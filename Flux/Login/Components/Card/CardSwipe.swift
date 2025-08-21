@@ -4,7 +4,7 @@ struct CardSwipe: View {
     var cards = [
         Card(
             headline: "Capital One Quicksilver",
-            title: "Available: $3,754 / $5,000",
+            title: "$5,000",
             caption: "**** 8821",
             icon: "creditcard.fill",
             button: "View Card",
@@ -15,20 +15,20 @@ struct CardSwipe: View {
              caption: "Worth $125 in travel",
              icon: "gift",
              button: "Redeem",
-             color: .blue),
+             color: .primaryColor),
         Card(headline: "Monthly Spending",
              title: "You spent $2,310 in August",
              caption: "Top category: Restaurants 🍔",
              icon: "chart.pie.fill",
              button: "See Insights",
-             color: .red),
+             color: .secondaryColor),
         Card(
             headline: "Special Offer",
             title: "Travel Insurance",
             caption: "Protect your trips starting at $12/mo",
             icon: "shield.fill",
             button: "Learn More",
-            color: .pink
+            color: .accentColorB
         ),
         Card(
             headline: "No Credit Card Yet?",
@@ -36,7 +36,7 @@ struct CardSwipe: View {
             caption: "Apply now for a Platinum Secured Card",
             icon: "star.fill",
             button: "Apply Now",
-            color: .orange
+            color: .secondaryColor
             
         )]
     
@@ -87,8 +87,7 @@ struct CardSwipe: View {
                                     } completion: {
                                         // Back to stack
                                         withAnimation(.smooth(duration: 0.5)) {
-                                            topCardIndex = (topCardIndex - direction + cards.count) % cards.count
-//                                            topCardIndex = (topCardIndex + 1) % cards.count
+                                            topCardIndex = (topCardIndex + 1) % cards.count
                                             dragOffSet = .zero
                                         }
                                     }

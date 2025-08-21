@@ -12,13 +12,7 @@ struct Card {
 struct CardView: View {
     @State var width: CGFloat = 350
     @State var card: Card
-    
-//    = Card(headline: "Rewards Available",
-//                    title: "12,500 points",
-//                    caption: "Worth $125 in travel",
-//                    icon: "gift",
-//                    button: "Redeem")
-//
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -35,16 +29,18 @@ struct CardView: View {
                         if let title = card.title {
                             Text(title)
                                 .foregroundStyle(.white)
-                                .font(AppFont.roboto(.bold, size: 24))
-                                .bold()
+                                .font(AppFont.roboto(.bold, size: 20))
                         }
                         
                         
                         Spacer()
                         
-                        Image(systemName: "gift.fill")
-                            .font(.system(size: 40))
-                            .foregroundStyle(.white)
+                        if let icon = card.icon {
+                            Image(systemName: icon)
+                                .font(.system(size: 40))
+                                .foregroundStyle(.white)
+                        }
+                        
                     }
 
             
@@ -78,12 +74,12 @@ struct CardView: View {
 }
 
 #Preview {
-   let card = Card(headline: "Rewards Available",
+    let card = Card(headline: "Rewards Available",
                     title: "12,500 points",
                     caption: "Worth $125 in travel",
                     icon: "gift",
                     button: "Redeem",
-                   color: .black)
+                    color: .black)
     
     CardView(card: card)
 }

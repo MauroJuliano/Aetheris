@@ -29,7 +29,7 @@ struct HomeApp: View {
                             CardDistribution(primaryColor: .white, backgroundColor: .black, spectrumRatio: .vertical)
                                 
                             VStack {
-                                CardDistribution(primaryColor: .white, backgroundColor: .primaryColor, spectrumRatio: .horizontal)
+                                CardDistribution(primaryColor: .white, backgroundColor: .accentColorB, spectrumRatio: .horizontal)
                                 CardDistribution(primaryColor: .white, backgroundColor: .black, spectrumRatio: .horizontal)
                             }
                         }
