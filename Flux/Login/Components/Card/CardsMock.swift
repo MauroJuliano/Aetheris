@@ -1,0 +1,46 @@
+
+struct CardsMock {
+    static var multipleTypeCards = [Card(content: .creditCard(.init(number: "**** **** **** **21",
+                                                                    validDate: "09/25",
+                                                                    name: "Jorge Henrique",
+                                                                    brand: "VISA"))),
+                                    Card(content: .info(.init(headline: "Rewards Available",
+                                                              title: "12,500 points",
+                                                              caption: "Worth $125 in travel",
+                                                              icon: "gift",
+                                                              button: "Redeem",
+                                                              color: .primaryColor))),
+                                    Card(content: .info(.init(headline: "Monthly Spending",
+                                                              title: "You spent $2,310 in August",
+                                                              caption: "Top category: Restaurants 🍔",
+                                                              icon: "chart.pie.fill",
+                                                              button: "See Insights",
+                                                              color: .secondaryColor))),
+                                    Card(content: .creditCard(.init(number: "**** **** **** **73",
+                                                                    validDate: "02/29",
+                                                                    name: "Amado batista",
+                                                                    brand: "MASTERCARD"))),
+                                    Card(content: .info(.init(headline: "Special Offer",
+                                                              title: "Travel Insurance",
+                                                              caption: "Protect your trips starting at $12/mo",
+                                                              icon: "shield.fill",
+                                                              button: "Learn More",
+                                                              color: .accentColorB))),
+                                    Card(content: .info(.init(headline: "No Credit Card Yet?",
+                                                              title: "Build Your Credit",
+                                                              caption: "Apply now for a Platinum Secured Card",
+                                                              icon: "star.fill",
+                                                              button: "Apply Now",
+                                                              color: .secondaryColor)))
+    ]
+
+    static var creditCardMocks = [Card(content: .creditCard(.init(number: "**** **** **** **21",
+                                                                  validDate: "09/25",
+                                                                  name: "Jorge Henrique",
+                                                                  brand: "VISA"))),
+                                  Card(content: .creditCard(.init(number: "**** **** **** **73",
+                                                                  validDate: "02/29",
+                                                                  name: "Amado batista",
+                                                                  brand: "MASTERCARD")))
+    ]
+}

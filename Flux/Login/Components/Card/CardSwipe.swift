@@ -1,47 +1,9 @@
 import SwiftUI
 
 struct CardSwipe: View {
-    var cards = [
-        Card(
-            headline: "Capital One Quicksilver",
-            title: "$5,000",
-            caption: "**** 8821",
-            icon: "creditcard.fill",
-            button: "View Card",
-            color: .black
-        ),
-        Card(headline: "Rewards Available",
-             title: "12,500 points",
-             caption: "Worth $125 in travel",
-             icon: "gift",
-             button: "Redeem",
-             color: .primaryColor),
-        Card(headline: "Monthly Spending",
-             title: "You spent $2,310 in August",
-             caption: "Top category: Restaurants 🍔",
-             icon: "chart.pie.fill",
-             button: "See Insights",
-             color: .secondaryColor),
-        Card(
-            headline: "Special Offer",
-            title: "Travel Insurance",
-            caption: "Protect your trips starting at $12/mo",
-            icon: "shield.fill",
-            button: "Learn More",
-            color: .accentColorB
-        ),
-        Card(
-            headline: "No Credit Card Yet?",
-            title: "Build Your Credit",
-            caption: "Apply now for a Platinum Secured Card",
-            icon: "star.fill",
-            button: "Apply Now",
-            color: .secondaryColor
-            
-        )]
-    
     @State private var dragOffSet: CGSize = .zero
     @State private var topCardIndex: Int = 0
+    @State var cards: [Card]
     
     var width: CGFloat = 350
     
@@ -54,7 +16,6 @@ struct CardSwipe: View {
                 
                 CardView(card: cards[index])
                     .frame(width: width, height: 200)
-                    .foregroundStyle(cards[index].color)
                     .offset(x: visualIndex == 0 ? dragOffSet.width : Double(visualIndex) * 10,
                             y: visualIndex == 0 ? 0 : Double(visualIndex) * -4)
                 
@@ -105,6 +66,6 @@ struct CardSwipe: View {
 }
 
 #Preview {
-    CardSwipe()
+    CardSwipe(cards: CardsMock.multipleTypeCards)
 }
 

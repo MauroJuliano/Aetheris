@@ -6,54 +6,52 @@ struct TabBarView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack() {
-                Color(.systemGray6)
-                    .ignoresSafeArea()
-                
-                VStack(spacing: 0) {
-                    
-                    Group {
-                        switch selectedIndex {
-                        case 0:
-                            HomeApp()
-                        case 1:
-                            ContentView()
-                        case 2:
-                            NotificationBell()
-                        default:
-                            Text("Tela não encontrada")
-                        }
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    
-                    Spacer(minLength: 0)
-                    
-                    HStack(spacing: 40) {
-                        TabBar(selectedIndex: $selectedIndex)
-                        
-                        Button {
-                            openSendMoney = true
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 25)
-                                    .fill(Color.black)
-                                    .frame(width: 50, height: 50)
-                                
-                                Image(systemName: "plus")
-                                    .foregroundColor(.white)
-                            }
-                        }
+            ZStack(alignment: .bottom) {
+                // Main content
+                Group {
+                    switch selectedIndex {
+                    case 0:
+                        HomeApp()
+                    case 1:
+                        CardHome()
+                    case 2:
+                        ProfileScreen()
+                    default:
+                        Text("Screen not found")
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                // Floating tab bar without extra background
+                HStack(spacing: 40) {
+                    TabBar(selectedIndex: $selectedIndex)
+                        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                    
+                    Button {
+                        openSendMoney = true
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.black)
+                                .frame(width: 50, height: 50)
+                            
+                            Image(systemName: "plus")
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20)
             }
             .navigationDestination(isPresented: $openSendMoney) {
-                ContentView()
+                SendMoney()
             }
         }
     }
 }
 
-
 #Preview {
     TabBarView()
 }
+

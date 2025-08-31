@@ -8,8 +8,8 @@ struct Recipients: View {
         VStack(alignment: .leading) {
             HStack {
                 Text("Recipients")
-                       .font(.title3)
-                       .fontWeight(.medium)
+                    .foregroundStyle(.black)
+                    .font(AppFont.roboto(.medium, size: 20))
                 
                 Spacer()
             }
@@ -21,6 +21,7 @@ struct Recipients: View {
                         .aspectRatio(contentMode: .fill)
                         .clipShape(.circle)
                         .frame(width: 50, height: 50)
+                        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
                 }
             }
         }
@@ -40,5 +41,5 @@ struct User: Identifiable {
 
 
 struct UserMock {
-    static var users: [User] = [.init(image: "melissa"), .init(image: "aria")]
+    static var users: [User] = [.init(image: "melissa"), .init(image: "aria"), .init(image: "caroline"), .init(image: "jadewest")]
 }
