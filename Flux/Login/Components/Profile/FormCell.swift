@@ -89,6 +89,23 @@ struct FormCell: View {
                 .tint(.accentColorBrown)
                 .labelsHidden()
             }
+            
+            if var button = model.content.toggle {
+                Button {
+                    
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .fill(Color.backgroundColorA)
+                            .frame(width: 100, height: 50)
+                            .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
+                        
+                        Text("Change")
+                            .font(AppFont.roboto(.regular, size: 16))
+                            .foregroundStyle(Color.accentColorBrown)
+                    }
+                }
+            }
         }
         
         if model.content.hasDivider {
