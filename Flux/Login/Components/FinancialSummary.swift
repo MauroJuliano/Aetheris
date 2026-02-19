@@ -26,15 +26,19 @@ struct FinancialSummary: View {
                 .frame(width: 40, height: 40)
                 .clipShape(.circle)
                 .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                .padding(.trailing, 5)
             
             VStack(alignment: .leading) {
                 Text(model.title)
                     .foregroundStyle(.black)
-                    .font(AppFont.roboto(.semibold, size: 20))
+                    .font(.headline)
+                    .fontWeight(.semibold)
                 
                 Text(model.description)
                     .foregroundStyle(.black)
-                    .font(AppFont.roboto(.regular, size: 12))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
             }
             
             Spacer()
@@ -42,11 +46,12 @@ struct FinancialSummary: View {
             VStack(alignment: .leading) {
                 Text(model.value)
                     .foregroundStyle(.black)
-                    .font(AppFont.roboto(.semibold, size: 16))
+                    .font(.headline)
+                    .monospacedDigit()
             }
         }
         .padding(.horizontal, 10)
-        .frame(height: 60)
+        .frame(minHeight: 30)
         
         Divider()
     }

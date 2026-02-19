@@ -2,19 +2,24 @@ import SwiftUI
 
 struct SendMoney: View {
     @State private var input = "$ "
+    @Binding var shouldPresentTransfer: Bool
     @State private var showSelection = false
+    @State var model: Beneficiary = .beneficiaries.first!
     
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 VStack {
+                    NavBar(hasBackButton: true,
+                           model: .init(firstText: "Transfer", hasInitialSpace: false),
+                           onBack: {
+                        shouldPresentTransfer = false
+                    })
+                    .padding(.horizontal)
                     
-                    NavBar(model: .init(firstText: "Transfer",
-                                        hasInitialSpace: false))
-                        .padding()
-                    
-                    TransferBeneficiary(shouldChange: $showSelection)
-                        .padding()
+                    TransferBeneficiary(shouldChange: $showSelection,
+                                        model: $model)
+                    .padding()
                     
                     Spacer()
                         .frame(height: 50)
@@ -46,21 +51,22 @@ struct SendMoney: View {
                     .padding()
                 }
             }
+            .navigationBarHidden(true)
             .padding(.horizontal)
             .background(Color.backgroundColorA)
         }
         .navigationDestination(isPresented: $showSelection) {
-            BeneficiaryList(model: Beneficiary.beneficiaries)
-//            SelectionView(items: items) { item in
-//                // closure returns selected item
-//                selectedItem = item
-//                showSelection = false // close selection view
-//            }
+            BeneficiaryList(showSelection: $showSelection,
+                            model: Beneficiary.beneficiaries,
+                            onSelect: { selected in
+                model = selected
+            })
+            .navigationBarHidden(true)
         }
         
     }
 }
 
 #Preview {
-    SendMoney()
+    SendMoney(shouldPresentTransfer: .constant(true), model: .beneficiaries.first!)
 }

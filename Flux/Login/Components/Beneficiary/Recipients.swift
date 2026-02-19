@@ -1,45 +1,48 @@
 import SwiftUI
 
 struct Recipients: View {
-    
-    var users = UserMock.users
+    @State private var users = Beneficiary.beneficiaries
+    @State private var shouldPresentTransfer: Bool = false
+    @State private var selectedUser: Beneficiary?
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text("Recipients")
-                    .foregroundStyle(.black)
-                    .font(AppFont.roboto(.medium, size: 20))
+        NavigationStack {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Recipients")
+                        .foregroundStyle(.black)
+                        .font(AppFont.roboto(.medium, size: 20))
+                    
+                    Spacer()
+                }
                 
-                Spacer()
-            }
-            
-            HStack {
-            ForEach(users) { user in
-                    Image(user.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(.circle)
-                        .frame(width: 50, height: 50)
-                        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                HStack {
+                    ForEach(users) { user in
+                        Button {
+                            selectedUser = user
+                            shouldPresentTransfer = true
+                        } label: {
+                            Image(user.image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipShape(.circle)
+                                .frame(width: 50, height: 50)
+                                .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                        }
+                    }
                 }
             }
+            .padding()
         }
-        .padding()
+        .navigationDestination(isPresented: $shouldPresentTransfer) {
+            if let user = selectedUser {
+                SendMoney(shouldPresentTransfer: $shouldPresentTransfer,
+                          model: user)
+            }
+        }
     }
 }
 
 #Preview {
     Recipients()
-}
-
-
-struct User: Identifiable {
-    let id: UUID = UUID()
-    var image: String
-}
-
-
-struct UserMock {
-    static var users: [User] = [.init(image: "melissa"), .init(image: "aria"), .init(image: "caroline"), .init(image: "jadewest")]
 }

@@ -1,77 +1,90 @@
 import SwiftUI
 
-enum Route: Hashable {
-    case login
-    case register
-    case forgotPassword
-}
-
 struct Login: View {
-    @State var login = ""
-    @State var password = ""
-    @State var path: [Route] = []
-    
+    var onLogin: () -> Void
+    var onRegister: () -> Void
+
+    @State private var login = ""
+    @State private var password = ""
+
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack {
-                Color(.systemGray6) // or Color.blue, Color.black, etc.
-                    .ignoresSafeArea()
-                
-                VStack() {
-                    Text("Hello Again!")
-                        .font(.title)
-                        .fontWeight(.medium)
-                        .padding()
-                    
-                    Text("Welcome back You've been missing!")
-                        .font(.headline)
-                        .fontWeight(.regular)
-                        .foregroundStyle(.gray)
-                        .padding()
-                    
-                    Spacer()
-                    
-                    TextField("Enter your email", text: $login)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding(.horizontal, 15)
-                    TextField("Enter your password", text: $password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    
-                    Button {
-                        path.append(.login)
-                    } label: {
-                        Text("Login")
-                    }
-                    .padding()
-                    
-                    HStack() {
-                        Text("Create a new account?")
-                        Button {
-                            
-                        } label: {
-                            Text("Sign up here")
-                                .bold()
-                                .foregroundStyle(.black)
-                        }
-                    }
+        VStack {
+            VStack(alignment: .leading) {
+                Text("Hello Again!")
+                    .foregroundStyle(.black)
+                    .font(.title)
+                    .fontWeight(.bold)
+
+                Text("Your financial journey continues. \nLet’s make your next move count.")
+                    .foregroundStyle(.gray)
+                    .font(.title2)
+                    .fontWeight(.bold)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(35)
+
+            Spacer()
+
+            // Email
+            HStack {
+                TextField(
+                    "",
+                    text: $login,
+                    prompt: Text("Email")
+                        .foregroundColor(.black.opacity(0.6))
+                        .font(.body)
+                )
+                .foregroundStyle(.black)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            }
+            .underlined(color: .gray.opacity(0.3))
+            .padding(.horizontal, 35)
+            .padding(.vertical, 10)
+
+            // Password
+            HStack {
+                TextField(
+                    "",
+                    text: $password,
+                    prompt: Text("Password")
+                        .foregroundColor(.black.opacity(0.6))
+                        .font(.body)
+                )
+                .foregroundStyle(.black)
+                .textInputAutocapitalization(.never)
+                .disableAutocorrection(true)
+            }
+            .underlined(color: .gray.opacity(0.3))
+            .padding(.horizontal, 35)
+            .padding(.vertical, 10)
+
+            // Login button
+            GlowButton(title: "Login") {
+                onLogin()
+            }
+            .padding()
+
+            // Register
+            HStack {
+                Text("Create a new account?")
+                    .foregroundStyle(.gray)
+
+                Button {
+                    onRegister()
+                } label: {
+                    Text("Sign up here")
+                        .bold()
+                        .foregroundStyle(.black)
                 }
-                .padding()
             }
         }
-        .navigationDestination(for: Route.self) { route in
-            switch route {
-            case .login:
-                HomeApp()
-            case .register:
-                HomeApp()
-            case .forgotPassword:
-                HomeApp()
-            }
-        }
+        .padding()
+        .background(Color.backgroundColorA)
     }
 }
 
+
 #Preview {
-    Login()
+    Login(onLogin: {}, onRegister: {})
 }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TransferBeneficiary: View {
     @Binding var shouldChange: Bool
+    @Binding var model: Beneficiary
     
     var body: some View {
         ZStack {
@@ -11,18 +12,19 @@ struct TransferBeneficiary: View {
             
             
             HStack {
-                Image("melissa")
+                Image(model.image)
                     .resizable()
+                    .scaledToFill()
                     .clipShape(Circle())
                     .frame(width: 50, height: 50)
                     .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
                 
                 VStack(alignment: .leading) {
-                    Text("Melissa Mccarthy")
+                    Text(model.name)
                         .font(AppFont.roboto(.semibold, size: 16))
                         .foregroundStyle(.black)
                     
-                    Text("@MelissaMccarthy")
+                    Text(model.pixKey)
                         .font(AppFont.roboto(.regular, size: 14))
                         .foregroundStyle(.gray)
                 }
@@ -54,5 +56,6 @@ struct TransferBeneficiary: View {
 }
 
 #Preview {
-    TransferBeneficiary(shouldChange: .constant(true))
+    TransferBeneficiary(shouldChange: .constant(true),
+                        model: .constant(Beneficiary.beneficiaries.first!))
 }

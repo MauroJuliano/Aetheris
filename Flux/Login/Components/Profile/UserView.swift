@@ -11,7 +11,7 @@ struct UserView: View {
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                .frame(width: 150, height: 150) // slightly bigger than card
+                .frame(width: 160, height: 160) // slightly bigger than card
                 .clipShape(Circle())
                 .blur(radius: 20)
                 .rotationEffect(.degrees(rotateGradient ? 360 : 0))
@@ -20,17 +20,16 @@ struct UserView: View {
                 
                 Image("melissa")
                     .resizable()
+                    .scaledToFit()
                     .clipShape(Circle())
-                    .frame(width: 150, height: 150)
-                    .aspectRatio(contentMode: .fill)
                     .clipped()
                     .shadow(radius: 10)
                     .overlay(
                         Circle()
                             .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
                     )
+                .frame(width: 200, height: 200)
             }
-            .padding()
             .onAppear {
                 rotateGradient = true
             }

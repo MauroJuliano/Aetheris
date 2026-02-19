@@ -69,6 +69,7 @@ struct FormCell: View {
         HStack {
             Image(systemName: model.content.icon)
                 .resizable()
+                .scaledToFit()
                 .foregroundStyle(.black)
                 .frame(width: 28, height: 28)
                 .padding()
@@ -88,23 +89,6 @@ struct FormCell: View {
                 ))
                 .tint(.accentColorBrown)
                 .labelsHidden()
-            }
-            
-            if var button = model.content.toggle {
-                Button {
-                    
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.backgroundColorA)
-                            .frame(width: 100, height: 50)
-                            .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
-                        
-                        Text("Change")
-                            .font(AppFont.roboto(.regular, size: 16))
-                            .foregroundStyle(Color.accentColorBrown)
-                    }
-                }
             }
         }
         

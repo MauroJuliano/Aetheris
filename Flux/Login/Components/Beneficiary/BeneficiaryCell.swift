@@ -17,11 +17,13 @@ struct Beneficiary: Identifiable {
 
 struct BeneficiaryCell: View {
     @State var model: Beneficiary
+    var onChange: ((Beneficiary) -> Void)? = nil
     
     var body: some View {
         HStack {
             Image(model.image)
                 .resizable()
+                .scaledToFill()
                 .foregroundStyle(.black)
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
@@ -36,7 +38,7 @@ struct BeneficiaryCell: View {
             Spacer()
             
                 Button {
-                    
+                    onChange?(model)
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)

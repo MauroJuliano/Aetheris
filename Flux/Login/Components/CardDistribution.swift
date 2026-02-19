@@ -55,7 +55,6 @@ struct CardDistribution: View {
                 }
                 
                 Spacer()
-                Spacer()
                 
                 HStack() {
                     Text(model.title)

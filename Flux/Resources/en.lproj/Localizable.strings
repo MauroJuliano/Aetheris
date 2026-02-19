@@ -1,0 +1,19 @@
+// Default
+"Default.buttonName" = "Continue";
+
+// SIN
+"SIN.title" = "Social Insurance Number";
+"SIN.placeholder" = "000.000.000";
+"SIN.buttonName" = "Continue";
+
+// MothersName
+"MothersName.title" = "Mother's name";
+"MothersName.placeholder" = "Jane doe";
+
+// UserName
+"UserName.title" = "Full name";
+"UserName.placeholder" = "John doe";
+
+// BirthDate
+"Birthdate.title" = "Date of birth";
+"Birthdate.placeholder" = "26/08/1970";

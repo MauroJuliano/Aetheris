@@ -7,7 +7,6 @@ struct TabBarView: View {
     var body: some View {
         NavigationStack {
             ZStack(alignment: .bottom) {
-                // Main content
                 Group {
                     switch selectedIndex {
                     case 0:
@@ -22,7 +21,6 @@ struct TabBarView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
-                // Floating tab bar without extra background
                 HStack(spacing: 40) {
                     TabBar(selectedIndex: $selectedIndex)
                         .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
@@ -35,7 +33,7 @@ struct TabBarView: View {
                                 .fill(Color.black)
                                 .frame(width: 50, height: 50)
                             
-                            Image(systemName: "plus")
+                            Image(systemName: "paperplane")
                                 .foregroundColor(.white)
                         }
                     }
@@ -45,7 +43,7 @@ struct TabBarView: View {
                 .padding(.bottom, 20)
             }
             .navigationDestination(isPresented: $openSendMoney) {
-                SendMoney()
+                SendMoney(shouldPresentTransfer: $openSendMoney)
             }
         }
     }
