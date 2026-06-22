@@ -1,0 +1,3756 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A982A8122F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
+		A982A81C2F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
+		A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */; };
+		A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */; };
+		A9AFA2AB2FE9E746005B85AF /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */; };
+		A9AFA2AC2FE9E746005B85AF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA2A92FE9E746005B85AF /* Localizable.strings */; };
+		A9B5306B2F4D2C34005C2C96 /* AERegistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530602F4D2C34005C2C96 /* AERegistration.framework */; };
+		A9B530752F4D2C34005C2C96 /* AERegistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530602F4D2C34005C2C96 /* AERegistration.framework */; };
+		A9B530762F4D2C34005C2C96 /* AERegistration.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530602F4D2C34005C2C96 /* AERegistration.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B5308E2F4D2C42005C2C96 /* AERegistrationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */; };
+		A9B530982F4D2C42005C2C96 /* AERegistrationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */; };
+		A9B530992F4D2C42005C2C96 /* AERegistrationInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B534512F4E384E005C2C96 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9B5345C2F4E384E005C2C96 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B535BD2F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; };
+		A9B535C72F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; };
+		A9B535C82F4E3B87005C2C96 /* AetherisDesignSystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B536DA2F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */; };
+		A9B536E42F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */; };
+		A9B536E52F4E6C01005C2C96 /* AetherisAuthentication.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9B537092F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
+		A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
+		A9B537142F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9C188F32F4E7A5A00013305 /* Payments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; };
+		A9C188FD2F4E7A5B00013305 /* Payments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; };
+		A9C188FE2F4E7A5B00013305 /* Payments.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9C1891E2F4E7AFE00013305 /* Account.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C189132F4E7AFD00013305 /* Account.framework */; };
+		A9C189282F4E7AFE00013305 /* Account.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C189132F4E7AFD00013305 /* Account.framework */; };
+		A9C189292F4E7AFE00013305 /* Account.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C189132F4E7AFD00013305 /* Account.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9C18B9F2F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
+		A9C18BA92F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
+		A9C18BAA2F4FCC3800013305 /* PaymentsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A976FAB62E37AEF200FF923B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A976FAC02E37AEF200FF923B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A982A7F72F510B4B00C22A84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B530822F4D2C42005C2C96;
+			remoteInfo = AERegistrationInterface;
+		};
+		A982A8132F5111E000C22A84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A982A8062F5111DF00C22A84;
+			remoteInfo = AccountInterface;
+		};
+		A982A8152F5111E000C22A84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = AetherisApp;
+		};
+		A982A81A2F5111E000C22A84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A982A8062F5111DF00C22A84;
+			remoteInfo = AccountInterface;
+		};
+		A982A8262F5112D900C22A84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A982A8062F5111DF00C22A84;
+			remoteInfo = AccountInterface;
+		};
+		A9B5306C2F4D2C34005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B5305F2F4D2C34005C2C96;
+			remoteInfo = AERegistration;
+		};
+		A9B5306E2F4D2C34005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A9B530732F4D2C34005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B5305F2F4D2C34005C2C96;
+			remoteInfo = AERegistration;
+		};
+		A9B5308F2F4D2C42005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B530822F4D2C42005C2C96;
+			remoteInfo = AERegistrationInterface;
+		};
+		A9B530912F4D2C42005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A9B530962F4D2C42005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B530822F4D2C42005C2C96;
+			remoteInfo = AERegistrationInterface;
+		};
+		A9B534522F4E384E005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B534452F4E384E005C2C96;
+			remoteInfo = Core;
+		};
+		A9B534542F4E384E005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A9B534592F4E384E005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B534452F4E384E005C2C96;
+			remoteInfo = Core;
+		};
+		A9B535BE2F4E3B87005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9B535C02F4E3B87005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A9B535C52F4E3B87005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9B535ED2F4E4337005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B530822F4D2C42005C2C96;
+			remoteInfo = AERegistrationInterface;
+		};
+		A9B536B02F4E6A21005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9B536DB2F4E6C01005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536CE2F4E6C01005C2C96;
+			remoteInfo = AetherisAuthentication;
+		};
+		A9B536DD2F4E6C01005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = Flux;
+		};
+		A9B536E22F4E6C01005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536CE2F4E6C01005C2C96;
+			remoteInfo = AetherisAuthentication;
+		};
+		A9B5370A2F4E6E16005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536FD2F4E6E16005C2C96;
+			remoteInfo = AetherisAuthenticationInterface;
+		};
+		A9B5370C2F4E6E16005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = AetherisApp;
+		};
+		A9B537112F4E6E16005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536FD2F4E6E16005C2C96;
+			remoteInfo = AetherisAuthenticationInterface;
+		};
+		A9B537202F4E6F35005C2C96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536FD2F4E6E16005C2C96;
+			remoteInfo = AetherisAuthenticationInterface;
+		};
+		A9C188F42F4E7A5A00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C188E72F4E7A5A00013305;
+			remoteInfo = Payments;
+		};
+		A9C188F62F4E7A5A00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = AetherisApp;
+		};
+		A9C188FB2F4E7A5B00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C188E72F4E7A5A00013305;
+			remoteInfo = Payments;
+		};
+		A9C1891F2F4E7AFE00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C189122F4E7AFD00013305;
+			remoteInfo = Account;
+		};
+		A9C189212F4E7AFE00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = AetherisApp;
+		};
+		A9C189262F4E7AFE00013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C189122F4E7AFD00013305;
+			remoteInfo = Account;
+		};
+		A9C1893B2F4E7E5200013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9C1893D2F4E7E5800013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9C189412F4E7F1600013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
+			remoteInfo = AetherisDesignSystem;
+		};
+		A9C18BA02F4FCC3800013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C18B932F4FCC3700013305;
+			remoteInfo = PaymentsInterface;
+		};
+		A9C18BA22F4FCC3800013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
+			remoteInfo = AetherisApp;
+		};
+		A9C18BA72F4FCC3800013305 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C18B932F4FCC3700013305;
+			remoteInfo = PaymentsInterface;
+		};
+		A9EB11422F4FCED0000766F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C18B932F4FCC3700013305;
+			remoteInfo = PaymentsInterface;
+		};
+		A9EB11462F4FD0C0000766F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9C18B932F4FCC3700013305;
+			remoteInfo = PaymentsInterface;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A9B530772F4D2C34005C2C96 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */,
+				A9C188FE2F4E7A5B00013305 /* Payments.framework in Embed Frameworks */,
+				A9B530762F4D2C34005C2C96 /* AERegistration.framework in Embed Frameworks */,
+				A9C189292F4E7AFE00013305 /* Account.framework in Embed Frameworks */,
+				A9B537142F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Embed Frameworks */,
+				A9B5345C2F4E384E005C2C96 /* Core.framework in Embed Frameworks */,
+				A9B535C82F4E3B87005C2C96 /* AetherisDesignSystem.framework in Embed Frameworks */,
+				A9B536E52F4E6C01005C2C96 /* AetherisAuthentication.framework in Embed Frameworks */,
+				A9B530992F4D2C42005C2C96 /* AERegistrationInterface.framework in Embed Frameworks */,
+				A9C18BAA2F4FCC3800013305 /* PaymentsInterface.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A976FAA82E37AEEF00FF923B /* AetherisApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AetherisApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A976FAB52E37AEF200FF923B /* AetherisAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A976FABF2E37AEF200FF923B /* AetherisAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A982A8072F5111DF00C22A84 /* AccountInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AccountInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A982A8112F5111E000C22A84 /* AccountInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisApp.swift; sourceTree = "<group>"; };
+		A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		A9AFA2A82FE9E746005B85AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A9B530602F4D2C34005C2C96 /* AERegistration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AERegistration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B5306A2F4D2C34005C2C96 /* AERegistrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AERegistrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AERegistrationInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B5308D2F4D2C42005C2C96 /* AERegistrationInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AERegistrationInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B534462F4E384E005C2C96 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B534502F4E384E005C2C96 /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisDesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B535BC2F4E3B87005C2C96 /* AetherisDesignSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisDesignSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisAuthentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B536D92F4E6C01005C2C96 /* AetherisAuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisAuthenticationInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9B537082F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAuthenticationInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C188E82F4E7A5A00013305 /* Payments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Payments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C188F22F4E7A5A00013305 /* PaymentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C189132F4E7AFD00013305 /* Account.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Account.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C1891D2F4E7AFE00013305 /* AccountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PaymentsInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9C18B9E2F4FCC3800013305 /* PaymentsInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentsInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A9AFA2A32FE9E6AC005B85AF /* Exceptions for "AetherisDesignSystem" folder in "Payments" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Components/LoadingScreen.swift,
+			);
+			target = A9C188E72F4E7A5A00013305 /* Payments */;
+		};
+		A9B535E22F4E3CE8005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisDesignSystem" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Components/LoadingScreen.swift,
+				"Helpers/Skeletonize+Extension.swift",
+			);
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+		};
+		A9B535E52F4E3D2C005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Components/Tabbar/TabBar.swift,
+				Components/Tabbar/TabBarView.swift,
+				"Helpers/Skeletonize+Extension.swift",
+			);
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+		};
+		A9B536B72F4E6AA2005C2C96 /* Exceptions for "AERegistration" folder in "AetherisApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Commons/RegisterView.swift,
+			);
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A982A8082F5111DF00C22A84 /* AccountInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AccountInterface;
+			sourceTree = "<group>";
+		};
+		A982A8172F5111E000C22A84 /* AccountInterfaceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AccountInterfaceTests;
+			sourceTree = "<group>";
+		};
+		A9AFA2A52FE9E6CA005B85AF /* Generated */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		A9B530612F4D2C34005C2C96 /* AERegistration */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A9B536B72F4E6AA2005C2C96 /* Exceptions for "AERegistration" folder in "AetherisApp" target */,
+			);
+			path = AERegistration;
+			sourceTree = "<group>";
+		};
+		A9B530702F4D2C34005C2C96 /* AERegistrationTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AERegistrationTests;
+			sourceTree = "<group>";
+		};
+		A9B530842F4D2C42005C2C96 /* AERegistrationInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AERegistrationInterface;
+			sourceTree = "<group>";
+		};
+		A9B530932F4D2C42005C2C96 /* AERegistrationInterfaceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AERegistrationInterfaceTests;
+			sourceTree = "<group>";
+		};
+		A9B534472F4E384E005C2C96 /* Core */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A9B534562F4E384E005C2C96 /* CoreTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = CoreTests;
+			sourceTree = "<group>";
+		};
+		A9B535B32F4E3B87005C2C96 /* AetherisDesignSystem */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A9B535E52F4E3D2C005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisApp" target */,
+				A9B535E22F4E3CE8005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisDesignSystem" target */,
+				A9AFA2A32FE9E6AC005B85AF /* Exceptions for "AetherisDesignSystem" folder in "Payments" target */,
+			);
+			path = AetherisDesignSystem;
+			sourceTree = "<group>";
+		};
+		A9B535C22F4E3B87005C2C96 /* AetherisDesignSystemTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisDesignSystemTests;
+			sourceTree = "<group>";
+		};
+		A9B536D02F4E6C01005C2C96 /* AetherisAuthentication */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisAuthentication;
+			sourceTree = "<group>";
+		};
+		A9B536DF2F4E6C01005C2C96 /* AetherisAuthenticationTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisAuthenticationTests;
+			sourceTree = "<group>";
+		};
+		A9B536FF2F4E6E16005C2C96 /* AetherisAuthenticationInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisAuthenticationInterface;
+			sourceTree = "<group>";
+		};
+		A9B5370E2F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisAuthenticationInterfaceTests;
+			sourceTree = "<group>";
+		};
+		A9C188E92F4E7A5A00013305 /* Payments */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		A9C188F82F4E7A5A00013305 /* PaymentsTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PaymentsTests;
+			sourceTree = "<group>";
+		};
+		A9C189142F4E7AFD00013305 /* Account */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Account;
+			sourceTree = "<group>";
+		};
+		A9C189232F4E7AFE00013305 /* AccountTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AccountTests;
+			sourceTree = "<group>";
+		};
+		A9C18B952F4FCC3700013305 /* PaymentsInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PaymentsInterface;
+			sourceTree = "<group>";
+		};
+		A9C18BA42F4FCC3800013305 /* PaymentsInterfaceTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = PaymentsInterfaceTests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A976FAA52E37AEEF00FF923B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A982A81C2F5111E000C22A84 /* AccountInterface.framework in Frameworks */,
+				A9C188FD2F4E7A5B00013305 /* Payments.framework in Frameworks */,
+				A9B530752F4D2C34005C2C96 /* AERegistration.framework in Frameworks */,
+				A9C189282F4E7AFE00013305 /* Account.framework in Frameworks */,
+				A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
+				A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */,
+				A9B535C72F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */,
+				A9B536E42F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */,
+				A9B530982F4D2C42005C2C96 /* AERegistrationInterface.framework in Frameworks */,
+				A9C18BA92F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FAB22E37AEF200FF923B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FABC2E37AEF200FF923B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A8042F5111DF00C22A84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A80E2F5111E000C22A84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A982A8122F5111E000C22A84 /* AccountInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5305D2F4D2C34005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530672F4D2C34005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B5306B2F4D2C34005C2C96 /* AERegistration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530802F4D2C42005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5308A2F4D2C42005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B5308E2F4D2C42005C2C96 /* AERegistrationInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B534432F4E384E005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5344D2F4E384E005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B534512F4E384E005C2C96 /* Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535AF2F4E3B87005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535B92F4E3B87005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B535BD2F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536CC2F4E6C01005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536D62F4E6C01005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B536DA2F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536FB2F4E6E16005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B537052F4E6E16005C2C96 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B537092F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188E52F4E7A5A00013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188EF2F4E7A5A00013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9C188F32F4E7A5A00013305 /* Payments.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C189102F4E7AFD00013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C1891A2F4E7AFE00013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9C1891E2F4E7AFE00013305 /* Account.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B912F4FCC3700013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B9B2F4FCC3800013305 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9C18B9F2F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A976FA9F2E37AEEF00FF923B = {
+			isa = PBXGroup;
+			children = (
+				A9AFA2AA2FE9E746005B85AF /* Resources */,
+				A9B534632F4E388F005C2C96 /* Modules */,
+				A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */,
+				A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */,
+				A976FAA92E37AEEF00FF923B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A976FAA92E37AEEF00FF923B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A976FAA82E37AEEF00FF923B /* AetherisApp.app */,
+				A976FAB52E37AEF200FF923B /* AetherisAppTests.xctest */,
+				A976FABF2E37AEF200FF923B /* AetherisAppUITests.xctest */,
+				A9B530602F4D2C34005C2C96 /* AERegistration.framework */,
+				A9B5306A2F4D2C34005C2C96 /* AERegistrationTests.xctest */,
+				A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */,
+				A9B5308D2F4D2C42005C2C96 /* AERegistrationInterfaceTests.xctest */,
+				A9B534462F4E384E005C2C96 /* Core.framework */,
+				A9B534502F4E384E005C2C96 /* CoreTests.xctest */,
+				A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */,
+				A9B535BC2F4E3B87005C2C96 /* AetherisDesignSystemTests.xctest */,
+				A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */,
+				A9B536D92F4E6C01005C2C96 /* AetherisAuthenticationTests.xctest */,
+				A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */,
+				A9B537082F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests.xctest */,
+				A9C188E82F4E7A5A00013305 /* Payments.framework */,
+				A9C188F22F4E7A5A00013305 /* PaymentsTests.xctest */,
+				A9C189132F4E7AFD00013305 /* Account.framework */,
+				A9C1891D2F4E7AFE00013305 /* AccountTests.xctest */,
+				A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */,
+				A9C18B9E2F4FCC3800013305 /* PaymentsInterfaceTests.xctest */,
+				A982A8072F5111DF00C22A84 /* AccountInterface.framework */,
+				A982A8112F5111E000C22A84 /* AccountInterfaceTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A982A8242F5111F000C22A84 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				A9C189142F4E7AFD00013305 /* Account */,
+				A9C189232F4E7AFE00013305 /* AccountTests */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		A982A8252F5111F900C22A84 /* AccountInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A982A8082F5111DF00C22A84 /* AccountInterface */,
+				A982A8172F5111E000C22A84 /* AccountInterfaceTests */,
+			);
+			path = AccountInterface;
+			sourceTree = "<group>";
+		};
+		A9AFA2AA2FE9E746005B85AF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */,
+				A9AFA2A92FE9E746005B85AF /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A9B534632F4E388F005C2C96 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A9C189302F4E7B0500013305 /* Account */,
+				A9C189052F4E7A6400013305 /* Payments */,
+				A9B536EC2F4E6C0D005C2C96 /* AetherisAuthentication */,
+				A9B535CF2F4E3BAB005C2C96 /* AetherisDesignSystem */,
+				A9B534652F4E38BC005C2C96 /* Core */,
+				A9B534642F4E389B005C2C96 /* AERegistration */,
+				A9AFA2A52FE9E6CA005B85AF /* Generated */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		A9B534642F4E389B005C2C96 /* AERegistration */ = {
+			isa = PBXGroup;
+			children = (
+				A9B534662F4E38EA005C2C96 /* AERegistration */,
+				A9B534672F4E3900005C2C96 /* AERegistrationInterface */,
+			);
+			path = AERegistration;
+			sourceTree = "<group>";
+		};
+		A9B534652F4E38BC005C2C96 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A9B534472F4E384E005C2C96 /* Core */,
+				A9B534562F4E384E005C2C96 /* CoreTests */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A9B534662F4E38EA005C2C96 /* AERegistration */ = {
+			isa = PBXGroup;
+			children = (
+				A9B530612F4D2C34005C2C96 /* AERegistration */,
+				A9B530702F4D2C34005C2C96 /* AERegistrationTests */,
+			);
+			path = AERegistration;
+			sourceTree = "<group>";
+		};
+		A9B534672F4E3900005C2C96 /* AERegistrationInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A9B530932F4D2C42005C2C96 /* AERegistrationInterfaceTests */,
+				A9B530842F4D2C42005C2C96 /* AERegistrationInterface */,
+			);
+			path = AERegistrationInterface;
+			sourceTree = "<group>";
+		};
+		A9B535CF2F4E3BAB005C2C96 /* AetherisDesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A9B535D02F4E3BB4005C2C96 /* AetherisDesignSystem */,
+			);
+			path = AetherisDesignSystem;
+			sourceTree = "<group>";
+		};
+		A9B535D02F4E3BB4005C2C96 /* AetherisDesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A9B535B32F4E3B87005C2C96 /* AetherisDesignSystem */,
+				A9B535C22F4E3B87005C2C96 /* AetherisDesignSystemTests */,
+			);
+			path = AetherisDesignSystem;
+			sourceTree = "<group>";
+		};
+		A9B536EC2F4E6C0D005C2C96 /* AetherisAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				A9B5371C2F4E6E2F005C2C96 /* AetherisAuthenticationInterface */,
+				A9B5371B2F4E6E25005C2C96 /* AetherisAuthentication */,
+			);
+			path = AetherisAuthentication;
+			sourceTree = "<group>";
+		};
+		A9B5371B2F4E6E25005C2C96 /* AetherisAuthentication */ = {
+			isa = PBXGroup;
+			children = (
+				A9B536D02F4E6C01005C2C96 /* AetherisAuthentication */,
+				A9B536DF2F4E6C01005C2C96 /* AetherisAuthenticationTests */,
+			);
+			path = AetherisAuthentication;
+			sourceTree = "<group>";
+		};
+		A9B5371C2F4E6E2F005C2C96 /* AetherisAuthenticationInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A9B536FF2F4E6E16005C2C96 /* AetherisAuthenticationInterface */,
+				A9B5370E2F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */,
+			);
+			path = AetherisAuthenticationInterface;
+			sourceTree = "<group>";
+		};
+		A9C189052F4E7A6400013305 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				A9C18BB12F4FCC4B00013305 /* Payments */,
+				A9C18BB22F4FCC5A00013305 /* PaymentsInterface */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		A9C189302F4E7B0500013305 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				A982A8252F5111F900C22A84 /* AccountInterface */,
+				A982A8242F5111F000C22A84 /* Account */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		A9C18BB12F4FCC4B00013305 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				A9C188E92F4E7A5A00013305 /* Payments */,
+				A9C188F82F4E7A5A00013305 /* PaymentsTests */,
+			);
+			path = Payments;
+			sourceTree = "<group>";
+		};
+		A9C18BB22F4FCC5A00013305 /* PaymentsInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A9C18B952F4FCC3700013305 /* PaymentsInterface */,
+				A9C18BA42F4FCC3800013305 /* PaymentsInterfaceTests */,
+			);
+			path = PaymentsInterface;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A982A8022F5111DF00C22A84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5305B2F4D2C34005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5307E2F4D2C42005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B534412F4E384E005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535AD2F4E3B87005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536CA2F4E6C01005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536F92F4E6E16005C2C96 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188E32F4E7A5A00013305 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C1890E2F4E7AFD00013305 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B8F2F4FCC3700013305 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A976FAA72E37AEEF00FF923B /* AetherisApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A976FAC92E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisApp" */;
+			buildPhases = (
+				A976FAA42E37AEEF00FF923B /* Sources */,
+				A976FAA52E37AEEF00FF923B /* Frameworks */,
+				A976FAA62E37AEEF00FF923B /* Resources */,
+				A9B530772F4D2C34005C2C96 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B530742F4D2C34005C2C96 /* PBXTargetDependency */,
+				A9B530972F4D2C42005C2C96 /* PBXTargetDependency */,
+				A9B5345A2F4E384E005C2C96 /* PBXTargetDependency */,
+				A9B535C62F4E3B87005C2C96 /* PBXTargetDependency */,
+				A9B536E32F4E6C01005C2C96 /* PBXTargetDependency */,
+				A9B537122F4E6E16005C2C96 /* PBXTargetDependency */,
+				A9C188FC2F4E7A5B00013305 /* PBXTargetDependency */,
+				A9C189272F4E7AFE00013305 /* PBXTargetDependency */,
+				A9C18BA82F4FCC3800013305 /* PBXTargetDependency */,
+				A982A81B2F5111E000C22A84 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9AFA2A52FE9E6CA005B85AF /* Generated */,
+			);
+			name = AetherisApp;
+			packageProductDependencies = (
+			);
+			productName = Flux;
+			productReference = A976FAA82E37AEEF00FF923B /* AetherisApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A976FAB42E37AEF200FF923B /* AetherisAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A976FACC2E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisAppTests" */;
+			buildPhases = (
+				A976FAB12E37AEF200FF923B /* Sources */,
+				A976FAB22E37AEF200FF923B /* Frameworks */,
+				A976FAB32E37AEF200FF923B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A976FAB72E37AEF200FF923B /* PBXTargetDependency */,
+			);
+			name = AetherisAppTests;
+			packageProductDependencies = (
+			);
+			productName = FluxTests;
+			productReference = A976FAB52E37AEF200FF923B /* AetherisAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A976FABE2E37AEF200FF923B /* AetherisAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A976FACF2E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisAppUITests" */;
+			buildPhases = (
+				A976FABB2E37AEF200FF923B /* Sources */,
+				A976FABC2E37AEF200FF923B /* Frameworks */,
+				A976FABD2E37AEF200FF923B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A976FAC12E37AEF200FF923B /* PBXTargetDependency */,
+			);
+			name = AetherisAppUITests;
+			packageProductDependencies = (
+			);
+			productName = FluxUITests;
+			productReference = A976FABF2E37AEF200FF923B /* AetherisAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A982A8062F5111DF00C22A84 /* AccountInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A982A81E2F5111E000C22A84 /* Build configuration list for PBXNativeTarget "AccountInterface" */;
+			buildPhases = (
+				A982A8022F5111DF00C22A84 /* Headers */,
+				A982A8032F5111DF00C22A84 /* Sources */,
+				A982A8042F5111DF00C22A84 /* Frameworks */,
+				A982A8052F5111DF00C22A84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A982A8082F5111DF00C22A84 /* AccountInterface */,
+			);
+			name = AccountInterface;
+			packageProductDependencies = (
+			);
+			productName = AccountInterface;
+			productReference = A982A8072F5111DF00C22A84 /* AccountInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A982A8102F5111E000C22A84 /* AccountInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A982A8212F5111E000C22A84 /* Build configuration list for PBXNativeTarget "AccountInterfaceTests" */;
+			buildPhases = (
+				A982A80D2F5111E000C22A84 /* Sources */,
+				A982A80E2F5111E000C22A84 /* Frameworks */,
+				A982A80F2F5111E000C22A84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A982A8142F5111E000C22A84 /* PBXTargetDependency */,
+				A982A8162F5111E000C22A84 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A982A8172F5111E000C22A84 /* AccountInterfaceTests */,
+			);
+			name = AccountInterfaceTests;
+			packageProductDependencies = (
+			);
+			productName = AccountInterfaceTests;
+			productReference = A982A8112F5111E000C22A84 /* AccountInterfaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B5305F2F4D2C34005C2C96 /* AERegistration */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B5307C2F4D2C34005C2C96 /* Build configuration list for PBXNativeTarget "AERegistration" */;
+			buildPhases = (
+				A9B5305B2F4D2C34005C2C96 /* Headers */,
+				A9B5305C2F4D2C34005C2C96 /* Sources */,
+				A9B5305D2F4D2C34005C2C96 /* Frameworks */,
+				A9B5305E2F4D2C34005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B536B12F4E6A21005C2C96 /* PBXTargetDependency */,
+				A9B535EE2F4E4337005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B530612F4D2C34005C2C96 /* AERegistration */,
+			);
+			name = AERegistration;
+			packageProductDependencies = (
+			);
+			productName = AERegistration;
+			productReference = A9B530602F4D2C34005C2C96 /* AERegistration.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B530692F4D2C34005C2C96 /* AERegistrationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B5307D2F4D2C34005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationTests" */;
+			buildPhases = (
+				A9B530662F4D2C34005C2C96 /* Sources */,
+				A9B530672F4D2C34005C2C96 /* Frameworks */,
+				A9B530682F4D2C34005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B5306D2F4D2C34005C2C96 /* PBXTargetDependency */,
+				A9B5306F2F4D2C34005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B530702F4D2C34005C2C96 /* AERegistrationTests */,
+			);
+			name = AERegistrationTests;
+			packageProductDependencies = (
+			);
+			productName = AERegistrationTests;
+			productReference = A9B5306A2F4D2C34005C2C96 /* AERegistrationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B530822F4D2C42005C2C96 /* AERegistrationInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B5309A2F4D2C42005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationInterface" */;
+			buildPhases = (
+				A9B5307E2F4D2C42005C2C96 /* Headers */,
+				A9B5307F2F4D2C42005C2C96 /* Sources */,
+				A9B530802F4D2C42005C2C96 /* Frameworks */,
+				A9B530812F4D2C42005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A9B530842F4D2C42005C2C96 /* AERegistrationInterface */,
+			);
+			name = AERegistrationInterface;
+			packageProductDependencies = (
+			);
+			productName = AERegistrationInterface;
+			productReference = A9B530832F4D2C42005C2C96 /* AERegistrationInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B5308C2F4D2C42005C2C96 /* AERegistrationInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B5309D2F4D2C42005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationInterfaceTests" */;
+			buildPhases = (
+				A9B530892F4D2C42005C2C96 /* Sources */,
+				A9B5308A2F4D2C42005C2C96 /* Frameworks */,
+				A9B5308B2F4D2C42005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B530902F4D2C42005C2C96 /* PBXTargetDependency */,
+				A9B530922F4D2C42005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B530932F4D2C42005C2C96 /* AERegistrationInterfaceTests */,
+			);
+			name = AERegistrationInterfaceTests;
+			packageProductDependencies = (
+			);
+			productName = AERegistrationInterfaceTests;
+			productReference = A9B5308D2F4D2C42005C2C96 /* AERegistrationInterfaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B534452F4E384E005C2C96 /* Core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B534612F4E384E005C2C96 /* Build configuration list for PBXNativeTarget "Core" */;
+			buildPhases = (
+				A9B534412F4E384E005C2C96 /* Headers */,
+				A9B534422F4E384E005C2C96 /* Sources */,
+				A9B534432F4E384E005C2C96 /* Frameworks */,
+				A9B534442F4E384E005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A9B534472F4E384E005C2C96 /* Core */,
+			);
+			name = Core;
+			packageProductDependencies = (
+			);
+			productName = Core;
+			productReference = A9B534462F4E384E005C2C96 /* Core.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B5344F2F4E384E005C2C96 /* CoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B534622F4E384E005C2C96 /* Build configuration list for PBXNativeTarget "CoreTests" */;
+			buildPhases = (
+				A9B5344C2F4E384E005C2C96 /* Sources */,
+				A9B5344D2F4E384E005C2C96 /* Frameworks */,
+				A9B5344E2F4E384E005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B534532F4E384E005C2C96 /* PBXTargetDependency */,
+				A9B534552F4E384E005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B534562F4E384E005C2C96 /* CoreTests */,
+			);
+			name = CoreTests;
+			packageProductDependencies = (
+			);
+			productName = CoreTests;
+			productReference = A9B534502F4E384E005C2C96 /* CoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B535C92F4E3B87005C2C96 /* Build configuration list for PBXNativeTarget "AetherisDesignSystem" */;
+			buildPhases = (
+				A9B535AD2F4E3B87005C2C96 /* Headers */,
+				A9B535AE2F4E3B87005C2C96 /* Sources */,
+				A9B535AF2F4E3B87005C2C96 /* Frameworks */,
+				A9B535B02F4E3B87005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A9B535B32F4E3B87005C2C96 /* AetherisDesignSystem */,
+			);
+			name = AetherisDesignSystem;
+			packageProductDependencies = (
+			);
+			productName = AetherisDesignSystem;
+			productReference = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B535BB2F4E3B87005C2C96 /* AetherisDesignSystemTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B535CC2F4E3B87005C2C96 /* Build configuration list for PBXNativeTarget "AetherisDesignSystemTests" */;
+			buildPhases = (
+				A9B535B82F4E3B87005C2C96 /* Sources */,
+				A9B535B92F4E3B87005C2C96 /* Frameworks */,
+				A9B535BA2F4E3B87005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B535BF2F4E3B87005C2C96 /* PBXTargetDependency */,
+				A9B535C12F4E3B87005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B535C22F4E3B87005C2C96 /* AetherisDesignSystemTests */,
+			);
+			name = AetherisDesignSystemTests;
+			packageProductDependencies = (
+			);
+			productName = AetherisDesignSystemTests;
+			productReference = A9B535BC2F4E3B87005C2C96 /* AetherisDesignSystemTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B536CE2F4E6C01005C2C96 /* AetherisAuthentication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B536E62F4E6C01005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthentication" */;
+			buildPhases = (
+				A9B536CA2F4E6C01005C2C96 /* Headers */,
+				A9B536CB2F4E6C01005C2C96 /* Sources */,
+				A9B536CC2F4E6C01005C2C96 /* Frameworks */,
+				A9B536CD2F4E6C01005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9EB11472F4FD0C0000766F1 /* PBXTargetDependency */,
+				A9C189422F4E7F1600013305 /* PBXTargetDependency */,
+				A9B537212F4E6F35005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B536D02F4E6C01005C2C96 /* AetherisAuthentication */,
+			);
+			name = AetherisAuthentication;
+			packageProductDependencies = (
+			);
+			productName = AetherisAuthentication;
+			productReference = A9B536CF2F4E6C01005C2C96 /* AetherisAuthentication.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B536D82F4E6C01005C2C96 /* AetherisAuthenticationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B536E92F4E6C01005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationTests" */;
+			buildPhases = (
+				A9B536D52F4E6C01005C2C96 /* Sources */,
+				A9B536D62F4E6C01005C2C96 /* Frameworks */,
+				A9B536D72F4E6C01005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B536DC2F4E6C01005C2C96 /* PBXTargetDependency */,
+				A9B536DE2F4E6C01005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B536DF2F4E6C01005C2C96 /* AetherisAuthenticationTests */,
+			);
+			name = AetherisAuthenticationTests;
+			packageProductDependencies = (
+			);
+			productName = AetherisAuthenticationTests;
+			productReference = A9B536D92F4E6C01005C2C96 /* AetherisAuthenticationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B537152F4E6E16005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationInterface" */;
+			buildPhases = (
+				A9B536F92F4E6E16005C2C96 /* Headers */,
+				A9B536FA2F4E6E16005C2C96 /* Sources */,
+				A9B536FB2F4E6E16005C2C96 /* Frameworks */,
+				A9B536FC2F4E6E16005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A982A7F82F510B4B00C22A84 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B536FF2F4E6E16005C2C96 /* AetherisAuthenticationInterface */,
+			);
+			name = AetherisAuthenticationInterface;
+			packageProductDependencies = (
+			);
+			productName = AetherisAuthenticationInterface;
+			productReference = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9B537072F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9B537182F4E6E16005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationInterfaceTests" */;
+			buildPhases = (
+				A9B537042F4E6E16005C2C96 /* Sources */,
+				A9B537052F4E6E16005C2C96 /* Frameworks */,
+				A9B537062F4E6E16005C2C96 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9B5370B2F4E6E16005C2C96 /* PBXTargetDependency */,
+				A9B5370D2F4E6E16005C2C96 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9B5370E2F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */,
+			);
+			name = AetherisAuthenticationInterfaceTests;
+			packageProductDependencies = (
+			);
+			productName = AetherisAuthenticationInterfaceTests;
+			productReference = A9B537082F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9C188E72F4E7A5A00013305 /* Payments */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C188FF2F4E7A5B00013305 /* Build configuration list for PBXNativeTarget "Payments" */;
+			buildPhases = (
+				A9C188E32F4E7A5A00013305 /* Headers */,
+				A9C188E42F4E7A5A00013305 /* Sources */,
+				A9C188E52F4E7A5A00013305 /* Frameworks */,
+				A9C188E62F4E7A5A00013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9EB11432F4FCED0000766F1 /* PBXTargetDependency */,
+				A9C1893C2F4E7E5200013305 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9C188E92F4E7A5A00013305 /* Payments */,
+			);
+			name = Payments;
+			packageProductDependencies = (
+			);
+			productName = Payments;
+			productReference = A9C188E82F4E7A5A00013305 /* Payments.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9C188F12F4E7A5A00013305 /* PaymentsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C189022F4E7A5B00013305 /* Build configuration list for PBXNativeTarget "PaymentsTests" */;
+			buildPhases = (
+				A9C188EE2F4E7A5A00013305 /* Sources */,
+				A9C188EF2F4E7A5A00013305 /* Frameworks */,
+				A9C188F02F4E7A5A00013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9C188F52F4E7A5A00013305 /* PBXTargetDependency */,
+				A9C188F72F4E7A5A00013305 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9C188F82F4E7A5A00013305 /* PaymentsTests */,
+			);
+			name = PaymentsTests;
+			packageProductDependencies = (
+			);
+			productName = PaymentsTests;
+			productReference = A9C188F22F4E7A5A00013305 /* PaymentsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9C189122F4E7AFD00013305 /* Account */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C1892A2F4E7AFE00013305 /* Build configuration list for PBXNativeTarget "Account" */;
+			buildPhases = (
+				A9C1890E2F4E7AFD00013305 /* Headers */,
+				A9C1890F2F4E7AFD00013305 /* Sources */,
+				A9C189102F4E7AFD00013305 /* Frameworks */,
+				A9C189112F4E7AFD00013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A982A8272F5112D900C22A84 /* PBXTargetDependency */,
+				A9C1893E2F4E7E5800013305 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9C189142F4E7AFD00013305 /* Account */,
+			);
+			name = Account;
+			packageProductDependencies = (
+			);
+			productName = Account;
+			productReference = A9C189132F4E7AFD00013305 /* Account.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9C1891C2F4E7AFE00013305 /* AccountTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C1892D2F4E7AFE00013305 /* Build configuration list for PBXNativeTarget "AccountTests" */;
+			buildPhases = (
+				A9C189192F4E7AFE00013305 /* Sources */,
+				A9C1891A2F4E7AFE00013305 /* Frameworks */,
+				A9C1891B2F4E7AFE00013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9C189202F4E7AFE00013305 /* PBXTargetDependency */,
+				A9C189222F4E7AFE00013305 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9C189232F4E7AFE00013305 /* AccountTests */,
+			);
+			name = AccountTests;
+			packageProductDependencies = (
+			);
+			productName = AccountTests;
+			productReference = A9C1891D2F4E7AFE00013305 /* AccountTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9C18B932F4FCC3700013305 /* PaymentsInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C18BAB2F4FCC3800013305 /* Build configuration list for PBXNativeTarget "PaymentsInterface" */;
+			buildPhases = (
+				A9C18B8F2F4FCC3700013305 /* Headers */,
+				A9C18B902F4FCC3700013305 /* Sources */,
+				A9C18B912F4FCC3700013305 /* Frameworks */,
+				A9C18B922F4FCC3700013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A9C18B952F4FCC3700013305 /* PaymentsInterface */,
+			);
+			name = PaymentsInterface;
+			packageProductDependencies = (
+			);
+			productName = PaymentsInterface;
+			productReference = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A9C18B9D2F4FCC3800013305 /* PaymentsInterfaceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9C18BAE2F4FCC3800013305 /* Build configuration list for PBXNativeTarget "PaymentsInterfaceTests" */;
+			buildPhases = (
+				A9C18B9A2F4FCC3800013305 /* Sources */,
+				A9C18B9B2F4FCC3800013305 /* Frameworks */,
+				A9C18B9C2F4FCC3800013305 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9C18BA12F4FCC3800013305 /* PBXTargetDependency */,
+				A9C18BA32F4FCC3800013305 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A9C18BA42F4FCC3800013305 /* PaymentsInterfaceTests */,
+			);
+			name = PaymentsInterfaceTests;
+			packageProductDependencies = (
+			);
+			productName = PaymentsInterfaceTests;
+			productReference = A9C18B9E2F4FCC3800013305 /* PaymentsInterfaceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A976FAA02E37AEEF00FF923B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					A976FAA72E37AEEF00FF923B = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A976FAB42E37AEF200FF923B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A976FABE2E37AEF200FF923B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A982A8062F5111DF00C22A84 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A982A8102F5111E000C22A84 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B5305F2F4D2C34005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B530692F4D2C34005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B530822F4D2C42005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B5308C2F4D2C42005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B534452F4E384E005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B5344F2F4E384E005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B535B12F4E3B87005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B535BB2F4E3B87005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B536CE2F4E6C01005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B536D82F4E6C01005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9B536FD2F4E6E16005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9B537072F4E6E16005C2C96 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9C188E72F4E7A5A00013305 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9C188F12F4E7A5A00013305 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9C189122F4E7AFD00013305 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9C1891C2F4E7AFE00013305 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+					A9C18B932F4FCC3700013305 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					A9C18B9D2F4FCC3800013305 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = A976FAA72E37AEEF00FF923B;
+					};
+				};
+			};
+			buildConfigurationList = A976FAA32E37AEEF00FF923B /* Build configuration list for PBXProject "Aetheris" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A976FA9F2E37AEEF00FF923B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A976FAA92E37AEEF00FF923B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A976FAA72E37AEEF00FF923B /* AetherisApp */,
+				A976FAB42E37AEF200FF923B /* AetherisAppTests */,
+				A976FABE2E37AEF200FF923B /* AetherisAppUITests */,
+				A9B5305F2F4D2C34005C2C96 /* AERegistration */,
+				A9B530692F4D2C34005C2C96 /* AERegistrationTests */,
+				A9B530822F4D2C42005C2C96 /* AERegistrationInterface */,
+				A9B5308C2F4D2C42005C2C96 /* AERegistrationInterfaceTests */,
+				A9B534452F4E384E005C2C96 /* Core */,
+				A9B5344F2F4E384E005C2C96 /* CoreTests */,
+				A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */,
+				A9B535BB2F4E3B87005C2C96 /* AetherisDesignSystemTests */,
+				A9B536CE2F4E6C01005C2C96 /* AetherisAuthentication */,
+				A9B536D82F4E6C01005C2C96 /* AetherisAuthenticationTests */,
+				A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */,
+				A9B537072F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */,
+				A9C188E72F4E7A5A00013305 /* Payments */,
+				A9C188F12F4E7A5A00013305 /* PaymentsTests */,
+				A9C189122F4E7AFD00013305 /* Account */,
+				A9C1891C2F4E7AFE00013305 /* AccountTests */,
+				A9C18B932F4FCC3700013305 /* PaymentsInterface */,
+				A9C18B9D2F4FCC3800013305 /* PaymentsInterfaceTests */,
+				A982A8062F5111DF00C22A84 /* AccountInterface */,
+				A982A8102F5111E000C22A84 /* AccountInterfaceTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A976FAA62E37AEEF00FF923B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */,
+				A9AFA2AC2FE9E746005B85AF /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FAB32E37AEF200FF923B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FABD2E37AEF200FF923B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A8052F5111DF00C22A84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A80F2F5111E000C22A84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5305E2F4D2C34005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530682F4D2C34005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530812F4D2C42005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5308B2F4D2C42005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B534442F4E384E005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5344E2F4E384E005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535B02F4E3B87005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535BA2F4E3B87005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536CD2F4E6C01005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536D72F4E6C01005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536FC2F4E6E16005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B537062F4E6E16005C2C96 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188E62F4E7A5A00013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188F02F4E7A5A00013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C189112F4E7AFD00013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C1891B2F4E7AFE00013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B922F4FCC3700013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B9C2F4FCC3800013305 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A976FAA42E37AEEF00FF923B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9AFA2AB2FE9E746005B85AF /* DependencyContainer.swift in Sources */,
+				A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FAB12E37AEF200FF923B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A976FABB2E37AEF200FF923B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A8032F5111DF00C22A84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A982A80D2F5111E000C22A84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5305C2F4D2C34005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530662F4D2C34005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5307F2F4D2C42005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B530892F4D2C42005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B534422F4E384E005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B5344C2F4E384E005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535AE2F4E3B87005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B535B82F4E3B87005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536CB2F4E6C01005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536D52F4E6C01005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B536FA2F4E6E16005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9B537042F4E6E16005C2C96 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188E42F4E7A5A00013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C188EE2F4E7A5A00013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C1890F2F4E7AFD00013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C189192F4E7AFE00013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B902F4FCC3700013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9C18B9A2F4FCC3800013305 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A976FAB72E37AEF200FF923B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A976FAB62E37AEF200FF923B /* PBXContainerItemProxy */;
+		};
+		A976FAC12E37AEF200FF923B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A976FAC02E37AEF200FF923B /* PBXContainerItemProxy */;
+		};
+		A982A7F82F510B4B00C22A84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B530822F4D2C42005C2C96 /* AERegistrationInterface */;
+			targetProxy = A982A7F72F510B4B00C22A84 /* PBXContainerItemProxy */;
+		};
+		A982A8142F5111E000C22A84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A982A8062F5111DF00C22A84 /* AccountInterface */;
+			targetProxy = A982A8132F5111E000C22A84 /* PBXContainerItemProxy */;
+		};
+		A982A8162F5111E000C22A84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A982A8152F5111E000C22A84 /* PBXContainerItemProxy */;
+		};
+		A982A81B2F5111E000C22A84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A982A8062F5111DF00C22A84 /* AccountInterface */;
+			targetProxy = A982A81A2F5111E000C22A84 /* PBXContainerItemProxy */;
+		};
+		A982A8272F5112D900C22A84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A982A8062F5111DF00C22A84 /* AccountInterface */;
+			targetProxy = A982A8262F5112D900C22A84 /* PBXContainerItemProxy */;
+		};
+		A9B5306D2F4D2C34005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B5305F2F4D2C34005C2C96 /* AERegistration */;
+			targetProxy = A9B5306C2F4D2C34005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B5306F2F4D2C34005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B5306E2F4D2C34005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B530742F4D2C34005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B5305F2F4D2C34005C2C96 /* AERegistration */;
+			targetProxy = A9B530732F4D2C34005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B530902F4D2C42005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B530822F4D2C42005C2C96 /* AERegistrationInterface */;
+			targetProxy = A9B5308F2F4D2C42005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B530922F4D2C42005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B530912F4D2C42005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B530972F4D2C42005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B530822F4D2C42005C2C96 /* AERegistrationInterface */;
+			targetProxy = A9B530962F4D2C42005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B534532F4E384E005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B534452F4E384E005C2C96 /* Core */;
+			targetProxy = A9B534522F4E384E005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B534552F4E384E005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B534542F4E384E005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B5345A2F4E384E005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B534452F4E384E005C2C96 /* Core */;
+			targetProxy = A9B534592F4E384E005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B535BF2F4E3B87005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9B535BE2F4E3B87005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B535C12F4E3B87005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B535C02F4E3B87005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B535C62F4E3B87005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9B535C52F4E3B87005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B535EE2F4E4337005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B530822F4D2C42005C2C96 /* AERegistrationInterface */;
+			targetProxy = A9B535ED2F4E4337005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B536B12F4E6A21005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9B536B02F4E6A21005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B536DC2F4E6C01005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B536CE2F4E6C01005C2C96 /* AetherisAuthentication */;
+			targetProxy = A9B536DB2F4E6C01005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B536DE2F4E6C01005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B536DD2F4E6C01005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B536E32F4E6C01005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B536CE2F4E6C01005C2C96 /* AetherisAuthentication */;
+			targetProxy = A9B536E22F4E6C01005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B5370B2F4E6E16005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */;
+			targetProxy = A9B5370A2F4E6E16005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B5370D2F4E6E16005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9B5370C2F4E6E16005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B537122F4E6E16005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */;
+			targetProxy = A9B537112F4E6E16005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9B537212F4E6F35005C2C96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */;
+			targetProxy = A9B537202F4E6F35005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9C188F52F4E7A5A00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C188E72F4E7A5A00013305 /* Payments */;
+			targetProxy = A9C188F42F4E7A5A00013305 /* PBXContainerItemProxy */;
+		};
+		A9C188F72F4E7A5A00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9C188F62F4E7A5A00013305 /* PBXContainerItemProxy */;
+		};
+		A9C188FC2F4E7A5B00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C188E72F4E7A5A00013305 /* Payments */;
+			targetProxy = A9C188FB2F4E7A5B00013305 /* PBXContainerItemProxy */;
+		};
+		A9C189202F4E7AFE00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C189122F4E7AFD00013305 /* Account */;
+			targetProxy = A9C1891F2F4E7AFE00013305 /* PBXContainerItemProxy */;
+		};
+		A9C189222F4E7AFE00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9C189212F4E7AFE00013305 /* PBXContainerItemProxy */;
+		};
+		A9C189272F4E7AFE00013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C189122F4E7AFD00013305 /* Account */;
+			targetProxy = A9C189262F4E7AFE00013305 /* PBXContainerItemProxy */;
+		};
+		A9C1893C2F4E7E5200013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9C1893B2F4E7E5200013305 /* PBXContainerItemProxy */;
+		};
+		A9C1893E2F4E7E5800013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9C1893D2F4E7E5800013305 /* PBXContainerItemProxy */;
+		};
+		A9C189422F4E7F1600013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
+			targetProxy = A9C189412F4E7F1600013305 /* PBXContainerItemProxy */;
+		};
+		A9C18BA12F4FCC3800013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
+			targetProxy = A9C18BA02F4FCC3800013305 /* PBXContainerItemProxy */;
+		};
+		A9C18BA32F4FCC3800013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
+			targetProxy = A9C18BA22F4FCC3800013305 /* PBXContainerItemProxy */;
+		};
+		A9C18BA82F4FCC3800013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
+			targetProxy = A9C18BA72F4FCC3800013305 /* PBXContainerItemProxy */;
+		};
+		A9EB11432F4FCED0000766F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
+			targetProxy = A9EB11422F4FCED0000766F1 /* PBXContainerItemProxy */;
+		};
+		A9EB11472F4FD0C0000766F1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
+			targetProxy = A9EB11462F4FD0C0000766F1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A9AFA2A92FE9E746005B85AF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9AFA2A82FE9E746005B85AF /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A976FAC72E37AEF200FF923B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A976FAC82E37AEF200FF923B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A976FACA2E37AEF200FF923B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Flux;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A976FACB2E37AEF200FF923B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Flux;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A976FACD2E37AEF200FF923B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A976FACE2E37AEF200FF923B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A976FAD02E37AEF200FF923B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Flux;
+			};
+			name = Debug;
+		};
+		A976FAD12E37AEF200FF923B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Flux;
+			};
+			name = Release;
+		};
+		A982A81F2F5111E000C22A84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A982A8202F5111E000C22A84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A982A8222F5111E000C22A84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Debug;
+		};
+		A982A8232F5111E000C22A84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Release;
+		};
+		A9B530782F4D2C34005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistration;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B530792F4D2C34005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistration;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B5307A2F4D2C34005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A9B5307B2F4D2C34005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A9B5309B2F4D2C42005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B5309C2F4D2C42005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B5309E2F4D2C42005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A9B5309F2F4D2C42005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AERegistrationInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A9B5345D2F4E384E005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Core;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B5345E2F4E384E005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Core;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B5345F2F4E384E005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.CoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A9B534602F4E384E005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.CoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A9B535CA2F4E3B87005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisDesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B535CB2F4E3B87005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisDesignSystem;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B535CD2F4E3B87005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisDesignSystemTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A9B535CE2F4E3B87005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisDesignSystemTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A9B536E72F4E6C01005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthentication;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B536E82F4E6C01005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthentication;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B536EA2F4E6C01005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Debug;
+		};
+		A9B536EB2F4E6C01005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+			};
+			name = Release;
+		};
+		A9B537162F4E6E16005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9B537172F4E6E16005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9B537192F4E6E16005C2C96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Debug;
+		};
+		A9B5371A2F4E6E16005C2C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAuthenticationInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Release;
+		};
+		A9C189002F4E7A5B00013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Payments;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9C189012F4E7A5B00013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Payments;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9C189032F4E7A5B00013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Debug;
+		};
+		A9C189042F4E7A5B00013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Release;
+		};
+		A9C1892B2F4E7AFE00013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Account;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9C1892C2F4E7AFE00013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Account;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9C1892E2F4E7AFE00013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Debug;
+		};
+		A9C1892F2F4E7AFE00013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AccountTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Release;
+		};
+		A9C18BAC2F4FCC3800013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A9C18BAD2F4FCC3800013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_MODULE = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9C18BAF2F4FCC3800013305 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Debug;
+		};
+		A9C18BB02F4FCC3800013305 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.PaymentsInterfaceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A976FAA32E37AEEF00FF923B /* Build configuration list for PBXProject "Aetheris" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A976FAC72E37AEF200FF923B /* Debug */,
+				A976FAC82E37AEF200FF923B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A976FAC92E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A976FACA2E37AEF200FF923B /* Debug */,
+				A976FACB2E37AEF200FF923B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A976FACC2E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A976FACD2E37AEF200FF923B /* Debug */,
+				A976FACE2E37AEF200FF923B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A976FACF2E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A976FAD02E37AEF200FF923B /* Debug */,
+				A976FAD12E37AEF200FF923B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A982A81E2F5111E000C22A84 /* Build configuration list for PBXNativeTarget "AccountInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A982A81F2F5111E000C22A84 /* Debug */,
+				A982A8202F5111E000C22A84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A982A8212F5111E000C22A84 /* Build configuration list for PBXNativeTarget "AccountInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A982A8222F5111E000C22A84 /* Debug */,
+				A982A8232F5111E000C22A84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B5307C2F4D2C34005C2C96 /* Build configuration list for PBXNativeTarget "AERegistration" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B530782F4D2C34005C2C96 /* Debug */,
+				A9B530792F4D2C34005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B5307D2F4D2C34005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B5307A2F4D2C34005C2C96 /* Debug */,
+				A9B5307B2F4D2C34005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B5309A2F4D2C42005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B5309B2F4D2C42005C2C96 /* Debug */,
+				A9B5309C2F4D2C42005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B5309D2F4D2C42005C2C96 /* Build configuration list for PBXNativeTarget "AERegistrationInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B5309E2F4D2C42005C2C96 /* Debug */,
+				A9B5309F2F4D2C42005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B534612F4E384E005C2C96 /* Build configuration list for PBXNativeTarget "Core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B5345D2F4E384E005C2C96 /* Debug */,
+				A9B5345E2F4E384E005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B534622F4E384E005C2C96 /* Build configuration list for PBXNativeTarget "CoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B5345F2F4E384E005C2C96 /* Debug */,
+				A9B534602F4E384E005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B535C92F4E3B87005C2C96 /* Build configuration list for PBXNativeTarget "AetherisDesignSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B535CA2F4E3B87005C2C96 /* Debug */,
+				A9B535CB2F4E3B87005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B535CC2F4E3B87005C2C96 /* Build configuration list for PBXNativeTarget "AetherisDesignSystemTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B535CD2F4E3B87005C2C96 /* Debug */,
+				A9B535CE2F4E3B87005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B536E62F4E6C01005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthentication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B536E72F4E6C01005C2C96 /* Debug */,
+				A9B536E82F4E6C01005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B536E92F4E6C01005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B536EA2F4E6C01005C2C96 /* Debug */,
+				A9B536EB2F4E6C01005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B537152F4E6E16005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B537162F4E6E16005C2C96 /* Debug */,
+				A9B537172F4E6E16005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9B537182F4E6E16005C2C96 /* Build configuration list for PBXNativeTarget "AetherisAuthenticationInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9B537192F4E6E16005C2C96 /* Debug */,
+				A9B5371A2F4E6E16005C2C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C188FF2F4E7A5B00013305 /* Build configuration list for PBXNativeTarget "Payments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C189002F4E7A5B00013305 /* Debug */,
+				A9C189012F4E7A5B00013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C189022F4E7A5B00013305 /* Build configuration list for PBXNativeTarget "PaymentsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C189032F4E7A5B00013305 /* Debug */,
+				A9C189042F4E7A5B00013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C1892A2F4E7AFE00013305 /* Build configuration list for PBXNativeTarget "Account" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C1892B2F4E7AFE00013305 /* Debug */,
+				A9C1892C2F4E7AFE00013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C1892D2F4E7AFE00013305 /* Build configuration list for PBXNativeTarget "AccountTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C1892E2F4E7AFE00013305 /* Debug */,
+				A9C1892F2F4E7AFE00013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C18BAB2F4FCC3800013305 /* Build configuration list for PBXNativeTarget "PaymentsInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C18BAC2F4FCC3800013305 /* Debug */,
+				A9C18BAD2F4FCC3800013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9C18BAE2F4FCC3800013305 /* Build configuration list for PBXNativeTarget "PaymentsInterfaceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9C18BAF2F4FCC3800013305 /* Debug */,
+				A9C18BB02F4FCC3800013305 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A976FAA02E37AEEF00FF923B /* Project object */;
+}
