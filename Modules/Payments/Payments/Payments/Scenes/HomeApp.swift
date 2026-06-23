@@ -21,59 +21,26 @@ struct HomeApp: View {
                             showNotifications = true
                         })
                         
-                        Divider()
-                        
                         BalanceView()
                         
                         CardSwipe(cards: $cardsMock)
                         
-                        Divider()
                         
-                        Recipients()
+                        RecipientsContainer()
                         
-                        Divider()
+                        QuickActions()
                         
-                        HStack(spacing: 35) {
-                            CardDistribution(primaryColor: .white,
-                                             backgroundColor: .black,
-                                             spectrumRatio: .vertical,
-                                             model: .mockCreditCard)
-                            .gesture(
-                                TapGesture()
-                                    .onEnded {
-                                        shouldPresentCardHome = true
-                                    }
-                            )
-                            
-                            VStack {
-                                CardDistribution(primaryColor: .white,
-                                                 backgroundColor: .accentColorB,
-                                                 spectrumRatio: .horizontal,
-                                                 model: .mockLoans)
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded {
-                                            shouldPresentLoan = true
-                                        }
-                                )
-                                
-                                CardDistribution(primaryColor: .white,
-                                                 backgroundColor: .black,
-                                                 spectrumRatio: .horizontal,
-                                                 model: .mockInvestiment)
-                                .gesture(
-                                    TapGesture()
-                                        .onEnded {
-                                            shouldPresentSIN = true
-                                        }
-                                )
-                            }
-                        }
+                        SpendingThisMonthView()
+                        
                     }
                 }
             }
             .opacity(isLoading ? 0 : 1)
             .padding(.horizontal)
+            .safeAreaInset(edge: .bottom) {
+                Color.clear
+                    .frame(height: 100)
+            }
             .navigationDestination(isPresented: $shouldPresentCardHome) {
                 CardHome()
             }

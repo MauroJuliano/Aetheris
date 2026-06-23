@@ -20,7 +20,7 @@ public extension Color {
     
     // Text
     static let textPrimary = Color(hex: "#111827")
-    // static let textSecondary = Color(hex: "#6B7280")
+    static let textSecondaryColor = Color(hex: "#6B7280")
     static let textTertiary = Color(hex: "#9CA3AF")
     
     // Surfaces

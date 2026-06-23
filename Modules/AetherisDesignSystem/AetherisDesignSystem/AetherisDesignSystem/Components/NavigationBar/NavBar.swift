@@ -88,6 +88,8 @@ public struct NavBar: View {
                 }
             }
         }
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
