@@ -23,33 +23,26 @@ public struct GlassButton: View {
     
     public var body: some View {
         Button(action: action) {
-            VStack {
-                
+            VStack(spacing: 8) {
                 ZStack {
-                    ZStack {
-                           Color.purple.opacity(0.3)
-                           BlurView(style: .systemUltraThinMaterial)
-                       }
-                       .frame(width: 60, height: 60)
-                       .clipShape(Circle())
-                       .overlay(Circle().stroke(.white.opacity(0.25), lineWidth: 1))
-                    
+                    Circle()
+                        .fill(Color.gray.opacity(0.08))
+                        .frame(width: 58, height: 58)
                     
                     Image(systemName: model.icon)
-                        .font(.title)
-                        .foregroundStyle(.white)
-                        .frame(width: 20, height: 20)
-                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 0, y: 2)
+                        .font(.system(size: 20, weight: .regular))
+                        .foregroundStyle(Color.brandPrimaryColor)
                 }
                 
-                
                 Text(model.label)
+                    .font(.caption)
+                    .bold()
+                    .foregroundStyle(Color.textPrimary)
                     .multilineTextAlignment(.center)
-                    .foregroundStyle(.gray)
-                    .font(AppFont.roboto(.regular, size: 16))
+                    .lineLimit(2)
+                    .frame(height: 32)
+                    
             }
-            
-            
         }
     }
 }

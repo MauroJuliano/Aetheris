@@ -57,9 +57,12 @@ public struct FormCellModel: Identifiable {
 
 public struct FormCell: View {
     @State var model: FormCellModel
+    let hasDivider: Bool
     
-    public init(model: FormCellModel) {
+    public init(model: FormCellModel,
+                hasDivider: Bool = false) {
         self.model = model
+        self.hasDivider = hasDivider
     }
     
     public var body: some View {
@@ -67,7 +70,8 @@ public struct FormCell: View {
             HStack {
                 Text(title)
                     .foregroundStyle(.black)
-                    .font(AppFont.roboto(.bold, size: 24))
+                    .font(.title2)
+                    .bold()
                     .multilineTextAlignment(.leading)
                     .padding(.top)
                 
@@ -77,12 +81,7 @@ public struct FormCell: View {
         }
         
         HStack {
-            Image(systemName: model.content.icon)
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.black)
-                .frame(width: 28, height: 28)
-                .padding()
+            IconContainer(model: .init(icon: model.content.icon))
             
             Text(model.content.title)
                 .foregroundStyle(.black)
@@ -97,12 +96,12 @@ public struct FormCell: View {
                         toggle.isOn = newValue
                     }
                 ))
-                .tint(.accentColorBrown)
+                .tint(Color.brandPrimaryColor)
                 .labelsHidden()
             }
         }
         
-        if model.content.hasDivider {
+        if hasDivider {
             Divider()
         }
     }

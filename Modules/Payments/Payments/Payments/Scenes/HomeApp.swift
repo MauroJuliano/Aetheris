@@ -12,28 +12,23 @@ struct HomeApp: View {
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
-                ZStack() {
-                    VStack {
-                        NavBar(model: .init(firstText: "Welcome, ",
-                                            secondText: "Blake!",
-                                            hasInitialSpace: false),
-                               onRightButtonAction: {
-                            showNotifications = true
-                        })
-                        
-                        BalanceView()
-                        
-                        CardSwipe(cards: $cardsMock)
-                        
-                        
-                        RecipientsContainer()
-                        
-                        QuickActions()
-                        
-                        SpendingThisMonthView()
-                        
-                    }
-                }
+                NavBar(model: .init(firstText: "Welcome, ",
+                                    secondText: "Blake!",
+                                    hasInitialSpace: false),
+                       onRightButtonAction: {
+                    showNotifications = true
+                })
+                
+                BalanceView()
+                
+                CardSwipe(cards: $cardsMock)
+                
+                RecipientsContainer()
+                
+                QuickActions()
+                
+                SpendingThisMonthView()
+                
             }
             .opacity(isLoading ? 0 : 1)
             .padding(.horizontal)

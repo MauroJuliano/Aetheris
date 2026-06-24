@@ -8,10 +8,9 @@ struct ProfileScreen: View {
                     UserView()
                     
                     FormView(cells: FormCellModel.generalCellsMock)
-                        .frame(maxWidth: .infinity)
-                    
+                        
                     FormView(cells: FormCellModel.notifications)
-                        .frame(maxWidth: .infinity)
+                     
                     
                     Spacer()
                     
@@ -29,26 +28,26 @@ struct ProfileScreen: View {
                                 .frame(width: 300, height: 50)
                             
                             Text("Logout")
-                                .foregroundStyle(Color.accentColorBrown)
+                                .foregroundStyle(Color.brandPrimaryColor)
                                 .font(AppFont.roboto(.semibold, size: 16))
                                 .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
                         }
-                        
                     }
+                    .padding(.vertical)
                     
                     Spacer()
                     
                     Text("Version 0.00.1")
                         .foregroundStyle(.gray.opacity(0.25))
-                        .font(AppFont.roboto(.regular, size: 16))
+                        .font(.footnote)
                         .padding(.top)
                     
                     Text("@2025 Powered by Blake")
                         .foregroundStyle(.gray.opacity(0.25))
-                        .font(AppFont.roboto(.regular, size: 16))
+                        .font(.footnote)
                     
                     Text("Account terms - Privacy Policy")
-                        .foregroundStyle(Color.accentColorBrown)
+                        .foregroundStyle(Color.brandPrimaryColor)
                         .font(AppFont.roboto(.semibold, size: 16))
                         .padding(.bottom, 100)
                 }

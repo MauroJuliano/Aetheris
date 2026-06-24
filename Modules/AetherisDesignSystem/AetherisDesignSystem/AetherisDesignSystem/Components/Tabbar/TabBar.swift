@@ -46,7 +46,7 @@ public struct TabBar: View {
         }) {
             HStack(spacing: 4) {
                 Image(systemName: icon)
-                    .foregroundColor(selectedIndex == index ? .black : .white)
+                    .foregroundColor(selectedIndex == index ? Color.brandPrimaryColor : .white)
                 
                 if selectedIndex == index {
                     Text(label)

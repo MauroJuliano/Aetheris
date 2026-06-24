@@ -24,14 +24,12 @@ struct NotificationsCentre: View {
 
                         Text(section.title)
                             .foregroundStyle(.black)
-                            .font(AppFont.roboto(.bold, size: 24))
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.headline)
                             .padding(.horizontal)
 
                         VStack {
                             ForEach(section.items) { cell in
                                 NotificationCell(model: cell)
-                                    .padding(.horizontal)
                             }
                         }
                         .background(
@@ -44,10 +42,11 @@ struct NotificationsCentre: View {
                                 )
                         )
                     }
+                    .padding(.horizontal)
                 }
             }
         }
-        .padding(.horizontal)
+        .navigationBarHidden(true)
         .background(Color.backgroundColorA)
         .task {
             await viewModel.load()

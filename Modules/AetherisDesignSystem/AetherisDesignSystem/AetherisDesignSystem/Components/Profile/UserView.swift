@@ -8,14 +8,14 @@ public struct UserView: View {
     }
     
     public var body: some View {
-        VStack {
+        HStack {
             ZStack {
                 LinearGradient(
                     colors: [Color.blue.opacity(0.4), Color.purple.opacity(0.4)],
                     startPoint: .top,
                     endPoint: .bottom
                 )
-                .frame(width: 160, height: 160) // slightly bigger than card
+                .frame(width: 120, height: 120)
                 .clipShape(Circle())
                 .blur(radius: 20)
                 .rotationEffect(.degrees(rotateGradient ? 360 : 0))
@@ -32,21 +32,23 @@ public struct UserView: View {
                         Circle()
                             .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
                     )
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
             }
             .onAppear {
                 rotateGradient = true
             }
             
-            Text("Melissa Mccarthy")
-                .foregroundStyle(.black)
-                .font(AppFont.roboto(.semibold, size: 28))
-            
-            Text("Joined August 17, 2025")
-                .foregroundStyle(.gray)
-                .font(AppFont.roboto(.semibold, size: 18))
+            VStack(alignment: .leading) {
+                Text("Melissa Mccarthy")
+                    .foregroundStyle(.black)
+                    .font(.title3)
+                
+                Text("Joined August 17, 2025")
+                    .foregroundStyle(Color.brandPrimaryColor)
+                    .font(.caption)
+            }
         }
-        .frame(width: 300, height: 300)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

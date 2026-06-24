@@ -2,7 +2,7 @@ import SwiftUI
 
 public struct FormView: View {
     @State var cells: [FormCellModel]
-   
+    
     public init(cells: [FormCellModel]) {
         self.cells = cells
     }
@@ -10,21 +10,17 @@ public struct FormView: View {
     public var body: some View {
         VStack {
             ForEach(cells) { cell in
-                FormCell(model: cell)
-                    .padding(.horizontal)
+                FormCell(model: cell,
+                         hasDivider: cell.id != cells.last?.id)
+                    .padding(5)
             }
         }
-        .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
-                )
-        )
-        .frame(width: 380)
         .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color.backgroundColorA)
+                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
+        )
     }
 }
 
@@ -35,17 +31,17 @@ public struct FormView: View {
                                      icon: "person",
                                      hasDivider: true)),
         FormCellModel(sectionTitle: nil,
-                                  content: .init(title: "contact@melissamccarthy.com",
-                                                 icon: "envelope",
-                                                 hasDivider: true)),
+                      content: .init(title: "contact@melissamccarthy.com",
+                                     icon: "envelope",
+                                     hasDivider: true)),
         FormCellModel(sectionTitle: nil,
-                                  content: .init(title: "(33) 9908-3213",
-                                                 icon: "iphone.gen2",
-                                                 hasDivider: true)),
+                      content: .init(title: "(33) 9908-3213",
+                                     icon: "iphone.gen2",
+                                     hasDivider: true)),
         FormCellModel(sectionTitle: nil,
-                                  content: .init(title: "Feedback",
-                                                 icon: "bubble",
-                                                 hasDivider: true))
+                      content: .init(title: "Feedback",
+                                     icon: "bubble",
+                                     hasDivider: true))
     ]
     
     FormView(cells: cells)

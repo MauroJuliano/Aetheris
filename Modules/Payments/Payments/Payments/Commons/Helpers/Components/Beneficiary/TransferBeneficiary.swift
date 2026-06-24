@@ -5,60 +5,105 @@ public struct TransferBeneficiary: View {
     @Binding var shouldChange: Bool
     @Binding var model: Beneficiary
     
+    @State private var rotateGradient: Bool
+    
     public init(shouldChange: Binding<Bool>,
-                model: Binding<Beneficiary>) {
+                model: Binding<Beneficiary>,
+                rotateGradient: Bool = false) {
         self._shouldChange = shouldChange
         self._model = model
+        self.rotateGradient = rotateGradient
     }
     
     public var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25)
-                .fill(Color.background)
-                .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
+        HStack(spacing: 16) {
+            avatarView
             
-            
-            HStack {
-                Image(model.image)
-                    .resizable()
-                    .scaledToFill()
-                    .clipShape(Circle())
-                    .frame(width: 50, height: 50)
-                    .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
-                
-                VStack(alignment: .leading) {
-                    Text(model.name)
-                        .font(AppFont.roboto(.semibold, size: 16))
-                        .foregroundStyle(.black)
-                    
+            VStack(alignment: .leading, spacing: 4) {
+                Text(model.name)
+                    .font(.headline)
+                    .foregroundStyle(Color.textPrimary)
+
+                HStack(spacing: 6) {
                     Text(model.pixKey)
-                        .font(AppFont.roboto(.regular, size: 14))
-                        .foregroundStyle(.gray)
-                }
-                
-                Spacer()
-                
-                Button {
-                    shouldChange = true
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.backgroundColorA)
-                            .frame(width: 100, height: 50)
-                            .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
-                        
-                        Text("Change")
-                            .font(AppFont.roboto(.regular, size: 16))
-                            .foregroundStyle(Color.accentColorBrown)
+                        .font(.footnote)
+                        .foregroundStyle(Color.textTertiary)
+                        .lineLimit(2)
+                        .truncationMode(.tail)
+                        .layoutPriority(1)
+
+                    Button {
+                        UIPasteboard.general.string = model.pixKey
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(Color.brandPrimaryColor)
                     }
-                    
-                    
                 }
             }
-            .padding()
+            
+            Button {
+                shouldChange = true
+            } label: {
+                HStack(spacing: 6) {
+                    Text("Change")
+                        .font(.subheadline.weight(.semibold))
+                    
+                    Image(systemName: "pencil")
+                        .font(.subheadline.weight(.semibold))
+                }
+                .foregroundStyle(Color.brandPrimaryColor)
+                .padding(.horizontal, 16)
+                .frame(height: 44)
+                .background(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .fill(Color.backgroundColorA)
+                        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+                )
+            }
         }
-        .frame(height: 100)
-        .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 18)
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color.backgroundColorA)
+                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
+        )
+    }
+    
+    private var avatarView: some View {
+        ZStack {
+            LinearGradient(
+                colors: [
+                    Color.blue.opacity(0.35),
+                    Color.purple.opacity(0.35)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(width: 72, height: 72)
+            .clipShape(Circle())
+            .blur(radius: 18)
+            .rotationEffect(.degrees(rotateGradient ? 360 : 0))
+            .animation(
+                .linear(duration: 6).repeatForever(autoreverses: false),
+                value: rotateGradient
+            )
+            
+            Image(model.image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 72, height: 72)
+                .clipShape(Circle())
+                .overlay(
+                    Circle()
+                        .stroke(.gray.opacity(0.25), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.12), radius: 10, y: 5)
+        }
+        .onAppear {
+            rotateGradient = true
+        }
     }
 }
 

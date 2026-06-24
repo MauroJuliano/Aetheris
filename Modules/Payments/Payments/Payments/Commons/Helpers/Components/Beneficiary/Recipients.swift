@@ -13,8 +13,6 @@ public struct Recipients: View {
            
             VStack(alignment: .leading) {
                 HStack {
-                  
-                        
                     Text("Recipients")
                         .foregroundStyle(.black)
                         .font(AppFont.roboto(.medium, size: 20))

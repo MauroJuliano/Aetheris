@@ -398,8 +398,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Components/LoadingScreen.swift,
+				Components/Profile/IconContainer.swift,
 			);
 			target = A9C188E72F4E7A5A00013305 /* Payments */;
+		};
+		A9AFA5052FECA020005B85AF /* Exceptions for "Payments" folder in "AetherisDesignSystem" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Commons/Helpers/Components/SpendingLineChart.swift,
+			);
+			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
 		};
 		A9B535E22F4E3CE8005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisDesignSystem" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -414,6 +422,7 @@
 			membershipExceptions = (
 				Components/Tabbar/TabBar.swift,
 				Components/Tabbar/TabBarView.swift,
+				Components/Tabbar/TransferAmountViewModel.swift,
 				"Helpers/Skeletonize+Extension.swift",
 			);
 			target = A976FAA72E37AEEF00FF923B /* AetherisApp */;
@@ -513,6 +522,9 @@
 		};
 		A9C188E92F4E7A5A00013305 /* Payments */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A9AFA5052FECA020005B85AF /* Exceptions for "Payments" folder in "AetherisDesignSystem" target */,
+			);
 			path = Payments;
 			sourceTree = "<group>";
 		};

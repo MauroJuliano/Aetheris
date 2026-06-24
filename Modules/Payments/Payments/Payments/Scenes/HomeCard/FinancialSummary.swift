@@ -1,13 +1,13 @@
 import SwiftUI
 
-public struct FinancialSummaryModel: Identifiable {
-    public var id: UUID
+struct FinancialSummaryModel: Identifiable {
+    var id: UUID
     var image: String
     var title: String
     var description: String
     var value: String
     
-    public init(id: UUID = UUID(),
+    init(id: UUID = UUID(),
                 image: String,
                 title: String,
                 description: String,
@@ -25,14 +25,17 @@ public struct FinancialSummaryModel: Identifiable {
                                                                  value: "$ 250.00")
 }
 
-public struct FinancialSummary: View {
+struct FinancialSummary: View {
     var model: FinancialSummaryModel
+    var hasDivider: Bool
     
-    public init(model: FinancialSummaryModel) {
+    init(model: FinancialSummaryModel,
+                hasDivider: Bool = true) {
         self.model = model
+        self.hasDivider = hasDivider
     }
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Image(model.image)
                 .resizable()
@@ -45,10 +48,10 @@ public struct FinancialSummary: View {
                 Text(model.title)
                     .foregroundStyle(.black)
                     .font(.headline)
-                    .fontWeight(.semibold)
+                    .bold()
                 
                 Text(model.description)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.gray)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
@@ -59,14 +62,16 @@ public struct FinancialSummary: View {
             VStack(alignment: .leading) {
                 Text(model.value)
                     .foregroundStyle(.black)
+                    .bold()
                     .font(.headline)
                     .monospacedDigit()
             }
         }
-        .padding(.horizontal, 10)
-        .frame(minHeight: 30)
+        .padding()
         
-        Divider()
+        if hasDivider {
+            Divider()
+        }
     }
 }
 

@@ -3,6 +3,8 @@ import SwiftUI
 
 struct RecipientsContainer: View {
     let users = Beneficiary.beneficiaries
+    @State private var shouldPresentSendMoney: Bool = false
+    @State private var userSelected: Beneficiary?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
@@ -22,27 +24,32 @@ struct RecipientsContainer: View {
             
             HStack(spacing: 24) {
                 ForEach(users.prefix(4)) { user in
-                    VStack(spacing: 8) {
-                        Image(user.image)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 58, height: 58)
-                            .clipShape(Circle())
-                        
-                        Text(user.name)
-                            .font(.caption)
-                            .bold()
-                            .foregroundStyle(Color.textPrimary)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                            .frame(height: 32)
+                    Button {
+                        userSelected = user
+                        shouldPresentSendMoney = true
+                    } label: {
+                        VStack(spacing: 8) {
+                            Image(user.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 58, height: 58)
+                                .clipShape(Circle())
                             
+                            Text(user.name)
+                                .font(.caption)
+                                .bold()
+                                .foregroundStyle(Color.textPrimary)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(2)
+                                .frame(height: 32)
+                            
+                        }
+                        .frame(maxWidth: .infinity)
                     }
-                    .frame(maxWidth: .infinity)
                 }
                 
                 Button {
-                    // add recipient
+                    
                 } label: {
                     VStack(spacing: 8) {
                         ZStack {
@@ -74,6 +81,12 @@ struct RecipientsContainer: View {
                 .fill(Color.backgroundColorA)
                 .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
         )
+        .navigationDestination(isPresented: $shouldPresentSendMoney) {
+            if let model = userSelected {
+                SendMoney(model: model)
+            }
+            
+        }
     }
 }
 

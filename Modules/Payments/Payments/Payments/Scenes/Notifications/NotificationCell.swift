@@ -1,107 +1,88 @@
 import AetherisDesignSystem
 import SwiftUI
 
-public struct Notifications: Identifiable {
-    public let id: UUID = UUID()
-    let title: String
-    let image: String
-    let date: Date
-    let hasDivider: Bool
-    
-    // For previews & testing
-    public static let mock: [Notifications] = [
-        Notifications(title: "Funds successfully transferred to Melissa",
-                     image: "melissa",
-                     date: Date(), // now → today
-                     hasDivider: true),
-        
-        Notifications(title: "Payment received from Ed",
-                     image: "ed",
-                     date: Date(), // now → today
-                     hasDivider: true),
-        
-        Notifications(title: "Subscription renewed for Man's best Friend",
-                     image: "sabrina",
-                     date: Date(), // now → today
-                     hasDivider: true),
-        
-        Notifications(title: "Payment received from Troy",
-                     image: "Troy",
-                     date: Calendar.current.date(byAdding: .day, value: -1, to: Date())!, // yesterday
-                     hasDivider: true),
-        
-        Notifications(title: "Refund processed successfully",
-                     image: "NetflixLogo",
-                     date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!, // last week
-                     hasDivider: true),
-        
-        Notifications(title: "Your subscription has expired",
-                     image: "netflix",
-                     date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!, // last month
-                     hasDivider: true),
-        
-        Notifications(title: "System maintenance completed",
-                     image: "system",
-                     date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!, // older
-                     hasDivider: true)
-    ]
-}
-
-public extension Notifications {
-    var section: String {
-        let calendar = Calendar.current
-        let now = Date()
-        
-        if calendar.isDateInToday(date) {
-            return "Today"
-        } else if calendar.isDateInYesterday(date) {
-            return "Yesterday"
-        } else if let weekAgo = calendar.date(byAdding: .day, value: -7, to: now),
-                  date >= weekAgo {
-            return "Last Week"
-        } else if let monthAgo = calendar.date(byAdding: .month, value: -1, to: now),
-                  date >= monthAgo {
-            return "Last Month"
-        } else {
-            return "Others"
-        }
-    }
-}
-
 public struct NotificationCell: View {
-    @State var model: Notifications
+    var model: Notifications
     
     public var body: some View {
-        HStack(spacing: 12) {
-            Image(model.image)
+        VStack(spacing: 0) {
+            
+            HStack(spacing: 14) {
+                leadingView
+
+                Text(model.title)
+                    .font(.callout)
+                    .foregroundStyle(Color.textPrimary)
+                    .bold()
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                HStack(spacing: 8) {
+                    Circle()
+                        .fill(Color.brandPrimaryColor)
+                        .frame(width: 8, height: 8)
+
+                    Text(timeLabel)
+                        .font(.footnote)
+                        .foregroundStyle(Color.textTertiary)
+                }
+            }
+            .padding(.horizontal, 18)
+            .padding(.vertical, 18)
+            
+            if model.hasDivider {
+                Divider()
+                    .padding(.leading, 78)
+            }
+        }
+    }
+    
+    private var timeLabel: String {
+        let formatter = DateFormatter()
+        
+        if Calendar.current.isDateInToday(model.date) {
+            formatter.dateFormat = "h:mm a"
+            return formatter.string(from: model.date)
+        }
+        
+        if Calendar.current.isDateInYesterday(model.date) {
+            return "Yesterday"
+        }
+        
+        let days = Calendar.current.dateComponents([.day],
+                                                   from: model.date,
+                                                   to: Date()).day ?? 0
+        
+        if days < 30 {
+            return "\(days) days ago"
+        }
+        
+        return "\(max(1, days / 30)) month ago"
+    }
+    
+    @ViewBuilder
+    private var leadingView: some View {
+        switch model.leadingContent {
+        case .image(let name):
+            Image(name)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 40, height: 40)
+                .frame(width: 46, height: 46)
                 .clipShape(Circle())
-                .foregroundStyle(.black)
 
-            Text(model.title)
-                .foregroundStyle(.black)
-                .font(AppFont.roboto(.regular, size: 16))
-
-            Spacer()
-
-//            VStack(alignment: .trailing, spacing: 4) {
-//                Text(model.hour)
-//                    .font(.subheadline)
-//                    .foregroundStyle(.gray)
-//
-//                Spacer()
-//            }
-        }
-        .frame(maxHeight: 50) // optional: keeps row height consistent
-        .padding(.vertical, 8)
-        
-        if model.hasDivider {
-            Divider()
+        case .icon(let systemName):
+            Circle()
+                .fill(Color.brandPrimaryColor.opacity(0.12))
+                .frame(width: 46, height: 46)
+                .overlay {
+                    Image(systemName: systemName)
+                        .font(.system(size: 20, weight: .medium))
+                        .foregroundStyle(Color.brandPrimaryColor)
+                }
         }
     }
 }
+
 
 #Preview {
     NotificationCell(model: .mock.first!)
