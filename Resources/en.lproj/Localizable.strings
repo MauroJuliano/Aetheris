@@ -3,6 +3,7 @@
 
 // SIN
 "SIN.title" = "Social Insurance Number";
+"SIN.subTitle" = "We'll use your SIN to verify your identity and keep your account secure.";
 "SIN.placeholder" = "000.000.000";
 "SIN.buttonName" = "Continue";
 

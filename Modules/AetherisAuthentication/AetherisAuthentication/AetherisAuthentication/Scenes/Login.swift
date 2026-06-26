@@ -11,18 +11,22 @@ struct Login: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Hello Again!")
-                    .foregroundStyle(.black)
+                Text("Welcome back!")
+                    .foregroundStyle(Color.brandPrimaryColor)
                     .font(.title)
-                    .fontWeight(.bold)
+                
+                Text("Let's get started")
+                    .foregroundStyle(.black)
+                    .font(.largeTitle)
+                    .bold()
 
-                Text("Your financial journey continues. \nLet’s make your next move count.")
-                    .foregroundStyle(.gray)
-                    .font(.title2)
-                    .fontWeight(.bold)
+                Text("Your financial journey continues. \nLet’s make your next \nmove count.")
+                    .foregroundStyle(Color.textTertiary)
+                    .font(.title3)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(35)
+            .padding(.vertical, 60)
+            .padding(.horizontal, 35)
 
             Spacer()
 
@@ -31,8 +35,8 @@ struct Login: View {
                 TextField(
                     "",
                     text: $login,
-                    prompt: Text("Email")
-                        .foregroundColor(.black.opacity(0.6))
+                    prompt: Text("Enter your email")
+                        .foregroundColor(.gray.opacity(0.6))
                         .font(.body)
                 )
                 .foregroundStyle(.black)
@@ -48,8 +52,8 @@ struct Login: View {
                 TextField(
                     "",
                     text: $password,
-                    prompt: Text("Password")
-                        .foregroundColor(.black.opacity(0.6))
+                    prompt: Text("Enter your password")
+                        .foregroundColor(.gray.opacity(0.6))
                         .font(.body)
                 )
                 .foregroundStyle(.black)
@@ -68,7 +72,7 @@ struct Login: View {
 
             // Register
             HStack {
-                Text("Create a new account?")
+                Text("Don't have an account?")
                     .foregroundStyle(.gray)
 
                 Button {
@@ -76,12 +80,17 @@ struct Login: View {
                 } label: {
                     Text("Sign up here")
                         .bold()
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.brandPrimaryColor)
                 }
             }
+            .padding(.bottom, 30)
         }
-        .padding()
-        .background(Color.backgroundColorA)
+        .background {
+            Image("login-background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+        }
     }
 }
 

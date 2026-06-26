@@ -12,6 +12,7 @@ struct UserNameView: View {
     var body: some View {
         ZStack {
             RegisterView(title: viewModel.title,
+                         subTitle: viewModel.subTitle,
                          textFieldValue: $viewModel.userName,
                          buttonTitle: viewModel.buttonName,
                          textFieldPlaceholder: viewModel.placeholder,

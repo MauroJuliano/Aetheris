@@ -31,6 +31,8 @@ internal enum Strings {
     internal static let buttonName = Strings.tr("Localizable", "SIN.buttonName", fallback: "Continue")
     /// 000.000.000
     internal static let placeholder = Strings.tr("Localizable", "SIN.placeholder", fallback: "000.000.000")
+    /// We'll use your SIN to verify your identity and keep your account secure.
+    internal static let subTitle = Strings.tr("Localizable", "SIN.subTitle", fallback: "We'll use your SIN to verify your identity and keep your account secure.")
     /// Social Insurance Number
     internal static let title = Strings.tr("Localizable", "SIN.title", fallback: "Social Insurance Number")
   }

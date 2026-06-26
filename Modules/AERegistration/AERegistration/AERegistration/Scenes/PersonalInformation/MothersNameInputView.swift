@@ -13,6 +13,7 @@ struct MothersNameInputView: View {
     var body: some View {
         ZStack {
             RegisterView(title: viewModel.title,
+                         subTitle: viewModel.subTitle,
                          textFieldValue: $viewModel.mothersNameInput,
                          buttonTitle: viewModel.buttonName,
                          textFieldPlaceholder: viewModel.placeholder,
@@ -27,6 +28,7 @@ struct MothersNameInputView: View {
             RegisterInputSkeleton()
                 .opacity(viewModel.isLoading ? 1 : 0)
         }
+        .navigationBarHidden(true)
     }
 }
 

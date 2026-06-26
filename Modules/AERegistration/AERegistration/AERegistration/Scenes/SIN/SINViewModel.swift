@@ -16,6 +16,7 @@ class SINViewModel: ObservableObject {
     }
     
     var title: String { localizable.title }
+    var subtitle: String { localizable.subTitle }
     var placeholder: String { localizable.placeholder }
     var buttonName: String { Strings.Default.buttonName }
     

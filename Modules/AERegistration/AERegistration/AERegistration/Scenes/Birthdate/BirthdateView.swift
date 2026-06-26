@@ -13,6 +13,7 @@ struct BirthdateView: View {
     var body: some View {
         ZStack {
             RegisterView(title: viewModel.title,
+                         subTitle: viewModel.subTitle,
                          textFieldValue: $viewModel.birthdate,
                          buttonTitle: viewModel.buttonName,
                          textFieldPlaceholder: viewModel.placeholder,

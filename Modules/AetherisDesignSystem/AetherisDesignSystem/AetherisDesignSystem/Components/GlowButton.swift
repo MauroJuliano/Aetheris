@@ -17,7 +17,7 @@ public struct GlowButton: View {
     public var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(AngularGradient(colors: [Color.accentColorBrown, .white, Color.accentColorBrown], center: .center, angle: .degrees(isAnimating ? 360 : 0)))
+                .fill(AngularGradient(colors: [Color.brandPrimaryColor, .white, Color.brandPrimaryColor], center: .center, angle: .degrees(isAnimating ? 360 : 0)))
                 .frame(width: 250, height: 50)
                 .blur(radius: 10)
                 .onAppear {
@@ -28,7 +28,7 @@ public struct GlowButton: View {
             
             Button(action: action) {
                 Text(title)
-                    .foregroundStyle(Color.accentColorBrown)
+                    .foregroundStyle(Color.brandPrimaryColor)
                     .frame(width: 250, height: 50)
                     .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
                     .background(Color.backgroundColorA)

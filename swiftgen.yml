@@ -1,8 +1,8 @@
 strings:
   inputs:
-    - Flux/Resources/en.lproj/Localizable.strings
+    - Resources/en.lproj/Localizable.strings
   outputs:
     - templateName: structured-swift5
-      output: Flux/Generated/Strings.generated.swift
+      output: Generated/Strings.generated.swift
       params:
         enumName: Strings

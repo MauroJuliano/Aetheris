@@ -16,6 +16,7 @@ struct SINView: View {
         ZStack {
             RegisterView(
                 title: viewModel.title,
+                subTitle: viewModel.subtitle,
                 textFieldValue: Binding(
                     get: { viewModel.sin },
                     set: { viewModel.updateSIN($0) }

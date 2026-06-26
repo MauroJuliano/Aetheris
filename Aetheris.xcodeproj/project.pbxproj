@@ -32,6 +32,7 @@
 		A9B537092F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		A9B537142F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9BC38522FEEC4B400BFE3AF /* Strings.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC38502FEEC4B400BFE3AF /* Strings.generated.swift */; };
 		A9C188F32F4E7A5A00013305 /* Payments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; };
 		A9C188FD2F4E7A5B00013305 /* Payments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; };
 		A9C188FE2F4E7A5B00013305 /* Payments.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C188E82F4E7A5A00013305 /* Payments.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -385,6 +386,7 @@
 		A9B536D92F4E6C01005C2C96 /* AetherisAuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisAuthenticationInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B537082F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisAuthenticationInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9BC38502FEEC4B400BFE3AF /* Strings.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.generated.swift; sourceTree = "<group>"; };
 		A9C188E82F4E7A5A00013305 /* Payments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Payments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C188F22F4E7A5A00013305 /* PaymentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C189132F4E7AFD00013305 /* Account.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Account.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -748,6 +750,7 @@
 				A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */,
 				A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */,
 				A976FAA92E37AEEF00FF923B /* Products */,
+				A9BC38512FEEC4B400BFE3AF /* Generated */,
 			);
 			sourceTree = "<group>";
 		};
@@ -900,6 +903,14 @@
 				A9B5370E2F4E6E16005C2C96 /* AetherisAuthenticationInterfaceTests */,
 			);
 			path = AetherisAuthenticationInterface;
+			sourceTree = "<group>";
+		};
+		A9BC38512FEEC4B400BFE3AF /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				A9BC38502FEEC4B400BFE3AF /* Strings.generated.swift */,
+			);
+			path = Generated;
 			sourceTree = "<group>";
 		};
 		A9C189052F4E7A6400013305 /* Payments */ = {
@@ -1872,6 +1883,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BC38522FEEC4B400BFE3AF /* Strings.generated.swift in Sources */,
 				A9AFA2AB2FE9E746005B85AF /* DependencyContainer.swift in Sources */,
 				A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */,
 			);

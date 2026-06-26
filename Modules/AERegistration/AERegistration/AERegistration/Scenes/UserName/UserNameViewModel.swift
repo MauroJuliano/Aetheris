@@ -10,6 +10,7 @@ class UserNameViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     var title: String { localizable.title }
+    var subTitle: String { localizable.subTitle }
     var placeholder: String { localizable.placeholder }
     var buttonName: String { Strings.Default.buttonName }
     

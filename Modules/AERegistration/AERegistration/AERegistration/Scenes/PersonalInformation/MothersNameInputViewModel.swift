@@ -9,6 +9,7 @@ class MothersNameInputViewModel: ObservableObject {
     let submissionSucceeded = PassthroughSubject<Void, Never>()
     
     var title: String { localizable.title }
+    var subTitle: String { localizable.subTitle }
     var placeholder: String { localizable.placeholder }
     var buttonName: String { Strings.Default.buttonName }
     

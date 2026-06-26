@@ -3,17 +3,21 @@
 
 // SIN
 "SIN.title" = "Social Insurance Number";
+"SIN.subTitle" = "We'll use your SIN to verify your identity and keep your account secure.";
 "SIN.placeholder" = "000.000.000";
 "SIN.buttonName" = "Continue";
 
 // MothersName
 "MothersName.title" = "Mother's name";
 "MothersName.placeholder" = "Jane doe";
+"MothersName.subTitle" = "Used as an additional security measure to help protect your account";
 
 // UserName
 "UserName.title" = "Full name";
+"UserName.subTitle" = "Choose a unique username that others can use to find and pay you.";
 "UserName.placeholder" = "John doe";
 
 // BirthDate
 "Birthdate.title" = "Date of birth";
+"Birthdate.subTitle" = "We'll use your date of birth to verify your identity securely";
 "Birthdate.placeholder" = "26/08/1970";
