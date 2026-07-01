@@ -11,24 +11,19 @@ struct BirthdateView: View {
     }
     
     var body: some View {
-        ZStack {
-            RegisterView(title: viewModel.title,
-                         subTitle: viewModel.subTitle,
-                         textFieldValue: $viewModel.birthdate,
-                         buttonTitle: viewModel.buttonName,
-                         textFieldPlaceholder: viewModel.placeholder,
-                         onAction: {
-                viewModel.submit()
-            })
-            .onReceive(viewModel.submissionSucceeded) {
-                onContinue()
-            }
-            .opacity(viewModel.isLoading ? 0 : 1)
-            
-            RegisterInputSkeleton()
-                .opacity(viewModel.isLoading ? 1 : 0)
+        RegisterView(title: viewModel.title,
+                     subTitle: viewModel.subTitle,
+                     textFieldValue: $viewModel.birthdate,
+                     buttonTitle: viewModel.buttonName,
+                     textFieldPlaceholder: viewModel.placeholder,
+                     onAction: {
+            viewModel.submit()
+        })
+        .onReceive(viewModel.submissionSucceeded) {
+            onContinue()
         }
         .background(Color.backgroundColorA)
+        .navigationBarHidden(true)
     }
 }
 

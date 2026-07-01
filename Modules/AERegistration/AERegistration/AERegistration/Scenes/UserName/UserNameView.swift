@@ -27,6 +27,7 @@ struct UserNameView: View {
             RegisterInputSkeleton()
                 .opacity(viewModel.isLoading ? 1 : 0)
         }
+        .navigationBarHidden(true)
     }
 }
 
