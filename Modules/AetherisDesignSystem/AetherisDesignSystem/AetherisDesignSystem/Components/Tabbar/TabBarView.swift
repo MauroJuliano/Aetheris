@@ -23,11 +23,11 @@ public struct TabBarView: View {
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 25)
-                                .fill(Color.black)
+                                .fill(.white)
                                 .frame(width: 50, height: 50)
                             
                             Image(systemName: "paperplane")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.brandPrimaryColor)
                         }
                     }
                     .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)

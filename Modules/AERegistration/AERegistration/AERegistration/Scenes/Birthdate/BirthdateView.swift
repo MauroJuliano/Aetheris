@@ -24,11 +24,12 @@ struct BirthdateView: View {
                 onContinue()
             }
             .opacity(viewModel.isLoading ? 0 : 1)
-            
+
             RegisterInputSkeleton()
                 .opacity(viewModel.isLoading ? 1 : 0)
         }
         .background(Color.backgroundColorA)
+        .navigationBarHidden(true)
     }
 }
 

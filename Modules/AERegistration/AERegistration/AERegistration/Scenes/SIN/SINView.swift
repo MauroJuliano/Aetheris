@@ -36,6 +36,7 @@ struct SINView: View {
                 .opacity(viewModel.isLoading ? 1 : 0)
         }
         .background(Color.backgroundColorA)
+        .navigationBarHidden(true)
     }
 }
 

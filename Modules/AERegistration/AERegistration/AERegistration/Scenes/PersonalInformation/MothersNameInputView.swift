@@ -20,11 +20,11 @@ struct MothersNameInputView: View {
                          onAction: {
                 viewModel.submit()
             })
-            .onReceive( viewModel.submissionSucceeded) {
+            .onReceive(viewModel.submissionSucceeded) {
                 onContinue()
             }
             .opacity(viewModel.isLoading ? 0 : 1)
-            
+
             RegisterInputSkeleton()
                 .opacity(viewModel.isLoading ? 1 : 0)
         }

@@ -4,6 +4,7 @@ enum RegisterRoute: Hashable {
     case personal
     case userName
     case birthdate
+    case resume
 }
 
 struct RegisterFlow: View {
@@ -27,6 +28,10 @@ struct RegisterFlow: View {
                     }
                 case .birthdate:
                     BirthdateView(viewModel: BirthdateViewModel(service: MockBirthdateService())) {
+                        path.append(.resume)
+                    }
+                case .resume:
+                    ResumeFactory.make {
                         onRegisterFinished()
                     }
                 }

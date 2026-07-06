@@ -1,37 +1,38 @@
 import AetherisDesignSystem
 import SwiftUI
 
-struct NotificationsCentre: View {
-    @Binding var isPresented: Bool
-    @StateObject private var viewModel = NotificationsCentreViewModel()
+struct TransactionHistoryView: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel = TransactionHistoryViewModel()
     @State private var isLoading = true
 
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {
-
                     NavBar(
                         hasNotifications: false,
                         hasBackButton: true,
                         model: .init(
-                            firstText: "Notifications Centre",
+                            firstText: "Transaction History",
                             hasInitialSpace: false
                         ),
-                        onBack: { isPresented = false }
+                        onBack: { dismiss() }
                     )
 
                     ForEach(viewModel.sections) { section in
                         VStack(alignment: .leading, spacing: 12) {
-
                             Text(section.title)
                                 .foregroundStyle(.black)
                                 .font(.headline)
                                 .padding(.horizontal)
 
                             VStack {
-                                ForEach(section.items) { cell in
-                                    NotificationCell(model: cell)
+                                ForEach(section.items) { transaction in
+                                    FinancialSummary(
+                                        model: transaction,
+                                        hasDivider: transaction.id != section.items.last?.id
+                                    )
                                 }
                             }
                             .background(
@@ -50,7 +51,7 @@ struct NotificationsCentre: View {
             }
             .opacity(isLoading ? 0 : 1)
 
-            NotificationsCentreSkeleton()
+            TransactionHistorySkeleton()
                 .opacity(isLoading ? 1 : 0)
         }
         .navigationBarHidden(true)
@@ -66,5 +67,5 @@ struct NotificationsCentre: View {
 }
 
 #Preview {
-    NotificationsCentre(isPresented: .constant(false))
+    TransactionHistoryView()
 }
