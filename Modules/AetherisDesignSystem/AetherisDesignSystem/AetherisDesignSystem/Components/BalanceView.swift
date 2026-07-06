@@ -2,6 +2,7 @@ import SwiftUI
 
 public struct BalanceView: View {
     @State private var isBalanceVisible = true
+    private let balanceText = "$ 13,553.00"
 
     public init() {}
 
@@ -12,7 +13,7 @@ public struct BalanceView: View {
                 .foregroundStyle(Color.textTertiary)
 
             HStack(spacing: 12) {
-                Text(isBalanceVisible ? "$ 13,553.00" : "••••••••")
+                Text(isBalanceVisible ? balanceText : maskedBalanceText)
                     .font(.title)
                     .bold()
                     .foregroundStyle(Color.textPrimary)
@@ -29,6 +30,17 @@ public struct BalanceView: View {
         .padding(.top)
         .padding(.horizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var maskedBalanceText: String {
+        guard let separatorIndex = balanceText.firstIndex(of: " ") else {
+            return String(repeating: "•", count: balanceText.count)
+        }
+
+        let prefix = balanceText[...separatorIndex]
+        let amount = balanceText[balanceText.index(after: separatorIndex)...]
+
+        return prefix + String(repeating: "•", count: amount.count)
     }
 }
 

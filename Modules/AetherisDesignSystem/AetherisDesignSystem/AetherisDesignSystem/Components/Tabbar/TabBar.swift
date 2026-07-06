@@ -9,9 +9,9 @@ public struct TabBar: View {
             ZStack {
                 // Background
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(Color.black)
+                    .fill(Color.white)
                     .frame(width: 250, height: 50)
-                    .shadow(radius: 10)
+                    .shadow(radius: 5)
                 
                 // Moving White Capsule
                 HStack(spacing: 0) {
@@ -24,6 +24,7 @@ public struct TabBar: View {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.white)
                         .frame(width: tabWidth, height: 40)
+                        .shadow(radius: 5)
                         .offset(x: CGFloat(selectedIndex - 1) * tabWidth)
                         .animation(.easeInOut(duration: 0.3), value: selectedIndex)
                 )
@@ -46,12 +47,12 @@ public struct TabBar: View {
         }) {
             HStack(spacing: 4) {
                 Image(systemName: icon)
-                    .foregroundColor(selectedIndex == index ? Color.brandPrimaryColor : .white)
+                    .foregroundColor(Color.brandPrimaryColor)
                 
                 if selectedIndex == index {
                     Text(label)
                         .font(.caption)
-                        .foregroundColor(selectedIndex == index ? .black : .white)
+                        .foregroundColor(.brandPrimaryColor)
                 }
             }
             .frame(width: tabWidth, height: 50)

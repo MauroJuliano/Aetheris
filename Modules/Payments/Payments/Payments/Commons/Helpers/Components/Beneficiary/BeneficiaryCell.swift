@@ -39,41 +39,42 @@ public struct BeneficiaryCell: View {
     }
     
     public var body: some View {
-        HStack {
+        HStack(spacing: 14) {
             Image(model.image)
                 .resizable()
                 .scaledToFill()
-                .foregroundStyle(.black)
-                .frame(width: 50, height: 50)
+                .frame(width: 46, height: 46)
                 .clipShape(Circle())
-                .aspectRatio(contentMode: .fit)
-                .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
-                .padding()
             
             Text(model.name)
-                .foregroundStyle(.black)
-                .font(AppFont.roboto(.semibold, size: 20))
+                .font(.callout)
+                .foregroundStyle(Color.textPrimary)
+                .bold()
+                .lineLimit(2)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
             
                 Button {
                     onChange?(model)
                 } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 25)
-                            .fill(Color.backgroundColorA)
-                            .frame(width: 80, height: 40)
-                            .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
-                        
-                        Text("Change")
-                            .font(AppFont.roboto(.regular, size: 16))
-                            .foregroundStyle(Color.accentColorBrown)
-                    }
+                    Image(systemName: "chevron.forward")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(Color.brandPrimaryColor)
+                        .frame(width: 50, height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(Color.backgroundColorA)
+                        )
+                        .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
                 }
         }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 18)
         
         if model.hasDivider {
             Divider()
+                .padding(.leading, 78)
         }
     }
 }

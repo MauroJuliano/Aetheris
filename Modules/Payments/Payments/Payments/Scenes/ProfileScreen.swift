@@ -2,8 +2,11 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct ProfileScreen: View {
+    @State private var isLoading = true
+
     var body: some View {
-        ScrollView(showsIndicators: false) {
+        ZStack {
+            ScrollView(showsIndicators: false) {
                 VStack {
                     UserView()
                     
@@ -51,9 +54,21 @@ struct ProfileScreen: View {
                         .font(AppFont.roboto(.semibold, size: 16))
                         .padding(.bottom, 100)
                 }
+            }
+            .opacity(isLoading ? 0 : 1)
+
+            ProfileScreenSkeleton()
+                .opacity(isLoading ? 1 : 0)
         }
         .padding(.horizontal)
         .background(Color.backgroundColorA)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation(.easeOut(duration: 0.5)) {
+                    isLoading = false
+                }
+            }
+        }
     }
 }
 
