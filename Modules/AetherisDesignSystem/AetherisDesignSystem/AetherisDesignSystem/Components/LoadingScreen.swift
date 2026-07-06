@@ -1,4 +1,5 @@
 import SwiftUI
+import AetherisDesignSystem
 
 struct LoadingScreen: View {
     @State private var progress: Double = 0
