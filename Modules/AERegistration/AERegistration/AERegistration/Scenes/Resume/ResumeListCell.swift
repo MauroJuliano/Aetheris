@@ -52,7 +52,7 @@ struct ResumeListCell: View {
                     .font(.subheadline)
                 
                 Text(model.value)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color.textPrimary)
                     .font(.title3)
             }
             
@@ -74,10 +74,7 @@ struct ResumeListCell: View {
                 }
             }
         }
-        
-        if hasDivider {
-            Divider()
-        }
+        .appListCellRow(hasDivider: hasDivider, dividerLeading: 0, horizontalPadding: 0, verticalPadding: 0)
     }
 }
 

@@ -4,25 +4,25 @@ import SwiftUI
 struct ProfileScreenSkeleton: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 18) {
+            VStack(spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
                 user
                 formSection(rows: 4, titleWidth: 90)
                 formSection(rows: 2, titleWidth: 150, hasToggle: true)
                 logoutButton
                 footer
             }
-            .padding(.top, 10)
-            .padding(.bottom, 100)
+            .padding(.top, AppSpacing.xSmall + AppSpacing.xxxSmall)
+            .padding(.bottom, AppSpacing.bottomBarClearance)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
     }
 
     private var user: some View {
-        HStack(spacing: 18) {
+        HStack(spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
             SkeletonView(.circle)
                 .frame(width: 120, height: 120)
 
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: AppSpacing.small) {
                 skeleton(width: 155, height: 22, radius: 11)
                 skeleton(width: 130, height: 14, radius: 7)
             }
@@ -30,7 +30,7 @@ struct ProfileScreenSkeleton: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 6)
+        .padding(.top, AppSpacing.xxSmall + AppSpacing.xxxSmall)
     }
 
     private func formSection(rows: Int, titleWidth: CGFloat, hasToggle: Bool = false) -> some View {
@@ -44,7 +44,7 @@ struct ProfileScreenSkeleton: View {
             .padding(.bottom, 14)
 
             ForEach(0..<rows, id: \.self) { index in
-                HStack(spacing: 14) {
+                HStack(spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
                     skeleton(width: 40, height: 40, radius: 14)
 
                     skeleton(width: rowTextWidth(for: index, hasToggle: hasToggle), height: 16, radius: 8)
@@ -56,7 +56,7 @@ struct ProfileScreenSkeleton: View {
                     }
                 }
                 .padding(.horizontal, 5)
-                .padding(.vertical, 10)
+                .padding(.vertical, AppSpacing.xSmall + AppSpacing.xxxSmall)
 
                 if index < rows - 1 {
                     Divider()
@@ -64,12 +64,8 @@ struct ProfileScreenSkeleton: View {
                 }
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
     }
 
     private var logoutButton: some View {

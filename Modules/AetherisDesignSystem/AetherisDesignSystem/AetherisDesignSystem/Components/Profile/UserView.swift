@@ -40,12 +40,12 @@ public struct UserView: View {
             
             VStack(alignment: .leading) {
                 Text("Melissa Mccarthy")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color.textPrimary)
                     .font(.title3)
                 
                 Text("Joined August 17, 2025")
                     .foregroundStyle(Color.brandPrimaryColor)
-                    .font(.caption)
+                    .font(AppTypography.caption)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

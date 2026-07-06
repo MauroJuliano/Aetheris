@@ -15,7 +15,7 @@ struct IconContainer: View {
         ZStack {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(
-                    Color.purple.opacity(0.08)
+                    Color.brandPrimaryColor.opacity(0.08)
                 )
                 .frame(width: 28, height: 28)
 

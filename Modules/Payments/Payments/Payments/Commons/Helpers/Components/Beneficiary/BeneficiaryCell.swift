@@ -39,7 +39,7 @@ public struct BeneficiaryCell: View {
     }
     
     public var body: some View {
-        HStack(spacing: 14) {
+        HStack(spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
             Image(model.image)
                 .resizable()
                 .scaledToFill()
@@ -47,7 +47,7 @@ public struct BeneficiaryCell: View {
                 .clipShape(Circle())
             
             Text(model.name)
-                .font(.callout)
+                .font(AppTypography.callout)
                 .foregroundStyle(Color.textPrimary)
                 .bold()
                 .lineLimit(2)
@@ -63,19 +63,13 @@ public struct BeneficiaryCell: View {
                         .foregroundStyle(Color.brandPrimaryColor)
                         .frame(width: 50, height: 50)
                         .background(
-                            RoundedRectangle(cornerRadius: 25)
+                            RoundedRectangle(cornerRadius: AppRadius.large)
                                 .fill(Color.backgroundColorA)
                         )
-                        .shadow(color: .gray.opacity(0.2), radius: 10, y: 5)
+                        .appShadow(AppShadow.card)
                 }
         }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 18)
-        
-        if model.hasDivider {
-            Divider()
-                .padding(.leading, 78)
-        }
+        .appListCellRow(hasDivider: model.hasDivider)
     }
 }
 

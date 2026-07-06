@@ -76,10 +76,10 @@ struct CreditCardView: View {
                             .foregroundColor(.white)
                     }
                 }
-                .padding(24)
+                .padding(AppSpacing.xLarge)
             }
             .frame(width: 340, height: 200)  // ✅ constrain the whole card
-            .clipShape(RoundedRectangle(cornerRadius: 20)) // ✅ keeps proportions
+            .clipShape(RoundedRectangle(cornerRadius: AppRadius.large)) // ✅ keeps proportions
             .shadow(color: .purple.opacity(0.15), radius: 10)
         }
         

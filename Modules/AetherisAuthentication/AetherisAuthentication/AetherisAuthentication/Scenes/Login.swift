@@ -16,8 +16,8 @@ struct Login: View {
                     .font(.title)
                 
                 Text("Let's get started")
-                    .foregroundStyle(.black)
-                    .font(.largeTitle)
+                    .foregroundStyle(Color.textPrimary)
+                    .font(AppTypography.screenTitle)
                     .bold()
 
                 Text("Your financial journey continues. \nLet’s make your next \nmove count.")
@@ -26,7 +26,7 @@ struct Login: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 60)
-            .padding(.horizontal, 35)
+            .padding(.horizontal, AppSpacing.formHorizontal)
 
             Spacer()
 
@@ -36,16 +36,16 @@ struct Login: View {
                     "",
                     text: $login,
                     prompt: Text("Enter your email")
-                        .foregroundColor(.gray.opacity(0.6))
-                        .font(.body)
+                        .foregroundColor(Color.textTertiary)
+                        .font(AppTypography.body)
                 )
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.textPrimary)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
             }
-            .underlined(color: .gray.opacity(0.3))
-            .padding(.horizontal, 35)
-            .padding(.vertical, 10)
+            .underlined(color: Color.border)
+            .padding(.horizontal, AppSpacing.formHorizontal)
+            .padding(.vertical, AppSpacing.xSmall)
 
             // Password
             HStack {
@@ -53,16 +53,16 @@ struct Login: View {
                     "",
                     text: $password,
                     prompt: Text("Enter your password")
-                        .foregroundColor(.gray.opacity(0.6))
-                        .font(.body)
+                        .foregroundColor(Color.textTertiary)
+                        .font(AppTypography.body)
                 )
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.textPrimary)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
             }
-            .underlined(color: .gray.opacity(0.3))
-            .padding(.horizontal, 35)
-            .padding(.vertical, 10)
+            .underlined(color: Color.border)
+            .padding(.horizontal, AppSpacing.formHorizontal)
+            .padding(.vertical, AppSpacing.xSmall)
 
             // Login button
             GlowButton(title: "Login") {
@@ -73,7 +73,7 @@ struct Login: View {
             // Register
             HStack {
                 Text("Don't have an account?")
-                    .foregroundStyle(.gray)
+                    .foregroundStyle(Color.textSecondaryColor)
 
                 Button {
                     onRegister()
@@ -83,7 +83,7 @@ struct Login: View {
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
             }
-            .padding(.bottom, 30)
+            .padding(.bottom, AppSpacing.xxLarge)
         }
         .background {
             Image("login-background")

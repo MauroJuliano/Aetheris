@@ -16,17 +16,17 @@ public struct TransferBeneficiary: View {
     }
     
     public var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: AppSpacing.medium) {
             avatarView
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
                 Text(model.name)
-                    .font(.headline)
+                    .font(AppTypography.headline)
                     .foregroundStyle(Color.textPrimary)
 
-                HStack(spacing: 6) {
+                HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
                     Text(model.pixKey)
-                        .font(.footnote)
+                        .font(AppTypography.footnote)
                         .foregroundStyle(Color.textTertiary)
                         .lineLimit(2)
                         .truncationMode(.tail)
@@ -45,30 +45,26 @@ public struct TransferBeneficiary: View {
             Button {
                 shouldChange = true
             } label: {
-                HStack(spacing: 6) {
+                HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
                     Text("Change")
-                        .font(.subheadline.weight(.semibold))
+                        .font(AppTypography.subheadline.weight(.semibold))
                     
                     Image(systemName: "pencil")
-                        .font(.subheadline.weight(.semibold))
+                        .font(AppTypography.subheadline.weight(.semibold))
                 }
                 .foregroundStyle(Color.brandPrimaryColor)
-                .padding(.horizontal, 16)
+                .padding(.horizontal, AppSpacing.medium)
                 .frame(height: 44)
                 .background(
-                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                    RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
                         .fill(Color.backgroundColorA)
                         .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
                 )
             }
         }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 18)
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(.horizontal, AppSpacing.medium)
+        .padding(.vertical, AppSpacing.medium + AppSpacing.xxxSmall)
+        .appCardSurface()
     }
     
     private var avatarView: some View {
@@ -97,9 +93,9 @@ public struct TransferBeneficiary: View {
                 .clipShape(Circle())
                 .overlay(
                     Circle()
-                        .stroke(.gray.opacity(0.25), lineWidth: 1)
+                        .stroke(Color.border, lineWidth: 1)
                 )
-                .shadow(color: .black.opacity(0.12), radius: 10, y: 5)
+                .appShadow(AppShadow.control)
         }
         .onAppear {
             rotateGradient = true

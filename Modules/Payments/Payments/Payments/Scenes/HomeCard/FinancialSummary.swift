@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import SwiftUI
 
 struct FinancialSummaryModel: Identifiable {
@@ -111,19 +112,18 @@ struct FinancialSummary: View {
                 .scaledToFill()
                 .frame(width: 40, height: 40)
                 .clipShape(.circle)
-                .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
-                .padding(.trailing, 5)
+                .appShadow(AppShadow.elevated)
+                .padding(.trailing, AppSpacing.xxSmall)
             
             VStack(alignment: .leading) {
                 Text(model.title)
-                    .foregroundStyle(.black)
-                    .font(.headline)
+                    .foregroundStyle(Color.textPrimary)
+                    .font(AppTypography.headline)
                     .bold()
                 
                 Text(model.description)
-                    .foregroundStyle(.gray)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.textSecondaryColor)
+                    .font(AppTypography.subheadline)
                     .monospacedDigit()
                 
                 TransactionTag(type: model.tag)
@@ -131,25 +131,24 @@ struct FinancialSummary: View {
             
             Spacer()
             
-            VStack(alignment: .trailing, spacing: 4) {
+            VStack(alignment: .trailing, spacing: AppSpacing.xxSmall) {
                 Text(model.value)
-                    .foregroundStyle(model.tag == .income ? model.tag.color : .black)
+                    .foregroundStyle(model.tag == .income ? model.tag.color : Color.textPrimary)
                     .bold()
-                    .font(.headline)
+                    .font(AppTypography.headline)
                     .monospacedDigit()
 
                 Text(dateLabel)
-                    .foregroundStyle(.gray)
-                    .font(.footnote)
+                    .foregroundStyle(Color.textSecondaryColor)
+                    .font(AppTypography.footnote)
                     .monospacedDigit()
             }
         }
-        .padding()
-        
-        if hasDivider {
-            Divider()
-                .padding(.leading, 78)
-        }
+        .appListCellRow(
+            hasDivider: hasDivider,
+            horizontalPadding: AppSpacing.medium,
+            verticalPadding: AppSpacing.medium
+        )
     }
 
     private var dateLabel: String {

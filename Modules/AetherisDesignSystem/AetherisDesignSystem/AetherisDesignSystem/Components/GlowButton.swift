@@ -16,7 +16,7 @@ public struct GlowButton: View {
     
     public var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
+            RoundedRectangle(cornerRadius: AppRadius.pill, style: .continuous)
                 .fill(AngularGradient(colors: [Color.brandPrimaryColor, .white, Color.brandPrimaryColor], center: .center, angle: .degrees(isAnimating ? 360 : 0)))
                 .frame(width: 250, height: 50)
                 .blur(radius: 10)
@@ -28,11 +28,12 @@ public struct GlowButton: View {
             
             Button(action: action) {
                 Text(title)
+                    .font(AppTypography.button)
                     .foregroundStyle(Color.brandPrimaryColor)
                     .frame(width: 250, height: 50)
-                    .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
+                    .appShadow(AppShadow.control)
                     .background(Color.backgroundColorA)
-                    .clipShape(RoundedRectangle(cornerRadius: 30))
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.pill))
             }
         }
     }

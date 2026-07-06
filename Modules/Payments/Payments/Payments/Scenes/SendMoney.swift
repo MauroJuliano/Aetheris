@@ -50,26 +50,26 @@ struct SendMoney: View {
                     
                 } label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: AppRadius.large)
                             .fill(Color.backgroundColorA)
-                            .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
+                            .appShadow(AppShadow.card)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
+                                RoundedRectangle(cornerRadius: AppRadius.pill)
+                                    .stroke(Color.border, style: .init(lineWidth: 1))
                             )
                             .frame(width: 300, height: 50)
                         
                         Text("Continue")
                             .foregroundStyle(Color.brandPrimaryColor)
-                            .font(.headline)
-                            .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
+                            .font(AppTypography.headline)
+                            .appShadow(AppShadow.control)
                     }
                 }
-                .padding()
+                .padding(AppSpacing.medium)
             }
             .navigationBarHidden(true)
-            .padding(.horizontal)
-            .background(Color.backgroundColorA)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
+            .appScreenBackground()
         }
         .navigationDestination(isPresented: $showSelection) {
             BeneficiaryList(showSelection: $showSelection,

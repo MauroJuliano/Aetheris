@@ -69,7 +69,7 @@ public struct FormCell: View {
         if let title = model.sectionTitle {
             HStack {
                 Text(title)
-                    .foregroundStyle(.black)
+                    .foregroundStyle(Color.textPrimary)
                     .font(.title2)
                     .bold()
                     .multilineTextAlignment(.leading)
@@ -84,8 +84,8 @@ public struct FormCell: View {
             IconContainer(model: .init(icon: model.content.icon))
             
             Text(model.content.title)
-                .foregroundStyle(.black)
-                .font(AppFont.roboto(.regular, size: 16))
+                .foregroundStyle(Color.textPrimary)
+                .font(AppTypography.cardBody)
             
             Spacer()
             

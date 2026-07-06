@@ -48,14 +48,14 @@ struct ResumeView: View {
         VStack {
             VStack(alignment: .leading) {
                 Text("Review You Information")
-                    .font(.largeTitle)
-                    .foregroundStyle(.black)
+                    .font(AppTypography.screenTitle)
+                    .foregroundStyle(Color.textPrimary)
                     .bold()
                 
                 Text("Please confirm that all the information below is correct before we continue.")
-                    .foregroundStyle(Color.gray)
+                    .foregroundStyle(Color.textSecondaryColor)
             }
-            .padding()
+            .padding(AppSpacing.medium)
             
             Spacer()
             
@@ -68,17 +68,13 @@ struct ResumeView: View {
                     }
                 }
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(Color.backgroundColorA)
-                    .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(.gray.opacity(0.25), lineWidth: 1)
-                    )
+            .padding(AppSpacing.medium)
+            .appCardSurface(
+                radius: AppRadius.large,
+                stroke: Color.border,
+                shadow: AppShadow.card
             )
-            .padding(.horizontal)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
             
             HStack {
                 Circle()
@@ -91,15 +87,15 @@ struct ResumeView: View {
                     }
                 
                 Text("Your information is securely encrypted and will never be shared.")
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
+                    .font(AppTypography.subheadline)
+                    .foregroundStyle(Color.textSecondaryColor)
             }
-            .padding()
+            .padding(AppSpacing.medium)
             
             GlowButton(title: "Continue") {
                 onContinue()
             }
-            .padding(.vertical)
+            .padding(.vertical, AppSpacing.medium)
             
            
         }

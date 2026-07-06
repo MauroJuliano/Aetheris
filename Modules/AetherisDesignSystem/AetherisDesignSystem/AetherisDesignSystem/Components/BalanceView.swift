@@ -9,10 +9,10 @@ public struct BalanceView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             Text("Balance")
-                .font(.system(size: 22, weight: .medium))
+                .font(AppTypography.navTitle)
                 .foregroundStyle(Color.textTertiary)
 
-            HStack(spacing: 12) {
+            HStack(spacing: AppSpacing.small) {
                 Text(isBalanceVisible ? balanceText : maskedBalanceText)
                     .font(.title)
                     .bold()
@@ -27,8 +27,8 @@ public struct BalanceView: View {
                 }
             }
         }
-        .padding(.top)
-        .padding(.horizontal)
+        .padding(.top, AppSpacing.medium)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 

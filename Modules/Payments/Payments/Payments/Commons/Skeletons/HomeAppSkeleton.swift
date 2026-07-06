@@ -17,7 +17,7 @@ struct HomeAppSkeleton: View {
             Color.clear
                 .frame(height: 100)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
     }
 
     private var navBar: some View {
@@ -92,7 +92,7 @@ struct HomeAppSkeleton: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 132)
                     .background(
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
                             .fill(Color.surface)
                     )
                 }
@@ -136,15 +136,11 @@ struct HomeAppSkeleton: View {
     }
 
     private func section<Content: View>(@ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
             content()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 0, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
     }
 
     private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {

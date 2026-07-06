@@ -10,28 +10,28 @@ struct CardHome: View {
             ScrollView(showsIndicators: false){
                 NavBar(model: .init(firstText: "Cards",
                                     hasInitialSpace: false))
-                .padding(.horizontal)
+                .padding(.horizontal, AppSpacing.screenHorizontal)
                 
                 CardSwipe(cards: $cardsMock)
                 
                 HomeQuickActions(actions: CardOptions.mock)
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
                 
                 FinancialSummaryContainer()
-                    .padding(.horizontal)
-                    .padding(.vertical, 5)
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
             }
             .opacity(isLoading ? 0 : 1)
             .safeAreaInset(edge: .bottom) {
                 Color.clear
-                    .frame(height: 100)
+                    .frame(height: AppSpacing.bottomBarClearance)
             }
 
             CardHomeSkeleton()
                 .opacity(isLoading ? 1 : 0)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation(.easeOut(duration: 0.5)) {

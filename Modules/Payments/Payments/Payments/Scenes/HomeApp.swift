@@ -31,10 +31,10 @@ struct HomeApp: View {
                 
             }
             .opacity(isLoading ? 0 : 1)
-            .padding(.horizontal)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
             .safeAreaInset(edge: .bottom) {
                 Color.clear
-                    .frame(height: 100)
+                    .frame(height: AppSpacing.bottomBarClearance)
             }
             .navigationDestination(isPresented: $shouldPresentCardHome) {
                 CardHome()
@@ -53,7 +53,7 @@ struct HomeApp: View {
             HomeAppSkeleton()
                 .opacity(isLoading ? 1 : 0)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 withAnimation(.easeOut(duration: 0.5)) {

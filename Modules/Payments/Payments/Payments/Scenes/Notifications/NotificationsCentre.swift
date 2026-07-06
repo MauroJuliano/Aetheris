@@ -9,7 +9,7 @@ struct NotificationsCentre: View {
     var body: some View {
         ZStack {
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
 
                     NavBar(
                         hasNotifications: false,
@@ -22,29 +22,25 @@ struct NotificationsCentre: View {
                     )
 
                     ForEach(viewModel.sections) { section in
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: AppSpacing.small) {
 
                             Text(section.title)
-                                .foregroundStyle(.black)
-                                .font(.headline)
-                                .padding(.horizontal)
+                                .foregroundStyle(Color.textPrimary)
+                                .font(AppTypography.sectionTitle)
+                                .padding(.horizontal, AppSpacing.screenHorizontal)
 
                             VStack {
                                 ForEach(section.items) { cell in
                                     NotificationCell(model: cell)
                                 }
                             }
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color.backgroundColorA)
-                                    .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(.gray.opacity(0.25), lineWidth: 1)
-                                    )
+                            .appCardSurface(
+                                radius: AppRadius.large,
+                                stroke: Color.border,
+                                shadow: AppShadow.card
                             )
                         }
-                        .padding(.horizontal)
+                        .padding(.horizontal, AppSpacing.screenHorizontal)
                     }
                 }
             }
@@ -54,7 +50,7 @@ struct NotificationsCentre: View {
                 .opacity(isLoading ? 1 : 0)
         }
         .navigationBarHidden(true)
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
         .task {
             await viewModel.load()
             try? await Task.sleep(nanoseconds: 1_500_000_000)

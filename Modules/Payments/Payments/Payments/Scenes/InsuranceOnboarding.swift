@@ -22,13 +22,13 @@ struct benefitsChart: View {
         HStack(alignment: .center) {
             Image(systemName: image)
                 .resizable()
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.textPrimary)
                 .frame(width: 20, height: 20)
                 .padding(.trailing)
             
             Text(text)
                 .multilineTextAlignment(.leading)
-                .foregroundStyle(.black)
+                .foregroundStyle(Color.textPrimary)
                 .fontWeight(.semibold)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -54,7 +54,7 @@ struct InsuranceOnboarding: View {
                     Text("Secure your future with our comprehensive financial insurance plan.")
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.textPrimary)
                         .multilineTextAlignment(.leading)
                         .frame(maxHeight: .infinity, alignment: .leading)
                         .padding(.top)
@@ -62,7 +62,7 @@ struct InsuranceOnboarding: View {
                     Text("Benefits:")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.textPrimary)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
@@ -78,33 +78,33 @@ struct InsuranceOnboarding: View {
                     
                 } label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: AppRadius.large)
                             .fill(Color.accentColorBrown)
-                            .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
+                            .appShadow(AppShadow.card)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
+                                RoundedRectangle(cornerRadius: AppRadius.pill)
+                                    .stroke(Color.border, style: .init(lineWidth: 1))
                             )
                             .frame(width: 300, height: 50)
                         
                         Text("Continue")
                             .foregroundStyle(.white)
-                            .font(AppFont.roboto(.semibold, size: 16))
+                            .font(AppTypography.button)
                     }
-                    .padding()
+                    .padding(AppSpacing.medium)
                 }
                 
                 Button {
                     
                 } label: {
                     Text("More options")
-                        .font(.subheadline)
-                        .foregroundStyle(.black)
+                        .font(AppTypography.subheadline)
+                        .foregroundStyle(Color.textPrimary)
                 }
             }
         }
-        .padding(.horizontal)
-        .background(Color.backgroundColorA)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .appScreenBackground()
     }
 }
 

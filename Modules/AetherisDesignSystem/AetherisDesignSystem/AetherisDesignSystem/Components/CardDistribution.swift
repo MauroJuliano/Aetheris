@@ -60,7 +60,7 @@ public struct CardDistribution: View {
     
     public var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: AppRadius.large)
                 .fill(backgroundColor ?? .black)
             
             VStack() {
@@ -82,7 +82,7 @@ public struct CardDistribution: View {
                     Text(model.title)
                         .multilineTextAlignment(.leading)
                         .foregroundStyle(.white)
-                        .font(AppFont.roboto(.bold, size: 16))
+                        .font(AppTypography.button)
                         .foregroundStyle(primaryColor)
                     
                     
@@ -90,10 +90,10 @@ public struct CardDistribution: View {
                 }
                 Spacer()
             }
-            .padding(8)
+            .padding(AppSpacing.xSmall)
         }
         .frame(width: spectrumRatio.size.width, height: spectrumRatio.size.height)
-        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+        .appShadow(AppShadow.elevated)
     }
 }
 
