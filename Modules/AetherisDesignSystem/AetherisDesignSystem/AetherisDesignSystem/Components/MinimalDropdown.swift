@@ -15,7 +15,7 @@ public struct MinimalDropdown: View {
     public var body: some View {
         HStack {
             Text("Transactions History")
-                .font(.title3)
+                .font(AppTypography.onboardingBody)
                 .fontWeight(.medium)
             
             Spacer()

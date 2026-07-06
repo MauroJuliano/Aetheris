@@ -10,31 +10,27 @@ struct SpendingThisMonthView: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
             header
 
             SpendingLineChart()
-                .padding(.top, 2)
+                .padding(.top, AppSpacing.xxxSmall)
 
             categoriesRow
-                .padding(.top, 4)
+                .padding(.top, AppSpacing.xxSmall)
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 0, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
     }
 
     private var header: some View {
         HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                 Text("Spending this month")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color.textPrimary)
 
-                HStack(spacing: 12) {
+                HStack(spacing: AppSpacing.small) {
                     Text("$ 2,428.00")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(Color.textPrimary)
@@ -42,14 +38,14 @@ struct SpendingThisMonthView: View {
                         .minimumScaleFactor(0.85)
                         .layoutPriority(1)
 
-                    HStack(spacing: 5) {
+                    HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
                         Image(systemName: "arrow.down")
                         Text("8.3%")
                     }
                     .font(.system(size: 12, weight: .bold))
                     .foregroundStyle(Color.success)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
+                    .padding(.horizontal, AppSpacing.xSmall + AppSpacing.xxxSmall)
+                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
                     .background(
                         Capsule()
                             .fill(Color.success.opacity(0.12))
@@ -70,8 +66,8 @@ struct SpendingThisMonthView: View {
                 Text("View report")
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(Color.brandPrimaryColor)
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 9)
+                    .padding(.horizontal, AppSpacing.medium + AppSpacing.xxxSmall)
+                    .padding(.vertical, AppSpacing.xSmall + AppSpacing.xxxSmall)
                     .background(
                         Capsule()
                             .stroke(Color.brandPrimaryColor.opacity(0.25), lineWidth: 1)

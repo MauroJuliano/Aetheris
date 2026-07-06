@@ -35,29 +35,29 @@ struct CardInfoView: View {
                     if let caption = infoModel.caption {
                         Text(caption)
                             .foregroundStyle(.white)
-                            .font(AppFont.roboto(.regular, size: 16))
+                            .font(AppTypography.cardBody)
                     }
                     
                     Spacer()
                     
                     ZStack {
-                        RoundedRectangle(cornerRadius: 25)
+                        RoundedRectangle(cornerRadius: AppRadius.pill)
                             .fill(.white)
                             .frame(width: 325, height: 40)
                         
                         Text(infoModel.button)
-                            .foregroundStyle(.black)
-                            .font(AppFont.roboto(.semibold, size: 16))
+                            .foregroundStyle(Color.textPrimary)
+                            .font(AppTypography.button)
                     }
-                    .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                    .appShadow(AppShadow.elevated)
                 }
-                .padding()
+                .padding(AppSpacing.medium)
                 
                 Spacer()
             }
         }
         .frame(width: 350, height: 200)
-        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+        .appShadow(AppShadow.elevated)
     }
 }
 

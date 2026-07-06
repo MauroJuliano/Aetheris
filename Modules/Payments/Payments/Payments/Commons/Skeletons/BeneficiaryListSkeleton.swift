@@ -6,17 +6,17 @@ struct BeneficiaryListSkeleton: View {
         VStack {
             ScrollView(showsIndicators: false) {
                 Spacer()
-                    .frame(height: 50)
+                    .frame(height: AppSpacing.bottomBarClearance / 2)
 
                 VStack(spacing: 0) {
                     ForEach(0..<4, id: \.self) { index in
-                        HStack(spacing: 14) {
+                        HStack(spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
                             SkeletonView(.circle)
                                 .frame(width: 46, height: 46)
 
-                            VStack(alignment: .leading, spacing: 8) {
-                                skeleton(width: nameWidth(for: index), height: 16, radius: 8)
-                                skeleton(width: keyWidth(for: index), height: 12, radius: 6)
+                            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                                SkeletonBlock(width: nameWidth(for: index), height: 16, radius: 8)
+                                SkeletonBlock(width: keyWidth(for: index), height: 12, radius: 6)
                             }
 
                             Spacer()
@@ -24,28 +24,18 @@ struct BeneficiaryListSkeleton: View {
                             SkeletonView(.circle)
                                 .frame(width: 50, height: 50)
                         }
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 18)
-
-                        if index < 3 {
-                            Divider()
-                                .padding(.leading, 78)
-                        }
+                        .appListCellRow(hasDivider: index < 3)
                     }
                 }
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.backgroundColorA)
-                        .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.gray.opacity(0.25), lineWidth: 1)
-                        )
+                .appCardSurface(
+                    radius: AppRadius.large,
+                    stroke: Color.border,
+                    shadow: AppShadow.card
                 )
             }
-            .background(Color.backgroundColorA)
+            .appScreenBackground()
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
     }
 
     private func nameWidth(for index: Int) -> CGFloat {
@@ -74,11 +64,6 @@ struct BeneficiaryListSkeleton: View {
         }
     }
 
-    private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {
-        SkeletonView(.rect)
-            .frame(width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
-    }
 }
 
 #Preview {

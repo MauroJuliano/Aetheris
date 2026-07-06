@@ -7,10 +7,10 @@ struct RecipientsContainer: View {
     @State private var userSelected: Beneficiary?
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
             HStack {
                 Text("Recipients")
-                    .font(.headline)
+                    .font(AppTypography.headline)
                     .foregroundStyle(Color.textPrimary)
                 
                 Spacer()
@@ -18,17 +18,17 @@ struct RecipientsContainer: View {
                 Button("See all") {
                     // action
                 }
-                .font(.subheadline.weight(.semibold))
+                .font(AppTypography.subheadline.weight(.semibold))
                 .foregroundStyle(Color.brandPrimaryColor)
             }
             
-            HStack(spacing: 24) {
+            HStack(spacing: AppSpacing.xLarge) {
                 ForEach(users.prefix(4)) { user in
                     Button {
                         userSelected = user
                         shouldPresentSendMoney = true
                     } label: {
-                        VStack(spacing: 8) {
+                        VStack(spacing: AppSpacing.xSmall) {
                             Image(user.image)
                                 .resizable()
                                 .scaledToFill()
@@ -36,7 +36,7 @@ struct RecipientsContainer: View {
                                 .clipShape(Circle())
                             
                             Text(user.name)
-                                .font(.caption)
+                                .font(AppTypography.caption)
                                 .bold()
                                 .foregroundStyle(Color.textPrimary)
                                 .multilineTextAlignment(.center)
@@ -51,10 +51,10 @@ struct RecipientsContainer: View {
                 Button {
                     
                 } label: {
-                    VStack(spacing: 8) {
+                    VStack(spacing: AppSpacing.xSmall) {
                         ZStack {
                             Circle()
-                                .fill(Color.gray.opacity(0.08))
+                                .fill(Color.brandPrimaryColor.opacity(0.08))
                                 .frame(width: 58, height: 58)
                             
                             Image(systemName: "plus")
@@ -63,7 +63,7 @@ struct RecipientsContainer: View {
                         }
                         
                         Text("New\nrecipient")
-                            .font(.caption)
+                            .font(AppTypography.caption)
                             .bold()
                             .foregroundStyle(Color.textPrimary)
                             .multilineTextAlignment(.center)
@@ -75,12 +75,8 @@ struct RecipientsContainer: View {
                 .frame(maxWidth: .infinity)
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
         .navigationDestination(isPresented: $shouldPresentSendMoney) {
             if let model = userSelected {
                 SendMoney(model: model)

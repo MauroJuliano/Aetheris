@@ -18,7 +18,7 @@ struct HomeQuickActions: View {
     var actions: [CardOptions]
     
     var body: some View {
-        HStack(spacing: 24) {
+        HStack(spacing: AppSpacing.xLarge) {
             ForEach(actions.prefix(4)) { option in
                 let buttonModel = GlassButtonModel(label: option.label,
                                                    icon: option.icon)
@@ -29,12 +29,8 @@ struct HomeQuickActions: View {
             }
             .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal)
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .appCardSurface()
     }
 }
 

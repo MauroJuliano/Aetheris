@@ -17,20 +17,20 @@ struct RegisterView: View {
     var body: some View {
         VStack {
             Text(title)
-                .foregroundStyle(.black)
-                .font(.largeTitle)
+                .foregroundStyle(Color.textPrimary)
+                .font(AppTypography.screenTitle)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 60)
-                .padding(.horizontal, 35)
+                .padding(.top, AppSpacing.formTop)
+                .padding(.horizontal, AppSpacing.formHorizontal)
             
             Text(subTitle)
                 .foregroundStyle(Color.textTertiary)
-                .font(.headline)
+                .font(AppTypography.headline)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 35)
+                .padding(.horizontal, AppSpacing.formHorizontal)
             
             Spacer()
             
@@ -38,22 +38,18 @@ struct RegisterView: View {
                 "",
                 text: $textFieldValue,
                 prompt: Text(textFieldPlaceholder)
-                    .foregroundColor(.gray.opacity(0.6))
-                    .font(.body)
+                    .foregroundColor(Color.textTertiary)
+                    .font(AppTypography.input)
             )
             .focused($isTextFieldFocused)
-            .foregroundStyle(.black)
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
             .keyboardType(keyboardType)
-            .underlined(color: .gray.opacity(0.3))
-            .padding(.horizontal, 35)
-            .padding(.bottom, 30)
+            .appInputField()
+            .padding(.bottom, AppSpacing.xxLarge)
             
             GlowButton(title: buttonTitle) {
                 onAction()
             }
-            .padding(.bottom, 30)
+            .padding(.bottom, AppSpacing.xxLarge)
         }
         .background {
             Image("login-background")

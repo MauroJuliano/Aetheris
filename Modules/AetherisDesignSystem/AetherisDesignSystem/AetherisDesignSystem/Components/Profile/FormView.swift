@@ -12,15 +12,11 @@ public struct FormView: View {
             ForEach(cells) { cell in
                 FormCell(model: cell,
                          hasDivider: cell.id != cells.last?.id)
-                    .padding(5)
+                    .padding(AppSpacing.xxSmall)
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
     }
 }
 

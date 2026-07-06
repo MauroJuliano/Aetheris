@@ -4,20 +4,20 @@ import SwiftUI
 struct CardHomeSkeleton: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 18) {
+            VStack(spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
                 navBar
                 cards
                 quickActions
                 financialSummary
             }
-            .padding(.horizontal)
-            .padding(.top, 8)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
+            .padding(.top, AppSpacing.xSmall)
         }
         .safeAreaInset(edge: .bottom) {
             Color.clear
-                .frame(height: 100)
+                .frame(height: AppSpacing.bottomBarClearance)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
     }
 
     private var navBar: some View {
@@ -29,7 +29,7 @@ struct CardHomeSkeleton: View {
             SkeletonView(.circle)
                 .frame(width: 44, height: 44)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
     }
 
     private var cards: some View {
@@ -48,14 +48,14 @@ struct CardHomeSkeleton: View {
 
     private var quickActions: some View {
         section {
-            HStack(spacing: 24) {
+            HStack(spacing: AppSpacing.xLarge) {
                 ForEach(0..<4, id: \.self) { _ in
-                    VStack(spacing: 10) {
+                    VStack(spacing: AppSpacing.xSmall + AppSpacing.xxxSmall) {
                         SkeletonView(.circle)
                             .frame(width: 54, height: 54)
                         skeleton(width: 52, height: 12, radius: 6)
                     }
-                    .padding(.vertical)
+                    .padding(.vertical, AppSpacing.medium)
                     .frame(maxWidth: .infinity)
                 }
             }
@@ -65,11 +65,11 @@ struct CardHomeSkeleton: View {
     private var financialSummary: some View {
         section(spacing: 0) {
             ForEach(0..<4, id: \.self) { index in
-                HStack(spacing: 12) {
+                HStack(spacing: AppSpacing.small) {
                     SkeletonView(.circle)
                         .frame(width: 40, height: 40)
 
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
                         skeleton(width: index == 3 ? 130 : 110, height: 16, radius: 8)
                         skeleton(width: index == 3 ? 190 : 135, height: 14, radius: 7)
                     }
@@ -78,7 +78,7 @@ struct CardHomeSkeleton: View {
 
                     skeleton(width: 62, height: 18, radius: 9)
                 }
-                .padding()
+                .padding(AppSpacing.medium)
 
                 if index < 3 {
                     Divider()
@@ -88,18 +88,14 @@ struct CardHomeSkeleton: View {
     }
 
     private func section<Content: View>(
-        spacing: CGFloat = 18,
+        spacing: CGFloat = AppSpacing.medium + AppSpacing.xxxSmall,
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: spacing) {
             content()
         }
-        .padding(spacing == 0 ? 0 : 16)
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
+        .padding(spacing == 0 ? 0 : AppSpacing.medium)
+        .appCardSurface()
     }
 
     private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {

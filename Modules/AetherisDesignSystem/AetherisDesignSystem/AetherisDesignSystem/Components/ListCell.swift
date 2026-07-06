@@ -19,20 +19,21 @@ public struct ListCell: View {
             
             VStack(alignment: .leading) {
                 Text("Swarovski")
+                    .foregroundStyle(Color.textPrimary)
                 
                 Text("Payment")
-                    .font(.caption)
-                    .foregroundStyle(.gray)
+                    .font(AppTypography.caption)
+                    .foregroundStyle(Color.textSecondaryColor)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
             
             Spacer()
             
             Text("-46.99")
-                .foregroundStyle(.gray)
-                .padding()
+                .foregroundStyle(Color.textSecondaryColor)
+                .padding(AppSpacing.medium)
         }
-        .padding(.horizontal)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
     }
 }
 

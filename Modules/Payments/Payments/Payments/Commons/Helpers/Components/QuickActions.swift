@@ -10,23 +10,19 @@ struct QuickActions: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
             Text("What would you like to do ?")
-                .font(.headline)
+                .font(AppTypography.headline)
                 .foregroundStyle(Color.textPrimary)
 
-            HStack(spacing: 16) {
+            HStack(spacing: AppSpacing.medium) {
                 ForEach(actions) { action in
                     QuickActionCard(action: action)
                 }
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 0, y: 12)
-        )
+        .padding(AppSpacing.medium)
+        .appCardSurface()
     }
 }
 
@@ -44,16 +40,16 @@ struct QuickActionCard: View {
         VStack(alignment: .leading, spacing: 0) {
             iconView
 
-            Spacer(minLength: 12)
+            Spacer(minLength: AppSpacing.small)
 
             textContent
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
+        .padding(.horizontal, AppSpacing.large)
+        .padding(.vertical, AppSpacing.medium)
         .frame(maxWidth: .infinity)
         .frame(height: 132)
         .background(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
+            RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
                 .fill(Color.surface)
         )
     }
@@ -71,7 +67,7 @@ struct QuickActionCard: View {
     }
 
     private var textContent: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
             Text(action.title)
                 .font(.system(size: 14, weight: .semibold))
                 .foregroundStyle(Color.textPrimary)

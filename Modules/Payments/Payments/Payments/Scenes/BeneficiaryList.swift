@@ -18,7 +18,7 @@ struct BeneficiaryList: View {
                 
                 ScrollView {
                     Spacer()
-                        .frame(height: 50)
+                        .frame(height: AppSpacing.bottomBarClearance / 2)
                     
                     VStack {
                         ForEach(model) { cell in
@@ -30,26 +30,22 @@ struct BeneficiaryList: View {
                                 .padding(.horizontal)
                         }
                     }
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.backgroundColorA)
-                            .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
-                            )
+                    .appCardSurface(
+                        radius: AppRadius.large,
+                        stroke: Color.border,
+                        shadow: AppShadow.card
                     )
                     
                 }
-                .background(Color.backgroundColorA)
+                .appScreenBackground()
             }
             .opacity(isLoading ? 0 : 1)
 
             BeneficiaryListSkeleton()
                 .opacity(isLoading ? 1 : 0)
         }
-        .padding(.horizontal)
-        .background(Color.backgroundColorA)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .appScreenBackground()
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 withAnimation(.easeOut(duration: 0.5)) {

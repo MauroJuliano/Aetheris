@@ -49,11 +49,11 @@ struct ResumeListCell: View {
             VStack(alignment: .leading) {
                 Text(model.description)
                     .foregroundStyle(Color.textTertiary)
-                    .font(.subheadline)
+                    .font(AppTypography.cellSubtitle)
                 
                 Text(model.value)
-                    .foregroundStyle(.black)
-                    .font(.title3)
+                    .foregroundStyle(Color.textPrimary)
+                    .font(AppTypography.onboardingBody)
             }
             
             Spacer()
@@ -63,7 +63,7 @@ struct ResumeListCell: View {
             } label: {
                 HStack {
                     Text("Edit")
-                        .font(.callout)
+                        .font(AppTypography.callout)
                         .foregroundStyle(Color.brandPrimaryColor)
                     
                     Image(systemName: "chevron.forward")
@@ -74,10 +74,7 @@ struct ResumeListCell: View {
                 }
             }
         }
-        
-        if hasDivider {
-            Divider()
-        }
+        .appListCellRow(hasDivider: hasDivider, dividerLeading: 0, horizontalPadding: 0, verticalPadding: 0)
     }
 }
 

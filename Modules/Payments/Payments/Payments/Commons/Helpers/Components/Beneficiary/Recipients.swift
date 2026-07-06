@@ -14,7 +14,7 @@ public struct Recipients: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text("Recipients")
-                        .foregroundStyle(.black)
+                        .foregroundStyle(Color.textPrimary)
                         .font(AppFont.roboto(.medium, size: 20))
                     
                     Spacer()
@@ -31,12 +31,12 @@ public struct Recipients: View {
                                 .aspectRatio(contentMode: .fill)
                                 .clipShape(.circle)
                                 .frame(width: 50, height: 50)
-                                .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
+                                .appShadow(AppShadow.elevated)
                         }
                     }
                 }
             }
-            .padding()
+            .padding(AppSpacing.medium)
         }
         .navigationDestination(isPresented: $shouldPresentTransfer) {
             if let user = selectedUser {

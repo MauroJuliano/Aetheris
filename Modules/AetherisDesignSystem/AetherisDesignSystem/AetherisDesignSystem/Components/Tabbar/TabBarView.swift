@@ -25,7 +25,7 @@ public struct TabBarView: View {
                             RoundedRectangle(cornerRadius: 25)
                                 .fill(.white)
                                 .frame(width: 50, height: 50)
-                            
+
                             Image(systemName: "paperplane")
                                 .foregroundColor(Color.brandPrimaryColor)
                         }
@@ -43,4 +43,3 @@ public struct TabBarView: View {
         print("preview")
     })
 }
-

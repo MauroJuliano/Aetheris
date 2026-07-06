@@ -41,18 +41,18 @@ struct CardInsurance: View {
                         Button {
                             
                         } label: {
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: AppRadius.large)
                                 .fill(Color.backgroundColorA)
-                                .shadow(color: .gray.opacity(0.25), radius: 16, y: 5)
+                                .appShadow(AppShadow.card)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .stroke(.gray.opacity(0.25), lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: AppRadius.pill)
+                                        .stroke(Color.border, lineWidth: 1)
                                 )
                                 .overlay(
                                     Text("Continue")
                                         .foregroundStyle(Color.accentColorBrown)
-                                        .font(AppFont.roboto(.semibold, size: 16))
-                                        .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
+                                        .font(AppTypography.button)
+                                        .appShadow(AppShadow.control)
                                 )
                                 .frame(width: 300, height: 50)
                             

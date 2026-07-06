@@ -36,13 +36,9 @@ struct FinancialSummaryContainer: View {
                                  hasDivider: transfer.id != mocks.last?.id)
             }
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.backgroundColorA)
-                .shadow(color: .black.opacity(0.08), radius: 24, x: 12, y: 12)
-        )
-        .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .padding(AppSpacing.medium)
+        .appCardSurface()
+        .contentShape(RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous))
         .onTapGesture {
             shouldPresentTransactionHistory = true
         }

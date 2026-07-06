@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import SwiftUI
 
 struct BirthdateView: View {
@@ -28,7 +29,7 @@ struct BirthdateView: View {
             RegisterInputSkeleton()
                 .opacity(viewModel.isLoading ? 1 : 0)
         }
-        .background(Color.backgroundColorA)
+        .appScreenBackground()
         .navigationBarHidden(true)
     }
 }

@@ -5,36 +5,27 @@ public struct NotificationCell: View {
     var model: Notifications
     
     public var body: some View {
-        VStack(spacing: 0) {
-            
-            HStack(spacing: 14) {
-                leadingView
+        HStack(spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
+            leadingView
 
-                Text(model.title)
-                    .font(.callout)
-                    .foregroundStyle(Color.textPrimary)
-                    .bold()
-                    .lineLimit(2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            Text(model.title)
+                .font(AppTypography.callout)
+                .foregroundStyle(Color.textPrimary)
+                .bold()
+                .lineLimit(2)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack(spacing: 8) {
-                    Circle()
-                        .fill(Color.brandPrimaryColor)
-                        .frame(width: 8, height: 8)
+            HStack(spacing: AppSpacing.xSmall) {
+                Circle()
+                    .fill(Color.brandPrimaryColor)
+                    .frame(width: AppSpacing.xSmall, height: AppSpacing.xSmall)
 
-                    Text(timeLabel)
-                        .font(.footnote)
-                        .foregroundStyle(Color.textTertiary)
-                }
-            }
-            .padding(.horizontal, 18)
-            .padding(.vertical, 18)
-            
-            if model.hasDivider {
-                Divider()
-                    .padding(.leading, 78)
+                Text(timeLabel)
+                    .font(AppTypography.footnote)
+                    .foregroundStyle(Color.textTertiary)
             }
         }
+        .appListCellRow(hasDivider: model.hasDivider)
     }
     
     private var timeLabel: String {

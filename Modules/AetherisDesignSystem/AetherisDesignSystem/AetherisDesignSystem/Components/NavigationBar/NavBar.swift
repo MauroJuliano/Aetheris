@@ -52,13 +52,12 @@ public struct NavBar: View {
                             Circle()
                                 .fill(Color.backgroundColorA)
                                 .frame(width: 40, height: 40)
-                                .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
+                                .appShadow(AppShadow.card)
                             
                             Image(systemName: "chevron.left")
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundStyle(.black)
-                                .shadow(color: .gray.opacity(0.2), radius: 16, y: 5)
+                                .foregroundStyle(Color.textPrimary)
                                 .frame(width: 10, height: 20)
                         }
                         
@@ -67,12 +66,12 @@ public struct NavBar: View {
                 
                 VStack {
                     Text("\(model.firstText)")
-                        .font(.system(size: 22, weight: .medium))
+                        .font(AppTypography.navTitle)
                         .foregroundStyle(Color.brandPrimaryColor)
                     
                     if let secondText = model.secondText {
                         Text(secondText)
-                            .font(.system(size: 34, weight: .bold))
+                            .font(AppTypography.heroTitle)
                             .foregroundStyle(Color.textPrimary)
                     }
                 }
@@ -88,7 +87,7 @@ public struct NavBar: View {
                 }
             }
         }
-        .padding(.horizontal)
+        .padding(.horizontal, AppSpacing.screenHorizontal)
      
     }
 }
