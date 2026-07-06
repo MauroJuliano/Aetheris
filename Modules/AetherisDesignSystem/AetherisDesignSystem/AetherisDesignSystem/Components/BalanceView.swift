@@ -14,7 +14,7 @@ public struct BalanceView: View {
 
             HStack(spacing: AppSpacing.small) {
                 Text(isBalanceVisible ? balanceText : maskedBalanceText)
-                    .font(.title)
+                    .font(AppTypography.balanceAmount)
                     .bold()
                     .foregroundStyle(Color.textPrimary)
 

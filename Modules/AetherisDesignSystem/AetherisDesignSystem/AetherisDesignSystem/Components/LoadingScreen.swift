@@ -19,7 +19,7 @@ struct LoadingScreen: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(messages[currentIndex])
-                        .font(.title3)
+                        .font(AppTypography.onboardingBody)
                         .fontWeight(.semibold)
                         .opacity(opacity)
                         .animation(.easeInOut(duration: fadeDuration),
@@ -33,7 +33,7 @@ struct LoadingScreen: View {
                 
                 Spacer()
             }
-            .padding(.bottom, 50)
+            .padding(.bottom, AppSpacing.controlHeight)
         }
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in

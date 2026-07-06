@@ -58,7 +58,7 @@ public struct TransferBeneficiary: View {
                 .background(
                     RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
                         .fill(Color.backgroundColorA)
-                        .shadow(color: .black.opacity(0.06), radius: 10, y: 5)
+                        .appShadow(AppShadow.chartGlow)
                 )
             }
         }

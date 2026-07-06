@@ -41,7 +41,7 @@ public struct UserView: View {
             VStack(alignment: .leading) {
                 Text("Melissa Mccarthy")
                     .foregroundStyle(Color.textPrimary)
-                    .font(.title3)
+                    .font(AppTypography.onboardingBody)
                 
                 Text("Joined August 17, 2025")
                     .foregroundStyle(Color.brandPrimaryColor)

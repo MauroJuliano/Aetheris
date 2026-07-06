@@ -13,7 +13,7 @@ struct Login: View {
             VStack(alignment: .leading) {
                 Text("Welcome back!")
                     .foregroundStyle(Color.brandPrimaryColor)
-                    .font(.title)
+                    .font(AppTypography.balanceAmount)
                 
                 Text("Let's get started")
                     .foregroundStyle(Color.textPrimary)
@@ -22,10 +22,10 @@ struct Login: View {
 
                 Text("Your financial journey continues. \nLet’s make your next \nmove count.")
                     .foregroundStyle(Color.textTertiary)
-                    .font(.title3)
+                    .font(AppTypography.onboardingBody)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.vertical, 60)
+            .padding(.vertical, AppSpacing.formTop)
             .padding(.horizontal, AppSpacing.formHorizontal)
 
             Spacer()
@@ -37,15 +37,10 @@ struct Login: View {
                     text: $login,
                     prompt: Text("Enter your email")
                         .foregroundColor(Color.textTertiary)
-                        .font(AppTypography.body)
+                        .font(AppTypography.input)
                 )
-                .foregroundStyle(Color.textPrimary)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
             }
-            .underlined(color: Color.border)
-            .padding(.horizontal, AppSpacing.formHorizontal)
-            .padding(.vertical, AppSpacing.xSmall)
+            .appInputField()
 
             // Password
             HStack {
@@ -54,15 +49,10 @@ struct Login: View {
                     text: $password,
                     prompt: Text("Enter your password")
                         .foregroundColor(Color.textTertiary)
-                        .font(AppTypography.body)
+                        .font(AppTypography.input)
                 )
-                .foregroundStyle(Color.textPrimary)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
             }
-            .underlined(color: Color.border)
-            .padding(.horizontal, AppSpacing.formHorizontal)
-            .padding(.vertical, AppSpacing.xSmall)
+            .appInputField()
 
             // Login button
             GlowButton(title: "Login") {

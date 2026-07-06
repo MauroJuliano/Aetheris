@@ -22,7 +22,7 @@ struct RegisterView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 60)
+                .padding(.top, AppSpacing.formTop)
                 .padding(.horizontal, AppSpacing.formHorizontal)
             
             Text(subTitle)
@@ -39,15 +39,11 @@ struct RegisterView: View {
                 text: $textFieldValue,
                 prompt: Text(textFieldPlaceholder)
                     .foregroundColor(Color.textTertiary)
-                    .font(AppTypography.body)
+                    .font(AppTypography.input)
             )
             .focused($isTextFieldFocused)
-            .foregroundStyle(Color.textPrimary)
-            .textInputAutocapitalization(.never)
-            .disableAutocorrection(true)
             .keyboardType(keyboardType)
-            .underlined(color: Color.border)
-            .padding(.horizontal, AppSpacing.formHorizontal)
+            .appInputField()
             .padding(.bottom, AppSpacing.xxLarge)
             
             GlowButton(title: buttonTitle) {

@@ -19,7 +19,7 @@ struct NotificationsCentreSkeleton: View {
             SkeletonView(.circle)
                 .frame(width: 40, height: 40)
 
-            skeleton(width: 230, height: 28, radius: 14)
+            SkeletonBlock(width: 230, height: 28, radius: 14)
 
             Spacer()
         }
@@ -28,7 +28,7 @@ struct NotificationsCentreSkeleton: View {
 
     private func notificationSection(titleWidth: CGFloat, rows: Int) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.small) {
-            skeleton(width: titleWidth, height: 18, radius: 9)
+            SkeletonBlock(width: titleWidth, height: 18, radius: 9)
                 .padding(.horizontal, AppSpacing.screenHorizontal)
 
             VStack(spacing: 0) {
@@ -38,8 +38,8 @@ struct NotificationsCentreSkeleton: View {
                             .frame(width: 46, height: 46)
 
                         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                            skeleton(width: index == 2 ? 180 : 220, height: 14, radius: 7)
-                            skeleton(width: index == 1 ? 145 : 110, height: 14, radius: 7)
+                            SkeletonBlock(width: index == 2 ? 180 : 220, height: 14, radius: 7)
+                            SkeletonBlock(width: index == 1 ? 145 : 110, height: 14, radius: 7)
                         }
 
                         Spacer()
@@ -47,7 +47,7 @@ struct NotificationsCentreSkeleton: View {
                         HStack(spacing: AppSpacing.xSmall) {
                             SkeletonView(.circle)
                                 .frame(width: AppSpacing.xSmall, height: AppSpacing.xSmall)
-                            skeleton(width: 58, height: 12, radius: 6)
+                            SkeletonBlock(width: 58, height: 12, radius: 6)
                         }
                     }
                     .appListCellRow(hasDivider: index < rows - 1)
@@ -62,11 +62,6 @@ struct NotificationsCentreSkeleton: View {
         .padding(.horizontal, AppSpacing.screenHorizontal)
     }
 
-    private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {
-        SkeletonView(.rect)
-            .frame(width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
-    }
 }
 
 #Preview {

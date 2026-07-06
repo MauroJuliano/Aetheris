@@ -15,8 +15,8 @@ struct BeneficiaryListSkeleton: View {
                                 .frame(width: 46, height: 46)
 
                             VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                                skeleton(width: nameWidth(for: index), height: 16, radius: 8)
-                                skeleton(width: keyWidth(for: index), height: 12, radius: 6)
+                                SkeletonBlock(width: nameWidth(for: index), height: 16, radius: 8)
+                                SkeletonBlock(width: keyWidth(for: index), height: 12, radius: 6)
                             }
 
                             Spacer()
@@ -64,11 +64,6 @@ struct BeneficiaryListSkeleton: View {
         }
     }
 
-    private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {
-        SkeletonView(.rect)
-            .frame(width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
-    }
 }
 
 #Preview {

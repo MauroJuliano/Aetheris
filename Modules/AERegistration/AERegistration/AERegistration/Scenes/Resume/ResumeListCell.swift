@@ -49,11 +49,11 @@ struct ResumeListCell: View {
             VStack(alignment: .leading) {
                 Text(model.description)
                     .foregroundStyle(Color.textTertiary)
-                    .font(.subheadline)
+                    .font(AppTypography.cellSubtitle)
                 
                 Text(model.value)
                     .foregroundStyle(Color.textPrimary)
-                    .font(.title3)
+                    .font(AppTypography.onboardingBody)
             }
             
             Spacer()
@@ -63,7 +63,7 @@ struct ResumeListCell: View {
             } label: {
                 HStack {
                     Text("Edit")
-                        .font(.callout)
+                        .font(AppTypography.callout)
                         .foregroundStyle(Color.brandPrimaryColor)
                     
                     Image(systemName: "chevron.forward")

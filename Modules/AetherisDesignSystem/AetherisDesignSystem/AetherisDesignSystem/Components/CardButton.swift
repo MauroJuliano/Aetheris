@@ -23,10 +23,10 @@ public struct GlassButton: View {
     
     public var body: some View {
         Button(action: action) {
-            VStack(spacing: 8) {
+            VStack(spacing: AppSpacing.xSmall) {
                 ZStack {
                     Circle()
-                        .fill(Color.gray.opacity(0.08))
+                        .fill(Color.brandPrimaryColor.opacity(0.08))
                         .frame(width: 58, height: 58)
                     
                     Image(systemName: model.icon)
@@ -35,7 +35,7 @@ public struct GlassButton: View {
                 }
                 
                 Text(model.label)
-                    .font(.caption)
+                    .font(AppTypography.cellCaption)
                     .bold()
                     .foregroundStyle(Color.textPrimary)
                     .multilineTextAlignment(.center)
@@ -67,4 +67,3 @@ struct GlassButton_Previews: PreviewProvider {
         .background(Color("BackgroundGray"))
     }
 }
-

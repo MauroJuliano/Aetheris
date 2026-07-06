@@ -19,7 +19,7 @@ struct TransactionHistorySkeleton: View {
             SkeletonView(.circle)
                 .frame(width: 40, height: 40)
 
-            skeleton(width: 220, height: 28, radius: 14)
+            SkeletonBlock(width: 220, height: 28, radius: 14)
 
             Spacer()
         }
@@ -28,7 +28,7 @@ struct TransactionHistorySkeleton: View {
 
     private func transactionSection(titleWidth: CGFloat, rows: Int) -> some View {
         VStack(alignment: .leading, spacing: AppSpacing.small) {
-            skeleton(width: titleWidth, height: 18, radius: 9)
+            SkeletonBlock(width: titleWidth, height: 18, radius: 9)
                 .padding(.horizontal, AppSpacing.screenHorizontal)
 
             VStack(spacing: 0) {
@@ -38,13 +38,13 @@ struct TransactionHistorySkeleton: View {
                             .frame(width: 40, height: 40)
 
                         VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                            skeleton(width: index == 0 ? 145 : 120, height: 16, radius: 8)
-                            skeleton(width: index == 0 ? 210 : 165, height: 14, radius: 7)
+                            SkeletonBlock(width: index == 0 ? 145 : 120, height: 16, radius: 8)
+                            SkeletonBlock(width: index == 0 ? 210 : 165, height: 14, radius: 7)
                         }
 
                         Spacer()
 
-                        skeleton(width: 64, height: 18, radius: 9)
+                        SkeletonBlock(width: 64, height: 18, radius: 9)
                     }
                     .appListCellRow(
                         hasDivider: index < rows - 1,
@@ -62,11 +62,6 @@ struct TransactionHistorySkeleton: View {
         .padding(.horizontal, AppSpacing.screenHorizontal)
     }
 
-    private func skeleton(width: CGFloat? = nil, height: CGFloat, radius: CGFloat) -> some View {
-        SkeletonView(.rect)
-            .frame(width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
-    }
 }
 
 #Preview {

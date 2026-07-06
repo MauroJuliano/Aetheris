@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import SwiftUI
 
 struct SpendingPoint: Identifiable, Equatable {
@@ -84,16 +85,16 @@ struct SpendingLineChart: View {
                     Text(formatCurrency(selectedData.amount))
                         .font(.system(size: 10, weight: .semibold))
                         .foregroundStyle(Color.textTertiary)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 5)
+                        .padding(.horizontal, AppChartStyle.tooltipHorizontalPadding)
+                        .padding(.vertical, AppChartStyle.tooltipVerticalPadding)
                         .background(
                             Capsule()
-                                .fill(Color.gray.opacity(0.12))
+                                .fill(AppChartStyle.tooltipBackground)
                         )
 
                     Circle()
                         .fill(Color.surface)
-                        .frame(width: 10, height: 10)
+                        .frame(width: AppChartStyle.markerSize, height: AppChartStyle.markerSize)
                         .overlay(
                             Circle()
                                 .stroke(Color.brandPrimaryColor, lineWidth: 3)

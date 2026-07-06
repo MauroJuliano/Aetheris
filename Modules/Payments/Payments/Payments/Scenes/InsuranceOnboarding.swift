@@ -52,7 +52,7 @@ struct InsuranceOnboarding: View {
                 
                 VStack {
                     Text("Secure your future with our comprehensive financial insurance plan.")
-                        .font(.title3)
+                        .font(AppTypography.onboardingBody)
                         .fontWeight(.bold)
                         .foregroundStyle(Color.textPrimary)
                         .multilineTextAlignment(.leading)
@@ -60,7 +60,7 @@ struct InsuranceOnboarding: View {
                         .padding(.top)
                     
                     Text("Benefits:")
-                        .font(.title3)
+                        .font(AppTypography.onboardingBody)
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.textPrimary)
                         .multilineTextAlignment(.leading)

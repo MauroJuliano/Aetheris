@@ -2,29 +2,29 @@ import SwiftUI
 
 public struct TabBar: View {
     @Binding var selectedIndex: Int
-    let tabWidth: CGFloat = 80
+    let tabWidth: CGFloat = AppTabBarMetrics.itemWidth
     
     public var body: some View {
-        HStack(spacing: 40) {
+        HStack(spacing: AppTabBarMetrics.itemSpacing) {
             ZStack {
                 // Background
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(Color.white)
-                    .frame(width: 250, height: 50)
-                    .shadow(radius: 5)
+                RoundedRectangle(cornerRadius: AppTabBarMetrics.containerRadius)
+                    .fill(Color.surface)
+                    .frame(width: AppTabBarMetrics.containerWidth, height: AppTabBarMetrics.containerHeight)
+                    .appShadow(AppShadow.card)
                 
                 // Moving White Capsule
                 HStack(spacing: 0) {
                     ForEach(0..<3) { index in
                         Color.clear
-                            .frame(width: tabWidth, height: 40)
+                            .frame(width: tabWidth, height: AppTabBarMetrics.selectedHeight)
                     }
                 }
                 .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.white)
-                        .frame(width: tabWidth, height: 40)
-                        .shadow(radius: 5)
+                    RoundedRectangle(cornerRadius: AppTabBarMetrics.selectedRadius)
+                        .fill(Color.surface)
+                        .frame(width: tabWidth, height: AppTabBarMetrics.selectedHeight)
+                        .appShadow(AppShadow.card)
                         .offset(x: CGFloat(selectedIndex - 1) * tabWidth)
                         .animation(.easeInOut(duration: 0.3), value: selectedIndex)
                 )
@@ -45,17 +45,17 @@ public struct TabBar: View {
         Button(action: {
             selectedIndex = index
         }) {
-            HStack(spacing: 4) {
+            HStack(spacing: AppTabBarMetrics.itemLabelSpacing) {
                 Image(systemName: icon)
                     .foregroundColor(Color.brandPrimaryColor)
                 
                 if selectedIndex == index {
                     Text(label)
-                        .font(.caption)
+                        .font(AppTypography.caption)
                         .foregroundColor(.brandPrimaryColor)
                 }
             }
-            .frame(width: tabWidth, height: 50)
+            .frame(width: tabWidth, height: AppTabBarMetrics.containerHeight)
         }
     }
     
