@@ -54,19 +54,19 @@ public struct NumericKeyboard: View {
     private var amountHeader: some View {
         VStack(spacing: 8) {
             Text(displayedAmount)
-                .foregroundStyle(Color.textPrimary)
-                .font(AppTypography.screenTitle)
+                .foregroundStyle(.black)
+                .font(.largeTitle)
                 .bold()
                 .contentTransition(.numericText())
 
             HStack  {
                 Text("Wallet balance:")
-                    .foregroundStyle(Color.textSecondaryColor)
-                    .font(AppTypography.subheadline)
+                    .foregroundStyle(Color.gray.opacity(0.85))
+                    .font(.subheadline)
                 
                 Text(displayedBalance)
                     .foregroundStyle(Color.brandPrimaryColor)
-                    .font(AppTypography.subheadline)
+                    .font(.subheadline)
             }
         }
         .padding(.bottom, 12)
@@ -91,7 +91,12 @@ public struct NumericKeyboard: View {
             .background(
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
                     .fill(Color.backgroundColorA.opacity(0.95))
-                    .appShadow(AppShadow.chartGlow)
+                    .shadow(
+                        color: .black.opacity(0.06),
+                        radius: 16,
+                        x: 8,
+                        y: 8
+                    )
                     .overlay(
                         RoundedRectangle(cornerRadius: 18, style: .continuous)
                             .stroke(.white.opacity(0.8), lineWidth: 1)

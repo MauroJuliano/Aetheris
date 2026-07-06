@@ -14,25 +14,26 @@ public struct TabBarView: View {
     
     public var body: some View {
             ZStack(alignment: .bottom) {
-                HStack(spacing: AppTabBarMetrics.itemSpacing) {
+                HStack(spacing: 40) {
                     TabBar(selectedIndex: $selectedIndex)
-                        .appShadow(AppShadow.tabBar)
+                        .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
                     
                     Button {
                         onCenterTap()
                     } label: {
                         ZStack {
+                            RoundedRectangle(cornerRadius: 25)
+                                .fill(.white)
+                                .frame(width: 50, height: 50)
+
                             Image(systemName: "paperplane")
                                 .foregroundColor(Color.brandPrimaryColor)
-                                .appIconButtonSurface(
-                                    radius: AppTabBarMetrics.containerRadius,
-                                    shadow: AppShadow.tabBar
-                                )
                         }
                     }
+                    .shadow(color: .black.opacity(0.3),radius: 10, x: 0, y: 5)
                 }
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                .padding(.bottom, AppSpacing.large)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20)
             }
     }
 }
