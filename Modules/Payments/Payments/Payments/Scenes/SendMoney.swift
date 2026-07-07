@@ -6,6 +6,8 @@ struct SendMoney: View {
     
     @State private var input = "$ "
     @State private var showSelection = false
+    @State private var showPin = false
+    @State private var showProcessing = false
     @State private var showSuccess = false
     @State private var successReceipt = TransferReceiptModel.mock
     @State var model: Beneficiary = .beneficiaries.first!
@@ -50,7 +52,7 @@ struct SendMoney: View {
                 
                 Button {
                     successReceipt = makeReceiptModel()
-                    showSuccess = true
+                    showPin = true
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: AppRadius.large)
@@ -80,6 +82,29 @@ struct SendMoney: View {
                             onSelect: { selected in
                 model = selected
             })
+            .navigationBarHidden(true)
+        }
+        .navigationDestination(isPresented: $showPin) {
+            TransferPinFactory.make(
+                receipt: successReceipt,
+                onBack: {
+                    showPin = false
+                },
+                onValidPin: {
+                    showPin = false
+                    showProcessing = true
+                }
+            )
+            .navigationBarHidden(true)
+        }
+        .navigationDestination(isPresented: $showProcessing) {
+            TransferProcessingFactory.make(
+                receipt: successReceipt,
+                onCompleted: {
+                    showProcessing = false
+                    showSuccess = true
+                }
+            )
             .navigationBarHidden(true)
         }
         .navigationDestination(isPresented: $showSuccess) {
