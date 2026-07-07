@@ -6,6 +6,10 @@ struct SendMoney: View {
     
     @State private var input = "$ "
     @State private var showSelection = false
+    @State private var showPin = false
+    @State private var showProcessing = false
+    @State private var showSuccess = false
+    @State private var successReceipt = TransferReceiptModel.mock
     @State var model: Beneficiary = .beneficiaries.first!
     @StateObject private var viewModel = TransferAmountViewModel(
         balance: 1000
@@ -47,7 +51,8 @@ struct SendMoney: View {
                 Spacer()
                 
                 Button {
-                    
+                    successReceipt = makeReceiptModel()
+                    showPin = true
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: AppRadius.large)
@@ -79,7 +84,72 @@ struct SendMoney: View {
             })
             .navigationBarHidden(true)
         }
+        .navigationDestination(isPresented: $showPin) {
+            TransferPinFactory.make(
+                receipt: successReceipt,
+                onBack: {
+                    showPin = false
+                },
+                onValidPin: {
+                    showPin = false
+                    showProcessing = true
+                }
+            )
+            .navigationBarHidden(true)
+        }
+        .navigationDestination(isPresented: $showProcessing) {
+            TransferProcessingFactory.make(
+                receipt: successReceipt,
+                onCompleted: {
+                    showProcessing = false
+                    showSuccess = true
+                }
+            )
+            .navigationBarHidden(true)
+        }
+        .navigationDestination(isPresented: $showSuccess) {
+            TransferSuccessView(
+                model: successReceipt,
+                onBack: {
+                    showSuccess = false
+                },
+                onDone: {
+                    dismiss()
+                },
+                onNewTransfer: {
+                    showSuccess = false
+                },
+                onCopyReference: { reference in
+                    UIPasteboard.general.string = reference
+                }
+            )
+            .navigationBarHidden(true)
+        }
         
+    }
+
+    private func makeReceiptModel() -> TransferReceiptModel {
+        TransferReceiptModel(
+            amount: viewModel.formattedAmount,
+            recipientName: model.name,
+            recipientEmail: model.pixKey,
+            accountName: "Main Account",
+            accountLastDigits: "1234",
+            date: formattedReceiptDate,
+            referenceId: receiptReferenceId
+        )
+    }
+
+    private var formattedReceiptDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM d, yyyy 'at' h:mm a"
+        return formatter.string(from: Date())
+    }
+
+    private var receiptReferenceId: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd-HHmmss"
+        return "TRX\(formatter.string(from: Date()))"
     }
 }
 
