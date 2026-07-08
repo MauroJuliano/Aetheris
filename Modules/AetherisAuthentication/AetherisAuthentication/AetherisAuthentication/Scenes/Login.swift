@@ -11,16 +11,16 @@ struct Login: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Welcome back!")
+                Text(Strings.Login.welcomeBack)
                     .foregroundStyle(Color.brandPrimaryColor)
                     .font(AppTypography.balanceAmount)
-                
-                Text("Let's get started")
+
+                Text(Strings.Login.getStarted)
                     .foregroundStyle(Color.textPrimary)
                     .font(AppTypography.screenTitle)
                     .bold()
 
-                Text("Your financial journey continues. \nLet’s make your next \nmove count.")
+                Text(Strings.Login.journey)
                     .foregroundStyle(Color.textTertiary)
                     .font(AppTypography.onboardingBody)
             }
@@ -35,7 +35,7 @@ struct Login: View {
                 TextField(
                     "",
                     text: $login,
-                    prompt: Text("Enter your email")
+                    prompt: Text(Strings.Login.emailPlaceholder)
                         .foregroundColor(Color.textTertiary)
                         .font(AppTypography.input)
                 )
@@ -47,7 +47,7 @@ struct Login: View {
                 TextField(
                     "",
                     text: $password,
-                    prompt: Text("Enter your password")
+                    prompt: Text(Strings.Login.passwordPlaceholder)
                         .foregroundColor(Color.textTertiary)
                         .font(AppTypography.input)
                 )
@@ -55,20 +55,20 @@ struct Login: View {
             .appInputField()
 
             // Login button
-            GlowButton(title: "Login") {
+            GlowButton(title: Strings.Login.loginButton) {
                 onLogin()
             }
             .padding()
 
             // Register
             HStack {
-                Text("Don't have an account?")
+                Text(Strings.Login.dontHaveAccount)
                     .foregroundStyle(Color.textSecondaryColor)
 
                 Button {
                     onRegister()
                 } label: {
-                    Text("Sign up here")
+                    Text(Strings.Login.signUp)
                         .bold()
                         .foregroundStyle(Color.brandPrimaryColor)
                 }

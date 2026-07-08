@@ -28,7 +28,7 @@ struct SendMoney: View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
                 NavBar(hasBackButton: true,
-                       model: .init(firstText: "Transfer", hasInitialSpace: false),
+                       model: .init(firstText: Strings.SendMoney.title, hasInitialSpace: false),
                        onBack: {
                     if let onBackAction {
                         onBackAction()
@@ -59,12 +59,12 @@ struct SendMoney: View {
                             .fill(Color.backgroundColorA)
                             .appShadow(AppShadow.card)
                             .overlay(
-                                RoundedRectangle(cornerRadius: AppRadius.pill)
+                        RoundedRectangle(cornerRadius: AppRadius.pill)
                                     .stroke(Color.border, style: .init(lineWidth: 1))
                             )
                             .frame(width: 300, height: 50)
                         
-                        Text("Continue")
+                        Text(Strings.SendMoney.continueButton)
                             .foregroundStyle(Color.brandPrimaryColor)
                             .font(AppTypography.headline)
                             .appShadow(AppShadow.control)

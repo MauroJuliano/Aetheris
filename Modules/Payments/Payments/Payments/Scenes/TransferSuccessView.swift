@@ -73,11 +73,11 @@ struct TransferSuccessView: View {
 
     private var titleSection: some View {
         VStack(spacing: AppSpacing.xSmall) {
-            Text("Transfer successful!")
+            Text(Strings.TransferSuccess.title)
                 .font(AppTypography.heroTitle)
                 .foregroundStyle(Color.textPrimary)
 
-            Text("Your money has been sent successfully.")
+            Text(Strings.TransferSuccess.subtitle)
                 .font(AppTypography.onboardingBody)
                 .foregroundStyle(Color.textSecondaryColor)
                 .multilineTextAlignment(.center)
@@ -88,7 +88,7 @@ struct TransferSuccessView: View {
         VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                    Text("Amount")
+                    Text(Strings.TransferSuccess.amount)
                         .font(AppTypography.onboardingBody.weight(.medium))
                         .foregroundStyle(Color.textSecondaryColor)
 
@@ -99,7 +99,7 @@ struct TransferSuccessView: View {
 
                 Spacer()
 
-                Label("Completed", systemImage: "checkmark.circle")
+                Label(Strings.TransferSuccess.completed, systemImage: "checkmark.circle")
                     .font(AppBadgeStyle.font)
                     .appCapsuleBadge(
                         foreground: Color.success,
@@ -109,7 +109,7 @@ struct TransferSuccessView: View {
 
             TransferInfoRow(
                 imageName: "person.circle.fill",
-                title: "To",
+                title: Strings.TransferSuccess.to,
                 primary: model.recipientName,
                 secondary: model.recipientEmail
             )
@@ -118,7 +118,7 @@ struct TransferSuccessView: View {
 
             TransferInfoRow(
                 icon: "building.columns.fill",
-                title: "From",
+                title: Strings.TransferSuccess.from,
                 primary: model.accountName,
                 secondary: "•••• \(model.accountLastDigits)"
             )
@@ -127,7 +127,7 @@ struct TransferSuccessView: View {
 
             TransferInfoRow(
                 icon: "calendar",
-                title: "Date & Time",
+                title: Strings.TransferSuccess.dateAndTime,
                 primary: model.date
             )
 
@@ -136,7 +136,7 @@ struct TransferSuccessView: View {
             HStack {
                 TransferInfoRow(
                     icon: "number",
-                    title: "Reference ID",
+                    title: Strings.TransferSuccess.referenceId,
                     primary: model.referenceId
                 )
 
@@ -168,11 +168,11 @@ struct TransferSuccessView: View {
             }
 
             VStack(alignment: .leading, spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                Text("Secure transfer")
+                Text(Strings.TransferSuccess.secureTransfer)
                     .font(AppTypography.onboardingBody.weight(.bold))
                     .foregroundStyle(Color.success.opacity(0.9))
 
-                Text("Your transaction is protected and encrypted.")
+                Text(Strings.TransferSuccess.secureSubtitle)
                     .font(AppTypography.button)
                     .foregroundStyle(Color.textSecondaryColor)
             }
@@ -191,7 +191,7 @@ struct TransferSuccessView: View {
     private var actionButtons: some View {
         VStack(spacing: AppSpacing.large) {
             Button(action: onDone) {
-                Text("Done")
+                Text(Strings.TransferSuccess.done)
                     .font(AppTypography.onboardingBody.weight(.semibold))
                     .foregroundStyle(Color.surface)
                     .frame(maxWidth: .infinity)
@@ -210,7 +210,7 @@ struct TransferSuccessView: View {
             }
 
             Button(action: onNewTransfer) {
-                Label("Make another transfer", systemImage: "paperplane")
+                Label(Strings.TransferSuccess.anotherTransfer, systemImage: "paperplane")
                     .font(AppTypography.onboardingBody.weight(.semibold))
                     .foregroundStyle(Color.brandPrimaryColor)
             }

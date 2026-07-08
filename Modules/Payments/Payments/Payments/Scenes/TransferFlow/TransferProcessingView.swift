@@ -12,11 +12,11 @@ struct TransferProcessingView: View {
             processingIcon
 
             VStack(spacing: AppSpacing.xSmall + AppSpacing.xxxSmall) {
-                Text("Processing transfer...")
+                Text(Strings.TransferProcessing.title)
                     .font(AppTypography.heroTitle)
                     .foregroundStyle(Color.textPrimary)
 
-                Text("Please don't close the app\nor go back.")
+                Text(Strings.TransferProcessing.subtitle)
                     .font(AppTypography.onboardingBody)
                     .foregroundStyle(Color.textSecondaryColor)
                     .multilineTextAlignment(.center)
