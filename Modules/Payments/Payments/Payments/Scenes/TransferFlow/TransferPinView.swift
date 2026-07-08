@@ -16,11 +16,11 @@ struct TransferPinView: View {
                 lockIcon
 
                 VStack(spacing: AppSpacing.xxSmall) {
-                    Text(viewModel.title)
+                    Text(Strings.TransferPin.title)
                         .font(AppTypography.heroTitle)
                         .foregroundStyle(Color.textPrimary)
 
-                    Text(viewModel.subtitle)
+                    Text(Strings.TransferPin.subtitle)
                         .font(AppTypography.button)
                         .foregroundStyle(Color.textSecondaryColor)
                         .multilineTextAlignment(.center)
@@ -31,11 +31,11 @@ struct TransferPinView: View {
 
                 if viewModel.isError {
                     VStack(spacing: AppSpacing.xxxSmall) {
-                        Text("Incorrect PIN. Try again.")
+                        Text(Strings.TransferPin.incorrect)
                             .font(AppTypography.callout.weight(.semibold))
                             .foregroundStyle(Color.error)
 
-                        Text("You have \(viewModel.attemptsLeft) attempts left.")
+                        Text(String(format: Strings.TransferPin.attempts, viewModel.attemptsLeft))
                             .font(AppTypography.cellCaption)
                             .foregroundStyle(Color.textSecondaryColor)
                     }
@@ -44,7 +44,7 @@ struct TransferPinView: View {
                 Button {
                     // Face ID mock
                 } label: {
-                    Label("Use Face ID", systemImage: "faceid")
+                    Label(Strings.TransferPin.useFaceID, systemImage: "faceid")
                         .font(AppTypography.onboardingBody.weight(.semibold))
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
@@ -73,7 +73,7 @@ struct TransferPinView: View {
                     .appShadow(AppShadow.card)
             }
 
-            Text("Confirm Transfer")
+            Text(Strings.TransferPin.confirmTransfer)
                 .font(AppTypography.navTitle)
                 .foregroundStyle(Color.brandPrimaryColor)
 
