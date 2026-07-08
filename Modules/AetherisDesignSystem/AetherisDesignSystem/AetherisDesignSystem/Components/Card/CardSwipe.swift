@@ -6,7 +6,7 @@ public struct CardSwipe: View {
     @State private var selectedCard: Card? = nil
     @Binding var cards: [Card]
     
-    var width: CGFloat = 350
+    var width: CGFloat = AppCardMetrics.swipeCardSize.width
     
     public init(cards: Binding<[Card]>) {
         self._cards = cards
@@ -21,7 +21,7 @@ public struct CardSwipe: View {
                     let signedProgress = (dragOffSet.width >= 0 ? 1 : -1) * progress
                     
                     CardView(card: cards[index])
-                        .frame(width: width, height: 200)
+                        .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
                         .offset(x: visualIndex == 0 ? dragOffSet.width : Double(visualIndex) * 10,
                                 y: visualIndex == 0 ? 0 : Double(visualIndex) * -4)
                     
@@ -91,4 +91,3 @@ public struct CardSwipe: View {
 #Preview {
     CardSwipe(cards: .constant(CardsMock.multipleTypeCards))
 }
-

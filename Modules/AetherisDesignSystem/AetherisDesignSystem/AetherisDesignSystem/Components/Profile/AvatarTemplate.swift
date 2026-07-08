@@ -15,7 +15,7 @@ public struct AvatarTemplate: View {
     public init(model: AvatarModel,
                 rotateGradient: Bool = false) {
         self.model = model
-        self.rotateGradient = rotateGradient
+        self._rotateGradient = State(initialValue: rotateGradient)
     }
     
     public var body: some View {
@@ -25,24 +25,24 @@ public struct AvatarTemplate: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            .frame(width: 120, height: 120)
+            .frame(width: AppAvatarMetrics.glowSize, height: AppAvatarMetrics.glowSize)
             .clipShape(Circle())
-            .blur(radius: 20)
+            .blur(radius: AppAvatarMetrics.glowBlurRadius)
             .rotationEffect(.degrees(rotateGradient ? 360 : 0))
             .animation(.linear(duration: 6).repeatForever(autoreverses: false), value: rotateGradient)
-            .offset(y: 5)
+            .offset(y: AppAvatarMetrics.glowOffsetY)
             
             Image(model.image)
                 .resizable()
                 .scaledToFit()
                 .clipShape(Circle())
                 .clipped()
-                .shadow(radius: 10)
+                .shadow(radius: AppAvatarMetrics.glowBlurRadius / 2)
                 .overlay(
                     Circle()
                         .stroke(.gray.opacity(0.25), style: .init(lineWidth: 1))
                 )
-            .frame(width: 150, height: 150)
+            .frame(width: AppAvatarMetrics.imageSize, height: AppAvatarMetrics.imageSize)
         }
         .onAppear {
             rotateGradient = true

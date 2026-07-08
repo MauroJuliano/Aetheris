@@ -27,10 +27,10 @@ public struct GlassButton: View {
                 ZStack {
                     Circle()
                         .fill(Color.brandPrimaryColor.opacity(0.08))
-                        .frame(width: 58, height: 58)
+                        .frame(width: AppComponentMetrics.mediumCircleSize, height: AppComponentMetrics.mediumCircleSize)
                     
                     Image(systemName: model.icon)
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.system(size: AppCardMetrics.cardButtonIconSize, weight: .regular))
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
                 
@@ -40,7 +40,7 @@ public struct GlassButton: View {
                     .foregroundStyle(Color.textPrimary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
-                    .frame(height: 32)
+                    .frame(height: AppComponentMetrics.glassButtonLabelHeight)
                     
             }
         }

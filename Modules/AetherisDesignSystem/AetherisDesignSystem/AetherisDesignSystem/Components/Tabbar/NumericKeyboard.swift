@@ -3,6 +3,7 @@ import SwiftUI
 public struct NumericKeyboard: View {
     let displayedAmount: String
     let displayedBalance: String
+    let balanceLabel: String
     let onKeyPressed: (String) -> Void
 
     private let keys = [
@@ -15,20 +16,22 @@ public struct NumericKeyboard: View {
     public init(
         displayedAmount: String,
         displayedBalance: String,
+        balanceLabel: String = "Wallet balance:",
         onKeyPressed: @escaping (String) -> Void
     ) {
         self.displayedAmount = displayedAmount
         self.displayedBalance = displayedBalance
+        self.balanceLabel = balanceLabel
         self.onKeyPressed = onKeyPressed
     }
 
     public var body: some View {
-        VStack(spacing: 22) {
+        VStack(spacing: AppSpacing.xLarge - AppSpacing.xSmall) {
             amountHeader
 
-            VStack(spacing: 14) {
+            VStack(spacing: AppComponentMetrics.keyboardRowSpacing) {
                 ForEach(keys, id: \.self) { row in
-                    HStack(spacing: 16) {
+                    HStack(spacing: AppComponentMetrics.keyboardKeySpacing) {
                         ForEach(row, id: \.self) { key in
                             keyboardButton(key)
                         }
@@ -36,18 +39,13 @@ public struct NumericKeyboard: View {
                 }
             }
         }
-        .padding(.horizontal, 34)
-        .padding(.top, 38)
-        .padding(.bottom, 28)
+        .padding(.horizontal, AppComponentMetrics.keyboardContainerHorizontalPadding)
+        .padding(.top, AppComponentMetrics.keyboardContainerTopPadding)
+        .padding(.bottom, AppComponentMetrics.keyboardContainerBottomPadding)
         .background(
-            RoundedRectangle(cornerRadius: 34, style: .continuous)
+            RoundedRectangle(cornerRadius: AppRadius.large + AppRadius.medium, style: .continuous)
                 .fill(Color.backgroundColorA)
-                .shadow(
-                    color: .black.opacity(0.08),
-                    radius: 28,
-                    x: 12,
-                    y: 18
-                )
+                .appShadow(AppShadow.soft)
         )
     }
 
@@ -59,8 +57,8 @@ public struct NumericKeyboard: View {
                 .bold()
                 .contentTransition(.numericText())
 
-            HStack  {
-                Text("Wallet balance:")
+            HStack {
+                Text(balanceLabel)
                     .foregroundStyle(Color.gray.opacity(0.85))
                     .font(.subheadline)
                 
@@ -82,23 +80,18 @@ public struct NumericKeyboard: View {
                         .font(.system(size: 28, weight: .regular))
                 } else {
                     Text(key)
-                        .font(AppFont.roboto(.regular, size: 34))
+                    .font(AppFont.roboto(.regular, size: 34))
                 }
             }
             .foregroundStyle(Color.brandPrimaryColor)
             .frame(maxWidth: .infinity)
-            .frame(height: 58)
+            .frame(height: AppComponentMetrics.keyboardKeyHeight)
             .background(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
+                RoundedRectangle(cornerRadius: AppComponentMetrics.keyboardKeyCornerRadius, style: .continuous)
                     .fill(Color.backgroundColorA.opacity(0.95))
-                    .shadow(
-                        color: .black.opacity(0.06),
-                        radius: 16,
-                        x: 8,
-                        y: 8
-                    )
+                    .appShadow(AppShadow.control)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        RoundedRectangle(cornerRadius: AppComponentMetrics.keyboardKeyCornerRadius, style: .continuous)
                             .stroke(.white.opacity(0.8), lineWidth: 1)
                     )
             )

@@ -1,20 +1,27 @@
 import SwiftUI
 
 public struct MinimalDropdown: View {
-    @State private var selectedOption = "Today"
-    @State private var isExpanded = false
+    @State private var selectedOption: String
+    @State private var isExpanded: Bool
 
-    let options = ["Today", "This Week", "This Month", "All Time"]
+    let title: String
+    let options: [String]
 
-    public init(selectedOption: String = "Today",
-                isExpanded: Bool = false) {
-        self.selectedOption = selectedOption
-        self.isExpanded = isExpanded
+    public init(
+        title: String = "Transactions History",
+        selectedOption: String = "Today",
+        isExpanded: Bool = false,
+        options: [String] = ["Today", "This Week", "This Month", "All Time"]
+    ) {
+        self.title = title
+        self._selectedOption = State(initialValue: selectedOption)
+        self._isExpanded = State(initialValue: isExpanded)
+        self.options = options
     }
     
     public var body: some View {
         HStack {
-            Text("Transactions History")
+            Text(title)
                 .font(AppTypography.onboardingBody)
                 .fontWeight(.medium)
             
@@ -26,11 +33,11 @@ public struct MinimalDropdown: View {
                         isExpanded.toggle()
                     }
                 }) {
-                    HStack(spacing: 4) {
-                        Text(selectedOption)
-                            .foregroundColor(.primary)
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 10))
+                        HStack(spacing: 4) {
+                            Text(selectedOption)
+                                .foregroundColor(.primary)
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 10))
                             .rotationEffect(.degrees(isExpanded ? 180 : 0))
                             .animation(.easeInOut(duration: 0.2), value: isExpanded)
                     }

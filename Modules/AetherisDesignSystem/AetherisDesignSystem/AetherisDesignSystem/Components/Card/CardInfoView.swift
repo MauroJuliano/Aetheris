@@ -5,7 +5,7 @@ struct CardInfoView: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: AppRadius.medium)
                 .fill(infoModel.color)
             
             HStack {
@@ -43,7 +43,7 @@ struct CardInfoView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: AppRadius.pill)
                             .fill(.white)
-                            .frame(width: 325, height: 40)
+                            .frame(width: AppCardMetrics.infoCardButtonSize.width, height: AppCardMetrics.infoCardButtonSize.height)
                         
                         Text(infoModel.button)
                             .foregroundStyle(Color.textPrimary)
@@ -55,10 +55,10 @@ struct CardInfoView: View {
                 
                 Spacer()
             }
+            }
+            .frame(width: AppCardMetrics.infoCardSize.width, height: AppCardMetrics.infoCardSize.height)
+            .appShadow(AppShadow.elevated)
         }
-        .frame(width: 350, height: 200)
-        .appShadow(AppShadow.elevated)
-    }
 }
 
 #Preview {

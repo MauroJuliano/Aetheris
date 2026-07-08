@@ -51,14 +51,14 @@ public struct NavBar: View {
                         ZStack {
                             Circle()
                                 .fill(Color.backgroundColorA)
-                                .frame(width: 40, height: 40)
+                                .frame(width: AppComponentMetrics.navigationIconButtonSize, height: AppComponentMetrics.navigationIconButtonSize)
                                 .appShadow(AppShadow.card)
                             
                             Image(systemName: "chevron.left")
                                 .resizable()
                                 .scaledToFit()
                                 .foregroundStyle(Color.textPrimary)
-                                .frame(width: 10, height: 20)
+                                .frame(width: AppComponentMetrics.navigationChevronSize.width, height: AppComponentMetrics.navigationChevronSize.height)
                         }
                         
                     }
