@@ -1,27 +1,50 @@
 import SwiftUI
 
 public struct ListCell: View {
-    public init() {}
+    public struct Model {
+        public let title: String
+        public let subtitle: String
+        public let value: String
+        public let icon: String
+
+        public init(
+            title: String = "Swarovski",
+            subtitle: String = "Payment",
+            value: String = "-46.99",
+            icon: String = "bag"
+        ) {
+            self.title = title
+            self.subtitle = subtitle
+            self.value = value
+            self.icon = icon
+        }
+    }
+
+    private let model: Model
+
+    public init(model: Model = .init()) {
+        self.model = model
+    }
     
     public var body: some View {
         HStack {
             ZStack {
-                Rectangle()
-                    .frame(width: 50, height: 50)
-                    .clipShape(.buttonBorder)
+                RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous)
+                    .fill(Color.brandPrimaryColor.opacity(0.12))
+                    .frame(width: AppComponentMetrics.listCellAvatarSize, height: AppComponentMetrics.listCellAvatarSize)
                 
-                Image(systemName: "bag")
+                Image(systemName: model.icon)
                     .resizable()
                     .foregroundStyle(.white)
-                    .frame(width: 20, height: 25)
+                    .frame(width: AppComponentMetrics.listCellIconSize.width, height: AppComponentMetrics.listCellIconSize.height)
                     
             }
             
             VStack(alignment: .leading) {
-                Text("Swarovski")
+                Text(model.title)
                     .foregroundStyle(Color.textPrimary)
                 
-                Text("Payment")
+                Text(model.subtitle)
                     .font(AppTypography.caption)
                     .foregroundStyle(Color.textSecondaryColor)
             }
@@ -29,7 +52,7 @@ public struct ListCell: View {
             
             Spacer()
             
-            Text("-46.99")
+            Text(model.value)
                 .foregroundStyle(Color.textSecondaryColor)
                 .padding(AppSpacing.medium)
         }

@@ -13,11 +13,9 @@ struct IconContainer: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(
-                    Color.brandPrimaryColor.opacity(0.08)
-                )
-                .frame(width: 28, height: 28)
+            RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous)
+                .fill(Color.brandPrimaryColor.opacity(0.08))
+                .frame(width: AppComponentMetrics.smallCircleSize, height: AppComponentMetrics.smallCircleSize)
 
             Image(systemName: model.icon)
                 .font(.system(size: 16, weight: .regular))

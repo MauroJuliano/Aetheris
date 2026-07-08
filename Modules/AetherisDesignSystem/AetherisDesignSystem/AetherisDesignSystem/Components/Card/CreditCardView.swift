@@ -27,17 +27,17 @@ struct CreditCardView: View {
                 ZStack {
                     Circle()
                         .fill(AppCreditCardStyle.lightOverlay)
-                        .frame(width: 300, height: 300)
+                        .frame(width: AppCardMetrics.creditCardOverlayOneSize, height: AppCardMetrics.creditCardOverlayOneSize)
                         .offset(x: -170, y: 110)
                     
                     Circle()
                         .fill(AppCreditCardStyle.darkOverlay)
-                        .frame(width: 350, height: 350)
+                        .frame(width: AppCardMetrics.creditCardOverlayTwoSize, height: AppCardMetrics.creditCardOverlayTwoSize)
                         .offset(x: 190, y: 150)
                     
                     Circle()
                         .fill(AppCreditCardStyle.accentOverlay)
-                        .frame(width: 250, height: 250)
+                        .frame(width: AppCardMetrics.creditCardOverlayThreeSize, height: AppCardMetrics.creditCardOverlayThreeSize)
                         .offset(x: 190, y: -60)
                 }
                 
@@ -78,8 +78,8 @@ struct CreditCardView: View {
                 }
                 .padding(AppSpacing.xLarge)
             }
-            .frame(width: AppCreditCardStyle.cardSize.width, height: AppCreditCardStyle.cardSize.height)
-            .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
+            .frame(width: AppCardMetrics.creditCardSize.width, height: AppCardMetrics.creditCardSize.height)
+            .clipShape(RoundedRectangle(cornerRadius: AppCardMetrics.creditCardBorderRadius))
             .appShadow(AppCreditCardStyle.shadow)
         }
         

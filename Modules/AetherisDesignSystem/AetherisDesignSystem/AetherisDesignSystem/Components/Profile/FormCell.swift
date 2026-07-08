@@ -70,7 +70,7 @@ public struct FormCell: View {
             HStack {
                 Text(title)
                     .foregroundStyle(Color.textPrimary)
-                    .font(.title2)
+                    .font(AppTypography.sectionTitle)
                     .bold()
                     .multilineTextAlignment(.leading)
                     .padding(.top)

@@ -400,7 +400,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Components/LoadingScreen.swift,
-				Components/Profile/IconContainer.swift,
 			);
 			target = A9C188E72F4E7A5A00013305 /* Payments */;
 		};
@@ -422,8 +421,6 @@
 		A9B535E52F4E3D2C005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Components/Tabbar/TabBar.swift,
-				Components/Tabbar/TabBarView.swift,
 				Components/Tabbar/TransferAmountViewModel.swift,
 				"Helpers/Skeletonize+Extension.swift",
 			);

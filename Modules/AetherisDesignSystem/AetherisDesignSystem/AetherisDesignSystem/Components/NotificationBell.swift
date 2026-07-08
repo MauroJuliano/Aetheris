@@ -5,11 +5,11 @@ public struct NotificationBell: View {
         ZStack {
             Image(systemName: "bell")
                 .font(.system(size: 24))
-                .tint(.gray)
+                .tint(Color.textTertiary)
             
             Circle()
                 .fill(Color.brandPrimaryColor)
-                .frame(width: 10, height: 10)
+                .frame(width: AppComponentMetrics.notificationBadgeSize, height: AppComponentMetrics.notificationBadgeSize)
                 .offset(x: 5, y: -5)
         }
     }

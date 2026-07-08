@@ -80,6 +80,8 @@ public enum AppTabBarMetrics {
     public static let itemSpacing: CGFloat = 40
     public static let centerButtonSize: CGFloat = 50
     public static let itemLabelSpacing: CGFloat = 4
+    public static let horizontalPadding: CGFloat = 16
+    public static let bottomPadding: CGFloat = 20
 }
 
 public enum AppChartStyle {
@@ -90,8 +92,8 @@ public enum AppChartStyle {
 }
 
 public enum AppCreditCardStyle {
-    public static let glowSize = CGSize(width: 360, height: 220)
-    public static let cardSize = CGSize(width: 340, height: 200)
+    public static let glowSize = AppCardMetrics.creditCardGlowSize
+    public static let cardSize = AppCardMetrics.creditCardSize
     public static let glowBlur: CGFloat = 20
     public static let glowOffsetY: CGFloat = 5
     public static let contentSpacing: CGFloat = 20
@@ -108,6 +110,57 @@ public enum AppBadgeStyle {
     public static let verticalPadding: CGFloat = 5
     public static let iconSize: CGFloat = 9
     public static let font = Font.system(size: 11, weight: .semibold)
+}
+
+public enum AppComponentMetrics {
+    public static let navigationIconButtonSize: CGFloat = 40
+    public static let navigationChevronSize = CGSize(width: 10, height: 20)
+    public static let notificationBadgeSize: CGFloat = 10
+    public static let smallCircleSize: CGFloat = 28
+    public static let mediumCircleSize: CGFloat = 58
+    public static let largeCircleSize: CGFloat = 120
+    public static let avatarImageSize: CGFloat = 150
+    public static let tabBarContainerWidth: CGFloat = 250
+    public static let tabBarContainerHeight: CGFloat = 50
+    public static let tabBarSelectionHeight: CGFloat = 40
+    public static let tabBarItemWidth: CGFloat = 80
+    public static let tabBarSpacing: CGFloat = 40
+    public static let tabBarBottomPadding: CGFloat = 20
+    public static let tabBarHorizontalPadding: CGFloat = 16
+    public static let tabBarCenterButtonSize: CGFloat = 50
+    public static let keyboardContainerHorizontalPadding: CGFloat = 34
+    public static let keyboardContainerTopPadding: CGFloat = 38
+    public static let keyboardContainerBottomPadding: CGFloat = 28
+    public static let keyboardKeySpacing: CGFloat = 16
+    public static let keyboardRowSpacing: CGFloat = 14
+    public static let keyboardKeyHeight: CGFloat = 58
+    public static let keyboardKeyCornerRadius: CGFloat = 18
+    public static let glowButtonWidth: CGFloat = 250
+    public static let glowButtonHeight: CGFloat = 50
+    public static let glassButtonLabelHeight: CGFloat = 32
+    public static let listCellAvatarSize: CGFloat = 50
+    public static let listCellIconSize = CGSize(width: 20, height: 25)
+    public static let balanceEyeSize: CGFloat = 20
+}
+
+public enum AppCardMetrics {
+    public static let swipeCardSize = CGSize(width: 350, height: 200)
+    public static let infoCardSize = CGSize(width: 350, height: 200)
+    public static let infoCardButtonSize = CGSize(width: 325, height: 40)
+    public static let creditCardSize = CGSize(width: 340, height: 200)
+    public static let creditCardGlowSize = CGSize(width: 360, height: 220)
+    public static let creditCardOverlayOneSize: CGFloat = 300
+    public static let creditCardOverlayTwoSize: CGFloat = 350
+    public static let creditCardOverlayThreeSize: CGFloat = 250
+    public static let creditCardBorderRadius: CGFloat = AppRadius.large
+    public static let cardButtonIconSize: CGFloat = 20
+}
+
+public enum AppAvatarMetrics {
+    public static let glowSize: CGFloat = 120
+    public static let imageSize: CGFloat = 150
+    public static let glowBlurRadius: CGFloat = 20
+    public static let glowOffsetY: CGFloat = 5
 }
 
 public extension View {

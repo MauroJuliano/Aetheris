@@ -2,13 +2,20 @@ import SwiftUI
 
 public struct BalanceView: View {
     @State private var isBalanceVisible = true
-    private let balanceText = "$ 13,553.00"
+    private let title: String
+    private let balanceText: String
 
-    public init() {}
+    public init(
+        title: String = "Balance",
+        balanceText: String = "$ 13,553.00"
+    ) {
+        self.title = title
+        self.balanceText = balanceText
+    }
 
     public var body: some View {
         VStack(alignment: .leading) {
-            Text("Balance")
+            Text(title)
                 .font(AppTypography.navTitle)
                 .foregroundStyle(Color.textTertiary)
 
@@ -22,7 +29,7 @@ public struct BalanceView: View {
                     isBalanceVisible.toggle()
                 } label: {
                     Image(systemName: isBalanceVisible ? "eye" : "eye.slash")
-                        .font(.system(size: 20, weight: .medium))
+                        .font(.system(size: AppComponentMetrics.balanceEyeSize, weight: .medium))
                         .foregroundStyle(Color.textTertiary)
                 }
             }
