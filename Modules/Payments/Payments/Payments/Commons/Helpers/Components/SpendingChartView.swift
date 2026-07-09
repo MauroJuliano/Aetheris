@@ -2,12 +2,18 @@ import SwiftUI
 import AetherisDesignSystem
 
 struct SpendingThisMonthView: View {
+    let onViewReportTap: () -> Void
+
     private let categories: [SpendingCategory] = [
         .init(title: "Shopping", amount: "$ 980.50", percentage: "40%", icon: "bag.fill", color: Color.brandPrimaryColor),
         .init(title: "Bills", amount: "$ 610.00", percentage: "25%", icon: "doc.text.fill", color: .cyan),
         .init(title: "Transport", amount: "$ 420.00", percentage: "17%", icon: "car.fill", color: Color.success),
         .init(title: "Food & Drinks", amount: "$ 417.50", percentage: "18%", icon: "fork.knife", color: .orange)
     ]
+
+    init(onViewReportTap: @escaping () -> Void = {}) {
+        self.onViewReportTap = onViewReportTap
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
@@ -61,7 +67,7 @@ struct SpendingThisMonthView: View {
             Spacer()
 
             Button {
-
+                onViewReportTap()
             } label: {
                 Text("View report")
                     .font(.system(size: 13, weight: .semibold))
