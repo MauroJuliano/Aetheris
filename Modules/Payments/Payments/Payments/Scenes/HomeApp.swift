@@ -6,6 +6,8 @@ struct HomeApp: View {
     @State private var shouldPresentSIN: Bool = false
     @State private var shouldPresentLoan: Bool = false
     @State private var showNotifications: Bool = false
+    @State private var showViewReport: Bool = false
+    @State private var showReportError: Bool = false
     @State private var isLoading = true
     @State private var cardsMock = CardsMock.multipleTypeCards
     
@@ -27,7 +29,11 @@ struct HomeApp: View {
                 
                 QuickActions()
                 
-                SpendingThisMonthView()
+                SpendingThisMonthView(
+                    onViewReportTap: {
+                        showViewReport = true
+                    }
+                )
                 
             }
             .opacity(isLoading ? 0 : 1)
@@ -48,6 +54,27 @@ struct HomeApp: View {
             }
             .navigationDestination(isPresented: $shouldPresentSIN) {
                 InsuranceOnboarding()
+            }
+            .navigationDestination(isPresented: $showViewReport) {
+                ViewReportView {
+                    showViewReport = false
+                    showReportError = true
+                }
+            }
+            .navigationDestination(isPresented: $showReportError) {
+                FullScreenErrorView(
+                    title: "Something went wrong",
+                    description: "We couldn't load your information. Please check your connection and try again.",
+                    primaryButtonTitle: "Try again",
+                    secondaryButtonTitle: "Try later",
+                    onPrimaryAction: {
+                        showReportError = false
+                        showViewReport = true
+                    },
+                    onSecondaryAction: {
+                        showReportError = false
+                    }
+                )
             }
             
             HomeAppSkeleton()
