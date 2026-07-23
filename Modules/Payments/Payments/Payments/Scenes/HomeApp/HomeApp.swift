@@ -112,6 +112,7 @@ struct HomeApp: View {
                             }
                         )
                     }
+                    .padding(.top, AppSpacing.formTop)
                     .padding(.horizontal, AppSpacing.screenHorizontal)
                     .safeAreaInset(edge: .bottom) {
                         Color.clear

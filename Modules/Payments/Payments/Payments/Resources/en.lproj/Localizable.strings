@@ -163,18 +163,15 @@
 "CardInsurance.bulletFour" = "Extended benefits for cardholders traveling abroad (e.g., lost luggage or emergency cash).";
 "CardInsurance.continueButton" = "Continue";
 
-"BeneficiaryAdd.subtitle" = "Add someone you transfer to often.";
-"BeneficiaryAdd.description" = "We are keeping this flow mocked, but the screen behaves like a real creation form.";
-"BeneficiaryAdd.title" = "New beneficiary";
-"BeneficiaryAdd.fullName" = "Full name";
-"BeneficiaryAdd.fullNamePlaceholder" = "Enter beneficiary name";
-"BeneficiaryAdd.pixKey" = "PIX key";
-"BeneficiaryAdd.pixKeyPlaceholder" = "Enter email or PIX key";
-"BeneficiaryAdd.chooseAvatar" = "Choose an avatar";
-"BeneficiaryAdd.saving" = "Saving...";
-"BeneficiaryAdd.saveBeneficiary" = "Save beneficiary";
-"BeneficiaryAdd.previewName" = "Beneficiary preview";
-"BeneficiaryAdd.previewPixKey" = "PIX key will appear here";
+"BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
+"BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";
+"BeneficiaryAdd.title" = "Find beneficiary";
+"BeneficiaryAdd.searchLabel" = "Email or PIX key";
+"BeneficiaryAdd.searchPlaceholder" = "Enter email or PIX key";
+"BeneficiaryAdd.searchButton" = "Find beneficiary";
+"BeneficiaryAdd.searchFailed" = "We could not find this beneficiary right now.";
+"BeneficiaryAdd.searching" = "Searching...";
+"BeneficiaryAdd.invalidSearch" = "Enter an email or PIX key to continue.";
 
 "Recipients.title" = "Recipients";
 "Recipients.seeAll" = "See all";

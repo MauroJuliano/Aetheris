@@ -2,10 +2,8 @@ import Core
 import Foundation
 
 protocol BeneficiaryAddServicing {
-    func createBeneficiary(
-        name: String,
-        pixKey: String,
-        image: String
+    func findBeneficiary(
+        identifier: String
     ) async throws -> Beneficiary
 }
 
@@ -16,17 +14,13 @@ final class BeneficiaryAddService: BeneficiaryAddServicing {
         self.coreService = coreService
     }
 
-    func createBeneficiary(
-        name: String,
-        pixKey: String,
-        image: String
+    func findBeneficiary(
+        identifier: String
     ) async throws -> Beneficiary {
         let response: BeneficiaryAddResponse = try await coreService.execute(
-            BeneficiaryAddEndpoint.create(
+            BeneficiaryAddEndpoint.search(
                 request: .init(
-                    name: name,
-                    pixKey: pixKey,
-                    image: image
+                    identifier: identifier
                 )
             )
         )
@@ -36,7 +30,7 @@ final class BeneficiaryAddService: BeneficiaryAddServicing {
 }
 
 private enum BeneficiaryAddEndpoint {
-    case create(request: BeneficiaryAddRequest)
+    case search(request: BeneficiaryAddRequest)
 }
 
 extension BeneficiaryAddEndpoint: Endpoint {
@@ -50,23 +44,38 @@ extension BeneficiaryAddEndpoint: Endpoint {
 
     var body: Encodable? {
         switch self {
-        case let .create(request):
+        case let .search(request):
             return request
         }
     }
 
     var mockResponseData: Data {
         switch self {
-        case let .create(request):
+        case let .search(request):
+            let selected = Self.mockBeneficiary(for: request.identifier)
             return Self.encodeOrEmpty(
                 BeneficiaryAddResponse(
-                    name: request.name,
-                    pixKey: request.pixKey,
-                    image: request.image,
+                    name: selected.name,
+                    pixKey: request.identifier,
+                    image: selected.image,
                     hasDivider: true
                 )
             )
         }
+    }
+
+    private static func mockBeneficiary(for identifier: String) -> Beneficiary {
+        let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+
+        if let match = Beneficiary.beneficiaries.first(where: {
+            let name = $0.name.lowercased()
+            let pixKey = $0.pixKey.lowercased()
+            return normalized.contains(name) || normalized.contains(pixKey) || name.contains(normalized)
+        }) {
+            return match
+        }
+
+        return Beneficiary.beneficiaries[abs(normalized.hashValue) % Beneficiary.beneficiaries.count]
     }
 
     private static func encodeOrEmpty<T: Encodable>(_ value: T) -> Data {
@@ -75,9 +84,7 @@ extension BeneficiaryAddEndpoint: Endpoint {
 }
 
 private struct BeneficiaryAddRequest: Codable {
-    let name: String
-    let pixKey: String
-    let image: String
+    let identifier: String
 }
 
 private struct BeneficiaryAddResponse: Codable {

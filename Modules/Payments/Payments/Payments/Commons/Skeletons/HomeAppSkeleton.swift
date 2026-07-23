@@ -11,7 +11,7 @@ struct HomeAppSkeleton: View {
                 quickActions
             }
             .padding(.horizontal)
-            .padding(.top, 8)
+            .padding(.top, AppSpacing.formTop)
         }
         .safeAreaInset(edge: .bottom) {
             Color.clear
@@ -149,4 +149,3 @@ struct HomeAppSkeleton: View {
             .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
 }
-

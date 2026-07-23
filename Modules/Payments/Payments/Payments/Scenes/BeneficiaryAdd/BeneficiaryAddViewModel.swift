@@ -3,10 +3,8 @@ import SwiftUI
 
 @MainActor
 final class BeneficiaryAddViewModel: ObservableObject {
-    @Published var name = ""
-    @Published var pixKey = ""
-    @Published var selectedImage = Beneficiary.beneficiaries.first?.image ?? ""
-    @Published private(set) var isSaving = false
+    @Published var searchTerm = ""
+    @Published private(set) var isSearching = false
     @Published private(set) var errorMessage: String?
 
     private let service: any BeneficiaryAddServicing
@@ -16,28 +14,25 @@ final class BeneficiaryAddViewModel: ObservableObject {
     }
 
     var isFormValid: Bool {
-        !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-            && !pixKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        !searchTerm.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
-    func save() async -> Beneficiary? {
+    func searchBeneficiary() async -> Beneficiary? {
         guard isFormValid else {
-            errorMessage = "Fill in the required fields."
+            errorMessage = Strings.BeneficiaryAdd.invalidSearch
             return nil
         }
 
-        isSaving = true
+        isSearching = true
         errorMessage = nil
-        defer { isSaving = false }
+        defer { isSearching = false }
 
         do {
-            return try await service.createBeneficiary(
-                name: name,
-                pixKey: pixKey,
-                image: selectedImage
+            return try await service.findBeneficiary(
+                identifier: searchTerm
             )
         } catch {
-            errorMessage = "We could not save this beneficiary right now."
+            errorMessage = Strings.BeneficiaryAdd.searchFailed
             return nil
         }
     }

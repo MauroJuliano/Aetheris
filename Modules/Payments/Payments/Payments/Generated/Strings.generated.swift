@@ -29,30 +29,24 @@ internal enum Strings {
     internal static let transferMoney = Strings.tr("Localizable", "AllServices.transferMoney", fallback: "Transfer money")
   }
   internal enum BeneficiaryAdd {
-    /// Choose an avatar
-    internal static let chooseAvatar = Strings.tr("Localizable", "BeneficiaryAdd.chooseAvatar", fallback: "Choose an avatar")
-    /// We are keeping this flow mocked, but the screen behaves like a real creation form.
-    internal static let description = Strings.tr("Localizable", "BeneficiaryAdd.description", fallback: "We are keeping this flow mocked, but the screen behaves like a real creation form.")
-    /// Full name
-    internal static let fullName = Strings.tr("Localizable", "BeneficiaryAdd.fullName", fallback: "Full name")
-    /// Enter beneficiary name
-    internal static let fullNamePlaceholder = Strings.tr("Localizable", "BeneficiaryAdd.fullNamePlaceholder", fallback: "Enter beneficiary name")
-    /// PIX key
-    internal static let pixKey = Strings.tr("Localizable", "BeneficiaryAdd.pixKey", fallback: "PIX key")
-    /// Enter email or PIX key
-    internal static let pixKeyPlaceholder = Strings.tr("Localizable", "BeneficiaryAdd.pixKeyPlaceholder", fallback: "Enter email or PIX key")
-    /// Beneficiary preview
-    internal static let previewName = Strings.tr("Localizable", "BeneficiaryAdd.previewName", fallback: "Beneficiary preview")
-    /// PIX key will appear here
-    internal static let previewPixKey = Strings.tr("Localizable", "BeneficiaryAdd.previewPixKey", fallback: "PIX key will appear here")
-    /// Save beneficiary
-    internal static let saveBeneficiary = Strings.tr("Localizable", "BeneficiaryAdd.saveBeneficiary", fallback: "Save beneficiary")
-    /// Saving...
-    internal static let saving = Strings.tr("Localizable", "BeneficiaryAdd.saving", fallback: "Saving...")
-    /// Add someone you transfer to often.
-    internal static let subtitle = Strings.tr("Localizable", "BeneficiaryAdd.subtitle", fallback: "Add someone you transfer to often.")
-    /// New beneficiary
-    internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "New beneficiary")
+    /// Enter an email or PIX key to continue.
+    internal static let invalidSearch = Strings.tr("Localizable", "BeneficiaryAdd.invalidSearch", fallback: "Enter an email or PIX key to continue.")
+    /// Search an existing recipient to use in this transfer.
+    internal static let subtitle = Strings.tr("Localizable", "BeneficiaryAdd.subtitle", fallback: "Search an existing recipient to use in this transfer.")
+    /// Find beneficiary
+    internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
+    /// Find beneficiary
+    internal static let searchButton = Strings.tr("Localizable", "BeneficiaryAdd.searchButton", fallback: "Find beneficiary")
+    /// Enter an email or PIX key
+    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryAdd.searchPlaceholder", fallback: "Enter email or PIX key")
+    /// Email or PIX key
+    internal static let searchLabel = Strings.tr("Localizable", "BeneficiaryAdd.searchLabel", fallback: "Email or PIX key")
+    /// We could not find this beneficiary right now.
+    internal static let searchFailed = Strings.tr("Localizable", "BeneficiaryAdd.searchFailed", fallback: "We could not find this beneficiary right now.")
+    /// Searching...
+    internal static let searching = Strings.tr("Localizable", "BeneficiaryAdd.searching", fallback: "Searching...")
+    /// Enter the email or PIX key for the person you want to find.
+    internal static let description = Strings.tr("Localizable", "BeneficiaryAdd.description", fallback: "Enter the email or PIX key for the person you want to find.")
   }
   internal enum CardHome {
     /// Cards
