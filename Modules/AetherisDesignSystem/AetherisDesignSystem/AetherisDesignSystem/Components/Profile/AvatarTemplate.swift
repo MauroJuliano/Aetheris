@@ -50,6 +50,3 @@ public struct AvatarTemplate: View {
     }
 }
 
-#Preview {
-    AvatarTemplate(model: .init(image: "melissa"))
-}

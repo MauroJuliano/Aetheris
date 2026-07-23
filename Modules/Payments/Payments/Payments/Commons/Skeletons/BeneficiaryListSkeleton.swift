@@ -66,7 +66,3 @@ struct BeneficiaryListSkeleton: View {
 
 }
 
-#Preview {
-    BeneficiaryListSkeleton()
-        .padding(.horizontal)
-}

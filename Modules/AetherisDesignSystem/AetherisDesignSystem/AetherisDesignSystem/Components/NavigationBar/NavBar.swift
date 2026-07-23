@@ -92,8 +92,3 @@ public struct NavBar: View {
     }
 }
 
-#Preview {
-    NavBar(model: .init(firstText: "Good morning, ",
-                        secondText: "Blake!",
-                        hasInitialSpace: false))
-}

@@ -1,28 +1,24 @@
+import Core
 import AetherisDesignSystem
 import SwiftUI
 
 struct ViewReportView: View {
+    @StateObject private var viewModel: ViewReportViewModel
     let onLoadingFinished: () -> Void
 
-    @State private var didTriggerCompletion = false
+    init(
+        viewModel: ViewReportViewModel,
+        onLoadingFinished: @escaping () -> Void
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onLoadingFinished = onLoadingFinished
+    }
 
     var body: some View {
         ViewReportSkeleton()
-        .onAppear {
-            scheduleFailure()
-        }
-    }
-
-    private func scheduleFailure() {
-        guard !didTriggerCompletion else { return }
-        didTriggerCompletion = true
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            onLoadingFinished()
-        }
+            .task {
+                viewModel.load(onLoadingFinished: onLoadingFinished)
+            }
     }
 }
 
-#Preview {
-    ViewReportView(onLoadingFinished: {})
-}

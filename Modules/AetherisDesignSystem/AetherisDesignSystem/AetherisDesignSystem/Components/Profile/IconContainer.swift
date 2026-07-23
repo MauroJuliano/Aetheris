@@ -24,6 +24,3 @@ struct IconContainer: View {
     }
 }
 
-#Preview {
-    IconContainer(model: .init(icon: "person"))
-}

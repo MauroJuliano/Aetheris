@@ -15,6 +15,3 @@ public struct NotificationBell: View {
     }
 }
 
-#Preview {
-    NotificationBell()
-}

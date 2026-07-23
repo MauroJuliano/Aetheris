@@ -8,15 +8,20 @@ public struct MinimalDropdown: View {
     let options: [String]
 
     public init(
-        title: String = "Transactions History",
-        selectedOption: String = "Today",
+        title: String? = nil,
+        selectedOption: String? = nil,
         isExpanded: Bool = false,
-        options: [String] = ["Today", "This Week", "This Month", "All Time"]
+        options: [String]? = nil
     ) {
-        self.title = title
-        self._selectedOption = State(initialValue: selectedOption)
+        self.title = title ?? Strings.MinimalDropdown.transactionsHistory
+        self._selectedOption = State(initialValue: selectedOption ?? Strings.MinimalDropdown.today)
         self._isExpanded = State(initialValue: isExpanded)
-        self.options = options
+        self.options = options ?? [
+            Strings.MinimalDropdown.today,
+            Strings.MinimalDropdown.thisWeek,
+            Strings.MinimalDropdown.thisMonth,
+            Strings.MinimalDropdown.allTime
+        ]
     }
     
     public var body: some View {
@@ -69,6 +74,3 @@ public struct MinimalDropdown: View {
 }
 
 
-#Preview {
-    MinimalDropdown()
-}

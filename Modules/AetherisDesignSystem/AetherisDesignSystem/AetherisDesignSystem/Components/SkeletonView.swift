@@ -63,16 +63,3 @@ public struct SkeletonView<S: Shape>: View {
     }
 }
 
-#Preview {
-    @Previewable
-    @State var isTapped: Bool = false
-    
-    SkeletonView(.circle)
-        .frame(width: 100, height: 100)
-        .onTapGesture {
-            withAnimation(.smooth) {
-                isTapped.toggle()
-            }
-        }
-        .padding(.bottom, isTapped ? 15 : 0)
-}

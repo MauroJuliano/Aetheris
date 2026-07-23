@@ -1,14 +1,17 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct SINView: View {
     @StateObject private var viewModel: SINViewModel
-    @State private var text = ""
+    @ObservedObject private var draft: RegistrationDraft
     private var onContinue: () -> Void
     
     init(viewModel: SINViewModel,
+         draft: RegistrationDraft,
          onContinue: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _draft = ObservedObject(wrappedValue: draft)
         self.onContinue = onContinue
     }
     
@@ -18,12 +21,13 @@ struct SINView: View {
                 title: viewModel.title,
                 subTitle: viewModel.subtitle,
                 textFieldValue: Binding(
-                    get: { viewModel.sin },
+                    get: { draft.sin },
                     set: { viewModel.updateSIN($0) }
                 ),
                 buttonTitle: viewModel.buttonName,
                 textFieldPlaceholder: viewModel.placeholder,
-                keyboardType: .numberPad
+                keyboardType: .numberPad,
+                fieldErrorMessage: viewModel.errorMessage
             ) {
                 viewModel.submit()
             }
@@ -41,7 +45,7 @@ struct SINView: View {
 }
 
 #Preview {
-    SINView(viewModel: SINViewModel(service: MockSINService())) {
-        print("Preview")
-    }
+    let draft = RegistrationDraft()
+    SINView(viewModel: SINViewModel(service: SINService(coreService: MockCoreServiceApi()), draft: draft),
+            draft: draft) {}
 }

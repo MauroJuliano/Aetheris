@@ -27,12 +27,12 @@ public struct CardDistributionModel {
         self.icon = icon
     }
     
-    public static let mockCreditCard: CardDistributionModel = .init(title: "Credit Card", subTitle: "Enjoy exclusive benefits with zero annual fee.", icon: "creditcard")
-    public static let mockLoans: CardDistributionModel = .init(title: "Loan",
-                                                        subTitle: "Apply today and receive funds within 24 hours",
+    public static let mockCreditCard: CardDistributionModel = .init(title: Strings.CardDistribution.creditCardTitle, subTitle: Strings.CardDistribution.creditCardSubtitle, icon: "creditcard")
+    public static let mockLoans: CardDistributionModel = .init(title: Strings.CardDistribution.loanTitle,
+                                                        subTitle: Strings.CardDistribution.loanSubtitle,
                                                         icon: "chart.line.uptrend.xyaxis")
-    public static let mockInvestiment: CardDistributionModel = .init(title: "Investments",
-                                                              subTitle: "Grow your money with expert-curated portfolios",
+    public static let mockInvestiment: CardDistributionModel = .init(title: Strings.CardDistribution.investmentsTitle,
+                                                              subTitle: Strings.CardDistribution.investmentsSubtitle,
                                                               icon: "shield.fill")
 }
 
@@ -97,10 +97,3 @@ public struct CardDistribution: View {
     }
 }
 
-#Preview {
-    CardDistribution(primaryColor: .white,
-                     backgroundColor: .primary,
-                     spectrumRatio: .horizontal,
-                     hasButton: true,
-                     model: .mockInvestiment)
-}

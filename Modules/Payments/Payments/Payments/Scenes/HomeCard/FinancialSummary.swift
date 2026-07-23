@@ -27,46 +27,46 @@ struct FinancialSummaryModel: Identifiable {
     }
     
     static let previewMock: FinancialSummaryModel = .init(image: "melissa",
-                                                          title: "Transfer sent",
-                                                          description: "Funds successfully transferred to Melissa",
+                                                          title: Strings.FinancialSummary.transferSent,
+                                                          description: Strings.FinancialSummary.transferSentDescription,
                                                           value: "-$ 250.00",
                                                           tag: .transfer,
                                                           date: Date())
     
     static let mock: [FinancialSummaryModel] = [
         .init(image: "melissa",
-              title: "Transfer sent",
-              description: "Funds successfully transferred to Melissa",
+              title: Strings.FinancialSummary.transferSent,
+              description: Strings.FinancialSummary.transferSentDescription,
               value: "-$ 250.00",
               tag: .transfer,
               date: Date()),
         .init(image: "ed",
-              title: "Payment received",
-              description: "Funds received from Ed Sheeran",
+              title: Strings.FinancialSummary.paymentReceived,
+              description: Strings.FinancialSummary.paymentReceivedDescription,
               value: "$ 125.00",
               tag: .income,
               date: Date()),
         .init(image: "NetflixLogo",
-              title: "Netflix",
-              description: "Subscription",
+              title: Strings.FinancialSummary.netflix,
+              description: Strings.FinancialSummary.subscription,
               value: "-$ 20.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()),
         .init(image: "applelogo",
-              title: "Apple.Com/Bill",
-              description: "Subscription",
+              title: Strings.FinancialSummary.appleBill,
+              description: Strings.FinancialSummary.subscription,
               value: "-$ 9.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()),
         .init(image: "ifoodlogo",
-              title: "Ifd* Bar do zé",
-              description: "Restaurant",
+              title: Strings.FinancialSummary.ifoodBar,
+              description: Strings.FinancialSummary.restaurant,
               value: "-$ 30.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -20, to: Date()) ?? Date()),
         .init(image: "Adele",
-              title: "Transfer sent",
-              description: "Funds successfully transferred to Adele",
+              title: Strings.FinancialSummary.transferSent,
+              description: Strings.FinancialSummary.transferSentAdeleDescription,
               value: "-$ 70.00",
               tag: .transfer,
               date: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date())
@@ -80,17 +80,17 @@ extension FinancialSummaryModel {
         let now = Date()
         
         if calendar.isDateInToday(date) {
-            return "Today"
+            return Strings.Notifications.sectionToday
         } else if calendar.isDateInYesterday(date) {
-            return "Yesterday"
+            return Strings.Notifications.sectionYesterday
         } else if let weekAgo = calendar.date(byAdding: .day, value: -7, to: now),
                   date >= weekAgo {
-            return "Last Week"
+            return Strings.Notifications.sectionLastWeek
         } else if let monthAgo = calendar.date(byAdding: .month, value: -1, to: now),
                   date >= monthAgo {
-            return "Last Month"
+            return Strings.Notifications.sectionLastMonth
         } else {
-            return "Others"
+            return Strings.Notifications.sectionOthers
         }
     }
 }
@@ -160,7 +160,7 @@ struct FinancialSummary: View {
         }
 
         if Calendar.current.isDateInYesterday(model.date) {
-            return "Yesterday"
+            return Strings.Notifications.sectionYesterday
         }
 
         let days = Calendar.current.dateComponents([.day],
@@ -168,13 +168,10 @@ struct FinancialSummary: View {
                                                    to: Date()).day ?? 0
 
         if days < 30 {
-            return "\(days) days ago"
+            return Strings.FinancialSummary.daysAgo(days)
         }
 
-        return "\(max(1, days / 30)) month ago"
+        return Strings.FinancialSummary.monthAgo(max(1, days / 30))
     }
 }
 
-#Preview {
-    FinancialSummary(model: .previewMock)
-}

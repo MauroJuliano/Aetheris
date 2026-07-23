@@ -35,7 +35,7 @@ struct TransferPinView: View {
                             .font(AppTypography.callout.weight(.semibold))
                             .foregroundStyle(Color.error)
 
-                        Text(String(format: Strings.TransferPin.attempts, viewModel.attemptsLeft))
+                        Text(Strings.TransferPin.attempts(viewModel.attemptsLeft))
                             .font(AppTypography.cellCaption)
                             .foregroundStyle(Color.textSecondaryColor)
                     }
@@ -170,10 +170,3 @@ struct TransferPinView: View {
     }
 }
 
-#Preview {
-    TransferPinView(
-        viewModel: TransferPinViewModel(receipt: .mock),
-        onBack: {},
-        onValidPin: {}
-    )
-}

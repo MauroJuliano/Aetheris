@@ -1,21 +1,29 @@
+import Core
 import SwiftUI
 
 struct UserNameView: View {
     @StateObject private var viewModel: UserNameViewModel
+    @ObservedObject private var draft: RegistrationDraft
     private let onContinue: () -> Void
     
-    init(viewModel: UserNameViewModel = UserNameViewModel(service: mockUserNameService()),
+    init(viewModel: UserNameViewModel,
+         draft: RegistrationDraft,
          onContinue: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _draft = ObservedObject(wrappedValue: draft)
         self.onContinue = onContinue
     }
     var body: some View {
         ZStack {
             RegisterView(title: viewModel.title,
                          subTitle: viewModel.subTitle,
-                         textFieldValue: $viewModel.userName,
+                         textFieldValue: Binding(
+                            get: { draft.userName },
+                            set: { viewModel.updateUserName($0) }
+                         ),
                          buttonTitle: viewModel.buttonName,
                          textFieldPlaceholder: viewModel.placeholder,
+                         fieldErrorMessage: viewModel.errorMessage,
             onAction: {
                 viewModel.submit()
             })
@@ -32,7 +40,7 @@ struct UserNameView: View {
 }
 
 #Preview {
-    UserNameView {
-        print("Preview")
-    }
+    let draft = RegistrationDraft()
+    UserNameView(viewModel: UserNameViewModel(service: UserNameService(coreService: MockCoreServiceApi()), draft: draft),
+                 draft: draft) {}
 }

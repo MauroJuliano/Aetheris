@@ -1,8 +1,10 @@
 import SwiftUI
 
 enum ResumeFactory {
-    static func make(onContinue: @escaping () -> Void) -> ResumeView {
-        let viewModel = ResumeViewModel()
+    @MainActor
+    static func make(draft: RegistrationDraft,
+                     onContinue: @escaping () -> Void) -> ResumeView {
+        let viewModel = ResumeViewModel(draft: draft)
         return ResumeView(viewModel: viewModel, onContinue: onContinue)
     }
 }

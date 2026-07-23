@@ -1,5 +1,11 @@
 import SwiftUI
 
+public final class TabBarVisibilityStore: ObservableObject {
+    @Published public var isVisible = true
+
+    public init() {}
+}
+
 public enum PaymentsEntryPoint {
     case home
     case card

@@ -150,6 +150,3 @@ struct HomeAppSkeleton: View {
     }
 }
 
-#Preview {
-    HomeAppSkeleton()
-}

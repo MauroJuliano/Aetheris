@@ -1,66 +1,79 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct NotificationsCentre: View {
-    @Binding var isPresented: Bool
-    @StateObject private var viewModel = NotificationsCentreViewModel()
-    @State private var isLoading = true
+    @StateObject private var viewModel: NotificationsCentreViewModel
+    let onBack: () -> Void
+
+    init(viewModel: NotificationsCentreViewModel,
+         onBack: @escaping () -> Void) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onBack = onBack
+    }
 
     var body: some View {
         ZStack {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
+            if viewModel.isLoading {
+                NotificationsCentreSkeleton()
+            } else if let errorMessage = viewModel.errorMessage {
+                FullScreenErrorView(
+                    title: Strings.NotificationsCentre.unavailableTitle,
+                    description: errorMessage,
+                    primaryButtonTitle: Strings.Common.tryAgain,
+                    secondaryButtonTitle: Strings.Common.back,
+                    onPrimaryAction: {
+                        Task { await viewModel.load() }
+                    },
+                    onSecondaryAction: onBack
+                )
+            } else if viewModel.isEmpty {
+                PaymentsEmptyStateView(
+                    title: Strings.NotificationsCentre.emptyTitle,
+                    description: Strings.NotificationsCentre.emptyDescription
+                )
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
 
-                    NavBar(
-                        hasNotifications: false,
-                        hasBackButton: true,
-                        model: .init(
-                            firstText: "Notifications Centre",
-                            hasInitialSpace: false
-                        ),
-                        onBack: { isPresented = false }
-                    )
+                        NavBar(
+                            hasNotifications: false,
+                            hasBackButton: true,
+                            model: .init(
+                                firstText: Strings.NotificationsCentre.title,
+                                hasInitialSpace: false
+                            ),
+                            onBack: onBack
+                        )
 
-                    ForEach(viewModel.sections) { section in
-                        VStack(alignment: .leading, spacing: AppSpacing.small) {
+                        ForEach(viewModel.sections) { section in
+                            VStack(alignment: .leading, spacing: AppSpacing.small) {
 
-                            Text(section.title)
-                                .foregroundStyle(Color.textPrimary)
-                                .font(AppTypography.sectionTitle)
-                                .padding(.horizontal, AppSpacing.screenHorizontal)
+                                Text(section.title)
+                                    .foregroundStyle(Color.textPrimary)
+                                    .font(AppTypography.sectionTitle)
+                                    .padding(.horizontal, AppSpacing.screenHorizontal)
 
-                            VStack {
-                                ForEach(section.items) { cell in
-                                    NotificationCell(model: cell)
+                                VStack {
+                                    ForEach(section.items) { cell in
+                                        NotificationCell(model: cell)
+                                    }
                                 }
+                                .appCardSurface(
+                                    radius: AppRadius.large,
+                                    stroke: Color.border,
+                                    shadow: AppShadow.card
+                                )
                             }
-                            .appCardSurface(
-                                radius: AppRadius.large,
-                                stroke: Color.border,
-                                shadow: AppShadow.card
-                            )
+                            .padding(.horizontal, AppSpacing.screenHorizontal)
                         }
-                        .padding(.horizontal, AppSpacing.screenHorizontal)
                     }
                 }
             }
-            .opacity(isLoading ? 0 : 1)
-
-            NotificationsCentreSkeleton()
-                .opacity(isLoading ? 1 : 0)
         }
         .navigationBarHidden(true)
         .appScreenBackground()
-        .task {
-            await viewModel.load()
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
-            withAnimation(.easeOut(duration: 0.5)) {
-                isLoading = false
-            }
-        }
+        .task { await viewModel.load() }
     }
 }
 
-#Preview {
-    NotificationsCentre(isPresented: .constant(false))
-}

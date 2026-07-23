@@ -124,13 +124,3 @@ public struct FullScreenErrorView: View {
     }
 }
 
-#Preview {
-    FullScreenErrorView(
-        title: "Something went wrong",
-        description: "We couldn't load your information. Please check your connection and try again.",
-        primaryButtonTitle: "Try again",
-        secondaryButtonTitle: "Try later",
-        onPrimaryAction: {},
-        onSecondaryAction: {}
-    )
-}

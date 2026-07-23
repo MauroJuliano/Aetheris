@@ -191,11 +191,14 @@ public extension View {
         background(Color.backgroundColorA)
     }
 
-    func appInputField(horizontalPadding: CGFloat = AppSpacing.formHorizontal) -> some View {
+    func appInputField(
+        horizontalPadding: CGFloat = AppSpacing.formHorizontal,
+        underlineColor: Color = Color.border
+    ) -> some View {
         foregroundStyle(Color.textPrimary)
             .textInputAutocapitalization(.never)
             .disableAutocorrection(true)
-            .underlined(color: Color.border)
+            .underlined(color: underlineColor)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, AppSpacing.xSmall)
     }

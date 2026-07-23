@@ -1,8 +1,13 @@
+import Core
 import SwiftUI
 
 enum MothersNameInputFactory {
-    static func make(onContinue: @escaping () -> Void) -> MothersNameInputView {
-        let viewModel = MothersNameInputViewModel()
-        return MothersNameInputView(viewModel: viewModel, onContinue: onContinue)
+    @MainActor
+    static func make(coreService: any HasCoreService,
+                     draft: RegistrationDraft,
+                     onContinue: @escaping () -> Void) -> MothersNameInputView {
+        let viewModel = MothersNameInputViewModel(service: MothersNameInputService(coreService: coreService),
+                                                  draft: draft)
+        return MothersNameInputView(viewModel: viewModel, draft: draft, onContinue: onContinue)
     }
 }

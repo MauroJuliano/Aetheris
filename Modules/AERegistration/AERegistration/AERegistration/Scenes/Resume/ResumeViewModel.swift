@@ -1,20 +1,19 @@
 import SwiftUI
 
-class ResumeViewModel: ObservableObject {
-    @Published private(set) var resume: ResumeModel?
-    
-    var resumeList: [ResumeListModel] {
-        guard let resume else { return [] }
-        
-        return [
-            .init(image: "person.fill", description: "Full Name", value: resume.name),
-            .init(image: "heart.fill", description: "Mother's Name", value: resume.mothersName),
-            .init(image: "calendar", description: "Birthdate", value: resume.birthDate),
-            .init(image: "lock.fill", description: "SIN", value: resume.sin)
-        ]
+@MainActor
+final class ResumeViewModel: ObservableObject {
+    private let draft: RegistrationDraft
+
+    init(draft: RegistrationDraft) {
+        self.draft = draft
     }
-    
-    func load() async {
-        resume = ResumeModel.mock
+
+    var resumeList: [ResumeListModel] {
+        [
+            .init(image: "lock.fill", description: Strings.Sin.title, value: draft.sin),
+            .init(image: "heart.fill", description: Strings.MothersName.title, value: draft.mothersName),
+            .init(image: "person.fill", description: Strings.UserName.title, value: draft.userName),
+            .init(image: "calendar", description: Strings.Birthdate.title, value: draft.birthdate)
+        ]
     }
 }

@@ -24,7 +24,7 @@ struct AuthenticationFlowView: View {
 
         case .register:
             dependencies.registrationFactory.make {
-                flow = .login
+                flow = .main
             }
 
         case .main:

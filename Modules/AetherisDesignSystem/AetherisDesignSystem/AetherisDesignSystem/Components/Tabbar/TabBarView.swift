@@ -38,8 +38,3 @@ public struct TabBarView: View {
     }
 }
 
-#Preview {
-    TabBarView(selectedIndex: .constant(0), onCenterTap: {
-        print("preview")
-    })
-}

@@ -22,9 +22,7 @@ struct HomeQuickActions: View {
             ForEach(actions.prefix(4)) { option in
                 let buttonModel = GlassButtonModel(label: option.label,
                                                    icon: option.icon)
-                GlassButton(model: buttonModel) {
-                    print("tapped")
-                }
+                GlassButton(model: buttonModel) {}
                 .padding(.vertical)
             }
             .frame(maxWidth: .infinity)
@@ -34,6 +32,3 @@ struct HomeQuickActions: View {
     }
 }
 
-#Preview {
-    HomeQuickActions(actions: CardOptions.mock)
-}

@@ -1,9 +1,18 @@
+import Foundation
 import SwiftUI
 
 @MainActor
 final class NotificationsCentreViewModel: ObservableObject {
 
+    @Published private(set) var isLoading = true
+    @Published private(set) var isEmpty = false
+    @Published private(set) var errorMessage: String?
     @Published private(set) var sections: [Section] = []
+    private let service: any NotificationsCentreServicing
+
+    init(service: any NotificationsCentreServicing) {
+        self.service = service
+    }
 
     struct Section: Identifiable {
         let id: String
@@ -12,8 +21,19 @@ final class NotificationsCentreViewModel: ObservableObject {
     }
 
     func load() async {
-        let data = Notifications.mock
-        buildSections(from: data)
+        isLoading = true
+        errorMessage = nil
+        isEmpty = false
+
+        do {
+            let notifications = try await service.loadNotifications()
+            buildSections(from: notifications)
+            isEmpty = notifications.isEmpty
+        } catch {
+            errorMessage = "We could not load your notifications."
+        }
+
+        isLoading = false
     }
 
     private func buildSections(from notifications: [Notifications]) {

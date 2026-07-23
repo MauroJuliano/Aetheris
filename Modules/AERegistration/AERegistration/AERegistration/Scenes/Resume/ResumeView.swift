@@ -1,39 +1,6 @@
 import AetherisDesignSystem
 import SwiftUI
 
-struct ResumeModel: Identifiable {
-    let id: UUID
-    let name: String
-    let mothersName: String
-    let birthDate: String
-    let sin: String
-    let userName: String
-    let address: String
-    
-    init(id: UUID = UUID(),
-         name: String,
-         mothersName: String,
-         birthDate: String,
-         sin: String,
-         userName: String,
-         address: String) {
-        self.id = id
-        self.name = name
-        self.mothersName = mothersName
-        self.birthDate = birthDate
-        self.sin = sin
-        self.userName = userName
-        self.address = address
-    }
-    
-    static var mock: ResumeModel = .init(name: "Mystical time",
-                                         mothersName: "Ann something",
-                                         birthDate: "12/10/1980",
-                                         sin: "000.000.00-23",
-                                         userName: "We could never be together",
-                                         address: "Avenue t's nice to pretend")
-}
-
 struct ResumeView: View {
     @StateObject private var viewModel: ResumeViewModel
     private var onContinue: () -> Void
@@ -47,12 +14,12 @@ struct ResumeView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Review You Information")
+                Text(Strings.Resume.title)
                     .font(AppTypography.screenTitle)
                     .foregroundStyle(Color.textPrimary)
                     .bold()
                 
-                Text("Please confirm that all the information below is correct before we continue.")
+                Text(Strings.Resume.subtitle)
                     .foregroundStyle(Color.textSecondaryColor)
             }
             .padding(AppSpacing.medium)
@@ -60,11 +27,12 @@ struct ResumeView: View {
             Spacer()
             
             VStack {
-                ForEach(Array(viewModel.resumeList.enumerated()), id: \.element.id) { index, model in
+                ForEach(viewModel.resumeList.indices, id: \.self) { index in
+                    let model = viewModel.resumeList[index]
                     ResumeListCell(model: model,
                                    hasDivider: index != viewModel.resumeList.count - 1
                     ) { selectedModel in
-                        print("Change tapped:", selectedModel.description)
+                        _ = selectedModel
                     }
                 }
             }
@@ -86,21 +54,16 @@ struct ResumeView: View {
                             .foregroundStyle(Color.brandPrimaryColor)
                     }
                 
-                Text("Your information is securely encrypted and will never be shared.")
+                Text(Strings.Resume.securityNote)
                     .font(AppTypography.subheadline)
                     .foregroundStyle(Color.textSecondaryColor)
             }
             .padding(AppSpacing.medium)
             
-            GlowButton(title: "Continue") {
+            GlowButton(title: Strings.Resume.continueButton) {
                 onContinue()
             }
             .padding(.vertical, AppSpacing.medium)
-            
-           
-        }
-        .task {
-            await viewModel.load()
         }
         .background {
             Image("login-background")
@@ -113,7 +76,13 @@ struct ResumeView: View {
 }
 
 #Preview {
-    ResumeView(viewModel: ResumeViewModel()) {
-        print("Clicked")
-    }
+    let draft = RegistrationDraft()
+    draft.sin = "000.000.000"
+    draft.mothersName = "Jane Doe"
+    draft.userName = "Melissa"
+    draft.birthdate = "10/10/1999"
+
+    return ResumeView(
+        viewModel: ResumeViewModel(draft: draft)
+    ) {}
 }

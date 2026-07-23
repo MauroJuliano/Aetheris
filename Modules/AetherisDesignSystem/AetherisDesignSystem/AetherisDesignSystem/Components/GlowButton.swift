@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct GlowButton: View {
-    private var title: String = "Continue"
+    private var title: String = Strings.GlowButton.continueTitle
     private var action: () -> Void = {}
     
     @State private var isAnimating = false
@@ -40,6 +40,3 @@ public struct GlowButton: View {
 }
 
 
-#Preview {
-    GlowButton(title: "Continue")
-}

@@ -51,6 +51,3 @@ public struct BalanceView: View {
     }
 }
 
-#Preview {
-    BalanceView()
-}

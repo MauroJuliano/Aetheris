@@ -108,7 +108,3 @@ struct ProfileScreenSkeleton: View {
     }
 }
 
-#Preview {
-    ProfileScreenSkeleton()
-        .padding(.horizontal)
-}
