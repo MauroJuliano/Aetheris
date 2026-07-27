@@ -1,0 +1,56 @@
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+import Foundation
+
+// swiftlint:disable superfluous_disable_command file_length implicit_return prefer_self_in_static_references
+
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
+internal enum Strings {
+  internal enum Login {
+    /// Don't have an account?
+    internal static let dontHaveAccount = Strings.tr("Localizable", "Login.dontHaveAccount", fallback: "Don't have an account?")
+    /// Enter your email
+    internal static let emailPlaceholder = Strings.tr("Localizable", "Login.emailPlaceholder", fallback: "Enter your email")
+    /// Let's get started
+    internal static let getStarted = Strings.tr("Localizable", "Login.getStarted", fallback: "Let's get started")
+    /// Your financial journey continues. 
+    /// Let’s make your next 
+    /// move count.
+    internal static let journey = Strings.tr("Localizable", "Login.journey", fallback: "Your financial journey continues. \nLet’s make your next \nmove count.")
+    /// Login
+    internal static let loginButton = Strings.tr("Localizable", "Login.loginButton", fallback: "Login")
+    /// Enter your password
+    internal static let passwordPlaceholder = Strings.tr("Localizable", "Login.passwordPlaceholder", fallback: "Enter your password")
+    /// Sign up here
+    internal static let signUp = Strings.tr("Localizable", "Login.signUp", fallback: "Sign up here")
+    /// Welcome back!
+    internal static let welcomeBack = Strings.tr("Localizable", "Login.welcomeBack", fallback: "Welcome back!")
+  }
+}
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
+
+// MARK: - Implementation Details
+
+extension Strings {
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg..., fallback value: String) -> String {
+    let format = BundleToken.bundle.localizedString(forKey: key, value: value, table: table)
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+}
+
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
+}
+// swiftlint:enable convenience_type

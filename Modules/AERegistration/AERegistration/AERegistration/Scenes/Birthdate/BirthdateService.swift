@@ -1,20 +1,18 @@
+import Core
 import SwiftUI
 
 protocol BirthdateServicing {
     func submitBirthdate(_ birthdate: String) async throws -> Bool
 }
 
-final class MockBirthdateService: BirthdateServicing {
-    var shouldFail: Bool = false
-    var delay: TimeInterval = 1.5
+final class BirthdateService: BirthdateServicing {
+    private let coreService: any HasCoreService
     
+    init(coreService: any HasCoreService) {
+        self.coreService = coreService
+    }
+
     func submitBirthdate(_ birthdate: String) async throws -> Bool {
-        try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-        
-        if shouldFail {
-            throw URLError(.badServerResponse)
-        }
-        
-        return true
+        try await coreService.execute(RegistrationEndpoint.birthdate(birthdate))
     }
 }

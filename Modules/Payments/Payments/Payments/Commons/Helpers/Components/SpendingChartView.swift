@@ -5,10 +5,10 @@ struct SpendingThisMonthView: View {
     let onViewReportTap: () -> Void
 
     private let categories: [SpendingCategory] = [
-        .init(title: "Shopping", amount: "$ 980.50", percentage: "40%", icon: "bag.fill", color: Color.brandPrimaryColor),
-        .init(title: "Bills", amount: "$ 610.00", percentage: "25%", icon: "doc.text.fill", color: .cyan),
-        .init(title: "Transport", amount: "$ 420.00", percentage: "17%", icon: "car.fill", color: Color.success),
-        .init(title: "Food & Drinks", amount: "$ 417.50", percentage: "18%", icon: "fork.knife", color: .orange)
+        .init(title: Strings.SpendingChart.shopping, amount: "$ 980.50", percentage: "40%", icon: "bag.fill", color: Color.brandPrimaryColor),
+        .init(title: Strings.SpendingChart.bills, amount: "$ 610.00", percentage: "25%", icon: "doc.text.fill", color: .cyan),
+        .init(title: Strings.SpendingChart.transport, amount: "$ 420.00", percentage: "17%", icon: "car.fill", color: Color.success),
+        .init(title: Strings.SpendingChart.foodAndDrinks, amount: "$ 417.50", percentage: "18%", icon: "fork.knife", color: .orange)
     ]
 
     init(onViewReportTap: @escaping () -> Void = {}) {
@@ -32,12 +32,12 @@ struct SpendingThisMonthView: View {
     private var header: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                Text("Spending this month")
+                Text(Strings.SpendingChart.title)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color.textPrimary)
 
                 HStack(spacing: AppSpacing.small) {
-                    Text("$ 2,428.00")
+                    Text(Strings.SpendingChart.total)
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
@@ -46,7 +46,7 @@ struct SpendingThisMonthView: View {
 
                     HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
                         Image(systemName: "arrow.down")
-                        Text("8.3%")
+                        Text(Strings.SpendingChart.change)
                     }
                     .font(.system(size: 12, weight: .bold))
                     .foregroundStyle(Color.success)
@@ -57,7 +57,7 @@ struct SpendingThisMonthView: View {
                             .fill(Color.success.opacity(0.12))
                     )
 
-                    Text("vs last month")
+                    Text(Strings.SpendingChart.comparison)
                         .font(.system(size: 11, weight: .medium))
                         .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
@@ -69,7 +69,7 @@ struct SpendingThisMonthView: View {
             Button {
                 onViewReportTap()
             } label: {
-                Text("View report")
+                Text(Strings.SpendingChart.viewReport)
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(Color.brandPrimaryColor)
                     .padding(.horizontal, AppSpacing.medium + AppSpacing.xxxSmall)
@@ -142,8 +142,3 @@ struct SpendingCategoryItem: View {
     }
 }
 
-#Preview {
-    SpendingThisMonthView()
-        .padding()
-        .background(Color.backgroundColorA)
-}

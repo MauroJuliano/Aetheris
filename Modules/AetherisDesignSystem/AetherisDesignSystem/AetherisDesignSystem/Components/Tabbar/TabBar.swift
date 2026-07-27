@@ -11,9 +11,9 @@ public struct TabBarItem: Identifiable, Hashable {
     }
 
     public static let defaultItems: [TabBarItem] = [
-        .init(icon: "house", label: "Home"),
-        .init(icon: "chart.bar", label: "Cards"),
-        .init(icon: "person", label: "Profile")
+        .init(icon: "house", label: Strings.TabBar.home),
+        .init(icon: "chart.bar", label: Strings.TabBar.cards),
+        .init(icon: "person", label: Strings.TabBar.profile)
     ]
 }
 
@@ -87,9 +87,6 @@ public struct TabBar: View {
     
 }
 
-#Preview {
-    TabBarPreviewWrapper()
-}
 
 struct TabBarPreviewWrapper: View {
     @State private var selectedIndex = 0

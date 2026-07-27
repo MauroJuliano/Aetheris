@@ -59,9 +59,3 @@ struct TransferProcessingView: View {
     }
 }
 
-#Preview {
-    TransferProcessingView(
-        viewModel: TransferProcessingViewModel(receipt: .mock),
-        onCompleted: {}
-    )
-}

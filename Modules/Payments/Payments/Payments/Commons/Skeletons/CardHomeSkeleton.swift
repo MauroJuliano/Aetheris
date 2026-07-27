@@ -105,6 +105,3 @@ struct CardHomeSkeleton: View {
     }
 }
 
-#Preview {
-    CardHomeSkeleton()
-}

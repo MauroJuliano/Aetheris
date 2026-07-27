@@ -1,9 +1,12 @@
+import Core
 import SwiftUI
 
 enum SINFactory {
-    @MainActor static func make(onContinue: @escaping () -> Void) -> some View {
-        let service: SINServiceProtocol = MockSINService()
-        let viewModel = SINViewModel(service: service)
-        return SINView(viewModel: viewModel, onContinue: onContinue)
+    @MainActor static func make(coreService: any HasCoreService,
+                                draft: RegistrationDraft,
+                                onContinue: @escaping () -> Void) -> some View {
+        let service: SINServiceProtocol = SINService(coreService: coreService)
+        let viewModel = SINViewModel(service: service, draft: draft)
+        return SINView(viewModel: viewModel, draft: draft, onContinue: onContinue)
     }
 }

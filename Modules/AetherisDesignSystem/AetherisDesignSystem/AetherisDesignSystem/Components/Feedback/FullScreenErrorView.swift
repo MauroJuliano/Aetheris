@@ -65,22 +65,22 @@ public struct FullScreenErrorView: View {
 
             VStack(spacing: AppSpacing.large - AppSpacing.xxxSmall) {
                 Button(action: onPrimaryAction) {
-                    Text(primaryButtonTitle)
-                        .font(AppTypography.onboardingBody.weight(.semibold))
-                        .foregroundStyle(Color.surface)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 58)
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Color.brandPrimaryColor,
-                                    Color.brandSecondaryColor
-                                ],
-                                startPoint: .leading,
-                                endPoint: .trailing
+                    ZStack {
+                        RoundedRectangle(cornerRadius: AppRadius.large)
+                            .fill(Color.backgroundColorA)
+                            .appShadow(AppShadow.card)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: AppRadius.pill)
+                                    .stroke(Color.border, style: .init(lineWidth: 1))
                             )
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.large - AppSpacing.xxSmall))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+
+                        Text(primaryButtonTitle)
+                            .foregroundStyle(Color.brandPrimaryColor)
+                            .font(AppTypography.headline)
+                            .appShadow(AppShadow.control)
+                    }
                 }
 
                 if let secondaryButtonTitle, let onSecondaryAction {
@@ -122,15 +122,4 @@ public struct FullScreenErrorView: View {
             }
         }
     }
-}
-
-#Preview {
-    FullScreenErrorView(
-        title: "Something went wrong",
-        description: "We couldn't load your information. Please check your connection and try again.",
-        primaryButtonTitle: "Try again",
-        secondaryButtonTitle: "Try later",
-        onPrimaryAction: {},
-        onSecondaryAction: {}
-    )
 }

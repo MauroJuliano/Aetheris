@@ -39,11 +39,11 @@ public struct UserView: View {
             }
             
             VStack(alignment: .leading) {
-                Text("Melissa Mccarthy")
+                Text(Strings.Profile.userName)
                     .foregroundStyle(Color.textPrimary)
                     .font(AppTypography.onboardingBody)
                 
-                Text("Joined August 17, 2025")
+                Text(Strings.Profile.joinedDate)
                     .foregroundStyle(Color.brandPrimaryColor)
                     .font(AppTypography.caption)
             }
@@ -52,6 +52,3 @@ public struct UserView: View {
     }
 }
 
-#Preview {
-    UserView()
-}

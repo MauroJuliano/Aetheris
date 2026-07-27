@@ -13,7 +13,7 @@ public struct Recipients: View {
            
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Recipients")
+                    Text(Strings.Recipients.title)
                         .foregroundStyle(Color.textPrimary)
                         .font(AppFont.roboto(.medium, size: 20))
                     
@@ -40,12 +40,12 @@ public struct Recipients: View {
         }
         .navigationDestination(isPresented: $shouldPresentTransfer) {
             if let user = selectedUser {
-                 SendMoney(model: user)
+                SendMoneyFlowCoordinator(
+                    selectedBeneficiary: .constant(user),
+                    onBackAction: {}
+                )
             }
         }
     }
 }
 
-#Preview {
-    Recipients()
-}

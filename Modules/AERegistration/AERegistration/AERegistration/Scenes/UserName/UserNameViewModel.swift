@@ -1,37 +1,50 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class UserNameViewModel: ObservableObject {
     typealias localizable = Strings.UserName
     
-    @Published var userName: String = ""
     @Published var isLoading: Bool = false
     let submissionSucceeded = PassthroughSubject<Void, Never>()
     @Published var errorMessage: String?
+
+    private let draft: RegistrationDraft
     
     var title: String { localizable.title }
     var subTitle: String { localizable.subTitle }
     var placeholder: String { localizable.placeholder }
     var buttonName: String { Strings.Default.buttonName }
+    var fieldErrorMessage: String? { errorMessage }
     
     private let service: UserNameServicing
     
-    init(service: UserNameServicing) {
+    init(service: UserNameServicing, draft: RegistrationDraft) {
         self.service = service
+        self.draft = draft
     }
-    
-    private var cancellables = Set<AnyCancellable>()
+
+    func updateUserName(_ value: String) {
+        errorMessage = nil
+        draft.userName = RegistrationInputRules.sanitizeName(value)
+    }
     
     // MARK: Life cycle
     func submit() {
+        guard RegistrationInputRules.isValidName(draft.userName) else {
+            errorMessage = Strings.UserName.error
+            return
+        }
+
+        errorMessage = nil
         isLoading = true
         
         Task {
             do {
-                let success = try await service.submitUserName(userName)
+                _ = try await service.submitUserName(draft.userName)
                 submissionSucceeded.send()
             } catch {
-                errorMessage = "Failed to submit"
+                errorMessage = Strings.Common.errorSubmit
             }
             
             isLoading = false

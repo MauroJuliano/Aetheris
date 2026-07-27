@@ -2,24 +2,12 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct TransferSuccessView: View {
-    let model: TransferReceiptModel
-    var onBack: () -> Void
-    var onDone: () -> Void
-    var onNewTransfer: () -> Void
-    var onCopyReference: (String) -> Void
+    @StateObject private var viewModel: TransferSuccessViewModel
 
     init(
-        model: TransferReceiptModel = .mock,
-        onBack: @escaping () -> Void = {},
-        onDone: @escaping () -> Void = {},
-        onNewTransfer: @escaping () -> Void = {},
-        onCopyReference: @escaping (String) -> Void = { _ in }
+        viewModel: TransferSuccessViewModel
     ) {
-        self.model = model
-        self.onBack = onBack
-        self.onDone = onDone
-        self.onNewTransfer = onNewTransfer
-        self.onCopyReference = onCopyReference
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
@@ -40,7 +28,7 @@ struct TransferSuccessView: View {
 
     private var header: some View {
         HStack {
-            Button(action: onBack) {
+            Button(action: viewModel.onBack) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundStyle(Color.textPrimary)
@@ -92,7 +80,7 @@ struct TransferSuccessView: View {
                         .font(AppTypography.onboardingBody.weight(.medium))
                         .foregroundStyle(Color.textSecondaryColor)
 
-                    Text(model.amount)
+                    Text(viewModel.model.amount)
                         .font(AppTypography.heroTitle)
                         .foregroundStyle(Color.textPrimary)
                 }
@@ -110,8 +98,8 @@ struct TransferSuccessView: View {
             TransferInfoRow(
                 imageName: "person.circle.fill",
                 title: Strings.TransferSuccess.to,
-                primary: model.recipientName,
-                secondary: model.recipientEmail
+                primary: viewModel.model.recipientName,
+                secondary: viewModel.model.recipientEmail
             )
 
             Divider()
@@ -119,8 +107,8 @@ struct TransferSuccessView: View {
             TransferInfoRow(
                 icon: "building.columns.fill",
                 title: Strings.TransferSuccess.from,
-                primary: model.accountName,
-                secondary: "•••• \(model.accountLastDigits)"
+                primary: viewModel.model.accountName,
+                secondary: "•••• \(viewModel.model.accountLastDigits)"
             )
 
             Divider()
@@ -128,7 +116,7 @@ struct TransferSuccessView: View {
             TransferInfoRow(
                 icon: "calendar",
                 title: Strings.TransferSuccess.dateAndTime,
-                primary: model.date
+                primary: viewModel.model.date
             )
 
             Divider()
@@ -137,13 +125,13 @@ struct TransferSuccessView: View {
                 TransferInfoRow(
                     icon: "number",
                     title: Strings.TransferSuccess.referenceId,
-                    primary: model.referenceId
+                    primary: viewModel.model.referenceId
                 )
 
                 Spacer()
 
                 Button {
-                    onCopyReference(model.referenceId)
+                    viewModel.onCopyReference(viewModel.model.referenceId)
                 } label: {
                     Image(systemName: "doc.on.doc")
                         .font(.system(size: 20, weight: .semibold))
@@ -190,7 +178,7 @@ struct TransferSuccessView: View {
 
     private var actionButtons: some View {
         VStack(spacing: AppSpacing.large) {
-            Button(action: onDone) {
+            Button(action: viewModel.onDone) {
                 Text(Strings.TransferSuccess.done)
                     .font(AppTypography.onboardingBody.weight(.semibold))
                     .foregroundStyle(Color.surface)
@@ -209,7 +197,7 @@ struct TransferSuccessView: View {
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.large - AppSpacing.xxxSmall))
             }
 
-            Button(action: onNewTransfer) {
+            Button(action: viewModel.onNewTransfer) {
                 Label(Strings.TransferSuccess.anotherTransfer, systemImage: "paperplane")
                     .font(AppTypography.onboardingBody.weight(.semibold))
                     .foregroundStyle(Color.brandPrimaryColor)
@@ -278,6 +266,3 @@ private struct TransferInfoRow: View {
     }
 }
 
-#Preview {
-    TransferSuccessView()
-}

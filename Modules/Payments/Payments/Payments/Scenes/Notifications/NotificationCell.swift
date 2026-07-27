@@ -75,6 +75,3 @@ public struct NotificationCell: View {
 }
 
 
-#Preview {
-    NotificationCell(model: .mock.first!)
-}

@@ -1,19 +1,18 @@
+import Core
 import SwiftUI
 
 protocol MothersNameInputServicing {
     func submitMothersName(_ mothersName: String) async throws -> RegisterModel
 }
 
-enum RegisterError: Error {
-    case invalidData
-    case invalidResponse
-    case invalidUrl
-}
-
 final class MothersNameInputService: MothersNameInputServicing {
-    let endpoint = ""
+    private let coreService: any HasCoreService
+
+    init(coreService: any HasCoreService) {
+        self.coreService = coreService
+    }
     
     func submitMothersName(_ mothersName: String) async throws -> RegisterModel {
-        return RegisterModel(mothersName: mothersName)
+        try await coreService.execute(RegistrationEndpoint.mothersName(mothersName))
     }
 }

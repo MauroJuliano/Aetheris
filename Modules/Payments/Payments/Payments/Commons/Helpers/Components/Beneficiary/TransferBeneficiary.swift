@@ -2,15 +2,15 @@ import SwiftUI
 import AetherisDesignSystem
 
 public struct TransferBeneficiary: View {
-    @Binding var shouldChange: Bool
+    let onChange: () -> Void
     @Binding var model: Beneficiary
     
     @State private var rotateGradient: Bool
     
-    public init(shouldChange: Binding<Bool>,
+    public init(onChange: @escaping () -> Void,
                 model: Binding<Beneficiary>,
                 rotateGradient: Bool = false) {
-        self._shouldChange = shouldChange
+        self.onChange = onChange
         self._model = model
         self.rotateGradient = rotateGradient
     }
@@ -43,10 +43,10 @@ public struct TransferBeneficiary: View {
             }
             
             Button {
-                shouldChange = true
+                onChange()
             } label: {
                 HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                    Text("Change")
+                    Text(Strings.TransferBeneficiary.change)
                         .font(AppTypography.subheadline.weight(.semibold))
                     
                     Image(systemName: "pencil")
@@ -103,7 +103,3 @@ public struct TransferBeneficiary: View {
     }
 }
 
-#Preview {
-    TransferBeneficiary(shouldChange: .constant(true),
-                        model: .constant(Beneficiary.beneficiaries.first!))
-}

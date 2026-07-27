@@ -64,6 +64,3 @@ struct NotificationsCentreSkeleton: View {
 
 }
 
-#Preview {
-    NotificationsCentreSkeleton()
-}

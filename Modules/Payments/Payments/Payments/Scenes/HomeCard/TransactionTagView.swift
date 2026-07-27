@@ -16,6 +16,3 @@ struct TransactionTag: View {
     }
 }
 
-#Preview {
-    TransactionTag(type: .income)
-}

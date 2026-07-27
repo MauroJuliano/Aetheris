@@ -42,6 +42,7 @@
 		A9C18B9F2F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
 		A9C18BA92F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
 		A9C18BAA2F4FCC3800013305 /* PaymentsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A9D000012F60000000013305 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -620,6 +621,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D000012F60000000013305 /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,6 +1109,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A9B534532F4E384E005C2C96 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A982A8082F5111DF00C22A84 /* AccountInterface */,
@@ -2458,7 +2461,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -2476,7 +2479,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};
@@ -2699,7 +2702,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -2716,7 +2719,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};
@@ -2803,7 +2806,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -2820,7 +2823,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};
@@ -2907,7 +2910,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -2924,7 +2927,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};

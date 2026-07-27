@@ -1,0 +1,80 @@
+import AetherisDesignSystem
+import SwiftUI
+
+struct SendMoney: View {
+    @StateObject private var viewModel: SendMoneyViewModel
+    @ObservedObject private var amountViewModel: TransferAmountViewModel
+    @Binding private var selectedBeneficiary: Beneficiary
+    let onBackAction: (() -> Void)?
+    let onChangeBeneficiary: () -> Void
+    let onContinue: (TransferReceiptModel) -> Void
+    
+    init(
+        selectedBeneficiary: Binding<Beneficiary>,
+        onBackAction: (() -> Void)? = nil,
+        onChangeBeneficiary: @escaping () -> Void,
+        onContinue: @escaping (TransferReceiptModel) -> Void
+    ) {
+        let viewModel = SendMoneyViewModel()
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _amountViewModel = ObservedObject(wrappedValue: viewModel.amountViewModel)
+        _selectedBeneficiary = selectedBeneficiary
+        self.onBackAction = onBackAction
+        self.onChangeBeneficiary = onChangeBeneficiary
+        self.onContinue = onContinue
+    }
+    
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            NavBar(hasBackButton: true,
+                   model: .init(firstText: Strings.SendMoney.title, hasInitialSpace: false),
+                   onBack: {
+                if let onBackAction {
+                    onBackAction()
+                }
+            })
+
+            TransferBeneficiary(
+                onChange: onChangeBeneficiary,
+                model: $selectedBeneficiary
+            )
+            .padding()
+
+            NumericKeyboard(
+                displayedAmount: amountViewModel.formattedAmount,
+                displayedBalance: amountViewModel.formattedBalance,
+                onKeyPressed: amountViewModel.handleKeyPress
+            )
+            .padding()
+
+            Spacer()
+
+            Button {
+                let receipt = viewModel.continueTapped(selectedBeneficiary: selectedBeneficiary)
+                onContinue(receipt)
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: AppRadius.large)
+                        .fill(Color.backgroundColorA)
+                        .appShadow(AppShadow.card)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppRadius.pill)
+                                .stroke(Color.border, style: .init(lineWidth: 1))
+                        )
+                        .frame(width: 300, height: 50)
+
+                    Text(Strings.SendMoney.continueButton)
+                        .foregroundStyle(Color.brandPrimaryColor)
+                        .font(AppTypography.headline)
+                        .appShadow(AppShadow.control)
+                }
+            }
+            .padding(AppSpacing.medium)
+        }
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+        .appScreenBackground()
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
+    }
+}

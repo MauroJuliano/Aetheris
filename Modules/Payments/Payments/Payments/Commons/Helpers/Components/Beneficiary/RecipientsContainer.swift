@@ -3,20 +3,21 @@ import SwiftUI
 
 struct RecipientsContainer: View {
     let users = Beneficiary.beneficiaries
-    @State private var shouldPresentSendMoney: Bool = false
-    @State private var userSelected: Beneficiary?
+    let onSelectRecipient: (Beneficiary) -> Void
+    let onSeeAllTap: () -> Void
+    let onNewRecipientTap: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
             HStack {
-                Text("Recipients")
+                Text(Strings.Recipients.title)
                     .font(AppTypography.headline)
                     .foregroundStyle(Color.textPrimary)
                 
                 Spacer()
                 
-                Button("See all") {
-                    // action
+                Button(Strings.Recipients.seeAll) {
+                    onSeeAllTap()
                 }
                 .font(AppTypography.subheadline.weight(.semibold))
                 .foregroundStyle(Color.brandPrimaryColor)
@@ -25,8 +26,7 @@ struct RecipientsContainer: View {
             HStack(spacing: AppSpacing.xLarge) {
                 ForEach(users.prefix(4)) { user in
                     Button {
-                        userSelected = user
-                        shouldPresentSendMoney = true
+                        onSelectRecipient(user)
                     } label: {
                         VStack(spacing: AppSpacing.xSmall) {
                             Image(user.image)
@@ -49,7 +49,7 @@ struct RecipientsContainer: View {
                 }
                 
                 Button {
-                    
+                    onNewRecipientTap()
                 } label: {
                     VStack(spacing: AppSpacing.xSmall) {
                         ZStack {
@@ -62,7 +62,7 @@ struct RecipientsContainer: View {
                                 .foregroundStyle(Color.brandPrimaryColor)
                         }
                         
-                        Text("New\nrecipient")
+                        Text(Strings.Recipients.newRecipient)
                             .font(AppTypography.caption)
                             .bold()
                             .foregroundStyle(Color.textPrimary)
@@ -77,15 +77,6 @@ struct RecipientsContainer: View {
         }
         .padding(AppSpacing.medium)
         .appCardSurface()
-        .navigationDestination(isPresented: $shouldPresentSendMoney) {
-            if let model = userSelected {
-                SendMoney(model: model)
-            }
-            
-        }
     }
 }
 
-#Preview {
-    RecipientsContainer()
-}

@@ -16,42 +16,42 @@ public struct Notifications: Identifiable {
     public static let mock: [Notifications] = [
 
         .init(
-            title: "Funds successfully transferred to Melissa",
+            title: Strings.Notifications.titleTransferSent,
             leadingContent: .image("melissa"),
             date: Date(),
             hasDivider: true
         ),
 
         .init(
-            title: "Payment received from Ed",
+            title: Strings.Notifications.titlePaymentReceived,
             leadingContent: .image("ed"),
             date: Date(),
             hasDivider: true
         ),
 
         .init(
-            title: "Subscription renewed for Man's best Friend",
+            title: Strings.Notifications.titleSubscriptionRenewed,
             leadingContent: .icon("bell"),
             date: Date(),
             hasDivider: true
         ),
 
         .init(
-            title: "Refund processed successfully",
+            title: Strings.Notifications.titleRefundProcessed,
             leadingContent: .icon("wrench.and.screwdriver"),
             date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
             hasDivider: true
         ),
 
         .init(
-            title: "Your subscription has expired",
+            title: Strings.Notifications.titleSubscriptionExpired,
             leadingContent: .icon("calendar"),
             date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!,
             hasDivider: true
         ),
 
         .init(
-            title: "System maintenance completed",
+            title: Strings.Notifications.titleMaintenanceCompleted,
             leadingContent: .icon("gearshape"),
             date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
             hasDivider: true
@@ -65,17 +65,17 @@ public extension Notifications {
         let now = Date()
         
         if calendar.isDateInToday(date) {
-            return "Today"
+            return Strings.Notifications.sectionToday
         } else if calendar.isDateInYesterday(date) {
-            return "Yesterday"
+            return Strings.Notifications.sectionYesterday
         } else if let weekAgo = calendar.date(byAdding: .day, value: -7, to: now),
                   date >= weekAgo {
-            return "Last Week"
+            return Strings.Notifications.sectionLastWeek
         } else if let monthAgo = calendar.date(byAdding: .month, value: -1, to: now),
                   date >= monthAgo {
-            return "Last Month"
+            return Strings.Notifications.sectionLastMonth
         } else {
-            return "Others"
+            return Strings.Notifications.sectionOthers
         }
     }
 }

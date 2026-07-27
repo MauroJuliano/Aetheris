@@ -1,3 +1,4 @@
+import Core
 import SwiftUI
 
 enum RegisterRoute: Hashable {
@@ -5,37 +6,68 @@ enum RegisterRoute: Hashable {
     case userName
     case birthdate
     case resume
+    case password
+    case confirmPassword
+}
+
+@MainActor
+final class RegistrationDraft: ObservableObject {
+    @Published var sin: String = ""
+    @Published var mothersName: String = ""
+    @Published var userName: String = ""
+    @Published var birthdate: String = ""
+    @Published var password: String = ""
+    @Published var confirmPassword: String = ""
 }
 
 struct RegisterFlow: View {
+    private let coreService: any HasCoreService
     var onRegisterFinished: () -> Void
     @State private var path: [RegisterRoute] = []
+    @StateObject private var draft = RegistrationDraft()
+
+    init(coreService: any HasCoreService,
+         onRegisterFinished: @escaping () -> Void) {
+        self.coreService = coreService
+        self.onRegisterFinished = onRegisterFinished
+    }
     
     var body: some View {
         NavigationStack(path: $path) {
-            SINFactory.make {
+            SINFactory.make(coreService: coreService, draft: draft) {
                 path.append(.personal)
             }
             .navigationDestination(for: RegisterRoute.self) { route in
                 switch route {
                 case .personal:
-                    MothersNameInputFactory.make {
+                    MothersNameInputFactory.make(coreService: coreService, draft: draft) {
                         path.append(.userName)
                     }
                 case .userName:
-                    UserNameFactory.make {
+                    UserNameFactory.make(coreService: coreService, draft: draft) {
                         path.append(.birthdate)
                     }
                 case .birthdate:
-                    BirthdateView(viewModel: BirthdateViewModel(service: MockBirthdateService())) {
+                    BirthdateFactory.make(coreService: coreService, draft: draft) {
                         path.append(.resume)
                     }
                 case .resume:
-                    ResumeFactory.make {
+                    ResumeFactory.make(draft: draft) {
+                        path.append(.password)
+                    }
+                case .password:
+                    PasswordFactory.make(draft: draft) {
+                        path.append(.confirmPassword)
+                    }
+                case .confirmPassword:
+                    ConfirmPasswordFactory.make(coreService: coreService, draft: draft, onBack: {
+                        if !path.isEmpty {
+                            path.removeLast()
+                        }
+                    }) {
                         onRegisterFinished()
                     }
                 }
-                
             }
         }
     }

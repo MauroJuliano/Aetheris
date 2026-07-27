@@ -174,6 +174,3 @@ struct SpendingLineChart: View {
     }
 }
 
-#Preview {
-    SpendingLineChart()
-}

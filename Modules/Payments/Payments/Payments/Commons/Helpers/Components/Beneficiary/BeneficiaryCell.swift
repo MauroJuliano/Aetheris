@@ -73,6 +73,3 @@ public struct BeneficiaryCell: View {
     }
 }
 
-#Preview {
-    BeneficiaryCell(model: .init(name: "melissa", pixKey: "melissa", image: "melissa", hasDivider: true))
-}

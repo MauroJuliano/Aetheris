@@ -60,6 +60,3 @@ public struct ListCell: View {
     }
 }
 
-#Preview {
-    ListCell()
-}

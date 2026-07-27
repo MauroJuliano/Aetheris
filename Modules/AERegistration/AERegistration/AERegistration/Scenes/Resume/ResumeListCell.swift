@@ -18,7 +18,7 @@ struct ResumeListModel: Identifiable {
     }
     
     static let list: [ResumeListModel] = [
-        .init(image: "person.fill", description: "Full Name", value: "Melissa Mccarthy")
+        .init(image: "person.fill", description: Strings.Resume.fullName, value: Strings.Resume.mockName)
     ]
 }
 
@@ -62,7 +62,7 @@ struct ResumeListCell: View {
                 onChange?(model)
             } label: {
                 HStack {
-                    Text("Edit")
+                    Text(Strings.Resume.edit)
                         .font(AppTypography.callout)
                         .foregroundStyle(Color.brandPrimaryColor)
                     

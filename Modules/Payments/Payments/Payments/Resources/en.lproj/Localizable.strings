@@ -1,4 +1,5 @@
 "Common.continueButton" = "Continue";
+"Common.errorSubmit" = "Failed to submit";
 "SendMoney.title" = "Transfer";
 "SendMoney.continueButton" = "Continue";
 "TransferPin.title" = "Enter your PIN";
@@ -21,3 +22,180 @@
 "TransferSuccess.secureSubtitle" = "Your transaction is protected and encrypted.";
 "TransferSuccess.done" = "Done";
 "TransferSuccess.anotherTransfer" = "Make another transfer";
+
+"HomeApp.homeUnavailableTitle" = "Home unavailable";
+"HomeApp.noDashboardDataTitle" = "No dashboard data yet";
+"HomeApp.emptyDescription" = "The simulated payments service returned an empty response.";
+"HomeApp.genericErrorTitle" = "Something went wrong";
+"HomeApp.genericErrorDescription" = "We couldn't load your information. Please check your connection and try again.";
+"HomeApp.tryLater" = "Try later";
+"HomeApp.welcomePrefix" = "Welcome, ";
+"HomeApp.welcomeName" = "Blake!";
+"HomeApp.logout" = "Logout";
+"HomeApp.version" = "Version 0.00.1";
+"HomeApp.poweredBy" = "@2025 Powered by Blake";
+"HomeApp.accountTerms" = "Account terms - Privacy Policy";
+"HomeApp.editNameTitle" = "Edit name";
+"HomeApp.editEmailTitle" = "Edit email";
+"HomeApp.editPhoneTitle" = "Edit phone";
+"HomeApp.editNameDescription" = "Update the public profile name shown in the app.";
+"HomeApp.editEmailDescription" = "Change the email used for notifications and contact.";
+"HomeApp.editPhoneDescription" = "Update the number associated with the account.";
+"HomeApp.editNamePlaceholder" = "Enter full name";
+"HomeApp.editEmailPlaceholder" = "Enter email";
+"HomeApp.editPhonePlaceholder" = "Enter phone number";
+"HomeApp.mockCardOwnerOne" = "Jorge Henrique";
+"HomeApp.mockVisa" = "VISA";
+"HomeApp.rewardsHeadline" = "Rewards Available";
+"HomeApp.rewardsTitle" = "12,500 points";
+"HomeApp.rewardsCaption" = "Worth $125 in travel";
+"HomeApp.redeem" = "Redeem";
+"HomeApp.monthlySpendingHeadline" = "Monthly Spending";
+"HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
+"HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
+"HomeApp.seeInsights" = "See Insights";
+"HomeApp.mockCardOwnerTwo" = "Amado batista";
+"HomeApp.mockMastercard" = "MASTERCARD";
+"HomeApp.specialOfferHeadline" = "Special Offer";
+"HomeApp.specialOfferTitle" = "Travel Insurance";
+"HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
+"HomeApp.learnMore" = "Learn More";
+"HomeApp.noCreditCardHeadline" = "No Credit Card Yet?";
+"HomeApp.buildYourCreditTitle" = "Build Your Credit";
+"HomeApp.buildYourCreditCaption" = "Apply now for a Platinum Secured Card";
+"HomeApp.applyNow" = "Apply Now";
+
+"QuickActions.sectionTitle" = "What would you like to do ?";
+"QuickActions.transferTitle" = "Transfer";
+"QuickActions.transferSubtitle" = "Send money";
+"QuickActions.requestTitle" = "Request";
+"QuickActions.requestSubtitle" = "Receive money";
+"QuickActions.moreTitle" = "More";
+"QuickActions.moreSubtitle" = "All services";
+
+"AllServices.title" = "All services";
+"AllServices.subtitle" = "Quick access to the main services available in the app.";
+"AllServices.transferMoney" = "Transfer money";
+"AllServices.manageBeneficiaries" = "Beneficiaries";
+"AllServices.cardCenter" = "Cards";
+"AllServices.notifications" = "Notifications";
+"AllServices.insurance" = "Insurance";
+"AllServices.reports" = "Reports";
+
+"SpendingChart.title" = "Spending this month";
+"SpendingChart.total" = "$ 2,428.00";
+"SpendingChart.change" = "8.3%";
+"SpendingChart.comparison" = "vs last month";
+"SpendingChart.viewReport" = "View report";
+"SpendingChart.shopping" = "Shopping";
+"SpendingChart.bills" = "Bills";
+"SpendingChart.transport" = "Transport";
+"SpendingChart.foodAndDrinks" = "Food & Drinks";
+
+"NotificationsCentre.unavailableTitle" = "Notifications unavailable";
+"NotificationsCentre.emptyTitle" = "No notifications yet";
+"NotificationsCentre.emptyDescription" = "The simulated service has no notifications to show.";
+"NotificationsCentre.title" = "Notifications";
+
+"Common.tryAgain" = "Try again";
+"Common.back" = "Back";
+
+"Notifications.titleTransferSent" = "Funds successfully transferred to Melissa";
+"Notifications.titlePaymentReceived" = "Payment received from Ed";
+"Notifications.titleSubscriptionRenewed" = "Subscription renewed for Man's best Friend";
+"Notifications.titleRefundProcessed" = "Refund processed successfully";
+"Notifications.titleSubscriptionExpired" = "Your subscription has expired";
+"Notifications.titleMaintenanceCompleted" = "System maintenance completed";
+"Notifications.sectionToday" = "Today";
+"Notifications.sectionYesterday" = "Yesterday";
+"Notifications.sectionLastWeek" = "Last Week";
+"Notifications.sectionLastMonth" = "Last Month";
+"Notifications.sectionOthers" = "Others";
+
+"TransactionHistory.title" = "Transaction History";
+"TransactionHistory.unavailableTitle" = "History unavailable";
+"TransactionHistory.emptyTitle" = "No transactions yet";
+"TransactionHistory.emptyDescription" = "This account does not have transaction history in the simulated dataset.";
+
+"HomeCard.cardsUnavailableTitle" = "Cards unavailable";
+"HomeCard.emptyTitle" = "No cards or activity yet";
+"HomeCard.emptyDescription" = "This area will reflect the dashboard when the simulated service returns data.";
+"CardHome.title" = "Cards";
+
+"TransactionsHistory.title" = "Transactions History";
+"TransactionsHistory.swarovski" = "Swarovski";
+"TransactionsHistory.payment" = "Payment";
+"TransactionsHistory.netflix" = "Netflix";
+"TransactionsHistory.subscription" = "Subscription";
+"TransactionsHistory.melissa" = "Melissa";
+"TransactionsHistory.transferReceived" = "Transfer received";
+"TransactionsHistory.apple" = "Apple";
+"TransactionsHistory.purchase" = "Purchase";
+"TransactionsHistory.salary" = "Salary";
+"TransactionsHistory.deposit" = "Deposit";
+
+"FinancialSummary.transferSent" = "Transfer sent";
+"FinancialSummary.transferSentDescription" = "Funds successfully transferred to Melissa";
+"FinancialSummary.transferSentAdeleDescription" = "Funds successfully transferred to Adele";
+"FinancialSummary.paymentReceived" = "Payment received";
+"FinancialSummary.paymentReceivedDescription" = "Funds received from Ed Sheeran";
+"FinancialSummary.netflix" = "Netflix";
+"FinancialSummary.appleBill" = "Apple.Com/Bill";
+"FinancialSummary.ifoodBar" = "Ifd* Bar do zé";
+"FinancialSummary.subscription" = "Subscription";
+"FinancialSummary.restaurant" = "Restaurant";
+"FinancialSummary.daysAgo" = "%d days ago";
+"FinancialSummary.monthAgo" = "%d month ago";
+
+"CardInsurance.continue" = "Continue";
+"InsuranceOnboarding.subtitle" = "Secure your future with our comprehensive financial insurance plan.";
+"InsuranceOnboarding.benefits" = "Benefits:";
+"InsuranceOnboarding.continue" = "Continue";
+"InsuranceOnboarding.moreOptions" = "More options";
+"InsuranceOnboarding.benefitOne" = "Fast and simple digital claims";
+"InsuranceOnboarding.benefitTwo" = "24/7 customer support";
+"InsuranceOnboarding.benefitThree" = "Flexible coverage options for any budget";
+"InsuranceOnboarding.benefitFour" = "Seamless integration with your finance dashboard";
+
+"CardInsurance.bulletOne" = "Covers unauthorized transactions made after card theft or cloning.";
+"CardInsurance.bulletTwo" = "Quick replacement of lost or stolen cards.";
+"CardInsurance.bulletThree" = "Insures eligible purchases against damage or theft for a limited period";
+"CardInsurance.bulletFour" = "Extended benefits for cardholders traveling abroad (e.g., lost luggage or emergency cash).";
+"CardInsurance.continueButton" = "Continue";
+
+"BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
+"BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";
+"BeneficiaryAdd.title" = "Find beneficiary";
+"BeneficiaryAdd.searchLabel" = "Email or PIX key";
+"BeneficiaryAdd.searchPlaceholder" = "Enter email or PIX key";
+"BeneficiaryAdd.searchButton" = "Find beneficiary";
+"BeneficiaryAdd.searchFailed" = "We could not find this beneficiary right now.";
+"BeneficiaryAdd.searching" = "Searching...";
+"BeneficiaryAdd.invalidSearch" = "Enter an email or PIX key to continue.";
+
+"Recipients.title" = "Recipients";
+"Recipients.seeAll" = "See all";
+"Recipients.newRecipient" = "New\nrecipient";
+"TransferBeneficiary.change" = "Change";
+
+"Profile.logout" = "Logout";
+"Profile.version" = "Version 0.00.1";
+"Profile.poweredBy" = "@2025 Powered by Blake";
+"Profile.terms" = "Account terms - Privacy Policy";
+"Profile.editNameTitle" = "Edit name";
+"Profile.editEmailTitle" = "Edit email";
+"Profile.editPhoneTitle" = "Edit phone";
+"Profile.userName" = "Melissa Mccarthy";
+"Profile.email" = "contact@melissamccarthy.com";
+"Profile.phone" = "(33) 9908-3213";
+"Profile.save" = "Save";
+"Profile.feedbackTitle" = "Feedback";
+"Profile.feedbackDescription" = "Tell us what can be improved in the app experience.";
+"Profile.sendFeedback" = "Send feedback";
+"Profile.privacyPolicy" = "Privacy Policy";
+"Profile.legalDescription" = "This is a mocked legal page used to keep the profile flow realistic while remaining fully local to the app.";
+"Profile.done" = "Done";
+"Profile.logoutDescription" = "This is a mocked logout action used for the profile flow.";
+"Profile.confirmLogout" = "Confirm logout";
+
+"ViewReport.loadingTitle" = "View Report";

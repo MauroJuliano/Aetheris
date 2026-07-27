@@ -56,7 +56,7 @@ struct CreditCardView: View {
                     
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Valid till")
+                            Text(Strings.CreditCard.validTill)
                                 .font(.caption2)
                                 .foregroundColor(AppCreditCardStyle.secondaryForeground)
                             Text(model.validDate)
@@ -87,11 +87,3 @@ struct CreditCardView: View {
     }
 }
 
-#Preview {
-    
-    let model = CreditCardModel(number: "XXXX XXXX XXXX XX27",
-                                validDate: "09/24",
-                                name: "Jorge henrique",
-                                brand: "VISA")
-    CreditCardView(model: model)
-}

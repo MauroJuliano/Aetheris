@@ -2,8 +2,8 @@ import SwiftUI
 
 public struct FormCellModel: Identifiable {
     public let id: UUID = UUID()
-    var sectionTitle: String?
-    var content: FormContent
+    public var sectionTitle: String?
+    public var content: FormContent
     
     public init(sectionTitle: String? = nil,
                 content: FormContent) {
@@ -12,105 +12,137 @@ public struct FormCellModel: Identifiable {
     }
     
     public struct FormContent {
-        var title: String
-        var icon: String
-        var hasDivider: Bool
-        var toggle: FormToggle?
+        public enum Kind: Hashable {
+            case general
+            case name
+            case email
+            case phone
+            case feedback
+            case pushNotifications
+            case smsNotifications
+        }
+
+        public var kind: Kind?
+        public var title: String
+        public var icon: String
+        public var hasDivider: Bool
+        public var toggle: FormToggle?
+        public var showsDisclosureIndicator: Bool
         
-        struct FormToggle {
-            var isOn: Bool
+        public struct FormToggle {
+            public var isOn: Bool
+
+            public init(isOn: Bool) {
+                self.isOn = isOn
+            }
         }
     }
     
     public static let generalCellsMock: [FormCellModel] = [
-        FormCellModel(sectionTitle: "General",
-                      content: .init(title: "Melissa Mccarthy",
+        FormCellModel(sectionTitle: Strings.Profile.generalSection,
+                      content: .init(kind: .name,
+                                     title: Strings.Profile.userName,
                                      icon: "person",
-                                     hasDivider: true)),
+                                     hasDivider: true,
+                                     showsDisclosureIndicator: true)),
         FormCellModel(sectionTitle: nil,
-                      content: .init(title: "contact@melissamccarthy.com",
+                      content: .init(kind: .email,
+                                     title: Strings.Profile.email,
                                      icon: "envelope",
-                                     hasDivider: true)),
+                                     hasDivider: true,
+                                     showsDisclosureIndicator: true)),
         FormCellModel(sectionTitle: nil,
-                      content: .init(title: "(33) 9908-3213",
+                      content: .init(kind: .phone,
+                                     title: Strings.Profile.phone,
                                      icon: "iphone.gen2",
-                                     hasDivider: true)),
+                                     hasDivider: true,
+                                     showsDisclosureIndicator: true)),
         FormCellModel(sectionTitle: nil,
-                      content: .init(title: "Feedback",
+                      content: .init(kind: .feedback,
+                                     title: Strings.Profile.feedback,
                                      icon: "bubble",
-                                     hasDivider: true))
+                                     hasDivider: true,
+                                     showsDisclosureIndicator: true))
     ]
     
     public static let notifications: [FormCellModel] = [
-        FormCellModel(sectionTitle: "Notifications",
-                      content: .init(title: "Push notifications",
+        FormCellModel(sectionTitle: Strings.Profile.notificationsSection,
+                      content: .init(kind: .pushNotifications,
+                                     title: Strings.Profile.pushNotifications,
                                      icon: "message.badge",
                                      hasDivider: true,
-                                     toggle: .init(isOn: true))),
+                                     toggle: .init(isOn: true),
+                                     showsDisclosureIndicator: false)),
         FormCellModel(sectionTitle: nil,
-                      content: .init(title: "sms notifications",
+                      content: .init(kind: .smsNotifications,
+                                     title: Strings.Profile.smsNotifications,
                                      icon: "text.bubble",
                                      hasDivider: false,
-                                     toggle: .init(isOn: true)))
+                                     toggle: .init(isOn: true),
+                                     showsDisclosureIndicator: false))
     ]
 }
 
 public struct FormCell: View {
     @State var model: FormCellModel
     let hasDivider: Bool
+    let onTap: (() -> Void)?
     
     public init(model: FormCellModel,
-                hasDivider: Bool = false) {
+                hasDivider: Bool = false,
+                onTap: (() -> Void)? = nil) {
         self.model = model
         self.hasDivider = hasDivider
+        self.onTap = onTap
     }
     
     public var body: some View {
-        if let title = model.sectionTitle {
+        VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+            if let title = model.sectionTitle {
+                HStack {
+                    Text(title)
+                        .foregroundStyle(Color.textPrimary)
+                        .font(AppTypography.sectionTitle)
+                        .bold()
+                        .multilineTextAlignment(.leading)
+                        .padding(.top)
+                    
+                    Spacer()
+                }
+            }
+            
             HStack {
-                Text(title)
+                IconContainer(model: .init(icon: model.content.icon))
+                
+                Text(model.content.title)
                     .foregroundStyle(Color.textPrimary)
-                    .font(AppTypography.sectionTitle)
-                    .bold()
-                    .multilineTextAlignment(.leading)
-                    .padding(.top)
+                    .font(AppTypography.cardBody)
                 
                 Spacer()
-            }
-            
-        }
-        
-        HStack {
-            IconContainer(model: .init(icon: model.content.icon))
-            
-            Text(model.content.title)
-                .foregroundStyle(Color.textPrimary)
-                .font(AppTypography.cardBody)
-            
-            Spacer()
-            
-            if var toggle = model.content.toggle {
-                Toggle("", isOn: Binding(
-                    get: { toggle.isOn },
-                    set: { newValue in
-                        toggle.isOn = newValue
-                    }
-                ))
-                .tint(Color.brandPrimaryColor)
-                .labelsHidden()
+                
+                if var toggle = model.content.toggle {
+                    Toggle("", isOn: Binding(
+                        get: { toggle.isOn },
+                        set: { newValue in
+                            toggle.isOn = newValue
+                        }
+                    ))
+                    .tint(Color.brandPrimaryColor)
+                    .labelsHidden()
+                } else if model.content.showsDisclosureIndicator {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color.textTertiary)
+                }
             }
         }
-        
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onTap?()
+        }
         if hasDivider {
             Divider()
         }
     }
 }
 
-#Preview {
-    var model = FormCellModel(sectionTitle: "General",
-                              content: .init(title: "contact@melissamccarthy.com",
-                                             icon: "envelope",
-                                             hasDivider: true))
-    FormCell(model: model)
-}

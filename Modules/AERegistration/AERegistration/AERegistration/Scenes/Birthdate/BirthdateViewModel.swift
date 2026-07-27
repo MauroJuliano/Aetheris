@@ -1,37 +1,50 @@
 import SwiftUI
 import Combine
 
+@MainActor
 class BirthdateViewModel: ObservableObject {
     typealias localizable = Strings.Birthdate
     
-    @Published var birthdate: String = ""
     @Published var isLoading: Bool = false
     let submissionSucceeded = PassthroughSubject<Void, Never>()
     @Published var errorMessage: String?
+
+    private let draft: RegistrationDraft
     
     var title: String { localizable.title }
     var subTitle: String { localizable.subTitle }
     var placeholder: String { localizable.placeholder }
     var buttonName: String { Strings.Default.buttonName }
-    
-    private var cancellables = Set<AnyCancellable>()
+    var fieldErrorMessage: String? { errorMessage }
     
     private let service: BirthdateServicing
     
-    init(service: BirthdateServicing) {
+    init(service: BirthdateServicing, draft: RegistrationDraft) {
         self.service = service
+        self.draft = draft
+    }
+
+    func updateBirthdate(_ value: String) {
+        errorMessage = nil
+        draft.birthdate = RegistrationInputRules.sanitizeBirthdate(value)
     }
     
     // MARK: Life Cycle
     func submit() {
+        guard RegistrationInputRules.isValidBirthdate(draft.birthdate) else {
+            errorMessage = Strings.Birthdate.error
+            return
+        }
+
+        errorMessage = nil
         isLoading = true
         
         Task {
             do {
-                let success = try await service.submitBirthdate(birthdate)
+                _ = try await service.submitBirthdate(draft.birthdate)
                 submissionSucceeded.send()
             } catch {
-                errorMessage = "Failed to submit"
+                errorMessage = Strings.Common.errorSubmit
             }
             
             isLoading = false

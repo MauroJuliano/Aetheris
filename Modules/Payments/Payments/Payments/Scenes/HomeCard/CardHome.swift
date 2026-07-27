@@ -1,47 +1,72 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
-struct CardHome: View {    
-    @State private var cardsMock = CardsMock.creditCardMocks
-    @State private var isLoading = true
-    
+struct CardHome: View {
+    @StateObject private var viewModel: HomeCardViewModel
+    let onBackAction: (() -> Void)?
+    let onTransactionHistoryTap: () -> Void
+
+    init(
+        viewModel: HomeCardViewModel,
+        onBackAction: (() -> Void)? = nil,
+        onTransactionHistoryTap: @escaping () -> Void = {}
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onBackAction = onBackAction
+        self.onTransactionHistoryTap = onTransactionHistoryTap
+    }
+
     var body: some View {
         ZStack {
-            ScrollView(showsIndicators: false){
-                NavBar(model: .init(firstText: "Cards",
-                                    hasInitialSpace: false))
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                
-                CardSwipe(cards: $cardsMock)
-                
-                HomeQuickActions(actions: CardOptions.mock)
+            if viewModel.isLoading {
+                CardHomeSkeleton()
+            } else if let errorMessage = viewModel.errorMessage {
+                FullScreenErrorView(
+                    title: Strings.HomeCard.cardsUnavailableTitle,
+                    description: errorMessage,
+                    primaryButtonTitle: Strings.Common.tryAgain,
+                    onPrimaryAction: {
+                        Task { await viewModel.load() }
+                    }
+                )
+            } else if viewModel.isEmpty {
+                PaymentsEmptyStateView(
+                    title: Strings.HomeCard.emptyTitle,
+                    description: Strings.HomeCard.emptyDescription
+                )
+            } else {
+                ScrollView(showsIndicators: false) {
+                    NavBar(
+                        hasBackButton: onBackAction != nil,
+                        model: .init(
+                            firstText: Strings.CardHome.title,
+                            hasInitialSpace: false
+                        ),
+                        onBack: onBackAction
+                    )
                     .padding(.horizontal, AppSpacing.screenHorizontal)
-                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
-                
-                FinancialSummaryContainer()
-                    .padding(.horizontal, AppSpacing.screenHorizontal)
-                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
-            }
-            .opacity(isLoading ? 0 : 1)
-            .safeAreaInset(edge: .bottom) {
-                Color.clear
-                    .frame(height: AppSpacing.bottomBarClearance)
-            }
 
-            CardHomeSkeleton()
-                .opacity(isLoading ? 1 : 0)
-        }
-        .appScreenBackground()
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation(.easeOut(duration: 0.5)) {
-                    isLoading = false
+                    CardSwipe(cards: $viewModel.cards)
+
+                    HomeQuickActions(actions: viewModel.quickActions)
+                        .padding(.horizontal, AppSpacing.screenHorizontal)
+                        .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+
+                    FinancialSummaryContainer(
+                        summaries: viewModel.summaries,
+                        onTap: onTransactionHistoryTap
+                    )
+                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+                }
+                .safeAreaInset(edge: .bottom) {
+                    Color.clear
+                        .frame(height: AppSpacing.bottomBarClearance)
                 }
             }
         }
+        .appScreenBackground()
+        .task { await viewModel.load() }
     }
-}
-
-#Preview {
-    CardHome()
 }

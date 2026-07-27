@@ -4,20 +4,35 @@ import SwiftUI
 
 struct QuickActions: View {
     private let actions: [QuickActionItem] = [
-        .init(title: "Transfer", subtitle: "Send money", icon: "arrow.right.arrow.left"),
-        .init(title: "Request", subtitle: "Receive money", icon: "arrow.down.left.arrow.up.right"),
-        .init(title: "More", subtitle: "All services", icon: "ellipsis")
+        .init(title: Strings.QuickActions.transferTitle, subtitle: Strings.QuickActions.transferSubtitle, icon: "arrow.right.arrow.left"),
+        .init(title: Strings.QuickActions.requestTitle, subtitle: Strings.QuickActions.requestSubtitle, icon: "arrow.down.left.arrow.up.right"),
+        .init(title: Strings.QuickActions.moreTitle, subtitle: Strings.QuickActions.moreSubtitle, icon: "ellipsis")
     ]
+
+    let onTransferTap: () -> Void
+    let onMoreTap: () -> Void
+
+    init(onTransferTap: @escaping () -> Void = {},
+         onMoreTap: @escaping () -> Void = {}) {
+        self.onTransferTap = onTransferTap
+        self.onMoreTap = onMoreTap
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.medium + AppSpacing.xxxSmall) {
-            Text("What would you like to do ?")
+            Text(Strings.QuickActions.sectionTitle)
                 .font(AppTypography.headline)
                 .foregroundStyle(Color.textPrimary)
 
             HStack(spacing: AppSpacing.medium) {
-                ForEach(actions) { action in
-                    QuickActionCard(action: action)
+                ForEach(Array(actions.enumerated()), id: \.element.id) { index, action in
+                    QuickActionCard(action: action) {
+                        if index == 0 {
+                            onTransferTap()
+                        } else if index == 2 {
+                            onMoreTap()
+                        }
+                    }
                 }
             }
         }
@@ -35,23 +50,31 @@ struct QuickActionItem: Identifiable {
 
 struct QuickActionCard: View {
     let action: QuickActionItem
+    let onTap: () -> Void
+
+    init(action: QuickActionItem, onTap: @escaping () -> Void = {}) {
+        self.action = action
+        self.onTap = onTap
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            iconView
+        Button(action: onTap) {
+            VStack(alignment: .leading, spacing: 0) {
+                iconView
 
-            Spacer(minLength: AppSpacing.small)
+                Spacer(minLength: AppSpacing.small)
 
-            textContent
+                textContent
+            }
+            .padding(.horizontal, AppSpacing.large)
+            .padding(.vertical, AppSpacing.medium)
+            .frame(maxWidth: .infinity)
+            .frame(height: 132)
+            .background(
+                RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
+                    .fill(Color.surface)
+            )
         }
-        .padding(.horizontal, AppSpacing.large)
-        .padding(.vertical, AppSpacing.medium)
-        .frame(maxWidth: .infinity)
-        .frame(height: 132)
-        .background(
-            RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                .fill(Color.surface)
-        )
     }
 
     private var iconView: some View {
@@ -83,6 +106,3 @@ struct QuickActionCard: View {
     }
 }
 
-#Preview {
-    QuickActions()
-}

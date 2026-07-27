@@ -1,21 +1,18 @@
+import Core
 import SwiftUI
 
 protocol SINServiceProtocol {
     func submitSIN(_ sin: String) async throws -> Bool
 }
 
-final class MockSINService: SINServiceProtocol {
-    
-    var shouldFail: Bool = false
-    var delay: TimeInterval = 1.5
+final class SINService: SINServiceProtocol {
+    private let coreService: any HasCoreService
+
+    init(coreService: any HasCoreService) {
+        self.coreService = coreService
+    }
     
     func submitSIN(_ sin: String) async throws -> Bool {
-        try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-        
-        if shouldFail {
-            throw URLError(.badServerResponse)
-        }
-        
-        return true
+        try await coreService.execute(RegistrationEndpoint.sin(sin))
     }
 }

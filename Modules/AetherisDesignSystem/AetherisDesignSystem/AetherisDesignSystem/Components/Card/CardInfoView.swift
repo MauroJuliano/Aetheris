@@ -61,13 +61,3 @@ struct CardInfoView: View {
         }
 }
 
-#Preview {
-    let model = InfoCardModel(headline: "Rewards Available",
-                              title: "12,500 points",
-                              caption: "Worth $125 in travel",
-                              icon: "gift",
-                              button: "Redeem",
-                              color: .black)
-    
-    CardInfoView(infoModel: model)
-}
