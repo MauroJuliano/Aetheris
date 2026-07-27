@@ -12,7 +12,6 @@ public struct Card: Identifiable, Hashable {
     
     public enum CardContent: Hashable {
         case creditCard(CreditCardModel)
-        case info(InfoCardModel)
     }
 }
 
@@ -86,24 +85,6 @@ public struct CreditCardModel: Hashable {
         self.name = name
         self.brand = brand
         self.style = style
-    }
-}
-
-public struct InfoCardModel: Hashable {
-    let headline: String
-    let title: String?
-    let caption: String?
-    let icon: String?
-    let button: String
-    let color: Color
-    
-    public init(headline: String, title: String?, caption: String?, icon: String?, button: String, color: Color) {
-        self.headline = headline
-        self.title = title
-        self.caption = caption
-        self.icon = icon
-        self.button = button
-        self.color = color
     }
 }
 

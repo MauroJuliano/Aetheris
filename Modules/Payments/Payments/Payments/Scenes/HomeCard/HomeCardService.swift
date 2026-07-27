@@ -138,18 +138,11 @@ private struct HomeCardSummaryPayload: Codable {
 }
 
 private struct HomeCardCardPayload: Codable {
-    let kind: String
     let number: String?
     let validDate: String?
     let name: String?
     let brand: String?
     let style: CreditCardStyle?
-    let headline: String?
-    let title: String?
-    let caption: String?
-    let icon: String?
-    let button: String?
-    let color: String?
 
     static let mock: [HomeCardCardPayload] = [
         .creditCard(number: "**** **** **** **21",
@@ -157,18 +150,11 @@ private struct HomeCardCardPayload: Codable {
                     name: Strings.HomeApp.mockCardOwnerOne,
                     brand: Strings.HomeApp.mockVisa,
                     style: .platinum),
-        .info(headline: Strings.HomeApp.rewardsHeadline,
-              title: Strings.HomeApp.rewardsTitle,
-              caption: Strings.HomeApp.rewardsCaption,
-              icon: "gift",
-              button: Strings.HomeApp.redeem,
-              color: "primaryColor"),
-        .info(headline: Strings.HomeApp.monthlySpendingHeadline,
-              title: Strings.HomeApp.monthlySpendingTitle,
-              caption: Strings.HomeApp.monthlySpendingCaption,
-              icon: "chart.pie.fill",
-              button: Strings.HomeApp.seeInsights,
-              color: "secondaryColor")
+        .creditCard(number: "**** **** **** **73",
+                    validDate: "02/29",
+                    name: Strings.HomeApp.mockCardOwnerTwo,
+                    brand: Strings.HomeApp.mockMastercard,
+                    style: .black)
     ]
 
     static func creditCard(number: String,
@@ -176,73 +162,20 @@ private struct HomeCardCardPayload: Codable {
                            name: String,
                            brand: String,
                            style: CreditCardStyle = .standard) -> HomeCardCardPayload {
-        .init(kind: "creditCard",
-              number: number,
+        .init(number: number,
               validDate: validDate,
               name: name,
               brand: brand,
-              style: style,
-              headline: nil,
-              title: nil,
-              caption: nil,
-              icon: nil,
-              button: nil,
-              color: nil)
-    }
-
-    static func info(headline: String,
-                     title: String?,
-                     caption: String?,
-                     icon: String?,
-                     button: String,
-                     color: String) -> HomeCardCardPayload {
-        .init(kind: "info",
-              number: nil,
-              validDate: nil,
-              name: nil,
-              brand: nil,
-              style: nil,
-              headline: headline,
-              title: title,
-              caption: caption,
-              icon: icon,
-              button: button,
-              color: color)
+              style: style)
     }
 
     var model: Card? {
-        switch kind {
-        case "creditCard":
-            guard let number, let validDate, let name, let brand else { return nil }
-            return Card(content: .creditCard(.init(number: number,
-                                                    validDate: validDate,
-                                                    name: name,
-                                                    brand: brand,
-                                                    style: style ?? .standard)))
-        case "info":
-            guard let headline, let button else { return nil }
-            return Card(content: .info(.init(headline: headline,
-                                             title: title,
-                                             caption: caption,
-                                             icon: icon,
-                                             button: button,
-                                             color: color.map(Self.cardColor) ?? .brandPrimaryColor)))
-        default:
-            return nil
-        }
-    }
-
-    private static func cardColor(_ token: String) -> Color {
-        switch token {
-        case "primaryColor":
-            .primaryColor
-        case "secondaryColor":
-            .secondaryColor
-        case "accentColorB":
-            .accentColorB
-        default:
-            .brandPrimaryColor
-        }
+        guard let number, let validDate, let name, let brand else { return nil }
+        return Card(content: .creditCard(.init(number: number,
+                                                validDate: validDate,
+                                                name: name,
+                                                brand: brand,
+                                                style: style ?? .standard)))
     }
 }
 
