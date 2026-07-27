@@ -295,12 +295,18 @@ internal enum Strings {
     internal static let moreSubtitle = Strings.tr("Localizable", "QuickActions.moreSubtitle", fallback: "All services")
     /// More
     internal static let moreTitle = Strings.tr("Localizable", "QuickActions.moreTitle", fallback: "More")
+    /// Pay
+    internal static let payTitle = Strings.tr("Localizable", "QuickActions.payTitle", fallback: "Pay")
     /// Receive money
     internal static let requestSubtitle = Strings.tr("Localizable", "QuickActions.requestSubtitle", fallback: "Receive money")
     /// Request
     internal static let requestTitle = Strings.tr("Localizable", "QuickActions.requestTitle", fallback: "Request")
     /// What would you like to do ?
     internal static let sectionTitle = Strings.tr("Localizable", "QuickActions.sectionTitle", fallback: "What would you like to do ?")
+    /// Send
+    internal static let sendTitle = Strings.tr("Localizable", "QuickActions.sendTitle", fallback: "Send")
+    /// Top up
+    internal static let topUpTitle = Strings.tr("Localizable", "QuickActions.topUpTitle", fallback: "Top up")
     /// Send money
     internal static let transferSubtitle = Strings.tr("Localizable", "QuickActions.transferSubtitle", fallback: "Send money")
     /// Transfer

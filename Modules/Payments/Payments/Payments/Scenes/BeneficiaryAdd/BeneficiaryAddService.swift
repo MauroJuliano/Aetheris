@@ -17,20 +17,35 @@ final class BeneficiaryAddService: BeneficiaryAddServicing {
     func findBeneficiary(
         identifier: String
     ) async throws -> Beneficiary {
-        let response: BeneficiaryAddResponse = try await coreService.execute(
+        let beneficiaries: [Beneficiary] = try await coreService.execute(
             BeneficiaryAddEndpoint.search(
-                request: .init(
-                    identifier: identifier
-                )
+                identifier: identifier
             )
         )
 
-        return response.model
+        guard let beneficiary = beneficiaries.first(where: {
+            Self.matches(identifier: identifier, beneficiary: $0)
+        }) else {
+            throw BeneficiaryAddError.notFound
+        }
+
+        return beneficiary
+    }
+
+    private static func matches(identifier: String, beneficiary: Beneficiary) -> Bool {
+        let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let name = beneficiary.name.lowercased()
+        let pixKey = beneficiary.pixKey.lowercased()
+
+        return normalized == name
+            || normalized == pixKey
+            || name.contains(normalized)
+            || pixKey.contains(normalized)
     }
 }
 
 private enum BeneficiaryAddEndpoint {
-    case search(request: BeneficiaryAddRequest)
+    case search(identifier: String)
 }
 
 extension BeneficiaryAddEndpoint: Endpoint {
@@ -44,37 +59,16 @@ extension BeneficiaryAddEndpoint: Endpoint {
 
     var body: Encodable? {
         switch self {
-        case let .search(request):
-            return request
+        case let .search(identifier):
+            return identifier
         }
     }
 
     var mockResponseData: Data {
         switch self {
-        case let .search(request):
-            guard let selected = Self.mockBeneficiary(for: request.identifier) else {
-                return Data()
-            }
-
-            return Self.encodeOrEmpty(
-                BeneficiaryAddResponse(
-                    name: selected.name,
-                    pixKey: request.identifier,
-                    image: selected.image,
-                    hasDivider: true
-                )
-            )
+        case .search:
+            return Self.encodeOrEmpty(Beneficiary.mock)
         }
-    }
-
-    private static func mockBeneficiary(for identifier: String) -> Beneficiary? {
-        let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-
-        return Beneficiary.beneficiaries.first(where: {
-            let name = $0.name.lowercased()
-            let pixKey = $0.pixKey.lowercased()
-            return normalized.contains(name) || normalized.contains(pixKey) || name.contains(normalized)
-        })
     }
 
     private static func encodeOrEmpty<T: Encodable>(_ value: T) -> Data {
@@ -82,22 +76,6 @@ extension BeneficiaryAddEndpoint: Endpoint {
     }
 }
 
-private struct BeneficiaryAddRequest: Codable {
-    let identifier: String
-}
-
-private struct BeneficiaryAddResponse: Codable {
-    let name: String
-    let pixKey: String
-    let image: String
-    let hasDivider: Bool
-
-    var model: Beneficiary {
-        Beneficiary(
-            name: name,
-            pixKey: pixKey,
-            image: image,
-            hasDivider: hasDivider
-        )
-    }
+private enum BeneficiaryAddError: Error {
+    case notFound
 }

@@ -66,12 +66,15 @@
 "HomeApp.applyNow" = "Apply Now";
 
 "QuickActions.sectionTitle" = "What would you like to do ?";
+"QuickActions.sendTitle" = "Send";
 "QuickActions.transferTitle" = "Transfer";
 "QuickActions.transferSubtitle" = "Send money";
 "QuickActions.requestTitle" = "Request";
 "QuickActions.requestSubtitle" = "Receive money";
 "QuickActions.moreTitle" = "More";
 "QuickActions.moreSubtitle" = "All services";
+"QuickActions.payTitle" = "Pay";
+"QuickActions.topUpTitle" = "Top up";
 
 "AllServices.title" = "All services";
 "AllServices.subtitle" = "Quick access to the main services available in the app.";

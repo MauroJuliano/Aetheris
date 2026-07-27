@@ -13,10 +13,7 @@ final class CardInsuranceService: CardInsuranceServicing {
     }
 
     func loadBullets() async throws -> [CardInsuranceBullet] {
-        let payloads: [CardInsuranceBulletPayload] = try await coreService.execute(
-            CardInsuranceEndpoint.bullets
-        )
-        return payloads.map(\.model)
+        try await coreService.execute(CardInsuranceEndpoint.bullets)
     }
 }
 
@@ -36,7 +33,7 @@ extension CardInsuranceEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .bullets:
-            return Self.encodeOrEmpty(CardInsuranceBulletPayload.mock)
+            return Self.encodeOrEmpty(CardInsuranceBullet.mock)
         }
     }
 
@@ -45,17 +42,11 @@ extension CardInsuranceEndpoint: Endpoint {
     }
 }
 
-private struct CardInsuranceBulletPayload: Codable {
-    let text: String
-
-    static let mock: [CardInsuranceBulletPayload] = [
+private extension CardInsuranceBullet {
+    static let mock: [CardInsuranceBullet] = [
         .init(text: Strings.CardInsurance.bulletOne),
         .init(text: Strings.CardInsurance.bulletTwo),
         .init(text: Strings.CardInsurance.bulletThree),
         .init(text: Strings.CardInsurance.bulletFour)
     ]
-
-    var model: CardInsuranceBullet {
-        CardInsuranceBullet(text: text)
-    }
 }

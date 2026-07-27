@@ -2,7 +2,7 @@ import Core
 import Foundation
 
 protocol ViewReportServicing {
-    func loadReport() async throws -> ViewReportPayload
+    func loadReport() async throws -> ViewReportModel
 }
 
 final class ViewReportService: ViewReportServicing {
@@ -12,7 +12,7 @@ final class ViewReportService: ViewReportServicing {
         self.coreService = coreService
     }
 
-    func loadReport() async throws -> ViewReportPayload {
+    func loadReport() async throws -> ViewReportModel {
         try await coreService.execute(ViewReportEndpoint.report)
     }
 }
@@ -33,7 +33,7 @@ extension ViewReportEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .report:
-            return Self.encodeOrEmpty(ViewReportPayload.mock)
+            return Self.encodeOrEmpty(ViewReportModel.mock)
         }
     }
 
@@ -42,8 +42,8 @@ extension ViewReportEndpoint: Endpoint {
     }
 }
 
-struct ViewReportPayload: Codable {
+struct ViewReportModel: Codable {
     let title: String
 
-    static let mock = ViewReportPayload(title: Strings.ViewReport.loadingTitle)
+    static let mock = ViewReportModel(title: Strings.ViewReport.loadingTitle)
 }

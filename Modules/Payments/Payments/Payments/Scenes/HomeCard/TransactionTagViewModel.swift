@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum TransactionType {
+enum TransactionType: String, Codable {
     case income
     case expense
     case transfer
@@ -29,5 +29,4 @@ enum TransactionType {
         }
     }
 }
-
 

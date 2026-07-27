@@ -13,8 +13,7 @@ final class AllServicesService: AllServicesServicing {
     }
 
     func loadServices() async throws -> [AllServicesItem] {
-        let payloads: [AllServicesPayload] = try await coreService.execute(AllServicesEndpoint.services)
-        return payloads.compactMap(\.model)
+        try await coreService.execute(AllServicesEndpoint.services)
     }
 }
 
@@ -34,7 +33,7 @@ extension AllServicesEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .services:
-            return Self.encodeOrEmpty(AllServicesPayload.mock)
+            return Self.encodeOrEmpty(AllServicesItem.mock)
         }
     }
 
@@ -43,13 +42,8 @@ extension AllServicesEndpoint: Endpoint {
     }
 }
 
-private struct AllServicesPayload: Codable {
-    let title: String
-    let subtitle: String
-    let icon: String
-    let theme: AllServicesItem.Theme
-
-    static let mock: [AllServicesPayload] = [
+private extension AllServicesItem {
+    static let mock: [AllServicesItem] = [
         .init(
             title: Strings.AllServices.transferMoney,
             subtitle: Strings.SendMoney.title,
@@ -87,9 +81,4 @@ private struct AllServicesPayload: Codable {
             theme: .info
         )
     ]
-
-    var model: AllServicesItem? {
-        .init(title: title, subtitle: subtitle, icon: icon, theme: theme)
-    }
 }
-

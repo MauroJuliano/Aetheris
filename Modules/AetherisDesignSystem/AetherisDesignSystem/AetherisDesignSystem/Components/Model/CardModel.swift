@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct Card: Identifiable, Hashable {
+public struct Card: Identifiable, Hashable, Codable {
     public var id: UUID
     var content: CardContent
     
@@ -10,7 +10,7 @@ public struct Card: Identifiable, Hashable {
         self.content = content
     }
     
-    public enum CardContent: Hashable {
+    public enum CardContent: Hashable, Codable {
         case creditCard(CreditCardModel)
     }
 }
@@ -66,7 +66,7 @@ public enum CreditCardStyle: String, Codable, Hashable {
     }
 }
 
-public struct CreditCardModel: Hashable {
+public struct CreditCardModel: Hashable, Codable {
     let number: String
     let validDate: String
     let name: String
