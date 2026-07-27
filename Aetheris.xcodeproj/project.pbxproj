@@ -12,6 +12,7 @@
 		A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */; };
 		A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */; };
+		A9AFA28E2FE9DEEA005B85AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA28F2FE9DEEA005B85AF /* LaunchScreen.storyboard */; };
 		A9AFA2AB2FE9E746005B85AF /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */; };
 		A9AFA2AC2FE9E746005B85AF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA2A92FE9E746005B85AF /* Localizable.strings */; };
 		A9B5306B2F4D2C34005C2C96 /* AERegistration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B530602F4D2C34005C2C96 /* AERegistration.framework */; };
@@ -373,6 +374,7 @@
 		A982A8112F5111E000C22A84 /* AccountInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisApp.swift; sourceTree = "<group>"; };
 		A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9AFA28F2FE9DEEA005B85AF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		A9AFA2A82FE9E746005B85AF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A9B530602F4D2C34005C2C96 /* AERegistration.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AERegistration.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,13 +405,6 @@
 				Components/LoadingScreen.swift,
 			);
 			target = A9C188E72F4E7A5A00013305 /* Payments */;
-		};
-		A9AFA5052FECA020005B85AF /* Exceptions for "Payments" folder in "AetherisDesignSystem" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Commons/Helpers/Components/SpendingLineChart.swift,
-			);
-			target = A9B535B12F4E3B87005C2C96 /* AetherisDesignSystem */;
 		};
 		A9B535E22F4E3CE8005C2C96 /* Exceptions for "AetherisDesignSystem" folder in "AetherisDesignSystem" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -522,9 +517,6 @@
 		};
 		A9C188E92F4E7A5A00013305 /* Payments */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				A9AFA5052FECA020005B85AF /* Exceptions for "Payments" folder in "AetherisDesignSystem" target */,
-			);
 			path = Payments;
 			sourceTree = "<group>";
 		};
@@ -748,6 +740,7 @@
 				A9B534632F4E388F005C2C96 /* Modules */,
 				A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */,
 				A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */,
+				A9AFA28F2FE9DEEA005B85AF /* LaunchScreen.storyboard */,
 				A976FAA92E37AEEF00FF923B /* Products */,
 				A9BC38512FEEC4B400BFE3AF /* Generated */,
 			);
@@ -1713,15 +1706,16 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A976FAA62E37AEEF00FF923B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */,
-				A9AFA2AC2FE9E746005B85AF /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+			A976FAA62E37AEEF00FF923B /* Resources */ = {
+				isa = PBXResourcesBuildPhase;
+				buildActionMask = 2147483647;
+				files = (
+					A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */,
+					A9AFA28E2FE9DEEA005B85AF /* LaunchScreen.storyboard in Resources */,
+					A9AFA2AC2FE9E746005B85AF /* Localizable.strings in Resources */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
 		A976FAB32E37AEF200FF923B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2400,11 +2394,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+					INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+					INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+					INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2429,11 +2424,12 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+					INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+					INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+					INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

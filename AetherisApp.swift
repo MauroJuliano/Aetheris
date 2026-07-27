@@ -42,11 +42,11 @@ struct SplashView: View {
         ZStack {
             Color.brandPrimaryColor
                 .ignoresSafeArea()
-            
-            Text("Aetheris")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
+
+            Image("launchScreen")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
         }
     }
 }

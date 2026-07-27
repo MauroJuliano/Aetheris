@@ -39,6 +39,7 @@ struct SendMoney: View {
                 model: $selectedBeneficiary
             )
             .padding()
+            .frame(maxWidth: .infinity)
 
             NumericKeyboard(
                 displayedAmount: amountViewModel.formattedAmount,
@@ -46,11 +47,15 @@ struct SendMoney: View {
                 onKeyPressed: amountViewModel.handleKeyPress
             )
             .padding()
+            .frame(maxWidth: .infinity)
 
             Spacer()
 
             Button {
-                let receipt = viewModel.continueTapped(selectedBeneficiary: selectedBeneficiary)
+                guard let receipt = viewModel.continueTapped(selectedBeneficiary: selectedBeneficiary) else {
+                    return
+                }
+
                 onContinue(receipt)
             } label: {
                 ZStack {
@@ -70,6 +75,8 @@ struct SendMoney: View {
                 }
             }
             .padding(AppSpacing.medium)
+            .disabled(amountViewModel.currentAmount <= 0)
+            .opacity(amountViewModel.currentAmount > 0 ? 1 : 0.55)
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
         .appScreenBackground()

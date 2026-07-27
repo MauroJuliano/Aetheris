@@ -77,8 +77,3 @@ struct ResumeListCell: View {
         .appListCellRow(hasDivider: hasDivider, dividerLeading: 0, horizontalPadding: 0, verticalPadding: 0)
     }
 }
-
-#Preview {
-    ResumeListCell(model: .list.first!, hasDivider: false) { ResumeListModel in
-        
-    }}

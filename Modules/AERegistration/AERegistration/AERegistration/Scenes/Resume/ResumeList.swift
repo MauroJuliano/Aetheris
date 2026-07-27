@@ -5,7 +5,3 @@ struct ResumeList: View {
         Text(Strings.Resume.listTitle)
     }
 }
-
-#Preview {
-    ResumeList()
-}

@@ -64,6 +64,7 @@ public struct TransferBeneficiary: View {
         }
         .padding(.horizontal, AppSpacing.medium)
         .padding(.vertical, AppSpacing.medium + AppSpacing.xxxSmall)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .appCardSurface()
     }
     
@@ -102,4 +103,3 @@ public struct TransferBeneficiary: View {
         }
     }
 }
-

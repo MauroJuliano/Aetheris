@@ -52,7 +52,10 @@ extension BeneficiaryAddEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case let .search(request):
-            let selected = Self.mockBeneficiary(for: request.identifier)
+            guard let selected = Self.mockBeneficiary(for: request.identifier) else {
+                return Data()
+            }
+
             return Self.encodeOrEmpty(
                 BeneficiaryAddResponse(
                     name: selected.name,
@@ -64,18 +67,14 @@ extension BeneficiaryAddEndpoint: Endpoint {
         }
     }
 
-    private static func mockBeneficiary(for identifier: String) -> Beneficiary {
+    private static func mockBeneficiary(for identifier: String) -> Beneficiary? {
         let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
 
-        if let match = Beneficiary.beneficiaries.first(where: {
+        return Beneficiary.beneficiaries.first(where: {
             let name = $0.name.lowercased()
             let pixKey = $0.pixKey.lowercased()
             return normalized.contains(name) || normalized.contains(pixKey) || name.contains(normalized)
-        }) {
-            return match
-        }
-
-        return Beneficiary.beneficiaries[abs(normalized.hashValue) % Beneficiary.beneficiaries.count]
+        })
     }
 
     private static func encodeOrEmpty<T: Encodable>(_ value: T) -> Data {

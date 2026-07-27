@@ -7,5 +7,8 @@ public protocol HasRegistration {
 
 public protocol RegistrationFactoryInterface {
     init(coreService: any HasCoreService)
-    func make(onFinished: @escaping () -> Void) -> AnyView
+    func make(
+        onFinished: @escaping () -> Void,
+        onBackToLogin: @escaping () -> Void
+    ) -> AnyView
 }

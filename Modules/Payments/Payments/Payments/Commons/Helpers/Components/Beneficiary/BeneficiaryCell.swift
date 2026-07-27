@@ -26,6 +26,15 @@ public struct Beneficiary: Identifiable {
         Beneficiary(name: "Adele", pixKey: "rollinginthedeep", image: "Adele", hasDivider: true),
         Beneficiary(name: "Troy Bolton", pixKey: "scream", image: "Troy", hasDivider: false)
     ]
+
+    public static var defaultSelection: Beneficiary {
+        beneficiaries.first ?? Beneficiary(
+            name: "Melissa",
+            pixKey: "contact@melissamccarthy.com",
+            image: "melissa",
+            hasDivider: true
+        )
+    }
 }
 
 public struct BeneficiaryCell: View {
@@ -72,4 +81,3 @@ public struct BeneficiaryCell: View {
         .appListCellRow(hasDivider: model.hasDivider)
     }
 }
-

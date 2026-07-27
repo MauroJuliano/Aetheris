@@ -1,4 +1,3 @@
-import AetherisDesignSystem
 import SwiftUI
 
 struct SpendingPoint: Identifiable, Equatable {
@@ -7,7 +6,9 @@ struct SpendingPoint: Identifiable, Equatable {
     let amount: Double
 }
 
-struct SpendingLineChart: View {
+public struct SpendingLineChart: View {
+    public init() {}
+
     private let points: [SpendingPoint] = [
         .init(day: "1", amount: 220),
         .init(day: "2", amount: 280),
@@ -45,7 +46,7 @@ struct SpendingLineChart: View {
 
     @State private var selectedIndex: Int = 22
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             let size = geometry.size
             let path = makePath(in: size)
@@ -144,10 +145,9 @@ struct SpendingLineChart: View {
         let topPadding: CGFloat = 28
         let bottomPadding: CGFloat = 8
         let drawableHeight = size.height - topPadding - bottomPadding
-        
+
         return points.enumerated().map { index, item in
             let normalized = range == 0 ? 0.5 : (item.amount - minAmount) / range
-        
 
             return CGPoint(
                 x: CGFloat(index) * step,
@@ -173,4 +173,3 @@ struct SpendingLineChart: View {
         "$ \(String(format: "%.2f", value))"
     }
 }
-

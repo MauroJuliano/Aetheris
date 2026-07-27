@@ -7,7 +7,7 @@ struct PaymentsFlowCoordinator: View {
     let coreService: any HasCoreService
     let onFinished: () -> Void
 
-    @State private var selectedBeneficiary: Beneficiary = .beneficiaries.first!
+    @State private var selectedBeneficiary: Beneficiary = .defaultSelection
 
     var body: some View {
         switch entryPoint {

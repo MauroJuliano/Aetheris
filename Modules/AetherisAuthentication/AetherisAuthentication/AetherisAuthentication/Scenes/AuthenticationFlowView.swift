@@ -23,9 +23,14 @@ struct AuthenticationFlowView: View {
             )
 
         case .register:
-            dependencies.registrationFactory.make {
-                flow = .main
-            }
+            dependencies.registrationFactory.make(
+                onFinished: {
+                    flow = .main
+                },
+                onBackToLogin: {
+                    flow = .login
+                }
+            )
 
         case .main:
             MainTabContainer(

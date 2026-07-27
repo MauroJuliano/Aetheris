@@ -1,9 +1,11 @@
+import Combine
 import Foundation
 import SwiftUI
 
 @MainActor
 public final class TransferAmountViewModel: ObservableObject {
     @Published private var digits: String = ""
+    @Published public private(set) var currentAmount: Decimal = 0
 
     public let balance: Decimal
 
@@ -13,14 +15,6 @@ public final class TransferAmountViewModel: ObservableObject {
 
     public var formattedBalance: String {
         formatCurrency(balance)
-    }
-
-    public var currentAmount: Decimal {
-        guard let cents = Decimal(string: digits), !digits.isEmpty else {
-            return 0
-        }
-
-        return cents / 100
     }
 
     public init(balance: Decimal) {
@@ -51,19 +45,30 @@ public final class TransferAmountViewModel: ObservableObject {
 
         if newAmount <= balance {
             digits = newDigits
+            currentAmount = newAmount
         } else {
             digits = balanceAsDigits
+            currentAmount = balance
         }
     }
 
     private func removeLastDigit() {
         guard !digits.isEmpty else { return }
         digits.removeLast()
+        currentAmount = amount(from: digits)
     }
 
     private var balanceAsDigits: String {
         let cents = balance * 100
         return NSDecimalNumber(decimal: cents).intValue.description
+    }
+
+    private func amount(from digits: String) -> Decimal {
+        guard let cents = Decimal(string: digits), !digits.isEmpty else {
+            return 0
+        }
+
+        return cents / 100
     }
 
     private func formatCurrency(_ value: Decimal) -> String {

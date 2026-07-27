@@ -5,50 +5,54 @@ import SwiftUI
 struct BirthdateView: View {
     @StateObject private var viewModel: BirthdateViewModel
     @ObservedObject private var draft: RegistrationDraft
+    private let onBack: () -> Void
     private var onContinue: () -> Void
     
     init(viewModel: BirthdateViewModel,
          draft: RegistrationDraft,
+         onBack: @escaping () -> Void,
          onContinue: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _draft = ObservedObject(wrappedValue: draft)
+        self.onBack = onBack
         self.onContinue = onContinue
     }
     
     var body: some View {
         ZStack {
-            RegisterView(title: viewModel.title,
-                         subTitle: viewModel.subTitle,
-                         textFieldValue: Binding(
-                            get: { draft.birthdate },
-                            set: { viewModel.updateBirthdate($0) }
-                         ),
-                         buttonTitle: viewModel.buttonName,
-                         textFieldPlaceholder: viewModel.placeholder,
-                         keyboardType: .numberPad,
-                         fieldErrorMessage: viewModel.errorMessage,
-                         onAction: {
-                viewModel.submit()
-            })
-            .onReceive(viewModel.submissionSucceeded) {
-                onContinue()
+            if viewModel.isLoading {
+                RegisterInputSkeleton()
+            } else {
+                RegisterView(title: viewModel.title,
+                             subTitle: viewModel.subTitle,
+                             textFieldValue: Binding(
+                                get: { draft.birthdate },
+                                set: { viewModel.updateBirthdate($0) }
+                             ),
+                             buttonTitle: viewModel.buttonName,
+                             textFieldPlaceholder: viewModel.placeholder,
+                             keyboardType: .numberPad,
+                             fieldErrorMessage: viewModel.errorMessage,
+                             onAction: {
+                    viewModel.submit()
+                })
             }
-            .opacity(viewModel.isLoading ? 0 : 1)
-
-            RegisterInputSkeleton()
-                .opacity(viewModel.isLoading ? 1 : 0)
+        }
+        .onReceive(viewModel.submissionSucceeded) {
+            onContinue()
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if !viewModel.isLoading {
+                NavBar(
+                    hasNotifications: false,
+                    hasBackButton: true,
+                    model: .init(hasInitialSpace: false),
+                    onBack: onBack
+                )
+                .padding(.top, AppSpacing.medium)
+            }
         }
         .appScreenBackground()
         .navigationBarHidden(true)
     }
-}
-
-#Preview {
-    let draft = RegistrationDraft()
-    BirthdateView(
-        viewModel: BirthdateViewModel(service: BirthdateService(coreService: MockCoreServiceApi()),
-                                      draft: draft),
-        draft: draft,
-        onContinue: {}
-    )
 }
