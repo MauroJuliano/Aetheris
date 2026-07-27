@@ -51,6 +51,7 @@ private struct HomeAppCardPayload: Codable {
     let validDate: String?
     let name: String?
     let brand: String?
+    let style: CreditCardStyle?
     let headline: String?
     let title: String?
     let caption: String?
@@ -62,46 +63,58 @@ private struct HomeAppCardPayload: Codable {
         .creditCard(number: "**** **** **** **21",
                     validDate: "09/25",
                     name: Strings.HomeApp.mockCardOwnerOne,
-                    brand: Strings.HomeApp.mockVisa),
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .standard),
+        .creditCard(number: "**** **** **** **21",
+                    validDate: "09/25",
+                    name: Strings.HomeApp.mockCardOwnerOne,
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .gold),
+        .creditCard(number: "**** **** **** **21",
+                    validDate: "09/25",
+                    name: Strings.HomeApp.mockCardOwnerOne,
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .aurora),
+        .creditCard(number: "**** **** **** **21",
+                    validDate: "09/25",
+                    name: Strings.HomeApp.mockCardOwnerOne,
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .infinite),
+        .creditCard(number: "**** **** **** **21",
+                    validDate: "09/25",
+                    name: Strings.HomeApp.mockCardOwnerOne,
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .platinum),
         .info(headline: Strings.HomeApp.rewardsHeadline,
               title: Strings.HomeApp.rewardsTitle,
               caption: Strings.HomeApp.rewardsCaption,
               icon: "gift",
               button: Strings.HomeApp.redeem,
               color: "primaryColor"),
-        .info(headline: Strings.HomeApp.monthlySpendingHeadline,
-              title: Strings.HomeApp.monthlySpendingTitle,
-              caption: Strings.HomeApp.monthlySpendingCaption,
-              icon: "chart.pie.fill",
-              button: Strings.HomeApp.seeInsights,
-              color: "secondaryColor"),
         .creditCard(number: "**** **** **** **73",
                     validDate: "02/29",
                     name: Strings.HomeApp.mockCardOwnerTwo,
-                    brand: Strings.HomeApp.mockMastercard),
+                    brand: Strings.HomeApp.mockMastercard,
+                    style: .black),
         .info(headline: Strings.HomeApp.specialOfferHeadline,
               title: Strings.HomeApp.specialOfferTitle,
               caption: Strings.HomeApp.specialOfferCaption,
               icon: "shield.fill",
               button: Strings.HomeApp.learnMore,
               color: "accentColorB"),
-        .info(headline: Strings.HomeApp.noCreditCardHeadline,
-              title: Strings.HomeApp.buildYourCreditTitle,
-              caption: Strings.HomeApp.buildYourCreditCaption,
-              icon: "star.fill",
-              button: Strings.HomeApp.applyNow,
-              color: "secondaryColor")
     ]
 
     static func creditCard(number: String,
                            validDate: String,
                            name: String,
-                           brand: String) -> HomeAppCardPayload {
+                           brand: String,
+                           style: CreditCardStyle = .standard) -> HomeAppCardPayload {
         .init(kind: "creditCard",
               number: number,
               validDate: validDate,
               name: name,
               brand: brand,
+              style: style,
               headline: nil,
               title: nil,
               caption: nil,
@@ -121,6 +134,7 @@ private struct HomeAppCardPayload: Codable {
               validDate: nil,
               name: nil,
               brand: nil,
+              style: nil,
               headline: headline,
               title: title,
               caption: caption,
@@ -136,7 +150,8 @@ private struct HomeAppCardPayload: Codable {
             return Card(content: .creditCard(.init(number: number,
                                                     validDate: validDate,
                                                     name: name,
-                                                    brand: brand)))
+                                                    brand: brand,
+                                                    style: style ?? .standard)))
         case "info":
             guard let headline, let button else { return nil }
             return Card(content: .info(.init(headline: headline,

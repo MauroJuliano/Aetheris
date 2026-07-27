@@ -10,8 +10,7 @@ struct CardView: View {
         case let .info(model):
             CardInfoView(infoModel: model)
         case let .creditCard(model):
-            CreditCardView(model: model)
+            CreditCardView(model: model, theme: model.style.theme)
         }
     }
 }
-

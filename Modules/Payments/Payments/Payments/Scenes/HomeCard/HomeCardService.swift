@@ -143,6 +143,7 @@ private struct HomeCardCardPayload: Codable {
     let validDate: String?
     let name: String?
     let brand: String?
+    let style: CreditCardStyle?
     let headline: String?
     let title: String?
     let caption: String?
@@ -154,7 +155,8 @@ private struct HomeCardCardPayload: Codable {
         .creditCard(number: "**** **** **** **21",
                     validDate: "09/25",
                     name: Strings.HomeApp.mockCardOwnerOne,
-                    brand: Strings.HomeApp.mockVisa),
+                    brand: Strings.HomeApp.mockVisa,
+                    style: .platinum),
         .info(headline: Strings.HomeApp.rewardsHeadline,
               title: Strings.HomeApp.rewardsTitle,
               caption: Strings.HomeApp.rewardsCaption,
@@ -172,12 +174,14 @@ private struct HomeCardCardPayload: Codable {
     static func creditCard(number: String,
                            validDate: String,
                            name: String,
-                           brand: String) -> HomeCardCardPayload {
+                           brand: String,
+                           style: CreditCardStyle = .standard) -> HomeCardCardPayload {
         .init(kind: "creditCard",
               number: number,
               validDate: validDate,
               name: name,
               brand: brand,
+              style: style,
               headline: nil,
               title: nil,
               caption: nil,
@@ -197,6 +201,7 @@ private struct HomeCardCardPayload: Codable {
               validDate: nil,
               name: nil,
               brand: nil,
+              style: nil,
               headline: headline,
               title: title,
               caption: caption,
@@ -212,7 +217,8 @@ private struct HomeCardCardPayload: Codable {
             return Card(content: .creditCard(.init(number: number,
                                                     validDate: validDate,
                                                     name: name,
-                                                    brand: brand)))
+                                                    brand: brand,
+                                                    style: style ?? .standard)))
         case "info":
             guard let headline, let button else { return nil }
             return Card(content: .info(.init(headline: headline,

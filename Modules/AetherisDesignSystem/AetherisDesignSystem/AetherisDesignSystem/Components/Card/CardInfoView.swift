@@ -61,3 +61,17 @@ struct CardInfoView: View {
         }
 }
 
+#Preview {
+    CardInfoView(
+        infoModel: .init(
+            headline: "Monthly spending",
+            title: "Track your expenses",
+            caption: "See where your money went this month.",
+            icon: "chart.pie.fill",
+            button: "View report",
+            color: .accentColorBrown
+        )
+    )
+    .padding()
+    .background(Color.backgroundColorA)
+}

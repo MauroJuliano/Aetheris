@@ -2,7 +2,8 @@ public struct CardsMock {
     public static var multipleTypeCards = [Card(content: .creditCard(.init(number: "**** **** **** **21",
                                                                            validDate: "09/25",
                                                                            name: Strings.CreditCard.ownerName,
-                                                                           brand: Strings.CreditCard.brandVisa))),
+                                                                           brand: Strings.CreditCard.brandVisa,
+                                                                           style: .standard))),
                                            Card(content: .info(.init(headline: Strings.CardInfo.rewardsHeadline,
                                                                      title: Strings.CardInfo.rewardsTitle,
                                                                      caption: Strings.CardInfo.rewardsCaption,
@@ -18,7 +19,8 @@ public struct CardsMock {
                                            Card(content: .creditCard(.init(number: "**** **** **** **73",
                                                                            validDate: "02/29",
                                                                            name: Strings.CreditCard.ownerNameTwo,
-                                                                           brand: Strings.CreditCard.brandMastercard))),
+                                                                           brand: Strings.CreditCard.brandMastercard,
+                                                                           style: .black))),
                                            Card(content: .info(.init(headline: Strings.CardInfo.specialOfferHeadline,
                                                                      title: Strings.CardInfo.specialOfferTitle,
                                                                      caption: Strings.CardInfo.specialOfferCaption,
@@ -36,10 +38,12 @@ public struct CardsMock {
     public static var creditCardMocks = [Card(content: .creditCard(.init(number: "**** **** **** **21",
                                                                          validDate: "09/25",
                                                                          name: Strings.CreditCard.ownerName,
-                                                                         brand: Strings.CreditCard.brandVisa))),
+                                                                         brand: Strings.CreditCard.brandVisa,
+                                                                         style: .platinum))),
                                          Card(content: .creditCard(.init(number: "**** **** **** **73",
                                                                          validDate: "02/29",
                                                                          name: Strings.CreditCard.ownerNameTwo,
-                                                                         brand: Strings.CreditCard.brandMastercard)))
+                                                                         brand: Strings.CreditCard.brandMastercard,
+                                                                         style: .gold)))
     ]
 }
