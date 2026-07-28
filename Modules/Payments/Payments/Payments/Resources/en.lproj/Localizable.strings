@@ -54,7 +54,7 @@
 "HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
 "HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "HomeApp.seeInsights" = "See Insights";
-"HomeApp.mockCardOwnerTwo" = "Amado batista";
+"HomeApp.mockCardOwnerTwo" = "Amado Batista";
 "HomeApp.mockMastercard" = "MASTERCARD";
 "HomeApp.specialOfferHeadline" = "Special Offer";
 "HomeApp.specialOfferTitle" = "Travel Insurance";
@@ -104,7 +104,7 @@
 "Common.back" = "Back";
 
 "Notifications.titleTransferSent" = "Funds successfully transferred to Melissa";
-"Notifications.titlePaymentReceived" = "Payment received from Ed";
+"Notifications.titlePaymentReceived" = "Payment received from Ed Sheeran";
 "Notifications.titleSubscriptionRenewed" = "Subscription renewed for Man's best Friend";
 "Notifications.titleRefundProcessed" = "Refund processed successfully";
 "Notifications.titleSubscriptionExpired" = "Your subscription has expired";

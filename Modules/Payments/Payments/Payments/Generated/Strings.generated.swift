@@ -147,8 +147,8 @@ internal enum Strings {
     internal static let logout = Strings.tr("Localizable", "HomeApp.logout", fallback: "Logout")
     /// Jorge Henrique
     internal static let mockCardOwnerOne = Strings.tr("Localizable", "HomeApp.mockCardOwnerOne", fallback: "Jorge Henrique")
-    /// Amado batista
-    internal static let mockCardOwnerTwo = Strings.tr("Localizable", "HomeApp.mockCardOwnerTwo", fallback: "Amado batista")
+    /// Amado Batista
+    internal static let mockCardOwnerTwo = Strings.tr("Localizable", "HomeApp.mockCardOwnerTwo", fallback: "Amado Batista")
     /// MASTERCARD
     internal static let mockMastercard = Strings.tr("Localizable", "HomeApp.mockMastercard", fallback: "MASTERCARD")
     /// VISA
@@ -229,8 +229,8 @@ internal enum Strings {
     internal static let sectionYesterday = Strings.tr("Localizable", "Notifications.sectionYesterday", fallback: "Yesterday")
     /// System maintenance completed
     internal static let titleMaintenanceCompleted = Strings.tr("Localizable", "Notifications.titleMaintenanceCompleted", fallback: "System maintenance completed")
-    /// Payment received from Ed
-    internal static let titlePaymentReceived = Strings.tr("Localizable", "Notifications.titlePaymentReceived", fallback: "Payment received from Ed")
+    /// Payment received from Ed Sheeran
+    internal static let titlePaymentReceived = Strings.tr("Localizable", "Notifications.titlePaymentReceived", fallback: "Payment received from Ed Sheeran")
     /// Refund processed successfully
     internal static let titleRefundProcessed = Strings.tr("Localizable", "Notifications.titleRefundProcessed", fallback: "Refund processed successfully")
     /// Your subscription has expired

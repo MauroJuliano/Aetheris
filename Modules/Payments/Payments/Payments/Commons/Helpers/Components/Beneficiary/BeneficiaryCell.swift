@@ -22,7 +22,7 @@ public struct Beneficiary: Identifiable, Codable, Hashable {
     
     public static let mock: [Beneficiary] = [
         Beneficiary(name: "Melissa", pixKey: "contact@melissamccarthy.com", image: "melissa", hasDivider: true),
-        Beneficiary(name: "Ed sheeran", pixKey: "afirelove", image: "ed", hasDivider: true),
+        Beneficiary(name: "Ed Sheeran", pixKey: "afirelove", image: "ed", hasDivider: true),
         Beneficiary(name: "Adele", pixKey: "rollinginthedeep", image: "Adele", hasDivider: true),
         Beneficiary(name: "Troy Bolton", pixKey: "scream", image: "Troy", hasDivider: false)
     ]
