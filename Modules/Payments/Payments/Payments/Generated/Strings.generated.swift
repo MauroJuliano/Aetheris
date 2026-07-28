@@ -267,6 +267,8 @@ internal enum Strings {
     internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "contact@melissamccarthy.com")
     /// Tell us what can be improved in the app experience.
     internal static let feedbackDescription = Strings.tr("Localizable", "Profile.feedbackDescription", fallback: "Tell us what can be improved in the app experience.")
+    /// Write your feedback here...
+    internal static let feedbackPlaceholder = Strings.tr("Localizable", "Profile.feedbackPlaceholder", fallback: "Write your feedback here...")
     /// Feedback
     internal static let feedbackTitle = Strings.tr("Localizable", "Profile.feedbackTitle", fallback: "Feedback")
     /// This legal page keeps the profile flow realistic while remaining fully local to the app.

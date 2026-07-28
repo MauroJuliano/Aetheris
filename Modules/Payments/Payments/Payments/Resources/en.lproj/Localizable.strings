@@ -195,6 +195,7 @@
 "Profile.save" = "Save";
 "Profile.feedbackTitle" = "Feedback";
 "Profile.feedbackDescription" = "Tell us what can be improved in the app experience.";
+"Profile.feedbackPlaceholder" = "Write your feedback here...";
 "Profile.sendFeedback" = "Send feedback";
 "Profile.privacyPolicy" = "Privacy Policy";
 "Profile.legalDescription" = "This legal page keeps the profile flow realistic while remaining fully local to the app.";
