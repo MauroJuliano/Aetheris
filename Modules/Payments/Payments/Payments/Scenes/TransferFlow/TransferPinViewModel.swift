@@ -1,4 +1,5 @@
 import Foundation
+import LocalAuthentication
 import SwiftUI
 
 @MainActor
@@ -6,6 +7,8 @@ final class TransferPinViewModel: ObservableObject {
     @Published private(set) var pin = ""
     @Published private(set) var isError = false
     @Published private(set) var attemptsLeft: Int
+    @Published private(set) var biometricErrorMessage: String?
+    @Published private(set) var canUseFaceID: Bool
 
     let receipt: TransferReceiptModel
     let correctPin: String
@@ -21,6 +24,11 @@ final class TransferPinViewModel: ObservableObject {
         self.correctPin = correctPin
         self.attemptsLeft = attemptsLeft
         self.pinLimit = pinLimit
+
+        let context = LAContext()
+        var evaluationError: NSError?
+        let canEvaluate = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &evaluationError)
+        self.canUseFaceID = canEvaluate && context.biometryType == .faceID
     }
 
     var title: String {
@@ -66,6 +74,50 @@ final class TransferPinViewModel: ObservableObject {
         guard !pin.isEmpty else { return }
         pin.removeLast()
         isError = false
+    }
+
+    func authenticateWithFaceID(onValidPin: @escaping () -> Void) {
+        guard canUseFaceID else {
+            biometricErrorMessage = Strings.TransferPin.faceIDUnavailable
+            return
+        }
+
+        biometricErrorMessage = nil
+
+        let context = LAContext()
+        context.localizedCancelTitle = Strings.Common.back
+
+        var evaluationError: NSError?
+        guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &evaluationError),
+              context.biometryType == .faceID else {
+            biometricErrorMessage = Strings.TransferPin.faceIDUnavailable
+            canUseFaceID = false
+            return
+        }
+
+        context.evaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            localizedReason: Strings.TransferPin.faceIDReason
+        ) { [weak self] success, error in
+            Task { @MainActor in
+                guard let self else { return }
+
+                if success {
+                    self.reset()
+                    onValidPin()
+                    return
+                }
+
+                if let laError = error as? LAError,
+                   laError.code == .userCancel ||
+                   laError.code == .systemCancel ||
+                   laError.code == .appCancel {
+                    return
+                }
+
+                self.biometricErrorMessage = error?.localizedDescription ?? Strings.TransferPin.faceIDFailed
+            }
+        }
     }
 
     func reset() {

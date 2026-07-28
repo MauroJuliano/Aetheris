@@ -6,6 +6,9 @@
 "TransferPin.subtitle" = "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.";
 "TransferPin.incorrect" = "Incorrect PIN. Try again.";
 "TransferPin.attempts" = "You have %d attempts left.";
+"TransferPin.faceIDReason" = "Authenticate to confirm this transfer.";
+"TransferPin.faceIDUnavailable" = "Face ID is not available on this device.";
+"TransferPin.faceIDFailed" = "Face ID authentication failed. Try again.";
 "TransferPin.useFaceID" = "Use Face ID";
 "TransferPin.confirmTransfer" = "Confirm Transfer";
 "TransferProcessing.title" = "Processing transfer...";

@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SendMoney: View {
     @StateObject private var viewModel: SendMoneyViewModel
-    @ObservedObject private var amountViewModel: TransferAmountViewModel
+    @StateObject private var amountViewModel: TransferAmountViewModel
     @Binding private var selectedBeneficiary: Beneficiary
     let onBackAction: (() -> Void)?
     let onChangeBeneficiary: () -> Void
@@ -15,9 +15,8 @@ struct SendMoney: View {
         onChangeBeneficiary: @escaping () -> Void,
         onContinue: @escaping (TransferReceiptModel) -> Void
     ) {
-        let viewModel = SendMoneyViewModel()
-        _viewModel = StateObject(wrappedValue: viewModel)
-        _amountViewModel = ObservedObject(wrappedValue: viewModel.amountViewModel)
+        _viewModel = StateObject(wrappedValue: SendMoneyViewModel())
+        _amountViewModel = StateObject(wrappedValue: TransferAmountViewModel(balance: 1000))
         _selectedBeneficiary = selectedBeneficiary
         self.onBackAction = onBackAction
         self.onChangeBeneficiary = onChangeBeneficiary
@@ -52,7 +51,11 @@ struct SendMoney: View {
             Spacer()
 
             Button {
-                guard let receipt = viewModel.continueTapped(selectedBeneficiary: selectedBeneficiary) else {
+                guard let receipt = viewModel.continueTapped(
+                    selectedBeneficiary: selectedBeneficiary,
+                    currentAmount: amountViewModel.currentAmount,
+                    formattedAmount: amountViewModel.formattedAmount
+                ) else {
                     return
                 }
 
@@ -75,8 +78,8 @@ struct SendMoney: View {
                 }
             }
             .padding(AppSpacing.medium)
-            .disabled(amountViewModel.currentAmount <= 0)
-            .opacity(amountViewModel.currentAmount > 0 ? 1 : 0.55)
+            .disabled(!viewModel.canContinue(currentAmount: amountViewModel.currentAmount))
+            .opacity(viewModel.canContinue(currentAmount: amountViewModel.currentAmount) ? 1 : 0.55)
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
         .appScreenBackground()

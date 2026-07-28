@@ -1,23 +1,29 @@
 import AetherisDesignSystem
 import Foundation
-import SwiftUI
 
-@MainActor
 final class SendMoneyViewModel: ObservableObject {
-    let amountViewModel = TransferAmountViewModel(balance: 1000)
-    
-    var canContinue: Bool {
-        amountViewModel.currentAmount > 0
+    func canContinue(currentAmount: Decimal) -> Bool {
+        currentAmount > 0
     }
 
-    func continueTapped(selectedBeneficiary: Beneficiary) -> TransferReceiptModel? {
-        guard canContinue else { return nil }
-        return makeReceiptModel(selectedBeneficiary: selectedBeneficiary)
+    func continueTapped(
+        selectedBeneficiary: Beneficiary,
+        currentAmount: Decimal,
+        formattedAmount: String
+    ) -> TransferReceiptModel? {
+        guard canContinue(currentAmount: currentAmount) else { return nil }
+        return makeReceiptModel(
+            selectedBeneficiary: selectedBeneficiary,
+            formattedAmount: formattedAmount
+        )
     }
 
-    func makeReceiptModel(selectedBeneficiary: Beneficiary) -> TransferReceiptModel {
+    func makeReceiptModel(
+        selectedBeneficiary: Beneficiary,
+        formattedAmount: String
+    ) -> TransferReceiptModel {
         TransferReceiptModel(
-            amount: amountViewModel.formattedAmount,
+            amount: formattedAmount,
             recipientName: selectedBeneficiary.name,
             recipientEmail: selectedBeneficiary.pixKey,
             accountName: "Main Account",

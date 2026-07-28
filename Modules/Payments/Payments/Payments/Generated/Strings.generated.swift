@@ -403,6 +403,12 @@ internal enum Strings {
     internal static let subtitle = Strings.tr("Localizable", "TransferPin.subtitle", fallback: "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.")
     /// Enter your PIN
     internal static let title = Strings.tr("Localizable", "TransferPin.title", fallback: "Enter your PIN")
+    /// Authenticate to confirm this transfer.
+    internal static let faceIDReason = Strings.tr("Localizable", "TransferPin.faceIDReason", fallback: "Authenticate to confirm this transfer.")
+    /// Face ID is not available on this device.
+    internal static let faceIDUnavailable = Strings.tr("Localizable", "TransferPin.faceIDUnavailable", fallback: "Face ID is not available on this device.")
+    /// Face ID authentication failed. Try again.
+    internal static let faceIDFailed = Strings.tr("Localizable", "TransferPin.faceIDFailed", fallback: "Face ID authentication failed. Try again.")
     /// Use Face ID
     internal static let useFaceID = Strings.tr("Localizable", "TransferPin.useFaceID", fallback: "Use Face ID")
   }
