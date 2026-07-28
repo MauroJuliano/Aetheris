@@ -41,6 +41,7 @@ public struct TransferBeneficiary: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             Button {
                 onChange()
@@ -61,6 +62,7 @@ public struct TransferBeneficiary: View {
                         .appShadow(AppShadow.chartGlow)
                 )
             }
+            .fixedSize()
         }
         .padding(.horizontal, AppSpacing.medium)
         .padding(.vertical, AppSpacing.medium + AppSpacing.xxxSmall)

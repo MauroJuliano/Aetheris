@@ -42,7 +42,7 @@ struct TransferPinView: View {
                 }
 
                 Button {
-                    // Face ID mock
+                    // Face ID placeholder action
                 } label: {
                     Label(Strings.TransferPin.useFaceID, systemImage: "faceid")
                         .font(AppTypography.onboardingBody.weight(.semibold))
@@ -169,4 +169,3 @@ struct TransferPinView: View {
         }
     }
 }
-

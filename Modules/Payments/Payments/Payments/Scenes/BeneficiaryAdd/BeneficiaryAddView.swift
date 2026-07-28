@@ -35,12 +35,15 @@ struct BeneficiaryAddView: View {
                         .foregroundStyle(Color.textSecondaryColor)
                         .lineSpacing(4)
                 }
+                .padding(.horizontal)
+                
 
                 inputField(
                     title: Strings.BeneficiaryAdd.searchLabel,
                     text: $viewModel.searchTerm,
                     placeholder: Strings.BeneficiaryAdd.searchPlaceholder
                 )
+                .padding(.horizontal)
 
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
@@ -77,6 +80,7 @@ struct BeneficiaryAddView: View {
                         .font(AppTypography.headline)
                         .appShadow(AppShadow.control)
                 }
+                .padding(.horizontal)
             }
             .opacity(viewModel.isFormValid ? 1 : 0.6)
             .disabled(viewModel.isSearching || !viewModel.isFormValid)

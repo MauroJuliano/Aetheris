@@ -24,7 +24,7 @@ final class HomeAppViewModel: ObservableObject {
             cards = try await service.loadCards()
             isEmpty = cards.isEmpty
         } catch {
-            errorMessage = "We could not load your cards right now."
+            errorMessage = Strings.HomeApp.cardsLoadFailed
         }
 
         isLoading = false

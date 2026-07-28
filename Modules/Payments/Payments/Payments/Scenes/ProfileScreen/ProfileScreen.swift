@@ -16,9 +16,9 @@ struct ProfileScreen: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        UserView()
+                        UserView(name: viewModel.profile.name)
                         
-                        FormView(cells: FormCellModel.generalCellsMock) { cell in
+                        FormView(cells: viewModel.generalCells) { cell in
                             switch cell.content.kind {
                             case .name:
                                 path.append(.editName)
@@ -92,25 +92,22 @@ struct ProfileScreen: View {
                     ProfileEditFieldView(
                         title: Strings.Profile.editNameTitle,
                         description: Strings.HomeApp.editNameDescription,
-                        value: Strings.Profile.userName,
-                        placeholder: Strings.HomeApp.editNamePlaceholder,
-                        onSave: { _ in path.removeLast() }
+                        value: nameBinding,
+                        placeholder: Strings.HomeApp.editNamePlaceholder
                     )
                 case .editEmail:
                     ProfileEditFieldView(
                         title: Strings.Profile.editEmailTitle,
                         description: Strings.HomeApp.editEmailDescription,
-                        value: Strings.Profile.email,
-                        placeholder: Strings.HomeApp.editEmailPlaceholder,
-                        onSave: { _ in path.removeLast() }
+                        value: emailBinding,
+                        placeholder: Strings.HomeApp.editEmailPlaceholder
                     )
                 case .editPhone:
                     ProfileEditFieldView(
                         title: Strings.Profile.editPhoneTitle,
                         description: Strings.HomeApp.editPhoneDescription,
-                        value: Strings.Profile.phone,
-                        placeholder: Strings.HomeApp.editPhonePlaceholder,
-                        onSave: { _ in path.removeLast() }
+                        value: phoneBinding,
+                        placeholder: Strings.HomeApp.editPhonePlaceholder
                     )
                 case .feedback:
                     ProfileFeedbackView {
@@ -121,9 +118,7 @@ struct ProfileScreen: View {
                         path.removeLast()
                     }
                 case .logout:
-                    ProfileLogoutView {
-                        path.removeLast()
-                    }
+                    ProfileLogoutView()
                 }
             }
         }
@@ -139,6 +134,27 @@ struct ProfileScreen: View {
     private func syncTabBarVisibility() {
         tabBarVisibilityStore.isVisible = path.isEmpty
     }
+
+    private var nameBinding: Binding<String> {
+        Binding(
+            get: { viewModel.profile.name },
+            set: { viewModel.updateName($0) }
+        )
+    }
+
+    private var emailBinding: Binding<String> {
+        Binding(
+            get: { viewModel.profile.email },
+            set: { viewModel.updateEmail($0) }
+        )
+    }
+
+    private var phoneBinding: Binding<String> {
+        Binding(
+            get: { viewModel.profile.phone },
+            set: { viewModel.updatePhone($0) }
+        )
+    }
 }
 
 private enum ProfileRoute: Hashable {
@@ -149,4 +165,3 @@ private enum ProfileRoute: Hashable {
     case terms
     case logout
 }
-

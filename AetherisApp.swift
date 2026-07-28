@@ -1,16 +1,19 @@
 import SwiftUI
 import AetherisAuthentication
+import AetherisAuthenticationInterface
 import AERegistration
 import Payments
 
 @main
 struct AetherisApp: App {
     private let dependencies = DependencyContainer()
+    @StateObject private var sessionStore = AppSessionStore()
     
     var body: some Scene {
         WindowGroup {
             SplashRootView {
                 dependencies.authenticationFactory.make()
+                    .environmentObject(sessionStore)
             }
         }
     }

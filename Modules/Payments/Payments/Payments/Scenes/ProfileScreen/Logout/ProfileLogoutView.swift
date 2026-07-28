@@ -1,10 +1,10 @@
 import AetherisDesignSystem
+import AetherisAuthenticationInterface
 import SwiftUI
 
 struct ProfileLogoutView: View {
-    let onDone: () -> Void
-
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var sessionStore: AppSessionStore
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.large) {
@@ -23,8 +23,7 @@ struct ProfileLogoutView: View {
                 Spacer()
 
                 Button {
-                    onDone()
-                    dismiss()
+                    sessionStore.isAuthenticated = false
                 } label: {
                     Text(Strings.Profile.confirmLogout)
                         .foregroundStyle(Color.white)

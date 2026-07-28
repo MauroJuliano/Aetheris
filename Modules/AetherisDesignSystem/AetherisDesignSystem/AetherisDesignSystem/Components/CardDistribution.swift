@@ -27,13 +27,13 @@ public struct CardDistributionModel {
         self.icon = icon
     }
     
-    public static let mockCreditCard: CardDistributionModel = .init(title: Strings.CardDistribution.creditCardTitle, subTitle: Strings.CardDistribution.creditCardSubtitle, icon: "creditcard")
-    public static let mockLoans: CardDistributionModel = .init(title: Strings.CardDistribution.loanTitle,
-                                                        subTitle: Strings.CardDistribution.loanSubtitle,
-                                                        icon: "chart.line.uptrend.xyaxis")
-    public static let mockInvestiment: CardDistributionModel = .init(title: Strings.CardDistribution.investmentsTitle,
-                                                              subTitle: Strings.CardDistribution.investmentsSubtitle,
-                                                              icon: "shield.fill")
+    public static let sampleCreditCard: CardDistributionModel = .init(title: Strings.CardDistribution.creditCardTitle, subTitle: Strings.CardDistribution.creditCardSubtitle, icon: "creditcard")
+    public static let sampleLoans: CardDistributionModel = .init(title: Strings.CardDistribution.loanTitle,
+                                                                  subTitle: Strings.CardDistribution.loanSubtitle,
+                                                                  icon: "chart.line.uptrend.xyaxis")
+    public static let sampleInvestments: CardDistributionModel = .init(title: Strings.CardDistribution.investmentsTitle,
+                                                                       subTitle: Strings.CardDistribution.investmentsSubtitle,
+                                                                       icon: "shield.fill")
 }
 
 public struct CardDistribution: View {
@@ -96,4 +96,3 @@ public struct CardDistribution: View {
         .appShadow(AppShadow.elevated)
     }
 }
-

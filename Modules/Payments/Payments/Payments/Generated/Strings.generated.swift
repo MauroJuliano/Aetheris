@@ -133,6 +133,8 @@ internal enum Strings {
     internal static let editPhonePlaceholder = Strings.tr("Localizable", "HomeApp.editPhonePlaceholder", fallback: "Enter phone number")
     /// Edit phone
     internal static let editPhoneTitle = Strings.tr("Localizable", "HomeApp.editPhoneTitle", fallback: "Edit phone")
+    /// We could not load your cards right now.
+    internal static let cardsLoadFailed = Strings.tr("Localizable", "HomeApp.cardsLoadFailed", fallback: "We could not load your cards right now.")
     /// The simulated payments service returned an empty response.
     internal static let emptyDescription = Strings.tr("Localizable", "HomeApp.emptyDescription", fallback: "The simulated payments service returned an empty response.")
     /// We couldn't load your information. Please check your connection and try again.
@@ -146,13 +148,13 @@ internal enum Strings {
     /// Logout
     internal static let logout = Strings.tr("Localizable", "HomeApp.logout", fallback: "Logout")
     /// Jorge Henrique
-    internal static let mockCardOwnerOne = Strings.tr("Localizable", "HomeApp.mockCardOwnerOne", fallback: "Jorge Henrique")
+    internal static let cardOwnerOne = Strings.tr("Localizable", "HomeApp.cardOwnerOne", fallback: "Jorge Henrique")
     /// Amado Batista
-    internal static let mockCardOwnerTwo = Strings.tr("Localizable", "HomeApp.mockCardOwnerTwo", fallback: "Amado Batista")
+    internal static let cardOwnerTwo = Strings.tr("Localizable", "HomeApp.cardOwnerTwo", fallback: "Amado Batista")
     /// MASTERCARD
-    internal static let mockMastercard = Strings.tr("Localizable", "HomeApp.mockMastercard", fallback: "MASTERCARD")
+    internal static let mastercardBrand = Strings.tr("Localizable", "HomeApp.mastercardBrand", fallback: "MASTERCARD")
     /// VISA
-    internal static let mockVisa = Strings.tr("Localizable", "HomeApp.mockVisa", fallback: "VISA")
+    internal static let visaBrand = Strings.tr("Localizable", "HomeApp.visaBrand", fallback: "VISA")
     /// Top category: Restaurants 🍔
     internal static let monthlySpendingCaption = Strings.tr("Localizable", "HomeApp.monthlySpendingCaption", fallback: "Top category: Restaurants 🍔")
     /// Monthly Spending
@@ -267,12 +269,12 @@ internal enum Strings {
     internal static let feedbackDescription = Strings.tr("Localizable", "Profile.feedbackDescription", fallback: "Tell us what can be improved in the app experience.")
     /// Feedback
     internal static let feedbackTitle = Strings.tr("Localizable", "Profile.feedbackTitle", fallback: "Feedback")
-    /// This is a mocked legal page used to keep the profile flow realistic while remaining fully local to the app.
-    internal static let legalDescription = Strings.tr("Localizable", "Profile.legalDescription", fallback: "This is a mocked legal page used to keep the profile flow realistic while remaining fully local to the app.")
+    /// This legal page keeps the profile flow realistic while remaining fully local to the app.
+    internal static let legalDescription = Strings.tr("Localizable", "Profile.legalDescription", fallback: "This legal page keeps the profile flow realistic while remaining fully local to the app.")
     /// Logout
     internal static let logout = Strings.tr("Localizable", "Profile.logout", fallback: "Logout")
-    /// This is a mocked logout action used for the profile flow.
-    internal static let logoutDescription = Strings.tr("Localizable", "Profile.logoutDescription", fallback: "This is a mocked logout action used for the profile flow.")
+    /// This logout action keeps the profile flow realistic while remaining fully local to the app.
+    internal static let logoutDescription = Strings.tr("Localizable", "Profile.logoutDescription", fallback: "This logout action keeps the profile flow realistic while remaining fully local to the app.")
     /// (33) 9908-3213
     internal static let phone = Strings.tr("Localizable", "Profile.phone", fallback: "(33) 9908-3213")
     /// @2025 Powered by Blake

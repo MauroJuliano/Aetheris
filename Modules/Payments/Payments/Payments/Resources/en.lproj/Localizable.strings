@@ -44,8 +44,9 @@
 "HomeApp.editNamePlaceholder" = "Enter full name";
 "HomeApp.editEmailPlaceholder" = "Enter email";
 "HomeApp.editPhonePlaceholder" = "Enter phone number";
-"HomeApp.mockCardOwnerOne" = "Jorge Henrique";
-"HomeApp.mockVisa" = "VISA";
+"HomeApp.cardsLoadFailed" = "We could not load your cards right now.";
+"HomeApp.cardOwnerOne" = "Jorge Henrique";
+"HomeApp.visaBrand" = "VISA";
 "HomeApp.rewardsHeadline" = "Rewards Available";
 "HomeApp.rewardsTitle" = "12,500 points";
 "HomeApp.rewardsCaption" = "Worth $125 in travel";
@@ -54,8 +55,8 @@
 "HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
 "HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "HomeApp.seeInsights" = "See Insights";
-"HomeApp.mockCardOwnerTwo" = "Amado Batista";
-"HomeApp.mockMastercard" = "MASTERCARD";
+"HomeApp.cardOwnerTwo" = "Amado Batista";
+"HomeApp.mastercardBrand" = "MASTERCARD";
 "HomeApp.specialOfferHeadline" = "Special Offer";
 "HomeApp.specialOfferTitle" = "Travel Insurance";
 "HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
@@ -196,9 +197,9 @@
 "Profile.feedbackDescription" = "Tell us what can be improved in the app experience.";
 "Profile.sendFeedback" = "Send feedback";
 "Profile.privacyPolicy" = "Privacy Policy";
-"Profile.legalDescription" = "This is a mocked legal page used to keep the profile flow realistic while remaining fully local to the app.";
+"Profile.legalDescription" = "This legal page keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.done" = "Done";
-"Profile.logoutDescription" = "This is a mocked logout action used for the profile flow.";
+"Profile.logoutDescription" = "This logout action keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.confirmLogout" = "Confirm logout";
 
 "ViewReport.loadingTitle" = "View Report";

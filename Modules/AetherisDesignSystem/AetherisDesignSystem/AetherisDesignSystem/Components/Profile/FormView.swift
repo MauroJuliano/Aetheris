@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct FormView: View {
-    @State var cells: [FormCellModel]
+    let cells: [FormCellModel]
     let onCellTap: ((FormCellModel) -> Void)?
     
     public init(
@@ -25,4 +25,3 @@ public struct FormView: View {
         .appCardSurface()
     }
 }
-

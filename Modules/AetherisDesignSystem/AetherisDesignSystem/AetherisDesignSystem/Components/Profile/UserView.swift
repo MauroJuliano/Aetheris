@@ -1,9 +1,11 @@
 import SwiftUI
 
 public struct UserView: View {
+    let name: String
     @State private var rotateGradient: Bool
     
-    public init(rotateGradient: Bool = false) {
+    public init(name: String, rotateGradient: Bool = false) {
+        self.name = name
         self._rotateGradient = State(initialValue: rotateGradient)
     }
     
@@ -39,7 +41,7 @@ public struct UserView: View {
             }
             
             VStack(alignment: .leading) {
-                Text(Strings.Profile.userName)
+                Text(name)
                     .foregroundStyle(Color.textPrimary)
                     .font(AppTypography.onboardingBody)
                 
@@ -51,4 +53,3 @@ public struct UserView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
-

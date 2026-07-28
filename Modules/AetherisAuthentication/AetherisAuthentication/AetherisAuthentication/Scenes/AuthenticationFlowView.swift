@@ -3,6 +3,7 @@ import SwiftUI
 
 struct AuthenticationFlowView: View {
     private let dependencies: AuthenticationDependencies
+    @EnvironmentObject private var sessionStore: AppSessionStore
     
     init(dependencies: AuthenticationDependencies) {
         self.dependencies = dependencies
@@ -11,31 +12,39 @@ struct AuthenticationFlowView: View {
     @State private var flow: AppFlow = .login
 
     var body: some View {
-        switch flow {
-        case .login:
-            Login(
-                onLogin: {
-                    flow = .main
-                },
-                onRegister: {
-                    flow = .register
-                }
-            )
+        Group {
+            if sessionStore.isAuthenticated {
+                MainTabContainer(
+                    paymentsFactory: dependencies.paymentsFactory
+                )
+            } else {
+                switch flow {
+                case .login:
+                    Login(
+                        onLogin: {
+                            sessionStore.isAuthenticated = true
+                        },
+                        onRegister: {
+                            flow = .register
+                        }
+                    )
 
-        case .register:
-            dependencies.registrationFactory.make(
-                onFinished: {
-                    flow = .main
-                },
-                onBackToLogin: {
-                    flow = .login
+                case .register:
+                    dependencies.registrationFactory.make(
+                        onFinished: {
+                            sessionStore.isAuthenticated = true
+                        },
+                        onBackToLogin: {
+                            flow = .login
+                        }
+                    )
                 }
-            )
-
-        case .main:
-            MainTabContainer(
-                paymentsFactory: dependencies.paymentsFactory
-            )
+            }
+        }
+        .onChange(of: sessionStore.isAuthenticated) { _, isAuthenticated in
+            if !isAuthenticated {
+                flow = .login
+            }
         }
     }
 }
