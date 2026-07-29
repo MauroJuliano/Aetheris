@@ -10,3 +10,12 @@
 "LoginError.description" = "The username or password you entered is incorrect. Please check your credentials and try again.";
 "LoginError.primaryButton" = "Try again";
 "LoginError.secondaryButton" = "Forgot password?";
+"ForgotPassword.back" = "Back";
+"ForgotPassword.title" = "Forgot password?";
+"ForgotPassword.heading" = "No worries!";
+"ForgotPassword.description" = "Enter your email and we'll send you a link to reset your password.";
+"ForgotPassword.emailLabel" = "Email address";
+"ForgotPassword.emailPlaceholder" = "Enter your email";
+"ForgotPassword.sendResetLink" = "Send reset link";
+"ForgotPassword.rememberPassword" = "Remember your password?";
+"ForgotPassword.backToLogin" = "Back to login";

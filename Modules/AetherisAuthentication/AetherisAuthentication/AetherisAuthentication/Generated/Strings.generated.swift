@@ -40,6 +40,26 @@ internal enum Strings {
     /// Unable to sign in
     internal static let title = Strings.tr("Localizable", "LoginError.title", fallback: "Unable to sign in")
   }
+  internal enum ForgotPassword {
+    /// Back
+    internal static let back = Strings.tr("Localizable", "ForgotPassword.back", fallback: "Back")
+    /// Back to login
+    internal static let backToLogin = Strings.tr("Localizable", "ForgotPassword.backToLogin", fallback: "Back to login")
+    /// Enter your email and we'll send you a link to reset your password.
+    internal static let description = Strings.tr("Localizable", "ForgotPassword.description", fallback: "Enter your email and we'll send you a link to reset your password.")
+    /// Email address
+    internal static let emailLabel = Strings.tr("Localizable", "ForgotPassword.emailLabel", fallback: "Email address")
+    /// Enter your email
+    internal static let emailPlaceholder = Strings.tr("Localizable", "ForgotPassword.emailPlaceholder", fallback: "Enter your email")
+    /// No worries!
+    internal static let heading = Strings.tr("Localizable", "ForgotPassword.heading", fallback: "No worries!")
+    /// Remember your password?
+    internal static let rememberPassword = Strings.tr("Localizable", "ForgotPassword.rememberPassword", fallback: "Remember your password?")
+    /// Send reset link
+    internal static let sendResetLink = Strings.tr("Localizable", "ForgotPassword.sendResetLink", fallback: "Send reset link")
+    /// Forgot password?
+    internal static let title = Strings.tr("Localizable", "ForgotPassword.title", fallback: "Forgot password?")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

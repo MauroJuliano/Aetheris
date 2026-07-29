@@ -4,6 +4,7 @@ import SwiftUI
 struct Login: View {
     var onLogin: () -> Void
     var onRegister: () -> Void
+    var onForgotPassword: (String) -> Void
 
     @State private var login = ""
     @State private var password = ""
@@ -99,10 +100,15 @@ struct Login: View {
             .padding(.bottom, AppSpacing.xxLarge)
         }
         .background {
-            Image("login-background")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+            ZStack {
+                Color.backgroundColorA
+                    .ignoresSafeArea()
+
+                Image("login-background")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+            }
         }
         .sheet(isPresented: $isShowingLoginErrorSheet) {
             LoginErrorSheet(
@@ -115,6 +121,9 @@ struct Login: View {
                 },
                 onForgotPassword: {
                     isShowingLoginErrorSheet = false
+                    DispatchQueue.main.async {
+                        onForgotPassword(login)
+                    }
                 }
             )
             .presentationDragIndicator(.visible)
@@ -130,6 +139,6 @@ struct Login: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        Login(onLogin: {}, onRegister: {})
+        Login(onLogin: {}, onRegister: {}, onForgotPassword: { _ in })
     }
 }
