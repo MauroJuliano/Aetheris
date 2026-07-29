@@ -11,23 +11,21 @@ struct HomeCardServiceTests {
         let sut = HomeCardService(coreService: coreService)
 
         let dashboard = try await sut.loadDashboard()
-        let quickActions = try await sut.loadQuickActions()
 
         #expect(dashboard.cards.count == 3)
         #expect(dashboard.summaries.count == 4)
+        #expect(dashboard.quickActions.count == 4)
         #expect(dashboard.summaries.map(\.tag) == [.transfer, .income, .expense, .expense])
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/home-card/dashboard", method: .get),
-            .init(path: "https://api.aetheris.app/payments/home-card/dashboard", method: .get)
         ])
-
-        #expect(quickActions.map(\.label) == [
+        #expect(dashboard.quickActions.map(\.label) == [
             "Send",
             "Request",
             "Pay",
             "Top up"
         ])
-        #expect(quickActions.map(\.icon) == [
+        #expect(dashboard.quickActions.map(\.icon) == [
             "paperplane.fill",
             "arrow.down",
             "creditcard.fill",
@@ -50,13 +48,13 @@ struct HomeCardServiceTests {
     }
 
     @Test
-    func loadQuickActions_propagatesCoreServiceErrors() async throws {
+    func loadDashboard_propagatesCoreServiceErrors() async throws {
         let coreService = CoreServiceTestDouble()
         coreService.error = URLError(.timedOut)
         let sut = HomeCardService(coreService: coreService)
 
         do {
-            _ = try await sut.loadQuickActions()
+            _ = try await sut.loadDashboard()
             #expect(Bool(false))
         } catch {
             let urlError = error as? URLError

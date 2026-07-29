@@ -5,12 +5,12 @@ import SwiftUI
 
 protocol HomeCardServicing {
     func loadDashboard() async throws -> HomeCardDashboard
-    func loadQuickActions() async throws -> [CardOptions]
 }
 
 struct HomeCardDashboard: Codable {
     let cards: [Card]
     let summaries: [FinancialSummaryModel]
+    let quickActions: [CardOptions]
 }
 
 final class HomeCardService: HomeCardServicing {
@@ -23,15 +23,10 @@ final class HomeCardService: HomeCardServicing {
     func loadDashboard() async throws -> HomeCardDashboard {
         try await coreService.execute(HomeCardEndpoint.dashboard)
     }
-
-    func loadQuickActions() async throws -> [CardOptions] {
-        try await coreService.execute(HomeCardEndpoint.quickActions)
-    }
 }
 
 private enum HomeCardEndpoint {
     case dashboard
-    case quickActions
 }
 
 extension HomeCardEndpoint: Endpoint {
@@ -47,8 +42,6 @@ extension HomeCardEndpoint: Endpoint {
         switch self {
         case .dashboard:
             return Self.encodeOrEmpty(HomeCardDashboard.mock)
-        case .quickActions:
-            return Self.encodeOrEmpty(CardOptions.mock)
         }
     }
 
@@ -60,6 +53,7 @@ extension HomeCardEndpoint: Endpoint {
 private extension HomeCardDashboard {
     static let mock = HomeCardDashboard(
         cards: CardsMock.creditCardMocks,
-        summaries: FinancialSummaryModel.mock
+        summaries: FinancialSummaryModel.mock,
+        quickActions: CardOptions.mock
     )
 }

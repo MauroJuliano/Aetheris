@@ -10,25 +10,27 @@ struct NotificationsCentreServiceTests {
         let coreService = CoreServiceTestDouble()
         let sut = NotificationsCentreService(coreService: coreService)
 
-        let notifications = try await sut.loadNotifications()
+        let response = try await sut.loadNotifications()
 
-        #expect(notifications.count == 5)
-        #expect(notifications.map(\.title) == [
+        #expect(response.unreadCount == 3)
+        #expect(response.notifications.count == 6)
+        #expect(response.notifications.map(\.title) == [
             Strings.Notifications.titleTransferSent,
             Strings.Notifications.titlePaymentReceived,
             Strings.Notifications.titleSubscriptionRenewed,
             Strings.Notifications.titleRefundProcessed,
-            Strings.Notifications.titleSubscriptionExpired
+            Strings.Notifications.titleSubscriptionExpired,
+            Strings.Notifications.titleMaintenanceCompleted
         ])
 
-        let images = notifications.compactMap { notification -> String? in
+        let images = response.notifications.compactMap { notification -> String? in
             if case let .image(value) = notification.leadingContent {
                 return value
             }
             return nil
         }
 
-        let icons = notifications.compactMap { notification -> String? in
+        let icons = response.notifications.compactMap { notification -> String? in
             if case let .icon(value) = notification.leadingContent {
                 return value
             }
@@ -37,7 +39,7 @@ struct NotificationsCentreServiceTests {
 
         #expect(images == ["melissa", "ed"])
         #expect(icons == ["bell", "wrench.and.screwdriver", "calendar"])
-        #expect(notifications[0].section == Strings.Notifications.sectionToday)
+        #expect(response.notifications[0].section == Strings.Notifications.sectionToday)
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/notifications", method: .get)
         ])

@@ -26,9 +26,9 @@ final class NotificationsCentreViewModel: ObservableObject {
         isEmpty = false
 
         do {
-            let notifications = try await service.loadNotifications()
-            buildSections(from: notifications)
-            isEmpty = notifications.isEmpty
+            let response = try await service.loadNotifications()
+            buildSections(from: response.notifications)
+            isEmpty = response.notifications.isEmpty
         } catch {
             errorMessage = "We could not load your notifications."
         }
