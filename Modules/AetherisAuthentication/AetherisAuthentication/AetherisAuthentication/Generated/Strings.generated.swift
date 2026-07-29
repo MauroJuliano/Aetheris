@@ -30,6 +30,16 @@ internal enum Strings {
     /// Welcome back!
     internal static let welcomeBack = Strings.tr("Localizable", "Login.welcomeBack", fallback: "Welcome back!")
   }
+  internal enum LoginError {
+    /// The username or password you entered is incorrect. Please check your credentials and try again.
+    internal static let description = Strings.tr("Localizable", "LoginError.description", fallback: "The username or password you entered is incorrect. Please check your credentials and try again.")
+    /// Try again
+    internal static let primaryButton = Strings.tr("Localizable", "LoginError.primaryButton", fallback: "Try again")
+    /// Forgot password?
+    internal static let secondaryButton = Strings.tr("Localizable", "LoginError.secondaryButton", fallback: "Forgot password?")
+    /// Unable to sign in
+    internal static let title = Strings.tr("Localizable", "LoginError.title", fallback: "Unable to sign in")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

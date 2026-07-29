@@ -6,3 +6,7 @@
 "Login.loginButton" = "Login";
 "Login.dontHaveAccount" = "Don't have an account?";
 "Login.signUp" = "Sign up here";
+"LoginError.title" = "Unable to sign in";
+"LoginError.description" = "The username or password you entered is incorrect. Please check your credentials and try again.";
+"LoginError.primaryButton" = "Try again";
+"LoginError.secondaryButton" = "Forgot password?";

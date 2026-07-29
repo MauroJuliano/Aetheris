@@ -7,6 +7,21 @@ struct Login: View {
 
     @State private var login = ""
     @State private var password = ""
+    @State private var isShowingLoginErrorSheet = false
+
+    private let validCredentials: [(email: String, password: String)] = [
+        ("melissa@aetheris.app", "1234"),
+        ("admin@aetheris.app", "4321")
+    ]
+
+    private var canSubmit: Bool {
+        login.trimmingCharacters(in: .whitespacesAndNewlines).count >= 5 &&
+        password.count >= 4
+    }
+
+    private var normalizedLogin: String {
+        login.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+    }
 
     var body: some View {
         VStack {
@@ -44,21 +59,29 @@ struct Login: View {
 
             // Password
             HStack {
-                TextField(
+                SecureField(
                     "",
                     text: $password,
                     prompt: Text(Strings.Login.passwordPlaceholder)
                         .foregroundColor(Color.textTertiary)
                         .font(AppTypography.input)
                 )
+                .keyboardType(.numberPad)
             }
             .appInputField()
 
             // Login button
             GlowButton(title: Strings.Login.loginButton) {
-                onLogin()
+                guard canSubmit else { return }
+                if validCredentials.contains(where: { $0.email == normalizedLogin && $0.password == password }) {
+                    onLogin()
+                } else {
+                    isShowingLoginErrorSheet = true
+                }
             }
             .padding()
+            .disabled(!canSubmit)
+            .opacity(canSubmit ? 1 : 0.55)
 
             // Register
             HStack {
@@ -81,10 +104,32 @@ struct Login: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         }
+        .sheet(isPresented: $isShowingLoginErrorSheet) {
+            LoginErrorSheet(
+                title: Strings.LoginError.title,
+                description: Strings.LoginError.description,
+                primaryButtonTitle: Strings.LoginError.primaryButton,
+                secondaryButtonTitle: Strings.LoginError.secondaryButton,
+                onTryAgain: {
+                    isShowingLoginErrorSheet = false
+                },
+                onForgotPassword: {
+                    isShowingLoginErrorSheet = false
+                }
+            )
+            .presentationDragIndicator(.visible)
+        }
+        .onChange(of: password) { _, newValue in
+            let filtered = newValue.filter(\.isNumber)
+            if filtered != newValue {
+                password = filtered
+            }
+        }
     }
 }
 
-
-#Preview {
-    Login(onLogin: {}, onRegister: {})
+struct Login_Previews: PreviewProvider {
+    static var previews: some View {
+        Login(onLogin: {}, onRegister: {})
+    }
 }
