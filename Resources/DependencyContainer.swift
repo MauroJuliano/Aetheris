@@ -6,6 +6,7 @@ import AERegistrationInterface
 import AetherisAuthentication
 import AetherisAuthenticationInterface
 
+@MainActor
 final class DependencyContainer: HasRegistration,
                                  HasPayments {
     lazy var coreService: any HasCoreService = MockCoreServiceApi()

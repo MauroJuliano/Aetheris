@@ -56,4 +56,19 @@ struct NotificationsCentreServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadNotifications_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.networkConnectionLost)
+        let sut = NotificationsCentreService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadNotifications()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .networkConnectionLost)
+        }
+    }
 }

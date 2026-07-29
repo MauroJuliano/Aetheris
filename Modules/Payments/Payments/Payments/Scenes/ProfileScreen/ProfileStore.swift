@@ -1,3 +1,4 @@
+import Core
 import AetherisDesignSystem
 import Foundation
 
@@ -19,6 +20,43 @@ extension ProfileData {
     }
 }
 
+@MainActor
 final class ProfileStore {
-    var profile: ProfileData = .mock
+    private let persistence = AppPersistenceController.shared
+    private let record: ProfileRecord
+
+    init() {
+        record = persistence.profileRecord()
+
+        if !record.isSeeded {
+            record.name = Strings.Profile.userName
+            record.email = Strings.Profile.email
+            record.phone = Strings.Profile.phone
+            record.isSeeded = true
+            persistence.saveChanges()
+        }
+    }
+
+    var profile: ProfileData {
+        ProfileData(
+            name: record.name,
+            email: record.email,
+            phone: record.phone
+        )
+    }
+
+    func updateName(_ name: String) {
+        record.name = name
+        persistence.saveChanges()
+    }
+
+    func updateEmail(_ email: String) {
+        record.email = email
+        persistence.saveChanges()
+    }
+
+    func updatePhone(_ phone: String) {
+        record.phone = phone
+        persistence.saveChanges()
+    }
 }

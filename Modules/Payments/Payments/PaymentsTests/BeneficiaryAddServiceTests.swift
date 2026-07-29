@@ -49,4 +49,19 @@ struct BeneficiaryAddServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func findBeneficiary_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.notConnectedToInternet)
+        let sut = BeneficiaryAddService(coreService: coreService)
+
+        do {
+            _ = try await sut.findBeneficiary(identifier: "beneficiary@example.com")
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .notConnectedToInternet)
+        }
+    }
 }

@@ -31,4 +31,19 @@ struct ViewReportServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadReport_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.cannotConnectToHost)
+        let sut = ViewReportService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadReport()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .cannotConnectToHost)
+        }
+    }
 }

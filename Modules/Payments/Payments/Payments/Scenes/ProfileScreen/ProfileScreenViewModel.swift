@@ -19,17 +19,17 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     func updateName(_ name: String) {
-        store.profile.name = name
+        store.updateName(name)
         profile = store.profile
     }
 
     func updateEmail(_ email: String) {
-        store.profile.email = email
+        store.updateEmail(email)
         profile = store.profile
     }
 
     func updatePhone(_ phone: String) {
-        store.profile.phone = phone
+        store.updatePhone(phone)
         profile = store.profile
     }
 

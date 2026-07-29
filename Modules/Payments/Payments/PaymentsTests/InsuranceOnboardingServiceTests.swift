@@ -37,4 +37,19 @@ struct InsuranceOnboardingServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadBenefits_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.dnsLookupFailed)
+        let sut = InsuranceOnboardingService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadBenefits()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .dnsLookupFailed)
+        }
+    }
 }

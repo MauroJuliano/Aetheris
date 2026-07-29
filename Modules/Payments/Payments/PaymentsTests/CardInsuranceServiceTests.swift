@@ -37,4 +37,19 @@ struct CardInsuranceServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadBullets_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.cannotParseResponse)
+        let sut = CardInsuranceService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadBullets()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .cannotParseResponse)
+        }
+    }
 }

@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 import AetherisAuthentication
 import AetherisAuthenticationInterface
 import AERegistration
 import Payments
+import Core
 
 @main
 struct AetherisApp: App {
@@ -16,6 +18,7 @@ struct AetherisApp: App {
                     .environmentObject(sessionStore)
             }
         }
+        .modelContainer(AppPersistenceController.shared.container)
     }
 }
 

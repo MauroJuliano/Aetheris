@@ -48,4 +48,19 @@ struct HomeCardServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadQuickActions_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.timedOut)
+        let sut = HomeCardService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadQuickActions()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .timedOut)
+        }
+    }
 }

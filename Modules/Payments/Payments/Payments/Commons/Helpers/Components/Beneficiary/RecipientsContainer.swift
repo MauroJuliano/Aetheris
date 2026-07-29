@@ -79,4 +79,3 @@ struct RecipientsContainer: View {
         .appCardSurface()
     }
 }
-

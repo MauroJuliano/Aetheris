@@ -45,4 +45,19 @@ struct TransactionHistoryServiceTests {
             #expect((error as? CoreServiceError) == .invalidData)
         }
     }
+
+    @Test
+    func loadTransactions_propagatesCoreServiceErrors() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.cannotFindHost)
+        let sut = TransactionHistoryService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadTransactions()
+            #expect(Bool(false))
+        } catch {
+            let urlError = error as? URLError
+            #expect(urlError?.code == .cannotFindHost)
+        }
+    }
 }
