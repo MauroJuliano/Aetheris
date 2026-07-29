@@ -5,9 +5,10 @@ import SwiftUI
 struct PaymentsFlowCoordinator: View {
     let entryPoint: PaymentsEntryPoint
     let coreService: any HasCoreService
+    let profileStore: ProfileStore
     let onFinished: () -> Void
 
-    @State private var selectedBeneficiary: Beneficiary = .beneficiaries.first!
+    @State private var selectedBeneficiary: Beneficiary = .defaultSelection
 
     var body: some View {
         switch entryPoint {
@@ -30,7 +31,7 @@ struct PaymentsFlowCoordinator: View {
             )
 
         case .profile:
-            ProfileFlowCoordinator()
+            ProfileFlowCoordinator(profileStore: profileStore)
         @unknown default:
             EmptyView()
         }

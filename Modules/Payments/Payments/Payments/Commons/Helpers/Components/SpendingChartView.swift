@@ -30,66 +30,68 @@ struct SpendingThisMonthView: View {
     }
 
     private var header: some View {
-        HStack(alignment: .top) {
-            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                Text(Strings.SpendingChart.title)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.textPrimary)
-
-                HStack(spacing: AppSpacing.small) {
-                    Text(Strings.SpendingChart.total)
-                        .font(.system(size: 24, weight: .bold))
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                    Text(Strings.SpendingChart.title)
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.textPrimary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .layoutPriority(1)
 
-                    HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                        Image(systemName: "arrow.down")
-                        Text(Strings.SpendingChart.change)
+                    HStack(spacing: AppSpacing.small) {
+                        Text(Strings.SpendingChart.total)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundStyle(Color.textPrimary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .layoutPriority(1)
+
+                        HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
+                            Image(systemName: "arrow.down")
+                            Text(Strings.SpendingChart.change)
+                        }
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(Color.success)
+                        .padding(.horizontal, AppSpacing.xSmall + AppSpacing.xxxSmall)
+                        .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+                        .background(
+                            Capsule()
+                                .fill(Color.success.opacity(0.12))
+                        )
                     }
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(Color.success)
-                    .padding(.horizontal, AppSpacing.xSmall + AppSpacing.xxxSmall)
-                    .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
-                    .background(
-                        Capsule()
-                            .fill(Color.success.opacity(0.12))
-                    )
+                }
 
-                    Text(Strings.SpendingChart.comparison)
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundStyle(Color.textTertiary)
-                        .lineLimit(1)
+                Spacer()
+
+                Button {
+                    onViewReportTap()
+                } label: {
+                    Text(Strings.SpendingChart.viewReport)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(Color.brandPrimaryColor)
+                        .padding(.horizontal, AppSpacing.medium + AppSpacing.xxxSmall)
+                        .padding(.vertical, AppSpacing.xSmall + AppSpacing.xxxSmall)
+                        .background(
+                            Capsule()
+                                .stroke(Color.brandPrimaryColor.opacity(0.25), lineWidth: 1)
+                        )
                 }
             }
 
-            Spacer()
-
-            Button {
-                onViewReportTap()
-            } label: {
-                Text(Strings.SpendingChart.viewReport)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(Color.brandPrimaryColor)
-                    .padding(.horizontal, AppSpacing.medium + AppSpacing.xxxSmall)
-                    .padding(.vertical, AppSpacing.xSmall + AppSpacing.xxxSmall)
-                    .background(
-                        Capsule()
-                            .stroke(Color.brandPrimaryColor.opacity(0.25), lineWidth: 1)
-                    )
-            }
+            Text(Strings.SpendingChart.comparison)
+            .font(.system(size: 11, weight: .medium))
+            .foregroundStyle(Color.textTertiary)
+            .lineLimit(1)
         }
     }
 
     private var categoriesRow: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: AppSpacing.medium) {
             ForEach(categories) { category in
                 SpendingCategoryItem(category: category)
 
                 if category.id != categories.last?.id {
                     Divider()
-                        .frame(height: 38)
+                        .frame(height: 54)
                 }
             }
         }
@@ -109,7 +111,7 @@ struct SpendingCategoryItem: View {
     let category: SpendingCategory
 
     var body: some View {
-        HStack(spacing: 8) {
+        VStack(alignment: .center, spacing: AppSpacing.xxxSmall) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                     .fill(category.color.opacity(0.1))
@@ -120,25 +122,25 @@ struct SpendingCategoryItem: View {
             }
             .frame(width: 34, height: 34)
 
-            VStack(alignment: .leading, spacing: 3) {
-                Text(category.title)
-                    .font(.system(size: 9, weight: .medium))
-                    .foregroundStyle(Color.textTertiary)
-                    .lineLimit(1)
+            Text(category.title)
+                .font(.system(size: 9, weight: .medium))
+                .foregroundStyle(Color.textTertiary)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
 
-                Text(category.amount)
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(Color.textPrimary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.75)
+            Text(category.amount)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundStyle(Color.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+                .frame(maxWidth: .infinity, alignment: .center)
 
-                Text(category.percentage)
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundStyle(Color.textTertiary)
-                    .lineLimit(1)
-            }
+            Text(category.percentage)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundStyle(Color.textTertiary)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .center)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
-

@@ -38,13 +38,15 @@ struct BeneficiaryAddServiceTests {
     }
 
     @Test
-    func findBeneficiary_usesFallbackMock_whenIdentifierIsUnknown() async throws {
+    func findBeneficiary_throwsInvalidData_whenIdentifierIsUnknown() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = BeneficiaryAddService(coreService: coreService)
 
-        let beneficiary = try await sut.findBeneficiary(identifier: "unknown@example.com")
-
-        #expect(!beneficiary.name.isEmpty)
-        #expect(beneficiary.pixKey == "unknown@example.com")
+        do {
+            _ = try await sut.findBeneficiary(identifier: "unknown@example.com")
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+        }
     }
 }

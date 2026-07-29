@@ -1,7 +1,7 @@
 import AetherisDesignSystem
 import SwiftUI
 
-struct FinancialSummaryModel: Identifiable {
+struct FinancialSummaryModel: Identifiable, Codable {
     var id: UUID
     var image: String
     var title: String
@@ -174,4 +174,3 @@ struct FinancialSummary: View {
         return Strings.FinancialSummary.monthAgo(max(1, days / 30))
     }
 }
-

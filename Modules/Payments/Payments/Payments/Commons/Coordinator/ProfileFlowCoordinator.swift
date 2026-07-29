@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct ProfileFlowCoordinator: View {
+    let profileStore: ProfileStore
+
     var body: some View {
-        ProfileScreenFactory.make()
+        ProfileScreenFactory.make(store: profileStore)
     }
 }

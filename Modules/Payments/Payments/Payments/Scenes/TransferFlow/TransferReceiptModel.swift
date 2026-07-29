@@ -1,6 +1,6 @@
 import Foundation
 
-struct TransferReceiptModel {
+struct TransferReceiptModel: Hashable {
     let amount: String
     let recipientName: String
     let recipientEmail: String

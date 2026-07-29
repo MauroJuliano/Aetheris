@@ -1,11 +1,11 @@
 import SwiftUI
 
 public struct NavBarModel {
-    var firstText: String
+    var firstText: String?
     var secondText: String?
     var hasInitialSpace: Bool
     
-    public init(firstText: String,
+    public init(firstText: String? = nil,
                 secondText: String? = nil,
                 hasInitialSpace: Bool) {
         self.firstText = firstText
@@ -64,15 +64,17 @@ public struct NavBar: View {
                     }
                 }
                 
-                VStack {
-                    Text("\(model.firstText)")
-                        .font(AppTypography.navTitle)
-                        .foregroundStyle(Color.brandPrimaryColor)
-                    
-                    if let secondText = model.secondText {
-                        Text(secondText)
-                            .font(AppTypography.heroTitle)
-                            .foregroundStyle(Color.textPrimary)
+                if let firstText = model.firstText {
+                    VStack {
+                        Text(firstText)
+                            .font(AppTypography.navTitle)
+                            .foregroundStyle(Color.brandPrimaryColor)
+
+                        if let secondText = model.secondText {
+                            Text(secondText)
+                                .font(AppTypography.heroTitle)
+                                .foregroundStyle(Color.textPrimary)
+                        }
                     }
                 }
                 
@@ -91,4 +93,3 @@ public struct NavBar: View {
      
     }
 }
-

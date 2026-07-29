@@ -6,6 +6,9 @@
 "TransferPin.subtitle" = "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.";
 "TransferPin.incorrect" = "Incorrect PIN. Try again.";
 "TransferPin.attempts" = "You have %d attempts left.";
+"TransferPin.faceIDReason" = "Authenticate to confirm this transfer.";
+"TransferPin.faceIDUnavailable" = "Face ID is not available on this device.";
+"TransferPin.faceIDFailed" = "Face ID authentication failed. Try again.";
 "TransferPin.useFaceID" = "Use Face ID";
 "TransferPin.confirmTransfer" = "Confirm Transfer";
 "TransferProcessing.title" = "Processing transfer...";
@@ -44,8 +47,9 @@
 "HomeApp.editNamePlaceholder" = "Enter full name";
 "HomeApp.editEmailPlaceholder" = "Enter email";
 "HomeApp.editPhonePlaceholder" = "Enter phone number";
-"HomeApp.mockCardOwnerOne" = "Jorge Henrique";
-"HomeApp.mockVisa" = "VISA";
+"HomeApp.cardsLoadFailed" = "We could not load your cards right now.";
+"HomeApp.cardOwnerOne" = "Jorge Henrique";
+"HomeApp.visaBrand" = "VISA";
 "HomeApp.rewardsHeadline" = "Rewards Available";
 "HomeApp.rewardsTitle" = "12,500 points";
 "HomeApp.rewardsCaption" = "Worth $125 in travel";
@@ -54,8 +58,8 @@
 "HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
 "HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "HomeApp.seeInsights" = "See Insights";
-"HomeApp.mockCardOwnerTwo" = "Amado batista";
-"HomeApp.mockMastercard" = "MASTERCARD";
+"HomeApp.cardOwnerTwo" = "Amado Batista";
+"HomeApp.mastercardBrand" = "MASTERCARD";
 "HomeApp.specialOfferHeadline" = "Special Offer";
 "HomeApp.specialOfferTitle" = "Travel Insurance";
 "HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
@@ -66,12 +70,15 @@
 "HomeApp.applyNow" = "Apply Now";
 
 "QuickActions.sectionTitle" = "What would you like to do ?";
+"QuickActions.sendTitle" = "Send";
 "QuickActions.transferTitle" = "Transfer";
 "QuickActions.transferSubtitle" = "Send money";
 "QuickActions.requestTitle" = "Request";
 "QuickActions.requestSubtitle" = "Receive money";
 "QuickActions.moreTitle" = "More";
 "QuickActions.moreSubtitle" = "All services";
+"QuickActions.payTitle" = "Pay";
+"QuickActions.topUpTitle" = "Top up";
 
 "AllServices.title" = "All services";
 "AllServices.subtitle" = "Quick access to the main services available in the app.";
@@ -101,7 +108,7 @@
 "Common.back" = "Back";
 
 "Notifications.titleTransferSent" = "Funds successfully transferred to Melissa";
-"Notifications.titlePaymentReceived" = "Payment received from Ed";
+"Notifications.titlePaymentReceived" = "Payment received from Ed Sheeran";
 "Notifications.titleSubscriptionRenewed" = "Subscription renewed for Man's best Friend";
 "Notifications.titleRefundProcessed" = "Refund processed successfully";
 "Notifications.titleSubscriptionExpired" = "Your subscription has expired";
@@ -191,11 +198,12 @@
 "Profile.save" = "Save";
 "Profile.feedbackTitle" = "Feedback";
 "Profile.feedbackDescription" = "Tell us what can be improved in the app experience.";
+"Profile.feedbackPlaceholder" = "Write your feedback here...";
 "Profile.sendFeedback" = "Send feedback";
 "Profile.privacyPolicy" = "Privacy Policy";
-"Profile.legalDescription" = "This is a mocked legal page used to keep the profile flow realistic while remaining fully local to the app.";
+"Profile.legalDescription" = "This legal page keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.done" = "Done";
-"Profile.logoutDescription" = "This is a mocked logout action used for the profile flow.";
+"Profile.logoutDescription" = "This logout action keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.confirmLogout" = "Confirm logout";
 
 "ViewReport.loadingTitle" = "View Report";

@@ -3,9 +3,9 @@ import SwiftUI
 
 private enum SendMoneyFlowRoute: Hashable {
     case beneficiaryList
-    case pin
-    case processing
-    case success
+    case pin(TransferReceiptModel)
+    case processing(TransferReceiptModel)
+    case success(TransferReceiptModel)
 }
 
 struct SendMoneyFlowCoordinator: View {
@@ -13,7 +13,6 @@ struct SendMoneyFlowCoordinator: View {
     let onBackAction: () -> Void
 
     @State private var path: [SendMoneyFlowRoute] = []
-    @State private var transferReceipt: TransferReceiptModel?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -24,8 +23,7 @@ struct SendMoneyFlowCoordinator: View {
                     path.append(.beneficiaryList)
                 },
                 onContinue: { receipt in
-                    transferReceipt = receipt
-                    path.append(.pin)
+                    path.append(.pin(receipt))
                 }
             )
             .navigationDestination(for: SendMoneyFlowRoute.self) { route in
@@ -40,54 +38,41 @@ struct SendMoneyFlowCoordinator: View {
                     )
                     .navigationBarHidden(true)
 
-                case .pin:
-                    if let receipt = transferReceipt {
-                        TransferPinFactory.make(
-                            receipt: receipt,
-                            onBack: { popRoute() },
-                            onValidPin: {
-                                path.append(.processing)
-                            }
-                        )
-                        .navigationBarHidden(true)
-                    } else {
-                        EmptyView()
-                    }
+                case .pin(let receipt):
+                    TransferPinFactory.make(
+                        receipt: receipt,
+                        onBack: { popRoute() },
+                        onValidPin: {
+                            path.append(.processing(receipt))
+                        }
+                    )
+                    .navigationBarHidden(true)
 
-                case .processing:
-                    if let receipt = transferReceipt {
-                        TransferProcessingFactory.make(
-                            receipt: receipt,
-                            onCompleted: {
-                                replaceCurrentRoute(with: .success)
-                            }
-                        )
-                        .navigationBarHidden(true)
-                    } else {
-                        EmptyView()
-                    }
+                case .processing(let receipt):
+                    TransferProcessingFactory.make(
+                        receipt: receipt,
+                        onCompleted: {
+                            replaceCurrentRoute(with: .success(receipt))
+                        }
+                    )
+                    .navigationBarHidden(true)
 
-                case .success:
-                    if let receipt = transferReceipt {
-                        TransferSuccessFactory.make(
-                            model: receipt,
-                            onBack: { popRoute() },
-                            onDone: {
-                                path.removeAll()
-                                onBackAction()
-                            },
-                            onNewTransfer: {
-                                transferReceipt = nil
-                                path.removeAll()
-                            },
-                            onCopyReference: { reference in
-                                UIPasteboard.general.string = reference
-                            }
-                        )
-                        .navigationBarHidden(true)
-                    } else {
-                        EmptyView()
-                    }
+                case .success(let receipt):
+                    TransferSuccessFactory.make(
+                        model: receipt,
+                        onBack: { popRoute() },
+                        onDone: {
+                            path.removeAll()
+                            onBackAction()
+                        },
+                        onNewTransfer: {
+                            path.removeAll()
+                        },
+                        onCopyReference: { reference in
+                            UIPasteboard.general.string = reference
+                        }
+                    )
+                    .navigationBarHidden(true)
                 }
             }
         }

@@ -40,9 +40,11 @@ struct RegisterView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
         }
-        .onTapGesture {
-            isTextFieldFocused = false
-        }
+        .simultaneousGesture(
+            TapGesture().onEnded {
+                isTextFieldFocused = false
+            }
+        )
     }
 
     private var header: some View {
@@ -127,12 +129,4 @@ struct RegisterView: View {
         }
         .accessibilityLabel(isSecureTextVisible ? secureTextVisibleLabel : secureTextHiddenLabel)
     }
-}
-
-#Preview {
-    RegisterView(title: Strings.Register.fullNameTitle,
-                 subTitle: Strings.Register.fullNameSubtitle,
-                 textFieldValue: .constant("Texto"),
-                 buttonTitle: Strings.Register.continueButton,
-                 textFieldPlaceholder: Strings.Register.placeholderName)
 }

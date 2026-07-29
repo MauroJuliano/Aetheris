@@ -5,6 +5,7 @@ struct TransferPinView: View {
     @StateObject var viewModel: TransferPinViewModel
     let onBack: () -> Void
     let onValidPin: () -> Void
+    @State private var showBiometricAlert = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -42,14 +43,14 @@ struct TransferPinView: View {
                 }
 
                 Button {
-                    // Face ID mock
+                    viewModel.authenticateWithFaceID(onValidPin: onValidPin)
                 } label: {
                     Label(Strings.TransferPin.useFaceID, systemImage: "faceid")
                         .font(AppTypography.onboardingBody.weight(.semibold))
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
                 .padding(.top, AppSpacing.xxxSmall)
-                .disabled(viewModel.isLockedOut)
+                .disabled(viewModel.isLockedOut || !viewModel.canUseFaceID)
             }
 
             Spacer()
@@ -59,6 +60,19 @@ struct TransferPinView: View {
         }
         .padding(.horizontal)
         .appScreenBackground()
+        .onChange(of: viewModel.biometricErrorMessage) { _, newValue in
+            showBiometricAlert = newValue != nil
+        }
+        .alert(
+            Strings.TransferPin.useFaceID,
+            isPresented: $showBiometricAlert
+        ) {
+            Button(Strings.Common.tryAgain, role: .cancel) {
+                viewModel.reset()
+            }
+        } message: {
+            Text(viewModel.biometricErrorMessage ?? Strings.TransferPin.faceIDUnavailable)
+        }
     }
 
     private var header: some View {
@@ -169,4 +183,3 @@ struct TransferPinView: View {
         }
     }
 }
-

@@ -1,7 +1,7 @@
 import SwiftUI
 import AetherisDesignSystem
 
-public struct Beneficiary: Identifiable {
+public struct Beneficiary: Identifiable, Codable, Hashable {
     public var id: UUID
     var name: String
     var pixKey: String
@@ -20,12 +20,25 @@ public struct Beneficiary: Identifiable {
         self.hasDivider = hasDivider
     }
     
-    public static let beneficiaries: [Beneficiary] = [
+    public static let mock: [Beneficiary] = [
         Beneficiary(name: "Melissa", pixKey: "contact@melissamccarthy.com", image: "melissa", hasDivider: true),
-        Beneficiary(name: "Ed sheeran", pixKey: "afirelove", image: "ed", hasDivider: true),
+        Beneficiary(name: "Ed Sheeran", pixKey: "afirelove", image: "ed", hasDivider: true),
         Beneficiary(name: "Adele", pixKey: "rollinginthedeep", image: "Adele", hasDivider: true),
         Beneficiary(name: "Troy Bolton", pixKey: "scream", image: "Troy", hasDivider: false)
     ]
+
+    public static var beneficiaries: [Beneficiary] {
+        mock
+    }
+
+    public static var defaultSelection: Beneficiary {
+        mock.first ?? Beneficiary(
+            name: "Melissa",
+            pixKey: "contact@melissamccarthy.com",
+            image: "melissa",
+            hasDivider: true
+        )
+    }
 }
 
 public struct BeneficiaryCell: View {
@@ -72,4 +85,3 @@ public struct BeneficiaryCell: View {
         .appListCellRow(hasDivider: model.hasDivider)
     }
 }
-

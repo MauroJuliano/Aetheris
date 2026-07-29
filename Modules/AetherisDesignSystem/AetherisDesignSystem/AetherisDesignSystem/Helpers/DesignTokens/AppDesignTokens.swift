@@ -12,7 +12,7 @@ public enum AppSpacing {
     public static let screenHorizontal: CGFloat = 16
     public static let formHorizontal: CGFloat = 35
     public static let listDividerLeading: CGFloat = 78
-    public static let bottomBarClearance: CGFloat = 100
+    public static let bottomBarClearance: CGFloat = 140
     public static let formTop: CGFloat = 60
     public static let controlHeight: CGFloat = 50
 }

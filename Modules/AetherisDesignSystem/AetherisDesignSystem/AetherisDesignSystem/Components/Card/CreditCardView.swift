@@ -1,12 +1,18 @@
 import SwiftUI
 
 struct CreditCardView: View {
-    @State var model: CreditCardModel
+    let model: CreditCardModel
+    let theme: CreditCardTheme
+
+    init(model: CreditCardModel, theme: CreditCardTheme) {
+        self.model = model
+        self.theme = theme
+    }
     
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color.blue.opacity(0.4), Color.purple.opacity(0.4)],
+                colors: theme.glow,
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -18,7 +24,7 @@ struct CreditCardView: View {
                 
                 // Base gradient
                 LinearGradient(
-                    colors: [Color.blue, Color.purple],
+                    colors: theme.gradient,
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -36,7 +42,7 @@ struct CreditCardView: View {
                         .offset(x: 190, y: 150)
                     
                     Circle()
-                        .fill(AppCreditCardStyle.accentOverlay)
+                        .fill(theme.accentOverlay)
                         .frame(width: AppCardMetrics.creditCardOverlayThreeSize, height: AppCardMetrics.creditCardOverlayThreeSize)
                         .offset(x: 190, y: -60)
                 }
@@ -48,20 +54,20 @@ struct CreditCardView: View {
                         Spacer()
                         Image(systemName: "wave.3.right") // top-right contactless
                     }
-                    .foregroundColor(AppCreditCardStyle.foreground)
+                    .foregroundColor(theme.foreground)
                     
                     Text(model.number)
                         .font(.title2.monospaced())
-                        .foregroundColor(AppCreditCardStyle.foreground)
+                        .foregroundColor(theme.foreground)
                     
                     HStack {
                         VStack(alignment: .leading) {
                             Text(Strings.CreditCard.validTill)
                                 .font(.caption2)
-                                .foregroundColor(AppCreditCardStyle.secondaryForeground)
+                                .foregroundColor(theme.secondaryForeground)
                             Text(model.validDate)
                                 .bold()
-                                .foregroundColor(AppCreditCardStyle.foreground)
+                                .foregroundColor(theme.foreground)
                         }
                         Spacer()
                     }
@@ -69,21 +75,20 @@ struct CreditCardView: View {
                     HStack {
                         Text(model.name)
                             .bold()
-                            .foregroundColor(AppCreditCardStyle.foreground)
+                            .foregroundColor(theme.foreground)
                         Spacer()
                         Text(model.brand)
                             .bold()
-                            .foregroundColor(AppCreditCardStyle.foreground)
+                            .foregroundColor(theme.foreground)
                     }
                 }
                 .padding(AppSpacing.xLarge)
             }
             .frame(width: AppCardMetrics.creditCardSize.width, height: AppCardMetrics.creditCardSize.height)
             .clipShape(RoundedRectangle(cornerRadius: AppCardMetrics.creditCardBorderRadius))
-            .appShadow(AppCreditCardStyle.shadow)
+            .appShadow(AppShadowStyle(color: theme.shadow, radius: 10))
         }
         
         
     }
 }
-

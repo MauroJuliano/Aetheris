@@ -21,15 +21,10 @@ struct ConfirmPasswordView: View {
     }
 
     var body: some View {
-        VStack(spacing: AppSpacing.large) {
-            NavBar(
-                hasNotifications: false,
-                hasBackButton: true,
-                model: .init(firstText: viewModel.title, hasInitialSpace: false),
-                onBack: onBack
-            )
-
-            ZStack {
+        ZStack {
+            if viewModel.isLoading {
+                RegisterInputSkeleton()
+            } else {
                 RegisterView(
                     title: viewModel.title,
                     subTitle: viewModel.subTitle,
@@ -47,27 +42,20 @@ struct ConfirmPasswordView: View {
                 ) {
                     viewModel.submit(onSuccess: onSuccess)
                 }
-                .opacity(viewModel.isLoading ? 0 : 1)
-
-                RegisterInputSkeleton()
-                    .opacity(viewModel.isLoading ? 1 : 0)
+            }
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            if !viewModel.isLoading {
+                NavBar(
+                    hasNotifications: false,
+                    hasBackButton: true,
+                    model: .init(hasInitialSpace: false),
+                    onBack: onBack
+                )
+                .padding(.top, AppSpacing.medium)
             }
         }
         .appScreenBackground()
         .navigationBarHidden(true)
     }
-}
-
-#Preview {
-    let draft = RegistrationDraft()
-    draft.password = "1234"
-
-    return ConfirmPasswordView(
-        viewModel: ConfirmPasswordViewModel(
-            service: ResumeService(coreService: MockCoreServiceApi()),
-            draft: draft
-        ),
-        draft: draft,
-        onBack: {}
-    ) {}
 }

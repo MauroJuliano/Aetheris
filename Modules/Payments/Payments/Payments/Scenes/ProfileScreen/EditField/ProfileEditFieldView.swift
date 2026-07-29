@@ -4,9 +4,8 @@ import SwiftUI
 struct ProfileEditFieldView: View {
     let title: String
     let description: String
-    let value: String
+    let value: Binding<String>
     let placeholder: String
-    let onSave: (String) -> Void
 
     @Environment(\.dismiss) private var dismiss
     @State private var draft: String
@@ -14,16 +13,14 @@ struct ProfileEditFieldView: View {
     init(
         title: String,
         description: String,
-        value: String,
-        placeholder: String,
-        onSave: @escaping (String) -> Void
+        value: Binding<String>,
+        placeholder: String
     ) {
         self.title = title
         self.description = description
         self.value = value
         self.placeholder = placeholder
-        self.onSave = onSave
-        _draft = State(initialValue: value)
+        _draft = State(initialValue: value.wrappedValue)
     }
 
     var body: some View {
@@ -47,7 +44,7 @@ struct ProfileEditFieldView: View {
                 Spacer()
 
                 Button {
-                    onSave(draft)
+                    value.wrappedValue = draft
                     dismiss()
                 } label: {
                     ZStack {

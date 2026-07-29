@@ -42,7 +42,3 @@ struct RegisterInputSkeleton: View {
             .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
 }
-
-#Preview {
-    RegisterInputSkeleton()
-}

@@ -178,23 +178,8 @@ struct TransferSuccessView: View {
 
     private var actionButtons: some View {
         VStack(spacing: AppSpacing.large) {
-            Button(action: viewModel.onDone) {
-                Text(Strings.TransferSuccess.done)
-                    .font(AppTypography.onboardingBody.weight(.semibold))
-                    .foregroundStyle(Color.surface)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 58)
-                    .background(
-                        LinearGradient(
-                            colors: [
-                                Color.brandPrimaryColor,
-                                Color.brandSecondaryColor
-                            ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.large - AppSpacing.xxxSmall))
+            GlowButton(title: Strings.TransferSuccess.done) {
+                viewModel.onDone()
             }
 
             Button(action: viewModel.onNewTransfer) {
@@ -265,4 +250,3 @@ private struct TransferInfoRow: View {
         }
     }
 }
-

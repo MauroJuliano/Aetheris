@@ -4,6 +4,7 @@ import SwiftUI
 
 public final class PaymentsFactory: PaymentsFactoryInterface {
     private let coreService: any HasCoreService
+    private let profileStore = ProfileStore()
 
     public init(coreService: any HasCoreService) {
         self.coreService = coreService
@@ -14,6 +15,7 @@ public final class PaymentsFactory: PaymentsFactoryInterface {
         
         AnyView(PaymentsFlowCoordinator(entryPoint: entryPoint,
                                         coreService: coreService,
+                                        profileStore: profileStore,
                                         onFinished: {
             onFinished()
         }))

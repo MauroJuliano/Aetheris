@@ -9,11 +9,18 @@ public struct RegistrationFactory: RegistrationFactoryInterface {
         self.coreService = coreService
     }
     
-    public func make(onFinished: @escaping () -> Void) -> AnyView {
+    public func make(
+        onFinished: @escaping () -> Void,
+        onBackToLogin: @escaping () -> Void
+    ) -> AnyView {
         AnyView(
-            RegisterFlow(coreService: coreService, onRegisterFinished: {
-                onFinished()
-            })
+            RegisterFlow(
+                coreService: coreService,
+                onBackToLogin: onBackToLogin,
+                onRegisterFinished: {
+                    onFinished()
+                }
+            )
         )
     }
 }

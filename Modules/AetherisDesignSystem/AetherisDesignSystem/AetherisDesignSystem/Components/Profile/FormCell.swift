@@ -81,10 +81,59 @@ public struct FormCellModel: Identifiable {
                                      toggle: .init(isOn: true),
                                      showsDisclosureIndicator: false))
     ]
+
+    public static func profileCells(
+        name: String,
+        email: String,
+        phone: String
+    ) -> [FormCellModel] {
+        [
+            FormCellModel(
+                sectionTitle: Strings.Profile.generalSection,
+                content: .init(
+                    kind: .name,
+                    title: name,
+                    icon: "person",
+                    hasDivider: true,
+                    showsDisclosureIndicator: true
+                )
+            ),
+            FormCellModel(
+                sectionTitle: nil,
+                content: .init(
+                    kind: .email,
+                    title: email,
+                    icon: "envelope",
+                    hasDivider: true,
+                    showsDisclosureIndicator: true
+                )
+            ),
+            FormCellModel(
+                sectionTitle: nil,
+                content: .init(
+                    kind: .phone,
+                    title: phone,
+                    icon: "iphone.gen2",
+                    hasDivider: true,
+                    showsDisclosureIndicator: true
+                )
+            ),
+            FormCellModel(
+                sectionTitle: nil,
+                content: .init(
+                    kind: .feedback,
+                    title: Strings.Profile.feedback,
+                    icon: "bubble",
+                    hasDivider: true,
+                    showsDisclosureIndicator: true
+                )
+            )
+        ]
+    }
 }
 
 public struct FormCell: View {
-    @State var model: FormCellModel
+    let model: FormCellModel
     let hasDivider: Bool
     let onTap: (() -> Void)?
     
@@ -145,4 +194,3 @@ public struct FormCell: View {
         }
     }
 }
-
