@@ -55,6 +55,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.gold:
             return [
                 .init(
+                    cardId: cardId,
                     image: "melissa",
                     title: Strings.FinancialSummary.transferSent,
                     description: Strings.FinancialSummary.transferSentDescription,
@@ -63,6 +64,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    cardId: cardId,
                     image: "NetflixLogo",
                     title: Strings.FinancialSummary.netflix,
                     description: Strings.FinancialSummary.subscription,
@@ -75,6 +77,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.infinite:
             return [
                 .init(
+                    cardId: cardId,
                     image: "Adele",
                     title: Strings.FinancialSummary.transferSent,
                     description: Strings.FinancialSummary.transferSentAdeleDescription,
@@ -83,6 +86,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
                 ),
                 .init(
+                    cardId: cardId,
                     image: "ed",
                     title: Strings.FinancialSummary.paymentReceived,
                     description: Strings.FinancialSummary.paymentReceivedDescription,
@@ -95,6 +99,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.black:
             return [
                 .init(
+                    cardId: cardId,
                     image: "applelogo",
                     title: Strings.FinancialSummary.appleBill,
                     description: Strings.FinancialSummary.subscription,
@@ -103,6 +108,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
                 ),
                 .init(
+                    cardId: cardId,
                     image: "ifoodlogo",
                     title: Strings.FinancialSummary.ifoodBar,
                     description: Strings.FinancialSummary.restaurant,

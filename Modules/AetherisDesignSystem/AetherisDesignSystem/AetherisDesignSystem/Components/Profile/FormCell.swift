@@ -36,6 +36,22 @@ public struct FormCellModel: Identifiable {
                 self.isOn = isOn
             }
         }
+
+        public init(
+            kind: Kind? = nil,
+            title: String,
+            icon: String,
+            hasDivider: Bool,
+            toggle: FormToggle? = nil,
+            showsDisclosureIndicator: Bool
+        ) {
+            self.kind = kind
+            self.title = title
+            self.icon = icon
+            self.hasDivider = hasDivider
+            self.toggle = toggle
+            self.showsDisclosureIndicator = showsDisclosureIndicator
+        }
     }
     
     public static let generalCellsMock: [FormCellModel] = [

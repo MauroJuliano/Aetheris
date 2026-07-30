@@ -104,7 +104,3 @@ struct ProfileFeedbackView: View {
         .frame(minHeight: 360)
     }
 }
-
-#Preview {
-    ProfileFeedbackView(onDone: {})
-}

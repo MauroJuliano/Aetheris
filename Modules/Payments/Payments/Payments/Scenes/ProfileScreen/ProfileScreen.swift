@@ -16,7 +16,11 @@ struct ProfileScreen: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        UserView(name: viewModel.profile.name)
+                        UserView(
+                            name: viewModel.profile.name,
+                            imageName: viewModel.profile.avatarName,
+                            joinedDate: viewModel.profile.joinedDate
+                        )
                         
                         FormView(cells: viewModel.generalCells) { cell in
                             switch cell.content.kind {
@@ -33,7 +37,7 @@ struct ProfileScreen: View {
                             }
                         }
                             
-                        FormView(cells: FormCellModel.notifications)
+                        FormView(cells: viewModel.notificationCells)
                         
                         Spacer()
                         
@@ -60,19 +64,19 @@ struct ProfileScreen: View {
                         
                         Spacer()
                         
-                        Text(Strings.Profile.version)
+                        Text(viewModel.footer.version)
                             .foregroundStyle(Color.textTertiary.opacity(0.5))
                             .font(AppTypography.footnote)
                             .padding(.top, AppSpacing.medium)
                         
-                        Text(Strings.Profile.poweredBy)
+                        Text(viewModel.footer.poweredBy)
                             .foregroundStyle(Color.textTertiary.opacity(0.5))
                             .font(AppTypography.footnote)
                         
                         Button {
                             path.append(.terms)
                         } label: {
-                            Text(Strings.Profile.terms)
+                            Text(viewModel.footer.terms)
                                 .foregroundStyle(Color.brandPrimaryColor)
                                 .font(AppTypography.button)
                         }

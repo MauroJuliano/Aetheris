@@ -13,8 +13,8 @@ struct HomeCardServiceTests {
         let dashboard = try await sut.loadDashboard()
 
         #expect(dashboard.cards.count == 3)
-        #expect(dashboard.summaries.count == 4)
-        #expect(dashboard.summaries.map(\.tag) == [.transfer, .income, .expense, .expense])
+        #expect(dashboard.summaries.count == 6)
+        #expect(dashboard.summaries.map(\.tag) == [.transfer, .income, .expense, .expense, .expense, .transfer])
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/home-card/dashboard", method: .get),
         ])

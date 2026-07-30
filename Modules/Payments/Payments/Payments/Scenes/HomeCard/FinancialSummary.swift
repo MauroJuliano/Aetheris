@@ -3,6 +3,7 @@ import SwiftUI
 
 struct FinancialSummaryModel: Identifiable, Codable {
     var id: UUID
+    var cardId: UUID?
     var image: String
     var title: String
     var description: String
@@ -11,6 +12,7 @@ struct FinancialSummaryModel: Identifiable, Codable {
     var date: Date
     
     init(id: UUID = UUID(),
+         cardId: UUID? = nil,
          image: String,
          title: String,
          description: String,
@@ -18,6 +20,7 @@ struct FinancialSummaryModel: Identifiable, Codable {
          tag: TransactionType,
          date: Date) {
         self.id = id
+        self.cardId = cardId
         self.image = image
         self.title = title
         self.description = description
@@ -25,8 +28,30 @@ struct FinancialSummaryModel: Identifiable, Codable {
         self.tag = tag
         self.date = date
     }
+
+    init(
+        cardId: UUID? = nil,
+        image: String,
+        title: String,
+        description: String,
+        value: String,
+        tag: TransactionType,
+        date: Date
+    ) {
+        self.init(
+            id: UUID(),
+            cardId: cardId,
+            image: image,
+            title: title,
+            description: description,
+            value: value,
+            tag: tag,
+            date: date
+        )
+    }
     
-    static let previewMock: FinancialSummaryModel = .init(image: "melissa",
+    static let previewMock: FinancialSummaryModel = .init(cardId: CardMockIDs.standard,
+                                                          image: "melissa",
                                                           title: Strings.FinancialSummary.transferSent,
                                                           description: Strings.FinancialSummary.transferSentDescription,
                                                           value: "-$ 250.00",
@@ -34,37 +59,43 @@ struct FinancialSummaryModel: Identifiable, Codable {
                                                           date: Date())
     
     static let mock: [FinancialSummaryModel] = [
-        .init(image: "melissa",
+        .init(cardId: CardMockIDs.standard,
+              image: "melissa",
               title: Strings.FinancialSummary.transferSent,
               description: Strings.FinancialSummary.transferSentDescription,
               value: "-$ 250.00",
               tag: .transfer,
               date: Date()),
-        .init(image: "ed",
+        .init(cardId: CardMockIDs.standard,
+              image: "ed",
               title: Strings.FinancialSummary.paymentReceived,
               description: Strings.FinancialSummary.paymentReceivedDescription,
               value: "$ 125.00",
               tag: .income,
               date: Date()),
-        .init(image: "NetflixLogo",
+        .init(cardId: CardMockIDs.gold,
+              image: "NetflixLogo",
               title: Strings.FinancialSummary.netflix,
               description: Strings.FinancialSummary.subscription,
               value: "-$ 20.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()),
-        .init(image: "applelogo",
+        .init(cardId: CardMockIDs.infinite,
+              image: "applelogo",
               title: Strings.FinancialSummary.appleBill,
               description: Strings.FinancialSummary.subscription,
               value: "-$ 9.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()),
-        .init(image: "ifoodlogo",
+        .init(cardId: CardMockIDs.infinite,
+              image: "ifoodlogo",
               title: Strings.FinancialSummary.ifoodBar,
               description: Strings.FinancialSummary.restaurant,
               value: "-$ 30.00",
               tag: .expense,
               date: Calendar.current.date(byAdding: .day, value: -20, to: Date()) ?? Date()),
-        .init(image: "Adele",
+        .init(cardId: CardMockIDs.gold,
+              image: "Adele",
               title: Strings.FinancialSummary.transferSent,
               description: Strings.FinancialSummary.transferSentAdeleDescription,
               value: "-$ 70.00",

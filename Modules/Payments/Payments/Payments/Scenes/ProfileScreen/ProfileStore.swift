@@ -6,18 +6,16 @@ struct ProfileData {
     var name: String
     var email: String
     var phone: String
+    var avatarName: String
+    var joinedDate: String
 
     static let mock = ProfileData(
         name: Strings.Profile.userName,
         email: Strings.Profile.email,
-        phone: Strings.Profile.phone
+        phone: Strings.Profile.phone,
+        avatarName: "melissa",
+        joinedDate: "Joined August 17, 2025"
     )
-}
-
-extension ProfileData {
-    var generalCells: [FormCellModel] {
-        FormCellModel.profileCells(name: name, email: email, phone: phone)
-    }
 }
 
 @MainActor
@@ -29,9 +27,9 @@ final class ProfileStore {
         record = persistence.profileRecord()
 
         if !record.isSeeded {
-            record.name = Strings.Profile.userName
-            record.email = Strings.Profile.email
-            record.phone = Strings.Profile.phone
+            record.name = ProfileData.mock.name
+            record.email = ProfileData.mock.email
+            record.phone = ProfileData.mock.phone
             record.isSeeded = true
             persistence.saveChanges()
         }
@@ -41,7 +39,9 @@ final class ProfileStore {
         ProfileData(
             name: record.name,
             email: record.email,
-            phone: record.phone
+            phone: record.phone,
+            avatarName: ProfileData.mock.avatarName,
+            joinedDate: ProfileData.mock.joinedDate
         )
     }
 

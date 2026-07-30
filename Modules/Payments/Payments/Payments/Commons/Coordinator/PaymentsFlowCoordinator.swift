@@ -32,7 +32,10 @@ struct PaymentsFlowCoordinator: View {
             )
 
         case .profile:
-            ProfileFlowCoordinator(profileStore: profileStore)
+            ProfileFlowCoordinator(
+                profileStore: profileStore,
+                coreService: coreService
+            )
         @unknown default:
             EmptyView()
         }
