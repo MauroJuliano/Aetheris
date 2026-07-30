@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import Core
 import Foundation
 
@@ -7,23 +8,28 @@ protocol TransactionHistoryServicing {
 
 final class TransactionHistoryService: TransactionHistoryServicing {
     private let coreService: any HasCoreService
+    private let cardId: UUID
 
-    init(coreService: any HasCoreService) {
+    init(coreService: any HasCoreService, cardId: UUID) {
         self.coreService = coreService
+        self.cardId = cardId
     }
 
     func loadTransactions() async throws -> [FinancialSummaryModel] {
-        try await coreService.execute(TransactionHistoryEndpoint.transactions)
+        try await coreService.execute(TransactionHistoryEndpoint.transactions(cardId: cardId))
     }
 }
 
 private enum TransactionHistoryEndpoint {
-    case transactions
+    case transactions(cardId: UUID)
 }
 
 extension TransactionHistoryEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/transactions"
+        switch self {
+        case .transactions(let cardId):
+            return "https://api.aetheris.app/payments/transactions?cardId=\(cardId.uuidString)"
+        }
     }
 
     var method: HTTPMethod { .get }
@@ -32,12 +38,82 @@ extension TransactionHistoryEndpoint: Endpoint {
 
     var mockResponseData: Data {
         switch self {
-        case .transactions:
-            return Self.encodeOrEmpty(FinancialSummaryModel.mock)
+        case .transactions(let cardId):
+            return Self.encodeOrEmpty(Self.mockTransactions(for: cardId))
         }
     }
 
     private static func encodeOrEmpty<T: Encodable>(_ value: T) -> Data {
         (try? JSONEncoder().encode(value)) ?? Data()
+    }
+
+    private static func mockTransactions(for cardId: UUID) -> [FinancialSummaryModel] {
+        switch cardId {
+        case CardMockIDs.standard:
+            return FinancialSummaryModel.mock
+
+        case CardMockIDs.gold:
+            return [
+                .init(
+                    image: "melissa",
+                    title: Strings.FinancialSummary.transferSent,
+                    description: Strings.FinancialSummary.transferSentDescription,
+                    value: "-$ 480.00",
+                    tag: .transfer,
+                    date: Date()
+                ),
+                .init(
+                    image: "NetflixLogo",
+                    title: Strings.FinancialSummary.netflix,
+                    description: Strings.FinancialSummary.subscription,
+                    value: "-$ 20.00",
+                    tag: .expense,
+                    date: Calendar.current.date(byAdding: .day, value: -2, to: Date()) ?? Date()
+                )
+            ]
+
+        case CardMockIDs.infinite:
+            return [
+                .init(
+                    image: "Adele",
+                    title: Strings.FinancialSummary.transferSent,
+                    description: Strings.FinancialSummary.transferSentAdeleDescription,
+                    value: "-$ 70.00",
+                    tag: .transfer,
+                    date: Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
+                ),
+                .init(
+                    image: "ed",
+                    title: Strings.FinancialSummary.paymentReceived,
+                    description: Strings.FinancialSummary.paymentReceivedDescription,
+                    value: "$ 125.00",
+                    tag: .income,
+                    date: Calendar.current.date(byAdding: .day, value: -3, to: Date()) ?? Date()
+                )
+            ]
+
+        case CardMockIDs.black:
+            return [
+                .init(
+                    image: "applelogo",
+                    title: Strings.FinancialSummary.appleBill,
+                    description: Strings.FinancialSummary.subscription,
+                    value: "-$ 9.00",
+                    tag: .expense,
+                    date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
+                ),
+                .init(
+                    image: "ifoodlogo",
+                    title: Strings.FinancialSummary.ifoodBar,
+                    description: Strings.FinancialSummary.restaurant,
+                    value: "-$ 30.00",
+                    tag: .expense,
+                    date: Calendar.current.date(byAdding: .day, value: -20, to: Date()) ?? Date()
+                )
+            ]
+
+        default:
+            return FinancialSummaryModel.mock
+        }
     }
 }

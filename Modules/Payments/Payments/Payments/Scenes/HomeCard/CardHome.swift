@@ -1,16 +1,18 @@
 import AetherisDesignSystem
 import Core
+import Foundation
 import SwiftUI
 
 struct CardHome: View {
     @StateObject private var viewModel: HomeCardViewModel
+    @State private var selectedCardIndex: Int = 0
     let onBackAction: (() -> Void)?
-    let onTransactionHistoryTap: () -> Void
+    let onTransactionHistoryTap: (UUID) -> Void
 
     init(
         viewModel: HomeCardViewModel,
         onBackAction: (() -> Void)? = nil,
-        onTransactionHistoryTap: @escaping () -> Void = {}
+        onTransactionHistoryTap: @escaping (UUID) -> Void = { _ in }
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.onBackAction = onBackAction
@@ -47,7 +49,10 @@ struct CardHome: View {
                     )
                     .padding(.horizontal, AppSpacing.screenHorizontal)
 
-                    CardSwipe(cards: $viewModel.cards)
+                    CardSwipe(
+                        cards: $viewModel.cards,
+                        selectedCardIndex: $selectedCardIndex
+                    )
 
                     HomeQuickActions(actions: viewModel.quickActions)
                         .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -55,7 +60,7 @@ struct CardHome: View {
 
                     FinancialSummaryContainer(
                         summaries: viewModel.summaries,
-                        onTap: onTransactionHistoryTap
+                        onTap: openTransactionHistory
                     )
                     .padding(.horizontal, AppSpacing.screenHorizontal)
                     .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
@@ -68,5 +73,16 @@ struct CardHome: View {
         }
         .appScreenBackground()
         .task { await viewModel.load() }
+    }
+
+    private func openTransactionHistory() {
+        guard let cardId = currentCardId else { return }
+        onTransactionHistoryTap(cardId)
+    }
+
+    private var currentCardId: UUID? {
+        guard !viewModel.cards.isEmpty else { return nil }
+        let safeIndex = min(max(selectedCardIndex, 0), viewModel.cards.count - 1)
+        return viewModel.cards[safeIndex].id
     }
 }

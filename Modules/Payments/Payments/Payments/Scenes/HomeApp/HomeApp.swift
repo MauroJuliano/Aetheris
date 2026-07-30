@@ -3,6 +3,7 @@ import SwiftUI
 
 struct HomeApp: View {
     @StateObject private var viewModel: HomeAppViewModel
+    @State private var selectedCardIndex: Int = 0
     let onCardTap: () -> Void
     let onNotificationsTap: () -> Void
     let onSelectRecipient: (Beneficiary) -> Void
@@ -70,7 +71,11 @@ struct HomeApp: View {
 
                     BalanceView()
 
-                    CardSwipe(cards: $viewModel.cards, onTap: onCardTap)
+                    CardSwipe(
+                        cards: $viewModel.cards,
+                        selectedCardIndex: $selectedCardIndex,
+                        onTap: onCardTap
+                    )
 
                     RecipientsContainer(
                         onSelectRecipient: onSelectRecipient,

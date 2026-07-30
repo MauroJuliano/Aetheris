@@ -14,22 +14,9 @@ struct HomeCardServiceTests {
 
         #expect(dashboard.cards.count == 3)
         #expect(dashboard.summaries.count == 4)
-        #expect(dashboard.quickActions.count == 4)
         #expect(dashboard.summaries.map(\.tag) == [.transfer, .income, .expense, .expense])
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/home-card/dashboard", method: .get),
-        ])
-        #expect(dashboard.quickActions.map(\.label) == [
-            "Send",
-            "Request",
-            "Pay",
-            "Top up"
-        ])
-        #expect(dashboard.quickActions.map(\.icon) == [
-            "paperplane.fill",
-            "arrow.down",
-            "creditcard.fill",
-            "plus"
         ])
     }
 

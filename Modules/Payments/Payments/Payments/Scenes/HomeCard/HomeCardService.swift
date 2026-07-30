@@ -10,7 +10,6 @@ protocol HomeCardServicing {
 struct HomeCardDashboard: Codable {
     let cards: [Card]
     let summaries: [FinancialSummaryModel]
-    let quickActions: [CardOptions]
 }
 
 final class HomeCardService: HomeCardServicing {
@@ -53,7 +52,6 @@ extension HomeCardEndpoint: Endpoint {
 private extension HomeCardDashboard {
     static let mock = HomeCardDashboard(
         cards: CardsMock.creditCardMocks,
-        summaries: FinancialSummaryModel.mock,
-        quickActions: CardOptions.mock
+        summaries: FinancialSummaryModel.mock
     )
 }

@@ -7,7 +7,7 @@ public final class TransferAmountViewModel: ObservableObject {
     @Published private var digits: String = ""
     @Published public private(set) var currentAmount: Decimal = 0
 
-    public let balance: Decimal
+    @Published public private(set) var balance: Decimal
 
     public var formattedAmount: String {
         formatCurrency(currentAmount)
@@ -19,6 +19,14 @@ public final class TransferAmountViewModel: ObservableObject {
 
     public init(balance: Decimal) {
         self.balance = balance
+    }
+
+    public func updateBalance(_ balance: Decimal) {
+        self.balance = balance
+        if currentAmount > balance {
+            currentAmount = balance
+            digits = balanceAsDigits
+        }
     }
 
     public func handleKeyPress(_ key: String) {

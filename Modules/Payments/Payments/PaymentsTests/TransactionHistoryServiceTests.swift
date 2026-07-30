@@ -5,10 +5,12 @@ import Testing
 
 @Suite("TransactionHistoryService")
 struct TransactionHistoryServiceTests {
+    private let cardId = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+
     @Test
     func loadTransactions_returnsMockTransactions() async throws {
         let coreService = CoreServiceTestDouble()
-        let sut = TransactionHistoryService(coreService: coreService)
+        let sut = TransactionHistoryService(coreService: coreService, cardId: cardId)
 
         let transactions = try await sut.loadTransactions()
 
@@ -28,7 +30,7 @@ struct TransactionHistoryServiceTests {
             .expense
         ])
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/transactions", method: .get)
+            .init(path: "https://api.aetheris.app/payments/transactions?cardId=11111111-1111-1111-1111-111111111111", method: .get)
         ])
     }
 
@@ -36,7 +38,7 @@ struct TransactionHistoryServiceTests {
     func loadTransactions_throwsInvalidData_whenResponseCannotDecode() async throws {
         let coreService = CoreServiceTestDouble()
         coreService.responseData = Data()
-        let sut = TransactionHistoryService(coreService: coreService)
+        let sut = TransactionHistoryService(coreService: coreService, cardId: cardId)
 
         do {
             _ = try await sut.loadTransactions()
@@ -50,7 +52,7 @@ struct TransactionHistoryServiceTests {
     func loadTransactions_propagatesCoreServiceErrors() async throws {
         let coreService = CoreServiceTestDouble()
         coreService.error = URLError(.cannotFindHost)
-        let sut = TransactionHistoryService(coreService: coreService)
+        let sut = TransactionHistoryService(coreService: coreService, cardId: cardId)
 
         do {
             _ = try await sut.loadTransactions()

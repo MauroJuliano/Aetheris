@@ -42,18 +42,20 @@ extension HomeFlowCoordinator {
             HomeCardFactory.make(
                 coreService: coreService,
                 onBackAction: { popRoute() },
-                onTransactionHistoryTap: { path.append(.transactionHistory) }
+                onTransactionHistoryTap: { cardId in path.append(.transactionHistory(cardId)) }
             )
             .navigationBarHidden(true)
 
-        case .transactionHistory:
+        case .transactionHistory(let cardId):
             TransactionHistoryFactory.make(
                 coreService: coreService,
+                cardId: cardId,
                 onBack: { popRoute() }
             )
 
         case .sendMoney:
             SendMoneyFactory.make(
+                coreService: coreService,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: { popRoute() },
                 onChangeBeneficiary: {
@@ -67,6 +69,7 @@ extension HomeFlowCoordinator {
 
         case .beneficiaryList:
             BeneficiaryListFactory.make(
+                coreService: coreService,
                 onSelect: { beneficiary in
                     RecentRecipientsStore.shared.record(beneficiary)
                     selectedBeneficiary = beneficiary
@@ -78,6 +81,7 @@ extension HomeFlowCoordinator {
 
         case .sendMoneyBeneficiaryList:
             BeneficiaryListFactory.make(
+                coreService: coreService,
                 onSelect: { beneficiary in
                     RecentRecipientsStore.shared.record(beneficiary)
                     selectedBeneficiary = beneficiary

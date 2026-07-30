@@ -26,6 +26,7 @@ struct PaymentsFlowCoordinator: View {
 
         case .sendMoney:
             SendMoneyFlowCoordinator(
+                coreService: coreService,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: onFinished
             )

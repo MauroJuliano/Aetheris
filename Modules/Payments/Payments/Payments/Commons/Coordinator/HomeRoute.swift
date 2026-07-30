@@ -1,8 +1,10 @@
 import Foundation
 
+import Foundation
+
 enum HomeRoute: Hashable {
     case card
-    case transactionHistory
+    case transactionHistory(UUID)
     case sendMoney
     case sendMoneyBeneficiaryList
     case sendMoneyPin(TransferReceiptModel)

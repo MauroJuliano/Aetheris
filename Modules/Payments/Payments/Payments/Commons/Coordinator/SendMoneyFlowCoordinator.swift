@@ -1,3 +1,4 @@
+import Core
 import UIKit
 import SwiftUI
 
@@ -9,6 +10,7 @@ private enum SendMoneyFlowRoute: Hashable {
 }
 
 struct SendMoneyFlowCoordinator: View {
+    let coreService: any HasCoreService
     @Binding var selectedBeneficiary: Beneficiary
     let onBackAction: () -> Void
 
@@ -17,6 +19,7 @@ struct SendMoneyFlowCoordinator: View {
     var body: some View {
         NavigationStack(path: $path) {
             SendMoneyFactory.make(
+                coreService: coreService,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: onBackAction,
                 onChangeBeneficiary: {
@@ -30,6 +33,7 @@ struct SendMoneyFlowCoordinator: View {
                 switch route {
                 case .beneficiaryList:
                     BeneficiaryListFactory.make(
+                        coreService: coreService,
                         onSelect: { beneficiary in
                             RecentRecipientsStore.shared.record(beneficiary)
                             selectedBeneficiary = beneficiary

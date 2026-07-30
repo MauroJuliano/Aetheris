@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		A982A8122F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81C2F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -44,6 +45,8 @@
 		A9C18BA92F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
 		A9C18BAA2F4FCC3800013305 /* PaymentsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9D000012F60000000013305 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9D000022F60000000013305 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9D000042F60000000013305 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -556,7 +559,7 @@
 				A9C188FD2F4E7A5B00013305 /* Payments.framework in Frameworks */,
 				A9B530752F4D2C34005C2C96 /* AERegistration.framework in Frameworks */,
 				A9C189282F4E7AFE00013305 /* Account.framework in Frameworks */,
-				A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
+				A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */,
 				A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */,
 				A9B535C72F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */,
 				A9B536E42F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */,
@@ -674,6 +677,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D000042F60000000013305 /* AccountInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +693,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D000022F60000000013305 /* Core.framework in Frameworks */,
+				A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1391,6 +1397,7 @@
 			);
 			dependencies = (
 				A982A7F82F510B4B00C22A84 /* PBXTargetDependency */,
+				A9D000052F60000000013305 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A9B536FF2F4E6E16005C2C96 /* AetherisAuthenticationInterface */,
@@ -1438,6 +1445,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A9D000032F60000000013305 /* PBXTargetDependency */,
 				A9EB11432F4FCED0000766F1 /* PBXTargetDependency */,
 				A9C1893C2F4E7E5200013305 /* PBXTargetDependency */,
 			);
@@ -2239,6 +2247,16 @@
 			isa = PBXTargetDependency;
 			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
 			targetProxy = A9C18BA72F4FCC3800013305 /* PBXContainerItemProxy */;
+		};
+		A9D000032F60000000013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B534452F4E384E005C2C96 /* Core */;
+			targetProxy = A9B534522F4E384E005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9D000052F60000000013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A982A8062F5111DF00C22A84 /* AccountInterface */;
+			targetProxy = A982A8132F5111E000C22A84 /* PBXContainerItemProxy */;
 		};
 		A9EB11432F4FCED0000766F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

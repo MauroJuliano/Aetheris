@@ -1,9 +1,10 @@
 import Core
 import PaymentsInterface
+import Foundation
 import SwiftUI
 
 private enum CardFlowRoute: Hashable {
-    case transactionHistory
+    case transactionHistory(UUID)
 }
 
 struct CardFlowCoordinator: View {
@@ -17,15 +18,16 @@ struct CardFlowCoordinator: View {
             HomeCardFactory.make(
                 coreService: coreService,
                 onBackAction: onDismiss,
-                onTransactionHistoryTap: {
-                    path.append(.transactionHistory)
+                onTransactionHistoryTap: { cardId in
+                    path.append(.transactionHistory(cardId))
                 }
             )
             .navigationDestination(for: CardFlowRoute.self) { route in
                 switch route {
-                case .transactionHistory:
+                case .transactionHistory(let cardId):
                     TransactionHistoryFactory.make(
                         coreService: coreService,
+                        cardId: cardId,
                         onBack: { popRoute() }
                     )
                 }

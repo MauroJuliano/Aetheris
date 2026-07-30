@@ -10,7 +10,7 @@ final class RecentRecipientsStore {
 
     private init() {}
 
-    func beneficiaries(limit: Int = 4) -> [Beneficiary] {
+    func beneficiaries(limit: Int = 4, fallback: [Beneficiary] = Beneficiary.beneficiaries) -> [Beneficiary] {
         let recentRecipients = persistence.recentRecipientRecords(limit: limit)
         let mappedRecipients = recentRecipients.map {
             Beneficiary(
@@ -23,11 +23,11 @@ final class RecentRecipientsStore {
         }
 
         guard !mappedRecipients.isEmpty else {
-            return Array(Beneficiary.beneficiaries.prefix(limit))
+            return Array(fallback.prefix(limit))
         }
 
         let recentPixKeys = Set(mappedRecipients.map(\.pixKey))
-        let remainingDefaults = Beneficiary.beneficiaries.filter { !recentPixKeys.contains($0.pixKey) }
+        let remainingDefaults = fallback.filter { !recentPixKeys.contains($0.pixKey) }
         return Array((mappedRecipients + remainingDefaults).prefix(limit))
     }
 
@@ -47,12 +47,20 @@ final class BeneficiaryListViewModel: ObservableObject {
     @Published private(set) var isLoading = true
     @Published private(set) var beneficiaries: [Beneficiary]
 
-    init(beneficiaries: [Beneficiary]? = nil) {
-        self.beneficiaries = beneficiaries ?? RecentRecipientsStore.shared.beneficiaries()
+    private let service: any BeneficiaryListServicing
+
+    init(service: any BeneficiaryListServicing) {
+        self.service = service
+        self.beneficiaries = RecentRecipientsStore.shared.beneficiaries()
     }
 
     func load() async {
-        try? await Task.sleep(nanoseconds: 1_500_000_000)
+        do {
+            let response = try await service.loadBeneficiaryList()
+            beneficiaries = RecentRecipientsStore.shared.beneficiaries(fallback: response.beneficiaries)
+        } catch {
+            beneficiaries = RecentRecipientsStore.shared.beneficiaries()
+        }
         isLoading = false
     }
 }
