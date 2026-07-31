@@ -122,11 +122,11 @@ struct CardHome: View {
                 isSummariesTransitioning = true
             }
 
-            try? await Task.sleep(nanoseconds: 160_000_000)
+            try? await Task.sleep(nanoseconds: 320_000_000)
 
             guard !Task.isCancelled else { return }
 
-            withAnimation(.easeInOut(duration: 0.16)) {
+            withAnimation(.easeInOut(duration: 0.22)) {
                 isSummariesTransitioning = false
             }
         }
