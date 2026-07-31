@@ -38,7 +38,7 @@ struct NotificationsCentreServiceTests {
         }
 
         #expect(images == ["melissa", "ed"])
-        #expect(icons == ["bell", "wrench.and.screwdriver", "calendar"])
+        #expect(icons == ["bell", "wrench.and.screwdriver", "calendar", "gearshape"])
         #expect(response.notifications[0].section == Strings.Notifications.sectionToday)
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/notifications", method: .get)
@@ -56,6 +56,22 @@ struct NotificationsCentreServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadNotifications_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"unreadCount":"three","notifications":[]}"#.utf8)
+        let sut = NotificationsCentreService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadNotifications()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -71,6 +87,7 @@ struct NotificationsCentreServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .networkConnectionLost)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

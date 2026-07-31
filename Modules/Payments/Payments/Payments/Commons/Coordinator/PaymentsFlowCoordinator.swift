@@ -2,16 +2,39 @@ import Core
 import PaymentsInterface
 import SwiftUI
 
+enum PaymentsFlowDestination: Equatable {
+    case home
+    case card
+    case sendMoney
+    case profile
+    case unsupported
+}
+
 struct PaymentsFlowCoordinator: View {
     let entryPoint: PaymentsEntryPoint
     let coreService: any HasCoreService
     let profileStore: ProfileStore
     let onFinished: () -> Void
 
-    @State private var selectedBeneficiary: Beneficiary = .defaultSelection
+    @State private var selectedBeneficiary: Beneficiary = BeneficiaryFixtures.defaultSelection
 
-    var body: some View {
+    var destination: PaymentsFlowDestination {
+        Self.destination(for: entryPoint)
+    }
+
+    static func destination(for entryPoint: PaymentsEntryPoint) -> PaymentsFlowDestination {
         switch entryPoint {
+        case .home: .home
+        case .card: .card
+        case .sendMoney: .sendMoney
+        case .profile: .profile
+        @unknown default: .unsupported
+        }
+    }
+
+    @ViewBuilder
+    var body: some View {
+        switch destination {
         case .home:
             HomeFlowCoordinator(
                 coreService: coreService,
@@ -36,7 +59,7 @@ struct PaymentsFlowCoordinator: View {
                 profileStore: profileStore,
                 coreService: coreService
             )
-        @unknown default:
+        case .unsupported:
             EmptyView()
         }
     }

@@ -32,7 +32,7 @@ final class BeneficiaryAddService: BeneficiaryAddServicing {
         return beneficiary
     }
 
-    private static func matches(identifier: String, beneficiary: Beneficiary) -> Bool {
+    static func matches(identifier: String, beneficiary: Beneficiary) -> Bool {
         let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let name = beneficiary.name.lowercased()
         let pixKey = beneficiary.pixKey.lowercased()
@@ -67,7 +67,7 @@ extension BeneficiaryAddEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .search:
-            return Self.encodeOrEmpty(Beneficiary.mock)
+            return Self.encodeOrEmpty(BeneficiaryFixtures.defaults)
         }
     }
 
@@ -76,6 +76,6 @@ extension BeneficiaryAddEndpoint: Endpoint {
     }
 }
 
-private enum BeneficiaryAddError: Error {
+enum BeneficiaryAddError: Error, Equatable {
     case notFound
 }

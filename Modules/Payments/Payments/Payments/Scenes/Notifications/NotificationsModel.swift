@@ -58,51 +58,6 @@ public struct Notifications: Identifiable, Codable, Equatable, Hashable {
         self.hasDivider = hasDivider
     }
     
-    // For previews & testing
-    public static let mock: [Notifications] = [
-
-        .init(
-            title: Strings.Notifications.titleTransferSent,
-            leadingContent: .image("melissa"),
-            date: Date(),
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titlePaymentReceived,
-            leadingContent: .image("ed"),
-            date: Date(),
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleSubscriptionRenewed,
-            leadingContent: .icon("bell"),
-            date: Date(),
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleRefundProcessed,
-            leadingContent: .icon("wrench.and.screwdriver"),
-            date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleSubscriptionExpired,
-            leadingContent: .icon("calendar"),
-            date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!,
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleMaintenanceCompleted,
-            leadingContent: .icon("gearshape"),
-            date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
-            hasDivider: true
-        )
-    ]
 }
 
 public struct NotificationsCentreResponse: Codable, Hashable, Equatable {
@@ -121,7 +76,44 @@ public struct NotificationsCentreResponse: Codable, Hashable, Equatable {
 public extension NotificationsCentreResponse {
     static let mock = NotificationsCentreResponse(
         unreadCount: 3,
-        notifications: Notifications.mock
+        notifications: [
+            .init(
+                title: Strings.Notifications.titleTransferSent,
+                leadingContent: .image("melissa"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titlePaymentReceived,
+                leadingContent: .image("ed"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleSubscriptionRenewed,
+                leadingContent: .icon("bell"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleRefundProcessed,
+                leadingContent: .icon("wrench.and.screwdriver"),
+                date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleSubscriptionExpired,
+                leadingContent: .icon("calendar"),
+                date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!,
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleMaintenanceCompleted,
+                leadingContent: .icon("gearshape"),
+                date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
+                hasDivider: true
+            )
+        ]
     )
 }
 

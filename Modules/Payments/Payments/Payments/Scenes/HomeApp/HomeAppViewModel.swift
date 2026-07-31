@@ -16,25 +16,33 @@ final class HomeAppViewModel: ObservableObject {
     @Published private(set) var balanceText: String = "$ 0.00"
     @Published private(set) var isBalanceVisible = true
     @Published private(set) var unreadCount = 0
+    var hasUnreadNotifications: Bool { unreadCount > 0 }
 
     private let service: any HomeAppServicing
+    private let locale: Locale
+    private var latestLoadID = UUID()
 
-    init(service: any HomeAppServicing) {
+    init(service: any HomeAppServicing, locale: Locale = .current) {
         self.service = service
+        self.locale = locale
     }
 
     func load() async {
+        let loadID = UUID()
+        latestLoadID = loadID
         isLoading = true
         errorMessage = nil
         isEmpty = false
 
         do {
             let dashboard = try await service.loadDashboard()
+            guard latestLoadID == loadID else { return }
 
             userFirstName = dashboard.user.firstName
             balanceText = Self.balanceText(
                 currency: dashboard.balance.currency,
-                amount: dashboard.balance.amount
+                amount: dashboard.balance.amount,
+                locale: locale
             )
             isBalanceVisible = !dashboard.balance.masked
             cards = dashboard.cards
@@ -44,6 +52,7 @@ final class HomeAppViewModel: ObservableObject {
             unreadCount = dashboard.notifications.unreadCount
             isEmpty = cards.isEmpty
         } catch {
+            guard latestLoadID == loadID else { return }
             errorMessage = Strings.HomeApp.cardsLoadFailed
         }
 
@@ -60,15 +69,16 @@ final class HomeAppViewModel: ObservableObject {
         )
     }
 
-    private static func balanceText(currency: String, amount: Double) -> String {
+    private static func balanceText(currency: String, amount: Double, locale: Locale) -> String {
         let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencyCode = currency
+        formatter.numberStyle = .decimal
+        formatter.locale = locale
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
-        formatter.currencySymbol = currency == "USD" ? "$" : currency
 
         let formattedAmount = formatter.string(from: NSNumber(value: amount)) ?? String(format: "%.2f", amount)
-        return formattedAmount.replacingOccurrences(of: "$", with: "$ ")
+        let currencySymbol = currency == "USD" ? "$" : currency
+
+        return "\(currencySymbol) \(formattedAmount)"
     }
 }

@@ -5,14 +5,7 @@ struct CardOptions: Identifiable, Codable, Hashable {
     let id: String
     let label: String
     let icon: String
-    
-    static let mock: [CardOptions] = [
-        .init(label: Strings.QuickActions.sendTitle, icon: "paperplane.fill"),
-        .init(label: Strings.QuickActions.requestTitle, icon: "arrow.down"),
-        .init(label: Strings.QuickActions.payTitle, icon: "creditcard.fill"),
-        .init(label: Strings.QuickActions.topUpTitle, icon: "plus")
-    ]
-    
+
     init(id: String? = nil, label: String, icon: String) {
         self.id = id ?? label
         self.label = label

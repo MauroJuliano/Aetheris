@@ -37,6 +37,22 @@ struct HomeAppServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadDashboard_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"user":{"firstName":"Incomplete"}}"#.utf8)
+        let sut = HomeAppService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadDashboard()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -52,6 +68,7 @@ struct HomeAppServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .notConnectedToInternet)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

@@ -12,7 +12,7 @@ struct BeneficiaryListServiceTests {
 
         let response = try await sut.loadBeneficiaryList()
 
-        #expect(response.beneficiaries.count == Beneficiary.mock.count)
+        #expect(response.beneficiaries.count == BeneficiaryFixtures.defaults.count)
         #expect(response.beneficiaries.first?.name == "Melissa")
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/beneficiaries/recent", method: .get)
@@ -30,6 +30,22 @@ struct BeneficiaryListServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadBeneficiaryList_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"beneficiaries":"invalid"}"#.utf8)
+        let sut = BeneficiaryListService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadBeneficiaryList()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -45,6 +61,7 @@ struct BeneficiaryListServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .notConnectedToInternet)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

@@ -19,7 +19,15 @@ struct ProfileData {
 }
 
 @MainActor
-final class ProfileStore {
+protocol ProfileStoring {
+    var profile: ProfileData { get }
+    func updateName(_ name: String)
+    func updateEmail(_ email: String)
+    func updatePhone(_ phone: String)
+}
+
+@MainActor
+final class ProfileStore: ProfileStoring {
     private let persistence = AppPersistenceController.shared
     private let record: ProfileRecord
 

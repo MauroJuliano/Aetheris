@@ -19,26 +19,6 @@ public struct Beneficiary: Identifiable, Codable, Hashable {
         self.image = image
         self.hasDivider = hasDivider
     }
-    
-    public static let mock: [Beneficiary] = [
-        Beneficiary(name: "Melissa", pixKey: "contact@melissamccarthy.com", image: "melissa", hasDivider: true),
-        Beneficiary(name: "Ed Sheeran", pixKey: "afirelove", image: "ed", hasDivider: true),
-        Beneficiary(name: "Adele", pixKey: "rollinginthedeep", image: "Adele", hasDivider: true),
-        Beneficiary(name: "Troy Bolton", pixKey: "scream", image: "Troy", hasDivider: false)
-    ]
-
-    public static var beneficiaries: [Beneficiary] {
-        mock
-    }
-
-    public static var defaultSelection: Beneficiary {
-        mock.first ?? Beneficiary(
-            name: "Melissa",
-            pixKey: "contact@melissamccarthy.com",
-            image: "melissa",
-            hasDivider: true
-        )
-    }
 }
 
 public struct BeneficiaryCell: View {

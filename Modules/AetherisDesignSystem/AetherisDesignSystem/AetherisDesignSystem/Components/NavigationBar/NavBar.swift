@@ -84,7 +84,7 @@ public struct NavBar: View {
                     Button {
                         onRightButtonAction?()
                     } label: {
-                        NotificationBell()
+                        NotificationBell(showBadge: shouldPresentNotifications)
                     }
                 }
             }

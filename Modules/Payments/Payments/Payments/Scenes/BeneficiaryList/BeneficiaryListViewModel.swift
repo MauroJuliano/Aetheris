@@ -3,14 +3,19 @@ import Foundation
 import SwiftUI
 
 @MainActor
-final class RecentRecipientsStore {
+protocol RecentRecipientsProviding {
+    func beneficiaries(limit: Int, fallback: [Beneficiary]) -> [Beneficiary]
+}
+
+@MainActor
+final class RecentRecipientsStore: RecentRecipientsProviding {
     static let shared = RecentRecipientsStore()
 
     private let persistence = AppPersistenceController.shared
 
     private init() {}
 
-    func beneficiaries(limit: Int = 4, fallback: [Beneficiary] = Beneficiary.beneficiaries) -> [Beneficiary] {
+    func beneficiaries(limit: Int = 4, fallback: [Beneficiary] = BeneficiaryFixtures.defaults) -> [Beneficiary] {
         let recentRecipients = persistence.recentRecipientRecords(limit: limit)
         let mappedRecipients = recentRecipients.map {
             Beneficiary(
@@ -48,18 +53,33 @@ final class BeneficiaryListViewModel: ObservableObject {
     @Published private(set) var beneficiaries: [Beneficiary]
 
     private let service: any BeneficiaryListServicing
+    private let recentRecipientsStore: any RecentRecipientsProviding
 
-    init(service: any BeneficiaryListServicing) {
+    init(
+        service: any BeneficiaryListServicing,
+        recentRecipientsStore: (any RecentRecipientsProviding)? = nil
+    ) {
+        let recentRecipientsStore = recentRecipientsStore ?? RecentRecipientsStore.shared
         self.service = service
-        self.beneficiaries = RecentRecipientsStore.shared.beneficiaries()
+        self.recentRecipientsStore = recentRecipientsStore
+        self.beneficiaries = recentRecipientsStore.beneficiaries(
+            limit: 4,
+            fallback: BeneficiaryFixtures.defaults
+        )
     }
 
     func load() async {
         do {
             let response = try await service.loadBeneficiaryList()
-            beneficiaries = RecentRecipientsStore.shared.beneficiaries(fallback: response.beneficiaries)
+            beneficiaries = recentRecipientsStore.beneficiaries(
+                limit: 4,
+                fallback: response.beneficiaries
+            )
         } catch {
-            beneficiaries = RecentRecipientsStore.shared.beneficiaries()
+            beneficiaries = recentRecipientsStore.beneficiaries(
+                limit: 4,
+                fallback: BeneficiaryFixtures.defaults
+            )
         }
         isLoading = false
     }

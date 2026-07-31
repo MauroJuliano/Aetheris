@@ -14,6 +14,7 @@ struct HomeCardServiceTests {
 
         #expect(dashboard.cards.count == 3)
         #expect(dashboard.summaries.count == 6)
+        #expect(dashboard.quickActions.count == 4)
         #expect(dashboard.summaries.map(\.tag) == [.transfer, .income, .expense, .expense, .expense, .transfer])
         #expect(coreService.calls == [
             .init(path: "https://api.aetheris.app/payments/home-card/dashboard", method: .get),
@@ -31,6 +32,22 @@ struct HomeCardServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadDashboard_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"cards":[]}"#.utf8)
+        let sut = HomeCardService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadDashboard()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -46,6 +63,7 @@ struct HomeCardServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .timedOut)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

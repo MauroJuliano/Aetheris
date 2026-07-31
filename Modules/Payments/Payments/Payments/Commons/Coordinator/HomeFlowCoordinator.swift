@@ -6,22 +6,22 @@ struct HomeFlowCoordinator: View {
     let coreService: any HasCoreService
     @Binding var selectedBeneficiary: Beneficiary
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
-    @State var path: [HomeRoute] = []
+    @State var navigation = HomeNavigationState()
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navigation.path) {
             rootView
                 .navigationDestination(for: HomeRoute.self, destination: destinationView(for:))
         }
         .onAppear {
             syncTabBarVisibility()
         }
-        .onChange(of: path.count) { _, _ in
+        .onChange(of: navigation.path.count) { _, _ in
             syncTabBarVisibility()
         }
     }
 
     private func syncTabBarVisibility() {
-        tabBarVisibilityStore.isVisible = path.isEmpty
+        tabBarVisibilityStore.isVisible = navigation.isAtRoot
     }
 }

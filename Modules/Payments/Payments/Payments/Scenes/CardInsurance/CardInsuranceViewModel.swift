@@ -18,7 +18,7 @@ final class CardInsuranceViewModel: ObservableObject {
         errorMessage = nil
 
         do {
-            bullets = try await service.loadBullets()
+            bullets = try await service.loadBullets().bullets
         } catch {
             bullets = []
             errorMessage = Strings.Common.errorSubmit

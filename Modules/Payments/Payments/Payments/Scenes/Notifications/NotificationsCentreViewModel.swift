@@ -38,7 +38,13 @@ final class NotificationsCentreViewModel: ObservableObject {
 
     private func buildSections(from notifications: [Notifications]) {
 
-        let order = ["Today", "Yesterday", "Last Week", "Last Month", "Others"]
+        let order = [
+            Strings.Notifications.sectionToday,
+            Strings.Notifications.sectionYesterday,
+            Strings.Notifications.sectionLastWeek,
+            Strings.Notifications.sectionLastMonth,
+            Strings.Notifications.sectionOthers
+        ]
 
         let grouped = Dictionary(grouping: notifications) { $0.section }
 

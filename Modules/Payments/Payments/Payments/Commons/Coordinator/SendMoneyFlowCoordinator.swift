@@ -2,11 +2,36 @@ import Core
 import UIKit
 import SwiftUI
 
-private enum SendMoneyFlowRoute: Hashable {
+enum SendMoneyFlowRoute: Hashable {
     case beneficiaryList
     case pin(TransferReceiptModel)
     case processing(TransferReceiptModel)
     case success(TransferReceiptModel)
+}
+
+struct SendMoneyNavigationState {
+    var path: [SendMoneyFlowRoute] = []
+    var isAtRoot: Bool { path.isEmpty }
+
+    mutating func push(_ route: SendMoneyFlowRoute) {
+        path.append(route)
+    }
+
+    mutating func pop() {
+        guard !path.isEmpty else { return }
+        path.removeLast()
+    }
+
+    mutating func replaceCurrent(with route: SendMoneyFlowRoute) {
+        if !path.isEmpty {
+            path.removeLast()
+        }
+        path.append(route)
+    }
+
+    mutating func reset() {
+        path.removeAll()
+    }
 }
 
 struct SendMoneyFlowCoordinator: View {
@@ -14,19 +39,19 @@ struct SendMoneyFlowCoordinator: View {
     @Binding var selectedBeneficiary: Beneficiary
     let onBackAction: () -> Void
 
-    @State private var path: [SendMoneyFlowRoute] = []
+    @State private var navigation = SendMoneyNavigationState()
 
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navigation.path) {
             SendMoneyFactory.make(
                 coreService: coreService,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: onBackAction,
                 onChangeBeneficiary: {
-                    path.append(.beneficiaryList)
+                    navigation.push(.beneficiaryList)
                 },
                 onContinue: { receipt in
-                    path.append(.pin(receipt))
+                    navigation.push(.pin(receipt))
                 }
             )
             .navigationDestination(for: SendMoneyFlowRoute.self) { route in
@@ -48,7 +73,7 @@ struct SendMoneyFlowCoordinator: View {
                         receipt: receipt,
                         onBack: { popRoute() },
                         onValidPin: {
-                            path.append(.processing(receipt))
+                            navigation.push(.processing(receipt))
                         }
                     )
                     .navigationBarHidden(true)
@@ -67,11 +92,11 @@ struct SendMoneyFlowCoordinator: View {
                         model: receipt,
                         onBack: { popRoute() },
                         onDone: {
-                            path.removeAll()
+                            navigation.reset()
                             onBackAction()
                         },
                         onNewTransfer: {
-                            path.removeAll()
+                            navigation.reset()
                         },
                         onCopyReference: { reference in
                             UIPasteboard.general.string = reference
@@ -87,14 +112,10 @@ struct SendMoneyFlowCoordinator: View {
     }
 
     private func popRoute() {
-        guard !path.isEmpty else { return }
-        path.removeLast()
+        navigation.pop()
     }
 
     private func replaceCurrentRoute(with route: SendMoneyFlowRoute) {
-        if !path.isEmpty {
-            path.removeLast()
-        }
-        path.append(route)
+        navigation.replaceCurrent(with: route)
     }
 }

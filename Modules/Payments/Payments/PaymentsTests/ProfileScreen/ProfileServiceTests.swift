@@ -42,6 +42,22 @@ struct ProfileServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadProfile_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"user":null}"#.utf8)
+        let sut = ProfileService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadProfile()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -57,6 +73,7 @@ struct ProfileServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .timedOut)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

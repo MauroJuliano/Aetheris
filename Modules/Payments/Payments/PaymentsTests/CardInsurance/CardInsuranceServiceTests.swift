@@ -10,10 +10,10 @@ struct CardInsuranceServiceTests {
         let coreService = CoreServiceTestDouble()
         let sut = CardInsuranceService(coreService: coreService)
 
-        let bullets = try await sut.loadBullets()
+        let response = try await sut.loadBullets()
 
-        #expect(bullets.count == 4)
-        #expect(bullets.map(\.text) == [
+        #expect(response.bullets.count == 4)
+        #expect(response.bullets.map(\.text) == [
             Strings.CardInsurance.bulletOne,
             Strings.CardInsurance.bulletTwo,
             Strings.CardInsurance.bulletThree,
@@ -35,6 +35,22 @@ struct CardInsuranceServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadBullets_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"bullets":42}"#.utf8)
+        let sut = CardInsuranceService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadBullets()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -50,6 +66,7 @@ struct CardInsuranceServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .cannotParseResponse)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

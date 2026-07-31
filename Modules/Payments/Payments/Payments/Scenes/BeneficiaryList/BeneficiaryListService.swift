@@ -48,6 +48,6 @@ extension BeneficiaryListEndpoint: Endpoint {
 
 extension BeneficiaryListResponse {
     static let mock = BeneficiaryListResponse(
-        beneficiaries: Beneficiary.mock
+        beneficiaries: BeneficiaryFixtures.defaults
     )
 }

@@ -9,7 +9,7 @@ final class HomeCardViewModel: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published var cards: [Card] = []
     @Published private(set) var summaries: [FinancialSummaryModel] = []
-    @Published private(set) var quickActions: [CardOptions] = CardOptions.mock
+    @Published private(set) var quickActions: [CardOptions] = []
 
     private let service: any HomeCardServicing
 
@@ -26,6 +26,7 @@ final class HomeCardViewModel: ObservableObject {
             let loadedDashboard = try await service.loadDashboard()
             cards = loadedDashboard.cards
             summaries = loadedDashboard.summaries
+            quickActions = loadedDashboard.quickActions
             isEmpty = cards.isEmpty && summaries.isEmpty
         } catch {
             errorMessage = "We could not load your cards and activity right now."

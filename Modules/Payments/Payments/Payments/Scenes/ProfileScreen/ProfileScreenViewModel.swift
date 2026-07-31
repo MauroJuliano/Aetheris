@@ -10,10 +10,10 @@ final class ProfileScreenViewModel: ObservableObject {
     @Published private(set) var notificationCells: [FormCellModel]
     @Published private(set) var footer: ProfileDashboardResponse.Footer
 
-    private let store: ProfileStore
+    private let store: any ProfileStoring
     private let service: ProfileServicing
 
-    init(store: ProfileStore, service: ProfileServicing) {
+    init(store: any ProfileStoring, service: ProfileServicing) {
         self.store = store
         self.service = service
         self.profile = store.profile

@@ -35,6 +35,22 @@ struct InsuranceOnboardingServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadBenefits_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"benefits":false}"#.utf8)
+        let sut = InsuranceOnboardingService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadBenefits()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -50,6 +66,7 @@ struct InsuranceOnboardingServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .dnsLookupFailed)
+            #expect(coreService.calls.count == 1)
         }
     }
 }

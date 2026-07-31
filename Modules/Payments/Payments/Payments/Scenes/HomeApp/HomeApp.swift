@@ -61,9 +61,10 @@ struct HomeApp: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     NavBar(
+                        shouldPresentNotifications: viewModel.hasUnreadNotifications,
                         model: .init(
                             firstText: Strings.HomeApp.welcomePrefix,
-                            secondText: Strings.HomeApp.welcomeName,
+                            secondText: viewModel.userFirstName,
                             hasInitialSpace: false
                         ),
                         onRightButtonAction: onNotificationsTap

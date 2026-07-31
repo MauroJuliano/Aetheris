@@ -45,6 +45,22 @@ struct TransactionHistoryServiceTests {
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
+    }
+
+    @Test
+    func loadTransactions_throwsInvalidData_whenResponseHasUnexpectedShape() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data(#"{"transactions":{}}"#.utf8)
+        let sut = TransactionHistoryService(coreService: coreService, cardId: cardId)
+
+        do {
+            _ = try await sut.loadTransactions()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
         }
     }
 
@@ -60,6 +76,7 @@ struct TransactionHistoryServiceTests {
         } catch {
             let urlError = error as? URLError
             #expect(urlError?.code == .cannotFindHost)
+            #expect(coreService.calls.count == 1)
         }
     }
 }
