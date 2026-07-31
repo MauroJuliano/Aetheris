@@ -106,6 +106,11 @@ private struct CardSwipeStackCard: View {
         (dragOffset.width >= 0 ? 1 : -1) * progress
     }
 
+    private var fadeProgress: CGFloat {
+        let threshold: CGFloat = 0.3
+        return max(0, min((progress - threshold) / (1 - threshold), 1))
+    }
+
     var body: some View {
         CardView(card: card)
             .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
@@ -113,6 +118,7 @@ private struct CardSwipeStackCard: View {
             .zIndex(Double(cardsCount - visualIndex))
             .rotationEffect(cardRotation, anchor: .bottom)
             .scaleEffect(cardScale)
+            .opacity(cardOpacity)
             .offset(x: visualIndex == 0 ? 0 : CGFloat(visualIndex) * -3)
             .rotation3DEffect(.degrees(cardRotation3D), axis: (0, 1, 0))
             .contentShape(Rectangle())
@@ -150,6 +156,17 @@ private struct CardSwipeStackCard: View {
         }
 
         return 1.0 - CGFloat(visualIndex) * 0.06
+    }
+
+    private var cardOpacity: Double {
+        switch visualIndex {
+        case 0:
+            return Double(1 - fadeProgress)
+        case 1:
+            return Double(0.72 + fadeProgress * 0.28)
+        default:
+            return 0.55
+        }
     }
 
     private var cardRotation3D: Double {
