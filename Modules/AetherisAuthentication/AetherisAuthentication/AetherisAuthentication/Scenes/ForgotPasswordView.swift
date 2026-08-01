@@ -49,10 +49,6 @@ struct ForgotPasswordView: View {
             .padding(.bottom, AppSpacing.large)
         }
         .ignoresSafeArea(edges: .bottom)
-        .contentShape(Rectangle())
-        .onTapGesture {
-            isEmailFocused = false
-        }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
     }
@@ -177,6 +173,10 @@ private extension ForgotPasswordView {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isEmailFocused = false
         }
     }
 }
