@@ -24,6 +24,7 @@ struct TransferSuccessView: View {
             .padding(.bottom, AppSpacing.xxLarge + AppSpacing.xxSmall)
         }
         .appScreenBackground()
+        .accessibilityIdentifier("transfer.successScreen")
     }
 
     private var header: some View {

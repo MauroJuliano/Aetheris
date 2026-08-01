@@ -31,6 +31,7 @@ struct TransferProcessingView: View {
         .onAppear {
             viewModel.start(onCompleted: onCompleted)
         }
+        .accessibilityIdentifier("transfer.processingScreen")
     }
 
     private var processingIcon: some View {
@@ -58,4 +59,3 @@ struct TransferProcessingView: View {
         }
     }
 }
-

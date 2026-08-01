@@ -73,6 +73,7 @@ struct ResumeView: View {
                 }
                 .disabled(viewModel.isLoading)
                 .padding(.vertical, AppSpacing.medium)
+                .accessibilityIdentifier("registration.resumeContinue")
             }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
@@ -91,6 +92,7 @@ struct ResumeView: View {
                 .ignoresSafeArea()
         }
         .navigationBarHidden(true)
+        .accessibilityIdentifier("registration.resumeScreen")
         .sheet(isPresented: submissionErrorBinding) {
             ActionErrorSheet(
                 title: Strings.SubmissionError.title,

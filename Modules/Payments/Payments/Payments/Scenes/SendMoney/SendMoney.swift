@@ -81,6 +81,7 @@ struct SendMoney: View {
             .padding(AppSpacing.medium)
             .disabled(!viewModel.canContinue(currentAmount: amountViewModel.currentAmount))
             .opacity(viewModel.canContinue(currentAmount: amountViewModel.currentAmount) ? 1 : 0.55)
+            .accessibilityIdentifier("transfer.continue")
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
         .appScreenBackground()
@@ -91,5 +92,6 @@ struct SendMoney: View {
             await viewModel.load()
             amountViewModel.updateBalance(viewModel.walletBalance)
         }
+        .accessibilityIdentifier("transfer.amountScreen")
     }
 }

@@ -73,6 +73,7 @@ struct TransferPinView: View {
         } message: {
             Text(viewModel.biometricErrorMessage ?? Strings.TransferPin.faceIDUnavailable)
         }
+        .accessibilityIdentifier("transfer.pinScreen")
     }
 
     private var header: some View {
@@ -180,6 +181,7 @@ struct TransferPinView: View {
                 .appShadow(AppShadow.soft)
             }
             .disabled(viewModel.isLockedOut)
+            .accessibilityIdentifier("pin.key.\(value)")
         }
     }
 }

@@ -136,6 +136,7 @@ struct ProfileScreen: View {
             syncTabBarVisibility()
         }
         .task { await viewModel.load() }
+        .accessibilityIdentifier("profile.screen")
     }
 
     private func syncTabBarVisibility() {

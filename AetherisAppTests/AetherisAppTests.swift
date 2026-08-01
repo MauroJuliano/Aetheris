@@ -1,14 +1,14 @@
 //
-//  FluxTests.swift
-//  FluxTests
+//  AetherisAppTests.swift
+//  AetherisAppTests
 //
 //  Created by maclau on 28/07/25.
 //
 
 import XCTest
-@testable import Flux
+@testable import AetherisApp
 
-final class FluxTests: XCTestCase {
+final class AetherisAppTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

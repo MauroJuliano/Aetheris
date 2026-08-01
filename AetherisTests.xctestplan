@@ -17,6 +17,14 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A976FABE2E37AEF200FF923B",
+        "name" : "AetherisAppUITests"
+      }
+    },
+    {
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Aetheris.xcodeproj",

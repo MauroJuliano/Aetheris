@@ -65,6 +65,7 @@ struct CardHome: View {
         .onChange(of: selectedCardIndex) { _, _ in
             refreshSummariesTransition()
         }
+        .accessibilityIdentifier("cards.screen")
     }
 
     private func openTransactionHistory() {

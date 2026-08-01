@@ -1,13 +1,13 @@
 //
-//  FluxUITestsLaunchTests.swift
-//  FluxUITests
+//  AetherisAppUITestsLaunchTests.swift
+//  AetherisAppUITests
 //
 //  Created by maclau on 28/07/25.
 //
 
 import XCTest
 
-final class FluxUITestsLaunchTests: XCTestCase {
+final class AetherisAppUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
@@ -20,10 +20,15 @@ final class FluxUITestsLaunchTests: XCTestCase {
     @MainActor
     func testLaunch() throws {
         let app = XCUIApplication()
+        app.launchArguments = ["-uiTesting"]
         app.launch()
 
-        // Insert steps here to perform after app launch but before taking a screenshot,
-        // such as logging into a test account or navigating somewhere in the app
+        XCTAssertTrue(
+            app.descendants(matching: .any)
+                .matching(identifier: "login.screen")
+                .firstMatch
+                .waitForExistence(timeout: 3)
+        )
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "Launch Screen"
