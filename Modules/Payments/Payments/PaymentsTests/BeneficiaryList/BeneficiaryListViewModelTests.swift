@@ -6,77 +6,56 @@ import Testing
 @Suite("BeneficiaryListViewModel")
 struct BeneficiaryListViewModelTests {
     @Test
-    func initialState_usesRecentRecipientsAndStartsLoading() {
-        let recent = [Beneficiary.fixture(name: "Recent")]
-        let store = RecentRecipientsStoreSpy(result: recent)
+    func initialState_usesLimitedDefaultBeneficiariesAndStartsLoading() {
         let sut = BeneficiaryListViewModel(
-            service: BeneficiaryListServiceSpy(result: .failure(URLError(.timedOut))),
-            recentRecipientsStore: store
+            service: BeneficiaryListServiceSpy(result: .failure(URLError(.timedOut)))
         )
 
         #expect(sut.isLoading)
-        #expect(sut.beneficiaries.map(\.name) == ["Recent"])
-        #expect(store.calls.count == 1)
-        #expect(store.calls[0].limit == 4)
+        #expect(sut.beneficiaries.count == min(4, BeneficiaryFixtures.defaults.count))
+        #expect(sut.beneficiaries.map(\.name) == Array(BeneficiaryFixtures.defaults.prefix(4)).map(\.name))
     }
 
     @Test
-    func load_usesServicePayloadAsFallbackForRecentRecipients() async {
-        let response = BeneficiaryListResponse(beneficiaries: [.fixture(name: "Remote")])
-        let store = RecentRecipientsStoreSpy(results: [
-            [.fixture(name: "Initial")],
-            [.fixture(name: "Merged")]
-        ])
-        let service = BeneficiaryListServiceSpy(result: .success(response))
-        let sut = BeneficiaryListViewModel(service: service, recentRecipientsStore: store)
+    func load_usesAtMostFourBeneficiariesFromService() async {
+        let remote = (1...5).map { Beneficiary.fixture(name: "Remote \($0)") }
+        let service = BeneficiaryListServiceSpy(result: .success(.init(beneficiaries: remote)))
+        let sut = BeneficiaryListViewModel(service: service)
 
         await sut.load()
 
         #expect(!sut.isLoading)
-        #expect(sut.beneficiaries.map(\.name) == ["Merged"])
-        #expect(store.calls.last?.fallback.map(\.name) == ["Remote"])
+        #expect(sut.beneficiaries.map(\.name) == ["Remote 1", "Remote 2", "Remote 3", "Remote 4"])
         #expect(service.loadCalls == 1)
     }
 
     @Test
     func load_usesDefaultFallback_whenServiceFails() async {
-        let store = RecentRecipientsStoreSpy(results: [
-            [.fixture(name: "Initial")],
-            [.fixture(name: "Fallback")]
-        ])
         let service = BeneficiaryListServiceSpy(result: .failure(URLError(.notConnectedToInternet)))
-        let sut = BeneficiaryListViewModel(service: service, recentRecipientsStore: store)
+        let sut = BeneficiaryListViewModel(service: service)
 
         await sut.load()
 
         #expect(!sut.isLoading)
-        #expect(sut.beneficiaries.map(\.name) == ["Fallback"])
-        #expect(store.calls.last?.fallback.count == BeneficiaryFixtures.defaults.count)
+        #expect(sut.beneficiaries.map(\.name) == Array(BeneficiaryFixtures.defaults.prefix(4)).map(\.name))
+        #expect(service.loadCalls == 1)
+    }
+
+    @Test
+    func load_acceptsEmptyRemoteList() async {
+        let service = BeneficiaryListServiceSpy(result: .success(.init(beneficiaries: [])))
+        let sut = BeneficiaryListViewModel(service: service)
+
+        await sut.load()
+
+        #expect(!sut.isLoading)
+        #expect(sut.beneficiaries.isEmpty)
     }
 }
 
 private extension Beneficiary {
     static func fixture(name: String) -> Beneficiary {
         Beneficiary(name: name, pixKey: "\(name.lowercased())@example.com", image: "avatar", hasDivider: true)
-    }
-}
-
-@MainActor
-private final class RecentRecipientsStoreSpy: RecentRecipientsProviding {
-    struct Call {
-        let limit: Int
-        let fallback: [Beneficiary]
-    }
-
-    private var results: [[Beneficiary]]
-    private(set) var calls: [Call] = []
-
-    init(result: [Beneficiary]) { results = [result] }
-    init(results: [[Beneficiary]]) { self.results = results }
-
-    func beneficiaries(limit: Int, fallback: [Beneficiary]) -> [Beneficiary] {
-        calls.append(.init(limit: limit, fallback: fallback))
-        return results.removeFirst()
     }
 }
 

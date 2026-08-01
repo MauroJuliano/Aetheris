@@ -3,6 +3,7 @@ import Foundation
 
 protocol ProfileServicing {
     func loadProfile() async throws -> ProfileDashboardResponse
+    func updateProfile(_ request: UpdateProfileRequest) async throws -> ProfileDashboardResponse
 }
 
 final class ProfileService: ProfileServicing {
@@ -15,6 +16,16 @@ final class ProfileService: ProfileServicing {
     func loadProfile() async throws -> ProfileDashboardResponse {
         try await coreService.execute(ProfileEndpoint.profile)
     }
+
+    func updateProfile(_ request: UpdateProfileRequest) async throws -> ProfileDashboardResponse {
+        try await coreService.execute(ProfileEndpoint.update(request))
+    }
+}
+
+struct UpdateProfileRequest: Codable, Equatable {
+    let name: String
+    let email: String
+    let phone: String
 }
 
 struct ProfileDashboardResponse: Codable {
@@ -52,21 +63,39 @@ struct ProfileDashboardResponse: Codable {
 
 private enum ProfileEndpoint {
     case profile
+    case update(UpdateProfileRequest)
 }
 
 extension ProfileEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/profile"
+        switch self {
+        case .profile:
+            "https://api.aetheris.app/payments/profile"
+        case .update:
+            "https://api.aetheris.app/payments/profile/update"
+        }
     }
 
-    var method: HTTPMethod { .get }
+    var method: HTTPMethod {
+        switch self {
+        case .profile: .get
+        case .update: .post
+        }
+    }
 
-    var body: Encodable? { nil }
+    var body: Encodable? {
+        switch self {
+        case .profile: nil
+        case let .update(request): request
+        }
+    }
 
     var mockResponseData: Data {
         switch self {
         case .profile:
             return Self.encodeOrEmpty(ProfileDashboardResponse.mock)
+        case let .update(request):
+            return Self.encodeOrEmpty(ProfileDashboardResponse.mock.updated(with: request))
         }
     }
 
@@ -100,4 +129,19 @@ extension ProfileDashboardResponse {
             terms: Strings.Profile.terms
         )
     )
+
+    func updated(with request: UpdateProfileRequest) -> ProfileDashboardResponse {
+        ProfileDashboardResponse(
+            user: user,
+            general: .init(
+                title: general.title,
+                name: request.name,
+                email: request.email,
+                phone: request.phone,
+                feedback: general.feedback
+            ),
+            notifications: notifications,
+            footer: footer
+        )
+    }
 }

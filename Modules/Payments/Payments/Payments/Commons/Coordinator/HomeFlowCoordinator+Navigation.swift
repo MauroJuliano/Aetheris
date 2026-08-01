@@ -15,7 +15,6 @@ extension HomeFlowCoordinator {
             onCardTap: { navigation.push(.card) },
             onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
-                RecentRecipientsStore.shared.record(beneficiary)
                 selectedBeneficiary = beneficiary
                 navigation.push(.sendMoney)
             },
@@ -70,7 +69,6 @@ extension HomeFlowCoordinator {
             BeneficiaryListFactory.make(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    RecentRecipientsStore.shared.record(beneficiary)
                     selectedBeneficiary = beneficiary
                     replaceCurrentRoute(with: .sendMoney)
                 },
@@ -82,7 +80,6 @@ extension HomeFlowCoordinator {
             BeneficiaryListFactory.make(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    RecentRecipientsStore.shared.record(beneficiary)
                     selectedBeneficiary = beneficiary
                     popRoute()
                 },
@@ -130,7 +127,6 @@ extension HomeFlowCoordinator {
                 coreService: coreService,
                 onBack: { popRoute() },
                 onComplete: { beneficiary in
-                    RecentRecipientsStore.shared.record(beneficiary)
                     selectedBeneficiary = beneficiary
                     replaceCurrentRoute(with: .sendMoney)
                 }

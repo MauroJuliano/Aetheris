@@ -3,7 +3,7 @@ import AetherisDesignSystem
 import SwiftUI
 
 public struct Recipients: View {
-    @State private var users: [Beneficiary] = []
+    @State private var users: [Beneficiary] = Array(BeneficiaryFixtures.defaults.prefix(4))
     @State private var shouldPresentTransfer: Bool = false
     @State private var selectedUser: Beneficiary?
     
@@ -25,7 +25,6 @@ public struct Recipients: View {
                     ForEach(users) { user in
                         Button {
                             selectedUser = user
-                            RecentRecipientsStore.shared.record(user)
                             shouldPresentTransfer = true
                         } label: {
                             Image(user.image)
@@ -39,14 +38,11 @@ public struct Recipients: View {
                 }
             }
             .padding(AppSpacing.medium)
-            .onAppear {
-                users = RecentRecipientsStore.shared.beneficiaries()
-            }
         }
         .navigationDestination(isPresented: $shouldPresentTransfer) {
             if let user = selectedUser {
                 SendMoneyFlowCoordinator(
-                    coreService: MockCoreServiceApi(),
+                    coreService: DemoCoreService(),
                     selectedBeneficiary: .constant(user),
                     onBackAction: {}
                 )

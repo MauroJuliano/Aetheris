@@ -26,45 +26,28 @@ final class ProfileScreenViewModel: ObservableObject {
         )
     }
 
-    func updateName(_ name: String) {
-        store.updateName(name)
-        profile.name = name
-        refreshGeneralCells()
+    func updateName(_ name: String) async -> Bool {
+        var updatedProfile = profile
+        updatedProfile.name = name
+        return await update(updatedProfile)
     }
 
-    func updateEmail(_ email: String) {
-        store.updateEmail(email)
-        profile.email = email
-        refreshGeneralCells()
+    func updateEmail(_ email: String) async -> Bool {
+        var updatedProfile = profile
+        updatedProfile.email = email
+        return await update(updatedProfile)
     }
 
-    func updatePhone(_ phone: String) {
-        store.updatePhone(phone)
-        profile.phone = phone
-        refreshGeneralCells()
+    func updatePhone(_ phone: String) async -> Bool {
+        var updatedProfile = profile
+        updatedProfile.phone = phone
+        return await update(updatedProfile)
     }
 
     func load() async {
         do {
             let response = try await service.loadProfile()
-            let storedProfile = store.profile
-
-            profile = ProfileData(
-                name: storedProfile.name.isEmpty ? "\(response.user.firstName) \(response.user.lastName)" : storedProfile.name,
-                email: storedProfile.email.isEmpty ? Strings.Profile.email : storedProfile.email,
-                phone: storedProfile.phone.isEmpty ? Strings.Profile.phone : storedProfile.phone,
-                avatarName: response.user.avatar,
-                joinedDate: response.user.joinedDate
-            )
-            generalCells = Self.makeGeneralCells(
-                title: response.general.title,
-                profile: profile
-            )
-            notificationCells = Self.makeNotificationCells(
-                pushIsOn: response.notifications.hasPushNotificationsActive,
-                smsIsOn: response.notifications.hasSMSNotificationsActive
-            )
-            footer = response.footer
+            apply(response)
         } catch {
             profile = store.profile
             generalCells = Self.makeGeneralCells(for: store.profile)
@@ -78,8 +61,38 @@ final class ProfileScreenViewModel: ObservableObject {
         isLoading = false
     }
 
-    private func refreshGeneralCells() {
-        generalCells = Self.makeGeneralCells(for: profile)
+    private func update(_ updatedProfile: ProfileData) async -> Bool {
+        let request = UpdateProfileRequest(
+            name: updatedProfile.name,
+            email: updatedProfile.email,
+            phone: updatedProfile.phone
+        )
+
+        do {
+            let response = try await service.updateProfile(request)
+            apply(response)
+            return true
+        } catch {
+            return false
+        }
+    }
+
+    private func apply(_ response: ProfileDashboardResponse) {
+        let remoteProfile = ProfileData(
+            name: response.general.name,
+            email: response.general.email,
+            phone: response.general.phone,
+            avatarName: response.user.avatar,
+            joinedDate: response.user.joinedDate
+        )
+        store.update(remoteProfile)
+        profile = remoteProfile
+        generalCells = Self.makeGeneralCells(title: response.general.title, profile: remoteProfile)
+        notificationCells = Self.makeNotificationCells(
+            pushIsOn: response.notifications.hasPushNotificationsActive,
+            smsIsOn: response.notifications.hasSMSNotificationsActive
+        )
+        footer = response.footer
     }
 
     private static func makeGeneralCells(for profile: ProfileData) -> [FormCellModel] {

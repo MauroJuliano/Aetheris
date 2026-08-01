@@ -76,4 +76,36 @@ struct ProfileServiceTests {
             #expect(coreService.calls.count == 1)
         }
     }
+
+    @Test
+    func updateProfile_postsProfileAndReturnsUpdatedPayload() async throws {
+        let coreService = CoreServiceTestDouble()
+        let sut = ProfileService(coreService: coreService)
+        let request = UpdateProfileRequest(
+            name: "New Name",
+            email: "new@example.com",
+            phone: "555"
+        )
+
+        let response = try await sut.updateProfile(request)
+
+        #expect(response.general.name == request.name)
+        #expect(response.general.email == request.email)
+        #expect(response.general.phone == request.phone)
+        #expect(coreService.calls == [
+            .init(path: "https://api.aetheris.app/payments/profile/update", method: .post)
+        ])
+    }
+
+    @Test
+    func updateProfile_propagatesCoreServiceErrors() async {
+        let coreService = CoreServiceTestDouble()
+        coreService.error = URLError(.notConnectedToInternet)
+        let sut = ProfileService(coreService: coreService)
+
+        await #expect(throws: URLError.self) {
+            try await sut.updateProfile(.init(name: "Name", email: "email", phone: "phone"))
+        }
+        #expect(coreService.calls.count == 1)
+    }
 }

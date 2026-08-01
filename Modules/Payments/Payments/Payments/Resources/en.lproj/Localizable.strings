@@ -106,6 +106,8 @@
 
 "Common.tryAgain" = "Try again";
 "Common.back" = "Back";
+"Profile.updateErrorTitle" = "Unable to save changes";
+"Profile.updateErrorDescription" = "We couldn't update your profile. Please try again.";
 
 "Notifications.titleTransferSent" = "Funds successfully transferred to Melissa";
 "Notifications.titlePaymentReceived" = "Payment received from Ed Sheeran";

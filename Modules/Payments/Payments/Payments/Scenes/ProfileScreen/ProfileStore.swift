@@ -1,4 +1,3 @@
-import Core
 import AetherisDesignSystem
 import Foundation
 
@@ -21,50 +20,18 @@ struct ProfileData {
 @MainActor
 protocol ProfileStoring {
     var profile: ProfileData { get }
-    func updateName(_ name: String)
-    func updateEmail(_ email: String)
-    func updatePhone(_ phone: String)
+    func update(_ profile: ProfileData)
 }
 
 @MainActor
 final class ProfileStore: ProfileStoring {
-    private let persistence = AppPersistenceController.shared
-    private let record: ProfileRecord
+    private(set) var profile: ProfileData
 
-    init() {
-        record = persistence.profileRecord()
-
-        if !record.isSeeded {
-            record.name = ProfileData.mock.name
-            record.email = ProfileData.mock.email
-            record.phone = ProfileData.mock.phone
-            record.isSeeded = true
-            persistence.saveChanges()
-        }
+    init(profile: ProfileData = .mock) {
+        self.profile = profile
     }
 
-    var profile: ProfileData {
-        ProfileData(
-            name: record.name,
-            email: record.email,
-            phone: record.phone,
-            avatarName: ProfileData.mock.avatarName,
-            joinedDate: ProfileData.mock.joinedDate
-        )
-    }
-
-    func updateName(_ name: String) {
-        record.name = name
-        persistence.saveChanges()
-    }
-
-    func updateEmail(_ email: String) {
-        record.email = email
-        persistence.saveChanges()
-    }
-
-    func updatePhone(_ phone: String) {
-        record.phone = phone
-        persistence.saveChanges()
+    func update(_ profile: ProfileData) {
+        self.profile = profile
     }
 }

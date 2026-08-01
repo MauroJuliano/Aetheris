@@ -135,7 +135,7 @@ private struct BackendErrorPayload: Decodable {
     var resolvedMessage: String? { message ?? error }
 }
 
-public final class MockCoreServiceApi: HasCoreService {
+public final class DemoCoreService: HasCoreService {
     public init(delay: TimeInterval = 0.9) {
         self.delay = delay
     }

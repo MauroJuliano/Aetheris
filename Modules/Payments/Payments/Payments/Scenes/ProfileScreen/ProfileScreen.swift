@@ -96,22 +96,25 @@ struct ProfileScreen: View {
                     ProfileEditFieldView(
                         title: Strings.Profile.editNameTitle,
                         description: Strings.HomeApp.editNameDescription,
-                        value: nameBinding,
-                        placeholder: Strings.HomeApp.editNamePlaceholder
+                        initialValue: viewModel.profile.name,
+                        placeholder: Strings.HomeApp.editNamePlaceholder,
+                        onSave: viewModel.updateName
                     )
                 case .editEmail:
                     ProfileEditFieldView(
                         title: Strings.Profile.editEmailTitle,
                         description: Strings.HomeApp.editEmailDescription,
-                        value: emailBinding,
-                        placeholder: Strings.HomeApp.editEmailPlaceholder
+                        initialValue: viewModel.profile.email,
+                        placeholder: Strings.HomeApp.editEmailPlaceholder,
+                        onSave: viewModel.updateEmail
                     )
                 case .editPhone:
                     ProfileEditFieldView(
                         title: Strings.Profile.editPhoneTitle,
                         description: Strings.HomeApp.editPhoneDescription,
-                        value: phoneBinding,
-                        placeholder: Strings.HomeApp.editPhonePlaceholder
+                        initialValue: viewModel.profile.phone,
+                        placeholder: Strings.HomeApp.editPhonePlaceholder,
+                        onSave: viewModel.updatePhone
                     )
                 case .feedback:
                     ProfileFeedbackView {
@@ -139,26 +142,6 @@ struct ProfileScreen: View {
         tabBarVisibilityStore.isVisible = path.isEmpty
     }
 
-    private var nameBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.name },
-            set: { viewModel.updateName($0) }
-        )
-    }
-
-    private var emailBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.email },
-            set: { viewModel.updateEmail($0) }
-        )
-    }
-
-    private var phoneBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.phone },
-            set: { viewModel.updatePhone($0) }
-        )
-    }
 }
 
 private enum ProfileRoute: Hashable {

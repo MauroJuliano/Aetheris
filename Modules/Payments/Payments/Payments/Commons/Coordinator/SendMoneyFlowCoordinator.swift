@@ -60,7 +60,6 @@ struct SendMoneyFlowCoordinator: View {
                     BeneficiaryListFactory.make(
                         coreService: coreService,
                         onSelect: { beneficiary in
-                            RecentRecipientsStore.shared.record(beneficiary)
                             selectedBeneficiary = beneficiary
                             popRoute()
                         },

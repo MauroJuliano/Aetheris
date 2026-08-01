@@ -289,6 +289,10 @@ internal enum Strings {
     internal static let sendFeedback = Strings.tr("Localizable", "Profile.sendFeedback", fallback: "Send feedback")
     /// Account terms - Privacy Policy
     internal static let terms = Strings.tr("Localizable", "Profile.terms", fallback: "Account terms - Privacy Policy")
+    /// We couldn't update your profile. Please try again.
+    internal static let updateErrorDescription = Strings.tr("Localizable", "Profile.updateErrorDescription", fallback: "We couldn't update your profile. Please try again.")
+    /// Unable to save changes
+    internal static let updateErrorTitle = Strings.tr("Localizable", "Profile.updateErrorTitle", fallback: "Unable to save changes")
     /// Melissa Mccarthy
     internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Melissa Mccarthy")
     /// Version 0.00.1
