@@ -1,19 +1,14 @@
 import SwiftUI
-import Combine
 
 @MainActor
 class SINViewModel: ObservableObject {
     typealias localizable = Strings.Sin
     
-    @Published var isLoading: Bool = false
-    let submissionSucceeded = PassthroughSubject<Void, Never>()
     @Published var errorMessage: String?
 
     private let draft: RegistrationDraft
-    private let service: SINServiceProtocol
 
-    init(service: SINServiceProtocol, draft: RegistrationDraft) {
-        self.service = service
+    init(draft: RegistrationDraft) {
         self.draft = draft
     }
 
@@ -37,24 +32,13 @@ class SINViewModel: ObservableObject {
         draft.sin = format(newValue)
     }
 
-    func submit() {
+    func submit(onContinue: () -> Void) {
         guard isSINValid else {
             errorMessage = Strings.Sin.error
             return
         }
 
         errorMessage = nil
-        isLoading = true
-        
-        Task {
-            do {
-                _ = try await service.submitSIN(draft.sin.filter(\.isNumber))
-                submissionSucceeded.send()
-            } catch {
-                errorMessage = Strings.Common.errorSubmit
-            }
-            
-            isLoading = false
-        }
+        onContinue()
     }
 }

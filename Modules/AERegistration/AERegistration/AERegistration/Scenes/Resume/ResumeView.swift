@@ -65,8 +65,13 @@ struct ResumeView: View {
                 .padding(AppSpacing.medium)
                 
                 GlowButton(title: Strings.Resume.continueButton) {
-                    onContinue()
+                    Task {
+                        if await viewModel.submit() {
+                            onContinue()
+                        }
+                    }
                 }
+                .disabled(viewModel.isLoading)
                 .padding(.vertical, AppSpacing.medium)
             }
         }
@@ -86,5 +91,35 @@ struct ResumeView: View {
                 .ignoresSafeArea()
         }
         .navigationBarHidden(true)
+        .sheet(isPresented: submissionErrorBinding) {
+            ActionErrorSheet(
+                title: Strings.SubmissionError.title,
+                description: viewModel.submissionErrorDescription,
+                primaryButtonTitle: Strings.SubmissionError.tryAgain,
+                secondaryButtonTitle: Strings.SubmissionError.cancel,
+                onPrimaryAction: {
+                    viewModel.submissionError = nil
+                    Task {
+                        if await viewModel.submit() {
+                            onContinue()
+                        }
+                    }
+                },
+                onSecondaryAction: {
+                    viewModel.submissionError = nil
+                }
+            )
+        }
+    }
+
+    private var submissionErrorBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.submissionError != nil },
+            set: { isPresented in
+                if !isPresented {
+                    viewModel.submissionError = nil
+                }
+            }
+        )
     }
 }

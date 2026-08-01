@@ -25,35 +25,6 @@ public final class ProfileRecord {
 }
 
 @Model
-public final class RegistrationDraftRecord {
-    @Attribute(.unique) public var key: String
-    public var sin: String
-    public var mothersName: String
-    public var userName: String
-    public var birthdate: String
-    public var password: String
-    public var confirmPassword: String
-
-    public init(
-        key: String = "registration-draft",
-        sin: String = "",
-        mothersName: String = "",
-        userName: String = "",
-        birthdate: String = "",
-        password: String = "",
-        confirmPassword: String = ""
-    ) {
-        self.key = key
-        self.sin = sin
-        self.mothersName = mothersName
-        self.userName = userName
-        self.birthdate = birthdate
-        self.password = password
-        self.confirmPassword = confirmPassword
-    }
-}
-
-@Model
 public final class RecentRecipientRecord {
     @Attribute(.unique) public var pixKey: String
     public var id: String
@@ -92,7 +63,6 @@ public final class AppPersistenceController {
     private init() {
         let schema = Schema([
             ProfileRecord.self,
-            RegistrationDraftRecord.self,
             RecentRecipientRecord.self
         ])
 
@@ -113,32 +83,6 @@ public final class AppPersistenceController {
         context.insert(record)
         saveContext()
         return record
-    }
-
-    public func registrationDraftRecord() -> RegistrationDraftRecord {
-        let descriptor = FetchDescriptor<RegistrationDraftRecord>(
-            predicate: #Predicate { $0.key == "registration-draft" }
-        )
-
-        if let existing = try? context.fetch(descriptor).first {
-            return existing
-        }
-
-        let record = RegistrationDraftRecord()
-        context.insert(record)
-        saveContext()
-        return record
-    }
-
-    public func clearRegistrationDraft() {
-        let record = registrationDraftRecord()
-        record.sin = ""
-        record.mothersName = ""
-        record.userName = ""
-        record.birthdate = ""
-        record.password = ""
-        record.confirmPassword = ""
-        saveContext()
     }
 
     public func recentRecipientRecords(limit: Int = 4) -> [RecentRecipientRecord] {

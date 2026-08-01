@@ -111,15 +111,15 @@ struct Login: View {
             }
         }
         .sheet(isPresented: $isShowingLoginErrorSheet) {
-            LoginErrorSheet(
+            ActionErrorSheet(
                 title: Strings.LoginError.title,
                 description: Strings.LoginError.description,
                 primaryButtonTitle: Strings.LoginError.primaryButton,
                 secondaryButtonTitle: Strings.LoginError.secondaryButton,
-                onTryAgain: {
+                onPrimaryAction: {
                     isShowingLoginErrorSheet = false
                 },
-                onForgotPassword: {
+                onSecondaryAction: {
                     isShowingLoginErrorSheet = false
                     DispatchQueue.main.async {
                         onForgotPassword(login)

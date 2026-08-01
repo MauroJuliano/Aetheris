@@ -12,65 +12,20 @@ enum RegisterRoute: Hashable {
 
 @MainActor
 final class RegistrationDraft: ObservableObject {
-    @Published var sin: String = "" {
-        didSet { persist() }
-    }
-
-    @Published var mothersName: String = "" {
-        didSet { persist() }
-    }
-
-    @Published var userName: String = "" {
-        didSet { persist() }
-    }
-
-    @Published var birthdate: String = "" {
-        didSet { persist() }
-    }
-
-    @Published var password: String = "" {
-        didSet { persist() }
-    }
-
-    @Published var confirmPassword: String = "" {
-        didSet { persist() }
-    }
-
-    private let persistence = AppPersistenceController.shared
-    private let record: RegistrationDraftRecord
-    private var shouldPersist = true
-
-    init() {
-        record = persistence.registrationDraftRecord()
-        sin = record.sin
-        mothersName = record.mothersName
-        userName = record.userName
-        birthdate = record.birthdate
-        password = record.password
-        confirmPassword = record.confirmPassword
-    }
+    @Published var sin = ""
+    @Published var mothersName = ""
+    @Published var userName = ""
+    @Published var birthdate = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
 
     func reset() {
-        shouldPersist = false
         sin = ""
         mothersName = ""
         userName = ""
         birthdate = ""
         password = ""
         confirmPassword = ""
-        shouldPersist = true
-        persist()
-    }
-
-    private func persist() {
-        guard shouldPersist else { return }
-        record.sin = sin
-        record.mothersName = mothersName
-        record.userName = userName
-        record.birthdate = birthdate
-        record.password = password
-        record.confirmPassword = confirmPassword
-        persistence.saveChanges()
     }
 }
 
@@ -91,14 +46,13 @@ struct RegisterFlow: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            SINFactory.make(coreService: coreService, draft: draft, onBack: onBackToLogin) {
+            SINFactory.make(draft: draft, onBack: onBackToLogin) {
                 path.append(.personal)
             }
             .navigationDestination(for: RegisterRoute.self) { route in
                 switch route {
                 case .personal:
                     MothersNameInputFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -111,7 +65,6 @@ struct RegisterFlow: View {
                     )
                 case .userName:
                     UserNameFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -124,7 +77,6 @@ struct RegisterFlow: View {
                     )
                 case .birthdate:
                     BirthdateFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -137,6 +89,7 @@ struct RegisterFlow: View {
                     )
                 case .resume:
                     ResumeFactory.make(
+                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {

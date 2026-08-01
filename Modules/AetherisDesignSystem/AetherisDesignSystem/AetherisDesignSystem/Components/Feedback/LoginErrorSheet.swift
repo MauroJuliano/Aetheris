@@ -1,27 +1,27 @@
 import SwiftUI
 
-public struct LoginErrorSheet: View {
+public struct ActionErrorSheet: View {
     public let title: String
     public let description: String
     public let primaryButtonTitle: String
     public let secondaryButtonTitle: String
-    public let onTryAgain: () -> Void
-    public let onForgotPassword: () -> Void
+    public let onPrimaryAction: () -> Void
+    public let onSecondaryAction: () -> Void
 
     public init(
         title: String,
         description: String,
         primaryButtonTitle: String,
         secondaryButtonTitle: String,
-        onTryAgain: @escaping () -> Void,
-        onForgotPassword: @escaping () -> Void
+        onPrimaryAction: @escaping () -> Void,
+        onSecondaryAction: @escaping () -> Void
     ) {
         self.title = title
         self.description = description
         self.primaryButtonTitle = primaryButtonTitle
         self.secondaryButtonTitle = secondaryButtonTitle
-        self.onTryAgain = onTryAgain
-        self.onForgotPassword = onForgotPassword
+        self.onPrimaryAction = onPrimaryAction
+        self.onSecondaryAction = onSecondaryAction
     }
 
     public var body: some View {
@@ -46,9 +46,9 @@ public struct LoginErrorSheet: View {
                     .multilineTextAlignment(.center)
             }
 
-            PrimaryButton(title: primaryButtonTitle, action: onTryAgain)
+            PrimaryButton(title: primaryButtonTitle, action: onPrimaryAction)
 
-            Button(action: onForgotPassword) {
+            Button(action: onSecondaryAction) {
                 Text(secondaryButtonTitle)
                     .font(AppTypography.body)
                     .foregroundStyle(Color.brandPrimaryColor)
@@ -60,3 +60,6 @@ public struct LoginErrorSheet: View {
         .presentationBackground(Color.backgroundColorA)
     }
 }
+
+@available(*, deprecated, renamed: "ActionErrorSheet")
+public typealias LoginErrorSheet = ActionErrorSheet

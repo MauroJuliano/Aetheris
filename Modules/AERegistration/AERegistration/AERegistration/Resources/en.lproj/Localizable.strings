@@ -1,6 +1,10 @@
 // Default
 "Default.buttonName" = "Continue";
 "Common.errorSubmit" = "Failed to submit";
+"SubmissionError.title" = "Unable to continue";
+"SubmissionError.description" = "We couldn't submit your information. Please try again.";
+"SubmissionError.tryAgain" = "Try again";
+"SubmissionError.cancel" = "Cancel";
 
 // SIN
 "SIN.title" = "Social Insurance Number";
@@ -47,7 +51,7 @@
 
 "Resume.title" = "Review You Information";
 "Resume.subtitle" = "Please confirm that all the information below is correct before we continue.";
-"Resume.securityNote" = "Your information is securely encrypted and will never be shared.";
+"Resume.securityNote" = "Your information is sent securely only when you continue.";
 "Resume.continueButton" = "Continue";
 "Resume.listTitle" = "Resume List";
 "Resume.edit" = "Edit";

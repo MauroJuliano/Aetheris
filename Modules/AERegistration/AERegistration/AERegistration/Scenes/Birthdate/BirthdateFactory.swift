@@ -3,12 +3,10 @@ import SwiftUI
 
 enum BirthdateFactory {
     @MainActor
-    static func make(coreService: any HasCoreService,
-                     draft: RegistrationDraft,
+    static func make(draft: RegistrationDraft,
                      onBack: @escaping () -> Void,
                      onContinue: @escaping () -> Void) -> BirthdateView {
-        let viewModel = BirthdateViewModel(service: BirthdateService(coreService: coreService),
-                                           draft: draft)
+        let viewModel = BirthdateViewModel(draft: draft)
         return BirthdateView(viewModel: viewModel,
                              draft: draft,
                              onBack: onBack,

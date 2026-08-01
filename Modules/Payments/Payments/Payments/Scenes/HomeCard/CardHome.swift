@@ -41,16 +41,6 @@ struct CardHome: View {
                 )
             } else {
                 ScrollView(showsIndicators: false) {
-                    NavBar(
-                        hasBackButton: onBackAction != nil,
-                        model: .init(
-                            firstText: Strings.CardHome.title,
-                            hasInitialSpace: false
-                        ),
-                        onBack: onBackAction
-                    )
-                    .padding(.horizontal, AppSpacing.screenHorizontal)
-
                     CardSwipe(
                         cards: $viewModel.cards,
                         selectedCardIndex: $selectedCardIndex
