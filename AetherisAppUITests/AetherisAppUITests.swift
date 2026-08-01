@@ -16,10 +16,10 @@ final class AetherisAppUITests: XCTestCase {
     func testAuthentication_validCredentialsOpenHome() {
         launch()
         XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 3))
-        app.textFields["Enter your email"].tap()
-        app.textFields["Enter your email"].typeText("melissa@aetheris.app")
-        app.secureTextFields["Enter your password"].tap()
-        app.secureTextFields["Enter your password"].typeText("1234")
+        app.textFields["login.email"].tap()
+        app.textFields["login.email"].typeText("melissa@aetheris.app")
+        app.secureTextFields["login.password"].tap()
+        app.secureTextFields["login.password"].typeText("1234")
         app.buttons["Login"].tap()
 
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
@@ -30,15 +30,15 @@ final class AetherisAppUITests: XCTestCase {
     func testAuthentication_invalidCredentialsShowErrorAndAllowRetry() {
         launch()
         XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 3))
-        app.textFields["Enter your email"].tap()
-        app.textFields["Enter your email"].typeText("wrong@aetheris.app")
-        app.secureTextFields["Enter your password"].tap()
-        app.secureTextFields["Enter your password"].typeText("9999")
+        app.textFields["login.email"].tap()
+        app.textFields["login.email"].typeText("wrong@aetheris.app")
+        app.secureTextFields["login.password"].tap()
+        app.secureTextFields["login.password"].typeText("9999")
         app.buttons["Login"].tap()
 
         XCTAssertTrue(app.staticTexts["Unable to sign in"].waitForExistence(timeout: 3))
         app.buttons["Try again"].tap()
-        XCTAssertTrue(element("login.screen").waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 2))
     }
 
     @MainActor
@@ -120,7 +120,9 @@ final class AetherisAppUITests: XCTestCase {
             }
         }
         XCTAssertTrue(titleElement.waitForExistence(timeout: 3))
-        let input = secure ? app.secureTextFields[placeholder] : app.textFields[placeholder]
+        let input = secure
+            ? app.secureTextFields["registration.input"]
+            : app.textFields["registration.input"]
         input.tap()
         input.typeText(value)
         app.buttons["Continue"].tap()

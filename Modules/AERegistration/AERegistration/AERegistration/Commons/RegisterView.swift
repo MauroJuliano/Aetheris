@@ -35,18 +35,16 @@ struct RegisterView: View {
             .accessibilityIdentifier("registration.continue")
             .padding(.bottom, AppSpacing.xxLarge)
         }
-        .accessibilityIdentifier("registration.screen")
         .background {
             Image("login-background")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    isTextFieldFocused = false
+                }
         }
-        .simultaneousGesture(
-            TapGesture().onEnded {
-                isTextFieldFocused = false
-            }
-        )
     }
 
     private var header: some View {
@@ -107,6 +105,7 @@ struct RegisterView: View {
                 prompt: inputPrompt
             )
             .accessibilityIdentifier("registration.input")
+            .focused($isTextFieldFocused)
         } else {
             TextField(
                 "",
@@ -114,6 +113,7 @@ struct RegisterView: View {
                 prompt: inputPrompt
             )
             .accessibilityIdentifier("registration.input")
+            .focused($isTextFieldFocused)
         }
     }
 

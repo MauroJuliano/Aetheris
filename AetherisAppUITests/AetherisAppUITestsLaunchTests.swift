@@ -24,9 +24,7 @@ final class AetherisAppUITestsLaunchTests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(
-            app.descendants(matching: .any)
-                .matching(identifier: "login.screen")
-                .firstMatch
+            app.staticTexts["Welcome back!"]
                 .waitForExistence(timeout: 3)
         )
 

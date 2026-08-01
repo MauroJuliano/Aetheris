@@ -2,6 +2,11 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct Login: View {
+    private enum Field: Hashable {
+        case email
+        case password
+    }
+
     var onLogin: () -> Void
     var onRegister: () -> Void
     var onForgotPassword: (String) -> Void
@@ -9,6 +14,7 @@ struct Login: View {
     @State private var login = ""
     @State private var password = ""
     @State private var isShowingLoginErrorSheet = false
+    @FocusState private var focusedField: Field?
 
     private let validCredentials: [(email: String, password: String)] = [
         ("melissa@aetheris.app", "1234"),
@@ -56,9 +62,11 @@ struct Login: View {
                         .font(AppTypography.input)
                 )
                 .accessibilityIdentifier("login.email")
+                .focused($focusedField, equals: .email)
+                .submitLabel(.next)
+                .onSubmit { focusedField = .password }
             }
             .appInputField()
-            .accessibilityIdentifier("login.email")
 
             // Password
             HStack {
@@ -71,9 +79,9 @@ struct Login: View {
                 )
                 .keyboardType(.numberPad)
                 .accessibilityIdentifier("login.password")
+                .focused($focusedField, equals: .password)
             }
             .appInputField()
-            .accessibilityIdentifier("login.password")
 
             // Login button
             GlowButton(title: Strings.Login.loginButton) {
@@ -135,7 +143,6 @@ struct Login: View {
             .presentationDragIndicator(.visible)
             .accessibilityIdentifier("login.errorSheet")
         }
-        .accessibilityIdentifier("login.screen")
         .onChange(of: password) { _, newValue in
             let filtered = newValue.filter(\.isNumber)
             if filtered != newValue {
