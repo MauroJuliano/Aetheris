@@ -4,23 +4,28 @@ import SwiftUI
 struct ProfileEditFieldView: View {
     let title: String
     let description: String
-    let value: Binding<String>
+    let initialValue: String
     let placeholder: String
+    let onSave: (String) async -> Bool
 
     @Environment(\.dismiss) private var dismiss
     @State private var draft: String
+    @State private var isSaving = false
+    @State private var isShowingError = false
 
     init(
         title: String,
         description: String,
-        value: Binding<String>,
-        placeholder: String
+        initialValue: String,
+        placeholder: String,
+        onSave: @escaping (String) async -> Bool
     ) {
         self.title = title
         self.description = description
-        self.value = value
+        self.initialValue = initialValue
         self.placeholder = placeholder
-        _draft = State(initialValue: value.wrappedValue)
+        self.onSave = onSave
+        _draft = State(initialValue: initialValue)
     }
 
     var body: some View {
@@ -44,8 +49,7 @@ struct ProfileEditFieldView: View {
                 Spacer()
 
                 Button {
-                    value.wrappedValue = draft
-                    dismiss()
+                    submit()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: AppRadius.large)
@@ -58,12 +62,18 @@ struct ProfileEditFieldView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
 
-                        Text(Strings.Profile.save)
-                            .foregroundStyle(Color.brandPrimaryColor)
-                            .font(AppTypography.button)
-                            .appShadow(AppShadow.control)
+                        if isSaving {
+                            ProgressView()
+                                .tint(Color.brandPrimaryColor)
+                        } else {
+                            Text(Strings.Profile.save)
+                                .foregroundStyle(Color.brandPrimaryColor)
+                                .font(AppTypography.button)
+                                .appShadow(AppShadow.control)
+                        }
                     }
                 }
+                .disabled(isSaving)
                 .padding(.bottom)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -71,5 +81,34 @@ struct ProfileEditFieldView: View {
         .padding(.bottom)
         .appScreenBackground()
         .navigationBarHidden(true)
+        .sheet(isPresented: $isShowingError) {
+            ActionErrorSheet(
+                title: Strings.Profile.updateErrorTitle,
+                description: Strings.Profile.updateErrorDescription,
+                primaryButtonTitle: Strings.Common.tryAgain,
+                secondaryButtonTitle: Strings.Common.back,
+                onPrimaryAction: {
+                    isShowingError = false
+                    submit()
+                },
+                onSecondaryAction: {
+                    isShowingError = false
+                }
+            )
+        }
+    }
+
+    private func submit() {
+        guard !isSaving else { return }
+        isSaving = true
+        Task {
+            let succeeded = await onSave(draft)
+            isSaving = false
+            if succeeded {
+                dismiss()
+            } else {
+                isShowingError = true
+            }
+        }
     }
 }

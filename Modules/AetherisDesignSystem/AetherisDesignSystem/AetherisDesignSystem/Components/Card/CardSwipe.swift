@@ -1,74 +1,176 @@
+import Foundation
 import SwiftUI
 
 public struct CardSwipe: View {
     @State private var dragOffSet: CGSize = .zero
     @State private var topCardIndex: Int = 0
     @Binding var cards: [Card]
+    @Binding var selectedCardIndex: Int
     let onTap: () -> Void
-    
-    var width: CGFloat = AppCardMetrics.swipeCardSize.width
-    
+
+    private let width = AppCardMetrics.swipeCardSize.width
+
     private var canSwipe: Bool {
         cards.count > 1
     }
-    
-    public init(cards: Binding<[Card]>, onTap: @escaping () -> Void = {}) {
+
+    public init(
+        cards: Binding<[Card]>,
+        selectedCardIndex: Binding<Int>,
+        onTap: @escaping () -> Void = {}
+    ) {
         self._cards = cards
+        self._selectedCardIndex = selectedCardIndex
         self.onTap = onTap
     }
-    
+
     public var body: some View {
         Group {
             if cards.count <= 1 {
-                if let card = cards.first {
-                    CardView(card: card)
-                        .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
-                        .zIndex(1)
-                        .contentShape(Rectangle())
-                        .simultaneousGesture(
-                            TapGesture()
-                                .onEnded {
-                                    onTap()
-                                }
-                        )
-                }
+                singleCardView
             } else {
-                ZStack {
-                    ForEach(cards.indices, id: \.self) { index in
-                        let visualIndex = (index - topCardIndex + cards.count) % cards.count
-                        let progress = min(abs(dragOffSet.width) / 150, 1)
-                        let signedProgress = (dragOffSet.width >= 0 ? 1 : -1) * progress
-                        
-                        CardView(card: cards[index])
-                            .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
-                            .offset(x: visualIndex == 0 ? dragOffSet.width : Double(visualIndex) * 10,
-                                    y: visualIndex == 0 ? 0 : Double(visualIndex) * -4)
-                        
-                            .zIndex(Double(cards.count - visualIndex))
-                        
-                            .rotationEffect(
-                                .degrees( visualIndex == 0 ? 0 : Double(visualIndex) * 3 - progress * 3), anchor: .bottom )
-                            .scaleEffect(visualIndex == 0 ? 1.0 : visualIndex == 1 ? (1.0 - Double(visualIndex) * 0.06 + progress * 0.06) : (1.0 - Double(visualIndex) * 0.06))
-                            .offset(x: visualIndex == 0 ? 0 : Double(visualIndex) * -3)
-                        
-                            .rotation3DEffect(
-                                .degrees(
-                                    (visualIndex == 0 || visualIndex == 1) ? 10 * signedProgress : 0),
-                                axis: (0, 1, 0))
-                            .contentShape(Rectangle())
-                            .modifier(CardSwipeInteractionModifier(
-                                canSwipe: canSwipe,
-                                width: width,
-                                dragOffSet: $dragOffSet,
-                                topCardIndex: $topCardIndex,
-                                cardsCount: cards.count,
-                                onTap: onTap
-                            ))
-                    }
-                    .padding()
-                }
+                stackedCardsView
             }
         }
+        .onAppear {
+            syncSelectedCardIndex()
+        }
+        .onChange(of: cards.count) { _, _ in
+            syncSelectedCardIndex()
+        }
+        .onChange(of: topCardIndex) { _, _ in
+            syncSelectedCardIndex()
+        }
+    }
+
+    @ViewBuilder
+    private var singleCardView: some View {
+        if let card = cards.first {
+            CardView(card: card)
+                .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
+                .zIndex(1)
+                .contentShape(Rectangle())
+                .simultaneousGesture(TapGesture().onEnded(onTap))
+        }
+    }
+
+    private var stackedCardsView: some View {
+        ZStack {
+            ForEach(cards.indices, id: \.self) { index in
+                CardSwipeStackCard(
+                    card: cards[index],
+                    index: index,
+                    cardsCount: cards.count,
+                    topCardIndex: $topCardIndex,
+                    dragOffset: $dragOffSet,
+                    selectedCardIndex: $selectedCardIndex,
+                    canSwipe: canSwipe,
+                    width: width,
+                    onTap: onTap
+                )
+            }
+        }
+        .padding()
+    }
+
+    private func syncSelectedCardIndex() {
+        guard !cards.isEmpty else {
+            selectedCardIndex = 0
+            return
+        }
+
+        selectedCardIndex = min(max(topCardIndex, 0), cards.count - 1)
+    }
+}
+
+private struct CardSwipeStackCard: View {
+    let card: Card
+    let index: Int
+    let cardsCount: Int
+    @Binding var topCardIndex: Int
+    @Binding var dragOffset: CGSize
+    @Binding var selectedCardIndex: Int
+    let canSwipe: Bool
+    let width: CGFloat
+    let onTap: () -> Void
+
+    private var visualIndex: Int {
+        (index - topCardIndex + cardsCount) % cardsCount
+    }
+
+    private var progress: CGFloat {
+        min(abs(dragOffset.width) / 150, 1)
+    }
+
+    private var signedProgress: CGFloat {
+        (dragOffset.width >= 0 ? 1 : -1) * progress
+    }
+
+    private var fadeProgress: CGFloat {
+        let threshold: CGFloat = 0.3
+        return max(0, min((progress - threshold) / (1 - threshold), 1))
+    }
+
+    var body: some View {
+        CardView(card: card)
+            .frame(width: width, height: AppCardMetrics.swipeCardSize.height)
+            .offset(cardOffset)
+            .zIndex(Double(cardsCount - visualIndex))
+            .rotationEffect(cardRotation, anchor: .bottom)
+            .scaleEffect(cardScale)
+            .opacity(cardOpacity)
+            .offset(x: visualIndex == 0 ? 0 : CGFloat(visualIndex) * -3)
+            .rotation3DEffect(.degrees(cardRotation3D), axis: (0, 1, 0))
+            .contentShape(Rectangle())
+            .modifier(
+                CardSwipeInteractionModifier(
+                    canSwipe: canSwipe,
+                    width: width,
+                    dragOffSet: $dragOffset,
+                    topCardIndex: $topCardIndex,
+                    selectedCardIndex: $selectedCardIndex,
+                    cardsCount: cardsCount,
+                    onTap: onTap
+                )
+            )
+    }
+
+    private var cardOffset: CGSize {
+        CGSize(
+            width: visualIndex == 0 ? dragOffset.width : CGFloat(visualIndex) * 10,
+            height: visualIndex == 0 ? 0 : CGFloat(visualIndex) * -4
+        )
+    }
+
+    private var cardRotation: Angle {
+        .degrees(visualIndex == 0 ? 0 : Double(visualIndex) * 3 - Double(progress * 3))
+    }
+
+    private var cardScale: CGFloat {
+        if visualIndex == 0 {
+            return 1.0
+        }
+
+        if visualIndex == 1 {
+            return 1.0 - CGFloat(visualIndex) * 0.06 + progress * 0.06
+        }
+
+        return 1.0 - CGFloat(visualIndex) * 0.06
+    }
+
+    private var cardOpacity: Double {
+        switch visualIndex {
+        case 0:
+            return Double(1 - fadeProgress)
+        case 1:
+            return Double(0.72 + fadeProgress * 0.28)
+        default:
+            return 0.55
+        }
+    }
+
+    private var cardRotation3D: Double {
+        (visualIndex == 0 || visualIndex == 1) ? Double(10 * signedProgress) : 0
     }
 }
 
@@ -77,30 +179,21 @@ private struct CardSwipeInteractionModifier: ViewModifier {
     let width: CGFloat
     @Binding var dragOffSet: CGSize
     @Binding var topCardIndex: Int
+    @Binding var selectedCardIndex: Int
     let cardsCount: Int
     let onTap: () -> Void
-    
+
     func body(content: Content) -> some View {
         if canSwipe {
             content
                 .gesture(dragGesture)
-                .simultaneousGesture(
-                    TapGesture()
-                        .onEnded {
-                            onTap()
-                        }
-                )
+                .simultaneousGesture(TapGesture().onEnded(onTap))
         } else {
             content
-                .simultaneousGesture(
-                    TapGesture()
-                        .onEnded {
-                            onTap()
-                        }
-                )
+                .simultaneousGesture(TapGesture().onEnded(onTap))
         }
     }
-    
+
     private var dragGesture: some Gesture {
         DragGesture(minimumDistance: 0)
             .onChanged { value in
@@ -108,7 +201,7 @@ private struct CardSwipeInteractionModifier: ViewModifier {
             }
             .onEnded { value in
                 let threshold: CGFloat = 50
-                
+
                 if abs(value.translation.width) > threshold {
                     let direction = value.translation.width < 0 ? -1 : 1
                     let delay: Double = direction == -1 ? 0.18 : 0.20
@@ -117,6 +210,7 @@ private struct CardSwipeInteractionModifier: ViewModifier {
                     } completion: {
                         withAnimation(.smooth(duration: 0.5)) {
                             topCardIndex = (topCardIndex + 1) % cardsCount
+                            selectedCardIndex = topCardIndex
                             dragOffSet = .zero
                         }
                     }

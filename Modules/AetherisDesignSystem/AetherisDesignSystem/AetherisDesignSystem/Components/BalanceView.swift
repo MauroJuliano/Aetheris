@@ -50,4 +50,3 @@ public struct BalanceView: View {
         return prefix + String(repeating: "•", count: amount.count)
     }
 }
-

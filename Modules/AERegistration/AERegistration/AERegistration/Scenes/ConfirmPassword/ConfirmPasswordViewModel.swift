@@ -4,13 +4,14 @@ import SwiftUI
 
 @MainActor
 final class ConfirmPasswordViewModel: ObservableObject {
-    @Published var isLoading = false
+    @Published private(set) var isLoading = false
     @Published var errorMessage: String?
+    @Published var submissionError: CoreServiceError?
 
     private let draft: RegistrationDraft
-    private let service: ResumeServicing
+    private let service: any RegistrationServicing
 
-    init(service: ResumeServicing, draft: RegistrationDraft) {
+    init(service: any RegistrationServicing, draft: RegistrationDraft) {
         self.service = service
         self.draft = draft
     }
@@ -25,43 +26,41 @@ final class ConfirmPasswordViewModel: ObservableObject {
         draft.confirmPassword = sanitize(value)
     }
 
-    func submit(onSuccess: @escaping () -> Void) {
+    @discardableResult
+    func submit() async -> Bool {
+        guard !isLoading else { return false }
+
         guard draft.confirmPassword.count == 4 else {
             errorMessage = Strings.Password.error
-            return
+            return false
         }
 
         guard draft.confirmPassword == draft.password else {
             errorMessage = Strings.ConfirmPassword.Error.mismatch
-            return
+            return false
         }
 
         isLoading = true
         errorMessage = nil
+        submissionError = nil
+        defer { isLoading = false }
 
-        Task {
-            do {
-                let request = RegistrationCompletionRequest(
-                    sin: draft.sin.filter(\.isNumber),
-                    mothersName: draft.mothersName,
-                    userName: draft.userName,
-                    birthdate: draft.birthdate,
-                    password: draft.password
-                )
-                _ = try await service.completeRegistration(request)
-                await MainActor.run {
-                    onSuccess()
-                }
-            } catch {
-                await MainActor.run {
-                    errorMessage = Strings.Common.errorSubmit
-                }
+        do {
+            let succeeded = try await service.submitPassword(
+                RegistrationPasswordRequest(password: draft.password)
+            )
+            if !succeeded {
+                submissionError = .invalidResponse
             }
-
-            await MainActor.run {
-                isLoading = false
-            }
+            return succeeded
+        } catch {
+            submissionError = (error as? CoreServiceError) ?? .invalidResponse
+            return false
         }
+    }
+
+    var submissionErrorDescription: String {
+        submissionError?.serverMessage ?? Strings.SubmissionError.description
     }
 
     private func sanitize(_ value: String) -> String {

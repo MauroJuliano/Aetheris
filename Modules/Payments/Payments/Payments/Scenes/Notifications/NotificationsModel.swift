@@ -39,7 +39,7 @@ public enum NotificationLeadingContent: Codable, Hashable {
     }
 }
 
-public struct Notifications: Identifiable, Codable {
+public struct Notifications: Identifiable, Codable, Equatable, Hashable {
     public let id: UUID
     let title: String
     let leadingContent: NotificationLeadingContent
@@ -58,51 +58,63 @@ public struct Notifications: Identifiable, Codable {
         self.hasDivider = hasDivider
     }
     
-    // For previews & testing
-    public static let mock: [Notifications] = [
+}
 
-        .init(
-            title: Strings.Notifications.titleTransferSent,
-            leadingContent: .image("melissa"),
-            date: Date(),
-            hasDivider: true
-        ),
+public struct NotificationsCentreResponse: Codable, Hashable, Equatable {
+    public let unreadCount: Int
+    public let notifications: [Notifications]
 
-        .init(
-            title: Strings.Notifications.titlePaymentReceived,
-            leadingContent: .image("ed"),
-            date: Date(),
-            hasDivider: true
-        ),
+    public init(
+        unreadCount: Int,
+        notifications: [Notifications]
+    ) {
+        self.unreadCount = unreadCount
+        self.notifications = notifications
+    }
+}
 
-        .init(
-            title: Strings.Notifications.titleSubscriptionRenewed,
-            leadingContent: .icon("bell"),
-            date: Date(),
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleRefundProcessed,
-            leadingContent: .icon("wrench.and.screwdriver"),
-            date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleSubscriptionExpired,
-            leadingContent: .icon("calendar"),
-            date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!,
-            hasDivider: true
-        ),
-
-        .init(
-            title: Strings.Notifications.titleMaintenanceCompleted,
-            leadingContent: .icon("gearshape"),
-            date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
-            hasDivider: true
-        )
-    ]
+public extension NotificationsCentreResponse {
+    static let mock = NotificationsCentreResponse(
+        unreadCount: 3,
+        notifications: [
+            .init(
+                title: Strings.Notifications.titleTransferSent,
+                leadingContent: .image("melissa"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titlePaymentReceived,
+                leadingContent: .image("ed"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleSubscriptionRenewed,
+                leadingContent: .icon("bell"),
+                date: Date(),
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleRefundProcessed,
+                leadingContent: .icon("wrench.and.screwdriver"),
+                date: Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleSubscriptionExpired,
+                leadingContent: .icon("calendar"),
+                date: Calendar.current.date(byAdding: .day, value: -20, to: Date())!,
+                hasDivider: true
+            ),
+            .init(
+                title: Strings.Notifications.titleMaintenanceCompleted,
+                leadingContent: .icon("gearshape"),
+                date: Calendar.current.date(byAdding: .month, value: -2, to: Date())!,
+                hasDivider: true
+            )
+        ]
+    )
 }
 
 public extension Notifications {

@@ -26,9 +26,9 @@ final class NotificationsCentreViewModel: ObservableObject {
         isEmpty = false
 
         do {
-            let notifications = try await service.loadNotifications()
-            buildSections(from: notifications)
-            isEmpty = notifications.isEmpty
+            let response = try await service.loadNotifications()
+            buildSections(from: response.notifications)
+            isEmpty = response.notifications.isEmpty
         } catch {
             errorMessage = "We could not load your notifications."
         }
@@ -38,7 +38,13 @@ final class NotificationsCentreViewModel: ObservableObject {
 
     private func buildSections(from notifications: [Notifications]) {
 
-        let order = ["Today", "Yesterday", "Last Week", "Last Month", "Others"]
+        let order = [
+            Strings.Notifications.sectionToday,
+            Strings.Notifications.sectionYesterday,
+            Strings.Notifications.sectionLastWeek,
+            Strings.Notifications.sectionLastMonth,
+            Strings.Notifications.sectionOthers
+        ]
 
         let grouped = Dictionary(grouping: notifications) { $0.section }
 

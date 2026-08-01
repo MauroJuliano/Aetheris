@@ -1,10 +1,16 @@
 import SwiftUI
+import Core
 
 @MainActor
 final class ResumeViewModel: ObservableObject {
-    private let draft: RegistrationDraft
+    @Published private(set) var isLoading = false
+    @Published var submissionError: CoreServiceError?
 
-    init(draft: RegistrationDraft) {
+    private let draft: RegistrationDraft
+    private let service: any RegistrationServicing
+
+    init(service: any RegistrationServicing, draft: RegistrationDraft) {
+        self.service = service
         self.draft = draft
     }
 
@@ -15,5 +21,35 @@ final class ResumeViewModel: ObservableObject {
             .init(image: "person.fill", description: Strings.UserName.title, value: draft.userName),
             .init(image: "calendar", description: Strings.Birthdate.title, value: draft.birthdate)
         ]
+    }
+
+    @discardableResult
+    func submit() async -> Bool {
+        guard !isLoading else { return false }
+
+        isLoading = true
+        submissionError = nil
+        defer { isLoading = false }
+
+        do {
+            let request = RegistrationProfileRequest(
+                sin: draft.sin.filter(\.isNumber),
+                mothersName: draft.mothersName,
+                userName: draft.userName,
+                birthdate: draft.birthdate
+            )
+            let succeeded = try await service.submitProfile(request)
+            if !succeeded {
+                submissionError = .invalidResponse
+            }
+            return succeeded
+        } catch {
+            submissionError = (error as? CoreServiceError) ?? .invalidResponse
+            return false
+        }
+    }
+
+    var submissionErrorDescription: String {
+        submissionError?.serverMessage ?? Strings.SubmissionError.description
     }
 }

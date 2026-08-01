@@ -3,6 +3,7 @@ import SwiftUI
 
 struct HomeApp: View {
     @StateObject private var viewModel: HomeAppViewModel
+    @State private var selectedCardIndex: Int = 0
     let onCardTap: () -> Void
     let onNotificationsTap: () -> Void
     let onSelectRecipient: (Beneficiary) -> Void
@@ -60,9 +61,10 @@ struct HomeApp: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     NavBar(
+                        shouldPresentNotifications: viewModel.hasUnreadNotifications,
                         model: .init(
                             firstText: Strings.HomeApp.welcomePrefix,
-                            secondText: Strings.HomeApp.welcomeName,
+                            secondText: viewModel.userFirstName,
                             hasInitialSpace: false
                         ),
                         onRightButtonAction: onNotificationsTap
@@ -70,7 +72,11 @@ struct HomeApp: View {
 
                     BalanceView()
 
-                    CardSwipe(cards: $viewModel.cards, onTap: onCardTap)
+                    CardSwipe(
+                        cards: $viewModel.cards,
+                        selectedCardIndex: $selectedCardIndex,
+                        onTap: onCardTap
+                    )
 
                     RecipientsContainer(
                         onSelectRecipient: onSelectRecipient,
@@ -96,5 +102,6 @@ struct HomeApp: View {
             }
         }
         .task { await viewModel.load() }
+        .accessibilityIdentifier("home.screen")
     }
 }

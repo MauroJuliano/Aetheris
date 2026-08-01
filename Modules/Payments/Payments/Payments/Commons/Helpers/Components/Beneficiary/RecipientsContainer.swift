@@ -2,7 +2,7 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct RecipientsContainer: View {
-    let users = Beneficiary.beneficiaries
+    let users = BeneficiaryFixtures.defaults
     let onSelectRecipient: (Beneficiary) -> Void
     let onSeeAllTap: () -> Void
     let onNewRecipientTap: () -> Void
@@ -79,4 +79,3 @@ struct RecipientsContainer: View {
         .appCardSurface()
     }
 }
-

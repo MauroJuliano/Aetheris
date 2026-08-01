@@ -10,12 +10,13 @@ struct SendMoney: View {
     let onContinue: (TransferReceiptModel) -> Void
     
     init(
+        viewModel: SendMoneyViewModel,
         selectedBeneficiary: Binding<Beneficiary>,
         onBackAction: (() -> Void)? = nil,
         onChangeBeneficiary: @escaping () -> Void,
         onContinue: @escaping (TransferReceiptModel) -> Void
     ) {
-        _viewModel = StateObject(wrappedValue: SendMoneyViewModel())
+        _viewModel = StateObject(wrappedValue: viewModel)
         _amountViewModel = StateObject(wrappedValue: TransferAmountViewModel(balance: 1000))
         _selectedBeneficiary = selectedBeneficiary
         self.onBackAction = onBackAction
@@ -80,11 +81,17 @@ struct SendMoney: View {
             .padding(AppSpacing.medium)
             .disabled(!viewModel.canContinue(currentAmount: amountViewModel.currentAmount))
             .opacity(viewModel.canContinue(currentAmount: amountViewModel.currentAmount) ? 1 : 0.55)
+            .accessibilityIdentifier("transfer.continue")
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
         .appScreenBackground()
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
+        .task {
+            await viewModel.load()
+            amountViewModel.updateBalance(viewModel.walletBalance)
+        }
+        .accessibilityIdentifier("transfer.amountScreen")
     }
 }

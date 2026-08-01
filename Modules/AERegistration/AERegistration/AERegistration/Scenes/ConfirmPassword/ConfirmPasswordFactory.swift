@@ -10,7 +10,7 @@ enum ConfirmPasswordFactory {
         onSuccess: @escaping () -> Void
     ) -> ConfirmPasswordView {
         let viewModel = ConfirmPasswordViewModel(
-            service: ResumeService(coreService: coreService),
+            service: RegistrationService(coreService: coreService),
             draft: draft
         )
         return ConfirmPasswordView(

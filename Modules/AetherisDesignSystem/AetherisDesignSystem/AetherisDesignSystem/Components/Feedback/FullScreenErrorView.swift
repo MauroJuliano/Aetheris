@@ -82,6 +82,7 @@ public struct FullScreenErrorView: View {
                             .appShadow(AppShadow.control)
                     }
                 }
+                .accessibilityIdentifier("error.retry")
 
                 if let secondaryButtonTitle, let onSecondaryAction {
                     Button(action: onSecondaryAction) {
@@ -98,6 +99,7 @@ public struct FullScreenErrorView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .appScreenBackground()
+        .accessibilityIdentifier("error.screen")
     }
 
     private var errorIllustration: some View {

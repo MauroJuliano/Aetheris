@@ -1,7 +1,23 @@
-import AetherisDesignSystem
+import Combine
 import Foundation
 
 final class SendMoneyViewModel: ObservableObject {
+    @Published private(set) var session: SendMoneySession?
+
+    private let service: any SendMoneyServicing
+
+    init(service: any SendMoneyServicing) {
+        self.service = service
+    }
+
+    func load() async {
+        do {
+            session = try await service.loadSession()
+        } catch {
+            session = .mock
+        }
+    }
+
     func canContinue(currentAmount: Decimal) -> Bool {
         currentAmount > 0
     }
@@ -26,11 +42,15 @@ final class SendMoneyViewModel: ObservableObject {
             amount: formattedAmount,
             recipientName: selectedBeneficiary.name,
             recipientEmail: selectedBeneficiary.pixKey,
-            accountName: "Main Account",
-            accountLastDigits: "1234",
+            accountName: session?.account.name ?? SendMoneySession.mock.account.name,
+            accountLastDigits: session?.account.lastDigits ?? SendMoneySession.mock.account.lastDigits,
             date: formattedReceiptDate,
             referenceId: receiptReferenceId
         )
+    }
+
+    var walletBalance: Decimal {
+        Decimal(session?.wallet.available ?? SendMoneySession.mock.wallet.available)
     }
 
     private var formattedReceiptDate: String {

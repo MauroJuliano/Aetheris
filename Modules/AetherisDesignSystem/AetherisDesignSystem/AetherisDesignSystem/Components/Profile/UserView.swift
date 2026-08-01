@@ -2,10 +2,17 @@ import SwiftUI
 
 public struct UserView: View {
     let name: String
+    let imageName: String
+    let joinedDate: String
     @State private var rotateGradient: Bool
     
-    public init(name: String, rotateGradient: Bool = false) {
+    public init(name: String,
+                imageName: String = "melissa",
+                joinedDate: String = "Joined August 17, 2025",
+                rotateGradient: Bool = false) {
         self.name = name
+        self.imageName = imageName
+        self.joinedDate = joinedDate
         self._rotateGradient = State(initialValue: rotateGradient)
     }
     
@@ -24,7 +31,7 @@ public struct UserView: View {
                 .animation(.linear(duration: 6).repeatForever(autoreverses: false), value: rotateGradient)
                 .offset(y: AppAvatarMetrics.glowOffsetY)
                 
-                Image("melissa")
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
@@ -45,7 +52,7 @@ public struct UserView: View {
                     .foregroundStyle(Color.textPrimary)
                     .font(AppTypography.onboardingBody)
                 
-                Text(Strings.Profile.joinedDate)
+                Text(joinedDate)
                     .foregroundStyle(Color.brandPrimaryColor)
                     .font(AppTypography.caption)
             }

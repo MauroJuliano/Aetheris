@@ -12,12 +12,21 @@ enum RegisterRoute: Hashable {
 
 @MainActor
 final class RegistrationDraft: ObservableObject {
-    @Published var sin: String = ""
-    @Published var mothersName: String = ""
-    @Published var userName: String = ""
-    @Published var birthdate: String = ""
-    @Published var password: String = ""
-    @Published var confirmPassword: String = ""
+    @Published var sin = ""
+    @Published var mothersName = ""
+    @Published var userName = ""
+    @Published var birthdate = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
+
+    func reset() {
+        sin = ""
+        mothersName = ""
+        userName = ""
+        birthdate = ""
+        password = ""
+        confirmPassword = ""
+    }
 }
 
 struct RegisterFlow: View {
@@ -37,14 +46,13 @@ struct RegisterFlow: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            SINFactory.make(coreService: coreService, draft: draft, onBack: onBackToLogin) {
+            SINFactory.make(draft: draft, onBack: onBackToLogin) {
                 path.append(.personal)
             }
             .navigationDestination(for: RegisterRoute.self) { route in
                 switch route {
                 case .personal:
                     MothersNameInputFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -57,7 +65,6 @@ struct RegisterFlow: View {
                     )
                 case .userName:
                     UserNameFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -70,7 +77,6 @@ struct RegisterFlow: View {
                     )
                 case .birthdate:
                     BirthdateFactory.make(
-                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -83,6 +89,7 @@ struct RegisterFlow: View {
                     )
                 case .resume:
                     ResumeFactory.make(
+                        coreService: coreService,
                         draft: draft,
                         onBack: {
                         if !path.isEmpty {
@@ -103,6 +110,7 @@ struct RegisterFlow: View {
                             path.removeLast()
                         }
                     }) {
+                        draft.reset()
                         onRegisterFinished()
                     }
                 }

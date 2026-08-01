@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		A982A8122F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81C2F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -44,6 +45,11 @@
 		A9C18BA92F4FCC3800013305 /* PaymentsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; };
 		A9C18BAA2F4FCC3800013305 /* PaymentsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9D000012F60000000013305 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9D000022F60000000013305 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A9D000042F60000000013305 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
+		A9F00002302C000000000001 /* UITestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F00001302C000000000001 /* UITestConfiguration.swift */; };
+		A9F00006302C000000000001 /* AetherisAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F00004302C000000000001 /* AetherisAppUITests.swift */; };
+		A9F00007302C000000000001 /* AetherisAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F00005302C000000000001 /* AetherisAppUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,14 +58,14 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A976FAC02E37AEF200FF923B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A982A7F72F510B4B00C22A84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -108,7 +114,7 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A9B530732F4D2C34005C2C96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -129,7 +135,7 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A9B530962F4D2C42005C2C96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -150,7 +156,7 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A9B534592F4E384E005C2C96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -171,7 +177,7 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A9B535C52F4E3B87005C2C96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -206,7 +212,7 @@
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A976FAA72E37AEEF00FF923B;
-			remoteInfo = Flux;
+			remoteInfo = AetherisApp;
 		};
 		A9B536E22F4E6C01005C2C96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -396,6 +402,9 @@
 		A9C1891D2F4E7AFE00013305 /* AccountTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AccountTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C18B942F4FCC3700013305 /* PaymentsInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PaymentsInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C18B9E2F4FCC3800013305 /* PaymentsInterfaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentsInterfaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F00001302C000000000001 /* UITestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestConfiguration.swift; sourceTree = "<group>"; };
+		A9F00004302C000000000001 /* AetherisAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisAppUITests.swift; sourceTree = "<group>"; };
+		A9F00005302C000000000001 /* AetherisAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -556,7 +565,7 @@
 				A9C188FD2F4E7A5B00013305 /* Payments.framework in Frameworks */,
 				A9B530752F4D2C34005C2C96 /* AERegistration.framework in Frameworks */,
 				A9C189282F4E7AFE00013305 /* Account.framework in Frameworks */,
-				A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
+				A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */,
 				A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */,
 				A9B535C72F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */,
 				A9B536E42F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */,
@@ -674,6 +683,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D000042F60000000013305 /* AccountInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +699,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D000022F60000000013305 /* Core.framework in Frameworks */,
+				A9B537132F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +748,7 @@
 		A976FA9F2E37AEEF00FF923B = {
 			isa = PBXGroup;
 			children = (
+				A9F00003302C000000000001 /* AetherisAppUITests */,
 				A9AFA2AA2FE9E746005B85AF /* Resources */,
 				A9B534632F4E388F005C2C96 /* Modules */,
 				A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */,
@@ -798,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				A9AFA2A72FE9E746005B85AF /* DependencyContainer.swift */,
+				A9F00001302C000000000001 /* UITestConfiguration.swift */,
 				A9AFA2A92FE9E746005B85AF /* Localizable.strings */,
 			);
 			path = Resources;
@@ -941,6 +955,15 @@
 			path = PaymentsInterface;
 			sourceTree = "<group>";
 		};
+		A9F00003302C000000000001 /* AetherisAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A9F00004302C000000000001 /* AetherisAppUITests.swift */,
+				A9F00005302C000000000001 /* AetherisAppUITestsLaunchTests.swift */,
+			);
+			path = AetherisAppUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1046,7 +1069,7 @@
 			name = AetherisApp;
 			packageProductDependencies = (
 			);
-			productName = Flux;
+			productName = AetherisApp;
 			productReference = A976FAA82E37AEEF00FF923B /* AetherisApp.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1066,7 +1089,7 @@
 			name = AetherisAppTests;
 			packageProductDependencies = (
 			);
-			productName = FluxTests;
+			productName = AetherisAppTests;
 			productReference = A976FAB52E37AEF200FF923B /* AetherisAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -1086,7 +1109,7 @@
 			name = AetherisAppUITests;
 			packageProductDependencies = (
 			);
-			productName = FluxUITests;
+			productName = AetherisAppUITests;
 			productReference = A976FABF2E37AEF200FF923B /* AetherisAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -1391,6 +1414,7 @@
 			);
 			dependencies = (
 				A982A7F82F510B4B00C22A84 /* PBXTargetDependency */,
+				A9D000052F60000000013305 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A9B536FF2F4E6E16005C2C96 /* AetherisAuthenticationInterface */,
@@ -1438,6 +1462,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A9D000032F60000000013305 /* PBXTargetDependency */,
 				A9EB11432F4FCED0000766F1 /* PBXTargetDependency */,
 				A9C1893C2F4E7E5200013305 /* PBXTargetDependency */,
 			);
@@ -1879,6 +1904,7 @@
 			files = (
 				A9BC38522FEEC4B400BFE3AF /* Strings.generated.swift in Sources */,
 				A9AFA2AB2FE9E746005B85AF /* DependencyContainer.swift in Sources */,
+				A9F00002302C000000000001 /* UITestConfiguration.swift in Sources */,
 				A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1894,6 +1920,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9F00006302C000000000001 /* AetherisAppUITests.swift in Sources */,
+				A9F00007302C000000000001 /* AetherisAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2240,6 +2268,16 @@
 			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
 			targetProxy = A9C18BA72F4FCC3800013305 /* PBXContainerItemProxy */;
 		};
+		A9D000032F60000000013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9B534452F4E384E005C2C96 /* Core */;
+			targetProxy = A9B534522F4E384E005C2C96 /* PBXContainerItemProxy */;
+		};
+		A9D000052F60000000013305 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A982A8062F5111DF00C22A84 /* AccountInterface */;
+			targetProxy = A982A8132F5111E000C22A84 /* PBXContainerItemProxy */;
+		};
 		A9EB11432F4FCED0000766F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A9C18B932F4FCC3700013305 /* PaymentsInterface */;
@@ -2406,7 +2444,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Flux;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2437,7 +2475,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.Flux;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -2451,10 +2489,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -2469,10 +2508,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -2486,14 +2526,15 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Flux;
+				TEST_TARGET_NAME = AetherisApp;
 			};
 			name = Debug;
 		};
@@ -2502,14 +2543,15 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.FluxUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Flux;
+				TEST_TARGET_NAME = AetherisApp;
 			};
 			name = Release;
 		};
@@ -3012,7 +3054,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -3029,7 +3071,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};
@@ -3116,7 +3158,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Debug;
 		};
@@ -3133,7 +3175,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flux.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Flux";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AetherisApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AetherisApp";
 			};
 			name = Release;
 		};

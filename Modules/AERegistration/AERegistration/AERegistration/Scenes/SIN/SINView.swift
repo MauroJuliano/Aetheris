@@ -20,10 +20,7 @@ struct SINView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                RegisterInputSkeleton()
-            } else {
-                RegisterView(
+            RegisterView(
                     title: viewModel.title,
                     subTitle: viewModel.subtitle,
                     textFieldValue: Binding(
@@ -35,23 +32,17 @@ struct SINView: View {
                     keyboardType: .numberPad,
                     fieldErrorMessage: viewModel.errorMessage
                     ) {
-                        viewModel.submit()
+                        viewModel.submit(onContinue: onContinue)
                     }
-            }
-        }
-        .onReceive(viewModel.submissionSucceeded) {
-            onContinue()
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            if !viewModel.isLoading {
-                NavBar(
+            NavBar(
                     hasNotifications: false,
                     hasBackButton: true,
                     model: .init(hasInitialSpace: false),
                     onBack: onBack
                 )
-                .padding(.top, AppSpacing.medium)
-            }
+            .padding(.top, AppSpacing.medium)
         }
         .appScreenBackground()
         .navigationBarHidden(true)

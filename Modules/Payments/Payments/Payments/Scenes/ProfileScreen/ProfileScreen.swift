@@ -16,7 +16,11 @@ struct ProfileScreen: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     VStack {
-                        UserView(name: viewModel.profile.name)
+                        UserView(
+                            name: viewModel.profile.name,
+                            imageName: viewModel.profile.avatarName,
+                            joinedDate: viewModel.profile.joinedDate
+                        )
                         
                         FormView(cells: viewModel.generalCells) { cell in
                             switch cell.content.kind {
@@ -33,7 +37,7 @@ struct ProfileScreen: View {
                             }
                         }
                             
-                        FormView(cells: FormCellModel.notifications)
+                        FormView(cells: viewModel.notificationCells)
                         
                         Spacer()
                         
@@ -60,19 +64,19 @@ struct ProfileScreen: View {
                         
                         Spacer()
                         
-                        Text(Strings.Profile.version)
+                        Text(viewModel.footer.version)
                             .foregroundStyle(Color.textTertiary.opacity(0.5))
                             .font(AppTypography.footnote)
                             .padding(.top, AppSpacing.medium)
                         
-                        Text(Strings.Profile.poweredBy)
+                        Text(viewModel.footer.poweredBy)
                             .foregroundStyle(Color.textTertiary.opacity(0.5))
                             .font(AppTypography.footnote)
                         
                         Button {
                             path.append(.terms)
                         } label: {
-                            Text(Strings.Profile.terms)
+                            Text(viewModel.footer.terms)
                                 .foregroundStyle(Color.brandPrimaryColor)
                                 .font(AppTypography.button)
                         }
@@ -92,22 +96,25 @@ struct ProfileScreen: View {
                     ProfileEditFieldView(
                         title: Strings.Profile.editNameTitle,
                         description: Strings.HomeApp.editNameDescription,
-                        value: nameBinding,
-                        placeholder: Strings.HomeApp.editNamePlaceholder
+                        initialValue: viewModel.profile.name,
+                        placeholder: Strings.HomeApp.editNamePlaceholder,
+                        onSave: viewModel.updateName
                     )
                 case .editEmail:
                     ProfileEditFieldView(
                         title: Strings.Profile.editEmailTitle,
                         description: Strings.HomeApp.editEmailDescription,
-                        value: emailBinding,
-                        placeholder: Strings.HomeApp.editEmailPlaceholder
+                        initialValue: viewModel.profile.email,
+                        placeholder: Strings.HomeApp.editEmailPlaceholder,
+                        onSave: viewModel.updateEmail
                     )
                 case .editPhone:
                     ProfileEditFieldView(
                         title: Strings.Profile.editPhoneTitle,
                         description: Strings.HomeApp.editPhoneDescription,
-                        value: phoneBinding,
-                        placeholder: Strings.HomeApp.editPhonePlaceholder
+                        initialValue: viewModel.profile.phone,
+                        placeholder: Strings.HomeApp.editPhonePlaceholder,
+                        onSave: viewModel.updatePhone
                     )
                 case .feedback:
                     ProfileFeedbackView {
@@ -129,32 +136,13 @@ struct ProfileScreen: View {
             syncTabBarVisibility()
         }
         .task { await viewModel.load() }
+        .accessibilityIdentifier("profile.screen")
     }
 
     private func syncTabBarVisibility() {
         tabBarVisibilityStore.isVisible = path.isEmpty
     }
 
-    private var nameBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.name },
-            set: { viewModel.updateName($0) }
-        )
-    }
-
-    private var emailBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.email },
-            set: { viewModel.updateEmail($0) }
-        )
-    }
-
-    private var phoneBinding: Binding<String> {
-        Binding(
-            get: { viewModel.profile.phone },
-            set: { viewModel.updatePhone($0) }
-        )
-    }
 }
 
 private enum ProfileRoute: Hashable {

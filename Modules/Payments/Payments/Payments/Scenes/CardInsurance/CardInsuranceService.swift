@@ -2,7 +2,7 @@ import Core
 import Foundation
 
 protocol CardInsuranceServicing {
-    func loadBullets() async throws -> [CardInsuranceBullet]
+    func loadBullets() async throws -> CardInsuranceResponse
 }
 
 final class CardInsuranceService: CardInsuranceServicing {
@@ -12,7 +12,7 @@ final class CardInsuranceService: CardInsuranceServicing {
         self.coreService = coreService
     }
 
-    func loadBullets() async throws -> [CardInsuranceBullet] {
+    func loadBullets() async throws -> CardInsuranceResponse {
         try await coreService.execute(CardInsuranceEndpoint.bullets)
     }
 }
@@ -33,7 +33,7 @@ extension CardInsuranceEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .bullets:
-            return Self.encodeOrEmpty(CardInsuranceBullet.mock)
+            return Self.encodeOrEmpty(CardInsuranceResponse.mock)
         }
     }
 
@@ -42,11 +42,11 @@ extension CardInsuranceEndpoint: Endpoint {
     }
 }
 
-private extension CardInsuranceBullet {
-    static let mock: [CardInsuranceBullet] = [
+private extension CardInsuranceResponse {
+    static let mock = CardInsuranceResponse(bullets: [
         .init(text: Strings.CardInsurance.bulletOne),
         .init(text: Strings.CardInsurance.bulletTwo),
         .init(text: Strings.CardInsurance.bulletThree),
         .init(text: Strings.CardInsurance.bulletFour)
-    ]
+    ])
 }

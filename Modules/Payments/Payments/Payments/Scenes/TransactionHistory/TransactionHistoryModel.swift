@@ -37,7 +37,13 @@ final class TransactionHistoryViewModel: ObservableObject {
     }
 
     private func buildSections(from transactions: [FinancialSummaryModel]) {
-        let order = ["Today", "Yesterday", "Last Week", "Last Month", "Others"]
+        let order = [
+            Strings.Notifications.sectionToday,
+            Strings.Notifications.sectionYesterday,
+            Strings.Notifications.sectionLastWeek,
+            Strings.Notifications.sectionLastMonth,
+            Strings.Notifications.sectionOthers
+        ]
         let grouped = Dictionary(grouping: transactions) { $0.section }
         let sorted = grouped.keys.sorted {
             (order.firstIndex(of: $0) ?? Int.max) <

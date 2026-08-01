@@ -2,6 +2,7 @@ import Core
 import PaymentsInterface
 import SwiftUI
 
+@MainActor
 public final class PaymentsFactory: PaymentsFactoryInterface {
     private let coreService: any HasCoreService
     private let profileStore = ProfileStore()

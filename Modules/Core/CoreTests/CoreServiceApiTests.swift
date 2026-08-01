@@ -35,19 +35,109 @@ struct CoreServiceApiTests {
         }
     }
 
-    @Test
-    func execute_throwsInvalidResponse_forNon200Status() async throws {
+    @Test(arguments: [201, 202])
+    func execute_acceptsCreatedAndAcceptedResponses(statusCode: Int) async throws {
         let url = makeURL()
-        URLProtocolSpy.register(response: .init(statusCode: 500, data: nil), for: url)
+        URLProtocolSpy.register(
+            response: .init(statusCode: statusCode, data: try JSONEncoder().encode(Payload(value: "ok"))),
+            for: url
+        )
+        let sut = CoreServiceApi(session: makeSession())
+
+        let result: Payload = try await sut.execute(TestEndpoint(url: url, body: nil))
+
+        #expect(result == .init(value: "ok"))
+    }
+
+    @Test
+    func execute_returnsEmptyResponse_forNoContent() async throws {
+        let url = makeURL()
+        URLProtocolSpy.register(response: .init(statusCode: 204, data: nil), for: url)
+        let sut = CoreServiceApi(session: makeSession())
+
+        let result: EmptyResponse = try await sut.execute(TestEndpoint(url: url, body: nil))
+
+        #expect(result == EmptyResponse())
+    }
+
+    @Test
+    func execute_withoutReturnType_acceptsNoContent() async throws {
+        let url = makeURL()
+        URLProtocolSpy.register(response: .init(statusCode: 204, data: nil), for: url)
+        let sut = CoreServiceApi(session: makeSession())
+
+        try await sut.execute(TestEndpoint(url: url, body: nil))
+    }
+
+    @Test
+    func execute_throwsInvalidData_whenNoContentExpectsPayload() async {
+        let url = makeURL()
+        URLProtocolSpy.register(response: .init(statusCode: 204, data: nil), for: url)
+        let sut = CoreServiceApi(session: makeSession())
+
+        do {
+            let _: Payload = try await sut.execute(TestEndpoint(url: url, body: nil))
+            Issue.record("Expected request to throw")
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+        }
+    }
+
+    @Test(arguments: HTTPErrorCase.allCases)
+    func execute_mapsKnownHTTPErrorStatuses(testCase: HTTPErrorCase) async throws {
+        let url = makeURL()
+        let backendError = BackendError(code: "request_failed", message: "Request failed")
+        URLProtocolSpy.register(
+            response: .init(statusCode: testCase.statusCode, data: try JSONEncoder().encode(backendError)),
+            for: url
+        )
 
         let sut = CoreServiceApi(session: makeSession())
 
         do {
             let _: Payload = try await sut.execute(TestEndpoint(url: url, body: Body(value: "dummy")))
-            #expect(Bool(false))
+            Issue.record("Expected request to throw")
         } catch {
-            #expect((error as? CoreServiceError) == .invalidResponse)
+            let context = HTTPErrorContext(
+                statusCode: testCase.statusCode,
+                code: "request_failed",
+                message: "Request failed"
+            )
+            #expect((error as? CoreServiceError) == testCase.expectedError(context: context))
         }
+    }
+
+    @Test
+    func execute_mapsUnexpectedHTTPStatusToGenericHTTPError() async {
+        let url = makeURL()
+        URLProtocolSpy.register(response: .init(statusCode: 418, data: nil), for: url)
+        let sut = CoreServiceApi(session: makeSession())
+
+        do {
+            let _: Payload = try await sut.execute(TestEndpoint(url: url, body: nil))
+            Issue.record("Expected request to throw")
+        } catch {
+            #expect(
+                (error as? CoreServiceError) == .httpError(
+                    .init(statusCode: 418)
+                )
+            )
+        }
+    }
+
+    @Test
+    func serviceError_exposesSharedContextAndServerMessage() {
+        let context = HTTPErrorContext(
+            statusCode: 400,
+            code: "invalid_field",
+            message: "The field is invalid"
+        )
+        let sut = CoreServiceError.badRequest(context)
+
+        #expect(sut.context == context)
+        #expect(sut.serverMessage == "The field is invalid")
+        #expect(CoreServiceError.invalidData.context == nil)
+        #expect(CoreServiceError.invalidData.serverMessage == nil)
     }
 
     @Test
@@ -102,6 +192,39 @@ private struct Body: Encodable, Equatable {
 
 private struct Payload: Codable, Equatable {
     let value: String
+}
+
+private struct BackendError: Encodable {
+    let code: String
+    let message: String
+}
+
+enum HTTPErrorCase: CaseIterable {
+    case badRequest
+    case unauthorized
+    case forbidden
+    case notFound
+    case internalServerError
+
+    var statusCode: Int {
+        switch self {
+        case .badRequest: 400
+        case .unauthorized: 401
+        case .forbidden: 403
+        case .notFound: 404
+        case .internalServerError: 500
+        }
+    }
+
+    func expectedError(context: HTTPErrorContext) -> CoreServiceError {
+        switch self {
+        case .badRequest: .badRequest(context)
+        case .unauthorized: .unauthorized(context)
+        case .forbidden: .forbidden(context)
+        case .notFound: .notFound(context)
+        case .internalServerError: .serverError(context)
+        }
+    }
 }
 
 private struct SpyResponse {

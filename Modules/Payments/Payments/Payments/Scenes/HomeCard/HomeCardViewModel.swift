@@ -23,15 +23,10 @@ final class HomeCardViewModel: ObservableObject {
         isEmpty = false
 
         do {
-            async let dashboard = service.loadDashboard()
-            async let quickActions = service.loadQuickActions()
-
-            let loadedDashboard = try await dashboard
-            let loadedQuickActions = try await quickActions
-
+            let loadedDashboard = try await service.loadDashboard()
             cards = loadedDashboard.cards
             summaries = loadedDashboard.summaries
-            self.quickActions = loadedQuickActions
+            quickActions = loadedDashboard.quickActions
             isEmpty = cards.isEmpty && summaries.isEmpty
         } catch {
             errorMessage = "We could not load your cards and activity right now."

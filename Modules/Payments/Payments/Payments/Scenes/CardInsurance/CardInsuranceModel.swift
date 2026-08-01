@@ -9,3 +9,7 @@ struct CardInsuranceBullet: Identifiable, Codable {
         self.text = text
     }
 }
+
+struct CardInsuranceResponse: Codable {
+    let bullets: [CardInsuranceBullet]
+}

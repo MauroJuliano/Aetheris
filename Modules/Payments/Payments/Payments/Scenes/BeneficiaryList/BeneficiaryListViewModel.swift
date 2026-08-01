@@ -6,12 +6,20 @@ final class BeneficiaryListViewModel: ObservableObject {
     @Published private(set) var isLoading = true
     @Published private(set) var beneficiaries: [Beneficiary]
 
-    init(beneficiaries: [Beneficiary] = Beneficiary.beneficiaries) {
-        self.beneficiaries = beneficiaries
+    private let service: any BeneficiaryListServicing
+
+    init(service: any BeneficiaryListServicing) {
+        self.service = service
+        self.beneficiaries = Array(BeneficiaryFixtures.defaults.prefix(4))
     }
 
     func load() async {
-        try? await Task.sleep(nanoseconds: 1_500_000_000)
+        do {
+            let response = try await service.loadBeneficiaryList()
+            beneficiaries = Array(response.beneficiaries.prefix(4))
+        } catch {
+            beneficiaries = Array(BeneficiaryFixtures.defaults.prefix(4))
+        }
         isLoading = false
     }
 }

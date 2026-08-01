@@ -16,13 +16,8 @@ final class AllServicesViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        do {
-            items = try await service.loadServices()
-        } catch {
-            errorMessage = error.localizedDescription
-        }
+        items = await service.loadServices()
 
         isLoading = false
     }
 }
-

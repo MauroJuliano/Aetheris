@@ -97,5 +97,6 @@ public struct NumericKeyboard: View {
             )
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("amount.key.\(key)")
     }
 }

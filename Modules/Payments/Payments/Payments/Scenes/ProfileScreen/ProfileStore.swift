@@ -5,20 +5,33 @@ struct ProfileData {
     var name: String
     var email: String
     var phone: String
+    var avatarName: String
+    var joinedDate: String
 
     static let mock = ProfileData(
         name: Strings.Profile.userName,
         email: Strings.Profile.email,
-        phone: Strings.Profile.phone
+        phone: Strings.Profile.phone,
+        avatarName: "melissa",
+        joinedDate: "Joined August 17, 2025"
     )
 }
 
-extension ProfileData {
-    var generalCells: [FormCellModel] {
-        FormCellModel.profileCells(name: name, email: email, phone: phone)
-    }
+@MainActor
+protocol ProfileStoring {
+    var profile: ProfileData { get }
+    func update(_ profile: ProfileData)
 }
 
-final class ProfileStore {
-    var profile: ProfileData = .mock
+@MainActor
+final class ProfileStore: ProfileStoring {
+    private(set) var profile: ProfileData
+
+    init(profile: ProfileData = .mock) {
+        self.profile = profile
+    }
+
+    func update(_ profile: ProfileData) {
+        self.profile = profile
+    }
 }

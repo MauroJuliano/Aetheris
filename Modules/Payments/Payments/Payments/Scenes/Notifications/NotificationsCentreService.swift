@@ -2,7 +2,7 @@ import Core
 import Foundation
 
 protocol NotificationsCentreServicing {
-    func loadNotifications() async throws -> [Notifications]
+    func loadNotifications() async throws -> NotificationsCentreResponse
 }
 
 final class NotificationsCentreService: NotificationsCentreServicing {
@@ -12,7 +12,7 @@ final class NotificationsCentreService: NotificationsCentreServicing {
         self.coreService = coreService
     }
 
-    func loadNotifications() async throws -> [Notifications] {
+    func loadNotifications() async throws -> NotificationsCentreResponse {
         try await coreService.execute(NotificationsEndpoint.notifications)
     }
 }
@@ -33,7 +33,7 @@ extension NotificationsEndpoint: Endpoint {
     var mockResponseData: Data {
         switch self {
         case .notifications:
-            return Self.encodeOrEmpty(Notifications.mock)
+            return Self.encodeOrEmpty(NotificationsCentreResponse.mock)
         }
     }
 

@@ -55,8 +55,10 @@ struct Login: View {
                         .foregroundColor(Color.textTertiary)
                         .font(AppTypography.input)
                 )
+                .accessibilityIdentifier("login.email")
             }
             .appInputField()
+            .accessibilityIdentifier("login.email")
 
             // Password
             HStack {
@@ -68,8 +70,10 @@ struct Login: View {
                         .font(AppTypography.input)
                 )
                 .keyboardType(.numberPad)
+                .accessibilityIdentifier("login.password")
             }
             .appInputField()
+            .accessibilityIdentifier("login.password")
 
             // Login button
             GlowButton(title: Strings.Login.loginButton) {
@@ -83,6 +87,7 @@ struct Login: View {
             .padding()
             .disabled(!canSubmit)
             .opacity(canSubmit ? 1 : 0.55)
+            .accessibilityIdentifier("login.submit")
 
             // Register
             HStack {
@@ -96,6 +101,7 @@ struct Login: View {
                         .bold()
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
+                .accessibilityIdentifier("login.register")
             }
             .padding(.bottom, AppSpacing.xxLarge)
         }
@@ -111,15 +117,15 @@ struct Login: View {
             }
         }
         .sheet(isPresented: $isShowingLoginErrorSheet) {
-            LoginErrorSheet(
+            ActionErrorSheet(
                 title: Strings.LoginError.title,
                 description: Strings.LoginError.description,
                 primaryButtonTitle: Strings.LoginError.primaryButton,
                 secondaryButtonTitle: Strings.LoginError.secondaryButton,
-                onTryAgain: {
+                onPrimaryAction: {
                     isShowingLoginErrorSheet = false
                 },
-                onForgotPassword: {
+                onSecondaryAction: {
                     isShowingLoginErrorSheet = false
                     DispatchQueue.main.async {
                         onForgotPassword(login)
@@ -127,7 +133,9 @@ struct Login: View {
                 }
             )
             .presentationDragIndicator(.visible)
+            .accessibilityIdentifier("login.errorSheet")
         }
+        .accessibilityIdentifier("login.screen")
         .onChange(of: password) { _, newValue in
             let filtered = newValue.filter(\.isNumber)
             if filtered != newValue {

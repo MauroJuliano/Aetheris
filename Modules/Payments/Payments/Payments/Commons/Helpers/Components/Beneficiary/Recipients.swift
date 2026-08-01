@@ -1,8 +1,9 @@
-import SwiftUI
+import Core
 import AetherisDesignSystem
+import SwiftUI
 
 public struct Recipients: View {
-    @State private var users = Beneficiary.beneficiaries
+    @State private var users: [Beneficiary] = Array(BeneficiaryFixtures.defaults.prefix(4))
     @State private var shouldPresentTransfer: Bool = false
     @State private var selectedUser: Beneficiary?
     
@@ -41,6 +42,7 @@ public struct Recipients: View {
         .navigationDestination(isPresented: $shouldPresentTransfer) {
             if let user = selectedUser {
                 SendMoneyFlowCoordinator(
+                    coreService: DemoCoreService(),
                     selectedBeneficiary: .constant(user),
                     onBackAction: {}
                 )
@@ -48,4 +50,3 @@ public struct Recipients: View {
         }
     }
 }
-

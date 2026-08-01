@@ -19,10 +19,7 @@ struct UserNameView: View {
     }
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                RegisterInputSkeleton()
-            } else {
-                RegisterView(title: viewModel.title,
+            RegisterView(title: viewModel.title,
                              subTitle: viewModel.subTitle,
                              textFieldValue: Binding(
                                 get: { draft.userName },
@@ -32,23 +29,17 @@ struct UserNameView: View {
                              textFieldPlaceholder: viewModel.placeholder,
                              fieldErrorMessage: viewModel.errorMessage,
                 onAction: {
-                    viewModel.submit()
+                    viewModel.submit(onContinue: onContinue)
                 })
-            }
-        }
-        .onReceive(viewModel.submissionSucceeded) {
-            onContinue()
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            if !viewModel.isLoading {
-                NavBar(
+            NavBar(
                     hasNotifications: false,
                     hasBackButton: true,
                     model: .init(hasInitialSpace: false),
                     onBack: onBack
                 )
-                .padding(.top, AppSpacing.medium)
-            }
+            .padding(.top, AppSpacing.medium)
         }
         .appScreenBackground()
         .navigationBarHidden(true)

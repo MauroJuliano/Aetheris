@@ -15,6 +15,13 @@ public struct Card: Identifiable, Hashable, Codable {
     }
 }
 
+public enum CardMockIDs {
+    public static let standard = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+    public static let black = UUID(uuidString: "22222222-2222-2222-2222-222222222222")!
+    public static let gold = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
+    public static let infinite = UUID(uuidString: "44444444-4444-4444-4444-444444444444")!
+}
+
 public struct CreditCardTheme: Hashable {
     let gradient: [Color]
     let glow: [Color]

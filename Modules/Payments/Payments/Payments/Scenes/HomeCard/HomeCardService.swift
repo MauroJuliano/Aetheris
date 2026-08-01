@@ -5,12 +5,12 @@ import SwiftUI
 
 protocol HomeCardServicing {
     func loadDashboard() async throws -> HomeCardDashboard
-    func loadQuickActions() async throws -> [CardOptions]
 }
 
 struct HomeCardDashboard: Codable {
     let cards: [Card]
     let summaries: [FinancialSummaryModel]
+    let quickActions: [CardOptions]
 }
 
 final class HomeCardService: HomeCardServicing {
@@ -23,15 +23,10 @@ final class HomeCardService: HomeCardServicing {
     func loadDashboard() async throws -> HomeCardDashboard {
         try await coreService.execute(HomeCardEndpoint.dashboard)
     }
-
-    func loadQuickActions() async throws -> [CardOptions] {
-        try await coreService.execute(HomeCardEndpoint.quickActions)
-    }
 }
 
 private enum HomeCardEndpoint {
     case dashboard
-    case quickActions
 }
 
 extension HomeCardEndpoint: Endpoint {
@@ -47,8 +42,6 @@ extension HomeCardEndpoint: Endpoint {
         switch self {
         case .dashboard:
             return Self.encodeOrEmpty(HomeCardDashboard.mock)
-        case .quickActions:
-            return Self.encodeOrEmpty(CardOptions.mock)
         }
     }
 
@@ -60,6 +53,67 @@ extension HomeCardEndpoint: Endpoint {
 private extension HomeCardDashboard {
     static let mock = HomeCardDashboard(
         cards: CardsMock.creditCardMocks,
-        summaries: FinancialSummaryModel.mock
+        summaries: [
+            .init(
+                cardId: CardMockIDs.standard,
+                image: "melissa",
+                title: Strings.FinancialSummary.transferSent,
+                description: Strings.FinancialSummary.transferSentDescription,
+                value: "-$ 250.00",
+                tag: .transfer,
+                date: Date()
+            ),
+            .init(
+                cardId: CardMockIDs.standard,
+                image: "ed",
+                title: Strings.FinancialSummary.paymentReceived,
+                description: Strings.FinancialSummary.paymentReceivedDescription,
+                value: "$ 125.00",
+                tag: .income,
+                date: Date()
+            ),
+            .init(
+                cardId: CardMockIDs.gold,
+                image: "NetflixLogo",
+                title: Strings.FinancialSummary.netflix,
+                description: Strings.FinancialSummary.subscription,
+                value: "-$ 20.00",
+                tag: .expense,
+                date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
+            ),
+            .init(
+                cardId: CardMockIDs.infinite,
+                image: "applelogo",
+                title: Strings.FinancialSummary.appleBill,
+                description: Strings.FinancialSummary.subscription,
+                value: "-$ 9.00",
+                tag: .expense,
+                date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
+            ),
+            .init(
+                cardId: CardMockIDs.infinite,
+                image: "ifoodlogo",
+                title: Strings.FinancialSummary.ifoodBar,
+                description: Strings.FinancialSummary.restaurant,
+                value: "-$ 30.00",
+                tag: .expense,
+                date: Calendar.current.date(byAdding: .day, value: -20, to: Date()) ?? Date()
+            ),
+            .init(
+                cardId: CardMockIDs.gold,
+                image: "Adele",
+                title: Strings.FinancialSummary.transferSent,
+                description: Strings.FinancialSummary.transferSentAdeleDescription,
+                value: "-$ 70.00",
+                tag: .transfer,
+                date: Calendar.current.date(byAdding: .month, value: -2, to: Date()) ?? Date()
+            )
+        ],
+        quickActions: [
+            .init(label: Strings.QuickActions.sendTitle, icon: "paperplane.fill"),
+            .init(label: Strings.QuickActions.requestTitle, icon: "arrow.down"),
+            .init(label: Strings.QuickActions.payTitle, icon: "creditcard.fill"),
+            .init(label: Strings.QuickActions.topUpTitle, icon: "plus")
+        ]
     )
 }

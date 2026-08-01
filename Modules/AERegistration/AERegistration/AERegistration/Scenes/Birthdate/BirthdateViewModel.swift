@@ -1,12 +1,9 @@
 import SwiftUI
-import Combine
 
 @MainActor
 class BirthdateViewModel: ObservableObject {
     typealias localizable = Strings.Birthdate
     
-    @Published var isLoading: Bool = false
-    let submissionSucceeded = PassthroughSubject<Void, Never>()
     @Published var errorMessage: String?
 
     private let draft: RegistrationDraft
@@ -17,10 +14,7 @@ class BirthdateViewModel: ObservableObject {
     var buttonName: String { Strings.Default.buttonName }
     var fieldErrorMessage: String? { errorMessage }
     
-    private let service: BirthdateServicing
-    
-    init(service: BirthdateServicing, draft: RegistrationDraft) {
-        self.service = service
+    init(draft: RegistrationDraft) {
         self.draft = draft
     }
 
@@ -30,24 +24,13 @@ class BirthdateViewModel: ObservableObject {
     }
     
     // MARK: Life Cycle
-    func submit() {
+    func submit(onContinue: () -> Void) {
         guard RegistrationInputRules.isValidBirthdate(draft.birthdate) else {
             errorMessage = Strings.Birthdate.error
             return
         }
 
         errorMessage = nil
-        isLoading = true
-        
-        Task {
-            do {
-                _ = try await service.submitBirthdate(draft.birthdate)
-                submissionSucceeded.send()
-            } catch {
-                errorMessage = Strings.Common.errorSubmit
-            }
-            
-            isLoading = false
-        }
+        onContinue()
     }
 }

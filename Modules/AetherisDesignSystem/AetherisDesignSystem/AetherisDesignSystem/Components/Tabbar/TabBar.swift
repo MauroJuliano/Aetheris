@@ -83,6 +83,8 @@ public struct TabBar: View {
             }
             .frame(width: tabWidth, height: AppTabBarMetrics.containerHeight)
         }
+        .accessibilityIdentifier("tab.\(index)")
+        .accessibilityLabel(item.label)
     }
     
 }

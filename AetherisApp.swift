@@ -3,15 +3,22 @@ import AetherisAuthentication
 import AetherisAuthenticationInterface
 import AERegistration
 import Payments
+import Core
 
 @main
 struct AetherisApp: App {
     private let dependencies = DependencyContainer()
-    @StateObject private var sessionStore = AppSessionStore()
+    @StateObject private var sessionStore: AppSessionStore
+
+    init() {
+        let session = AppSessionStore()
+        session.isAuthenticated = UITestConfiguration.startsAuthenticated
+        _sessionStore = StateObject(wrappedValue: session)
+    }
     
     var body: some Scene {
         WindowGroup {
-            SplashRootView {
+            SplashRootView(delay: UITestConfiguration.isEnabled ? 0 : 1.5) {
                 dependencies.authenticationFactory.make()
                     .environmentObject(sessionStore)
             }
@@ -21,6 +28,7 @@ struct AetherisApp: App {
 
 struct SplashRootView<Content: View>: View {
     @State private var isSplashVisible = true
+    let delay: TimeInterval
     let content: () -> Content
     
     var body: some View {
@@ -32,7 +40,7 @@ struct SplashRootView<Content: View>: View {
             }
         }
         .task {
-            try? await Task.sleep(nanoseconds: 1_500_000_000)
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
             withAnimation(.easeOut(duration: 0.25)) {
                 isSplashVisible = false
             }

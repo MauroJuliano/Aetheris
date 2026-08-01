@@ -32,8 +32,10 @@ struct RegisterView: View {
             GlowButton(title: buttonTitle) {
                 onAction()
             }
+            .accessibilityIdentifier("registration.continue")
             .padding(.bottom, AppSpacing.xxLarge)
         }
+        .accessibilityIdentifier("registration.screen")
         .background {
             Image("login-background")
                 .resizable()
@@ -104,12 +106,14 @@ struct RegisterView: View {
                 text: $textFieldValue,
                 prompt: inputPrompt
             )
+            .accessibilityIdentifier("registration.input")
         } else {
             TextField(
                 "",
                 text: $textFieldValue,
                 prompt: inputPrompt
             )
+            .accessibilityIdentifier("registration.input")
         }
     }
 

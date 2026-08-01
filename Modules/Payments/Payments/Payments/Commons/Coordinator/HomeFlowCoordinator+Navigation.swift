@@ -5,32 +5,31 @@ import SwiftUI
 
 extension HomeFlowCoordinator {
     private func popRoute() {
-        guard !path.isEmpty else { return }
-        path.removeLast()
+        navigation.pop()
     }
 
     @ViewBuilder
     var rootView: some View {
         HomeAppFactory.make(
             coreService: coreService,
-            onCardTap: { path.append(.card) },
-            onNotificationsTap: { path.append(.notifications) },
+            onCardTap: { navigation.push(.card) },
+            onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
                 selectedBeneficiary = beneficiary
-                path.append(.sendMoney)
+                navigation.push(.sendMoney)
             },
-            onSeeAllRecipientsTap: { path.append(.beneficiaryList) },
-            onNewRecipientTap: { path.append(.addBeneficiary) },
+            onSeeAllRecipientsTap: { navigation.push(.beneficiaryList) },
+            onNewRecipientTap: { navigation.push(.addBeneficiary) },
             onTransferTap: {
-                selectedBeneficiary = .defaultSelection
-                path.append(.sendMoney)
+                selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+                navigation.push(.sendMoney)
             },
             onMoreTap: {
                 withAnimation(.easeInOut(duration: 0.25)) {
-                    path.append(.allServices)
+                    navigation.push(.allServices)
                 }
             },
-            onViewReportTap: { path.append(.viewReport) }
+            onViewReportTap: { navigation.push(.viewReport) }
         )
     }
 
@@ -41,31 +40,34 @@ extension HomeFlowCoordinator {
             HomeCardFactory.make(
                 coreService: coreService,
                 onBackAction: { popRoute() },
-                onTransactionHistoryTap: { path.append(.transactionHistory) }
+                onTransactionHistoryTap: { cardId in navigation.push(.transactionHistory(cardId)) }
             )
             .navigationBarHidden(true)
 
-        case .transactionHistory:
+        case .transactionHistory(let cardId):
             TransactionHistoryFactory.make(
                 coreService: coreService,
+                cardId: cardId,
                 onBack: { popRoute() }
             )
 
         case .sendMoney:
             SendMoneyFactory.make(
+                coreService: coreService,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: { popRoute() },
                 onChangeBeneficiary: {
-                    path.append(.sendMoneyBeneficiaryList)
+                    navigation.push(.sendMoneyBeneficiaryList)
                 },
                 onContinue: { receipt in
-                    path.append(.sendMoneyPin(receipt))
+                    navigation.push(.sendMoneyPin(receipt))
                 }
             )
             .navigationBarHidden(true)
 
         case .beneficiaryList:
             BeneficiaryListFactory.make(
+                coreService: coreService,
                 onSelect: { beneficiary in
                     selectedBeneficiary = beneficiary
                     replaceCurrentRoute(with: .sendMoney)
@@ -76,6 +78,7 @@ extension HomeFlowCoordinator {
 
         case .sendMoneyBeneficiaryList:
             BeneficiaryListFactory.make(
+                coreService: coreService,
                 onSelect: { beneficiary in
                     selectedBeneficiary = beneficiary
                     popRoute()
@@ -89,7 +92,7 @@ extension HomeFlowCoordinator {
                 receipt: receipt,
                 onBack: { popRoute() },
                 onValidPin: {
-                    path.append(.sendMoneyProcessing(receipt))
+                    navigation.push(.sendMoneyProcessing(receipt))
                 }
             )
             .navigationBarHidden(true)
@@ -108,10 +111,10 @@ extension HomeFlowCoordinator {
                 model: receipt,
                 onBack: { popRoute() },
                 onDone: {
-                    path.removeAll()
+                    navigation.reset()
                 },
                 onNewTransfer: {
-                    path.removeAll()
+                    navigation.reset()
                 },
                 onCopyReference: { reference in
                     UIPasteboard.general.string = reference
@@ -139,7 +142,6 @@ extension HomeFlowCoordinator {
 
         case .allServices:
             AllServicesFactory.make(
-                coreService: coreService,
                 onBack: { popRoute() }
             )
 
@@ -157,14 +159,6 @@ extension HomeFlowCoordinator {
     }
 
     private func replaceCurrentRoute(with route: HomeRoute) {
-        guard !path.isEmpty else {
-            path = [route]
-            return
-        }
-
-        var updatedPath = path
-        updatedPath.removeLast()
-        updatedPath.append(route)
-        path = updatedPath
+        navigation.replaceCurrent(with: route)
     }
 }

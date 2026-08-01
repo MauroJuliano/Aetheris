@@ -3,12 +3,10 @@ import SwiftUI
 
 enum MothersNameInputFactory {
     @MainActor
-    static func make(coreService: any HasCoreService,
-                     draft: RegistrationDraft,
+    static func make(draft: RegistrationDraft,
                      onBack: @escaping () -> Void,
                      onContinue: @escaping () -> Void) -> MothersNameInputView {
-        let viewModel = MothersNameInputViewModel(service: MothersNameInputService(coreService: coreService),
-                                                  draft: draft)
+        let viewModel = MothersNameInputViewModel(draft: draft)
         return MothersNameInputView(viewModel: viewModel,
                                     draft: draft,
                                     onBack: onBack,

@@ -99,8 +99,8 @@ internal enum Strings {
     internal static let mockSin = Strings.tr("Localizable", "Resume.mockSin", fallback: "000.000.00-23")
     /// We could never be together
     internal static let mockWeCouldNeverBeTogether = Strings.tr("Localizable", "Resume.mockWeCouldNeverBeTogether", fallback: "We could never be together")
-    /// Your information is securely encrypted and will never be shared.
-    internal static let securityNote = Strings.tr("Localizable", "Resume.securityNote", fallback: "Your information is securely encrypted and will never be shared.")
+    /// Your information is sent securely only when you continue.
+    internal static let securityNote = Strings.tr("Localizable", "Resume.securityNote", fallback: "Your information is sent securely only when you continue.")
     /// Please confirm that all the information below is correct before we continue.
     internal static let subtitle = Strings.tr("Localizable", "Resume.subtitle", fallback: "Please confirm that all the information below is correct before we continue.")
     /// Review You Information
@@ -117,6 +117,16 @@ internal enum Strings {
     internal static let subTitle = Strings.tr("Localizable", "SIN.subTitle", fallback: "We'll use your SIN to verify your identity and keep your account secure.")
     /// Social Insurance Number
     internal static let title = Strings.tr("Localizable", "SIN.title", fallback: "Social Insurance Number")
+  }
+  internal enum SubmissionError {
+    /// Cancel
+    internal static let cancel = Strings.tr("Localizable", "SubmissionError.cancel", fallback: "Cancel")
+    /// We couldn't submit your information. Please try again.
+    internal static let description = Strings.tr("Localizable", "SubmissionError.description", fallback: "We couldn't submit your information. Please try again.")
+    /// Unable to continue
+    internal static let title = Strings.tr("Localizable", "SubmissionError.title", fallback: "Unable to continue")
+    /// Try again
+    internal static let tryAgain = Strings.tr("Localizable", "SubmissionError.tryAgain", fallback: "Try again")
   }
   internal enum UserName {
     /// Enter at least 2 letters.

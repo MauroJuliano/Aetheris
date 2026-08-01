@@ -105,4 +105,3 @@ struct QuickActionCard: View {
         .frame(height: 36, alignment: .bottom)
     }
 }
-
