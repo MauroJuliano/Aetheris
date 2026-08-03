@@ -30,7 +30,7 @@ struct TransactionHistoryServiceTests {
             .expense
         ])
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/transactions?cardId=11111111-1111-1111-1111-111111111111", method: .get)
+            .init(path: "/payments/transactions?cardId=11111111-1111-1111-1111-111111111111", method: .get)
         ])
     }
 

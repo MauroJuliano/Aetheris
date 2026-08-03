@@ -15,7 +15,7 @@ struct ViewReportServiceTests {
         #expect(report.title == Strings.ViewReport.loadingTitle)
         #expect(report.topCategories.count == 4)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/view-report", method: .get)
+            .init(path: "/payments/view-report", method: .get)
         ])
     }
 

@@ -24,6 +24,26 @@ struct CoreServiceApiTests {
     }
 
     @Test
+    func execute_combinesInjectedBaseURLWithRelativeEndpointPath() async throws {
+        let baseURL = URL(string: "https://staging.aetheris.app")!
+        let path = "/custom/resource?source=test"
+        let expectedURL = URL(string: path, relativeTo: baseURL)!.absoluteURL
+        URLProtocolSpy.register(
+            response: .init(statusCode: 200, data: try JSONEncoder().encode(Payload(value: "ok"))),
+            for: expectedURL
+        )
+        let sut = CoreServiceApi(
+            configuration: APIConfiguration(baseURL: baseURL),
+            session: makeSession()
+        )
+
+        let result: Payload = try await sut.execute(TestEndpoint(path: path, body: nil))
+
+        #expect(result == Payload(value: "ok"))
+        #expect(URLProtocolSpy.request(for: expectedURL)?.url == expectedURL)
+    }
+
+    @Test
     func execute_throwsInvalidUrl_forBadPath() async throws {
         let sut = CoreServiceApi(session: makeSession())
 
@@ -173,7 +193,9 @@ private struct TestEndpoint: Endpoint {
     let body: Encodable?
 
     init(url: URL, body: Encodable?) {
-        self.path = url.absoluteString
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let query = components?.percentEncodedQuery.map { "?\($0)" } ?? ""
+        self.path = url.path + query
         self.body = body
     }
 

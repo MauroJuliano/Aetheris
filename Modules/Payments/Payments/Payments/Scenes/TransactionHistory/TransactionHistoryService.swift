@@ -28,7 +28,7 @@ extension TransactionHistoryEndpoint: Endpoint {
     var path: String {
         switch self {
         case .transactions(let cardId):
-            return "https://api.aetheris.app/payments/transactions?cardId=\(cardId.uuidString)"
+            return "/payments/transactions?cardId=\(cardId.uuidString)"
         }
     }
 

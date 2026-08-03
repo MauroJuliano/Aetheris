@@ -50,7 +50,7 @@ private enum BeneficiaryAddEndpoint {
 
 extension BeneficiaryAddEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/beneficiaries"
+        "/payments/beneficiaries"
     }
 
     var method: HTTPMethod {

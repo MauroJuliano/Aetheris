@@ -8,10 +8,16 @@
 import Testing
 @testable import AetherisAuthenticationInterface
 
+@MainActor
 struct AetherisAuthenticationInterfaceTests {
+    @Test
+    func sessionStore_startsLoggedOutAndPublishesAuthenticationChanges() {
+        let sut = AppSessionStore()
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+        #expect(sut.isAuthenticated == false)
+
+        sut.isAuthenticated = true
+
+        #expect(sut.isAuthenticated == true)
     }
-
 }

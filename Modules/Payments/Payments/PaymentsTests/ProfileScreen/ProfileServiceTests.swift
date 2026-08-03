@@ -27,7 +27,7 @@ struct ProfileServiceTests {
         #expect(response.footer.poweredBy == Strings.Profile.poweredBy)
         #expect(response.footer.terms == Strings.Profile.terms)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/profile", method: .get)
+            .init(path: "/payments/profile", method: .get)
         ])
     }
 
@@ -93,7 +93,7 @@ struct ProfileServiceTests {
         #expect(response.general.email == request.email)
         #expect(response.general.phone == request.phone)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/profile/update", method: .post)
+            .init(path: "/payments/profile/update", method: .post)
         ])
     }
 

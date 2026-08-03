@@ -27,7 +27,7 @@ private enum BeneficiaryListEndpoint {
 
 extension BeneficiaryListEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/beneficiaries/recent"
+        "/payments/beneficiaries/recent"
     }
 
     var method: HTTPMethod { .get }

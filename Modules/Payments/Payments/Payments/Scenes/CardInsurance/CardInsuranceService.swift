@@ -23,7 +23,7 @@ private enum CardInsuranceEndpoint {
 
 extension CardInsuranceEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/card-insurance/bullets"
+        "/payments/card-insurance/bullets"
     }
 
     var method: HTTPMethod { .get }

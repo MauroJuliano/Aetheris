@@ -59,14 +59,22 @@ public extension HasCoreService {
 }
 
 public final class CoreServiceApi: HasCoreService {
+    private let configuration: APIConfiguration
     private let session: URLSession
 
-    public init(session: URLSession = .shared) {
+    public init(
+        configuration: APIConfiguration = .demo,
+        session: URLSession = .shared
+    ) {
+        self.configuration = configuration
         self.session = session
     }
 
     public func execute<T>(_ endpoint: any Endpoint) async throws -> T where T : Decodable {
-        guard let url = URL(string: endpoint.path) else { throw CoreServiceError.invalidUrl }
+        guard endpoint.path.hasPrefix("/"),
+              let url = URL(string: endpoint.path, relativeTo: configuration.baseURL)?.absoluteURL else {
+            throw CoreServiceError.invalidUrl
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue

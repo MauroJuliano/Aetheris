@@ -57,7 +57,7 @@ private enum SendMoneyEndpoint {
 
 extension SendMoneyEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/send-money/session"
+        "/payments/send-money/session"
     }
 
     var method: HTTPMethod { .get }

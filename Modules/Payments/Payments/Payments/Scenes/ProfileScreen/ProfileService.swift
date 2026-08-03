@@ -70,9 +70,9 @@ extension ProfileEndpoint: Endpoint {
     var path: String {
         switch self {
         case .profile:
-            "https://api.aetheris.app/payments/profile"
+            "/payments/profile"
         case .update:
-            "https://api.aetheris.app/payments/profile/update"
+            "/payments/profile/update"
         }
     }
 

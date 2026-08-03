@@ -23,7 +23,7 @@ private enum ViewReportEndpoint {
 
 extension ViewReportEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/view-report"
+        "/payments/view-report"
     }
 
     var method: HTTPMethod { .get }

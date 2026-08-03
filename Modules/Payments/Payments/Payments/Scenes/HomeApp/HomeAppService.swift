@@ -97,7 +97,7 @@ private enum HomeAppEndpoint {
 
 extension HomeAppEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/home/dashboard"
+        "/payments/home/dashboard"
     }
 
     var method: HTTPMethod { .get }

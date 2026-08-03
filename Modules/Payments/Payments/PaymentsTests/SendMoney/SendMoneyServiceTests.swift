@@ -22,7 +22,7 @@ struct SendMoneyServiceTests {
         #expect(session.fees.count == 1)
         #expect(session.securityMessage.contains("biometrics"))
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/send-money/session", method: .get)
+            .init(path: "/payments/send-money/session", method: .get)
         ])
     }
 

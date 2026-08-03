@@ -20,7 +20,7 @@ struct InsuranceOnboardingServiceTests {
             Strings.InsuranceOnboarding.benefitFour
         ])
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/insurance/benefits", method: .get)
+            .init(path: "/payments/insurance/benefits", method: .get)
         ])
     }
 

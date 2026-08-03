@@ -10,9 +10,9 @@ extension RegistrationEndpoint: Endpoint {
     var path: String {
         switch self {
         case .profile:
-            return "https://api.aetheris.app/registration/profile"
+            return "/registration/profile"
         case .password:
-            return "https://api.aetheris.app/registration/password"
+            return "/registration/password"
         }
     }
 
