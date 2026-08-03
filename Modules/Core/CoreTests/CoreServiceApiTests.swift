@@ -44,6 +44,46 @@ struct CoreServiceApiTests {
     }
 
     @Test
+    func configuration_buildsSessionWithExplicitTimeouts() {
+        let configuration = APIConfiguration(
+            baseURL: URL(string: "https://api.aetheris.app")!,
+            requestTimeout: 12,
+            resourceTimeout: 45
+        )
+
+        let session = configuration.makeSession()
+
+        #expect(session.configuration.timeoutIntervalForRequest == 12)
+        #expect(session.configuration.timeoutIntervalForResource == 45)
+    }
+
+    @Test
+    func execute_mergesDefaultAndEndpointHeaders_withEndpointTakingPrecedence() async throws {
+        let url = makeURL()
+        URLProtocolSpy.register(
+            response: .init(statusCode: 200, data: try JSONEncoder().encode(Payload(value: "ok"))),
+            for: url
+        )
+        let configuration = APIConfiguration(
+            baseURL: URL(string: "https://api.aetheris.app")!,
+            defaultHeaders: ["Accept": "application/json", "X-Source": "global"]
+        )
+        let sut = CoreServiceApi(configuration: configuration, session: makeSession())
+        let endpoint = TestEndpoint(
+            url: url,
+            body: nil,
+            headers: ["X-Source": "endpoint", "Idempotency-Key": "transfer-1"]
+        )
+
+        let _: Payload = try await sut.execute(endpoint)
+
+        let request = URLProtocolSpy.request(for: url)
+        #expect(request?.value(forHTTPHeaderField: "Accept") == "application/json")
+        #expect(request?.value(forHTTPHeaderField: "X-Source") == "endpoint")
+        #expect(request?.value(forHTTPHeaderField: "Idempotency-Key") == "transfer-1")
+    }
+
+    @Test
     func execute_throwsInvalidUrl_forBadPath() async throws {
         let sut = CoreServiceApi(session: makeSession())
 
@@ -103,6 +143,32 @@ struct CoreServiceApiTests {
         }
     }
 
+    @Test
+    func execute_mapsURLErrorToNetworkError() async {
+        let url = makeURL()
+        URLProtocolSpy.register(error: URLError(.notConnectedToInternet), for: url)
+        let sut = CoreServiceApi(session: makeSession())
+
+        do {
+            let _: Payload = try await sut.execute(TestEndpoint(url: url, body: nil))
+            Issue.record("Expected request to throw")
+        } catch {
+            #expect((error as? CoreServiceError) == .network(.noConnection))
+        }
+    }
+
+    @Test
+    func execute_mapsBodyEncodingFailure() async {
+        let sut = CoreServiceApi(session: makeSession())
+
+        do {
+            let _: Payload = try await sut.execute(TestEndpoint(path: "/encoding", body: FailingBody()))
+            Issue.record("Expected request to throw")
+        } catch {
+            #expect((error as? CoreServiceError) == .encoding)
+        }
+    }
+
     @Test(arguments: HTTPErrorCase.allCases)
     func execute_mapsKnownHTTPErrorStatuses(testCase: HTTPErrorCase) async throws {
         let url = makeURL()
@@ -156,12 +222,12 @@ struct CoreServiceApiTests {
 
         #expect(sut.context == context)
         #expect(sut.serverMessage == "The field is invalid")
-        #expect(CoreServiceError.invalidData.context == nil)
-        #expect(CoreServiceError.invalidData.serverMessage == nil)
+        #expect(CoreServiceError.network(.timedOut).context == nil)
+        #expect(CoreServiceError.decoding(.init(type: "Payload", codingPath: "value", description: "Invalid")).serverMessage == nil)
     }
 
     @Test
-    func execute_throwsInvalidData_forMalformedResponse() async throws {
+    func execute_preservesContext_forMalformedResponse() async throws {
         let url = makeURL()
         URLProtocolSpy.register(response: .init(statusCode: 200, data: Data("{}".utf8)), for: url)
 
@@ -171,7 +237,13 @@ struct CoreServiceApiTests {
             let _: Payload = try await sut.execute(TestEndpoint(url: url, body: Body(value: "dummy")))
             #expect(Bool(false))
         } catch {
-            #expect((error as? CoreServiceError) == .invalidData)
+            guard case let .decoding(context) = error as? CoreServiceError else {
+                Issue.record("Expected decoding error")
+                return
+            }
+            #expect(context.type.contains("Payload"))
+            #expect(context.codingPath.isEmpty)
+            #expect(context.description.contains("value"))
         }
     }
 
@@ -191,17 +263,20 @@ private struct TestEndpoint: Endpoint {
 
     let path: String
     let body: Encodable?
+    let headers: [String: String]
 
-    init(url: URL, body: Encodable?) {
+    init(url: URL, body: Encodable?, headers: [String: String] = [:]) {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let query = components?.percentEncodedQuery.map { "?\($0)" } ?? ""
         self.path = url.path + query
         self.body = body
+        self.headers = headers
     }
 
-    init(path: String, body: Encodable?) {
+    init(path: String, body: Encodable?, headers: [String: String] = [:]) {
         self.path = path
         self.body = body
+        self.headers = headers
     }
 
     var method: HTTPMethod { .post }
@@ -210,6 +285,16 @@ private struct TestEndpoint: Endpoint {
 
 private struct Body: Encodable, Equatable {
     let value: String
+}
+
+private struct FailingBody: Encodable {
+    func encode(to encoder: Encoder) throws {
+        throw EncodingFailure.expected
+    }
+}
+
+private enum EncodingFailure: Error {
+    case expected
 }
 
 private struct Payload: Codable, Equatable {
@@ -257,12 +342,19 @@ private struct SpyResponse {
 private final class URLProtocolSpy: URLProtocol {
     private static let lock = NSLock()
     private static var responses: [URL: SpyResponse] = [:]
+    private static var errors: [URL: Error] = [:]
     private static var requests: [URL: URLRequest] = [:]
     private static var bodies: [URL: Data] = [:]
 
     static func register(response: SpyResponse, for url: URL) {
         lock.lock()
         responses[url] = response
+        lock.unlock()
+    }
+
+    static func register(error: Error, for url: URL) {
+        lock.lock()
+        errors[url] = error
         lock.unlock()
     }
 
@@ -299,6 +391,11 @@ private final class URLProtocolSpy: URLProtocol {
         Self.bodies[url] = request.httpBody ?? Self.data(from: request.httpBodyStream)
         Self.lock.unlock()
 
+        if let error = Self.error(for: url) {
+            client?.urlProtocol(self, didFailWithError: error)
+            return
+        }
+
         let httpResponse = HTTPURLResponse(
             url: url,
             statusCode: response.statusCode,
@@ -321,6 +418,12 @@ private final class URLProtocolSpy: URLProtocol {
         lock.lock()
         defer { lock.unlock() }
         return responses[url]
+    }
+
+    private static func error(for url: URL) -> Error? {
+        lock.lock()
+        defer { lock.unlock() }
+        return errors.removeValue(forKey: url)
     }
 
     private static func data(from stream: InputStream?) -> Data? {
