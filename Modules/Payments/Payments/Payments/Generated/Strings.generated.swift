@@ -29,24 +29,24 @@ internal enum Strings {
     internal static let transferMoney = Strings.tr("Localizable", "AllServices.transferMoney", fallback: "Transfer money")
   }
   internal enum BeneficiaryAdd {
+    /// Enter the email or PIX key for the person you want to find.
+    internal static let description = Strings.tr("Localizable", "BeneficiaryAdd.description", fallback: "Enter the email or PIX key for the person you want to find.")
     /// Enter an email or PIX key to continue.
     internal static let invalidSearch = Strings.tr("Localizable", "BeneficiaryAdd.invalidSearch", fallback: "Enter an email or PIX key to continue.")
-    /// Search an existing recipient to use in this transfer.
-    internal static let subtitle = Strings.tr("Localizable", "BeneficiaryAdd.subtitle", fallback: "Search an existing recipient to use in this transfer.")
-    /// Find beneficiary
-    internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
     /// Find beneficiary
     internal static let searchButton = Strings.tr("Localizable", "BeneficiaryAdd.searchButton", fallback: "Find beneficiary")
-    /// Enter an email or PIX key
-    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryAdd.searchPlaceholder", fallback: "Enter email or PIX key")
-    /// Email or PIX key
-    internal static let searchLabel = Strings.tr("Localizable", "BeneficiaryAdd.searchLabel", fallback: "Email or PIX key")
     /// We could not find this beneficiary right now.
     internal static let searchFailed = Strings.tr("Localizable", "BeneficiaryAdd.searchFailed", fallback: "We could not find this beneficiary right now.")
     /// Searching...
     internal static let searching = Strings.tr("Localizable", "BeneficiaryAdd.searching", fallback: "Searching...")
-    /// Enter the email or PIX key for the person you want to find.
-    internal static let description = Strings.tr("Localizable", "BeneficiaryAdd.description", fallback: "Enter the email or PIX key for the person you want to find.")
+    /// Email or PIX key
+    internal static let searchLabel = Strings.tr("Localizable", "BeneficiaryAdd.searchLabel", fallback: "Email or PIX key")
+    /// Enter email or PIX key
+    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryAdd.searchPlaceholder", fallback: "Enter email or PIX key")
+    /// Search an existing recipient to use in this transfer.
+    internal static let subtitle = Strings.tr("Localizable", "BeneficiaryAdd.subtitle", fallback: "Search an existing recipient to use in this transfer.")
+    /// Find beneficiary
+    internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
   }
   internal enum CardHome {
     /// Cards
@@ -115,6 +115,12 @@ internal enum Strings {
     internal static let buildYourCreditCaption = Strings.tr("Localizable", "HomeApp.buildYourCreditCaption", fallback: "Apply now for a Platinum Secured Card")
     /// Build Your Credit
     internal static let buildYourCreditTitle = Strings.tr("Localizable", "HomeApp.buildYourCreditTitle", fallback: "Build Your Credit")
+    /// Jorge Henrique
+    internal static let cardOwnerOne = Strings.tr("Localizable", "HomeApp.cardOwnerOne", fallback: "Jorge Henrique")
+    /// Amado Batista
+    internal static let cardOwnerTwo = Strings.tr("Localizable", "HomeApp.cardOwnerTwo", fallback: "Amado Batista")
+    /// We could not load your cards right now.
+    internal static let cardsLoadFailed = Strings.tr("Localizable", "HomeApp.cardsLoadFailed", fallback: "We could not load your cards right now.")
     /// Change the email used for notifications and contact.
     internal static let editEmailDescription = Strings.tr("Localizable", "HomeApp.editEmailDescription", fallback: "Change the email used for notifications and contact.")
     /// Enter email
@@ -133,8 +139,6 @@ internal enum Strings {
     internal static let editPhonePlaceholder = Strings.tr("Localizable", "HomeApp.editPhonePlaceholder", fallback: "Enter phone number")
     /// Edit phone
     internal static let editPhoneTitle = Strings.tr("Localizable", "HomeApp.editPhoneTitle", fallback: "Edit phone")
-    /// We could not load your cards right now.
-    internal static let cardsLoadFailed = Strings.tr("Localizable", "HomeApp.cardsLoadFailed", fallback: "We could not load your cards right now.")
     /// The simulated payments service returned an empty response.
     internal static let emptyDescription = Strings.tr("Localizable", "HomeApp.emptyDescription", fallback: "The simulated payments service returned an empty response.")
     /// We couldn't load your information. Please check your connection and try again.
@@ -147,14 +151,8 @@ internal enum Strings {
     internal static let learnMore = Strings.tr("Localizable", "HomeApp.learnMore", fallback: "Learn More")
     /// Logout
     internal static let logout = Strings.tr("Localizable", "HomeApp.logout", fallback: "Logout")
-    /// Jorge Henrique
-    internal static let cardOwnerOne = Strings.tr("Localizable", "HomeApp.cardOwnerOne", fallback: "Jorge Henrique")
-    /// Amado Batista
-    internal static let cardOwnerTwo = Strings.tr("Localizable", "HomeApp.cardOwnerTwo", fallback: "Amado Batista")
     /// MASTERCARD
     internal static let mastercardBrand = Strings.tr("Localizable", "HomeApp.mastercardBrand", fallback: "MASTERCARD")
-    /// VISA
-    internal static let visaBrand = Strings.tr("Localizable", "HomeApp.visaBrand", fallback: "VISA")
     /// Top category: Restaurants 🍔
     internal static let monthlySpendingCaption = Strings.tr("Localizable", "HomeApp.monthlySpendingCaption", fallback: "Top category: Restaurants 🍔")
     /// Monthly Spending
@@ -187,6 +185,8 @@ internal enum Strings {
     internal static let tryLater = Strings.tr("Localizable", "HomeApp.tryLater", fallback: "Try later")
     /// Version 0.00.1
     internal static let version = Strings.tr("Localizable", "HomeApp.version", fallback: "Version 0.00.1")
+    /// VISA
+    internal static let visaBrand = Strings.tr("Localizable", "HomeApp.visaBrand", fallback: "VISA")
     /// Blake!
     internal static let welcomeName = Strings.tr("Localizable", "HomeApp.welcomeName", fallback: "Blake!")
     /// Welcome, 
@@ -271,22 +271,30 @@ internal enum Strings {
     internal static let feedbackPlaceholder = Strings.tr("Localizable", "Profile.feedbackPlaceholder", fallback: "Write your feedback here...")
     /// Feedback
     internal static let feedbackTitle = Strings.tr("Localizable", "Profile.feedbackTitle", fallback: "Feedback")
+    /// General
+    internal static let generalSection = Strings.tr("Localizable", "Profile.generalSection", fallback: "General")
     /// This legal page keeps the profile flow realistic while remaining fully local to the app.
     internal static let legalDescription = Strings.tr("Localizable", "Profile.legalDescription", fallback: "This legal page keeps the profile flow realistic while remaining fully local to the app.")
     /// Logout
     internal static let logout = Strings.tr("Localizable", "Profile.logout", fallback: "Logout")
     /// This logout action keeps the profile flow realistic while remaining fully local to the app.
     internal static let logoutDescription = Strings.tr("Localizable", "Profile.logoutDescription", fallback: "This logout action keeps the profile flow realistic while remaining fully local to the app.")
+    /// Notifications
+    internal static let notificationsSection = Strings.tr("Localizable", "Profile.notificationsSection", fallback: "Notifications")
     /// (33) 9908-3213
     internal static let phone = Strings.tr("Localizable", "Profile.phone", fallback: "(33) 9908-3213")
     /// @2025 Powered by Blake
     internal static let poweredBy = Strings.tr("Localizable", "Profile.poweredBy", fallback: "@2025 Powered by Blake")
     /// Privacy Policy
     internal static let privacyPolicy = Strings.tr("Localizable", "Profile.privacyPolicy", fallback: "Privacy Policy")
+    /// Push notifications
+    internal static let pushNotifications = Strings.tr("Localizable", "Profile.pushNotifications", fallback: "Push notifications")
     /// Save
     internal static let save = Strings.tr("Localizable", "Profile.save", fallback: "Save")
     /// Send feedback
     internal static let sendFeedback = Strings.tr("Localizable", "Profile.sendFeedback", fallback: "Send feedback")
+    /// SMS notifications
+    internal static let smsNotifications = Strings.tr("Localizable", "Profile.smsNotifications", fallback: "SMS notifications")
     /// Account terms - Privacy Policy
     internal static let terms = Strings.tr("Localizable", "Profile.terms", fallback: "Account terms - Privacy Policy")
     /// We couldn't update your profile. Please try again.
@@ -303,6 +311,8 @@ internal enum Strings {
     internal static let moreSubtitle = Strings.tr("Localizable", "QuickActions.moreSubtitle", fallback: "All services")
     /// More
     internal static let moreTitle = Strings.tr("Localizable", "QuickActions.moreTitle", fallback: "More")
+    /// Pay bills
+    internal static let paySubtitle = Strings.tr("Localizable", "QuickActions.paySubtitle", fallback: "Pay bills")
     /// Pay
     internal static let payTitle = Strings.tr("Localizable", "QuickActions.payTitle", fallback: "Pay")
     /// Receive money
@@ -313,6 +323,8 @@ internal enum Strings {
     internal static let sectionTitle = Strings.tr("Localizable", "QuickActions.sectionTitle", fallback: "What would you like to do ?")
     /// Send
     internal static let sendTitle = Strings.tr("Localizable", "QuickActions.sendTitle", fallback: "Send")
+    /// Add funds
+    internal static let topUpSubtitle = Strings.tr("Localizable", "QuickActions.topUpSubtitle", fallback: "Add funds")
     /// Top up
     internal static let topUpTitle = Strings.tr("Localizable", "QuickActions.topUpTitle", fallback: "Top up")
     /// Send money
@@ -400,6 +412,12 @@ internal enum Strings {
     }
     /// Confirm Transfer
     internal static let confirmTransfer = Strings.tr("Localizable", "TransferPin.confirmTransfer", fallback: "Confirm Transfer")
+    /// Face ID authentication failed. Try again.
+    internal static let faceIDFailed = Strings.tr("Localizable", "TransferPin.faceIDFailed", fallback: "Face ID authentication failed. Try again.")
+    /// Authenticate to confirm this transfer.
+    internal static let faceIDReason = Strings.tr("Localizable", "TransferPin.faceIDReason", fallback: "Authenticate to confirm this transfer.")
+    /// Face ID is not available on this device.
+    internal static let faceIDUnavailable = Strings.tr("Localizable", "TransferPin.faceIDUnavailable", fallback: "Face ID is not available on this device.")
     /// Incorrect PIN. Try again.
     internal static let incorrect = Strings.tr("Localizable", "TransferPin.incorrect", fallback: "Incorrect PIN. Try again.")
     /// Enter your 4-digit PIN to send
@@ -407,12 +425,6 @@ internal enum Strings {
     internal static let subtitle = Strings.tr("Localizable", "TransferPin.subtitle", fallback: "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.")
     /// Enter your PIN
     internal static let title = Strings.tr("Localizable", "TransferPin.title", fallback: "Enter your PIN")
-    /// Authenticate to confirm this transfer.
-    internal static let faceIDReason = Strings.tr("Localizable", "TransferPin.faceIDReason", fallback: "Authenticate to confirm this transfer.")
-    /// Face ID is not available on this device.
-    internal static let faceIDUnavailable = Strings.tr("Localizable", "TransferPin.faceIDUnavailable", fallback: "Face ID is not available on this device.")
-    /// Face ID authentication failed. Try again.
-    internal static let faceIDFailed = Strings.tr("Localizable", "TransferPin.faceIDFailed", fallback: "Face ID authentication failed. Try again.")
     /// Use Face ID
     internal static let useFaceID = Strings.tr("Localizable", "TransferPin.useFaceID", fallback: "Use Face ID")
   }

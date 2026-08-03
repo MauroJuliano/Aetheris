@@ -96,9 +96,10 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     private static func makeGeneralCells(for profile: ProfileData) -> [FormCellModel] {
-        makeGeneralCells(
-            title: "General",
-            profile: profile
+        FormCellModel.profileCells(
+            name: profile.name,
+            email: profile.email,
+            phone: profile.phone
         )
     }
 
@@ -119,29 +120,6 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     private static func makeNotificationCells(pushIsOn: Bool, smsIsOn: Bool) -> [FormCellModel] {
-        [
-            FormCellModel(
-                sectionTitle: "Notifications",
-                content: .init(
-                    kind: .pushNotifications,
-                    title: "Push notifications",
-                    icon: "message.badge",
-                    hasDivider: true,
-                    toggle: .init(isOn: pushIsOn),
-                    showsDisclosureIndicator: false
-                )
-            ),
-            FormCellModel(
-                sectionTitle: nil,
-                content: .init(
-                    kind: .smsNotifications,
-                    title: "SMS notifications",
-                    icon: "text.bubble",
-                    hasDivider: false,
-                    toggle: .init(isOn: smsIsOn),
-                    showsDisclosureIndicator: false
-                )
-            )
-        ]
+        FormCellModel.notificationCells(pushIsOn: pushIsOn, smsIsOn: smsIsOn)
     }
 }

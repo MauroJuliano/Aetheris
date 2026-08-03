@@ -78,7 +78,9 @@
 "QuickActions.moreTitle" = "More";
 "QuickActions.moreSubtitle" = "All services";
 "QuickActions.payTitle" = "Pay";
+"QuickActions.paySubtitle" = "Pay bills";
 "QuickActions.topUpTitle" = "Top up";
+"QuickActions.topUpSubtitle" = "Add funds";
 
 "AllServices.title" = "All services";
 "AllServices.subtitle" = "Quick access to the main services available in the app.";
@@ -207,5 +209,9 @@
 "Profile.done" = "Done";
 "Profile.logoutDescription" = "This logout action keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.confirmLogout" = "Confirm logout";
+"Profile.generalSection" = "General";
+"Profile.notificationsSection" = "Notifications";
+"Profile.pushNotifications" = "Push notifications";
+"Profile.smsNotifications" = "SMS notifications";
 
 "ViewReport.loadingTitle" = "View Report";

@@ -137,8 +137,8 @@ extension HomeAppDashboard {
         quickActions: [
             .init(id: "transfer", title: Strings.QuickActions.sendTitle, subtitle: Strings.QuickActions.transferSubtitle, icon: "paperplane.fill", route: .sendMoney),
             .init(id: "request", title: Strings.QuickActions.requestTitle, subtitle: Strings.QuickActions.requestSubtitle, icon: "arrow.down", route: .requestMoney),
-            .init(id: "pay", title: Strings.QuickActions.payTitle, subtitle: "Pay bills", icon: "creditcard.fill", route: .payBills),
-            .init(id: "top_up", title: Strings.QuickActions.topUpTitle, subtitle: "Add funds", icon: "plus", route: .topUp)
+            .init(id: "pay", title: Strings.QuickActions.payTitle, subtitle: Strings.QuickActions.paySubtitle, icon: "creditcard.fill", route: .payBills),
+            .init(id: "top_up", title: Strings.QuickActions.topUpTitle, subtitle: Strings.QuickActions.topUpSubtitle, icon: "plus", route: .topUp)
         ],
         spendingThisMonth: .init(
             title: Strings.SpendingChart.title,

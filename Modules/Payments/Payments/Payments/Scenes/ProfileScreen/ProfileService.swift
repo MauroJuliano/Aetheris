@@ -113,7 +113,7 @@ extension ProfileDashboardResponse {
             joinedDate: "Joined August 17, 2025"
         ),
         general: .init(
-            title: "General",
+            title: Strings.Profile.generalSection,
             name: Strings.Profile.userName,
             email: Strings.Profile.email,
             phone: Strings.Profile.phone,
