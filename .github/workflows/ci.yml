@@ -111,6 +111,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Select Xcode
         uses: maxim-lobanov/setup-xcode@v1
@@ -124,4 +126,6 @@ jobs:
           path: TestResults.xcresult
 
       - name: Check code coverage
-        run: scripts/check_coverage.sh TestResults.xcresult 40
+        env:
+          BASE_REVISION: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: scripts/check_coverage.sh TestResults.xcresult "$BASE_REVISION" 80
