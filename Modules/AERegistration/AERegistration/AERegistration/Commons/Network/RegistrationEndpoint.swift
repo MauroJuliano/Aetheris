@@ -10,14 +10,23 @@ extension RegistrationEndpoint: Endpoint {
     var path: String {
         switch self {
         case .profile:
-            return "https://api.aetheris.app/registration/profile"
+            return "/registration/profile"
         case .password:
-            return "https://api.aetheris.app/registration/password"
+            return "/registration/password"
         }
     }
 
     var method: HTTPMethod {
         .post
+    }
+
+    var headers: [String: String] {
+        switch self {
+        case .profile:
+            return [:]
+        case .password:
+            return ["Cache-Control": "no-store"]
+        }
     }
 
     var body: Encodable? {
@@ -51,5 +60,7 @@ struct RegistrationProfileRequest: Codable, Equatable {
 }
 
 struct RegistrationPasswordRequest: Codable, Equatable {
+    // Confirmation is validated locally. A real backend receives this value over
+    // HTTPS and is responsible for salted, adaptive password hashing.
     let password: String
 }

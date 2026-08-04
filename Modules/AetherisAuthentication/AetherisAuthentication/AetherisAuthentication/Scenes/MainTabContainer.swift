@@ -42,18 +42,24 @@ struct MainTabContainer: View {
     
     @ViewBuilder
     private var content: some View {
-        switch selectedIndex {
-        case 0:
+        ZStack {
             paymentsFactory.make(entryPoint: .home, onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
-        case 1:
+                .opacity(selectedIndex == 0 ? 1 : 0)
+                .allowsHitTesting(selectedIndex == 0)
+                .accessibilityHidden(selectedIndex != 0)
+
             paymentsFactory.make(entryPoint: .card, onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
-        case 2:
+                .opacity(selectedIndex == 1 ? 1 : 0)
+                .allowsHitTesting(selectedIndex == 1)
+                .accessibilityHidden(selectedIndex != 1)
+
             paymentsFactory.make(entryPoint: .profile, onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
-        default:
-            EmptyView()
+                .opacity(selectedIndex == 2 ? 1 : 0)
+                .allowsHitTesting(selectedIndex == 2)
+                .accessibilityHidden(selectedIndex != 2)
         }
     }
     

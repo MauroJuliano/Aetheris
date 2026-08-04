@@ -1,17 +1,24 @@
+import Core
 import SwiftUI
 
 enum TransferPinFactory {
     @MainActor
     static func make(
-        receipt: TransferReceiptModel,
+        coreService: any HasCoreService,
+        draft: TransferDraft,
         onBack: @escaping () -> Void,
-        onValidPin: @escaping () -> Void
+        onAuthorized: @escaping (IdentityAuthorization) -> Void,
+        onValidationFailed: @escaping () -> Void
     ) -> AnyView {
         AnyView(
             TransferPinView(
-                viewModel: TransferPinViewModel(receipt: receipt),
+                viewModel: TransferPinViewModel(
+                    draft: draft,
+                    service: SendMoneyService(coreService: coreService)
+                ),
                 onBack: onBack,
-                onValidPin: onValidPin
+                onAuthorized: onAuthorized,
+                onValidationFailed: onValidationFailed
             )
         )
     }

@@ -1,8 +1,11 @@
 import Combine
+import Core
 import Foundation
 
 final class SendMoneyViewModel: ObservableObject {
     @Published private(set) var session: SendMoneySession?
+    @Published private(set) var isLoading = false
+    @Published private(set) var errorMessage: String?
 
     private let service: any SendMoneyServicing
 
@@ -11,57 +14,50 @@ final class SendMoneyViewModel: ObservableObject {
     }
 
     func load() async {
+        guard !isLoading else { return }
+        isLoading = true
+        errorMessage = nil
+        defer { isLoading = false }
+
         do {
             session = try await service.loadSession()
         } catch {
-            session = .mock
+            session = nil
+            errorMessage = Self.message(for: error)
         }
     }
 
     func canContinue(currentAmount: Decimal) -> Bool {
-        currentAmount > 0
+        session != nil && currentAmount > 0 && currentAmount <= walletBalance
     }
 
     func continueTapped(
         selectedBeneficiary: Beneficiary,
         currentAmount: Decimal,
         formattedAmount: String
-    ) -> TransferReceiptModel? {
+    ) -> TransferDraft? {
         guard canContinue(currentAmount: currentAmount) else { return nil }
-        return makeReceiptModel(
-            selectedBeneficiary: selectedBeneficiary,
-            formattedAmount: formattedAmount
-        )
-    }
-
-    func makeReceiptModel(
-        selectedBeneficiary: Beneficiary,
-        formattedAmount: String
-    ) -> TransferReceiptModel {
-        TransferReceiptModel(
-            amount: formattedAmount,
-            recipientName: selectedBeneficiary.name,
-            recipientEmail: selectedBeneficiary.pixKey,
-            accountName: session?.account.name ?? SendMoneySession.mock.account.name,
-            accountLastDigits: session?.account.lastDigits ?? SendMoneySession.mock.account.lastDigits,
-            date: formattedReceiptDate,
-            referenceId: receiptReferenceId
+        guard let session else { return nil }
+        return TransferDraft(
+            amount: currentAmount,
+            formattedAmount: formattedAmount,
+            currency: session.wallet.currency,
+            beneficiaryName: selectedBeneficiary.name,
+            beneficiaryIdentifier: selectedBeneficiary.pixKey,
+            accountName: session.account.name,
+            accountLastDigits: session.account.lastDigits
         )
     }
 
     var walletBalance: Decimal {
-        Decimal(session?.wallet.available ?? SendMoneySession.mock.wallet.available)
+        Decimal(session?.wallet.available ?? 0)
     }
 
-    private var formattedReceiptDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM d, yyyy 'at' h:mm a"
-        return formatter.string(from: Date())
-    }
-
-    private var receiptReferenceId: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd-HHmmss"
-        return "TRX\(formatter.string(from: Date()))"
+    private static func message(for error: Error) -> String {
+        if let coreError = error as? CoreServiceError,
+           let message = coreError.serverMessage {
+            return message
+        }
+        return Strings.HomeApp.genericErrorDescription
     }
 }

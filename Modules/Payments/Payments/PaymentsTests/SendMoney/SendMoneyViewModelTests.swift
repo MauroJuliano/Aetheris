@@ -18,24 +18,27 @@ struct SendMoneyViewModelTests {
     }
 
     @Test
-    func load_usesFallbackSession_whenServiceFails() async {
+    func load_exposesErrorWithoutUsingFallbackSession_whenServiceFails() async {
         let service = SendMoneyServiceSpy(result: .failure(URLError(.timedOut)))
         let sut = SendMoneyViewModel(service: service)
 
         await sut.load()
 
-        #expect(sut.session == .mock)
-        #expect(sut.walletBalance == Decimal(SendMoneySession.mock.wallet.available))
+        #expect(sut.session == nil)
+        #expect(sut.walletBalance == 0)
+        #expect(sut.errorMessage != nil)
     }
 
     @Test(arguments: [
         (Decimal(-1), false),
         (Decimal.zero, false),
         (Decimal(string: "0.01")!, true),
-        (Decimal(1_000), true)
+        (Decimal(1_000), true),
+        (Decimal(1_000.01), false)
     ])
-    func canContinue_validatesPositiveAmounts(amount: Decimal, expected: Bool) {
+    func canContinue_validatesPositiveAmountsAndAvailableBalance(amount: Decimal, expected: Bool) async {
         let sut = SendMoneyViewModel(service: SendMoneyServiceSpy(result: .success(.mock)))
+        await sut.load()
 
         #expect(sut.canContinue(currentAmount: amount) == expected)
     }
@@ -55,35 +58,29 @@ struct SendMoneyViewModelTests {
     }
 
     @Test
-    func continueTapped_mapsReceiptUsingLoadedSession() async throws {
+    func continueTapped_mapsDraftUsingLoadedSession() async throws {
         let service = SendMoneyServiceSpy(result: .success(makeSession(available: 500, accountName: "Savings")))
         let sut = SendMoneyViewModel(service: service)
         await sut.load()
 
-        let receipt = try #require(sut.continueTapped(
+        let draft = try #require(sut.continueTapped(
             selectedBeneficiary: .fixture,
             currentAmount: 125,
             formattedAmount: "$ 125.00"
         ))
 
-        #expect(receipt.amount == "$ 125.00")
-        #expect(receipt.recipientName == "Melissa")
-        #expect(receipt.recipientEmail == "melissa@example.com")
-        #expect(receipt.accountName == "Savings")
-        #expect(receipt.accountLastDigits == "9876")
-        #expect(!receipt.date.isEmpty)
-        #expect(receipt.referenceId.hasPrefix("TRX"))
+        #expect(draft.amount == 125)
+        #expect(draft.formattedAmount == "$ 125.00")
+        #expect(draft.beneficiaryName == "Melissa")
+        #expect(draft.beneficiaryIdentifier == "melissa@example.com")
+        #expect(draft.accountName == "Savings")
+        #expect(draft.accountLastDigits == "9876")
     }
 
     private func makeSession(available: Double, accountName: String) -> SendMoneySession {
         SendMoneySession(
             wallet: .init(currency: "USD", balance: 1_000, available: available),
-            account: .init(name: accountName, lastDigits: "9876"),
-            limits: .init(currency: "USD", dailyLimit: 2_500, remainingDailyLimit: 2_000, singleTransferLimit: 1_000),
-            fees: [],
-            securityMessage: "Secure",
-            processingMessage: "Processing",
-            suggestedAmount: 100
+            account: .init(name: accountName, lastDigits: "9876")
         )
     }
 }
@@ -110,5 +107,13 @@ private final class SendMoneyServiceSpy: SendMoneyServicing {
         case let .success(session): return session
         case let .failure(error): throw error
         }
+    }
+
+    func validate(pin: String) async throws -> IdentityAuthorization {
+        .init(token: "token", expiresAt: "later")
+    }
+
+    func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
+        .fixture
     }
 }

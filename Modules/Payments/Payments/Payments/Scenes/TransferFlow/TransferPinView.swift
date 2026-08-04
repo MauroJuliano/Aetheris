@@ -4,8 +4,9 @@ import SwiftUI
 struct TransferPinView: View {
     @StateObject var viewModel: TransferPinViewModel
     let onBack: () -> Void
-    let onValidPin: () -> Void
-    @State private var showBiometricAlert = false
+    let onAuthorized: (IdentityAuthorization) -> Void
+    let onValidationFailed: () -> Void
+    @State private var showValidationError = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -21,7 +22,10 @@ struct TransferPinView: View {
                         .font(AppTypography.heroTitle)
                         .foregroundStyle(Color.textPrimary)
 
-                    Text(Strings.TransferPin.subtitle)
+                    Text(Strings.TransferPin.subtitle(
+                        viewModel.draft.formattedAmount,
+                        viewModel.draft.beneficiaryName
+                    ))
                         .font(AppTypography.button)
                         .foregroundStyle(Color.textSecondaryColor)
                         .multilineTextAlignment(.center)
@@ -30,27 +34,11 @@ struct TransferPinView: View {
 
                 pinDots
 
-                if viewModel.isError {
-                    VStack(spacing: AppSpacing.xxxSmall) {
-                        Text(Strings.TransferPin.incorrect)
-                            .font(AppTypography.callout.weight(.semibold))
-                            .foregroundStyle(Color.error)
-
-                        Text(Strings.TransferPin.attempts(viewModel.attemptsLeft))
-                            .font(AppTypography.cellCaption)
-                            .foregroundStyle(Color.textSecondaryColor)
-                    }
+                if viewModel.isAuthenticating {
+                    ProgressView()
+                        .tint(Color.brandPrimaryColor)
+                        .accessibilityIdentifier("transfer.pinLoading")
                 }
-
-                Button {
-                    viewModel.authenticateWithFaceID(onValidPin: onValidPin)
-                } label: {
-                    Label(Strings.TransferPin.useFaceID, systemImage: "faceid")
-                        .font(AppTypography.onboardingBody.weight(.semibold))
-                        .foregroundStyle(Color.brandPrimaryColor)
-                }
-                .padding(.top, AppSpacing.xxxSmall)
-                .disabled(viewModel.isLockedOut || !viewModel.canUseFaceID)
             }
 
             Spacer()
@@ -60,18 +48,26 @@ struct TransferPinView: View {
         }
         .padding(.horizontal)
         .appScreenBackground()
-        .onChange(of: viewModel.biometricErrorMessage) { _, newValue in
-            showBiometricAlert = newValue != nil
+        .onChange(of: viewModel.validationErrorMessage) { _, newValue in
+            showValidationError = newValue != nil
         }
-        .alert(
-            Strings.TransferPin.useFaceID,
-            isPresented: $showBiometricAlert
-        ) {
-            Button(Strings.Common.tryAgain, role: .cancel) {
-                viewModel.reset()
-            }
-        } message: {
-            Text(viewModel.biometricErrorMessage ?? Strings.TransferPin.faceIDUnavailable)
+        .sheet(isPresented: $showValidationError, onDismiss: {
+            guard viewModel.validationErrorMessage != nil else { return }
+            viewModel.clearError()
+            onValidationFailed()
+        }) {
+            ActionErrorSheet(
+                title: Strings.TransferPin.validationErrorTitle,
+                description: viewModel.validationErrorMessage ?? Strings.TransferPin.validationErrorDescription,
+                primaryButtonTitle: Strings.Common.close,
+                secondaryButtonTitle: nil,
+                onPrimaryAction: {
+                    showValidationError = false
+                },
+                onSecondaryAction: nil
+            )
+            .presentationDragIndicator(.visible)
+            .accessibilityIdentifier("transfer.pinErrorSheet")
         }
         .accessibilityIdentifier("transfer.pinScreen")
     }
@@ -164,7 +160,7 @@ struct TransferPinView: View {
             }
         } else {
             Button {
-                viewModel.handleDigit(value, onValidPin: onValidPin)
+                viewModel.handleDigit(value, onAuthorized: onAuthorized)
             } label: {
                 VStack(spacing: AppSpacing.xxxSmall) {
                     Text(value)
@@ -180,7 +176,7 @@ struct TransferPinView: View {
                 .clipShape(Circle())
                 .appShadow(AppShadow.soft)
             }
-            .disabled(viewModel.isLockedOut)
+            .disabled(viewModel.isAuthenticating)
             .accessibilityIdentifier("pin.key.\(value)")
         }
     }

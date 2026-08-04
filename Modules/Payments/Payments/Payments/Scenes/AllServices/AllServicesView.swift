@@ -15,7 +15,7 @@ struct AllServicesView: View {
             if viewModel.isLoading {
                 AllServicesSkeleton()
             } else if let errorMessage = viewModel.errorMessage {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.HomeApp.genericErrorTitle,
                     description: errorMessage,
                     primaryButtonTitle: Strings.Common.tryAgain,

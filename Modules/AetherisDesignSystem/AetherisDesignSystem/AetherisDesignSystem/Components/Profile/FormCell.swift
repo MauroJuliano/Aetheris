@@ -81,22 +81,28 @@ public struct FormCellModel: Identifiable {
                                      showsDisclosureIndicator: true))
     ]
     
-    public static let notifications: [FormCellModel] = [
-        FormCellModel(sectionTitle: Strings.Profile.notificationsSection,
+    public static let notifications = notificationCells(pushIsOn: true, smsIsOn: true)
+
+    public static func notificationCells(
+        pushIsOn: Bool,
+        smsIsOn: Bool
+    ) -> [FormCellModel] {
+        [FormCellModel(sectionTitle: Strings.Profile.notificationsSection,
                       content: .init(kind: .pushNotifications,
                                      title: Strings.Profile.pushNotifications,
                                      icon: "message.badge",
                                      hasDivider: true,
-                                     toggle: .init(isOn: true),
+                                     toggle: .init(isOn: pushIsOn),
                                      showsDisclosureIndicator: false)),
         FormCellModel(sectionTitle: nil,
                       content: .init(kind: .smsNotifications,
                                      title: Strings.Profile.smsNotifications,
                                      icon: "text.bubble",
                                      hasDivider: false,
-                                     toggle: .init(isOn: true),
+                                     toggle: .init(isOn: smsIsOn),
                                      showsDisclosureIndicator: false))
-    ]
+        ]
+    }
 
     public static func profileCells(
         name: String,

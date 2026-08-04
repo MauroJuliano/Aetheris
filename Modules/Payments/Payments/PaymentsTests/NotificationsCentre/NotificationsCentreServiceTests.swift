@@ -41,7 +41,7 @@ struct NotificationsCentreServiceTests {
         #expect(icons == ["bell", "wrench.and.screwdriver", "calendar", "gearshape"])
         #expect(response.notifications[0].section == Strings.Notifications.sectionToday)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/notifications", method: .get)
+            .init(path: "/payments/notifications", method: .get)
         ])
     }
 

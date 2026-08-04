@@ -16,7 +16,7 @@ public struct Recipients: View {
                 HStack {
                     Text(Strings.Recipients.title)
                         .foregroundStyle(Color.textPrimary)
-                        .font(AppFont.roboto(.medium, size: 20))
+                        .font(.system(size: 20, weight: .medium))
                     
                     Spacer()
                 }

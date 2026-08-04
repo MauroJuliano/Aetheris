@@ -51,6 +51,8 @@ final class ConfirmPasswordViewModel: ObservableObject {
             )
             if !succeeded {
                 submissionError = .invalidResponse
+            } else {
+                draft.clearPasswords()
             }
             return succeeded
         } catch {

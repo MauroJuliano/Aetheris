@@ -23,7 +23,7 @@ private enum InsuranceOnboardingEndpoint {
 
 extension InsuranceOnboardingEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/insurance/benefits"
+        "/payments/insurance/benefits"
     }
 
     var method: HTTPMethod { .get }

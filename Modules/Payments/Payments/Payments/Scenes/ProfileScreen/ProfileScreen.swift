@@ -15,12 +15,22 @@ struct ProfileScreen: View {
         NavigationStack(path: $path) {
             ZStack {
                 ScrollView(showsIndicators: false) {
-                    VStack {
+                    VStack(spacing: AppSpacing.medium) {
                         UserView(
                             name: viewModel.profile.name,
                             imageName: viewModel.profile.avatarName,
                             joinedDate: viewModel.profile.joinedDate
                         )
+
+                        if viewModel.hasLoadingError {
+                            ProfileLoadErrorView(
+                                isRetrying: viewModel.isRetrying,
+                                onRetry: {
+                                    Task { await viewModel.retry() }
+                                }
+                            )
+                            .transition(.move(edge: .top).combined(with: .opacity))
+                        }
                         
                         FormView(cells: viewModel.generalCells) { cell in
                             switch cell.content.kind {
@@ -83,10 +93,10 @@ struct ProfileScreen: View {
                         .padding(.bottom, AppSpacing.bottomBarClearance)
                     }
                 }
-                .opacity(viewModel.isLoading ? 0 : 1)
+                .opacity(viewModel.isInitialLoading ? 0 : 1)
 
                 ProfileScreenSkeleton()
-                    .opacity(viewModel.isLoading ? 1 : 0)
+                    .opacity(viewModel.isInitialLoading ? 1 : 0)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .appScreenBackground()
@@ -128,6 +138,7 @@ struct ProfileScreen: View {
                     ProfileLogoutView()
                 }
             }
+            .animation(.easeInOut(duration: 0.25), value: viewModel.hasLoadingError)
         }
         .onAppear {
             syncTabBarVisibility()

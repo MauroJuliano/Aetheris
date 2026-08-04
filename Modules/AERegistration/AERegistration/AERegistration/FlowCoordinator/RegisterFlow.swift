@@ -19,13 +19,17 @@ final class RegistrationDraft: ObservableObject {
     @Published var password = ""
     @Published var confirmPassword = ""
 
+    func clearPasswords() {
+        password = ""
+        confirmPassword = ""
+    }
+
     func reset() {
         sin = ""
         mothersName = ""
         userName = ""
         birthdate = ""
-        password = ""
-        confirmPassword = ""
+        clearPasswords()
     }
 }
 

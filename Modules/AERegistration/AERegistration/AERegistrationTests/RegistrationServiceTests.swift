@@ -20,7 +20,7 @@ struct RegistrationServiceTests {
 
         #expect(result)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/registration/profile", method: .post)
+            .init(path: "/registration/profile", method: .post)
         ])
     }
 
@@ -33,7 +33,11 @@ struct RegistrationServiceTests {
 
         #expect(result)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/registration/password", method: .post)
+            .init(
+                path: "/registration/password",
+                method: .post,
+                headers: ["Cache-Control": "no-store"]
+            )
         ])
     }
 

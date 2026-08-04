@@ -47,6 +47,19 @@ struct HomeAppViewModelTests {
     }
 
     @Test
+    func loadIfNeeded_loadsOnlyOnceAcrossRepeatedAppearances() async {
+        let service = HomeAppServiceSpy(result: .success(.mock))
+        let sut = makeSUT(service: service)
+
+        await sut.loadIfNeeded()
+        await sut.loadIfNeeded()
+
+        #expect(service.loadCalls == 1)
+        #expect(!sut.isLoading)
+        #expect(sut.cards.count == 3)
+    }
+
+    @Test
     func load_mapsRecipientFieldsAndPreservesValidIdentifier() async throws {
         let recipientID = try #require(UUID(uuidString: "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA"))
         let dashboard = makeDashboard(

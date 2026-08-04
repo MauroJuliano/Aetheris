@@ -15,7 +15,7 @@ struct BeneficiaryListServiceTests {
         #expect(response.beneficiaries.count == BeneficiaryFixtures.defaults.count)
         #expect(response.beneficiaries.first?.name == "Melissa")
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/beneficiaries/recent", method: .get)
+            .init(path: "/payments/beneficiaries/recent", method: .get)
         ])
     }
 

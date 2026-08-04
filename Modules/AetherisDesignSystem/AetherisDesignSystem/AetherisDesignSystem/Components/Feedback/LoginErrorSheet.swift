@@ -4,17 +4,17 @@ public struct ActionErrorSheet: View {
     public let title: String
     public let description: String
     public let primaryButtonTitle: String
-    public let secondaryButtonTitle: String
+    public let secondaryButtonTitle: String?
     public let onPrimaryAction: () -> Void
-    public let onSecondaryAction: () -> Void
+    public let onSecondaryAction: (() -> Void)?
 
     public init(
         title: String,
         description: String,
         primaryButtonTitle: String,
-        secondaryButtonTitle: String,
+        secondaryButtonTitle: String? = nil,
         onPrimaryAction: @escaping () -> Void,
-        onSecondaryAction: @escaping () -> Void
+        onSecondaryAction: (() -> Void)? = nil
     ) {
         self.title = title
         self.description = description
@@ -48,14 +48,16 @@ public struct ActionErrorSheet: View {
 
             PrimaryButton(title: primaryButtonTitle, action: onPrimaryAction)
 
-            Button(action: onSecondaryAction) {
-                Text(secondaryButtonTitle)
-                    .font(AppTypography.body)
-                    .foregroundStyle(Color.brandPrimaryColor)
+            if let secondaryButtonTitle, let onSecondaryAction {
+                Button(action: onSecondaryAction) {
+                    Text(secondaryButtonTitle)
+                        .font(AppTypography.body)
+                        .foregroundStyle(Color.brandPrimaryColor)
+                }
             }
         }
         .padding(AppSpacing.xLarge)
-        .presentationDetents([.height(360)])
+        .presentationDetents([.height(secondaryButtonTitle == nil ? 320 : 360)])
         .presentationDragIndicator(.visible)
         .presentationBackground(Color.backgroundColorA)
     }

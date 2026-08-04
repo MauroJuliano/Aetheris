@@ -8,7 +8,7 @@ enum SendMoneyFactory {
         selectedBeneficiary: Binding<Beneficiary>,
         onBackAction: (() -> Void)? = nil,
         onChangeBeneficiary: @escaping () -> Void = {},
-        onContinue: @escaping (TransferReceiptModel) -> Void = { _ in }
+        onContinue: @escaping (TransferDraft) -> Void = { _ in }
     ) -> SendMoney {
         SendMoney(
             viewModel: SendMoneyViewModel(service: SendMoneyService(coreService: coreService)),

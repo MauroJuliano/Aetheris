@@ -3,16 +3,14 @@
 "SendMoney.title" = "Transfer";
 "SendMoney.continueButton" = "Continue";
 "TransferPin.title" = "Enter your PIN";
-"TransferPin.subtitle" = "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.";
-"TransferPin.incorrect" = "Incorrect PIN. Try again.";
-"TransferPin.attempts" = "You have %d attempts left.";
-"TransferPin.faceIDReason" = "Authenticate to confirm this transfer.";
-"TransferPin.faceIDUnavailable" = "Face ID is not available on this device.";
-"TransferPin.faceIDFailed" = "Face ID authentication failed. Try again.";
-"TransferPin.useFaceID" = "Use Face ID";
+"TransferPin.subtitle" = "Enter your 4-digit PIN to send\n%1$@ to %2$@.";
 "TransferPin.confirmTransfer" = "Confirm Transfer";
+"TransferPin.validationErrorTitle" = "We couldn't confirm your identity";
+"TransferPin.validationErrorDescription" = "The PIN could not be validated. Please review it and start the transfer again.";
 "TransferProcessing.title" = "Processing transfer...";
 "TransferProcessing.subtitle" = "Please don't close the app\nor go back.";
+"TransferProcessing.errorTitle" = "We couldn't complete your transfer";
+"TransferProcessing.errorDescription" = "No money was deducted. You can try again now or return to the transfer later.";
 "TransferSuccess.title" = "Transfer successful!";
 "TransferSuccess.subtitle" = "Your money has been sent successfully.";
 "TransferSuccess.amount" = "Amount";
@@ -78,7 +76,9 @@
 "QuickActions.moreTitle" = "More";
 "QuickActions.moreSubtitle" = "All services";
 "QuickActions.payTitle" = "Pay";
+"QuickActions.paySubtitle" = "Pay bills";
 "QuickActions.topUpTitle" = "Top up";
+"QuickActions.topUpSubtitle" = "Add funds";
 
 "AllServices.title" = "All services";
 "AllServices.subtitle" = "Quick access to the main services available in the app.";
@@ -106,6 +106,7 @@
 
 "Common.tryAgain" = "Try again";
 "Common.back" = "Back";
+"Common.close" = "Close";
 "Profile.updateErrorTitle" = "Unable to save changes";
 "Profile.updateErrorDescription" = "We couldn't update your profile. Please try again.";
 
@@ -207,5 +208,12 @@
 "Profile.done" = "Done";
 "Profile.logoutDescription" = "This logout action keeps the profile flow realistic while remaining fully local to the app.";
 "Profile.confirmLogout" = "Confirm logout";
+"Profile.generalSection" = "General";
+"Profile.notificationsSection" = "Notifications";
+"Profile.pushNotifications" = "Push notifications";
+"Profile.smsNotifications" = "SMS notifications";
+"Profile.refreshErrorTitle" = "Unable to refresh profile";
+"Profile.refreshErrorDescription" = "Some information may be outdated.";
+"Profile.retry" = "Retry";
 
 "ViewReport.loadingTitle" = "View Report";

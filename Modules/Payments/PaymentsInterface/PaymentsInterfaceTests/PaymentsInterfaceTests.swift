@@ -9,9 +9,14 @@ import Testing
 @testable import PaymentsInterface
 
 struct PaymentsInterfaceTests {
+    @Test
+    func tabBarVisibilityStore_startsVisibleAndAcceptsVisibilityChanges() {
+        let sut = TabBarVisibilityStore()
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+        #expect(sut.isVisible == true)
+
+        sut.isVisible = false
+
+        #expect(sut.isVisible == false)
     }
-
 }

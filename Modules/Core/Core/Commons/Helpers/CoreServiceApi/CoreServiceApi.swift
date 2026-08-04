@@ -12,10 +12,33 @@ public struct HTTPErrorContext: Equatable, Sendable {
     }
 }
 
+public enum NetworkError: Equatable, Sendable {
+    case timedOut
+    case noConnection
+    case cancelled
+    case connectionLost
+    case other(code: Int)
+}
+
+public struct DecodingErrorContext: Equatable, Sendable {
+    public let type: String
+    public let codingPath: String
+    public let description: String
+
+    public init(type: String, codingPath: String, description: String) {
+        self.type = type
+        self.codingPath = codingPath
+        self.description = description
+    }
+}
+
 public enum CoreServiceError: Error, Equatable {
     case invalidData
     case invalidResponse
     case invalidUrl
+    case encoding
+    case network(NetworkError)
+    case decoding(DecodingErrorContext)
     case badRequest(HTTPErrorContext)
     case unauthorized(HTTPErrorContext)
     case forbidden(HTTPErrorContext)
@@ -34,7 +57,7 @@ public extension CoreServiceError {
              let .serverError(context),
              let .httpError(context):
             return context
-        case .invalidData, .invalidResponse, .invalidUrl:
+        case .invalidData, .invalidResponse, .invalidUrl, .encoding, .network, .decoding:
             return nil
         }
     }
@@ -59,24 +82,54 @@ public extension HasCoreService {
 }
 
 public final class CoreServiceApi: HasCoreService {
+    private let configuration: APIConfiguration
     private let session: URLSession
 
-    public init(session: URLSession = .shared) {
-        self.session = session
+    public init(
+        configuration: APIConfiguration = .demo,
+        session: URLSession? = nil
+    ) {
+        self.configuration = configuration
+        self.session = session ?? configuration.makeSession()
     }
 
     public func execute<T>(_ endpoint: any Endpoint) async throws -> T where T : Decodable {
-        guard let url = URL(string: endpoint.path) else { throw CoreServiceError.invalidUrl }
+        guard configuration.baseURL.scheme?.lowercased() == "https",
+              endpoint.path.hasPrefix("/"),
+              let url = URL(string: endpoint.path, relativeTo: configuration.baseURL)?.absoluteURL else {
+            throw CoreServiceError.invalidUrl
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        if let body = endpoint.body {
-            request.httpBody = try JSONEncoder().encode(AnyEncodable(body))
+
+        configuration.defaultHeaders.forEach {
+            request.setValue($0.value, forHTTPHeaderField: $0.key)
+        }
+        endpoint.headers.forEach {
+            request.setValue($0.value, forHTTPHeaderField: $0.key)
         }
         
-        let (data, response) = try await session.data(for: request)
+        if let body = endpoint.body {
+            if request.value(forHTTPHeaderField: "Content-Type") == nil {
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+            do {
+                request.httpBody = try JSONEncoder().encode(AnyEncodable(body))
+            } catch {
+                throw CoreServiceError.encoding
+            }
+        }
+
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch let error as URLError {
+            throw CoreServiceError.network(Self.networkError(for: error))
+        } catch {
+            throw CoreServiceError.invalidResponse
+        }
         
         guard let response = response as? HTTPURLResponse else {
             throw CoreServiceError.invalidResponse
@@ -98,8 +151,53 @@ public final class CoreServiceApi: HasCoreService {
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw CoreServiceError.invalidData
+            throw CoreServiceError.decoding(Self.decodingContext(for: error, type: T.self))
         }
+    }
+
+    private static func networkError(for error: URLError) -> NetworkError {
+        switch error.code {
+        case .timedOut:
+            return .timedOut
+        case .notConnectedToInternet:
+            return .noConnection
+        case .cancelled:
+            return .cancelled
+        case .networkConnectionLost:
+            return .connectionLost
+        default:
+            return .other(code: error.errorCode)
+        }
+    }
+
+    private static func decodingContext<T>(for error: Error, type: T.Type) -> DecodingErrorContext {
+        let context: DecodingError.Context?
+        let description: String
+
+        switch error {
+        case let DecodingError.dataCorrupted(value):
+            context = value
+            description = value.debugDescription
+        case let DecodingError.keyNotFound(key, value):
+            context = value
+            description = "Missing key: \(key.stringValue). \(value.debugDescription)"
+        case let DecodingError.typeMismatch(_, value):
+            context = value
+            description = value.debugDescription
+        case let DecodingError.valueNotFound(_, value):
+            context = value
+            description = value.debugDescription
+        default:
+            context = nil
+            description = String(describing: error)
+        }
+
+        let codingPath = context?.codingPath.map(\.stringValue).joined(separator: ".") ?? ""
+        return DecodingErrorContext(
+            type: String(reflecting: type),
+            codingPath: codingPath,
+            description: description
+        )
     }
 
     private static func serviceError(statusCode: Int, data: Data) -> CoreServiceError {

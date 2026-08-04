@@ -20,7 +20,7 @@ struct TransactionHistoryView: View {
             if viewModel.isLoading {
                 TransactionHistorySkeleton()
             } else if let errorMessage = viewModel.errorMessage {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.TransactionHistory.unavailableTitle,
                     description: errorMessage,
                     primaryButtonTitle: Strings.Common.tryAgain,

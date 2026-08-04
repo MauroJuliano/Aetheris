@@ -15,14 +15,16 @@ struct SendMoneyNavigationStateTests {
 
     @Test
     func successfulTransfer_replacesProcessingWithSuccess() {
+        let draft = TransferDraft.fixture
+        let submission = TransferSubmission.fixture
         let receipt = TransferReceiptModel.fixture
         var sut = SendMoneyNavigationState()
-        sut.push(.pin(receipt))
-        sut.push(.processing(receipt))
+        sut.push(.pin(draft))
+        sut.push(.processing(submission))
 
         sut.replaceCurrent(with: .success(receipt))
 
-        #expect(sut.path == [.pin(receipt), .success(receipt)])
+        #expect(sut.path == [.pin(draft), .success(receipt)])
     }
 
     @Test
@@ -39,8 +41,8 @@ struct SendMoneyNavigationStateTests {
     func newTransfer_resetsNavigationToRoot() {
         let receipt = TransferReceiptModel.fixture
         var sut = SendMoneyNavigationState()
-        sut.push(.pin(receipt))
-        sut.push(.processing(receipt))
+        sut.push(.pin(.fixture))
+        sut.push(.processing(.fixture))
         sut.replaceCurrent(with: .success(receipt))
 
         sut.reset()

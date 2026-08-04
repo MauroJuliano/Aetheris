@@ -80,7 +80,7 @@ public struct NumericKeyboard: View {
                         .font(.system(size: 28, weight: .regular))
                 } else {
                     Text(key)
-                    .font(AppFont.roboto(.regular, size: 34))
+                        .font(.system(size: 34, weight: .regular, design: .monospaced))
                 }
             }
             .foregroundStyle(Color.brandPrimaryColor)

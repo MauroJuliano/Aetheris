@@ -22,7 +22,7 @@ struct HomeAppServiceTests {
         #expect(dashboard.spendingThisMonth.categories.count == 4)
         #expect(dashboard.notifications.unreadCount == 3)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/home/dashboard", method: .get)
+            .init(path: "/payments/home/dashboard", method: .get)
         ])
     }
 

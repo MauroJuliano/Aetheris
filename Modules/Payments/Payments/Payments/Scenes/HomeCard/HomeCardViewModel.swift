@@ -12,9 +12,16 @@ final class HomeCardViewModel: ObservableObject {
     @Published private(set) var quickActions: [CardOptions] = []
 
     private let service: any HomeCardServicing
+    private var hasLoaded = false
 
     init(service: any HomeCardServicing) {
         self.service = service
+    }
+
+    func loadIfNeeded() async {
+        guard !hasLoaded else { return }
+        hasLoaded = true
+        await load()
     }
 
     func load() async {

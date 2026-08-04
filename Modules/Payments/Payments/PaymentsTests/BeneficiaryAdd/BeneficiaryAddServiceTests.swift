@@ -19,7 +19,7 @@ struct BeneficiaryAddServiceTests {
         #expect(beneficiary.image == "melissa")
         #expect(beneficiary.hasDivider)
         #expect(coreService.calls == [
-            .init(path: "https://api.aetheris.app/payments/beneficiaries", method: .post)
+            .init(path: "/payments/beneficiaries", method: .post)
         ])
     }
 

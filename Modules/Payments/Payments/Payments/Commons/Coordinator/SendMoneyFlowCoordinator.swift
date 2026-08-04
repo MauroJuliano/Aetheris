@@ -4,8 +4,8 @@ import SwiftUI
 
 enum SendMoneyFlowRoute: Hashable {
     case beneficiaryList
-    case pin(TransferReceiptModel)
-    case processing(TransferReceiptModel)
+    case pin(TransferDraft)
+    case processing(TransferSubmission)
     case success(TransferReceiptModel)
 }
 
@@ -67,21 +67,33 @@ struct SendMoneyFlowCoordinator: View {
                     )
                     .navigationBarHidden(true)
 
-                case .pin(let receipt):
+                case .pin(let draft):
                     TransferPinFactory.make(
-                        receipt: receipt,
+                        coreService: coreService,
+                        draft: draft,
                         onBack: { popRoute() },
-                        onValidPin: {
-                            navigation.push(.processing(receipt))
+                        onAuthorized: { authorization in
+                            navigation.push(.processing(.init(
+                                draft: draft,
+                                authorization: authorization,
+                                idempotencyKey: UUID().uuidString
+                            )))
+                        },
+                        onValidationFailed: {
+                            navigation.reset()
                         }
                     )
                     .navigationBarHidden(true)
 
-                case .processing(let receipt):
+                case .processing(let submission):
                     TransferProcessingFactory.make(
-                        receipt: receipt,
-                        onCompleted: {
+                        coreService: coreService,
+                        submission: submission,
+                        onCompleted: { receipt in
                             replaceCurrentRoute(with: .success(receipt))
+                        },
+                        onTryLater: {
+                            navigation.reset()
                         }
                     )
                     .navigationBarHidden(true)
@@ -89,7 +101,10 @@ struct SendMoneyFlowCoordinator: View {
                 case .success(let receipt):
                     TransferSuccessFactory.make(
                         model: receipt,
-                        onBack: { popRoute() },
+                        onBack: {
+                            navigation.reset()
+                            onBackAction()
+                        },
                         onDone: {
                             navigation.reset()
                             onBackAction()

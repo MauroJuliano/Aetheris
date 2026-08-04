@@ -19,7 +19,7 @@ struct ViewReportFlowCoordinator: View {
             )
 
             if showsError {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.HomeApp.genericErrorTitle,
                     description: Strings.HomeApp.genericErrorDescription,
                     primaryButtonTitle: Strings.Common.tryAgain,

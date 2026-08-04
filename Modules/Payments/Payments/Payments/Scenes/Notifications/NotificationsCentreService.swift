@@ -23,7 +23,7 @@ private enum NotificationsEndpoint {
 
 extension NotificationsEndpoint: Endpoint {
     var path: String {
-        "https://api.aetheris.app/payments/notifications"
+        "/payments/notifications"
     }
 
     var method: HTTPMethod { .get }

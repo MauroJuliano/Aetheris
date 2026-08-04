@@ -17,7 +17,7 @@ struct NotificationsCentre: View {
             if viewModel.isLoading {
                 NotificationsCentreSkeleton()
             } else if let errorMessage = viewModel.errorMessage {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.NotificationsCentre.unavailableTitle,
                     description: errorMessage,
                     primaryButtonTitle: Strings.Common.tryAgain,
@@ -76,4 +76,3 @@ struct NotificationsCentre: View {
         .task { await viewModel.load() }
     }
 }
-

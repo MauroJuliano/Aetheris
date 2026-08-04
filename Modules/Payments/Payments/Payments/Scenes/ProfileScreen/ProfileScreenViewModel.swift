@@ -2,9 +2,16 @@ import AetherisDesignSystem
 import Combine
 import Foundation
 
+enum ProfileLoadingState: Equatable {
+    case initialLoading
+    case loaded
+    case refreshing
+    case refreshFailed
+}
+
 @MainActor
 final class ProfileScreenViewModel: ObservableObject {
-    @Published private(set) var isLoading = true
+    @Published private(set) var loadingState: ProfileLoadingState = .initialLoading
     @Published private(set) var profile: ProfileData
     @Published private(set) var generalCells: [FormCellModel]
     @Published private(set) var notificationCells: [FormCellModel]
@@ -12,6 +19,12 @@ final class ProfileScreenViewModel: ObservableObject {
 
     private let store: any ProfileStoring
     private let service: ProfileServicing
+
+    var isInitialLoading: Bool { loadingState == .initialLoading }
+    var isRetrying: Bool { loadingState == .refreshing }
+    var hasLoadingError: Bool {
+        loadingState == .refreshFailed || loadingState == .refreshing
+    }
 
     init(store: any ProfileStoring, service: ProfileServicing) {
         self.store = store
@@ -45,20 +58,28 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     func load() async {
+        guard loadingState == .initialLoading else { return }
+
         do {
             let response = try await service.loadProfile()
             apply(response)
+            loadingState = .loaded
         } catch {
-            profile = store.profile
-            generalCells = Self.makeGeneralCells(for: store.profile)
-            notificationCells = Self.makeNotificationCells(pushIsOn: false, smsIsOn: false)
-            footer = .init(
-                version: Strings.Profile.version,
-                poweredBy: Strings.Profile.poweredBy,
-                terms: Strings.Profile.terms
-            )
+            loadingState = .refreshFailed
         }
-        isLoading = false
+    }
+
+    func retry() async {
+        guard loadingState == .refreshFailed else { return }
+
+        loadingState = .refreshing
+        do {
+            let response = try await service.loadProfile()
+            apply(response)
+            loadingState = .loaded
+        } catch {
+            loadingState = .refreshFailed
+        }
     }
 
     private func update(_ updatedProfile: ProfileData) async -> Bool {
@@ -96,9 +117,10 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     private static func makeGeneralCells(for profile: ProfileData) -> [FormCellModel] {
-        makeGeneralCells(
-            title: "General",
-            profile: profile
+        FormCellModel.profileCells(
+            name: profile.name,
+            email: profile.email,
+            phone: profile.phone
         )
     }
 
@@ -119,29 +141,6 @@ final class ProfileScreenViewModel: ObservableObject {
     }
 
     private static func makeNotificationCells(pushIsOn: Bool, smsIsOn: Bool) -> [FormCellModel] {
-        [
-            FormCellModel(
-                sectionTitle: "Notifications",
-                content: .init(
-                    kind: .pushNotifications,
-                    title: "Push notifications",
-                    icon: "message.badge",
-                    hasDivider: true,
-                    toggle: .init(isOn: pushIsOn),
-                    showsDisclosureIndicator: false
-                )
-            ),
-            FormCellModel(
-                sectionTitle: nil,
-                content: .init(
-                    kind: .smsNotifications,
-                    title: "SMS notifications",
-                    icon: "text.bubble",
-                    hasDivider: false,
-                    toggle: .init(isOn: smsIsOn),
-                    showsDisclosureIndicator: false
-                )
-            )
-        ]
+        FormCellModel.notificationCells(pushIsOn: pushIsOn, smsIsOn: smsIsOn)
     }
 }
