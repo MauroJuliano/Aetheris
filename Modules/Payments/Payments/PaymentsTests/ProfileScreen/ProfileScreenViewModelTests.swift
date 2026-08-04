@@ -1,4 +1,5 @@
 import Foundation
+import Core
 import Testing
 @testable import Payments
 
@@ -104,9 +105,9 @@ struct ProfileScreenViewModelTests {
         let service = ProfileServiceSpy(updateResult: .success(response))
         let sut = ProfileScreenViewModel(store: store, service: service)
 
-        let succeeded = await sut.updateName("New Name")
+        let result = await sut.updateName("New Name")
 
-        #expect(succeeded)
+        #expect(result == .success)
         #expect(service.updateRequests == [
             .init(name: "New Name", email: "user@example.com", phone: "123")
         ])
@@ -120,9 +121,9 @@ struct ProfileScreenViewModelTests {
         let service = ProfileServiceSpy(updateResult: .success(.fixture(email: "new@example.com")))
         let sut = ProfileScreenViewModel(store: store, service: service)
 
-        let succeeded = await sut.updateEmail("new@example.com")
+        let result = await sut.updateEmail("new@example.com")
 
-        #expect(succeeded)
+        #expect(result == .success)
         #expect(service.updateRequests.first?.email == "new@example.com")
     }
 
@@ -132,9 +133,9 @@ struct ProfileScreenViewModelTests {
         let service = ProfileServiceSpy(updateResult: .success(.fixture(phone: "555")))
         let sut = ProfileScreenViewModel(store: store, service: service)
 
-        let succeeded = await sut.updatePhone("555")
+        let result = await sut.updatePhone("555")
 
-        #expect(succeeded)
+        #expect(result == .success)
         #expect(service.updateRequests.first?.phone == "555")
     }
 
@@ -144,12 +145,24 @@ struct ProfileScreenViewModelTests {
         let service = ProfileServiceSpy(updateResult: .failure(URLError(.notConnectedToInternet)))
         let sut = ProfileScreenViewModel(store: store, service: service)
 
-        let succeeded = await sut.updateName("Rejected")
+        let result = await sut.updateName("Rejected")
 
-        #expect(!succeeded)
+        #expect(result == .failure(message: Strings.Profile.updateErrorDescription))
         #expect(sut.profile.name == "Current")
         #expect(store.updatedProfiles.isEmpty)
         #expect(service.updateRequests.map(\.name) == ["Rejected"])
+    }
+
+    @Test
+    func update_exposesBackendMessage_whenServiceReturnsContext() async {
+        let context = HTTPErrorContext(statusCode: 400, message: "This email is already in use.")
+        let service = ProfileServiceSpy(updateResult: .failure(CoreServiceError.badRequest(context)))
+        let sut = ProfileScreenViewModel(store: ProfileStoreSpy(profile: .fixture()), service: service)
+
+        let result = await sut.updateEmail("existing@example.com")
+
+        #expect(result == .failure(message: "This email is already in use."))
+        #expect(sut.profile.email == "user@example.com")
     }
 }
 
