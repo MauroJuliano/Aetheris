@@ -6,19 +6,19 @@ struct ProfileEditFieldView: View {
     let description: String
     let initialValue: String
     let placeholder: String
-    let onSave: (String) async -> Bool
+    let onSave: (String) async -> ProfileUpdateResult
 
     @Environment(\.dismiss) private var dismiss
     @State private var draft: String
     @State private var isSaving = false
-    @State private var isShowingError = false
+    @State private var errorMessage: String?
 
     init(
         title: String,
         description: String,
         initialValue: String,
         placeholder: String,
-        onSave: @escaping (String) async -> Bool
+        onSave: @escaping (String) async -> ProfileUpdateResult
     ) {
         self.title = title
         self.description = description
@@ -74,6 +74,7 @@ struct ProfileEditFieldView: View {
                     }
                 }
                 .disabled(isSaving)
+                .accessibilityIdentifier("profile.edit.save")
                 .padding(.bottom)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -81,20 +82,28 @@ struct ProfileEditFieldView: View {
         .padding(.bottom)
         .appScreenBackground()
         .navigationBarHidden(true)
-        .sheet(isPresented: $isShowingError) {
+        .sheet(
+            isPresented: Binding(
+                get: { errorMessage != nil },
+                set: { isPresented in
+                    if !isPresented { errorMessage = nil }
+                }
+            )
+        ) {
             ActionErrorSheet(
                 title: Strings.Profile.updateErrorTitle,
-                description: Strings.Profile.updateErrorDescription,
+                description: errorMessage ?? Strings.Profile.updateErrorDescription,
                 primaryButtonTitle: Strings.Common.tryAgain,
                 secondaryButtonTitle: Strings.Common.back,
                 onPrimaryAction: {
-                    isShowingError = false
+                    errorMessage = nil
                     submit()
                 },
                 onSecondaryAction: {
-                    isShowingError = false
+                    errorMessage = nil
                 }
             )
+            .accessibilityIdentifier("profile.edit.errorSheet")
         }
     }
 
@@ -102,12 +111,13 @@ struct ProfileEditFieldView: View {
         guard !isSaving else { return }
         isSaving = true
         Task {
-            let succeeded = await onSave(draft)
+            let result = await onSave(draft)
             isSaving = false
-            if succeeded {
+            switch result {
+            case .success:
                 dismiss()
-            } else {
-                isShowingError = true
+            case let .failure(message):
+                errorMessage = message
             }
         }
     }
