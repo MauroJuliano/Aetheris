@@ -30,6 +30,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate main source branch
+        if: github.event_name == 'pull_request' && github.base_ref == 'main'
+        env:
+          HEAD_BRANCH: ${{ github.head_ref }}
+        run: |
+          if [[ "$HEAD_BRANCH" != "dev" ]]; then
+            echo "Pull requests to main must originate from dev."
+            exit 1
+          fi
+
       - name: Install SwiftLint
         run: brew install swiftlint
 
