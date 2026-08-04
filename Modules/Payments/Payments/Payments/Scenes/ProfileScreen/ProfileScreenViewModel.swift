@@ -1,5 +1,6 @@
 import AetherisDesignSystem
 import Combine
+import Core
 import Foundation
 
 enum ProfileLoadingState: Equatable {
@@ -7,6 +8,11 @@ enum ProfileLoadingState: Equatable {
     case loaded
     case refreshing
     case refreshFailed
+}
+
+enum ProfileUpdateResult: Equatable {
+    case success
+    case failure(message: String)
 }
 
 @MainActor
@@ -39,19 +45,19 @@ final class ProfileScreenViewModel: ObservableObject {
         )
     }
 
-    func updateName(_ name: String) async -> Bool {
+    func updateName(_ name: String) async -> ProfileUpdateResult {
         var updatedProfile = profile
         updatedProfile.name = name
         return await update(updatedProfile)
     }
 
-    func updateEmail(_ email: String) async -> Bool {
+    func updateEmail(_ email: String) async -> ProfileUpdateResult {
         var updatedProfile = profile
         updatedProfile.email = email
         return await update(updatedProfile)
     }
 
-    func updatePhone(_ phone: String) async -> Bool {
+    func updatePhone(_ phone: String) async -> ProfileUpdateResult {
         var updatedProfile = profile
         updatedProfile.phone = phone
         return await update(updatedProfile)
@@ -82,7 +88,7 @@ final class ProfileScreenViewModel: ObservableObject {
         }
     }
 
-    private func update(_ updatedProfile: ProfileData) async -> Bool {
+    private func update(_ updatedProfile: ProfileData) async -> ProfileUpdateResult {
         let request = UpdateProfileRequest(
             name: updatedProfile.name,
             email: updatedProfile.email,
@@ -92,9 +98,10 @@ final class ProfileScreenViewModel: ObservableObject {
         do {
             let response = try await service.updateProfile(request)
             apply(response)
-            return true
+            return .success
         } catch {
-            return false
+            let serverMessage = (error as? CoreServiceError)?.serverMessage
+            return .failure(message: serverMessage ?? Strings.Profile.updateErrorDescription)
         }
     }
 
