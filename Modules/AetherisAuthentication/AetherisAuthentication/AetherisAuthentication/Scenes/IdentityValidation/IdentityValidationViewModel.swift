@@ -1,24 +1,26 @@
+import AetherisAuthenticationInterface
+import AetherisDesignSystem
 import Core
 import Foundation
 import SwiftUI
 
 @MainActor
-final class TransferPinViewModel: ObservableObject {
+final class IdentityValidationViewModel: ObservableObject {
     @Published private(set) var pin = ""
     @Published private(set) var isAuthenticating = false
     @Published private(set) var validationErrorMessage: String?
 
-    let draft: TransferDraft
+    let content: IdentityValidationContent
     let pinLimit: Int
 
-    private let service: any SendMoneyServicing
+    private let service: any IdentityValidationServicing
 
     init(
-        draft: TransferDraft,
-        service: any SendMoneyServicing,
+        content: IdentityValidationContent,
+        service: any IdentityValidationServicing,
         pinLimit: Int = 4
     ) {
-        self.draft = draft
+        self.content = content
         self.service = service
         self.pinLimit = pinLimit
     }
@@ -33,7 +35,6 @@ final class TransferPinViewModel: ObservableObject {
     ) {
         guard pin.count < pinLimit, !isAuthenticating else { return }
         pin.append(digit)
-
         guard pin.count == pinLimit else { return }
         Task { await validate(onAuthorized: onAuthorized) }
     }
@@ -82,6 +83,6 @@ final class TransferPinViewModel: ObservableObject {
            let message = coreError.serverMessage {
             return message
         }
-        return Strings.TransferPin.validationErrorDescription
+        return Strings.IdentityValidation.errorDescription
     }
 }

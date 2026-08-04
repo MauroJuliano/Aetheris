@@ -12,7 +12,6 @@ enum HomeRoute: Hashable {
     case addBeneficiary
     case notifications
     case allServices
-    case insurance
     case viewReport
 }
 

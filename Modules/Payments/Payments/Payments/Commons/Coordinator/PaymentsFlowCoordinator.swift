@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Core
 import PaymentsInterface
 import SwiftUI
@@ -13,6 +14,7 @@ enum PaymentsFlowDestination: Equatable {
 struct PaymentsFlowCoordinator: View {
     let entryPoint: PaymentsEntryPoint
     let coreService: any HasCoreService
+    let identityValidation: any IdentityValidating
     let profileStore: ProfileStore
     let onFinished: () -> Void
 
@@ -38,6 +40,7 @@ struct PaymentsFlowCoordinator: View {
         case .home:
             HomeFlowCoordinator(
                 coreService: coreService,
+                identityValidation: identityValidation,
                 selectedBeneficiary: $selectedBeneficiary
             )
 
@@ -50,6 +53,7 @@ struct PaymentsFlowCoordinator: View {
         case .sendMoney:
             SendMoneyFlowCoordinator(
                 coreService: coreService,
+                identityValidation: identityValidation,
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: onFinished
             )

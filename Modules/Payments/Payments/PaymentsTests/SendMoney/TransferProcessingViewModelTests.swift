@@ -65,8 +65,6 @@ private final class SubmissionServiceSpy: SendMoneyServicing {
     }
 
     func loadSession() async throws -> SendMoneySession { .mock }
-    func validate(pin: String) async throws -> IdentityAuthorization { .fixture }
-
     func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
         submissions.append(submission)
         if let delay { try await Task.sleep(for: delay) }

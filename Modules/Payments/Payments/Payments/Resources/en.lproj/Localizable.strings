@@ -5,8 +5,6 @@
 "TransferPin.title" = "Enter your PIN";
 "TransferPin.subtitle" = "Enter your 4-digit PIN to send\n%1$@ to %2$@.";
 "TransferPin.confirmTransfer" = "Confirm Transfer";
-"TransferPin.validationErrorTitle" = "We couldn't confirm your identity";
-"TransferPin.validationErrorDescription" = "The PIN could not be validated. Please review it and start the transfer again.";
 "TransferProcessing.title" = "Processing transfer...";
 "TransferProcessing.subtitle" = "Please don't close the app\nor go back.";
 "TransferProcessing.errorTitle" = "We couldn't complete your transfer";
@@ -58,10 +56,6 @@
 "HomeApp.seeInsights" = "See Insights";
 "HomeApp.cardOwnerTwo" = "Amado Batista";
 "HomeApp.mastercardBrand" = "MASTERCARD";
-"HomeApp.specialOfferHeadline" = "Special Offer";
-"HomeApp.specialOfferTitle" = "Travel Insurance";
-"HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
-"HomeApp.learnMore" = "Learn More";
 "HomeApp.noCreditCardHeadline" = "No Credit Card Yet?";
 "HomeApp.buildYourCreditTitle" = "Build Your Credit";
 "HomeApp.buildYourCreditCaption" = "Apply now for a Platinum Secured Card";
@@ -86,7 +80,6 @@
 "AllServices.manageBeneficiaries" = "Beneficiaries";
 "AllServices.cardCenter" = "Cards";
 "AllServices.notifications" = "Notifications";
-"AllServices.insurance" = "Insurance";
 "AllServices.reports" = "Reports";
 
 "SpendingChart.title" = "Spending this month";
@@ -156,22 +149,6 @@
 "FinancialSummary.restaurant" = "Restaurant";
 "FinancialSummary.daysAgo" = "%d days ago";
 "FinancialSummary.monthAgo" = "%d month ago";
-
-"CardInsurance.continue" = "Continue";
-"InsuranceOnboarding.subtitle" = "Secure your future with our comprehensive financial insurance plan.";
-"InsuranceOnboarding.benefits" = "Benefits:";
-"InsuranceOnboarding.continue" = "Continue";
-"InsuranceOnboarding.moreOptions" = "More options";
-"InsuranceOnboarding.benefitOne" = "Fast and simple digital claims";
-"InsuranceOnboarding.benefitTwo" = "24/7 customer support";
-"InsuranceOnboarding.benefitThree" = "Flexible coverage options for any budget";
-"InsuranceOnboarding.benefitFour" = "Seamless integration with your finance dashboard";
-
-"CardInsurance.bulletOne" = "Covers unauthorized transactions made after card theft or cloning.";
-"CardInsurance.bulletTwo" = "Quick replacement of lost or stolen cards.";
-"CardInsurance.bulletThree" = "Insures eligible purchases against damage or theft for a limited period";
-"CardInsurance.bulletFour" = "Extended benefits for cardholders traveling abroad (e.g., lost luggage or emergency cash).";
-"CardInsurance.continueButton" = "Continue";
 
 "BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
 "BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";

@@ -42,12 +42,6 @@ enum AllServicesFixtures {
             theme: .primary
         ),
         .init(
-            title: Strings.AllServices.insurance,
-            subtitle: Strings.InsuranceOnboarding.moreOptions,
-            icon: "shield.checkered",
-            theme: .success
-        ),
-        .init(
             title: Strings.AllServices.reports,
             subtitle: Strings.SpendingChart.viewReport,
             icon: "chart.bar.fill",

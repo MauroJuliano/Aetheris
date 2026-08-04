@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Foundation
 import Testing
 @testable import Payments

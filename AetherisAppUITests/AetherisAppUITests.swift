@@ -109,11 +109,11 @@ final class AetherisAppUITests: XCTestCase {
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
         app.buttons["1"].tap()
         app.buttons["Continue"].tap()
-        XCTAssertTrue(element("transfer.pinScreen").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
 
         ["0", "0", "0", "0"].forEach { _ in app.buttons["0"].tap() }
 
-        XCTAssertTrue(element("transfer.pinErrorSheet").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("identity.validation.errorSheet").waitForExistence(timeout: 3))
         app.buttons["Close"].tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
     }
@@ -126,7 +126,7 @@ final class AetherisAppUITests: XCTestCase {
         app.buttons["1"].tap()
         app.buttons["Continue"].tap()
 
-        XCTAssertTrue(element("transfer.pinScreen").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
         ["1", "2, ABC", "3, DEF", "4, GHI"].forEach { app.buttons[$0].tap() }
     }
 

@@ -1,9 +1,11 @@
+import AetherisAuthenticationInterface
 import Core
 import PaymentsInterface
 import SwiftUI
 
 struct HomeFlowCoordinator: View {
     let coreService: any HasCoreService
+    let identityValidation: any IdentityValidating
     @Binding var selectedBeneficiary: Beneficiary
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
     @State var navigation = HomeNavigationState()
