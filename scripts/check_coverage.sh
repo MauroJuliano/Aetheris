@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-DERIVED_DATA_PATH="${1:-DerivedData}"
+RESULT_PATH="${1:-DerivedData}"
 MINIMUM_COVERAGE="${2:-40}"
 
 if ! [[ "$MINIMUM_COVERAGE" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
@@ -10,16 +10,20 @@ if ! [[ "$MINIMUM_COVERAGE" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
   exit 1
 fi
 
-RESULT_BUNDLE=$(find "$DERIVED_DATA_PATH" \
-  -type d \
-  -name "*.xcresult" \
-  -exec stat -f '%m %N' {} + \
-  | sort -nr \
-  | head -n 1 \
-  | cut -d ' ' -f 2- || true)
+if [[ "$RESULT_PATH" == *.xcresult ]]; then
+  RESULT_BUNDLE="$RESULT_PATH"
+else
+  RESULT_BUNDLE=$(find "$RESULT_PATH" \
+    -type d \
+    -name "*.xcresult" \
+    -exec stat -f '%m %N' {} + \
+    | sort -nr \
+    | head -n 1 \
+    | cut -d ' ' -f 2- || true)
+fi
 
-if [[ -z "$RESULT_BUNDLE" ]]; then
-  echo "No xcresult bundle was found in $DERIVED_DATA_PATH."
+if [[ -z "$RESULT_BUNDLE" || ! -d "$RESULT_BUNDLE" ]]; then
+  echo "No xcresult bundle was found at $RESULT_PATH."
   exit 1
 fi
 
