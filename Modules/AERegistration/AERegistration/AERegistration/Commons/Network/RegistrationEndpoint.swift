@@ -20,6 +20,15 @@ extension RegistrationEndpoint: Endpoint {
         .post
     }
 
+    var headers: [String: String] {
+        switch self {
+        case .profile:
+            return [:]
+        case .password:
+            return ["Cache-Control": "no-store"]
+        }
+    }
+
     var body: Encodable? {
         switch self {
         case let .profile(request):
@@ -51,5 +60,7 @@ struct RegistrationProfileRequest: Codable, Equatable {
 }
 
 struct RegistrationPasswordRequest: Codable, Equatable {
+    // Confirmation is validated locally. A real backend receives this value over
+    // HTTPS and is responsible for salted, adaptive password hashing.
     let password: String
 }

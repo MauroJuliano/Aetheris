@@ -33,7 +33,11 @@ struct RegistrationServiceTests {
 
         #expect(result)
         #expect(coreService.calls == [
-            .init(path: "/registration/password", method: .post)
+            .init(
+                path: "/registration/password",
+                method: .post,
+                headers: ["Cache-Control": "no-store"]
+            )
         ])
     }
 

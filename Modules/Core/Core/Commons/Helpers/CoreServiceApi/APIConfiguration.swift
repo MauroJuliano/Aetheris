@@ -22,10 +22,19 @@ public struct APIConfiguration: Sendable {
         baseURL: URL(string: "https://api.aetheris.app")!
     )
 
-    func makeSession() -> URLSession {
-        let configuration = URLSessionConfiguration.default
+    func makeSessionConfiguration() -> URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = requestTimeout
         configuration.timeoutIntervalForResource = resourceTimeout
-        return URLSession(configuration: configuration)
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.httpShouldSetCookies = false
+        configuration.urlCache = nil
+        configuration.httpCookieStorage = nil
+        configuration.urlCredentialStorage = nil
+        return configuration
+    }
+
+    func makeSession() -> URLSession {
+        URLSession(configuration: makeSessionConfiguration())
     }
 }

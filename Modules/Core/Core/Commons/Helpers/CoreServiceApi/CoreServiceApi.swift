@@ -94,7 +94,8 @@ public final class CoreServiceApi: HasCoreService {
     }
 
     public func execute<T>(_ endpoint: any Endpoint) async throws -> T where T : Decodable {
-        guard endpoint.path.hasPrefix("/"),
+        guard configuration.baseURL.scheme?.lowercased() == "https",
+              endpoint.path.hasPrefix("/"),
               let url = URL(string: endpoint.path, relativeTo: configuration.baseURL)?.absoluteURL else {
             throw CoreServiceError.invalidUrl
         }

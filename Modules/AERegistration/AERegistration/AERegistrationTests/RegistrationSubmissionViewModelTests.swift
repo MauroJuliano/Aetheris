@@ -99,6 +99,21 @@ struct RegistrationSubmissionViewModelTests {
         #expect(sut.submissionError == nil)
         #expect(service.passwordRequests == [.init(password: "1234")])
         #expect(service.profileRequests.isEmpty)
+        #expect(draft.password.isEmpty)
+        #expect(draft.confirmPassword.isEmpty)
+    }
+
+    @Test
+    func confirmPassword_preservesPasswords_whenBackendRejectsRequest() async {
+        let service = RegistrationServiceSpy(result: false)
+        let draft = makeDraft()
+        let sut = ConfirmPasswordViewModel(service: service, draft: draft)
+
+        let succeeded = await sut.submit()
+
+        #expect(!succeeded)
+        #expect(draft.password == "1234")
+        #expect(draft.confirmPassword == "1234")
     }
 
     @Test

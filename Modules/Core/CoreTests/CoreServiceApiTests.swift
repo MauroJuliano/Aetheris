@@ -51,10 +51,15 @@ struct CoreServiceApiTests {
             resourceTimeout: 45
         )
 
-        let session = configuration.makeSession()
+        let sessionConfiguration = configuration.makeSessionConfiguration()
 
-        #expect(session.configuration.timeoutIntervalForRequest == 12)
-        #expect(session.configuration.timeoutIntervalForResource == 45)
+        #expect(sessionConfiguration.timeoutIntervalForRequest == 12)
+        #expect(sessionConfiguration.timeoutIntervalForResource == 45)
+        #expect(sessionConfiguration.requestCachePolicy == .reloadIgnoringLocalCacheData)
+        #expect(!sessionConfiguration.httpShouldSetCookies)
+        #expect(sessionConfiguration.httpCookieStorage == nil)
+        #expect(sessionConfiguration.urlCredentialStorage == nil)
+        #expect(sessionConfiguration.urlCache == nil)
     }
 
     @Test
@@ -90,6 +95,19 @@ struct CoreServiceApiTests {
         do {
             let _: Payload = try await sut.execute(TestEndpoint.invalidURL)
             #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidUrl)
+        }
+    }
+
+    @Test
+    func execute_rejectsInsecureBaseURL() async {
+        let configuration = APIConfiguration(baseURL: URL(string: "http://api.aetheris.app")!)
+        let sut = CoreServiceApi(configuration: configuration, session: makeSession())
+
+        do {
+            let _: Payload = try await sut.execute(TestEndpoint(path: "/registration/password", body: nil))
+            Issue.record("Expected insecure URL to be rejected")
         } catch {
             #expect((error as? CoreServiceError) == .invalidUrl)
         }
