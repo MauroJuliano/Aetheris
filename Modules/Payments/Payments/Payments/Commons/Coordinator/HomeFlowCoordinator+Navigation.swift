@@ -159,10 +159,6 @@ extension HomeFlowCoordinator {
                 onBack: { popRoute() }
             )
 
-        case .insurance:
-            InsuranceOnboardingFactory.make(coreService: coreService)
-                .navigationBarHidden(true)
-
         case .viewReport:
             ViewReportFlowCoordinator(
                 coreService: coreService,

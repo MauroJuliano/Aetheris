@@ -10,13 +10,12 @@ struct AllServicesServiceTests {
 
         let items = await sut.loadServices()
 
-        #expect(items.count == 6)
+        #expect(items.count == 5)
         #expect(items.map(\.title) == [
             Strings.AllServices.transferMoney,
             Strings.AllServices.manageBeneficiaries,
             Strings.AllServices.cardCenter,
             Strings.AllServices.notifications,
-            Strings.AllServices.insurance,
             Strings.AllServices.reports
         ])
         #expect(items.map(\.icon) == [
@@ -24,10 +23,9 @@ struct AllServicesServiceTests {
             "person.2.fill",
             "creditcard.fill",
             "bell.fill",
-            "shield.checkered",
             "chart.bar.fill"
         ])
-        #expect(items.map(\.theme) == [.primary, .info, .warning, .primary, .success, .info])
+        #expect(items.map(\.theme) == [.primary, .info, .warning, .primary, .info])
         #expect(Set(items.map(\.id)).count == items.count)
     }
 }

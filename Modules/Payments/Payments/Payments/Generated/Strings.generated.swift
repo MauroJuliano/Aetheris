@@ -13,8 +13,6 @@ internal enum Strings {
   internal enum AllServices {
     /// Cards
     internal static let cardCenter = Strings.tr("Localizable", "AllServices.cardCenter", fallback: "Cards")
-    /// Insurance
-    internal static let insurance = Strings.tr("Localizable", "AllServices.insurance", fallback: "Insurance")
     /// Beneficiaries
     internal static let manageBeneficiaries = Strings.tr("Localizable", "AllServices.manageBeneficiaries", fallback: "Beneficiaries")
     /// Notifications
@@ -51,20 +49,6 @@ internal enum Strings {
   internal enum CardHome {
     /// Cards
     internal static let title = Strings.tr("Localizable", "CardHome.title", fallback: "Cards")
-  }
-  internal enum CardInsurance {
-    /// Extended benefits for cardholders traveling abroad (e.g., lost luggage or emergency cash).
-    internal static let bulletFour = Strings.tr("Localizable", "CardInsurance.bulletFour", fallback: "Extended benefits for cardholders traveling abroad (e.g., lost luggage or emergency cash).")
-    /// Covers unauthorized transactions made after card theft or cloning.
-    internal static let bulletOne = Strings.tr("Localizable", "CardInsurance.bulletOne", fallback: "Covers unauthorized transactions made after card theft or cloning.")
-    /// Insures eligible purchases against damage or theft for a limited period
-    internal static let bulletThree = Strings.tr("Localizable", "CardInsurance.bulletThree", fallback: "Insures eligible purchases against damage or theft for a limited period")
-    /// Quick replacement of lost or stolen cards.
-    internal static let bulletTwo = Strings.tr("Localizable", "CardInsurance.bulletTwo", fallback: "Quick replacement of lost or stolen cards.")
-    /// Continue
-    internal static let `continue` = Strings.tr("Localizable", "CardInsurance.continue", fallback: "Continue")
-    /// Continue
-    internal static let continueButton = Strings.tr("Localizable", "CardInsurance.continueButton", fallback: "Continue")
   }
   internal enum Common {
     /// Back
@@ -149,8 +133,6 @@ internal enum Strings {
     internal static let genericErrorTitle = Strings.tr("Localizable", "HomeApp.genericErrorTitle", fallback: "Something went wrong")
     /// Home unavailable
     internal static let homeUnavailableTitle = Strings.tr("Localizable", "HomeApp.homeUnavailableTitle", fallback: "Home unavailable")
-    /// Learn More
-    internal static let learnMore = Strings.tr("Localizable", "HomeApp.learnMore", fallback: "Learn More")
     /// Logout
     internal static let logout = Strings.tr("Localizable", "HomeApp.logout", fallback: "Logout")
     /// MASTERCARD
@@ -177,12 +159,6 @@ internal enum Strings {
     internal static let rewardsTitle = Strings.tr("Localizable", "HomeApp.rewardsTitle", fallback: "12,500 points")
     /// See Insights
     internal static let seeInsights = Strings.tr("Localizable", "HomeApp.seeInsights", fallback: "See Insights")
-    /// Protect your trips starting at $12/mo
-    internal static let specialOfferCaption = Strings.tr("Localizable", "HomeApp.specialOfferCaption", fallback: "Protect your trips starting at $12/mo")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "HomeApp.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "HomeApp.specialOfferTitle", fallback: "Travel Insurance")
     /// Try later
     internal static let tryLater = Strings.tr("Localizable", "HomeApp.tryLater", fallback: "Try later")
     /// Version 0.00.1
@@ -201,24 +177,6 @@ internal enum Strings {
     internal static let emptyDescription = Strings.tr("Localizable", "HomeCard.emptyDescription", fallback: "This area will reflect the dashboard when the simulated service returns data.")
     /// No cards or activity yet
     internal static let emptyTitle = Strings.tr("Localizable", "HomeCard.emptyTitle", fallback: "No cards or activity yet")
-  }
-  internal enum InsuranceOnboarding {
-    /// Seamless integration with your finance dashboard
-    internal static let benefitFour = Strings.tr("Localizable", "InsuranceOnboarding.benefitFour", fallback: "Seamless integration with your finance dashboard")
-    /// Fast and simple digital claims
-    internal static let benefitOne = Strings.tr("Localizable", "InsuranceOnboarding.benefitOne", fallback: "Fast and simple digital claims")
-    /// Benefits:
-    internal static let benefits = Strings.tr("Localizable", "InsuranceOnboarding.benefits", fallback: "Benefits:")
-    /// Flexible coverage options for any budget
-    internal static let benefitThree = Strings.tr("Localizable", "InsuranceOnboarding.benefitThree", fallback: "Flexible coverage options for any budget")
-    /// 24/7 customer support
-    internal static let benefitTwo = Strings.tr("Localizable", "InsuranceOnboarding.benefitTwo", fallback: "24/7 customer support")
-    /// Continue
-    internal static let `continue` = Strings.tr("Localizable", "InsuranceOnboarding.continue", fallback: "Continue")
-    /// More options
-    internal static let moreOptions = Strings.tr("Localizable", "InsuranceOnboarding.moreOptions", fallback: "More options")
-    /// Secure your future with our comprehensive financial insurance plan.
-    internal static let subtitle = Strings.tr("Localizable", "InsuranceOnboarding.subtitle", fallback: "Secure your future with our comprehensive financial insurance plan.")
   }
   internal enum Notifications {
     /// Last Month
