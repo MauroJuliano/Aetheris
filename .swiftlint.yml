@@ -1,0 +1,55 @@
+included:
+  - Modules
+  - Resources
+  - AetherisAppTests
+  - AetherisAppUITests
+
+excluded:
+  - DerivedData
+  - build
+  - .build
+  - "**/Generated"
+  - "**/*.generated.swift"
+
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - first_where
+  - sorted_imports
+
+disabled_rules:
+  - todo
+  - trailing_whitespace
+
+line_length:
+  warning: 140
+  error: 220
+  ignores_comments: true
+  ignores_urls: true
+
+type_body_length:
+  warning: 350
+  error: 500
+
+file_length:
+  warning: 600
+  error: 800
+
+function_body_length:
+  warning: 80
+  error: 200
+
+function_parameter_count:
+  warning: 5
+  error: 12
+
+type_name:
+  excluded:
+    - localizable
+
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+    - x
+    - y
