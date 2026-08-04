@@ -109,10 +109,6 @@ private final class SendMoneyServiceSpy: SendMoneyServicing {
         }
     }
 
-    func validate(pin: String) async throws -> IdentityAuthorization {
-        .init(token: "token", expiresAt: "later")
-    }
-
     func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
         .fixture
     }

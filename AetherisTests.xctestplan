@@ -52,6 +52,14 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B536D82F4E6C01005C2C96",
+        "name" : "AetherisAuthenticationTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
         "identifier" : "A9B537072F4E6E16005C2C96",
         "name" : "AetherisAuthenticationInterfaceTests"
       }

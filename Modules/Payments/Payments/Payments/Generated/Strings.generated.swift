@@ -423,10 +423,6 @@ internal enum Strings {
     }
     /// Enter your PIN
     internal static let title = Strings.tr("Localizable", "TransferPin.title", fallback: "Enter your PIN")
-    /// The PIN could not be validated. Please review it and start the transfer again.
-    internal static let validationErrorDescription = Strings.tr("Localizable", "TransferPin.validationErrorDescription", fallback: "The PIN could not be validated. Please review it and start the transfer again.")
-    /// We couldn't confirm your identity
-    internal static let validationErrorTitle = Strings.tr("Localizable", "TransferPin.validationErrorTitle", fallback: "We couldn't confirm your identity")
   }
   internal enum TransferProcessing {
     /// No money was deducted. You can try again now or return to the transfer later.

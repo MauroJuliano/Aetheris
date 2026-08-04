@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Core
 import PaymentsInterface
 import UIKit
@@ -88,19 +89,20 @@ extension HomeFlowCoordinator {
             .navigationBarHidden(true)
 
         case .sendMoneyPin(let draft):
-            TransferPinFactory.make(
-                coreService: coreService,
-                draft: draft,
-                onBack: { popRoute() },
-                onAuthorized: { authorization in
-                    navigation.push(.sendMoneyProcessing(.init(
-                        draft: draft,
-                        authorization: authorization,
-                        idempotencyKey: UUID().uuidString
-                    )))
-                },
-                onValidationFailed: {
-                    navigation.returnToSendMoney()
+            identityValidation.authenticate(
+                content: identityContent(for: draft),
+                onCancel: { popRoute() },
+                onResult: { result in
+                    switch result {
+                    case let .authorized(authorization):
+                        navigation.push(.sendMoneyProcessing(.init(
+                            draft: draft,
+                            authorization: authorization,
+                            idempotencyKey: UUID().uuidString
+                        )))
+                    case .failed:
+                        navigation.returnToSendMoney()
+                    }
                 }
             )
             .navigationBarHidden(true)
@@ -172,5 +174,13 @@ extension HomeFlowCoordinator {
 
     private func replaceCurrentRoute(with route: HomeRoute) {
         navigation.replaceCurrent(with: route)
+    }
+
+    private func identityContent(for draft: TransferDraft) -> IdentityValidationContent {
+        IdentityValidationContent(
+            navigationTitle: Strings.TransferPin.confirmTransfer,
+            title: Strings.TransferPin.title,
+            description: Strings.TransferPin.subtitle(draft.formattedAmount, draft.beneficiaryName)
+        )
     }
 }

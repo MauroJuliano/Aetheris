@@ -1,0 +1,73 @@
+import AetherisAuthenticationInterface
+import Foundation
+import Testing
+@testable import AetherisAuthentication
+
+@MainActor
+@Suite("IdentityValidationViewModel")
+struct IdentityValidationViewModelTests {
+    @Test
+    func fourDigits_requestValidationAndReturnAuthorization() async {
+        let service = IdentityValidationServiceSpy(result: .success(.fixture))
+        let sut = IdentityValidationViewModel(content: .fixture, service: service)
+        var receivedAuthorization: IdentityAuthorization?
+
+        ["1", "2", "3", "4"].forEach { digit in
+            sut.handleDigit(digit) { receivedAuthorization = $0 }
+        }
+        await waitForAsyncWork()
+
+        #expect(service.validatedPins == ["1234"])
+        #expect(receivedAuthorization == .fixture)
+        #expect(sut.pin.isEmpty)
+        #expect(sut.validationErrorMessage == nil)
+    }
+
+    @Test
+    func rejectedPin_exposesErrorWithoutLocalAttemptsOrLockout() async {
+        let service = IdentityValidationServiceSpy(result: .failure(IdentityValidationError.rejected))
+        let sut = IdentityValidationViewModel(content: .fixture, service: service)
+
+        ["0", "0", "0", "0"].forEach { digit in
+            sut.handleDigit(digit) { _ in }
+        }
+        await waitForAsyncWork()
+
+        #expect(service.validatedPins == ["0000"])
+        #expect(sut.validationErrorMessage != nil)
+
+        sut.clearError()
+        #expect(sut.pin.isEmpty)
+        #expect(sut.validationErrorMessage == nil)
+    }
+
+    private func waitForAsyncWork() async {
+        try? await Task.sleep(for: .milliseconds(20))
+    }
+}
+
+private final class IdentityValidationServiceSpy: IdentityValidationServicing {
+    let result: Result<IdentityAuthorization, Error>
+    private(set) var validatedPins: [String] = []
+
+    init(result: Result<IdentityAuthorization, Error>) {
+        self.result = result
+    }
+
+    func validate(pin: String) async throws -> IdentityAuthorization {
+        validatedPins.append(pin)
+        return try result.get()
+    }
+}
+
+private extension IdentityAuthorization {
+    static let fixture = IdentityAuthorization(token: "authorization-token", expiresAt: "later")
+}
+
+private extension IdentityValidationContent {
+    static let fixture = IdentityValidationContent(
+        navigationTitle: "Confirm",
+        title: "Enter PIN",
+        description: "Confirm your identity"
+    )
+}

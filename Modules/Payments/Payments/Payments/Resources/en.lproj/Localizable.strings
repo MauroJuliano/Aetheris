@@ -5,8 +5,6 @@
 "TransferPin.title" = "Enter your PIN";
 "TransferPin.subtitle" = "Enter your 4-digit PIN to send\n%1$@ to %2$@.";
 "TransferPin.confirmTransfer" = "Confirm Transfer";
-"TransferPin.validationErrorTitle" = "We couldn't confirm your identity";
-"TransferPin.validationErrorDescription" = "The PIN could not be validated. Please review it and start the transfer again.";
 "TransferProcessing.title" = "Processing transfer...";
 "TransferProcessing.subtitle" = "Please don't close the app\nor go back.";
 "TransferProcessing.errorTitle" = "We couldn't complete your transfer";

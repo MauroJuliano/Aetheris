@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Core
 import UIKit
 import SwiftUI
@@ -36,6 +37,7 @@ struct SendMoneyNavigationState {
 
 struct SendMoneyFlowCoordinator: View {
     let coreService: any HasCoreService
+    let identityValidation: any IdentityValidating
     @Binding var selectedBeneficiary: Beneficiary
     let onBackAction: () -> Void
 
@@ -68,19 +70,20 @@ struct SendMoneyFlowCoordinator: View {
                     .navigationBarHidden(true)
 
                 case .pin(let draft):
-                    TransferPinFactory.make(
-                        coreService: coreService,
-                        draft: draft,
-                        onBack: { popRoute() },
-                        onAuthorized: { authorization in
-                            navigation.push(.processing(.init(
-                                draft: draft,
-                                authorization: authorization,
-                                idempotencyKey: UUID().uuidString
-                            )))
-                        },
-                        onValidationFailed: {
-                            navigation.reset()
+                    identityValidation.authenticate(
+                        content: identityContent(for: draft),
+                        onCancel: { popRoute() },
+                        onResult: { result in
+                            switch result {
+                            case let .authorized(authorization):
+                                navigation.push(.processing(.init(
+                                    draft: draft,
+                                    authorization: authorization,
+                                    idempotencyKey: UUID().uuidString
+                                )))
+                            case .failed:
+                                navigation.reset()
+                            }
                         }
                     )
                     .navigationBarHidden(true)
@@ -131,5 +134,13 @@ struct SendMoneyFlowCoordinator: View {
 
     private func replaceCurrentRoute(with route: SendMoneyFlowRoute) {
         navigation.replaceCurrent(with: route)
+    }
+
+    private func identityContent(for draft: TransferDraft) -> IdentityValidationContent {
+        IdentityValidationContent(
+            navigationTitle: Strings.TransferPin.confirmTransfer,
+            title: Strings.TransferPin.title,
+            description: Strings.TransferPin.subtitle(draft.formattedAmount, draft.beneficiaryName)
+        )
     }
 }
