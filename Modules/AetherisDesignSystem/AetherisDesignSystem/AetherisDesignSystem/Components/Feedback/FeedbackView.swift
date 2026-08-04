@@ -8,7 +8,7 @@ private extension Bundle {
     }
 }
 
-public struct FullScreenErrorView: View {
+public struct FeedbackView: View {
     public let title: String
     public let description: String
     public let primaryButtonTitle: String
@@ -125,3 +125,6 @@ public struct FullScreenErrorView: View {
         }
     }
 }
+
+@available(*, deprecated, renamed: "FeedbackView")
+public typealias FullScreenErrorView = FeedbackView

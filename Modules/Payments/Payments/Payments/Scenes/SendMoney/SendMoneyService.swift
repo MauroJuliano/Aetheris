@@ -3,6 +3,8 @@ import Foundation
 
 protocol SendMoneyServicing {
     func loadSession() async throws -> SendMoneySession
+    func validate(pin: String) async throws -> IdentityAuthorization
+    func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse
 }
 
 struct SendMoneySession: Codable, Hashable {
@@ -17,26 +19,21 @@ struct SendMoneySession: Codable, Hashable {
         let available: Double
     }
 
-    struct Limits: Codable, Hashable {
-        let currency: String
-        let dailyLimit: Double
-        let remainingDailyLimit: Double
-        let singleTransferLimit: Double
-    }
-
-    struct Fee: Codable, Hashable {
-        let label: String
-        let amount: Double
-        let currency: String
-    }
-
     let wallet: Wallet
     let account: Account
-    let limits: Limits
-    let fees: [Fee]
-    let securityMessage: String
-    let processingMessage: String
-    let suggestedAmount: Double
+}
+
+private struct IdentityValidationRequest: Encodable {
+    let pin: String
+}
+
+private struct IdentityValidationResponse: Codable {
+    let isAuthorized: Bool
+    let authorization: IdentityAuthorization?
+}
+
+enum IdentityValidationError: Error, Equatable {
+    case rejected
 }
 
 final class SendMoneyService: SendMoneyServicing {
@@ -49,25 +46,105 @@ final class SendMoneyService: SendMoneyServicing {
     func loadSession() async throws -> SendMoneySession {
         try await coreService.execute(SendMoneyEndpoint.session)
     }
+
+    func validate(pin: String) async throws -> IdentityAuthorization {
+        let response: IdentityValidationResponse = try await coreService.execute(
+            SendMoneyEndpoint.validateIdentity(.init(pin: pin))
+        )
+        guard response.isAuthorized, let authorization = response.authorization else {
+            throw IdentityValidationError.rejected
+        }
+        return authorization
+    }
+
+    func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
+        let request = TransferRequest(
+            amount: submission.draft.amount,
+            currency: submission.draft.currency,
+            beneficiaryIdentifier: submission.draft.beneficiaryIdentifier,
+            authorizationToken: submission.authorization.token
+        )
+        return try await coreService.execute(
+            SendMoneyEndpoint.submitTransfer(
+                request: request,
+                draft: submission.draft,
+                idempotencyKey: submission.idempotencyKey
+            )
+        )
+    }
 }
 
 private enum SendMoneyEndpoint {
     case session
+    case validateIdentity(IdentityValidationRequest)
+    case submitTransfer(
+        request: TransferRequest,
+        draft: TransferDraft,
+        idempotencyKey: String
+    )
 }
 
 extension SendMoneyEndpoint: Endpoint {
     var path: String {
-        "/payments/send-money/session"
+        switch self {
+        case .session:
+            "/payments/send-money/session"
+        case .validateIdentity:
+            "/security/identity/validate"
+        case .submitTransfer:
+            "/payments/transfers"
+        }
     }
 
-    var method: HTTPMethod { .get }
+    var method: HTTPMethod {
+        switch self {
+        case .session: .get
+        case .validateIdentity, .submitTransfer: .post
+        }
+    }
 
-    var body: Encodable? { nil }
+    var headers: [String: String] {
+        guard case let .submitTransfer(_, _, idempotencyKey) = self else { return [:] }
+        return ["Idempotency-Key": idempotencyKey]
+    }
+
+    var body: Encodable? {
+        switch self {
+        case .session:
+            nil
+        case let .validateIdentity(request):
+            request
+        case let .submitTransfer(request, _, _):
+            request
+        }
+    }
 
     var mockResponseData: Data {
         switch self {
         case .session:
             return Self.encodeOrEmpty(SendMoneySession.mock)
+        case let .validateIdentity(request):
+            let authorization = request.pin == "1234"
+                ? IdentityAuthorization(token: "demo-transfer-authorization", expiresAt: "2026-08-04T12:00:00Z")
+                : nil
+            return Self.encodeOrEmpty(
+                IdentityValidationResponse(isAuthorized: authorization != nil, authorization: authorization)
+            )
+        case let .submitTransfer(_, draft, idempotencyKey):
+            return Self.encodeOrEmpty(
+                TransferReceiptResponse(
+                    transactionId: idempotencyKey,
+                    referenceId: "TRX-\(idempotencyKey.prefix(8).uppercased())",
+                    status: "completed",
+                    amount: NSDecimalNumber(decimal: draft.amount).doubleValue,
+                    currency: draft.currency,
+                    recipientName: draft.beneficiaryName,
+                    recipientIdentifier: draft.beneficiaryIdentifier,
+                    accountName: draft.accountName,
+                    accountLastDigits: draft.accountLastDigits,
+                    completedAt: "August 4, 2026 at 12:00 PM"
+                )
+            )
         }
     }
 
@@ -86,18 +163,6 @@ extension SendMoneySession {
         account: .init(
             name: "Main Account",
             lastDigits: "1234"
-        ),
-        limits: .init(
-            currency: "USD",
-            dailyLimit: 2_500.00,
-            remainingDailyLimit: 1_810.00,
-            singleTransferLimit: 1_000.00
-        ),
-        fees: [
-            .init(label: "Instant transfer", amount: 0.00, currency: "USD")
-        ],
-        securityMessage: "Transfer protected by biometrics and device verification.",
-        processingMessage: "Your transfer is being processed.",
-        suggestedAmount: 250.00
+        )
     )
 }

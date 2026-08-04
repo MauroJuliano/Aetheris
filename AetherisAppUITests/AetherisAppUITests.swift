@@ -85,6 +85,41 @@ final class AetherisAppUITests: XCTestCase {
     @MainActor
     func testTransfer_reachesSingleSuccessScreen() {
         launch(authenticated: true)
+        enterValidTransfer()
+        XCTAssertTrue(element("transfer.successScreen").waitForExistence(timeout: 5))
+        XCTAssertEqual(app.descendants(matching: .any).matching(identifier: "transfer.successScreen").count, 1)
+    }
+
+    @MainActor
+    func testTransfer_failureAllowsRetryWithSameOperation() {
+        launch(authenticated: true, additionalArguments: ["-uiTestingTransferFailureOnce"])
+        enterValidTransfer()
+
+        XCTAssertTrue(element("transfer.processingError").waitForExistence(timeout: 5))
+        app.buttons["Try again"].tap()
+
+        XCTAssertTrue(element("transfer.successScreen").waitForExistence(timeout: 5))
+    }
+
+    @MainActor
+    func testTransfer_invalidPinReturnsToSendMoney() {
+        launch(authenticated: true)
+        XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
+        app.buttons["Transfer"].tap()
+        XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
+        app.buttons["1"].tap()
+        app.buttons["Continue"].tap()
+        XCTAssertTrue(element("transfer.pinScreen").waitForExistence(timeout: 3))
+
+        ["0", "0", "0", "0"].forEach { _ in app.buttons["0"].tap() }
+
+        XCTAssertTrue(element("transfer.pinErrorSheet").waitForExistence(timeout: 3))
+        app.buttons["Close"].tap()
+        XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
+    }
+
+    @MainActor
+    private func enterValidTransfer() {
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
         app.buttons["Transfer"].tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
@@ -92,11 +127,7 @@ final class AetherisAppUITests: XCTestCase {
         app.buttons["Continue"].tap()
 
         XCTAssertTrue(element("transfer.pinScreen").waitForExistence(timeout: 3))
-        ["1", "2, ABC", "3, DEF"].forEach { app.buttons[$0].tap() }
-        app.buttons["4, GHI"].tap(withNumberOfTaps: 2, numberOfTouches: 1)
-        XCTAssertTrue(element("transfer.processingScreen").waitForExistence(timeout: 3))
-        XCTAssertTrue(element("transfer.successScreen").waitForExistence(timeout: 5))
-        XCTAssertEqual(app.descendants(matching: .any).matching(identifier: "transfer.successScreen").count, 1)
+        ["1", "2, ABC", "3, DEF", "4, GHI"].forEach { app.buttons[$0].tap() }
     }
 
     private func launch(authenticated: Bool = false, additionalArguments: [String] = []) {

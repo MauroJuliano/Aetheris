@@ -45,7 +45,7 @@ struct HomeApp: View {
             if viewModel.isLoading {
                 HomeAppSkeleton()
             } else if let errorMessage = viewModel.errorMessage {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.HomeApp.homeUnavailableTitle,
                     description: errorMessage,
                     primaryButtonTitle: Strings.Common.tryAgain,

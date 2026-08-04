@@ -26,7 +26,7 @@ struct CardHome: View {
             if viewModel.isLoading {
                 CardHomeSkeleton()
             } else if let errorMessage = viewModel.errorMessage {
-                FullScreenErrorView(
+                FeedbackView(
                     title: Strings.HomeCard.cardsUnavailableTitle,
                     description: errorMessage,
                     primaryButtonTitle: Strings.Common.tryAgain,

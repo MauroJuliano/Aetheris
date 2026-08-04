@@ -3,9 +3,34 @@ import SwiftUI
 
 struct TransferProcessingView: View {
     @StateObject var viewModel: TransferProcessingViewModel
-    let onCompleted: () -> Void
+    @State private var isAnimating = false
+    let onCompleted: (TransferReceiptModel) -> Void
+    let onTryLater: () -> Void
 
     var body: some View {
+        Group {
+            switch viewModel.state {
+            case .submitting:
+                processingContent
+            case let .failed(message):
+                FeedbackView(
+                    title: Strings.TransferProcessing.errorTitle,
+                    description: message,
+                    primaryButtonTitle: Strings.Common.tryAgain,
+                    secondaryButtonTitle: Strings.HomeApp.tryLater,
+                    onPrimaryAction: {
+                        Task { await viewModel.submit(onCompleted: onCompleted) }
+                    },
+                    onSecondaryAction: onTryLater
+                )
+                .accessibilityIdentifier("transfer.processingError")
+            }
+        }
+        .task { await viewModel.submit(onCompleted: onCompleted) }
+        .onAppear { isAnimating = true }
+    }
+
+    private var processingContent: some View {
         VStack(spacing: AppSpacing.large + AppSpacing.xxxSmall) {
             Spacer()
 
@@ -28,9 +53,6 @@ struct TransferProcessingView: View {
         .frame(maxWidth: .infinity)
         .padding(.horizontal, AppSpacing.xLarge)
         .appScreenBackground()
-        .onAppear {
-            viewModel.start(onCompleted: onCompleted)
-        }
         .accessibilityIdentifier("transfer.processingScreen")
     }
 
@@ -47,11 +69,8 @@ struct TransferProcessingView: View {
                     style: StrokeStyle(lineWidth: 8, lineCap: .round)
                 )
                 .frame(width: 170, height: 170)
-                .rotationEffect(.degrees(viewModel.isAnimating ? 360 : 0))
-                .animation(
-                    .linear(duration: 1.4).repeatForever(autoreverses: false),
-                    value: viewModel.isAnimating
-                )
+                .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                .animation(.linear(duration: 1.4).repeatForever(autoreverses: false), value: isAnimating)
 
             Image(systemName: "paperplane.fill")
                 .font(.system(size: 48, weight: .semibold))

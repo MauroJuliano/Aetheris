@@ -7,14 +7,14 @@ struct SendMoney: View {
     @Binding private var selectedBeneficiary: Beneficiary
     let onBackAction: (() -> Void)?
     let onChangeBeneficiary: () -> Void
-    let onContinue: (TransferReceiptModel) -> Void
+    let onContinue: (TransferDraft) -> Void
     
     init(
         viewModel: SendMoneyViewModel,
         selectedBeneficiary: Binding<Beneficiary>,
         onBackAction: (() -> Void)? = nil,
         onChangeBeneficiary: @escaping () -> Void,
-        onContinue: @escaping (TransferReceiptModel) -> Void
+        onContinue: @escaping (TransferDraft) -> Void
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _amountViewModel = StateObject(wrappedValue: TransferAmountViewModel(balance: 1000))
@@ -25,6 +25,32 @@ struct SendMoney: View {
     }
     
     var body: some View {
+        Group {
+            if viewModel.isLoading {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else if let errorMessage = viewModel.errorMessage {
+                FeedbackView(
+                    title: Strings.HomeApp.genericErrorTitle,
+                    description: errorMessage,
+                    primaryButtonTitle: Strings.Common.tryAgain,
+                    onPrimaryAction: {
+                        Task { await loadSession() }
+                    }
+                )
+            } else {
+                content
+            }
+        }
+        .appScreenBackground()
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .toolbar(.hidden, for: .navigationBar)
+        .task { await loadSession() }
+        .accessibilityIdentifier("transfer.amountScreen")
+    }
+
+    private var content: some View {
         ScrollView(showsIndicators: false) {
             NavBar(hasBackButton: true,
                    model: .init(firstText: Strings.SendMoney.title, hasInitialSpace: false),
@@ -84,14 +110,12 @@ struct SendMoney: View {
             .accessibilityIdentifier("transfer.continue")
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
-        .appScreenBackground()
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
-        .toolbar(.hidden, for: .navigationBar)
-        .task {
-            await viewModel.load()
+    }
+
+    private func loadSession() async {
+        await viewModel.load()
+        if viewModel.session != nil {
             amountViewModel.updateBalance(viewModel.walletBalance)
         }
-        .accessibilityIdentifier("transfer.amountScreen")
     }
 }

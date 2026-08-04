@@ -87,21 +87,33 @@ extension HomeFlowCoordinator {
             )
             .navigationBarHidden(true)
 
-        case .sendMoneyPin(let receipt):
+        case .sendMoneyPin(let draft):
             TransferPinFactory.make(
-                receipt: receipt,
+                coreService: coreService,
+                draft: draft,
                 onBack: { popRoute() },
-                onValidPin: {
-                    navigation.push(.sendMoneyProcessing(receipt))
+                onAuthorized: { authorization in
+                    navigation.push(.sendMoneyProcessing(.init(
+                        draft: draft,
+                        authorization: authorization,
+                        idempotencyKey: UUID().uuidString
+                    )))
+                },
+                onValidationFailed: {
+                    navigation.returnToSendMoney()
                 }
             )
             .navigationBarHidden(true)
 
-        case .sendMoneyProcessing(let receipt):
+        case .sendMoneyProcessing(let submission):
             TransferProcessingFactory.make(
-                receipt: receipt,
-                onCompleted: {
+                coreService: coreService,
+                submission: submission,
+                onCompleted: { receipt in
                     replaceCurrentRoute(with: .sendMoneySuccess(receipt))
+                },
+                onTryLater: {
+                    navigation.returnToSendMoney()
                 }
             )
             .navigationBarHidden(true)
@@ -109,7 +121,7 @@ extension HomeFlowCoordinator {
         case .sendMoneySuccess(let receipt):
             TransferSuccessFactory.make(
                 model: receipt,
-                onBack: { popRoute() },
+                onBack: { navigation.reset() },
                 onDone: {
                     navigation.reset()
                 },

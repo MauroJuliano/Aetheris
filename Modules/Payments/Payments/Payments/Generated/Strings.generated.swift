@@ -69,6 +69,8 @@ internal enum Strings {
   internal enum Common {
     /// Back
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")
+    /// Close
+    internal static let close = Strings.tr("Localizable", "Common.close", fallback: "Close")
     /// Continue
     internal static let continueButton = Strings.tr("Localizable", "Common.continueButton", fallback: "Continue")
     /// Failed to submit
@@ -412,29 +414,25 @@ internal enum Strings {
     internal static let change = Strings.tr("Localizable", "TransferBeneficiary.change", fallback: "Change")
   }
   internal enum TransferPin {
-    /// You have %d attempts left.
-    internal static func attempts(_ p1: Int) -> String {
-      return Strings.tr("Localizable", "TransferPin.attempts", p1, fallback: "You have %d attempts left.")
-    }
     /// Confirm Transfer
     internal static let confirmTransfer = Strings.tr("Localizable", "TransferPin.confirmTransfer", fallback: "Confirm Transfer")
-    /// Face ID authentication failed. Try again.
-    internal static let faceIDFailed = Strings.tr("Localizable", "TransferPin.faceIDFailed", fallback: "Face ID authentication failed. Try again.")
-    /// Authenticate to confirm this transfer.
-    internal static let faceIDReason = Strings.tr("Localizable", "TransferPin.faceIDReason", fallback: "Authenticate to confirm this transfer.")
-    /// Face ID is not available on this device.
-    internal static let faceIDUnavailable = Strings.tr("Localizable", "TransferPin.faceIDUnavailable", fallback: "Face ID is not available on this device.")
-    /// Incorrect PIN. Try again.
-    internal static let incorrect = Strings.tr("Localizable", "TransferPin.incorrect", fallback: "Incorrect PIN. Try again.")
     /// Enter your 4-digit PIN to send
-    /// $250.00 to Melissa Johnson.
-    internal static let subtitle = Strings.tr("Localizable", "TransferPin.subtitle", fallback: "Enter your 4-digit PIN to send\n$250.00 to Melissa Johnson.")
+    /// %1$@ to %2$@.
+    internal static func subtitle(_ p1: Any, _ p2: Any) -> String {
+      return Strings.tr("Localizable", "TransferPin.subtitle", String(describing: p1), String(describing: p2), fallback: "Enter your 4-digit PIN to send\n%1$@ to %2$@.")
+    }
     /// Enter your PIN
     internal static let title = Strings.tr("Localizable", "TransferPin.title", fallback: "Enter your PIN")
-    /// Use Face ID
-    internal static let useFaceID = Strings.tr("Localizable", "TransferPin.useFaceID", fallback: "Use Face ID")
+    /// The PIN could not be validated. Please review it and start the transfer again.
+    internal static let validationErrorDescription = Strings.tr("Localizable", "TransferPin.validationErrorDescription", fallback: "The PIN could not be validated. Please review it and start the transfer again.")
+    /// We couldn't confirm your identity
+    internal static let validationErrorTitle = Strings.tr("Localizable", "TransferPin.validationErrorTitle", fallback: "We couldn't confirm your identity")
   }
   internal enum TransferProcessing {
+    /// No money was deducted. You can try again now or return to the transfer later.
+    internal static let errorDescription = Strings.tr("Localizable", "TransferProcessing.errorDescription", fallback: "No money was deducted. You can try again now or return to the transfer later.")
+    /// We couldn't complete your transfer
+    internal static let errorTitle = Strings.tr("Localizable", "TransferProcessing.errorTitle", fallback: "We couldn't complete your transfer")
     /// Please don't close the app
     /// or go back.
     internal static let subtitle = Strings.tr("Localizable", "TransferProcessing.subtitle", fallback: "Please don't close the app\nor go back.")

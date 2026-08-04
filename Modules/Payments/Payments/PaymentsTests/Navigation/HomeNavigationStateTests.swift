@@ -59,19 +59,33 @@ struct HomeNavigationStateTests {
 
     @Test
     func transferRoutes_preserveReceiptAcrossFlow() {
+        let draft = TransferDraft.fixture
+        let submission = TransferSubmission.fixture
         let receipt = TransferReceiptModel.fixture
         var sut = HomeNavigationState()
 
         sut.push(.sendMoney)
-        sut.push(.sendMoneyPin(receipt))
-        sut.push(.sendMoneyProcessing(receipt))
+        sut.push(.sendMoneyPin(draft))
+        sut.push(.sendMoneyProcessing(submission))
         sut.replaceCurrent(with: .sendMoneySuccess(receipt))
 
         #expect(sut.path == [
             .sendMoney,
-            .sendMoneyPin(receipt),
+            .sendMoneyPin(draft),
             .sendMoneySuccess(receipt)
         ])
+    }
+
+    @Test
+    func returnToSendMoney_removesAuthenticationAndProcessingRoutes() {
+        var sut = HomeNavigationState()
+        sut.push(.sendMoney)
+        sut.push(.sendMoneyPin(.fixture))
+        sut.push(.sendMoneyProcessing(.fixture))
+
+        sut.returnToSendMoney()
+
+        #expect(sut.path == [.sendMoney])
     }
 
     @Test
@@ -95,5 +109,44 @@ extension TransferReceiptModel {
         accountLastDigits: "1234",
         date: "Today",
         referenceId: "TRX123"
+    )
+}
+
+extension TransferDraft {
+    static let fixture = TransferDraft(
+        amount: 10,
+        formattedAmount: "$ 10.00",
+        currency: "USD",
+        beneficiaryName: "Melissa",
+        beneficiaryIdentifier: "melissa@example.com",
+        accountName: "Main Account",
+        accountLastDigits: "1234"
+    )
+}
+
+extension IdentityAuthorization {
+    static let fixture = IdentityAuthorization(token: "authorization-token", expiresAt: "later")
+}
+
+extension TransferSubmission {
+    static let fixture = TransferSubmission(
+        draft: .fixture,
+        authorization: .fixture,
+        idempotencyKey: "idempotency-key"
+    )
+}
+
+extension TransferReceiptResponse {
+    static let fixture = TransferReceiptResponse(
+        transactionId: "transaction-id",
+        referenceId: "TRX-123",
+        status: "completed",
+        amount: 10,
+        currency: "USD",
+        recipientName: "Melissa",
+        recipientIdentifier: "melissa@example.com",
+        accountName: "Main Account",
+        accountLastDigits: "1234",
+        completedAt: "Today"
     )
 }

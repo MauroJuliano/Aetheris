@@ -5,8 +5,8 @@ enum HomeRoute: Hashable {
     case transactionHistory(UUID)
     case sendMoney
     case sendMoneyBeneficiaryList
-    case sendMoneyPin(TransferReceiptModel)
-    case sendMoneyProcessing(TransferReceiptModel)
+    case sendMoneyPin(TransferDraft)
+    case sendMoneyProcessing(TransferSubmission)
     case sendMoneySuccess(TransferReceiptModel)
     case beneficiaryList
     case addBeneficiary
@@ -39,5 +39,13 @@ struct HomeNavigationState {
 
     mutating func reset() {
         path.removeAll()
+    }
+
+    mutating func returnToSendMoney() {
+        guard let sendMoneyIndex = path.lastIndex(of: .sendMoney) else {
+            path = [.sendMoney]
+            return
+        }
+        path.removeSubrange(path.index(after: sendMoneyIndex)..<path.endIndex)
     }
 }

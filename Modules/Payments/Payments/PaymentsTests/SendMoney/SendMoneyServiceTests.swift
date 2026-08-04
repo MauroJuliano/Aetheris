@@ -17,10 +17,6 @@ struct SendMoneyServiceTests {
         #expect(session.wallet.available == 1_000.00)
         #expect(session.account.name == "Main Account")
         #expect(session.account.lastDigits == "1234")
-        #expect(session.limits.dailyLimit == 2_500.00)
-        #expect(session.limits.remainingDailyLimit == 1_810.00)
-        #expect(session.fees.count == 1)
-        #expect(session.securityMessage.contains("biometrics"))
         #expect(coreService.calls == [
             .init(path: "/payments/send-money/session", method: .get)
         ])
@@ -70,5 +66,50 @@ struct SendMoneyServiceTests {
             #expect(urlError?.code == .timedOut)
             #expect(coreService.calls.count == 1)
         }
+    }
+
+    @Test
+    func validatePin_postsToIdentityEndpointAndReturnsAuthorization() async throws {
+        let coreService = CoreServiceTestDouble()
+        let sut = SendMoneyService(coreService: coreService)
+
+        let authorization = try await sut.validate(pin: "1234")
+
+        #expect(authorization.token == "demo-transfer-authorization")
+        #expect(coreService.calls == [
+            .init(path: "/security/identity/validate", method: .post)
+        ])
+    }
+
+    @Test
+    func validatePin_throwsRejected_whenIdentityDoesNotAuthorize() async {
+        let coreService = CoreServiceTestDouble()
+        let sut = SendMoneyService(coreService: coreService)
+
+        do {
+            _ = try await sut.validate(pin: "0000")
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? IdentityValidationError) == .rejected)
+        }
+    }
+
+    @Test
+    func submitTransfer_postsWithIdempotencyKeyAndReturnsBackendReceipt() async throws {
+        let coreService = CoreServiceTestDouble()
+        let sut = SendMoneyService(coreService: coreService)
+        let submission = TransferSubmission.fixture
+
+        let receipt = try await sut.submit(submission)
+
+        #expect(receipt.transactionId == submission.idempotencyKey)
+        #expect(receipt.recipientName == submission.draft.beneficiaryName)
+        #expect(coreService.calls == [
+            .init(
+                path: "/payments/transfers",
+                method: .post,
+                headers: ["Idempotency-Key": submission.idempotencyKey]
+            )
+        ])
     }
 }
