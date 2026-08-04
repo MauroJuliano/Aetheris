@@ -213,5 +213,8 @@
 "Profile.notificationsSection" = "Notifications";
 "Profile.pushNotifications" = "Push notifications";
 "Profile.smsNotifications" = "SMS notifications";
+"Profile.refreshErrorTitle" = "Unable to refresh profile";
+"Profile.refreshErrorDescription" = "Some information may be outdated.";
+"Profile.retry" = "Retry";
 
 "ViewReport.loadingTitle" = "View Report";

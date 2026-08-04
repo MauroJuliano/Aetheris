@@ -289,6 +289,12 @@ internal enum Strings {
     internal static let privacyPolicy = Strings.tr("Localizable", "Profile.privacyPolicy", fallback: "Privacy Policy")
     /// Push notifications
     internal static let pushNotifications = Strings.tr("Localizable", "Profile.pushNotifications", fallback: "Push notifications")
+    /// Some information may be outdated.
+    internal static let refreshErrorDescription = Strings.tr("Localizable", "Profile.refreshErrorDescription", fallback: "Some information may be outdated.")
+    /// Unable to refresh profile
+    internal static let refreshErrorTitle = Strings.tr("Localizable", "Profile.refreshErrorTitle", fallback: "Unable to refresh profile")
+    /// Retry
+    internal static let retry = Strings.tr("Localizable", "Profile.retry", fallback: "Retry")
     /// Save
     internal static let save = Strings.tr("Localizable", "Profile.save", fallback: "Save")
     /// Send feedback

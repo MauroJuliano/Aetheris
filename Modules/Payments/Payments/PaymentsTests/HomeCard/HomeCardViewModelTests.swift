@@ -39,6 +39,24 @@ struct HomeCardViewModelTests {
     }
 
     @Test
+    func loadIfNeeded_loadsOnlyOnceAcrossRepeatedAppearances() async {
+        let dashboard = HomeCardDashboard(
+            cards: CardsMock.creditCardMocks,
+            summaries: [.fixture],
+            quickActions: []
+        )
+        let service = HomeCardServiceSpy(result: .success(dashboard))
+        let sut = HomeCardViewModel(service: service)
+
+        await sut.loadIfNeeded()
+        await sut.loadIfNeeded()
+
+        #expect(service.loadCalls == 1)
+        #expect(!sut.isLoading)
+        #expect(sut.cards.count == 3)
+    }
+
+    @Test
     func load_marksDashboardEmpty_whenCardsAndSummariesAreEmpty() async {
         let sut = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(.empty)))
 

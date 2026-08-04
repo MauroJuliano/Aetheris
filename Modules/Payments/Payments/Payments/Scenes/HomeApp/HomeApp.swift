@@ -101,7 +101,7 @@ struct HomeApp: View {
                 }
             }
         }
-        .task { await viewModel.load() }
+        .task { await viewModel.loadIfNeeded() }
         .accessibilityIdentifier("home.screen")
     }
 }

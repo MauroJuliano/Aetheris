@@ -10,7 +10,9 @@ struct ProfileScreenViewModelTests {
         let store = ProfileStoreSpy(profile: .fixture(name: "Cached"))
         let sut = ProfileScreenViewModel(store: store, service: ProfileServiceSpy())
 
-        #expect(sut.isLoading)
+        #expect(sut.loadingState == .initialLoading)
+        #expect(sut.isInitialLoading)
+        #expect(!sut.hasLoadingError)
         #expect(sut.profile.name == "Cached")
         #expect(sut.generalCells.count == 4)
         #expect(sut.notificationCells.count == 2)
@@ -25,7 +27,8 @@ struct ProfileScreenViewModelTests {
 
         await sut.load()
 
-        #expect(!sut.isLoading)
+        #expect(sut.loadingState == .loaded)
+        #expect(!sut.isInitialLoading)
         #expect(sut.profile.name == "Remote")
         #expect(sut.profile.email == "remote@example.com")
         #expect(sut.profile.phone == "999")
@@ -35,18 +38,63 @@ struct ProfileScreenViewModelTests {
     }
 
     @Test
-    func load_keepsSessionFallback_whenServiceFails() async {
+    func load_keepsSessionFallbackAndExposesRefreshError_whenServiceFails() async {
         let store = ProfileStoreSpy(profile: .fixture(name: "Offline User"))
         let service = ProfileServiceSpy(loadResult: .failure(URLError(.timedOut)))
         let sut = ProfileScreenViewModel(store: store, service: service)
 
         await sut.load()
 
-        #expect(!sut.isLoading)
+        #expect(sut.loadingState == .refreshFailed)
+        #expect(sut.hasLoadingError)
+        #expect(!sut.isRetrying)
         #expect(sut.profile.name == "Offline User")
         #expect(store.updatedProfiles.isEmpty)
         #expect(sut.notificationCells.count == 2)
         #expect(sut.footer.version == Strings.Profile.version)
+    }
+
+    @Test
+    func retry_replacesCachedContentAndClearsError_whenServiceRecovers() async {
+        let store = ProfileStoreSpy(profile: .fixture(name: "Cached"))
+        let service = ProfileServiceSpy(loadResult: .failure(URLError(.timedOut)))
+        let sut = ProfileScreenViewModel(store: store, service: service)
+        await sut.load()
+        service.loadResult = .success(.fixture(name: "Recovered"))
+
+        await sut.retry()
+
+        #expect(sut.loadingState == .loaded)
+        #expect(!sut.hasLoadingError)
+        #expect(sut.profile.name == "Recovered")
+        #expect(service.loadCalls == 2)
+    }
+
+    @Test
+    func retry_keepsCachedContentAndError_whenServiceFailsAgain() async {
+        let store = ProfileStoreSpy(profile: .fixture(name: "Cached"))
+        let service = ProfileServiceSpy(loadResult: .failure(URLError(.timedOut)))
+        let sut = ProfileScreenViewModel(store: store, service: service)
+        await sut.load()
+
+        await sut.retry()
+
+        #expect(sut.loadingState == .refreshFailed)
+        #expect(sut.hasLoadingError)
+        #expect(sut.profile.name == "Cached")
+        #expect(service.loadCalls == 2)
+    }
+
+    @Test
+    func retry_ignoresRequest_whenThereIsNoRefreshError() async {
+        let service = ProfileServiceSpy(loadResult: .success(.fixture()))
+        let sut = ProfileScreenViewModel(store: ProfileStoreSpy(profile: .fixture()), service: service)
+        await sut.load()
+
+        await sut.retry()
+
+        #expect(sut.loadingState == .loaded)
+        #expect(service.loadCalls == 1)
     }
 
     @Test
@@ -146,7 +194,7 @@ private final class ProfileStoreSpy: ProfileStoring {
 private final class ProfileServiceSpy: ProfileServicing {
     enum Result { case success(ProfileDashboardResponse), failure(Error) }
 
-    let loadResult: Result
+    var loadResult: Result
     let updateResult: Result
     private(set) var loadCalls = 0
     private(set) var updateRequests: [UpdateProfileRequest] = []

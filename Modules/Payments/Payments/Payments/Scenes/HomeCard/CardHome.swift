@@ -61,7 +61,7 @@ struct CardHome: View {
             }
         }
         .appScreenBackground()
-        .task { await viewModel.load() }
+        .task { await viewModel.loadIfNeeded() }
         .onChange(of: selectedCardIndex) { _, _ in
             refreshSummariesTransition()
         }

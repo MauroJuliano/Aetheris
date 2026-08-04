@@ -21,10 +21,17 @@ final class HomeAppViewModel: ObservableObject {
     private let service: any HomeAppServicing
     private let locale: Locale
     private var latestLoadID = UUID()
+    private var hasLoaded = false
 
     init(service: any HomeAppServicing, locale: Locale = .current) {
         self.service = service
         self.locale = locale
+    }
+
+    func loadIfNeeded() async {
+        guard !hasLoaded else { return }
+        hasLoaded = true
+        await load()
     }
 
     func load() async {
