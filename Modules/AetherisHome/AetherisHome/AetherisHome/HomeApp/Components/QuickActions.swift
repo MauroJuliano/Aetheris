@@ -1,7 +1,6 @@
 import AetherisDesignSystem
 import SwiftUI
 
-
 struct QuickActions: View {
     private let actions: [QuickActionItem] = [
         .init(title: Strings.QuickActions.transferTitle, subtitle: Strings.QuickActions.transferSubtitle, icon: "arrow.right.arrow.left"),
@@ -39,13 +38,6 @@ struct QuickActions: View {
         .padding(AppSpacing.medium)
         .appCardSurface()
     }
-}
-
-struct QuickActionItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let subtitle: String
-    let icon: String
 }
 
 struct QuickActionCard: View {
