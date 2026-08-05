@@ -1,11 +1,12 @@
 import AetherisDesignSystem
 import AetherisInsights
+import Foundation
 import SwiftUI
 
 struct HomeApp: View {
     @StateObject private var viewModel: HomeAppViewModel
     @State private var selectedCardIndex: Int = 0
-    let onCardTap: () -> Void
+    let onCardTap: (UUID) -> Void
     let onNotificationsTap: () -> Void
     let onSelectRecipient: (Beneficiary) -> Void
     let onSeeAllRecipientsTap: () -> Void
@@ -16,7 +17,7 @@ struct HomeApp: View {
 
     init(
         viewModel: HomeAppViewModel,
-        onCardTap: @escaping () -> Void,
+        onCardTap: @escaping (UUID) -> Void,
         onNotificationsTap: @escaping () -> Void,
         onSelectRecipient: @escaping (Beneficiary) -> Void,
         onSeeAllRecipientsTap: @escaping () -> Void,
@@ -76,7 +77,7 @@ struct HomeApp: View {
                     CardSwipe(
                         cards: $viewModel.cards,
                         selectedCardIndex: $selectedCardIndex,
-                        onTap: onCardTap
+                        onTap: openSelectedCard
                     )
 
                     RecipientsContainer(
@@ -104,5 +105,16 @@ struct HomeApp: View {
         }
         .task { await viewModel.loadIfNeeded() }
         .accessibilityIdentifier("home.screen")
+    }
+
+    private func openSelectedCard() {
+        guard let selectedCardId else { return }
+        onCardTap(selectedCardId)
+    }
+
+    private var selectedCardId: UUID? {
+        guard !viewModel.cards.isEmpty else { return nil }
+        let safeIndex = min(max(selectedCardIndex, 0), viewModel.cards.count - 1)
+        return viewModel.cards[safeIndex].id
     }
 }

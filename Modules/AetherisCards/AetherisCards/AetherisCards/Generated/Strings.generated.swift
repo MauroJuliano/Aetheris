@@ -14,6 +14,30 @@ internal enum Strings {
     /// Cards
     internal static let title = Strings.tr("Localizable", "CardHome.title", fallback: "Cards")
   }
+  internal enum CardInformation {
+    /// Aberta
+    internal static let openInvoice = Strings.tr("Localizable", "CardInformation.openInvoice", fallback: "Aberta")
+    /// Fechada
+    internal static let closedInvoice = Strings.tr("Localizable", "CardInformation.closedInvoice", fallback: "Fechada")
+    /// Fatura atual
+    internal static let currentInvoice = Strings.tr("Localizable", "CardInformation.currentInvoice", fallback: "Fatura atual")
+    /// Vence em breve
+    internal static let dueSoon = Strings.tr("Localizable", "CardInformation.dueSoon", fallback: "Vence em breve")
+    /// Vencimento
+    internal static let dueDate = Strings.tr("Localizable", "CardInformation.dueDate", fallback: "Vencimento")
+    /// Bloquear
+    internal static let lock = Strings.tr("Localizable", "CardInformation.lock", fallback: "Bloquear")
+    /// de %@
+    internal static func totalLimit(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "CardInformation.totalLimit", String(describing: p1), fallback: "de %@")
+    }
+    /// Desbloquear
+    internal static let unlock = Strings.tr("Localizable", "CardInformation.unlock", fallback: "Desbloquear")
+    /// Limite disponível
+    internal static let availableLimit = Strings.tr("Localizable", "CardInformation.availableLimit", fallback: "Limite disponível")
+    /// Cartão virtual
+    internal static let virtualCard = Strings.tr("Localizable", "CardInformation.virtualCard", fallback: "Cartão virtual")
+  }
   internal enum Common {
     /// Back
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")

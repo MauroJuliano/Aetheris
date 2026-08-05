@@ -16,7 +16,9 @@ extension HomeFlowCoordinator {
     var rootView: some View {
         HomeAppFactory.make(
             coreService: coreService,
-            onCardTap: { navigation.push(.card) },
+            onCardTap: { cardId in
+                navigation.push(.card(initialCardId: cardId))
+            },
             onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
                 selectedBeneficiary = beneficiary
@@ -40,10 +42,11 @@ extension HomeFlowCoordinator {
     @ViewBuilder
     func destinationView(for route: HomeRoute) -> some View {
         switch route {
-        case .card:
+        case .card(let initialCardId):
             CardsFactory.makeEmbedded(
                 coreService: coreService,
                 path: $navigation.path,
+                initialSelectedCardId: initialCardId,
                 onFinished: { popRoute() }
             )
             .navigationBarHidden(true)
@@ -110,7 +113,7 @@ extension HomeFlowCoordinator {
         case .beneficiaries:
             navigation.replaceCurrent(with: .beneficiaryList)
         case .cards:
-            navigation.replaceCurrent(with: .card)
+            navigation.replaceCurrent(with: .card())
         case .notifications:
             navigation.replaceCurrent(with: .notifications)
         case .reports:

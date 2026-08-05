@@ -6,19 +6,40 @@ import SwiftUI
 struct CardHome: View {
     @StateObject private var viewModel: HomeCardViewModel
     @State private var selectedCardIndex: Int = 0
+    @State private var didApplyInitialSelectedCard = false
+    @State private var isCardDetailsTransitioning = false
+    @State private var cardDetailsTransitionTask: Task<Void, Never>?
     @State private var isSummariesTransitioning = false
     @State private var summariesTransitionTask: Task<Void, Never>?
+    private let initialSelectedCardId: UUID?
     let onBackAction: (() -> Void)?
     let onTransactionHistoryTap: (UUID) -> Void
+    let onVirtualCardTap: (UUID) -> Void
+    let onInvoiceTap: (UUID) -> Void
+    let onDueDateTap: (UUID) -> Void
+    let onCardLockTap: (UUID, Bool) -> Void
+    let onQuickActionTap: (CardOptions) -> Void
 
     init(
         viewModel: HomeCardViewModel,
+        initialSelectedCardId: UUID? = nil,
         onBackAction: (() -> Void)? = nil,
-        onTransactionHistoryTap: @escaping (UUID) -> Void = { _ in }
+        onTransactionHistoryTap: @escaping (UUID) -> Void = { _ in },
+        onVirtualCardTap: @escaping (UUID) -> Void = { _ in },
+        onInvoiceTap: @escaping (UUID) -> Void = { _ in },
+        onDueDateTap: @escaping (UUID) -> Void = { _ in },
+        onCardLockTap: @escaping (UUID, Bool) -> Void = { _, _ in },
+        onQuickActionTap: @escaping (CardOptions) -> Void = { _ in }
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.initialSelectedCardId = initialSelectedCardId
         self.onBackAction = onBackAction
         self.onTransactionHistoryTap = onTransactionHistoryTap
+        self.onVirtualCardTap = onVirtualCardTap
+        self.onInvoiceTap = onInvoiceTap
+        self.onDueDateTap = onDueDateTap
+        self.onCardLockTap = onCardLockTap
+        self.onQuickActionTap = onQuickActionTap
     }
 
     var body: some View {
@@ -56,18 +77,27 @@ struct CardHome: View {
                     )
                 } else {
                     ScrollView(showsIndicators: false) {
-                        CardSwipe(
-                            cards: $viewModel.cards,
-                            selectedCardIndex: $selectedCardIndex
-                        )
+                        VStack(spacing: 0) {
+                            CardSwipe(
+                                cards: $viewModel.cards,
+                                selectedCardIndex: $selectedCardIndex
+                            )
 
-                        HomeQuickActions(actions: viewModel.quickActions)
+                            cardDetailsSection
+                                .padding(.horizontal, AppSpacing.screenHorizontal)
+                                .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+
+                            HomeQuickActions(
+                                actions: viewModel.quickActions,
+                                onAction: onQuickActionTap
+                            )
                             .padding(.horizontal, AppSpacing.screenHorizontal)
                             .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
 
-                        summariesSection
-                            .padding(.horizontal, AppSpacing.screenHorizontal)
-                            .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+                            summariesSection
+                                .padding(.horizontal, AppSpacing.screenHorizontal)
+                                .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
+                        }
                     }
                     .safeAreaInset(edge: .bottom) {
                         Color.clear
@@ -77,9 +107,15 @@ struct CardHome: View {
             }
         }
         .appScreenBackground()
-        .task { await viewModel.loadIfNeeded() }
+        .task {
+            await viewModel.loadIfNeeded()
+            applyInitialSelectedCardIfNeeded()
+        }
+        .onChange(of: viewModel.cards) { _, _ in
+            applyInitialSelectedCardIfNeeded()
+        }
         .onChange(of: selectedCardIndex) { _, _ in
-            refreshSummariesTransition()
+            refreshCardContentTransition()
         }
         .accessibilityIdentifier("cards.screen")
     }
@@ -95,6 +131,25 @@ struct CardHome: View {
         return viewModel.cards[safeIndex].id
     }
 
+    private func applyInitialSelectedCardIfNeeded() {
+        guard !didApplyInitialSelectedCard,
+              let initialSelectedCardId,
+              let initialSelectedCardIndex = viewModel.cards.firstIndex(where: { $0.id == initialSelectedCardId }) else {
+            return
+        }
+
+        selectedCardIndex = initialSelectedCardIndex
+        didApplyInitialSelectedCard = true
+    }
+
+    private var currentCardDetails: CardDetailsModel? {
+        guard let cardId = currentCardId else {
+            return nil
+        }
+
+        return viewModel.cardDetails.first { $0.cardId == cardId }
+    }
+
     private var currentSummaries: [FinancialSummaryModel] {
         guard let cardId = currentCardId else {
             return viewModel.summaries
@@ -102,6 +157,38 @@ struct CardHome: View {
 
         let filteredSummaries = viewModel.summaries.filter { $0.cardId == cardId }
         return filteredSummaries.isEmpty ? viewModel.summaries : filteredSummaries
+    }
+
+    @ViewBuilder
+    private var cardDetailsSection: some View {
+        ZStack {
+            if let details = currentCardDetails {
+                CardInformationContainer(
+                    model: details,
+                    onInvoiceTap: {
+                        guard let cardId = currentCardId else { return }
+                        onInvoiceTap(cardId)
+                    },
+                    onDueDateTap: {
+                        guard let cardId = currentCardId else { return }
+                        onDueDateTap(cardId)
+                    },
+                    onVirtualCardTap: {
+                        guard let cardId = currentCardId else { return }
+                        onVirtualCardTap(cardId)
+                    },
+                    onLockTap: {
+                        guard let cardId = currentCardId else { return }
+                        onCardLockTap(cardId, !details.isBlocked)
+                    }
+                )
+                .opacity(isCardDetailsTransitioning ? 0 : 1)
+            }
+
+            if isCardDetailsTransitioning {
+                CardInformationContainerSkeleton()
+            }
+        }
     }
 
     @ViewBuilder
@@ -115,6 +202,31 @@ struct CardHome: View {
 
             if isSummariesTransitioning {
                 FinancialSummaryContainerSkeleton()
+            }
+        }
+    }
+
+    private func refreshCardContentTransition() {
+        guard !viewModel.isLoading, !viewModel.isEmpty else { return }
+
+        refreshCardDetailsTransition()
+        refreshSummariesTransition()
+    }
+
+    private func refreshCardDetailsTransition() {
+        cardDetailsTransitionTask?.cancel()
+
+        cardDetailsTransitionTask = Task { @MainActor in
+            withAnimation(.easeInOut(duration: 0.12)) {
+                isCardDetailsTransitioning = true
+            }
+
+            try? await Task.sleep(nanoseconds: 320_000_000)
+
+            guard !Task.isCancelled else { return }
+
+            withAnimation(.easeInOut(duration: 0.22)) {
+                isCardDetailsTransitioning = false
             }
         }
     }
@@ -137,6 +249,71 @@ struct CardHome: View {
                 isSummariesTransitioning = false
             }
         }
+    }
+}
+
+private struct CardInformationContainerSkeleton: View {
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack(spacing: AppSpacing.medium) {
+                summaryColumn
+
+                Divider()
+                    .frame(height: 104)
+
+                summaryColumn
+            }
+            .padding(AppSpacing.medium)
+
+            Divider()
+                .padding(.horizontal, AppSpacing.medium)
+
+            HStack(spacing: AppSpacing.small) {
+                SkeletonView(.circle)
+                    .frame(width: 44, height: 44)
+
+                VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                    SkeletonBlock(width: 90, height: 14, radius: 7)
+                    SkeletonBlock(width: 110, height: 16, radius: 8)
+                }
+
+                Spacer()
+            }
+            .padding(AppSpacing.medium)
+
+            Divider()
+                .padding(.horizontal, AppSpacing.medium)
+
+            HStack(spacing: AppSpacing.large) {
+                managementAction
+                managementAction
+            }
+            .padding(AppSpacing.medium)
+        }
+        .appCardSurface()
+    }
+
+    private var summaryColumn: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+            SkeletonBlock(width: 120, height: 14, radius: 7)
+            SkeletonBlock(width: 100, height: 22, radius: 9)
+            SkeletonBlock(width: 130, height: 8, radius: 4)
+            SkeletonBlock(width: 90, height: 14, radius: 7)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var managementAction: some View {
+        VStack(spacing: AppSpacing.xSmall) {
+            SkeletonView(.circle)
+                .frame(
+                    width: AppComponentMetrics.mediumCircleSize,
+                    height: AppComponentMetrics.mediumCircleSize
+                )
+
+            SkeletonBlock(width: 90, height: 14, radius: 7)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 

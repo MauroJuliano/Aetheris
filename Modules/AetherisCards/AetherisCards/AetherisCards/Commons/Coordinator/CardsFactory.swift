@@ -18,10 +18,12 @@ public final class CardsFactory: CardsFactoryInterface {
     public static func makeEmbedded(
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
+        initialSelectedCardId: UUID? = nil,
         onFinished: @escaping () -> Void
     ) -> AnyView {
         AnyView(HomeCardFactory.make(
             coreService: coreService,
+            initialSelectedCardId: initialSelectedCardId,
             onBackAction: onFinished,
             onTransactionHistoryTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))

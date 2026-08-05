@@ -6,6 +6,17 @@
 "HomeCard.emptyTitle" = "No cards or activity yet";
 "HomeCard.emptyDescription" = "This area will reflect the dashboard when the simulated service returns data.";
 
+"CardInformation.availableLimit" = "Limite disponível";
+"CardInformation.currentInvoice" = "Fatura atual";
+"CardInformation.dueDate" = "Vencimento";
+"CardInformation.virtualCard" = "Cartão virtual";
+"CardInformation.lock" = "Bloquear";
+"CardInformation.unlock" = "Desbloquear";
+"CardInformation.totalLimit" = "de %@";
+"CardInformation.openInvoice" = "Aberta";
+"CardInformation.closedInvoice" = "Fechada";
+"CardInformation.dueSoon" = "Vence em breve";
+
 "QuickActions.sectionTitle" = "What would you like to do ?";
 "QuickActions.sendTitle" = "Send";
 "QuickActions.transferTitle" = "Transfer";

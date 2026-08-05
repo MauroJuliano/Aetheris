@@ -1,11 +1,12 @@
 import Core
+import Foundation
 import SwiftUI
 
 enum HomeAppFactory {
     @MainActor
     static func make(
         coreService: any HasCoreService,
-        onCardTap: @escaping () -> Void,
+        onCardTap: @escaping (UUID) -> Void,
         onNotificationsTap: @escaping () -> Void,
         onSelectRecipient: @escaping (Beneficiary) -> Void,
         onSeeAllRecipientsTap: @escaping () -> Void,

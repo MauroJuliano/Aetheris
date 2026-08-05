@@ -13,6 +13,7 @@ struct HomeCardViewModelTests {
         #expect(sut.isLoading)
         #expect(!sut.isEmpty)
         #expect(sut.cards.isEmpty)
+        #expect(sut.cardDetails.isEmpty)
         #expect(sut.summaries.isEmpty)
         #expect(sut.quickActions.isEmpty)
         #expect(sut.errorMessage == nil)
@@ -22,6 +23,7 @@ struct HomeCardViewModelTests {
     func load_mapsDashboard() async {
         let dashboard = HomeCardDashboard(
             cards: CardsMock.creditCardMocks,
+            cardDetails: [.fixture],
             summaries: [.fixture],
             quickActions: [.init(label: "Send", icon: "paperplane")]
         )
@@ -33,6 +35,7 @@ struct HomeCardViewModelTests {
         #expect(!sut.isLoading)
         #expect(!sut.isEmpty)
         #expect(sut.cards.count == 3)
+        #expect(sut.cardDetails.map(\.cardId) == [CardMockIDs.standard])
         #expect(sut.summaries.map(\.title) == ["Transfer"])
         #expect(sut.quickActions.map(\.label) == ["Send"])
         #expect(sut.errorMessage == nil)
@@ -42,6 +45,7 @@ struct HomeCardViewModelTests {
     func loadIfNeeded_loadsOnlyOnceAcrossRepeatedAppearances() async {
         let dashboard = HomeCardDashboard(
             cards: CardsMock.creditCardMocks,
+            cardDetails: [.fixture],
             summaries: [.fixture],
             quickActions: []
         )
@@ -71,7 +75,7 @@ struct HomeCardViewModelTests {
     func load_setsErrorAndRecoversOnRetry() async {
         let service = HomeCardServiceSpy(results: [
             .failure(URLError(.timedOut)),
-            .success(.init(cards: CardsMock.creditCardMocks, summaries: [], quickActions: []))
+            .success(.init(cards: CardsMock.creditCardMocks, cardDetails: [], summaries: [], quickActions: []))
         ])
         let sut = HomeCardViewModel(service: service)
 
@@ -88,7 +92,19 @@ struct HomeCardViewModelTests {
 }
 
 private extension HomeCardDashboard {
-    static let empty = HomeCardDashboard(cards: [], summaries: [], quickActions: [])
+    static let empty = HomeCardDashboard(cards: [], cardDetails: [], summaries: [], quickActions: [])
+}
+
+private extension CardDetailsModel {
+    static let fixture = CardDetailsModel(
+        cardId: CardMockIDs.standard,
+        availableLimit: 750,
+        totalLimit: 1_000,
+        currentInvoice: 250,
+        invoiceStatus: "Open",
+        dueDate: Date(),
+        isBlocked: false
+    )
 }
 
 private extension FinancialSummaryModel {
