@@ -2,7 +2,6 @@ import SwiftUI
 import AetherisAuthentication
 import AetherisAuthenticationInterface
 import AERegistration
-import Payments
 import Core
 
 @main
