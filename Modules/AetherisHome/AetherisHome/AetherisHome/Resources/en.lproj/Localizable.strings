@@ -1,0 +1,84 @@
+"Common.continueButton" = "Continue";
+"Common.errorSubmit" = "Failed to submit";
+"SendMoney.title" = "Transfer";
+"SendMoney.continueButton" = "Continue";
+
+"HomeApp.homeUnavailableTitle" = "Home unavailable";
+"HomeApp.noDashboardDataTitle" = "No dashboard data yet";
+"HomeApp.emptyDescription" = "The simulated payments service returned an empty response.";
+"HomeApp.genericErrorTitle" = "Something went wrong";
+"HomeApp.genericErrorDescription" = "We couldn't load your information. Please check your connection and try again.";
+"HomeApp.tryLater" = "Try later";
+"HomeApp.welcomePrefix" = "Welcome, ";
+"HomeApp.welcomeName" = "Blake!";
+"HomeApp.logout" = "Logout";
+"HomeApp.version" = "Version 0.00.1";
+"HomeApp.poweredBy" = "@2025 Powered by Blake";
+"HomeApp.accountTerms" = "Account terms - Privacy Policy";
+"HomeApp.cardsLoadFailed" = "We could not load your cards right now.";
+"HomeApp.cardOwnerOne" = "Jorge Henrique";
+"HomeApp.visaBrand" = "VISA";
+"HomeApp.rewardsHeadline" = "Rewards Available";
+"HomeApp.rewardsTitle" = "12,500 points";
+"HomeApp.rewardsCaption" = "Worth $125 in travel";
+"HomeApp.redeem" = "Redeem";
+"HomeApp.monthlySpendingHeadline" = "Monthly Spending";
+"HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
+"HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
+"HomeApp.seeInsights" = "See Insights";
+"HomeApp.cardOwnerTwo" = "Amado Batista";
+"HomeApp.mastercardBrand" = "MASTERCARD";
+"HomeApp.specialOfferHeadline" = "Special Offer";
+"HomeApp.specialOfferTitle" = "Travel Insurance";
+"HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
+"HomeApp.learnMore" = "Learn More";
+"HomeApp.noCreditCardHeadline" = "No Credit Card Yet?";
+"HomeApp.buildYourCreditTitle" = "Build Your Credit";
+"HomeApp.buildYourCreditCaption" = "Apply now for a Platinum Secured Card";
+"HomeApp.applyNow" = "Apply Now";
+
+"QuickActions.sectionTitle" = "What would you like to do ?";
+"QuickActions.sendTitle" = "Send";
+"QuickActions.transferTitle" = "Transfer";
+"QuickActions.transferSubtitle" = "Send money";
+"QuickActions.requestTitle" = "Request";
+"QuickActions.requestSubtitle" = "Receive money";
+"QuickActions.moreTitle" = "More";
+"QuickActions.moreSubtitle" = "All services";
+"QuickActions.payTitle" = "Pay";
+"QuickActions.paySubtitle" = "Pay bills";
+"QuickActions.topUpTitle" = "Top up";
+"QuickActions.topUpSubtitle" = "Add funds";
+
+"AllServices.title" = "All services";
+"AllServices.subtitle" = "Quick access to the main services available in the app.";
+"AllServices.transferMoney" = "Transfer money";
+"AllServices.manageBeneficiaries" = "Beneficiaries";
+"AllServices.cardCenter" = "Cards";
+"AllServices.notifications" = "Notifications";
+"AllServices.reports" = "Reports";
+
+"SpendingChart.title" = "Spending this month";
+"SpendingChart.total" = "$ 2,428.00";
+"SpendingChart.change" = "8.3%";
+"SpendingChart.comparison" = "vs last month";
+"SpendingChart.viewReport" = "View report";
+"SpendingChart.shopping" = "Shopping";
+"SpendingChart.bills" = "Bills";
+"SpendingChart.transport" = "Transport";
+"SpendingChart.foodAndDrinks" = "Food & Drinks";
+
+"NotificationsCentre.unavailableTitle" = "Notifications unavailable";
+"NotificationsCentre.emptyTitle" = "No notifications yet";
+"NotificationsCentre.emptyDescription" = "The simulated service has no notifications to show.";
+"NotificationsCentre.title" = "Notifications";
+
+"Common.tryAgain" = "Try again";
+"Common.back" = "Back";
+"Common.close" = "Close";
+
+"CardHome.title" = "Cards";
+
+"Recipients.title" = "Recipients";
+"Recipients.seeAll" = "See all";
+"Recipients.newRecipient" = "New\nrecipient";

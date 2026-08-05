@@ -16,7 +16,10 @@ struct AuthenticationFlowView: View {
         Group {
             if sessionStore.isAuthenticated {
                 MainTabContainer(
-                    paymentsFactory: dependencies.paymentsFactory
+                    homeFactory: dependencies.homeFactory,
+                    cardsFactory: dependencies.cardsFactory,
+                    transfersFactory: dependencies.transfersFactory,
+                    accountFactory: dependencies.accountFactory
                 )
             } else {
                 switch flow {

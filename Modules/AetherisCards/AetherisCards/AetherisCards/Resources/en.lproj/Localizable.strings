@@ -1,0 +1,56 @@
+"Common.tryAgain" = "Try again";
+"Common.back" = "Back";
+
+"CardHome.title" = "Cards";
+"HomeCard.cardsUnavailableTitle" = "Cards unavailable";
+"HomeCard.emptyTitle" = "No cards or activity yet";
+"HomeCard.emptyDescription" = "This area will reflect the dashboard when the simulated service returns data.";
+
+"QuickActions.sectionTitle" = "What would you like to do ?";
+"QuickActions.sendTitle" = "Send";
+"QuickActions.transferTitle" = "Transfer";
+"QuickActions.transferSubtitle" = "Send money";
+"QuickActions.requestTitle" = "Request";
+"QuickActions.requestSubtitle" = "Receive money";
+"QuickActions.moreTitle" = "More";
+"QuickActions.moreSubtitle" = "All services";
+"QuickActions.payTitle" = "Pay";
+"QuickActions.paySubtitle" = "Pay bills";
+"QuickActions.topUpTitle" = "Top up";
+"QuickActions.topUpSubtitle" = "Add funds";
+
+"TransactionHistory.title" = "Transaction History";
+"TransactionHistory.unavailableTitle" = "History unavailable";
+"TransactionHistory.emptyTitle" = "No transactions yet";
+"TransactionHistory.emptyDescription" = "This account does not have transaction history in the simulated dataset.";
+
+"TransactionsHistory.title" = "Transactions History";
+"TransactionsHistory.swarovski" = "Swarovski";
+"TransactionsHistory.payment" = "Payment";
+"TransactionsHistory.netflix" = "Netflix";
+"TransactionsHistory.subscription" = "Subscription";
+"TransactionsHistory.melissa" = "Melissa";
+"TransactionsHistory.transferReceived" = "Transfer received";
+"TransactionsHistory.apple" = "Apple";
+"TransactionsHistory.purchase" = "Purchase";
+"TransactionsHistory.salary" = "Salary";
+"TransactionsHistory.deposit" = "Deposit";
+
+"FinancialSummary.transferSent" = "Transfer sent";
+"FinancialSummary.transferSentDescription" = "Funds successfully transferred to Melissa";
+"FinancialSummary.transferSentAdeleDescription" = "Funds successfully transferred to Adele";
+"FinancialSummary.paymentReceived" = "Payment received";
+"FinancialSummary.paymentReceivedDescription" = "Funds received from Ed Sheeran";
+"FinancialSummary.netflix" = "Netflix";
+"FinancialSummary.appleBill" = "Apple.Com/Bill";
+"FinancialSummary.ifoodBar" = "Ifd* Bar do zé";
+"FinancialSummary.subscription" = "Subscription";
+"FinancialSummary.restaurant" = "Restaurant";
+"FinancialSummary.daysAgo" = "%d days ago";
+"FinancialSummary.monthAgo" = "%d month ago";
+
+"Notifications.sectionToday" = "Today";
+"Notifications.sectionYesterday" = "Yesterday";
+"Notifications.sectionLastWeek" = "Last Week";
+"Notifications.sectionLastMonth" = "Last Month";
+"Notifications.sectionOthers" = "Others";

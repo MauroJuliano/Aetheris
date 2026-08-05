@@ -1,5 +1,9 @@
 import AetherisDesignSystem
-import PaymentsInterface
+import AccountInterface
+import AetherisAuthenticationInterface
+import AetherisCardsInterface
+import AetherisHomeInterface
+import AetherisTransfersInterface
 import SwiftUI
 
 struct MainTabContainer: View {
@@ -7,7 +11,10 @@ struct MainTabContainer: View {
     @State private var showSendMoney = false
     @StateObject private var tabBarVisibilityStore = TabBarVisibilityStore()
     
-    let paymentsFactory: PaymentsFactoryInterface
+    let homeFactory: HomeFactoryInterface
+    let cardsFactory: CardsFactoryInterface
+    let transfersFactory: TransfersFactoryInterface
+    let accountFactory: AccountFactoryInterface
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -29,12 +36,9 @@ struct MainTabContainer: View {
             tabBarVisibilityStore.isVisible = true
         }
         .fullScreenCover(isPresented: $showSendMoney) {
-            paymentsFactory.make(
-                entryPoint: .sendMoney,
-                onFinished: {
+            transfersFactory.make(onFinished: {
                     showSendMoney = false
-                }
-            )
+                })
             .environmentObject(tabBarVisibilityStore)
         }
         .background(Color.backgroundColorA.ignoresSafeArea())
@@ -43,19 +47,19 @@ struct MainTabContainer: View {
     @ViewBuilder
     private var content: some View {
         ZStack {
-            paymentsFactory.make(entryPoint: .home, onFinished: {})
+            homeFactory.make()
                 .environmentObject(tabBarVisibilityStore)
                 .opacity(selectedIndex == 0 ? 1 : 0)
                 .allowsHitTesting(selectedIndex == 0)
                 .accessibilityHidden(selectedIndex != 0)
 
-            paymentsFactory.make(entryPoint: .card, onFinished: {})
+            cardsFactory.make(onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
                 .opacity(selectedIndex == 1 ? 1 : 0)
                 .allowsHitTesting(selectedIndex == 1)
                 .accessibilityHidden(selectedIndex != 1)
 
-            paymentsFactory.make(entryPoint: .profile, onFinished: {})
+            accountFactory.make(entryPoint: .profile, onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
                 .opacity(selectedIndex == 2 ? 1 : 0)
                 .allowsHitTesting(selectedIndex == 2)
