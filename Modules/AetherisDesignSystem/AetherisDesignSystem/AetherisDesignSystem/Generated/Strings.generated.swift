@@ -27,8 +27,6 @@ internal enum Strings {
   internal enum CardInfo {
     /// Apply Now
     internal static let applyNow = Strings.tr("Localizable", "CardInfo.applyNow", fallback: "Apply Now")
-    /// Learn More
-    internal static let learnMore = Strings.tr("Localizable", "CardInfo.learnMore", fallback: "Learn More")
     /// See Insights
     internal static let monthlySpendingButton = Strings.tr("Localizable", "CardInfo.monthlySpendingButton", fallback: "See Insights")
     /// Top category: Restaurants 🍔
@@ -51,12 +49,6 @@ internal enum Strings {
     internal static let rewardsHeadline = Strings.tr("Localizable", "CardInfo.rewardsHeadline", fallback: "Rewards Available")
     /// 12,500 points
     internal static let rewardsTitle = Strings.tr("Localizable", "CardInfo.rewardsTitle", fallback: "12,500 points")
-    /// Protect your trips starting at $12/mo
-    internal static let specialOfferCaption = Strings.tr("Localizable", "CardInfo.specialOfferCaption", fallback: "Protect your trips starting at $12/mo")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "CardInfo.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "CardInfo.specialOfferTitle", fallback: "Travel Insurance")
   }
   internal enum CardView {
     /// Rewards Available
@@ -73,10 +65,6 @@ internal enum Strings {
     internal static let noCreditCardHeadline = Strings.tr("Localizable", "CardsMock.noCreditCardHeadline", fallback: "No Credit Card Yet?")
     /// Build Your Credit
     internal static let noCreditCardTitle = Strings.tr("Localizable", "CardsMock.noCreditCardTitle", fallback: "Build Your Credit")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "CardsMock.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "CardsMock.specialOfferTitle", fallback: "Travel Insurance")
   }
   internal enum CreditCard {
     /// MASTERCARD

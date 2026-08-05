@@ -6,6 +6,7 @@ import SwiftUI
 
 struct HomeFlowCoordinator: View {
     let coreService: any HasCoreService
+    let identityValidation: any IdentityValidating
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
     @State var selectedBeneficiary = BeneficiaryFixtures.defaultSelection
     @State var navigation = HomeNavigationState()
@@ -22,6 +23,7 @@ struct HomeFlowCoordinator: View {
                     path: $navigation.path
                 ),
                 coreService: coreService,
+                identityValidation: identityValidation,
                 selectedBeneficiary: $selectedBeneficiary,
                 path: $navigation.path,
                 onFinished: { navigation.reset() }

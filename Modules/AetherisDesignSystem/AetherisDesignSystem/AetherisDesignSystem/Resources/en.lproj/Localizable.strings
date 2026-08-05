@@ -41,10 +41,6 @@
 "CardInfo.monthlySpendingTitle" = "You spent $2,310 in August";
 "CardInfo.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "CardInfo.monthlySpendingButton" = "See Insights";
-"CardInfo.specialOfferHeadline" = "Special Offer";
-"CardInfo.specialOfferTitle" = "Travel Insurance";
-"CardInfo.specialOfferCaption" = "Protect your trips starting at $12/mo";
-"CardInfo.learnMore" = "Learn More";
 "CardInfo.noCreditCardHeadline" = "No Credit Card Yet?";
 "CardInfo.noCreditCardTitle" = "Build Your Credit";
 "CardInfo.noCreditCardCaption" = "Apply now for a Platinum Secured Card";
@@ -55,8 +51,6 @@
 
 "CardsMock.monthlySpendingHeadline" = "Monthly Spending";
 "CardsMock.monthlySpendingTitle" = "You spent $2,310 in August";
-"CardsMock.specialOfferHeadline" = "Special Offer";
-"CardsMock.specialOfferTitle" = "Travel Insurance";
 "CardsMock.noCreditCardHeadline" = "No Credit Card Yet?";
 "CardsMock.noCreditCardTitle" = "Build Your Credit";
 "CreditCard.ownerName" = "Jorge Henrique";

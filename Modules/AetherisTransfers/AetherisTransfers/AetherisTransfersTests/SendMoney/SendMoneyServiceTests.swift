@@ -69,32 +69,6 @@ struct SendMoneyServiceTests {
     }
 
     @Test
-    func validatePin_postsToIdentityEndpointAndReturnsAuthorization() async throws {
-        let coreService = CoreServiceTestDouble()
-        let sut = SendMoneyService(coreService: coreService)
-
-        let authorization = try await sut.validate(pin: "1234")
-
-        #expect(authorization.token == "demo-transfer-authorization")
-        #expect(coreService.calls == [
-            .init(path: "/security/identity/validate", method: .post)
-        ])
-    }
-
-    @Test
-    func validatePin_throwsRejected_whenIdentityDoesNotAuthorize() async {
-        let coreService = CoreServiceTestDouble()
-        let sut = SendMoneyService(coreService: coreService)
-
-        do {
-            _ = try await sut.validate(pin: "0000")
-            #expect(Bool(false))
-        } catch {
-            #expect((error as? IdentityValidationError) == .rejected)
-        }
-    }
-
-    @Test
     func submitTransfer_postsWithIdempotencyKeyAndReturnsBackendReceipt() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = SendMoneyService(coreService: coreService)

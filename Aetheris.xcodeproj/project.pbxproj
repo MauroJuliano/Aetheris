@@ -112,9 +112,17 @@
 		F645C172CAB2CCE761F4AFC5 /* AetherisDesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; };
 		F80DF3916815E5CD8FAD2F67 /* AetherisNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C467F7752CD2F88D7AF88191 /* AetherisNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F81E679143666A32DC6EBA36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5895AA430AC85BD2EC4F0E1 /* Foundation.framework */; };
+		F1000001302D000000000001 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F1000002302D000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9B536FD2F4E6E16005C2C96;
+			remoteInfo = AetherisAuthenticationInterface;
+		};
 		05291EC48721A57CC7E620F2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
@@ -1022,6 +1030,7 @@
 				CDF6CF897CB418C83683A6E3 /* AetherisTransfersInterface.framework in Frameworks */,
 				964B91F7BBFCDD7F24F4327D /* Core.framework in Frameworks */,
 				B01FAFB29A8D89FAB40078BD /* AetherisDesignSystem.framework in Frameworks */,
+				F1000001302D000000000001 /* AetherisAuthenticationInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1912,6 +1921,7 @@
 				A14F21E809EC07A641A31327 /* PBXTargetDependency */,
 				4D3F89EE9A60A4603861BB56 /* PBXTargetDependency */,
 				9CC6634538E0DE7D49AF97B7 /* PBXTargetDependency */,
+				F1000003302D000000000001 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				7B37B8A82C05385AD8BDAB34 /* AetherisTransfers */,
@@ -3023,6 +3033,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F1000003302D000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisAuthenticationInterface;
+			target = A9B536FD2F4E6E16005C2C96 /* AetherisAuthenticationInterface */;
+			targetProxy = F1000002302D000000000001 /* PBXContainerItemProxy */;
+		};
 		1EBB49E9FAE49AEA4D967B79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AetherisDesignSystem;

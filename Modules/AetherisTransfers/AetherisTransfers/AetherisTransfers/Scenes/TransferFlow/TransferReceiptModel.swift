@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Foundation
 
 struct TransferDraft: Hashable {
@@ -8,11 +9,6 @@ struct TransferDraft: Hashable {
     let beneficiaryIdentifier: String
     let accountName: String
     let accountLastDigits: String
-}
-
-struct IdentityAuthorization: Codable, Hashable {
-    let token: String
-    let expiresAt: String
 }
 
 struct TransferSubmission: Hashable {

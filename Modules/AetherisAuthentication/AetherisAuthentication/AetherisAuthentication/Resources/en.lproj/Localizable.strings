@@ -19,3 +19,6 @@
 "ForgotPassword.sendResetLink" = "Send reset link";
 "ForgotPassword.rememberPassword" = "Remember your password?";
 "ForgotPassword.backToLogin" = "Back to login";
+"IdentityValidation.errorTitle" = "We couldn't confirm your identity";
+"IdentityValidation.errorDescription" = "The PIN could not be validated. Please review it and start again.";
+"IdentityValidation.close" = "Close";

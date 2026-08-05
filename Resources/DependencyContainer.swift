@@ -29,9 +29,16 @@ final class DependencyContainer: HasRegistration,
     }
 
     lazy var registrationFactory: RegistrationFactoryInterface = RegistrationFactory(coreService: coreService)
-    lazy var homeFactory: HomeFactoryInterface = HomeFactory(coreService: coreService)
+    lazy var identityValidation: IdentityValidating = IdentityValidationFactory(coreService: coreService)
+    lazy var homeFactory: HomeFactoryInterface = HomeFactory(
+        coreService: coreService,
+        identityValidation: identityValidation
+    )
     lazy var cardsFactory: CardsFactoryInterface = CardsFactory(coreService: coreService)
-    lazy var transfersFactory: TransfersFactoryInterface = TransfersFeatureFactory(coreService: coreService)
+    lazy var transfersFactory: TransfersFactoryInterface = TransfersFeatureFactory(
+        coreService: coreService,
+        identityValidation: identityValidation
+    )
     lazy var accountFactory: AccountFactoryInterface = AccountFactory(coreService: coreService)
     lazy var authenticationFactory: AuthenticationFactoryInterface = AuthenticationFactory(dependencies: self)
 }

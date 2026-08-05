@@ -51,6 +51,7 @@ extension HomeFlowCoordinator {
         case .sendMoney:
             TransfersFactory.makeEmbedded(
                 coreService: coreService,
+                identityValidation: identityValidation,
                 selectedBeneficiary: $selectedBeneficiary,
                 path: $navigation.path,
                 onFinished: { navigation.reset() }

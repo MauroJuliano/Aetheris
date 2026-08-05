@@ -1,3 +1,4 @@
+import AetherisAuthenticationInterface
 import Core
 import AetherisTransfersInterface
 import Foundation
@@ -8,11 +9,13 @@ public enum TransfersFactory {
     @MainActor
     public static func make(
         coreService: any HasCoreService,
+        identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary>,
         onFinished: @escaping () -> Void
     ) -> AnyView {
         AnyView(SendMoneyFlowCoordinator(
             coreService: coreService,
+            identityValidation: identityValidation,
             selectedBeneficiary: selectedBeneficiary,
             onBackAction: onFinished
         ))
@@ -21,6 +24,7 @@ public enum TransfersFactory {
     @MainActor
     public static func makeEmbedded(
         coreService: any HasCoreService,
+        identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
@@ -42,6 +46,7 @@ public enum TransfersFactory {
     public static func makeNavigationHost(
         content: AnyView,
         coreService: any HasCoreService,
+        identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
@@ -51,6 +56,7 @@ public enum TransfersFactory {
                 embeddedDestination(
                     for: route,
                     coreService: coreService,
+                    identityValidation: identityValidation,
                     selectedBeneficiary: selectedBeneficiary,
                     path: path,
                     onFinished: onFinished
@@ -82,6 +88,7 @@ public enum TransfersFactory {
     private static func embeddedDestination(
         for route: SendMoneyFlowRoute,
         coreService: any HasCoreService,
+        identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
@@ -99,18 +106,23 @@ public enum TransfersFactory {
             .navigationBarHidden(true)
 
         case .pin(let draft):
-            TransferPinFactory.make(
-                coreService: coreService,
-                draft: draft,
-                onBack: { pop(path) },
-                onAuthorized: { authorization in
-                    path.wrappedValue.append(SendMoneyFlowRoute.processing(.init(
-                        draft: draft,
-                        authorization: authorization,
-                        idempotencyKey: UUID().uuidString
-                    )))
-                },
-                onValidationFailed: { pop(path) }
+            identityValidation.authenticate(
+                content: identityContent(for: draft),
+                onCancel: { pop(path) },
+                onResult: { result in
+                    switch result {
+                    case let .authorized(authorization):
+                        path.wrappedValue.append(SendMoneyFlowRoute.processing(.init(
+                            draft: draft,
+                            authorization: authorization,
+                            idempotencyKey: UUID().uuidString
+                        )))
+                    case .failed:
+                        returnToSendMoney(path)
+                    @unknown default:
+                        returnToSendMoney(path)
+                    }
+                }
             )
             .navigationBarHidden(true)
 
@@ -155,5 +167,13 @@ public enum TransfersFactory {
     private static func returnToSendMoney(_ path: Binding<NavigationPath>) {
         guard path.wrappedValue.count > 1 else { return }
         path.wrappedValue.removeLast(path.wrappedValue.count - 1)
+    }
+
+    private static func identityContent(for draft: TransferDraft) -> IdentityValidationContent {
+        IdentityValidationContent(
+            navigationTitle: Strings.TransferPin.confirmTransfer,
+            title: Strings.TransferPin.title,
+            description: Strings.TransferPin.subtitle(draft.formattedAmount, draft.beneficiaryName)
+        )
     }
 }

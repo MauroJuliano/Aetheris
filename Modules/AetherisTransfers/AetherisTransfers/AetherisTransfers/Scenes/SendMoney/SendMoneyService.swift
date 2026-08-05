@@ -3,7 +3,6 @@ import Foundation
 
 protocol SendMoneyServicing {
     func loadSession() async throws -> SendMoneySession
-    func validate(pin: String) async throws -> IdentityAuthorization
     func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse
 }
 
@@ -23,19 +22,6 @@ struct SendMoneySession: Codable, Hashable {
     let account: Account
 }
 
-private struct IdentityValidationRequest: Encodable {
-    let pin: String
-}
-
-private struct IdentityValidationResponse: Codable {
-    let isAuthorized: Bool
-    let authorization: IdentityAuthorization?
-}
-
-enum IdentityValidationError: Error, Equatable {
-    case rejected
-}
-
 final class SendMoneyService: SendMoneyServicing {
     private let coreService: any HasCoreService
 
@@ -45,16 +31,6 @@ final class SendMoneyService: SendMoneyServicing {
 
     func loadSession() async throws -> SendMoneySession {
         try await coreService.execute(SendMoneyEndpoint.session)
-    }
-
-    func validate(pin: String) async throws -> IdentityAuthorization {
-        let response: IdentityValidationResponse = try await coreService.execute(
-            SendMoneyEndpoint.validateIdentity(.init(pin: pin))
-        )
-        guard response.isAuthorized, let authorization = response.authorization else {
-            throw IdentityValidationError.rejected
-        }
-        return authorization
     }
 
     func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
@@ -76,7 +52,6 @@ final class SendMoneyService: SendMoneyServicing {
 
 private enum SendMoneyEndpoint {
     case session
-    case validateIdentity(IdentityValidationRequest)
     case submitTransfer(
         request: TransferRequest,
         draft: TransferDraft,
@@ -89,8 +64,6 @@ extension SendMoneyEndpoint: Endpoint {
         switch self {
         case .session:
             "/payments/send-money/session"
-        case .validateIdentity:
-            "/security/identity/validate"
         case .submitTransfer:
             "/payments/transfers"
         }
@@ -99,7 +72,7 @@ extension SendMoneyEndpoint: Endpoint {
     var method: HTTPMethod {
         switch self {
         case .session: .get
-        case .validateIdentity, .submitTransfer: .post
+        case .submitTransfer: .post
         }
     }
 
@@ -112,8 +85,6 @@ extension SendMoneyEndpoint: Endpoint {
         switch self {
         case .session:
             nil
-        case let .validateIdentity(request):
-            request
         case let .submitTransfer(request, _, _):
             request
         }
@@ -123,13 +94,6 @@ extension SendMoneyEndpoint: Endpoint {
         switch self {
         case .session:
             return Self.encodeOrEmpty(SendMoneySession.mock)
-        case let .validateIdentity(request):
-            let authorization = request.pin == "1234"
-                ? IdentityAuthorization(token: "demo-transfer-authorization", expiresAt: "2026-08-04T12:00:00Z")
-                : nil
-            return Self.encodeOrEmpty(
-                IdentityValidationResponse(isAuthorized: authorization != nil, authorization: authorization)
-            )
         case let .submitTransfer(_, draft, idempotencyKey):
             return Self.encodeOrEmpty(
                 TransferReceiptResponse(
