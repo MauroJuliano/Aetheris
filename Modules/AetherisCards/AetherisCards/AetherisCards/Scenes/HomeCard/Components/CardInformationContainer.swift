@@ -5,17 +5,10 @@ struct CardInformationContainer: View {
     let model: CardDetailsModel
     let onInvoiceTap: () -> Void
     let onDueDateTap: () -> Void
-    let onVirtualCardTap: () -> Void
-    let onLockTap: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
             financialInformation
-
-            Divider()
-                .padding(.horizontal, AppSpacing.medium)
-
-            managementActions
         }
         .appCardSurface()
     }
@@ -128,49 +121,6 @@ struct CardInformationContainer: View {
         .buttonStyle(.plain)
     }
 
-    private var managementActions: some View {
-        HStack(spacing: AppSpacing.small) {
-            CardManagementButton(
-                label: Strings.CardInformation.virtualCard,
-                icon: "creditcard",
-                color: .brandPrimaryColor,
-                action: onVirtualCardTap
-            )
-
-            CardManagementButton(
-                label: model.isBlocked ? Strings.CardInformation.unlock : Strings.CardInformation.lock,
-                icon: model.isBlocked ? "lock.open" : "lock",
-                color: model.isBlocked ? .success : .red,
-                action: onLockTap
-            )
-        }
-        .padding(AppSpacing.medium)
-    }
-}
-
-private struct CardManagementButton: View {
-    let label: String
-    let icon: String
-    let color: Color
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            VStack(spacing: AppSpacing.xSmall) {
-                CircleIcon(icon: icon, color: color)
-
-                Text(label)
-                    .font(AppTypography.cellCaption)
-                    .bold()
-                    .foregroundStyle(Color.textPrimary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-            }
-            .frame(maxWidth: .infinity)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-    }
 }
 
 private struct CircleIcon: View {

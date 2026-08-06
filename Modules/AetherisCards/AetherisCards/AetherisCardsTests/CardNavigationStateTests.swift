@@ -43,6 +43,16 @@ struct CardNavigationStateTests {
     }
 
     @Test
+    func showCardLock_preservesCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showCardLock(cardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.cardLock(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
     func pop_returnsToRootAndIsSafeWhenAlreadyEmpty() {
         var sut = CardNavigationState()
         sut.showTransactionHistory(cardID: CardMockIDs.standard)

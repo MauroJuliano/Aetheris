@@ -39,6 +39,10 @@ internal enum Strings {
     internal static let continueButton = Strings.tr("Localizable", "Common.continueButton", fallback: "Continue")
     /// Failed to submit
     internal static let errorSubmit = Strings.tr("Localizable", "Common.errorSubmit", fallback: "Failed to submit")
+    /// Help
+    internal static let help = Strings.tr("Localizable", "Common.help", fallback: "Help")
+    /// OK
+    internal static let ok = Strings.tr("Localizable", "Common.ok", fallback: "OK")
     /// Try again
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
   }
@@ -109,6 +113,50 @@ internal enum Strings {
     internal static let welcomeName = Strings.tr("Localizable", "HomeApp.welcomeName", fallback: "Blake!")
     /// Welcome, 
     internal static let welcomePrefix = Strings.tr("Localizable", "HomeApp.welcomePrefix", fallback: "Welcome, ")
+  }
+  internal enum RequestMoney {
+    /// How much do you want to request?
+    internal static let amountTitle = Strings.tr("Localizable", "RequestMoney.amountTitle", fallback: "How much do you want to request?")
+    /// Contact or key
+    internal static let contactMode = Strings.tr("Localizable", "RequestMoney.contactMode", fallback: "Contact or key")
+    /// Request money from friends, family, or anyone using a contact or Pix key.
+    internal static let description = Strings.tr("Localizable", "RequestMoney.description", fallback: "Request money from friends, family, or anyone using a contact or Pix key.")
+    /// Edit
+    internal static let edit = Strings.tr("Localizable", "RequestMoney.edit", fallback: "Edit")
+    /// We could not send the request
+    internal static let errorTitle = Strings.tr("Localizable", "RequestMoney.errorTitle", fallback: "We could not send the request")
+    /// The request will be sent via Pix. Your contact can pay quickly and securely.
+    internal static let previewInformation = Strings.tr("Localizable", "RequestMoney.previewInformation", fallback: "The request will be sent via Pix. Your contact can pay quickly and securely.")
+    /// Request preview
+    internal static let previewTitle = Strings.tr("Localizable", "RequestMoney.previewTitle", fallback: "Request preview")
+    /// Ex: Split dinner, gift, rent...
+    internal static let reasonPlaceholder = Strings.tr("Localizable", "RequestMoney.reasonPlaceholder", fallback: "Ex: Split dinner, gift, rent...")
+    /// Reason (optional)
+    internal static let reasonTitle = Strings.tr("Localizable", "RequestMoney.reasonTitle", fallback: "Reason (optional)")
+    /// Recent contacts
+    internal static let recentContacts = Strings.tr("Localizable", "RequestMoney.recentContacts", fallback: "Recent contacts")
+    /// Name, phone, email, or Pix key
+    internal static let recipientPlaceholder = Strings.tr("Localizable", "RequestMoney.recipientPlaceholder", fallback: "Name, phone, email, or Pix key")
+    /// Who do you want to request from?
+    internal static let recipientTitle = Strings.tr("Localizable", "RequestMoney.recipientTitle", fallback: "Who do you want to request from?")
+    /// Send request
+    internal static let sendRequest = Strings.tr("Localizable", "RequestMoney.sendRequest", fallback: "Send request")
+    /// How much do you want to charge?
+    internal static let shareAmountTitle = Strings.tr("Localizable", "RequestMoney.shareAmountTitle", fallback: "How much do you want to charge?")
+    /// A payment request link will be created for you to share in any app.
+    internal static let shareDescription = Strings.tr("Localizable", "RequestMoney.shareDescription", fallback: "A payment request link will be created for you to share in any app.")
+    /// Share request
+    internal static let shareMode = Strings.tr("Localizable", "RequestMoney.shareMode", fallback: "Share request")
+    /// Share request
+    internal static let shareRequest = Strings.tr("Localizable", "RequestMoney.shareRequest", fallback: "Share request")
+    /// Request money
+    internal static let title = Strings.tr("Localizable", "RequestMoney.title", fallback: "Request money")
+    /// To
+    internal static let to = Strings.tr("Localizable", "RequestMoney.to", fallback: "To")
+    /// We could not load your contacts
+    internal static let unavailableTitle = Strings.tr("Localizable", "RequestMoney.unavailableTitle", fallback: "We could not load your contacts")
+    /// You request
+    internal static let youRequest = Strings.tr("Localizable", "RequestMoney.youRequest", fallback: "You request")
   }
   internal enum SendMoney {
     /// Continue

@@ -61,6 +61,8 @@
 "Common.tryAgain" = "Try again";
 "Common.back" = "Back";
 "Common.close" = "Close";
+"Common.ok" = "OK";
+"Common.help" = "Help";
 
 "BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
 "BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";
@@ -74,3 +76,24 @@
 
 "TransferBeneficiary.change" = "Change";
 
+"RequestMoney.title" = "Request money";
+"RequestMoney.description" = "Request money from friends, family, or anyone using a contact or Pix key.";
+"RequestMoney.contactMode" = "Contact or key";
+"RequestMoney.shareMode" = "Share request";
+"RequestMoney.recipientTitle" = "Who do you want to request from?";
+"RequestMoney.recipientPlaceholder" = "Name, phone, email, or Pix key";
+"RequestMoney.recentContacts" = "Recent contacts";
+"RequestMoney.amountTitle" = "How much do you want to request?";
+"RequestMoney.shareAmountTitle" = "How much do you want to charge?";
+"RequestMoney.edit" = "Edit";
+"RequestMoney.reasonTitle" = "Reason (optional)";
+"RequestMoney.reasonPlaceholder" = "Ex: Split dinner, gift, rent...";
+"RequestMoney.previewTitle" = "Request preview";
+"RequestMoney.youRequest" = "You request";
+"RequestMoney.to" = "To";
+"RequestMoney.previewInformation" = "The request will be sent via Pix. Your contact can pay quickly and securely.";
+"RequestMoney.shareDescription" = "A payment request link will be created for you to share in any app.";
+"RequestMoney.sendRequest" = "Send request";
+"RequestMoney.shareRequest" = "Share request";
+"RequestMoney.unavailableTitle" = "We could not load your contacts";
+"RequestMoney.errorTitle" = "We could not send the request";

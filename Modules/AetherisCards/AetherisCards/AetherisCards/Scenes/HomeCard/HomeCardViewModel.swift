@@ -38,7 +38,10 @@ final class HomeCardViewModel: ObservableObject {
             quickActions = loadedDashboard.quickActions
             isEmpty = cards.isEmpty && summaries.isEmpty
         } catch {
-            errorMessage = "We could not load your cards and activity right now."
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: "We could not load your cards and activity right now."
+            )
         }
 
         isLoading = false

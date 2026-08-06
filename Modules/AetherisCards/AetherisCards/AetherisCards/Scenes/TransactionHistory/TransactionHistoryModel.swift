@@ -30,7 +30,10 @@ final class TransactionHistoryViewModel: ObservableObject {
             buildSections(from: transactions)
             isEmpty = transactions.isEmpty
         } catch {
-            errorMessage = "We could not load your transaction history."
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: "We could not load your transaction history."
+            )
         }
 
         isLoading = false

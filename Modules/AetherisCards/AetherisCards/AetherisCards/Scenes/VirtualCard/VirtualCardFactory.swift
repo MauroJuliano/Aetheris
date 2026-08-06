@@ -15,7 +15,7 @@ enum VirtualCardFactory {
         VirtualCardScreen(
             viewModel: VirtualCardViewModel(
                 physicalCardId: physicalCardId,
-                service: VirtualCardServiceMock(physicalCardId: physicalCardId)
+                service: VirtualCardService(coreService: coreService)
             ),
             onBackAction: onBackAction,
             onSettingsTap: onSettingsTap,

@@ -140,10 +140,10 @@ private extension HomeCardDashboard {
             )
         ],
         quickActions: [
-            .init(label: Strings.QuickActions.sendTitle, icon: "paperplane.fill"),
-            .init(label: Strings.QuickActions.requestTitle, icon: "arrow.down"),
-            .init(label: Strings.QuickActions.payTitle, icon: "creditcard.fill"),
-            .init(label: Strings.QuickActions.topUpTitle, icon: "plus")
+            .init(id: CardOptions.sendId, label: Strings.QuickActions.sendTitle, icon: "paperplane.fill"),
+            .init(id: CardOptions.requestId, label: Strings.QuickActions.requestTitle, icon: "arrow.down"),
+            .init(id: CardOptions.payId, label: Strings.QuickActions.payTitle, icon: "creditcard.fill"),
+            .init(id: CardOptions.topUpId, label: Strings.QuickActions.topUpTitle, icon: "plus")
         ]
     )
 }

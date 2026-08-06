@@ -84,6 +84,23 @@ public enum TransfersFactory {
     }
 
     @MainActor
+    public static func makeRequestMoney(
+        coreService: any HasCoreService,
+        onBack: @escaping () -> Void,
+        onFinished: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            RequestMoneyFactory.make(
+                coreService: coreService,
+                onBackAction: onBack,
+                onSuccess: { _ in
+                    onFinished()
+                }
+            )
+        )
+    }
+
+    @MainActor
     @ViewBuilder
     private static func embeddedDestination(
         for route: SendMoneyFlowRoute,

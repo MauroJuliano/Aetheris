@@ -33,6 +33,9 @@ public final class CardsFactory: CardsFactoryInterface {
             },
             onInvoiceTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.currentInvoice(cardID))
+            },
+            onCardLockTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.cardLock(cardID))
             }
         ))
     }
@@ -77,6 +80,18 @@ public final class CardsFactory: CardsFactoryInterface {
                         },
                         onTransactionHistoryTap: { invoiceID in
                             path.wrappedValue.append(CardFlowRoute.transactionHistory(invoiceID))
+                        }
+                    )
+                case .cardLock(let cardID):
+                    CardLockFactory.make(
+                        coreService: coreService,
+                        cardId: cardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onVirtualCardTap: { cardID in
+                            path.wrappedValue.append(CardFlowRoute.virtualCard(cardID))
                         }
                     )
                 }

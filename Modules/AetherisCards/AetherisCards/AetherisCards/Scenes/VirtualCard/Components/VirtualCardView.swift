@@ -32,20 +32,20 @@ struct VirtualCardView: View {
         RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
             .fill(
                 LinearGradient(
-                    colors: [
-                        Color.brandPrimaryColor,
-                        Color.brandSecondaryColor,
-                        Color.brandTertiaryColor
-                    ],
+                    colors: model.style.cardsGradientColors,
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
             )
             .overlay {
+                model.style.cardsAccentOverlay
+                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous))
+            }
+            .overlay {
                 decorativeShapes
                     .clipShape(RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous))
             }
-            .shadow(color: Color.brandPrimaryColor.opacity(0.25), radius: 16, y: 8)
+            .shadow(color: model.style.cardsShadowColor, radius: 16, y: 8)
     }
 
     private var decorativeShapes: some View {
@@ -67,12 +67,12 @@ struct VirtualCardView: View {
             Text("VIRTUAL")
                 .font(AppTypography.cellCaption)
                 .bold()
-                .foregroundStyle(Color.white)
+                .foregroundStyle(model.style.cardsForegroundColor)
                 .padding(.horizontal, AppSpacing.small)
                 .padding(.vertical, AppSpacing.xxxSmall)
                 .overlay {
                     RoundedRectangle(cornerRadius: AppRadius.small, style: .continuous)
-                        .stroke(Color.white.opacity(0.6))
+                        .stroke(model.style.cardsForegroundColor.opacity(0.6))
                 }
 
             Spacer()
@@ -80,37 +80,37 @@ struct VirtualCardView: View {
             Button(action: onVisibilityTap) {
                 Image(systemName: isContentVisible ? "eye.slash" : "eye")
                     .font(.system(size: 24, weight: .medium))
-                    .foregroundStyle(Color.white)
+                    .foregroundStyle(model.style.cardsForegroundColor)
                     .frame(width: 44, height: 44)
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(isContentVisible ? "Ocultar dados do cartão" : "Mostrar dados do cartão")
+            .accessibilityLabel(isContentVisible ? "Hide card details" : "Show card details")
         }
     }
 
     private var cardNumber: some View {
         Text(isContentVisible ? model.formattedNumber : model.maskedNumber)
             .font(.system(size: 23, weight: .medium, design: .rounded))
-            .foregroundStyle(Color.white)
+            .foregroundStyle(model.style.cardsForegroundColor)
             .lineLimit(1)
             .minimumScaleFactor(0.75)
-            .accessibilityLabel("Número do cartão")
-            .accessibilityValue(isContentVisible ? model.formattedNumber : "Número oculto")
+            .accessibilityLabel("Card number")
+            .accessibilityValue(isContentVisible ? model.formattedNumber : "Hidden number")
     }
 
     private var footer: some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: AppSpacing.medium) {
                 HStack(spacing: AppSpacing.xLarge) {
-                    cardField(title: "Válido até", value: isContentVisible ? model.expirationDate : "••/••")
+                    cardField(title: "Valid until", value: isContentVisible ? model.expirationDate : "••/••")
                     cardField(title: "CVC", value: isContentVisible ? model.securityCode : "•••")
                 }
 
                 Text(model.holderName.uppercased())
                     .font(AppTypography.body)
                     .bold()
-                    .foregroundStyle(Color.white)
+                    .foregroundStyle(model.style.cardsForegroundColor)
                     .lineLimit(1)
             }
 
@@ -118,7 +118,7 @@ struct VirtualCardView: View {
 
             Text(model.brand.rawValue)
                 .font(.system(size: 22, weight: .bold))
-                .foregroundStyle(Color.white)
+                .foregroundStyle(model.style.cardsForegroundColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
         }
@@ -128,12 +128,12 @@ struct VirtualCardView: View {
         VStack(alignment: .leading, spacing: AppSpacing.xxxSmall) {
             Text(title)
                 .font(AppTypography.cellCaption)
-                .foregroundStyle(Color.white.opacity(0.8))
+                .foregroundStyle(model.style.cardsSecondaryForegroundColor)
 
             Text(value)
                 .font(AppTypography.body)
                 .bold()
-                .foregroundStyle(Color.white)
+                .foregroundStyle(model.style.cardsForegroundColor)
         }
     }
 }

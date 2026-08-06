@@ -30,6 +30,9 @@ extension HomeFlowCoordinator {
                 selectedBeneficiary = BeneficiaryFixtures.defaultSelection
                 navigation.push(.sendMoney)
             },
+            onRequestMoneyTap: {
+                navigation.push(.requestMoney)
+            },
             onMoreTap: {
                 withAnimation(.easeInOut(duration: 0.25)) {
                     navigation.push(.allServices)
@@ -58,6 +61,14 @@ extension HomeFlowCoordinator {
                 selectedBeneficiary: $selectedBeneficiary,
                 path: $navigation.path,
                 onFinished: { navigation.reset() }
+            )
+            .navigationBarHidden(true)
+
+        case .requestMoney:
+            TransfersFactory.makeRequestMoney(
+                coreService: coreService,
+                onBack: { popRoute() },
+                onFinished: { popRoute() }
             )
             .navigationBarHidden(true)
 

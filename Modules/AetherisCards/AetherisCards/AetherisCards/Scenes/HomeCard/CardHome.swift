@@ -19,7 +19,7 @@ struct CardHome: View {
     let onVirtualCardTap: (UUID) -> Void
     let onInvoiceTap: (UUID) -> Void
     let onDueDateTap: (UUID) -> Void
-    let onCardLockTap: (UUID, Bool) -> Void
+    let onCardLockTap: (UUID) -> Void
     let onQuickActionTap: (CardOptions) -> Void
 
     init(
@@ -32,7 +32,7 @@ struct CardHome: View {
         onVirtualCardTap: @escaping (UUID) -> Void = { _ in },
         onInvoiceTap: @escaping (UUID) -> Void = { _ in },
         onDueDateTap: @escaping (UUID) -> Void = { _ in },
-        onCardLockTap: @escaping (UUID, Bool) -> Void = { _, _ in },
+        onCardLockTap: @escaping (UUID) -> Void = { _ in },
         onQuickActionTap: @escaping (CardOptions) -> Void = { _ in }
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -92,8 +92,8 @@ struct CardHome: View {
                                 .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
 
                             HomeQuickActions(
-                                actions: viewModel.quickActions,
-                                onAction: onQuickActionTap
+                                actions: currentQuickActions,
+                                onAction: handleQuickActionTap
                             )
                             .padding(.horizontal, AppSpacing.screenHorizontal)
                             .padding(.vertical, AppSpacing.xxSmall + AppSpacing.xxxSmall)
@@ -178,6 +178,30 @@ struct CardHome: View {
         return filteredSummaries.isEmpty ? viewModel.summaries : filteredSummaries
     }
 
+    private var currentQuickActions: [CardOptions] {
+        let baseActions = viewModel.quickActions
+            .filter { !CardOptions.replacedQuickActionIds.contains($0.id) }
+            .prefix(2)
+
+        return Array(baseActions) + [
+            .virtualCard(),
+            .cardLock(isBlocked: currentCardDetails?.isBlocked == true)
+        ]
+    }
+
+    private func handleQuickActionTap(_ option: CardOptions) {
+        guard let cardId = currentCardId else { return }
+
+        switch option.id {
+        case CardOptions.virtualCardId:
+            onVirtualCardTap(cardId)
+        case CardOptions.cardLockId:
+            onCardLockTap(cardId)
+        default:
+            onQuickActionTap(option)
+        }
+    }
+
     @ViewBuilder
     private var cardDetailsSection: some View {
         ZStack {
@@ -191,14 +215,6 @@ struct CardHome: View {
                     onDueDateTap: {
                         guard let cardId = currentCardId else { return }
                         onDueDateTap(cardId)
-                    },
-                    onVirtualCardTap: {
-                        guard let cardId = currentCardId else { return }
-                        onVirtualCardTap(cardId)
-                    },
-                    onLockTap: {
-                        guard let cardId = currentCardId else { return }
-                        onCardLockTap(cardId, !details.isBlocked)
                     }
                 )
                 .opacity(isCardDetailsTransitioning ? 0 : 1)
@@ -302,15 +318,6 @@ private struct CardInformationContainerSkeleton: View {
                 Spacer()
             }
             .padding(AppSpacing.medium)
-
-            Divider()
-                .padding(.horizontal, AppSpacing.medium)
-
-            HStack(spacing: AppSpacing.large) {
-                managementAction
-                managementAction
-            }
-            .padding(AppSpacing.medium)
         }
         .appCardSurface()
     }
@@ -323,18 +330,5 @@ private struct CardInformationContainerSkeleton: View {
             SkeletonBlock(width: 90, height: 14, radius: 7)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-    }
-
-    private var managementAction: some View {
-        VStack(spacing: AppSpacing.xSmall) {
-            SkeletonView(.circle)
-                .frame(
-                    width: AppComponentMetrics.mediumCircleSize,
-                    height: AppComponentMetrics.mediumCircleSize
-                )
-
-            SkeletonBlock(width: 90, height: 14, radius: 7)
-        }
-        .frame(maxWidth: .infinity)
     }
 }

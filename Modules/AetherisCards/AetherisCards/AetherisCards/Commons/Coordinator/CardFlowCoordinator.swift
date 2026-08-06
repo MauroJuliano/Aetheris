@@ -8,6 +8,7 @@ enum CardFlowRoute: Hashable {
     case transactionHistory(UUID)
     case virtualCard(UUID)
     case currentInvoice(UUID)
+    case cardLock(UUID)
 }
 
 struct CardNavigationState {
@@ -24,6 +25,10 @@ struct CardNavigationState {
 
     mutating func showCurrentInvoice(cardID: UUID) {
         path.append(.currentInvoice(cardID))
+    }
+
+    mutating func showCardLock(cardID: UUID) {
+        path.append(.cardLock(cardID))
     }
 
     mutating func pop() {
@@ -56,6 +61,9 @@ struct CardFlowCoordinator: View {
                 },
                 onInvoiceTap: { cardId in
                     navigation.showCurrentInvoice(cardID: cardId)
+                },
+                onCardLockTap: { cardId in
+                    navigation.showCardLock(cardID: cardId)
                 }
             )
             .navigationDestination(for: CardFlowRoute.self) { route in
@@ -82,6 +90,15 @@ struct CardFlowCoordinator: View {
                         onBackAction: { popRoute() },
                         onTransactionHistoryTap: { invoiceId in
                             navigation.showTransactionHistory(cardID: invoiceId)
+                        }
+                    )
+                case .cardLock(let cardId):
+                    CardLockFactory.make(
+                        coreService: coreService,
+                        cardId: cardId,
+                        onBackAction: { popRoute() },
+                        onVirtualCardTap: { cardId in
+                            navigation.showVirtualCard(physicalCardID: cardId)
                         }
                     )
                 }

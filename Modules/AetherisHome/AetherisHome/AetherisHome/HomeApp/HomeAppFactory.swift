@@ -12,6 +12,7 @@ enum HomeAppFactory {
         onSeeAllRecipientsTap: @escaping () -> Void,
         onNewRecipientTap: @escaping () -> Void,
         onTransferTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void,
         onMoreTap: @escaping () -> Void,
         onViewReportTap: @escaping () -> Void
     ) -> HomeApp {
@@ -23,6 +24,7 @@ enum HomeAppFactory {
             onSeeAllRecipientsTap: onSeeAllRecipientsTap,
             onNewRecipientTap: onNewRecipientTap,
             onTransferTap: onTransferTap,
+            onRequestMoneyTap: onRequestMoneyTap,
             onMoreTap: onMoreTap,
             onViewReportTap: onViewReportTap
         )

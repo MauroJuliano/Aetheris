@@ -1,12 +1,13 @@
+import AetherisDesignSystem
 import Foundation
 
-enum CardBrand: String, Equatable {
+enum CardBrand: String, Codable, Equatable {
     case visa = "VISA"
     case mastercard = "MASTERCARD"
     case elo = "ELO"
 }
 
-struct VirtualCardModel: Identifiable, Equatable {
+struct VirtualCardModel: Identifiable, Codable, Equatable {
     let id: UUID
     let physicalCardId: UUID
     let holderName: String
@@ -14,6 +15,7 @@ struct VirtualCardModel: Identifiable, Equatable {
     let expirationDate: String
     let securityCode: String
     let brand: CardBrand
+    let style: CreditCardStyle
     let availableLimit: Decimal
     let totalLimit: Decimal
     let monthlyExpenses: Decimal

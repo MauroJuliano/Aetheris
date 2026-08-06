@@ -40,7 +40,10 @@ final class CurrentInvoiceViewModel: ObservableObject {
             summaries = dashboard.summaries
             hasLoaded = true
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: Strings.CurrentInvoice.unavailableTitle
+            )
         }
     }
 

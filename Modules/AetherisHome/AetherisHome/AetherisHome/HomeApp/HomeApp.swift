@@ -12,6 +12,7 @@ struct HomeApp: View {
     let onSeeAllRecipientsTap: () -> Void
     let onNewRecipientTap: () -> Void
     let onTransferTap: () -> Void
+    let onRequestMoneyTap: () -> Void
     let onMoreTap: () -> Void
     let onViewReportTap: () -> Void
 
@@ -23,6 +24,7 @@ struct HomeApp: View {
         onSeeAllRecipientsTap: @escaping () -> Void,
         onNewRecipientTap: @escaping () -> Void,
         onTransferTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void,
         onMoreTap: @escaping () -> Void,
         onViewReportTap: @escaping () -> Void
     ) {
@@ -33,6 +35,7 @@ struct HomeApp: View {
         self.onSeeAllRecipientsTap = onSeeAllRecipientsTap
         self.onNewRecipientTap = onNewRecipientTap
         self.onTransferTap = onTransferTap
+        self.onRequestMoneyTap = onRequestMoneyTap
         self.onMoreTap = onMoreTap
         self.onViewReportTap = onViewReportTap
     }
@@ -88,6 +91,7 @@ struct HomeApp: View {
 
                     QuickActions(
                         onTransferTap: onTransferTap,
+                        onRequestTap: onRequestMoneyTap,
                         onMoreTap: onMoreTap
                     )
 

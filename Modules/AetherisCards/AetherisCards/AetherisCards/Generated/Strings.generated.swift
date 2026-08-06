@@ -15,123 +15,210 @@ internal enum Strings {
     internal static let title = Strings.tr("Localizable", "CardHome.title", fallback: "Cards")
   }
   internal enum CardInformation {
-    /// Limite disponível
-    internal static let availableLimit = Strings.tr("Localizable", "CardInformation.availableLimit", fallback: "Limite disponível")
-    /// Fechada
-    internal static let closedInvoice = Strings.tr("Localizable", "CardInformation.closedInvoice", fallback: "Fechada")
-    /// Fatura atual
-    internal static let currentInvoice = Strings.tr("Localizable", "CardInformation.currentInvoice", fallback: "Fatura atual")
-    /// Vencimento
-    internal static let dueDate = Strings.tr("Localizable", "CardInformation.dueDate", fallback: "Vencimento")
-    /// Vence em breve
-    internal static let dueSoon = Strings.tr("Localizable", "CardInformation.dueSoon", fallback: "Vence em breve")
-    /// Bloquear
-    internal static let lock = Strings.tr("Localizable", "CardInformation.lock", fallback: "Bloquear")
-    /// Aberta
-    internal static let openInvoice = Strings.tr("Localizable", "CardInformation.openInvoice", fallback: "Aberta")
-    /// de %@
+    /// Available limit
+    internal static let availableLimit = Strings.tr("Localizable", "CardInformation.availableLimit", fallback: "Available limit")
+    /// Closed
+    internal static let closedInvoice = Strings.tr("Localizable", "CardInformation.closedInvoice", fallback: "Closed")
+    /// Current invoice
+    internal static let currentInvoice = Strings.tr("Localizable", "CardInformation.currentInvoice", fallback: "Current invoice")
+    /// Due date
+    internal static let dueDate = Strings.tr("Localizable", "CardInformation.dueDate", fallback: "Due date")
+    /// Due soon
+    internal static let dueSoon = Strings.tr("Localizable", "CardInformation.dueSoon", fallback: "Due soon")
+    /// Lock
+    internal static let lock = Strings.tr("Localizable", "CardInformation.lock", fallback: "Lock")
+    /// Open
+    internal static let openInvoice = Strings.tr("Localizable", "CardInformation.openInvoice", fallback: "Open")
+    /// of %@
     internal static func totalLimit(_ p1: Any) -> String {
-      return Strings.tr("Localizable", "CardInformation.totalLimit", String(describing: p1), fallback: "de %@")
+      return Strings.tr("Localizable", "CardInformation.totalLimit", String(describing: p1), fallback: "of %@")
     }
-    /// Desbloquear
-    internal static let unlock = Strings.tr("Localizable", "CardInformation.unlock", fallback: "Desbloquear")
-    /// Cartão virtual
-    internal static let virtualCard = Strings.tr("Localizable", "CardInformation.virtualCard", fallback: "Cartão virtual")
+    /// Unlock
+    internal static let unlock = Strings.tr("Localizable", "CardInformation.unlock", fallback: "Unlock")
+    /// Virtual card
+    internal static let virtualCard = Strings.tr("Localizable", "CardInformation.virtualCard", fallback: "Virtual card")
+    /// Virtual
+    /// card
+    internal static let virtualCardQuickAction = Strings.tr("Localizable", "CardInformation.virtualCardQuickAction", fallback: "Virtual\ncard")
+  }
+  internal enum CardLock {
+    /// LOCKED
+    internal static let blocked = Strings.tr("Localizable", "CardLock.blocked", fallback: "LOCKED")
+    /// Your card is locked. Unlock it when you are ready to use it again.
+    internal static let blockedDescription = Strings.tr("Localizable", "CardLock.blockedDescription", fallback: "Your card is locked. Unlock it when you are ready to use it again.")
+    /// While locked, new purchases and withdrawals are not allowed.
+    internal static let blockedStatusDescription = Strings.tr("Localizable", "CardLock.blockedStatusDescription", fallback: "While locked, new purchases and withdrawals are not allowed.")
+    /// Your card is locked
+    internal static let cardIsBlocked = Strings.tr("Localizable", "CardLock.cardIsBlocked", fallback: "Your card is locked")
+    /// Your card is unlocked
+    internal static let cardIsUnlocked = Strings.tr("Localizable", "CardLock.cardIsUnlocked", fallback: "Your card is unlocked")
+    /// Card settings
+    internal static let cardSettings = Strings.tr("Localizable", "CardLock.cardSettings", fallback: "Card settings")
+    /// Limits, international usage, and other preferences
+    internal static let cardSettingsDescription = Strings.tr("Localizable", "CardLock.cardSettingsDescription", fallback: "Limits, international usage, and other preferences")
+    /// Digital wallets and contactless payments will not work.
+    internal static let contactlessDisabledDescription = Strings.tr("Localizable", "CardLock.contactlessDisabledDescription", fallback: "Digital wallets and contactless payments will not work.")
+    /// Contactless payments are disabled
+    internal static let contactlessDisabledTitle = Strings.tr("Localizable", "CardLock.contactlessDisabledTitle", fallback: "Contactless payments are disabled")
+    /// We could not find the data needed to manage this card.
+    internal static let emptyDescription = Strings.tr("Localizable", "CardLock.emptyDescription", fallback: "We could not find the data needed to manage this card.")
+    /// Card not found
+    internal static let emptyTitle = Strings.tr("Localizable", "CardLock.emptyTitle", fallback: "Card not found")
+    /// Lock card
+    internal static let lockCard = Strings.tr("Localizable", "CardLock.lockCard", fallback: "Lock card")
+    /// New purchases, withdrawals, and payments will be declined until you unlock the card.
+    internal static let lockConfirmationDescription = Strings.tr("Localizable", "CardLock.lockConfirmationDescription", fallback: "New purchases, withdrawals, and payments will be declined until you unlock the card.")
+    /// Lock this card?
+    internal static let lockConfirmationTitle = Strings.tr("Localizable", "CardLock.lockConfirmationTitle", fallback: "Lock this card?")
+    /// Lock card
+    internal static let lockTitle = Strings.tr("Localizable", "CardLock.lockTitle", fallback: "Lock card")
+    /// Locking the card does not affect your account balance or current invoice.
+    internal static let moneyIsSafeDescription = Strings.tr("Localizable", "CardLock.moneyIsSafeDescription", fallback: "Locking the card does not affect your account balance or current invoice.")
+    /// Your money is safe
+    internal static let moneyIsSafeTitle = Strings.tr("Localizable", "CardLock.moneyIsSafeTitle", fallback: "Your money is safe")
+    /// Other options
+    internal static let otherOptions = Strings.tr("Localizable", "CardLock.otherOptions", fallback: "Other options")
+    /// You will not be able to make in-person or online purchases.
+    internal static let purchasesRefusedDescription = Strings.tr("Localizable", "CardLock.purchasesRefusedDescription", fallback: "You will not be able to make in-person or online purchases.")
+    /// New purchases are declined
+    internal static let purchasesRefusedTitle = Strings.tr("Localizable", "CardLock.purchasesRefusedTitle", fallback: "New purchases are declined")
+    /// Request new card
+    internal static let requestNewCard = Strings.tr("Localizable", "CardLock.requestNewCard", fallback: "Request new card")
+    /// In case of loss, theft, or damage
+    internal static let requestNewCardDescription = Strings.tr("Localizable", "CardLock.requestNewCardDescription", fallback: "In case of loss, theft, or damage")
+    /// Recurring services linked to this card may be interrupted.
+    internal static let subscriptionsAffectedDescription = Strings.tr("Localizable", "CardLock.subscriptionsAffectedDescription", fallback: "Recurring services linked to this card may be interrupted.")
+    /// Subscriptions may be affected
+    internal static let subscriptionsAffectedTitle = Strings.tr("Localizable", "CardLock.subscriptionsAffectedTitle", fallback: "Subscriptions may be affected")
+    /// Card status
+    internal static let title = Strings.tr("Localizable", "CardLock.title", fallback: "Card status")
+    /// We could not load this card
+    internal static let unavailableTitle = Strings.tr("Localizable", "CardLock.unavailableTitle", fallback: "We could not load this card")
+    /// UNLOCKED
+    internal static let unblocked = Strings.tr("Localizable", "CardLock.unblocked", fallback: "UNLOCKED")
+    /// Manage your physical card status securely and with full control.
+    internal static let unblockedDescription = Strings.tr("Localizable", "CardLock.unblockedDescription", fallback: "Manage your physical card status securely and with full control.")
+    /// Your card is active and ready for purchases, withdrawals, and payments.
+    internal static let unblockedStatusDescription = Strings.tr("Localizable", "CardLock.unblockedStatusDescription", fallback: "Your card is active and ready for purchases, withdrawals, and payments.")
+    /// Unlock card
+    internal static let unlockCard = Strings.tr("Localizable", "CardLock.unlockCard", fallback: "Unlock card")
+    /// The card will work again for purchases, withdrawals, and payments.
+    internal static let unlockConfirmationDescription = Strings.tr("Localizable", "CardLock.unlockConfirmationDescription", fallback: "The card will work again for purchases, withdrawals, and payments.")
+    /// Unlock this card?
+    internal static let unlockConfirmationTitle = Strings.tr("Localizable", "CardLock.unlockConfirmationTitle", fallback: "Unlock this card?")
+    /// Unlock card
+    internal static let unlockTitle = Strings.tr("Localizable", "CardLock.unlockTitle", fallback: "Unlock card")
+    /// Valid until
+    internal static let validUntil = Strings.tr("Localizable", "CardLock.validUntil", fallback: "Valid until")
+    /// Virtual card
+    internal static let virtualCard = Strings.tr("Localizable", "CardLock.virtualCard", fallback: "Virtual card")
+    /// Manage your virtual card
+    internal static let virtualCardDescription = Strings.tr("Localizable", "CardLock.virtualCardDescription", fallback: "Manage your virtual card")
+    /// What happens when you lock it
+    internal static let whenBlockingTitle = Strings.tr("Localizable", "CardLock.whenBlockingTitle", fallback: "What happens when you lock it")
+    /// While your card is locked
+    internal static let whileBlockedTitle = Strings.tr("Localizable", "CardLock.whileBlockedTitle", fallback: "While your card is locked")
+    /// Cash withdrawals will not be allowed.
+    internal static let withdrawalsDisabledDescription = Strings.tr("Localizable", "CardLock.withdrawalsDisabledDescription", fallback: "Cash withdrawals will not be allowed.")
+    /// Withdrawals are disabled
+    internal static let withdrawalsDisabledTitle = Strings.tr("Localizable", "CardLock.withdrawalsDisabledTitle", fallback: "Withdrawals are disabled")
   }
   internal enum Common {
     /// Back
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")
+    /// Cancel
+    internal static let cancel = Strings.tr("Localizable", "Common.cancel", fallback: "Cancel")
     /// Try again
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
   }
   internal enum CurrentInvoice {
-    /// Limite disponível
-    internal static let availableLimit = Strings.tr("Localizable", "CurrentInvoice.availableLimit", fallback: "Limite disponível")
-    /// Melhor data para compra
-    internal static let bestPurchaseDate = Strings.tr("Localizable", "CurrentInvoice.bestPurchaseDate", fallback: "Melhor data para compra")
-    /// Fechar aviso
-    internal static let closeNotice = Strings.tr("Localizable", "CurrentInvoice.closeNotice", fallback: "Fechar aviso")
-    /// %d dias para vencer
+    /// Available limit
+    internal static let availableLimit = Strings.tr("Localizable", "CurrentInvoice.availableLimit", fallback: "Available limit")
+    /// Best purchase date
+    internal static let bestPurchaseDate = Strings.tr("Localizable", "CurrentInvoice.bestPurchaseDate", fallback: "Best purchase date")
+    /// Close notice
+    internal static let closeNotice = Strings.tr("Localizable", "CurrentInvoice.closeNotice", fallback: "Close notice")
+    /// %d days until due
     internal static func daysUntilDue(_ p1: Int) -> String {
-      return Strings.tr("Localizable", "CurrentInvoice.daysUntilDue", p1, fallback: "%d dias para vencer")
+      return Strings.tr("Localizable", "CurrentInvoice.daysUntilDue", p1, fallback: "%d days until due")
     }
-    /// Acompanhe o valor da sua fatura, vencimento e detalhes dos seus gastos do período.
-    internal static let description = Strings.tr("Localizable", "CurrentInvoice.description", fallback: "Acompanhe o valor da sua fatura, vencimento e detalhes dos seus gastos do período.")
-    /// Detalhes da fatura
-    internal static let detailsTitle = Strings.tr("Localizable", "CurrentInvoice.detailsTitle", fallback: "Detalhes da fatura")
-    /// Descontos e créditos
-    internal static let discountsAndCredits = Strings.tr("Localizable", "CurrentInvoice.discountsAndCredits", fallback: "Descontos e créditos")
-    /// Pagamentos e estornos
-    internal static let discountsAndCreditsDescription = Strings.tr("Localizable", "CurrentInvoice.discountsAndCreditsDescription", fallback: "Pagamentos e estornos")
-    /// Vencimento
-    internal static let dueDate = Strings.tr("Localizable", "CurrentInvoice.dueDate", fallback: "Vencimento")
-    /// Vence hoje
-    internal static let dueToday = Strings.tr("Localizable", "CurrentInvoice.dueToday", fallback: "Vence hoje")
-    /// Quando você realizar compras com seu cartão, os lançamentos aparecerão aqui.
-    internal static let emptyDescription = Strings.tr("Localizable", "CurrentInvoice.emptyDescription", fallback: "Quando você realizar compras com seu cartão, os lançamentos aparecerão aqui.")
-    /// Nenhuma fatura disponível
-    internal static let emptyTitle = Strings.tr("Localizable", "CurrentInvoice.emptyTitle", fallback: "Nenhuma fatura disponível")
-    /// Parcelado
-    internal static let installment = Strings.tr("Localizable", "CurrentInvoice.installment", fallback: "Parcelado")
-    /// %d por cento parcelado
+    /// Track your invoice amount, due date, and spending details for this period.
+    internal static let description = Strings.tr("Localizable", "CurrentInvoice.description", fallback: "Track your invoice amount, due date, and spending details for this period.")
+    /// Invoice details
+    internal static let detailsTitle = Strings.tr("Localizable", "CurrentInvoice.detailsTitle", fallback: "Invoice details")
+    /// Discounts and credits
+    internal static let discountsAndCredits = Strings.tr("Localizable", "CurrentInvoice.discountsAndCredits", fallback: "Discounts and credits")
+    /// Payments and refunds
+    internal static let discountsAndCreditsDescription = Strings.tr("Localizable", "CurrentInvoice.discountsAndCreditsDescription", fallback: "Payments and refunds")
+    /// Due date
+    internal static let dueDate = Strings.tr("Localizable", "CurrentInvoice.dueDate", fallback: "Due date")
+    /// Due today
+    internal static let dueToday = Strings.tr("Localizable", "CurrentInvoice.dueToday", fallback: "Due today")
+    /// When you make purchases with your card, transactions will appear here.
+    internal static let emptyDescription = Strings.tr("Localizable", "CurrentInvoice.emptyDescription", fallback: "When you make purchases with your card, transactions will appear here.")
+    /// No invoice available
+    internal static let emptyTitle = Strings.tr("Localizable", "CurrentInvoice.emptyTitle", fallback: "No invoice available")
+    /// Installments
+    internal static let installment = Strings.tr("Localizable", "CurrentInvoice.installment", fallback: "Installments")
+    /// %d percent installments
     internal static func installmentAccessibilityValue(_ p1: Int) -> String {
-      return Strings.tr("Localizable", "CurrentInvoice.installmentAccessibilityValue", p1, fallback: "%d por cento parcelado")
+      return Strings.tr("Localizable", "CurrentInvoice.installmentAccessibilityValue", p1, fallback: "%d percent installments")
     }
-    /// Total da fatura
-    internal static let invoiceTotal = Strings.tr("Localizable", "CurrentInvoice.invoiceTotal", fallback: "Total da fatura")
-    /// Pagando até o vencimento, você evita juros e mantém seu limite disponível.
-    internal static let noticeDescription = Strings.tr("Localizable", "CurrentInvoice.noticeDescription", fallback: "Pagando até o vencimento, você evita juros e mantém seu limite disponível.")
-    /// Fatura aberta
-    internal static let noticeTitle = Strings.tr("Localizable", "CurrentInvoice.noticeTitle", fallback: "Fatura aberta")
-    /// 1 dia para vencer
-    internal static let oneDayUntilDue = Strings.tr("Localizable", "CurrentInvoice.oneDayUntilDue", fallback: "1 dia para vencer")
-    /// À vista
-    internal static let oneTime = Strings.tr("Localizable", "CurrentInvoice.oneTime", fallback: "À vista")
-    /// Outros lançamentos
-    internal static let otherCharges = Strings.tr("Localizable", "CurrentInvoice.otherCharges", fallback: "Outros lançamentos")
-    /// Taxas, tarifas e ajustes
-    internal static let otherChargesDescription = Strings.tr("Localizable", "CurrentInvoice.otherChargesDescription", fallback: "Taxas, tarifas e ajustes")
-    /// Pagamento em atraso
-    internal static let overduePayment = Strings.tr("Localizable", "CurrentInvoice.overduePayment", fallback: "Pagamento em atraso")
-    /// Fatura paga
-    internal static let paidInvoice = Strings.tr("Localizable", "CurrentInvoice.paidInvoice", fallback: "Fatura paga")
-    /// Pagar fatura
-    internal static let payInvoice = Strings.tr("Localizable", "CurrentInvoice.payInvoice", fallback: "Pagar fatura")
-    /// Subtotal de compras
-    internal static let purchasesSubtotal = Strings.tr("Localizable", "CurrentInvoice.purchasesSubtotal", fallback: "Subtotal de compras")
-    /// Compras nacionais e internacionais
-    internal static let purchasesSubtotalDescription = Strings.tr("Localizable", "CurrentInvoice.purchasesSubtotalDescription", fallback: "Compras nacionais e internacionais")
-    /// Ver gráficos
-    internal static let seeCharts = Strings.tr("Localizable", "CurrentInvoice.seeCharts", fallback: "Ver gráficos")
-    /// Distribuição dos gastos
-    internal static let spendingDistribution = Strings.tr("Localizable", "CurrentInvoice.spendingDistribution", fallback: "Distribuição dos gastos")
-    /// Resumo de gastos
-    internal static let spendingSummaryTitle = Strings.tr("Localizable", "CurrentInvoice.spendingSummaryTitle", fallback: "Resumo de gastos")
-    /// Fatura atual
-    internal static let title = Strings.tr("Localizable", "CurrentInvoice.title", fallback: "Fatura atual")
-    /// Valor total da fatura
-    internal static let totalAmount = Strings.tr("Localizable", "CurrentInvoice.totalAmount", fallback: "Valor total da fatura")
-    /// Total do limite
-    internal static let totalLimit = Strings.tr("Localizable", "CurrentInvoice.totalLimit", fallback: "Total do limite")
-    /// Total gasto no período
-    internal static let totalSpent = Strings.tr("Localizable", "CurrentInvoice.totalSpent", fallback: "Total gasto no período")
-    /// Não foi possível carregar sua fatura
-    internal static let unavailableTitle = Strings.tr("Localizable", "CurrentInvoice.unavailableTitle", fallback: "Não foi possível carregar sua fatura")
-    /// Limite utilizado
-    internal static let usedLimit = Strings.tr("Localizable", "CurrentInvoice.usedLimit", fallback: "Limite utilizado")
-    /// %d%% do limite
+    /// Invoice total
+    internal static let invoiceTotal = Strings.tr("Localizable", "CurrentInvoice.invoiceTotal", fallback: "Invoice total")
+    /// Pay by the due date to avoid interest and keep your limit available.
+    internal static let noticeDescription = Strings.tr("Localizable", "CurrentInvoice.noticeDescription", fallback: "Pay by the due date to avoid interest and keep your limit available.")
+    /// Open invoice
+    internal static let noticeTitle = Strings.tr("Localizable", "CurrentInvoice.noticeTitle", fallback: "Open invoice")
+    /// 1 day until due
+    internal static let oneDayUntilDue = Strings.tr("Localizable", "CurrentInvoice.oneDayUntilDue", fallback: "1 day until due")
+    /// One-time
+    internal static let oneTime = Strings.tr("Localizable", "CurrentInvoice.oneTime", fallback: "One-time")
+    /// Other charges
+    internal static let otherCharges = Strings.tr("Localizable", "CurrentInvoice.otherCharges", fallback: "Other charges")
+    /// Fees, charges, and adjustments
+    internal static let otherChargesDescription = Strings.tr("Localizable", "CurrentInvoice.otherChargesDescription", fallback: "Fees, charges, and adjustments")
+    /// Payment overdue
+    internal static let overduePayment = Strings.tr("Localizable", "CurrentInvoice.overduePayment", fallback: "Payment overdue")
+    /// Invoice paid
+    internal static let paidInvoice = Strings.tr("Localizable", "CurrentInvoice.paidInvoice", fallback: "Invoice paid")
+    /// Pay invoice
+    internal static let payInvoice = Strings.tr("Localizable", "CurrentInvoice.payInvoice", fallback: "Pay invoice")
+    /// Purchases subtotal
+    internal static let purchasesSubtotal = Strings.tr("Localizable", "CurrentInvoice.purchasesSubtotal", fallback: "Purchases subtotal")
+    /// Domestic and international purchases
+    internal static let purchasesSubtotalDescription = Strings.tr("Localizable", "CurrentInvoice.purchasesSubtotalDescription", fallback: "Domestic and international purchases")
+    /// See charts
+    internal static let seeCharts = Strings.tr("Localizable", "CurrentInvoice.seeCharts", fallback: "See charts")
+    /// Spending distribution
+    internal static let spendingDistribution = Strings.tr("Localizable", "CurrentInvoice.spendingDistribution", fallback: "Spending distribution")
+    /// Spending summary
+    internal static let spendingSummaryTitle = Strings.tr("Localizable", "CurrentInvoice.spendingSummaryTitle", fallback: "Spending summary")
+    /// Current invoice
+    internal static let title = Strings.tr("Localizable", "CurrentInvoice.title", fallback: "Current invoice")
+    /// Total invoice amount
+    internal static let totalAmount = Strings.tr("Localizable", "CurrentInvoice.totalAmount", fallback: "Total invoice amount")
+    /// Total limit
+    internal static let totalLimit = Strings.tr("Localizable", "CurrentInvoice.totalLimit", fallback: "Total limit")
+    /// Total spent this period
+    internal static let totalSpent = Strings.tr("Localizable", "CurrentInvoice.totalSpent", fallback: "Total spent this period")
+    /// We could not load your invoice
+    internal static let unavailableTitle = Strings.tr("Localizable", "CurrentInvoice.unavailableTitle", fallback: "We could not load your invoice")
+    /// Used limit
+    internal static let usedLimit = Strings.tr("Localizable", "CurrentInvoice.usedLimit", fallback: "Used limit")
+    /// %d%% of limit
     internal static func usedLimitPercentage(_ p1: Int) -> String {
-      return Strings.tr("Localizable", "CurrentInvoice.usedLimitPercentage", p1, fallback: "%d%% do limite")
+      return Strings.tr("Localizable", "CurrentInvoice.usedLimitPercentage", p1, fallback: "%d%% of limit")
     }
     internal enum Status {
-      /// Fechada
-      internal static let closed = Strings.tr("Localizable", "CurrentInvoice.Status.closed", fallback: "Fechada")
-      /// Em aberto
-      internal static let `open` = Strings.tr("Localizable", "CurrentInvoice.Status.open", fallback: "Em aberto")
-      /// Vencida
-      internal static let overdue = Strings.tr("Localizable", "CurrentInvoice.Status.overdue", fallback: "Vencida")
-      /// Paga
-      internal static let paid = Strings.tr("Localizable", "CurrentInvoice.Status.paid", fallback: "Paga")
+      /// Closed
+      internal static let closed = Strings.tr("Localizable", "CurrentInvoice.Status.closed", fallback: "Closed")
+      /// Open
+      internal static let `open` = Strings.tr("Localizable", "CurrentInvoice.Status.open", fallback: "Open")
+      /// Overdue
+      internal static let overdue = Strings.tr("Localizable", "CurrentInvoice.Status.overdue", fallback: "Overdue")
+      /// Paid
+      internal static let paid = Strings.tr("Localizable", "CurrentInvoice.Status.paid", fallback: "Paid")
     }
   }
   internal enum FinancialSummary {
@@ -141,8 +228,8 @@ internal enum Strings {
     internal static func daysAgo(_ p1: Int) -> String {
       return Strings.tr("Localizable", "FinancialSummary.daysAgo", p1, fallback: "%d days ago")
     }
-    /// Ifd* Bar do zé
-    internal static let ifoodBar = Strings.tr("Localizable", "FinancialSummary.ifoodBar", fallback: "Ifd* Bar do zé")
+    /// Ifd* Joe's Bar
+    internal static let ifoodBar = Strings.tr("Localizable", "FinancialSummary.ifoodBar", fallback: "Ifd* Joe's Bar")
     /// %d month ago
     internal static func monthAgo(_ p1: Int) -> String {
       return Strings.tr("Localizable", "FinancialSummary.monthAgo", p1, fallback: "%d month ago")
@@ -245,52 +332,52 @@ internal enum Strings {
     internal static let transferReceived = Strings.tr("Localizable", "TransactionsHistory.transferReceived", fallback: "Transfer received")
   }
   internal enum VirtualCard {
-    /// Seu cartão está pronto para uso
-    internal static let activeDescription = Strings.tr("Localizable", "VirtualCard.activeDescription", fallback: "Seu cartão está pronto para uso")
-    /// Cartão virtual ativo
-    internal static let activeTitle = Strings.tr("Localizable", "VirtualCard.activeTitle", fallback: "Cartão virtual ativo")
-    /// Limite disponível
-    internal static let availableLimit = Strings.tr("Localizable", "VirtualCard.availableLimit", fallback: "Limite disponível")
-    /// Cancelar
-    internal static let cancel = Strings.tr("Localizable", "VirtualCard.cancel", fallback: "Cancelar")
-    /// Número copiado
-    internal static let copied = Strings.tr("Localizable", "VirtualCard.copied", fallback: "Número copiado")
-    /// Copiar número
-    internal static let copyNumber = Strings.tr("Localizable", "VirtualCard.copyNumber", fallback: "Copiar número")
-    /// Use seu cartão virtual para compras online e assinaturas com mais segurança.
-    internal static let description = Strings.tr("Localizable", "VirtualCard.description", fallback: "Use seu cartão virtual para compras online e assinaturas com mais segurança.")
-    /// Crie um cartão virtual para realizar compras online com mais segurança.
-    internal static let emptyDescription = Strings.tr("Localizable", "VirtualCard.emptyDescription", fallback: "Crie um cartão virtual para realizar compras online com mais segurança.")
-    /// Você ainda não possui um cartão virtual
-    internal static let emptyTitle = Strings.tr("Localizable", "VirtualCard.emptyTitle", fallback: "Você ainda não possui um cartão virtual")
-    /// Gerar novo número
-    internal static let generateConfirmationAction = Strings.tr("Localizable", "VirtualCard.generateConfirmationAction", fallback: "Gerar novo número")
-    /// O número atual deixará de funcionar. Compras recorrentes e assinaturas poderão precisar ser atualizadas.
-    internal static let generateConfirmationMessage = Strings.tr("Localizable", "VirtualCard.generateConfirmationMessage", fallback: "O número atual deixará de funcionar. Compras recorrentes e assinaturas poderão precisar ser atualizadas.")
-    /// Gerar novo número?
-    internal static let generateConfirmationTitle = Strings.tr("Localizable", "VirtualCard.generateConfirmationTitle", fallback: "Gerar novo número?")
-    /// Gerar novo número
-    internal static let generateNewNumber = Strings.tr("Localizable", "VirtualCard.generateNewNumber", fallback: "Gerar novo número")
-    /// Ative o cartão para voltar a utilizá-lo
-    internal static let inactiveDescription = Strings.tr("Localizable", "VirtualCard.inactiveDescription", fallback: "Ative o cartão para voltar a utilizá-lo")
-    /// Cartão virtual bloqueado
-    internal static let inactiveTitle = Strings.tr("Localizable", "VirtualCard.inactiveTitle", fallback: "Cartão virtual bloqueado")
-    /// Saiba mais
-    internal static let learnMore = Strings.tr("Localizable", "VirtualCard.learnMore", fallback: "Saiba mais")
-    /// Gastos no mês
-    internal static let monthlyExpenses = Strings.tr("Localizable", "VirtualCard.monthlyExpenses", fallback: "Gastos no mês")
-    /// Transações recentes
-    internal static let recentTransactions = Strings.tr("Localizable", "VirtualCard.recentTransactions", fallback: "Transações recentes")
-    /// O cartão virtual possui número, validade e CVC diferentes do seu cartão físico.
-    internal static let securityDescription = Strings.tr("Localizable", "VirtualCard.securityDescription", fallback: "O cartão virtual possui número, validade e CVC diferentes do seu cartão físico.")
-    /// Ver todas
-    internal static let seeAll = Strings.tr("Localizable", "VirtualCard.seeAll", fallback: "Ver todas")
-    /// Configurações
-    internal static let settings = Strings.tr("Localizable", "VirtualCard.settings", fallback: "Configurações")
-    /// Cartão virtual
-    internal static let title = Strings.tr("Localizable", "VirtualCard.title", fallback: "Cartão virtual")
-    /// Cartão virtual indisponível
-    internal static let unavailableTitle = Strings.tr("Localizable", "VirtualCard.unavailableTitle", fallback: "Cartão virtual indisponível")
+    /// Your card is ready to use
+    internal static let activeDescription = Strings.tr("Localizable", "VirtualCard.activeDescription", fallback: "Your card is ready to use")
+    /// Virtual card active
+    internal static let activeTitle = Strings.tr("Localizable", "VirtualCard.activeTitle", fallback: "Virtual card active")
+    /// Available limit
+    internal static let availableLimit = Strings.tr("Localizable", "VirtualCard.availableLimit", fallback: "Available limit")
+    /// Cancel
+    internal static let cancel = Strings.tr("Localizable", "VirtualCard.cancel", fallback: "Cancel")
+    /// Number copied
+    internal static let copied = Strings.tr("Localizable", "VirtualCard.copied", fallback: "Number copied")
+    /// Copy number
+    internal static let copyNumber = Strings.tr("Localizable", "VirtualCard.copyNumber", fallback: "Copy number")
+    /// Use your virtual card for online purchases and subscriptions with more security.
+    internal static let description = Strings.tr("Localizable", "VirtualCard.description", fallback: "Use your virtual card for online purchases and subscriptions with more security.")
+    /// Create a virtual card to make online purchases more securely.
+    internal static let emptyDescription = Strings.tr("Localizable", "VirtualCard.emptyDescription", fallback: "Create a virtual card to make online purchases more securely.")
+    /// You do not have a virtual card yet
+    internal static let emptyTitle = Strings.tr("Localizable", "VirtualCard.emptyTitle", fallback: "You do not have a virtual card yet")
+    /// Generate new number
+    internal static let generateConfirmationAction = Strings.tr("Localizable", "VirtualCard.generateConfirmationAction", fallback: "Generate new number")
+    /// The current number will stop working. Recurring purchases and subscriptions may need to be updated.
+    internal static let generateConfirmationMessage = Strings.tr("Localizable", "VirtualCard.generateConfirmationMessage", fallback: "The current number will stop working. Recurring purchases and subscriptions may need to be updated.")
+    /// Generate a new number?
+    internal static let generateConfirmationTitle = Strings.tr("Localizable", "VirtualCard.generateConfirmationTitle", fallback: "Generate a new number?")
+    /// Generate new number
+    internal static let generateNewNumber = Strings.tr("Localizable", "VirtualCard.generateNewNumber", fallback: "Generate new number")
+    /// Activate the card to use it again
+    internal static let inactiveDescription = Strings.tr("Localizable", "VirtualCard.inactiveDescription", fallback: "Activate the card to use it again")
+    /// Virtual card locked
+    internal static let inactiveTitle = Strings.tr("Localizable", "VirtualCard.inactiveTitle", fallback: "Virtual card locked")
+    /// Learn more
+    internal static let learnMore = Strings.tr("Localizable", "VirtualCard.learnMore", fallback: "Learn more")
+    /// Monthly spending
+    internal static let monthlyExpenses = Strings.tr("Localizable", "VirtualCard.monthlyExpenses", fallback: "Monthly spending")
+    /// Recent transactions
+    internal static let recentTransactions = Strings.tr("Localizable", "VirtualCard.recentTransactions", fallback: "Recent transactions")
+    /// The virtual card has a different number, expiration date, and CVC than your physical card.
+    internal static let securityDescription = Strings.tr("Localizable", "VirtualCard.securityDescription", fallback: "The virtual card has a different number, expiration date, and CVC than your physical card.")
+    /// See all
+    internal static let seeAll = Strings.tr("Localizable", "VirtualCard.seeAll", fallback: "See all")
+    /// Settings
+    internal static let settings = Strings.tr("Localizable", "VirtualCard.settings", fallback: "Settings")
+    /// Virtual card
+    internal static let title = Strings.tr("Localizable", "VirtualCard.title", fallback: "Virtual card")
+    /// Virtual card unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "VirtualCard.unavailableTitle", fallback: "Virtual card unavailable")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

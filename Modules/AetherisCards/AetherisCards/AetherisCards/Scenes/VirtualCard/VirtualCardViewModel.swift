@@ -32,15 +32,16 @@ final class VirtualCardViewModel: ObservableObject {
         }
 
         do {
-            async let cardRequest = service.fetchVirtualCard(physicalCardId: physicalCardId)
-            async let summariesRequest = service.fetchSummaries(physicalCardId: physicalCardId)
-            let (card, summaries) = try await (cardRequest, summariesRequest)
+            let dashboard = try await service.loadDashboard(physicalCardId: physicalCardId)
 
-            virtualCard = card
-            self.summaries = summaries
+            virtualCard = dashboard.virtualCard
+            summaries = dashboard.summaries
             hasLoaded = true
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: Strings.VirtualCard.unavailableTitle
+            )
         }
     }
 
@@ -59,7 +60,10 @@ final class VirtualCardViewModel: ObservableObject {
         do {
             virtualCard = try await service.updateCardStatus(cardId: currentCard.id, isActive: isActive)
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: Strings.VirtualCard.unavailableTitle
+            )
         }
     }
 
@@ -75,7 +79,10 @@ final class VirtualCardViewModel: ObservableObject {
         do {
             virtualCard = try await service.generateNewCardNumber(cardId: cardId)
         } catch {
-            errorMessage = error.localizedDescription
+            errorMessage = CardServiceErrorMessage.message(
+                for: error,
+                fallback: Strings.VirtualCard.unavailableTitle
+            )
         }
     }
 
