@@ -23,6 +23,26 @@ struct CardNavigationStateTests {
     }
 
     @Test
+    func showVirtualCard_preservesPhysicalCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showVirtualCard(physicalCardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.virtualCard(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
+    func showCurrentInvoice_preservesCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showCurrentInvoice(cardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.currentInvoice(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
     func pop_returnsToRootAndIsSafeWhenAlreadyEmpty() {
         var sut = CardNavigationState()
         sut.showTransactionHistory(cardID: CardMockIDs.standard)

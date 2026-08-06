@@ -17,7 +17,7 @@ extension HomeFlowCoordinator {
         HomeAppFactory.make(
             coreService: coreService,
             onCardTap: { cardId in
-                navigation.push(.card(initialCardId: cardId))
+                tabBarRoutingStore.showCards(selectedCardId: cardId)
             },
             onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
@@ -113,7 +113,8 @@ extension HomeFlowCoordinator {
         case .beneficiaries:
             navigation.replaceCurrent(with: .beneficiaryList)
         case .cards:
-            navigation.replaceCurrent(with: .card())
+            navigation.reset()
+            tabBarRoutingStore.showCards()
         case .notifications:
             navigation.replaceCurrent(with: .notifications)
         case .reports:

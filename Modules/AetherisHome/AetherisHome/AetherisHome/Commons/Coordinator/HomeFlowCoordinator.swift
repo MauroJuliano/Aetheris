@@ -1,6 +1,7 @@
 import Core
 import AetherisAuthenticationInterface
 import AetherisCards
+import AetherisCardsInterface
 import AetherisTransfers
 import SwiftUI
 
@@ -8,6 +9,7 @@ struct HomeFlowCoordinator: View {
     let coreService: any HasCoreService
     let identityValidation: any IdentityValidating
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
+    @EnvironmentObject var tabBarRoutingStore: TabBarRoutingStore
     @State var selectedBeneficiary = BeneficiaryFixtures.defaultSelection
     @State var navigation = HomeNavigationState()
 

@@ -27,6 +27,12 @@ public final class CardsFactory: CardsFactoryInterface {
             onBackAction: onFinished,
             onTransactionHistoryTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))
+            },
+            onVirtualCardTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.virtualCard(cardID))
+            },
+            onInvoiceTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.currentInvoice(cardID))
             }
         ))
     }
@@ -47,6 +53,30 @@ public final class CardsFactory: CardsFactoryInterface {
                         onBack: {
                             guard !path.wrappedValue.isEmpty else { return }
                             path.wrappedValue.removeLast()
+                        }
+                    )
+                case .virtualCard(let physicalCardID):
+                    VirtualCardFactory.make(
+                        coreService: coreService,
+                        physicalCardId: physicalCardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onTransactionHistoryTap: { cardID in
+                            path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))
+                        }
+                    )
+                case .currentInvoice(let cardID):
+                    CurrentInvoiceFactory.make(
+                        coreService: coreService,
+                        cardId: cardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onTransactionHistoryTap: { invoiceID in
+                            path.wrappedValue.append(CardFlowRoute.transactionHistory(invoiceID))
                         }
                     )
                 }

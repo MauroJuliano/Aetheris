@@ -7,9 +7,9 @@ import AetherisTransfersInterface
 import SwiftUI
 
 struct MainTabContainer: View {
-    @State private var selectedIndex = 0
     @State private var showSendMoney = false
     @StateObject private var tabBarVisibilityStore = TabBarVisibilityStore()
+    @StateObject private var tabBarRoutingStore = TabBarRoutingStore()
     
     let homeFactory: HomeFactoryInterface
     let cardsFactory: CardsFactoryInterface
@@ -23,7 +23,7 @@ struct MainTabContainer: View {
 
             if tabBarVisibilityStore.isVisible {
                 TabBarView(
-                    selectedIndex: $selectedIndex,
+                    selectedIndex: $tabBarRoutingStore.selectedIndex,
                     onCenterTap: {
                         showSendMoney = true
                     }
@@ -32,7 +32,7 @@ struct MainTabContainer: View {
             }
         }
         .animation(.easeInOut(duration: 0.22), value: tabBarVisibilityStore.isVisible)
-        .onChange(of: selectedIndex) { _, _ in
+        .onChange(of: tabBarRoutingStore.selectedIndex) { _, _ in
             tabBarVisibilityStore.isVisible = true
         }
         .fullScreenCover(isPresented: $showSendMoney) {
@@ -40,6 +40,7 @@ struct MainTabContainer: View {
                     showSendMoney = false
                 })
             .environmentObject(tabBarVisibilityStore)
+            .environmentObject(tabBarRoutingStore)
         }
         .background(Color.backgroundColorA.ignoresSafeArea())
     }
@@ -49,21 +50,24 @@ struct MainTabContainer: View {
         ZStack {
             homeFactory.make()
                 .environmentObject(tabBarVisibilityStore)
-                .opacity(selectedIndex == 0 ? 1 : 0)
-                .allowsHitTesting(selectedIndex == 0)
-                .accessibilityHidden(selectedIndex != 0)
+                .environmentObject(tabBarRoutingStore)
+                .opacity(tabBarRoutingStore.selectedIndex == 0 ? 1 : 0)
+                .allowsHitTesting(tabBarRoutingStore.selectedIndex == 0)
+                .accessibilityHidden(tabBarRoutingStore.selectedIndex != 0)
 
             cardsFactory.make(onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
-                .opacity(selectedIndex == 1 ? 1 : 0)
-                .allowsHitTesting(selectedIndex == 1)
-                .accessibilityHidden(selectedIndex != 1)
+                .environmentObject(tabBarRoutingStore)
+                .opacity(tabBarRoutingStore.selectedIndex == 1 ? 1 : 0)
+                .allowsHitTesting(tabBarRoutingStore.selectedIndex == 1)
+                .accessibilityHidden(tabBarRoutingStore.selectedIndex != 1)
 
             accountFactory.make(entryPoint: .profile, onFinished: {})
                 .environmentObject(tabBarVisibilityStore)
-                .opacity(selectedIndex == 2 ? 1 : 0)
-                .allowsHitTesting(selectedIndex == 2)
-                .accessibilityHidden(selectedIndex != 2)
+                .environmentObject(tabBarRoutingStore)
+                .opacity(tabBarRoutingStore.selectedIndex == 2 ? 1 : 0)
+                .allowsHitTesting(tabBarRoutingStore.selectedIndex == 2)
+                .accessibilityHidden(tabBarRoutingStore.selectedIndex != 2)
         }
     }
     

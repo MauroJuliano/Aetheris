@@ -1,10 +1,13 @@
 import Core
 import AetherisAuthenticationInterface
+import AetherisCardsInterface
 import Foundation
 import SwiftUI
 
 enum CardFlowRoute: Hashable {
     case transactionHistory(UUID)
+    case virtualCard(UUID)
+    case currentInvoice(UUID)
 }
 
 struct CardNavigationState {
@@ -13,6 +16,14 @@ struct CardNavigationState {
 
     mutating func showTransactionHistory(cardID: UUID) {
         path.append(.transactionHistory(cardID))
+    }
+
+    mutating func showVirtualCard(physicalCardID: UUID) {
+        path.append(.virtualCard(physicalCardID))
+    }
+
+    mutating func showCurrentInvoice(cardID: UUID) {
+        path.append(.currentInvoice(cardID))
     }
 
     mutating func pop() {
@@ -26,14 +37,25 @@ struct CardFlowCoordinator: View {
     let onDismiss: (() -> Void)?
     @State private var navigation = CardNavigationState()
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
+    @EnvironmentObject private var tabBarRoutingStore: TabBarRoutingStore
 
     var body: some View {
         NavigationStack(path: $navigation.path) {
             HomeCardFactory.make(
                 coreService: coreService,
+                selectedCardRequestId: tabBarRoutingStore.pendingCardsSelectedCardId,
+                onSelectedCardRequestApplied: {
+                    tabBarRoutingStore.clearPendingCardsSelection()
+                },
                 onBackAction: onDismiss,
                 onTransactionHistoryTap: { cardId in
                     navigation.showTransactionHistory(cardID: cardId)
+                },
+                onVirtualCardTap: { cardId in
+                    navigation.showVirtualCard(physicalCardID: cardId)
+                },
+                onInvoiceTap: { cardId in
+                    navigation.showCurrentInvoice(cardID: cardId)
                 }
             )
             .navigationDestination(for: CardFlowRoute.self) { route in
@@ -43,6 +65,24 @@ struct CardFlowCoordinator: View {
                         coreService: coreService,
                         cardId: cardId,
                         onBack: { popRoute() }
+                    )
+                case .virtualCard(let physicalCardId):
+                    VirtualCardFactory.make(
+                        coreService: coreService,
+                        physicalCardId: physicalCardId,
+                        onBackAction: { popRoute() },
+                        onTransactionHistoryTap: { cardId in
+                            navigation.showTransactionHistory(cardID: cardId)
+                        }
+                    )
+                case .currentInvoice(let cardId):
+                    CurrentInvoiceFactory.make(
+                        coreService: coreService,
+                        cardId: cardId,
+                        onBackAction: { popRoute() },
+                        onTransactionHistoryTap: { invoiceId in
+                            navigation.showTransactionHistory(cardID: invoiceId)
+                        }
                     )
                 }
             }

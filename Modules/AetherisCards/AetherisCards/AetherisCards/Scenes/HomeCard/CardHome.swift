@@ -12,6 +12,8 @@ struct CardHome: View {
     @State private var isSummariesTransitioning = false
     @State private var summariesTransitionTask: Task<Void, Never>?
     private let initialSelectedCardId: UUID?
+    private let selectedCardRequestId: UUID?
+    private let onSelectedCardRequestApplied: () -> Void
     let onBackAction: (() -> Void)?
     let onTransactionHistoryTap: (UUID) -> Void
     let onVirtualCardTap: (UUID) -> Void
@@ -23,6 +25,8 @@ struct CardHome: View {
     init(
         viewModel: HomeCardViewModel,
         initialSelectedCardId: UUID? = nil,
+        selectedCardRequestId: UUID? = nil,
+        onSelectedCardRequestApplied: @escaping () -> Void = {},
         onBackAction: (() -> Void)? = nil,
         onTransactionHistoryTap: @escaping (UUID) -> Void = { _ in },
         onVirtualCardTap: @escaping (UUID) -> Void = { _ in },
@@ -33,6 +37,8 @@ struct CardHome: View {
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.initialSelectedCardId = initialSelectedCardId
+        self.selectedCardRequestId = selectedCardRequestId
+        self.onSelectedCardRequestApplied = onSelectedCardRequestApplied
         self.onBackAction = onBackAction
         self.onTransactionHistoryTap = onTransactionHistoryTap
         self.onVirtualCardTap = onVirtualCardTap
@@ -44,10 +50,9 @@ struct CardHome: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if let onBackAction {
                 NavBar(
                     hasNotifications: false,
-                    hasBackButton: true,
+                    hasBackButton: false,
                     model: .init(
                         firstText: Strings.CardHome.title,
                         hasInitialSpace: false
@@ -56,7 +61,6 @@ struct CardHome: View {
                 )
                 .padding(.horizontal, AppSpacing.screenHorizontal)
                 .padding(.bottom)
-            }
 
             ZStack {
                 if viewModel.isLoading {
@@ -110,9 +114,14 @@ struct CardHome: View {
         .task {
             await viewModel.loadIfNeeded()
             applyInitialSelectedCardIfNeeded()
+            applySelectedCardRequestIfNeeded()
         }
         .onChange(of: viewModel.cards) { _, _ in
             applyInitialSelectedCardIfNeeded()
+            applySelectedCardRequestIfNeeded()
+        }
+        .onChange(of: selectedCardRequestId) { _, _ in
+            applySelectedCardRequestIfNeeded()
         }
         .onChange(of: selectedCardIndex) { _, _ in
             refreshCardContentTransition()
@@ -140,6 +149,16 @@ struct CardHome: View {
 
         selectedCardIndex = initialSelectedCardIndex
         didApplyInitialSelectedCard = true
+    }
+
+    private func applySelectedCardRequestIfNeeded() {
+        guard let selectedCardRequestId,
+              let selectedCardRequestIndex = viewModel.cards.firstIndex(where: { $0.id == selectedCardRequestId }) else {
+            return
+        }
+
+        selectedCardIndex = selectedCardRequestIndex
+        onSelectedCardRequestApplied()
     }
 
     private var currentCardDetails: CardDetailsModel? {
@@ -196,7 +215,10 @@ struct CardHome: View {
         ZStack {
             FinancialSummaryContainer(
                 summaries: currentSummaries,
-                onTap: openTransactionHistory
+                title: Strings.VirtualCard.recentTransactions,
+                actionTitle: Strings.VirtualCard.seeAll,
+                onTap: openTransactionHistory,
+                onActionTap: openTransactionHistory
             )
             .opacity(isSummariesTransitioning ? 0 : 1)
 
@@ -314,46 +336,5 @@ private struct CardInformationContainerSkeleton: View {
             SkeletonBlock(width: 90, height: 14, radius: 7)
         }
         .frame(maxWidth: .infinity)
-    }
-}
-
-private struct FinancialSummaryContainerSkeleton: View {
-    var body: some View {
-        VStack(spacing: 0) {
-            ForEach(0..<4, id: \.self) { index in
-                summaryRow(index: index)
-
-                if index < 3 {
-                    Divider()
-                }
-            }
-        }
-        .padding(AppSpacing.medium)
-        .appCardSurface()
-    }
-
-    private func summaryRow(index: Int) -> some View {
-        HStack(spacing: AppSpacing.small) {
-            SkeletonView(.circle)
-                .frame(width: 40, height: 40)
-
-            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-                SkeletonBlock(width: index == 0 ? 120 : 150, height: 16, radius: 8)
-                SkeletonBlock(width: index == 1 ? 160 : 190, height: 14, radius: 7)
-                SkeletonBlock(width: index == 2 ? 64 : 74, height: 18, radius: 9)
-            }
-
-            Spacer()
-
-            VStack(alignment: .trailing, spacing: AppSpacing.xxSmall) {
-                SkeletonBlock(width: index == 3 ? 72 : 58, height: 18, radius: 9)
-                SkeletonBlock(width: index == 2 ? 52 : 44, height: 12, radius: 6)
-            }
-        }
-        .appListCellRow(
-            hasDivider: false,
-            horizontalPadding: AppSpacing.medium,
-            verticalPadding: AppSpacing.medium
-        )
     }
 }
