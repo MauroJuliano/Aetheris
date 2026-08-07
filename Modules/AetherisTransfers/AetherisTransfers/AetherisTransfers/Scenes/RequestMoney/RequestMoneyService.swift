@@ -122,38 +122,14 @@ extension RequestMoneyEndpoint: Endpoint {
 }
 
 private enum RequestMoneyMock {
-    static let contacts: [RequestContactModel] = [
+    static let contacts: [RequestContactModel] = BeneficiaryFixtures.defaults.map {
         RequestContactModel(
-            id: UUID(uuidString: "51CE8568-0922-4893-A112-DAAE87B7D650")!,
-            name: "Marina Silva",
-            contactInformation: "(11) 98765-4321",
-            imageName: "marina"
-        ),
-        RequestContactModel(
-            id: UUID(uuidString: "0E72F341-8A26-4224-A4CC-07C9775C9B00")!,
-            name: "Lucas Almeida",
-            contactInformation: "(11) 97654-3210",
-            imageName: "lucas"
-        ),
-        RequestContactModel(
-            id: UUID(uuidString: "03A4BD13-C73C-440D-BF12-6222BD1B7218")!,
-            name: "Julia Santos",
-            contactInformation: "(11) 94567-8901",
-            imageName: "julia"
-        ),
-        RequestContactModel(
-            id: UUID(uuidString: "D76D587C-F804-46C1-9981-A977F43B7D07")!,
-            name: "Rafael Costa",
-            contactInformation: "(11) 91234-5678",
-            imageName: "rafael"
-        ),
-        RequestContactModel(
-            id: UUID(uuidString: "F4EE9A90-4310-4A72-B736-E5CD6982D310")!,
-            name: "Carlos Barbosa",
-            contactInformation: "carlos@email.com",
-            imageName: nil
+            id: $0.id,
+            name: $0.name,
+            contactInformation: $0.pixKey,
+            imageName: $0.image
         )
-    ]
+    }
 
     static let amountPresets: [RequestMoneyAmountPresetModel] = [
         RequestMoneyAmountPresetModel(id: "preset_50", value: 50, title: "R$ 50"),

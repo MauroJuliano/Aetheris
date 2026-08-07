@@ -10,7 +10,7 @@ struct HomeFlowCoordinator: View {
     let identityValidation: any IdentityValidating
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
     @EnvironmentObject var tabBarRoutingStore: TabBarRoutingStore
-    @State var selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+    @State var selectedBeneficiary: Beneficiary?
     @State var navigation = HomeNavigationState()
 
     var body: some View {

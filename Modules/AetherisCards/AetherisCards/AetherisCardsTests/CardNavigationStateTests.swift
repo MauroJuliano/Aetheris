@@ -23,6 +23,16 @@ struct CardNavigationStateTests {
     }
 
     @Test
+    func showTransactionDetails_preservesTransactionIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showTransactionDetails(transactionID: TransactionMockIDs.netflixSubscription)
+
+        #expect(sut.path == [.transactionDetails(TransactionMockIDs.netflixSubscription)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
     func showVirtualCard_preservesPhysicalCardIdentifier() {
         var sut = CardNavigationState()
 

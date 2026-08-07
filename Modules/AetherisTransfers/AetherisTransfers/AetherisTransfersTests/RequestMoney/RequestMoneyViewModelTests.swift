@@ -21,6 +21,23 @@ struct RequestMoneyViewModelTests {
     }
 
     @Test
+    func load_keepsInitialContactSelectedAndAddsItToRecentContacts() async {
+        let initialContact = RequestContactModel.ed
+        let dashboard = RequestMoneyDashboard.fixture()
+        let service = RequestMoneyServiceSpy(dashboardResult: .success(dashboard))
+        let sut = RequestMoneyViewModel(
+            service: service,
+            initialContact: initialContact
+        )
+
+        await sut.load()
+
+        #expect(sut.selectedContact == initialContact)
+        #expect(sut.recentContacts.first == initialContact)
+        #expect(sut.recentContacts.dropFirst() == dashboard.recentContacts[...])
+    }
+
+    @Test
     func load_exposesError_whenServiceFails() async {
         let service = RequestMoneyServiceSpy(dashboardResult: .failure(URLError(.timedOut)))
         let sut = RequestMoneyViewModel(service: service)
@@ -117,6 +134,13 @@ private extension RequestContactModel {
         name: "Lucas Almeida",
         contactInformation: "(11) 97654-3210",
         imageName: "lucas"
+    )
+
+    static let ed = RequestContactModel(
+        id: UUID(uuidString: "A0000000-0000-0000-0000-000000000001")!,
+        name: "Ed Sheeran",
+        contactInformation: "afirelove",
+        imageName: "ed"
     )
 }
 

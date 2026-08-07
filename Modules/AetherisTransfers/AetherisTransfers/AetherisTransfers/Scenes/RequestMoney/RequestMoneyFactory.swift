@@ -6,6 +6,7 @@ enum RequestMoneyFactory {
     @MainActor
     static func make(
         coreService: any HasCoreService,
+        initialContact: RequestContactModel? = nil,
         onBackAction: @escaping () -> Void,
         onHelpTap: @escaping () -> Void = {},
         onContactSearchTap: @escaping () -> Void = {},
@@ -14,7 +15,8 @@ enum RequestMoneyFactory {
     ) -> RequestMoneyScreen {
         RequestMoneyScreen(
             viewModel: RequestMoneyViewModel(
-                service: RequestMoneyService(coreService: coreService)
+                service: RequestMoneyService(coreService: coreService),
+                initialContact: initialContact
             ),
             onBackAction: onBackAction,
             onHelpTap: onHelpTap,

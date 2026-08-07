@@ -5,6 +5,7 @@ enum HomeRoute: Hashable {
     case card(initialCardId: UUID? = nil)
     case sendMoney
     case requestMoney
+    case beneficiaryDetails(UUID)
     case beneficiaryList
     case addBeneficiary
     case notifications

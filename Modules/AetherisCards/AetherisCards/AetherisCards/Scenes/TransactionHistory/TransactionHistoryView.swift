@@ -6,13 +6,16 @@ struct TransactionHistoryView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: TransactionHistoryViewModel
     let onBack: (() -> Void)?
+    let onTransactionTap: (UUID) -> Void
 
     init(
         viewModel: TransactionHistoryViewModel,
-        onBack: (() -> Void)? = nil
+        onBack: (() -> Void)? = nil,
+        onTransactionTap: @escaping (UUID) -> Void = { _ in }
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.onBack = onBack
+        self.onTransactionTap = onTransactionTap
     }
 
     var body: some View {
@@ -65,10 +68,18 @@ struct TransactionHistoryView: View {
 
                                 VStack {
                                     ForEach(section.items) { transaction in
-                                        FinancialSummary(
-                                            model: transaction,
-                                            hasDivider: transaction.id != section.items.last?.id
-                                        )
+                                        Button {
+                                            onTransactionTap(transaction.id)
+                                        } label: {
+                                            FinancialSummary(
+                                                model: transaction,
+                                                hasDivider: transaction.id != section.items.last?.id
+                                            )
+                                            .frame(maxWidth: .infinity)
+                                            .contentShape(Rectangle())
+                                        }
+                                        .buttonStyle(.plain)
+                                        .accessibilityIdentifier("transactionHistory.row.\(transaction.id.uuidString)")
                                     }
                                 }
                                 .appCardSurface(

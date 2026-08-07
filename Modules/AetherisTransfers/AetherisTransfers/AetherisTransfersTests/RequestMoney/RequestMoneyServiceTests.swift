@@ -13,7 +13,10 @@ struct RequestMoneyServiceTests {
         let dashboard = try await sut.loadDashboard()
 
         #expect(dashboard.requesterName == "Blake Brown")
-        #expect(dashboard.recentContacts.count == 5)
+        #expect(dashboard.recentContacts.count == BeneficiaryFixtures.defaults.count)
+        #expect(dashboard.recentContacts.map(\.id) == BeneficiaryFixtures.defaults.map(\.id))
+        #expect(dashboard.recentContacts.map(\.name) == BeneficiaryFixtures.defaults.map(\.name))
+        #expect(dashboard.recentContacts.map(\.imageName) == BeneficiaryFixtures.defaults.map(\.image))
         #expect(dashboard.amountPresets.map(\.value) == [50, 100, 150, 200, 300])
         #expect(coreService.calls == [
             .init(path: "/payments/request-money/dashboard", method: .get)
@@ -24,16 +27,17 @@ struct RequestMoneyServiceTests {
     func createRequest_postsRequestAndReturnsBackendModel() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = RequestMoneyService(coreService: coreService)
-        let contactId = UUID(uuidString: "51CE8568-0922-4893-A112-DAAE87B7D650")!
+        let contact = BeneficiaryFixtures.defaults[0]
 
         let request = try await sut.createRequest(
-            contactId: contactId,
+            contactId: contact.id,
             amount: 125,
             reason: "Dinner"
         )
 
-        #expect(request.contact?.id == contactId)
-        #expect(request.contact?.name == "Marina Silva")
+        #expect(request.contact?.id == contact.id)
+        #expect(request.contact?.name == contact.name)
+        #expect(request.contact?.imageName == contact.image)
         #expect(request.amount == 125)
         #expect(request.reason == "Dinner")
         #expect(request.paymentLink == nil)

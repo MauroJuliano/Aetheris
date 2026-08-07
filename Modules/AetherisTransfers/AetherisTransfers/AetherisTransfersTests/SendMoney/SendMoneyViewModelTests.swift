@@ -48,7 +48,25 @@ struct SendMoneyViewModelTests {
         let sut = SendMoneyViewModel(service: SendMoneyServiceSpy(result: .success(.mock)))
         await sut.load()
 
-        #expect(sut.canContinue(currentAmount: amount) == expected)
+        #expect(
+            sut.canContinue(
+                selectedBeneficiary: .fixture,
+                currentAmount: amount
+            ) == expected
+        )
+    }
+
+    @Test
+    func canContinue_requiresSelectedBeneficiary() async {
+        let sut = SendMoneyViewModel(service: SendMoneyServiceSpy(result: .success(.mock)))
+        await sut.load()
+
+        #expect(
+            !sut.canContinue(
+                selectedBeneficiary: nil,
+                currentAmount: 50
+            )
+        )
     }
 
     @Test

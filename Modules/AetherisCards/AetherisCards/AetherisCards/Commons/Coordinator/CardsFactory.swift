@@ -56,6 +56,18 @@ public final class CardsFactory: CardsFactoryInterface {
                         onBack: {
                             guard !path.wrappedValue.isEmpty else { return }
                             path.wrappedValue.removeLast()
+                        },
+                        onTransactionTap: { transactionID in
+                            path.wrappedValue.append(CardFlowRoute.transactionDetails(transactionID))
+                        }
+                    )
+                case .transactionDetails(let transactionID):
+                    TransactionDetailsFactory.make(
+                        coreService: coreService,
+                        transactionId: transactionID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
                         }
                     )
                 case .virtualCard(let physicalCardID):

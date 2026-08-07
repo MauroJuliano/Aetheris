@@ -30,9 +30,79 @@ internal enum Strings {
     /// Find beneficiary
     internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
   }
+  internal enum BeneficiaryDetails {
+    /// Account
+    internal static let account = Strings.tr("Localizable", "BeneficiaryDetails.account", fallback: "Account")
+    /// Something went wrong
+    internal static let actionErrorTitle = Strings.tr("Localizable", "BeneficiaryDetails.actionErrorTitle", fallback: "Something went wrong")
+    /// Bank account
+    internal static let bankAccount = Strings.tr("Localizable", "BeneficiaryDetails.bankAccount", fallback: "Bank account")
+    /// Business
+    internal static let business = Strings.tr("Localizable", "BeneficiaryDetails.business", fallback: "Business")
+    /// Completed
+    internal static let completed = Strings.tr("Localizable", "BeneficiaryDetails.completed", fallback: "Completed")
+    /// Contact
+    internal static let contact = Strings.tr("Localizable", "BeneficiaryDetails.contact", fallback: "Contact")
+    /// Email
+    internal static let email = Strings.tr("Localizable", "BeneficiaryDetails.email", fallback: "Email")
+    /// We couldn't find the details for this beneficiary.
+    internal static let emptyDescription = Strings.tr("Localizable", "BeneficiaryDetails.emptyDescription", fallback: "We couldn't find the details for this beneficiary.")
+    /// Beneficiary not found
+    internal static let emptyTitle = Strings.tr("Localizable", "BeneficiaryDetails.emptyTitle", fallback: "Beneficiary not found")
+    /// Failed
+    internal static let failed = Strings.tr("Localizable", "BeneficiaryDetails.failed", fallback: "Failed")
+    /// Information
+    internal static let information = Strings.tr("Localizable", "BeneficiaryDetails.information", fallback: "Information")
+    /// Location
+    internal static let location = Strings.tr("Localizable", "BeneficiaryDetails.location", fallback: "Location")
+    /// More
+    internal static let more = Strings.tr("Localizable", "BeneficiaryDetails.more", fallback: "More")
+    /// Net
+    internal static let net = Strings.tr("Localizable", "BeneficiaryDetails.net", fallback: "Net")
+    /// 1 transaction
+    internal static let oneTransaction = Strings.tr("Localizable", "BeneficiaryDetails.oneTransaction", fallback: "1 transaction")
+    /// Payment received
+    internal static let paymentReceived = Strings.tr("Localizable", "BeneficiaryDetails.paymentReceived", fallback: "Payment received")
+    /// Pending
+    internal static let pending = Strings.tr("Localizable", "BeneficiaryDetails.pending", fallback: "Pending")
+    /// Phone
+    internal static let phone = Strings.tr("Localizable", "BeneficiaryDetails.phone", fallback: "Phone")
+    /// Received
+    internal static let received = Strings.tr("Localizable", "BeneficiaryDetails.received", fallback: "Received")
+    /// Remove beneficiary
+    internal static let removeBeneficiary = Strings.tr("Localizable", "BeneficiaryDetails.removeBeneficiary", fallback: "Remove beneficiary")
+    /// You will no longer be able to send or request money from this person.
+    internal static let removeBeneficiaryDescription = Strings.tr("Localizable", "BeneficiaryDetails.removeBeneficiaryDescription", fallback: "You will no longer be able to send or request money from this person.")
+    /// This person will be removed from your beneficiaries. Your transaction history will not be deleted.
+    internal static let removeConfirmationDescription = Strings.tr("Localizable", "BeneficiaryDetails.removeConfirmationDescription", fallback: "This person will be removed from your beneficiaries. Your transaction history will not be deleted.")
+    /// Remove this beneficiary?
+    internal static let removeConfirmationTitle = Strings.tr("Localizable", "BeneficiaryDetails.removeConfirmationTitle", fallback: "Remove this beneficiary?")
+    /// Request
+    internal static let request = Strings.tr("Localizable", "BeneficiaryDetails.request", fallback: "Request")
+    /// Sent
+    internal static let sent = Strings.tr("Localizable", "BeneficiaryDetails.sent", fallback: "Sent")
+    /// Beneficiary
+    internal static let title = Strings.tr("Localizable", "BeneficiaryDetails.title", fallback: "Beneficiary")
+    /// Transactions
+    internal static let transactions = Strings.tr("Localizable", "BeneficiaryDetails.transactions", fallback: "Transactions")
+    /// %d transactions
+    internal static func transactionsCount(_ p1: Int) -> String {
+      return Strings.tr("Localizable", "BeneficiaryDetails.transactionsCount", p1, fallback: "%d transactions")
+    }
+    /// Transfer
+    internal static let transfer = Strings.tr("Localizable", "BeneficiaryDetails.transfer", fallback: "Transfer")
+    /// Transfer sent
+    internal static let transferSent = Strings.tr("Localizable", "BeneficiaryDetails.transferSent", fallback: "Transfer sent")
+    /// Beneficiary unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryDetails.unavailableTitle", fallback: "Beneficiary unavailable")
+    /// Verified beneficiary
+    internal static let verified = Strings.tr("Localizable", "BeneficiaryDetails.verified", fallback: "Verified beneficiary")
+  }
   internal enum Common {
     /// Back
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")
+    /// Cancel
+    internal static let cancel = Strings.tr("Localizable", "Common.cancel", fallback: "Cancel")
     /// Close
     internal static let close = Strings.tr("Localizable", "Common.close", fallback: "Close")
     /// Continue
@@ -43,6 +113,8 @@ internal enum Strings {
     internal static let help = Strings.tr("Localizable", "Common.help", fallback: "Help")
     /// OK
     internal static let ok = Strings.tr("Localizable", "Common.ok", fallback: "OK")
+    /// See all
+    internal static let seeAll = Strings.tr("Localizable", "Common.seeAll", fallback: "See all")
     /// Try again
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
   }
@@ -139,6 +211,10 @@ internal enum Strings {
     internal static let recipientPlaceholder = Strings.tr("Localizable", "RequestMoney.recipientPlaceholder", fallback: "Name, phone, email, or Pix key")
     /// Who do you want to request from?
     internal static let recipientTitle = Strings.tr("Localizable", "RequestMoney.recipientTitle", fallback: "Who do you want to request from?")
+    /// Choose who should receive this request
+    internal static let selectBeneficiaryDescription = Strings.tr("Localizable", "RequestMoney.selectBeneficiaryDescription", fallback: "Choose who should receive this request")
+    /// Select a beneficiary
+    internal static let selectBeneficiaryTitle = Strings.tr("Localizable", "RequestMoney.selectBeneficiaryTitle", fallback: "Select a beneficiary")
     /// Send request
     internal static let sendRequest = Strings.tr("Localizable", "RequestMoney.sendRequest", fallback: "Send request")
     /// How much do you want to charge?
@@ -167,6 +243,12 @@ internal enum Strings {
   internal enum TransferBeneficiary {
     /// Change
     internal static let change = Strings.tr("Localizable", "TransferBeneficiary.change", fallback: "Change")
+    /// Select
+    internal static let select = Strings.tr("Localizable", "TransferBeneficiary.select", fallback: "Select")
+    /// Choose who should receive this transfer
+    internal static let selectDescription = Strings.tr("Localizable", "TransferBeneficiary.selectDescription", fallback: "Choose who should receive this transfer")
+    /// Select a beneficiary
+    internal static let selectTitle = Strings.tr("Localizable", "TransferBeneficiary.selectTitle", fallback: "Select a beneficiary")
   }
   internal enum TransferPin {
     /// Confirm Transfer

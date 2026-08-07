@@ -63,6 +63,41 @@
 "Common.close" = "Close";
 "Common.ok" = "OK";
 "Common.help" = "Help";
+"Common.cancel" = "Cancel";
+"Common.seeAll" = "See all";
+
+"BeneficiaryDetails.title" = "Beneficiary";
+"BeneficiaryDetails.transfer" = "Transfer";
+"BeneficiaryDetails.request" = "Request";
+"BeneficiaryDetails.more" = "More";
+"BeneficiaryDetails.verified" = "Verified beneficiary";
+"BeneficiaryDetails.contact" = "Contact";
+"BeneficiaryDetails.business" = "Business";
+"BeneficiaryDetails.bankAccount" = "Bank account";
+"BeneficiaryDetails.information" = "Information";
+"BeneficiaryDetails.email" = "Email";
+"BeneficiaryDetails.phone" = "Phone";
+"BeneficiaryDetails.location" = "Location";
+"BeneficiaryDetails.account" = "Account";
+"BeneficiaryDetails.transactions" = "Transactions";
+"BeneficiaryDetails.sent" = "Sent";
+"BeneficiaryDetails.received" = "Received";
+"BeneficiaryDetails.net" = "Net";
+"BeneficiaryDetails.oneTransaction" = "1 transaction";
+"BeneficiaryDetails.transactionsCount" = "%d transactions";
+"BeneficiaryDetails.transferSent" = "Transfer sent";
+"BeneficiaryDetails.paymentReceived" = "Payment received";
+"BeneficiaryDetails.pending" = "Pending";
+"BeneficiaryDetails.completed" = "Completed";
+"BeneficiaryDetails.failed" = "Failed";
+"BeneficiaryDetails.removeBeneficiary" = "Remove beneficiary";
+"BeneficiaryDetails.removeBeneficiaryDescription" = "You will no longer be able to send or request money from this person.";
+"BeneficiaryDetails.removeConfirmationTitle" = "Remove this beneficiary?";
+"BeneficiaryDetails.removeConfirmationDescription" = "This person will be removed from your beneficiaries. Your transaction history will not be deleted.";
+"BeneficiaryDetails.unavailableTitle" = "Beneficiary unavailable";
+"BeneficiaryDetails.emptyTitle" = "Beneficiary not found";
+"BeneficiaryDetails.emptyDescription" = "We couldn't find the details for this beneficiary.";
+"BeneficiaryDetails.actionErrorTitle" = "Something went wrong";
 
 "BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
 "BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";
@@ -75,6 +110,9 @@
 "BeneficiaryAdd.invalidSearch" = "Enter an email or PIX key to continue.";
 
 "TransferBeneficiary.change" = "Change";
+"TransferBeneficiary.select" = "Select";
+"TransferBeneficiary.selectTitle" = "Select a beneficiary";
+"TransferBeneficiary.selectDescription" = "Choose who should receive this transfer";
 
 "RequestMoney.title" = "Request money";
 "RequestMoney.description" = "Request money from friends, family, or anyone using a contact or Pix key.";
@@ -82,6 +120,8 @@
 "RequestMoney.shareMode" = "Share request";
 "RequestMoney.recipientTitle" = "Who do you want to request from?";
 "RequestMoney.recipientPlaceholder" = "Name, phone, email, or Pix key";
+"RequestMoney.selectBeneficiaryTitle" = "Select a beneficiary";
+"RequestMoney.selectBeneficiaryDescription" = "Choose who should receive this request";
 "RequestMoney.recentContacts" = "Recent contacts";
 "RequestMoney.amountTitle" = "How much do you want to request?";
 "RequestMoney.shareAmountTitle" = "How much do you want to charge?";

@@ -24,8 +24,12 @@ final class RequestMoneyViewModel: ObservableObject {
     private var hasLoaded = false
     private let service: any RequestMoneyServicing
 
-    init(service: any RequestMoneyServicing) {
+    init(
+        service: any RequestMoneyServicing,
+        initialContact: RequestContactModel? = nil
+    ) {
         self.service = service
+        selectedContact = initialContact
     }
 
     var amount: Decimal {
@@ -73,7 +77,10 @@ final class RequestMoneyViewModel: ObservableObject {
         do {
             let dashboard = try await service.loadDashboard()
             requesterName = dashboard.requesterName
-            recentContacts = dashboard.recentContacts
+            recentContacts = Self.merging(
+                selectedContact: selectedContact,
+                into: dashboard.recentContacts
+            )
             amountPresets = dashboard.amountPresets
 
             if reason.isEmpty,
@@ -161,5 +168,17 @@ final class RequestMoneyViewModel: ObservableObject {
         }
 
         return Strings.HomeApp.genericErrorDescription
+    }
+
+    private static func merging(
+        selectedContact: RequestContactModel?,
+        into contacts: [RequestContactModel]
+    ) -> [RequestContactModel] {
+        guard let selectedContact,
+              !contacts.contains(where: { $0.id == selectedContact.id }) else {
+            return contacts
+        }
+
+        return [selectedContact] + contacts
     }
 }

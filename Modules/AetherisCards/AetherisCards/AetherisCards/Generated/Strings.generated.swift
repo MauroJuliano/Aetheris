@@ -128,6 +128,10 @@ internal enum Strings {
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")
     /// Cancel
     internal static let cancel = Strings.tr("Localizable", "Common.cancel", fallback: "Cancel")
+    /// OK
+    internal static let ok = Strings.tr("Localizable", "Common.ok", fallback: "OK")
+    /// See all
+    internal static let seeAll = Strings.tr("Localizable", "Common.seeAll", fallback: "See all")
     /// Try again
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
   }
@@ -296,6 +300,160 @@ internal enum Strings {
     internal static let transferSubtitle = Strings.tr("Localizable", "QuickActions.transferSubtitle", fallback: "Send money")
     /// Transfer
     internal static let transferTitle = Strings.tr("Localizable", "QuickActions.transferTitle", fallback: "Transfer")
+  }
+  internal enum TransactionDetails {
+    /// Add note
+    internal static let addNote = Strings.tr("Localizable", "TransactionDetails.addNote", fallback: "Add note")
+    /// Allow future payments
+    internal static let allowFuturePayments = Strings.tr("Localizable", "TransactionDetails.allowFuturePayments", fallback: "Allow future payments")
+    /// Future charges from this merchant will be allowed again.
+    internal static let allowFuturePaymentsDescription = Strings.tr("Localizable", "TransactionDetails.allowFuturePaymentsDescription", fallback: "Future charges from this merchant will be allowed again.")
+    /// Amount
+    internal static let amount = Strings.tr("Localizable", "TransactionDetails.amount", fallback: "Amount")
+    /// Billing frequency
+    internal static let billingFrequency = Strings.tr("Localizable", "TransactionDetails.billingFrequency", fallback: "Billing frequency")
+    /// Block future payments
+    internal static let blockFuturePayments = Strings.tr("Localizable", "TransactionDetails.blockFuturePayments", fallback: "Block future payments")
+    /// Future charges from this merchant will be declined.
+    internal static let blockFuturePaymentsDescription = Strings.tr("Localizable", "TransactionDetails.blockFuturePaymentsDescription", fallback: "Future charges from this merchant will be declined.")
+    /// Cancelled
+    internal static let cancelled = Strings.tr("Localizable", "TransactionDetails.cancelled", fallback: "Cancelled")
+    /// Category
+    internal static let category = Strings.tr("Localizable", "TransactionDetails.category", fallback: "Category")
+    /// Completed
+    internal static let completed = Strings.tr("Localizable", "TransactionDetails.completed", fallback: "Completed")
+    /// Confirmation code
+    internal static let confirmationCode = Strings.tr("Localizable", "TransactionDetails.confirmationCode", fallback: "Confirmation code")
+    /// Date
+    internal static let date = Strings.tr("Localizable", "TransactionDetails.date", fallback: "Date")
+    /// Declined
+    internal static let declined = Strings.tr("Localizable", "TransactionDetails.declined", fallback: "Declined")
+    /// Download
+    internal static let download = Strings.tr("Localizable", "TransactionDetails.download", fallback: "Download")
+    /// We couldn't find the details for this transaction.
+    internal static let emptyDescription = Strings.tr("Localizable", "TransactionDetails.emptyDescription", fallback: "We couldn't find the details for this transaction.")
+    /// Transaction not found
+    internal static let emptyTitle = Strings.tr("Localizable", "TransactionDetails.emptyTitle", fallback: "Transaction not found")
+    /// Something went wrong
+    internal static let errorTitle = Strings.tr("Localizable", "TransactionDetails.errorTitle", fallback: "Something went wrong")
+    /// Expected amount
+    internal static let expectedAmount = Strings.tr("Localizable", "TransactionDetails.expectedAmount", fallback: "Expected amount")
+    /// Expected availability
+    internal static let expectedAvailability = Strings.tr("Localizable", "TransactionDetails.expectedAvailability", fallback: "Expected availability")
+    /// From
+    internal static let from = Strings.tr("Localizable", "TransactionDetails.from", fallback: "From")
+    /// Get support
+    internal static let getSupport = Strings.tr("Localizable", "TransactionDetails.getSupport", fallback: "Get support")
+    /// Income
+    internal static let income = Strings.tr("Localizable", "TransactionDetails.income", fallback: "Income")
+    /// Institution
+    internal static let institution = Strings.tr("Localizable", "TransactionDetails.institution", fallback: "Institution")
+    /// Invoice
+    internal static let invoice = Strings.tr("Localizable", "TransactionDetails.invoice", fallback: "Invoice")
+    /// Invoice payment
+    internal static let invoicePayment = Strings.tr("Localizable", "TransactionDetails.invoicePayment", fallback: "Invoice payment")
+    /// Invoice payment details
+    internal static let invoicePaymentDetails = Strings.tr("Localizable", "TransactionDetails.invoicePaymentDetails", fallback: "Invoice payment details")
+    /// Location
+    internal static let location = Strings.tr("Localizable", "TransactionDetails.location", fallback: "Location")
+    /// Merchant
+    internal static let merchant = Strings.tr("Localizable", "TransactionDetails.merchant", fallback: "Merchant")
+    /// Method
+    internal static let method = Strings.tr("Localizable", "TransactionDetails.method", fallback: "Method")
+    /// Monthly
+    internal static let monthly = Strings.tr("Localizable", "TransactionDetails.monthly", fallback: "Monthly")
+    /// Need help?
+    internal static let needHelp = Strings.tr("Localizable", "TransactionDetails.needHelp", fallback: "Need help?")
+    /// Next expected payment: %@
+    internal static func nextExpectedPayment(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "TransactionDetails.nextExpectedPayment", String(describing: p1), fallback: "Next expected payment: %@")
+    }
+    /// Next expected payment
+    internal static let nextPayment = Strings.tr("Localizable", "TransactionDetails.nextPayment", fallback: "Next expected payment")
+    /// Note
+    internal static let note = Strings.tr("Localizable", "TransactionDetails.note", fallback: "Note")
+    /// Not identified
+    internal static let notIdentified = Strings.tr("Localizable", "TransactionDetails.notIdentified", fallback: "Not identified")
+    /// Original transaction
+    internal static let originalTransaction = Strings.tr("Localizable", "TransactionDetails.originalTransaction", fallback: "Original transaction")
+    /// Paid amount
+    internal static let paidAmount = Strings.tr("Localizable", "TransactionDetails.paidAmount", fallback: "Paid amount")
+    /// Payment details
+    internal static let paymentDetails = Strings.tr("Localizable", "TransactionDetails.paymentDetails", fallback: "Payment details")
+    /// Payment history
+    internal static let paymentHistory = Strings.tr("Localizable", "TransactionDetails.paymentHistory", fallback: "Payment history")
+    /// Payment method
+    internal static let paymentMethod = Strings.tr("Localizable", "TransactionDetails.paymentMethod", fallback: "Payment method")
+    /// Pending
+    internal static let pending = Strings.tr("Localizable", "TransactionDetails.pending", fallback: "Pending")
+    /// Processing
+    internal static let processing = Strings.tr("Localizable", "TransactionDetails.processing", fallback: "Processing")
+    /// Purchase
+    internal static let purchase = Strings.tr("Localizable", "TransactionDetails.purchase", fallback: "Purchase")
+    /// Purchase details
+    internal static let purchaseDetails = Strings.tr("Localizable", "TransactionDetails.purchaseDetails", fallback: "Purchase details")
+    /// Every three months
+    internal static let quarterly = Strings.tr("Localizable", "TransactionDetails.quarterly", fallback: "Every three months")
+    /// Reason
+    internal static let reason = Strings.tr("Localizable", "TransactionDetails.reason", fallback: "Reason")
+    /// %@ usually charges %@ every month.
+    internal static func recurringMonthly(_ p1: Any, _ p2: Any) -> String {
+      return Strings.tr("Localizable", "TransactionDetails.recurringMonthly", String(describing: p1), String(describing: p2), fallback: "%@ usually charges %@ every month.")
+    }
+    /// Recurring payment
+    internal static let recurringPayment = Strings.tr("Localizable", "TransactionDetails.recurringPayment", fallback: "Recurring payment")
+    /// %@ usually charges %@ every three months.
+    internal static func recurringQuarterly(_ p1: Any, _ p2: Any) -> String {
+      return Strings.tr("Localizable", "TransactionDetails.recurringQuarterly", String(describing: p1), String(describing: p2), fallback: "%@ usually charges %@ every three months.")
+    }
+    /// We identified similar recurring payments from this merchant.
+    internal static let recurringUnknown = Strings.tr("Localizable", "TransactionDetails.recurringUnknown", fallback: "We identified similar recurring payments from this merchant.")
+    /// %@ usually charges %@ every week.
+    internal static func recurringWeekly(_ p1: Any, _ p2: Any) -> String {
+      return Strings.tr("Localizable", "TransactionDetails.recurringWeekly", String(describing: p1), String(describing: p2), fallback: "%@ usually charges %@ every week.")
+    }
+    /// %@ usually charges %@ every year.
+    internal static func recurringYearly(_ p1: Any, _ p2: Any) -> String {
+      return Strings.tr("Localizable", "TransactionDetails.recurringYearly", String(describing: p1), String(describing: p2), fallback: "%@ usually charges %@ every year.")
+    }
+    /// Reference
+    internal static let reference = Strings.tr("Localizable", "TransactionDetails.reference", fallback: "Reference")
+    /// Refund
+    internal static let refund = Strings.tr("Localizable", "TransactionDetails.refund", fallback: "Refund")
+    /// Refund details
+    internal static let refundDetails = Strings.tr("Localizable", "TransactionDetails.refundDetails", fallback: "Refund details")
+    /// Refunded
+    internal static let refundedStatus = Strings.tr("Localizable", "TransactionDetails.refundedStatus", fallback: "Refunded")
+    /// Report issue
+    internal static let reportIssue = Strings.tr("Localizable", "TransactionDetails.reportIssue", fallback: "Report issue")
+    /// Share
+    internal static let share = Strings.tr("Localizable", "TransactionDetails.share", fallback: "Share")
+    /// Status
+    internal static let status = Strings.tr("Localizable", "TransactionDetails.status", fallback: "Status")
+    /// Subscription
+    internal static let subscription = Strings.tr("Localizable", "TransactionDetails.subscription", fallback: "Subscription")
+    /// Subscription details
+    internal static let subscriptionDetails = Strings.tr("Localizable", "TransactionDetails.subscriptionDetails", fallback: "Subscription details")
+    /// If you have any questions about this transaction, we're here to help.
+    internal static let supportDescription = Strings.tr("Localizable", "TransactionDetails.supportDescription", fallback: "If you have any questions about this transaction, we're here to help.")
+    /// Transaction Details
+    internal static let title = Strings.tr("Localizable", "TransactionDetails.title", fallback: "Transaction Details")
+    /// To
+    internal static let to = Strings.tr("Localizable", "TransactionDetails.to", fallback: "To")
+    /// Transaction ID
+    internal static let transactionId = Strings.tr("Localizable", "TransactionDetails.transactionId", fallback: "Transaction ID")
+    /// Transfer
+    internal static let transfer = Strings.tr("Localizable", "TransactionDetails.transfer", fallback: "Transfer")
+    /// Transfer details
+    internal static let transferDetails = Strings.tr("Localizable", "TransactionDetails.transferDetails", fallback: "Transfer details")
+    /// Type
+    internal static let type = Strings.tr("Localizable", "TransactionDetails.type", fallback: "Type")
+    /// Transaction unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "TransactionDetails.unavailableTitle", fallback: "Transaction unavailable")
+    /// Weekly
+    internal static let weekly = Strings.tr("Localizable", "TransactionDetails.weekly", fallback: "Weekly")
+    /// Yearly
+    internal static let yearly = Strings.tr("Localizable", "TransactionDetails.yearly", fallback: "Yearly")
   }
   internal enum TransactionHistory {
     /// This account does not have transaction history in the simulated dataset.

@@ -10,7 +10,7 @@ public enum TransfersFactory {
     public static func make(
         coreService: any HasCoreService,
         identityValidation: any IdentityValidating,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         onFinished: @escaping () -> Void
     ) -> AnyView {
         AnyView(SendMoneyFlowCoordinator(
@@ -25,7 +25,7 @@ public enum TransfersFactory {
     public static func makeEmbedded(
         coreService: any HasCoreService,
         identityValidation: any IdentityValidating,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
     ) -> AnyView {
@@ -34,7 +34,7 @@ public enum TransfersFactory {
             selectedBeneficiary: selectedBeneficiary,
             onBackAction: onFinished,
             onChangeBeneficiary: {
-                path.wrappedValue.append(SendMoneyFlowRoute.beneficiaryList)
+                path.wrappedValue.append(SendMoneyFlowRoute.beneficiaryList(.transferSelection))
             },
             onContinue: { draft in
                 path.wrappedValue.append(SendMoneyFlowRoute.pin(draft))
@@ -47,7 +47,7 @@ public enum TransfersFactory {
         content: AnyView,
         coreService: any HasCoreService,
         identityValidation: any IdentityValidating,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
     ) -> AnyView {
@@ -101,24 +101,103 @@ public enum TransfersFactory {
     }
 
     @MainActor
+    public static func makeRequestMoneyWithContactPicker(
+        coreService: any HasCoreService,
+        path: Binding<NavigationPath>,
+        onBack: @escaping () -> Void,
+        onFinished: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            RequestMoneyFactory.make(
+                coreService: coreService,
+                onBackAction: onBack,
+                onContactSearchTap: {
+                    path.wrappedValue.append(SendMoneyFlowRoute.beneficiaryList(.detailsNavigation))
+                },
+                onSuccess: { _ in
+                    onFinished()
+                }
+            )
+        )
+    }
+
+    @MainActor
+    public static func makeBeneficiaryDetails(
+        coreService: any HasCoreService,
+        beneficiaryId: UUID,
+        path: Binding<NavigationPath>,
+        onBack: @escaping () -> Void,
+        onTransferTap: @escaping (Beneficiary) -> Void,
+        onBeneficiaryRemoved: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            BeneficiaryDetailsFactory.make(
+                coreService: coreService,
+                beneficiaryId: beneficiaryId,
+                onBackAction: onBack,
+                onTransferTap: onTransferTap,
+                onRequestMoneyTap: { contact in
+                    path.wrappedValue.append(SendMoneyFlowRoute.requestMoney(contact))
+                },
+                onBeneficiaryRemoved: onBeneficiaryRemoved
+            )
+        )
+    }
+
+    @MainActor
     @ViewBuilder
     private static func embeddedDestination(
         for route: SendMoneyFlowRoute,
         coreService: any HasCoreService,
         identityValidation: any IdentityValidating,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         path: Binding<NavigationPath>,
         onFinished: @escaping () -> Void
     ) -> some View {
         switch route {
-        case .beneficiaryList:
+        case .beneficiaryList(let context):
             BeneficiaryListFactory.make(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    selectedBeneficiary.wrappedValue = beneficiary
-                    pop(path)
+                    switch context {
+                    case .transferSelection:
+                        selectedBeneficiary.wrappedValue = beneficiary
+                        pop(path)
+
+                    case .detailsNavigation:
+                        path.wrappedValue.append(SendMoneyFlowRoute.beneficiaryDetails(beneficiary.id))
+                    }
                 },
                 onBack: { pop(path) }
+            )
+            .navigationBarHidden(true)
+
+        case .beneficiaryDetails(let beneficiaryId):
+            BeneficiaryDetailsFactory.make(
+                coreService: coreService,
+                beneficiaryId: beneficiaryId,
+                onBackAction: { pop(path) },
+                onTransferTap: { beneficiary in
+                    selectedBeneficiary.wrappedValue = beneficiary
+                    returnToSendMoney(path)
+                },
+                onRequestMoneyTap: { contact in
+                    path.wrappedValue.append(SendMoneyFlowRoute.requestMoney(contact))
+                },
+                onBeneficiaryRemoved: {
+                    returnToSendMoney(path)
+                }
+            )
+            .navigationBarHidden(true)
+
+        case .requestMoney(let contact):
+            RequestMoneyFactory.make(
+                coreService: coreService,
+                initialContact: contact,
+                onBackAction: { pop(path) },
+                onSuccess: { _ in
+                    returnToSendMoney(path)
+                }
             )
             .navigationBarHidden(true)
 

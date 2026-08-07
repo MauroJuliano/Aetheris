@@ -36,23 +36,29 @@ struct RequestMoneyFormCard: View {
 
             Button(action: onSearchTap) {
                 HStack(spacing: AppSpacing.small) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 18, weight: .regular))
-                        .foregroundStyle(Color.textSecondaryColor)
+                    recipientIcon
 
-                    Text(searchFieldText)
-                        .font(AppTypography.body)
-                        .foregroundStyle(searchFieldColor)
-                        .lineLimit(1)
+                    VStack(alignment: .leading, spacing: AppSpacing.xxxSmall) {
+                        Text(recipientTitle)
+                            .font(AppTypography.body)
+                            .fontWeight(.medium)
+                            .foregroundStyle(Color.textPrimary)
+                            .lineLimit(1)
+
+                        Text(recipientSubtitle)
+                            .font(AppTypography.cellCaption)
+                            .foregroundStyle(Color.textSecondaryColor)
+                            .lineLimit(1)
+                    }
 
                     Spacer()
 
-                    Image(systemName: "viewfinder")
-                        .font(.system(size: 19, weight: .medium))
+                    Image(systemName: "chevron.right")
+                        .font(.caption.bold())
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
                 .padding(.horizontal, AppSpacing.medium)
-                .frame(height: 54)
+                .frame(height: 66)
                 .background(Color.surface.opacity(0.7))
                 .overlay {
                     RoundedRectangle(cornerRadius: AppRadius.medium)
@@ -68,12 +74,34 @@ struct RequestMoneyFormCard: View {
         }
     }
 
-    private var searchFieldText: String {
-        selectedContact?.name ?? Strings.RequestMoney.recipientPlaceholder
+    @ViewBuilder
+    private var recipientIcon: some View {
+        if let imageName = selectedContact?.imageName,
+           !imageName.isEmpty {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 42, height: 42)
+                .clipShape(Circle())
+        } else {
+            ZStack {
+                Circle()
+                    .fill(Color.brandPrimaryColor.opacity(0.08))
+                    .frame(width: 42, height: 42)
+
+                Image(systemName: "person")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundStyle(Color.brandPrimaryColor)
+            }
+        }
     }
 
-    private var searchFieldColor: Color {
-        selectedContact == nil ? Color.textTertiary : Color.textPrimary
+    private var recipientTitle: String {
+        selectedContact?.name ?? Strings.RequestMoney.selectBeneficiaryTitle
+    }
+
+    private var recipientSubtitle: String {
+        selectedContact?.contactInformation ?? Strings.RequestMoney.selectBeneficiaryDescription
     }
 
     private var recentContacts: some View {

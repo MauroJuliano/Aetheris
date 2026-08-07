@@ -22,6 +22,13 @@ struct TransactionHistoryServiceTests {
             Strings.FinancialSummary.appleBill,
             Strings.FinancialSummary.ifoodBar
         ])
+        #expect(transactions.map(\.id) == [
+            TransactionMockIDs.melissaTransfer,
+            TransactionMockIDs.edPayment,
+            TransactionMockIDs.netflixSubscription,
+            TransactionMockIDs.appleSubscription,
+            TransactionMockIDs.ifoodPurchase
+        ])
         #expect(transactions.map(\.tag) == [
             .transfer,
             .income,

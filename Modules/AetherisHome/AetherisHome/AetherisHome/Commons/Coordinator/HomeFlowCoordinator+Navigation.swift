@@ -21,13 +21,12 @@ extension HomeFlowCoordinator {
             },
             onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
-                selectedBeneficiary = beneficiary
-                navigation.push(.sendMoney)
+                navigation.push(.beneficiaryDetails(beneficiary.id))
             },
             onSeeAllRecipientsTap: { navigation.push(.beneficiaryList) },
             onNewRecipientTap: { navigation.push(.addBeneficiary) },
             onTransferTap: {
-                selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+                selectedBeneficiary = nil
                 navigation.push(.sendMoney)
             },
             onRequestMoneyTap: {
@@ -65,10 +64,25 @@ extension HomeFlowCoordinator {
             .navigationBarHidden(true)
 
         case .requestMoney:
-            TransfersFactory.makeRequestMoney(
+            TransfersFactory.makeRequestMoneyWithContactPicker(
                 coreService: coreService,
+                path: $navigation.path,
                 onBack: { popRoute() },
                 onFinished: { popRoute() }
+            )
+            .navigationBarHidden(true)
+
+        case .beneficiaryDetails(let beneficiaryId):
+            TransfersFactory.makeBeneficiaryDetails(
+                coreService: coreService,
+                beneficiaryId: beneficiaryId,
+                path: $navigation.path,
+                onBack: { popRoute() },
+                onTransferTap: { beneficiary in
+                    selectedBeneficiary = beneficiary
+                    navigation.push(.sendMoney)
+                },
+                onBeneficiaryRemoved: { popRoute() }
             )
             .navigationBarHidden(true)
 
@@ -76,8 +90,7 @@ extension HomeFlowCoordinator {
             TransfersFactory.makeBeneficiaryList(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    selectedBeneficiary = beneficiary
-                    navigation.replaceCurrent(with: .sendMoney)
+                    navigation.replaceCurrent(with: .beneficiaryDetails(beneficiary.id))
                 },
                 onBack: { popRoute() }
             )
@@ -87,8 +100,7 @@ extension HomeFlowCoordinator {
             TransfersFactory.makeBeneficiarySearch(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    selectedBeneficiary = beneficiary
-                    navigation.replaceCurrent(with: .sendMoney)
+                    navigation.replaceCurrent(with: .beneficiaryDetails(beneficiary.id))
                 },
                 onBack: { popRoute() }
             )
@@ -119,7 +131,7 @@ extension HomeFlowCoordinator {
     private func navigateFromAllServices(_ route: AllServicesItem.Route) {
         switch route {
         case .transfer:
-            selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+            selectedBeneficiary = nil
             navigation.replaceCurrent(with: .sendMoney)
         case .beneficiaries:
             navigation.replaceCurrent(with: .beneficiaryList)

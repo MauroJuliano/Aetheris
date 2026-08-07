@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 import AetherisDesignSystem
 @testable import AetherisHome
 
@@ -67,6 +68,14 @@ struct HomeNavigationStateTests {
         sut.replaceCurrent(with: .addBeneficiary)
 
         #expect(sut.path.count == 2)
+    }
+
+    @Test
+    func beneficiaryDetails_preservesBeneficiaryIdentifier() {
+        let beneficiaryId = UUID()
+        let route = HomeRoute.beneficiaryDetails(beneficiaryId)
+
+        #expect(route == .beneficiaryDetails(beneficiaryId))
     }
 
     @Test
