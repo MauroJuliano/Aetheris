@@ -62,3 +62,11 @@ struct BeneficiarySearchBar: View {
         )
     }
 }
+
+#Preview {
+    @Previewable @State var text = "Adele"
+
+    BeneficiarySearchBar(text: $text)
+        .padding()
+        .appScreenBackground()
+}

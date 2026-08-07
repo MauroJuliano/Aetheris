@@ -95,3 +95,13 @@ private struct BeneficiaryInformationRow: View {
         .padding(.vertical, AppSpacing.medium)
     }
 }
+
+#Preview {
+    BeneficiaryInformationSection(
+        information: BeneficiaryDetailsMockStore
+            .beneficiary(for: BeneficiaryFixtures.defaultSelection.id)
+            .information
+    )
+    .padding()
+    .appScreenBackground()
+}

@@ -101,3 +101,14 @@ struct TransactionHistoryView: View {
         .task { await viewModel.load() }
     }
 }
+
+#Preview {
+    TransactionHistoryView(
+        viewModel: TransactionHistoryViewModel(
+            service: TransactionHistoryService(
+                coreService: DemoCoreService(delay: 0),
+                cardId: CardsPreviewData.cardId
+            )
+        )
+    )
+}

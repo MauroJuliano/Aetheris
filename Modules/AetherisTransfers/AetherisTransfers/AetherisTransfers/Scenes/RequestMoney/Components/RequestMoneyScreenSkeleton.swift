@@ -94,3 +94,8 @@ struct RequestMoneyScreenSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    RequestMoneyScreenSkeleton()
+        .appScreenBackground()
+}

@@ -134,3 +134,15 @@ struct RegisterView: View {
         .accessibilityLabel(isSecureTextVisible ? secureTextVisibleLabel : secureTextHiddenLabel)
     }
 }
+
+#Preview {
+    @Previewable @State var value = "Melissa"
+
+    RegisterView(
+        title: "Create your account",
+        subTitle: "Tell us how we should call you.",
+        textFieldValue: $value,
+        buttonTitle: "Continue",
+        textFieldPlaceholder: "Full name"
+    )
+}

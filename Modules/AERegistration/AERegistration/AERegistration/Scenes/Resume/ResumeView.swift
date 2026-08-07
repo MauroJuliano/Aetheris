@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct ResumeView: View {
@@ -124,4 +125,19 @@ struct ResumeView: View {
             }
         )
     }
+}
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    ResumeView(
+        viewModel: ResumeViewModel(
+            service: RegistrationService(
+                coreService: DemoCoreService(delay: 0)
+            ),
+            draft: draft
+        ),
+        onBack: {},
+        onContinue: {}
+    )
 }

@@ -48,3 +48,14 @@ struct SINView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    SINView(
+        viewModel: SINViewModel(draft: draft),
+        draft: draft,
+        onBack: {},
+        onContinue: {}
+    )
+}

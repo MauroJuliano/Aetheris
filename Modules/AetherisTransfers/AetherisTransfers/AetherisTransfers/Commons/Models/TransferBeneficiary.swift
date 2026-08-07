@@ -138,3 +138,25 @@ public struct TransferBeneficiary: View {
         }
     }
 }
+
+#Preview("Selected") {
+    @Previewable @State var beneficiary: Beneficiary? = BeneficiaryFixtures.defaultSelection
+
+    TransferBeneficiary(
+        onChange: {},
+        model: $beneficiary
+    )
+    .padding()
+    .appScreenBackground()
+}
+
+#Preview("Empty") {
+    @Previewable @State var beneficiary: Beneficiary?
+
+    TransferBeneficiary(
+        onChange: {},
+        model: $beneficiary
+    )
+    .padding()
+    .appScreenBackground()
+}

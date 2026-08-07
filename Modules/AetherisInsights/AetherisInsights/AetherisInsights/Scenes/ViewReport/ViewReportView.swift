@@ -22,3 +22,14 @@ struct ViewReportView: View {
     }
 }
 
+#Preview {
+    ViewReportView(
+        viewModel: ViewReportViewModel(
+            service: ViewReportService(
+                coreService: DemoCoreService(delay: 0)
+            ),
+            loadingDelayNanoseconds: 0
+        ),
+        onLoadingFinished: {}
+    )
+}

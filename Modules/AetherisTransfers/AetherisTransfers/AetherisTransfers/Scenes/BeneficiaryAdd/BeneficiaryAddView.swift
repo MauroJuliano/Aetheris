@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct BeneficiaryAddView: View {
@@ -102,4 +103,16 @@ struct BeneficiaryAddView: View {
                 .appInputField(horizontalPadding: 0)
         }
     }
+}
+
+#Preview {
+    BeneficiaryAddView(
+        viewModel: BeneficiaryAddViewModel(
+            service: BeneficiaryAddService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBack: {},
+        onComplete: { _ in }
+    )
 }

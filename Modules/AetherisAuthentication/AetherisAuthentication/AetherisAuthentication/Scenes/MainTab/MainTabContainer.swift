@@ -72,3 +72,12 @@ struct MainTabContainer: View {
     }
     
 }
+
+#Preview {
+    MainTabContainer(
+        homeFactory: AuthenticationPreviewHomeFactory(),
+        cardsFactory: AuthenticationPreviewCardsFactory(),
+        transfersFactory: AuthenticationPreviewTransfersFactory(),
+        accountFactory: AuthenticationPreviewAccountFactory()
+    )
+}

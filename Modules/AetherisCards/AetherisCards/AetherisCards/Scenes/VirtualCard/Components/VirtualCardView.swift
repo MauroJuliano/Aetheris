@@ -137,3 +137,23 @@ struct VirtualCardView: View {
         }
     }
 }
+
+#Preview("Hidden") {
+    VirtualCardView(
+        model: CardsPreviewData.virtualCard,
+        isContentVisible: false,
+        onVisibilityTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}
+
+#Preview("Visible") {
+    VirtualCardView(
+        model: CardsPreviewData.virtualCard,
+        isContentVisible: true,
+        onVisibilityTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

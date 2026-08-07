@@ -442,3 +442,89 @@ private func iconCircle(systemName: String, color: Color, size: CGFloat) -> some
             .foregroundStyle(color)
     }
 }
+
+#Preview {
+    ScrollView {
+        VStack(spacing: AppSpacing.medium) {
+            IncomingPaymentDetailsSection(
+                details: IncomingPaymentDetailsModel(
+                    senderId: UUID(),
+                    senderName: "Melissa Clark",
+                    senderContact: "melissa@email.com",
+                    method: "ACH",
+                    methodDetails: "Checking account",
+                    reference: "INV-2048"
+                ),
+                onSenderTap: {},
+                onPaymentMethodTap: {}
+            )
+
+            TransferDetailsSection(
+                details: TransferDetailsModel(
+                    recipientId: UUID(),
+                    recipientName: "Ed Sheeran",
+                    recipientContact: "+1 (617) 555-0198",
+                    destinationInstitution: "Aetheris Bank",
+                    method: "Instant transfer",
+                    reference: "Dinner"
+                ),
+                onRecipientTap: {}
+            )
+
+            MerchantDetailsSection(
+                details: MerchantDetailsModel(
+                    merchantId: UUID(),
+                    merchantName: "Apple",
+                    descriptor: "APPLE.COM/BILL",
+                    category: "Digital services",
+                    location: "Cupertino, CA",
+                    paymentMethod: CardsPreviewData.paymentMethod
+                ),
+                onMerchantTap: {},
+                onPaymentMethodTap: {}
+            )
+
+            if let subscriptionDetails = CardsPreviewData.transaction.subscriptionDetails {
+                SubscriptionDetailsSection(
+                    details: subscriptionDetails,
+                    onMerchantTap: {},
+                    onPaymentMethodTap: {},
+                    onHistoryTap: {},
+                    onBlockMerchantTap: {}
+                )
+            }
+
+            RefundDetailsSection(
+                details: RefundDetailsModel(
+                    originalTransactionId: UUID(),
+                    originalMerchantName: "Swarovski",
+                    originalPurchaseDate: Date(),
+                    refundReason: "Returned item",
+                    expectedAvailabilityDate: Calendar.current.date(
+                        byAdding: .day,
+                        value: 3,
+                        to: Date()
+                    )
+                ),
+                onOriginalTransactionTap: {}
+            )
+
+            InvoicePaymentDetailsSection(
+                details: InvoicePaymentDetailsModel(
+                    invoiceId: UUID(),
+                    cardId: CardsPreviewData.cardId,
+                    cardName: "Aetheris Visa",
+                    billingPeriod: "Aug 2026",
+                    paidAmount: 350,
+                    currencyCode: "USD",
+                    paymentMethod: CardsPreviewData.paymentMethod,
+                    confirmationCode: "PAY-2026-08"
+                ),
+                onInvoiceTap: {},
+                onPaymentMethodTap: {}
+            )
+        }
+        .padding()
+    }
+    .appScreenBackground()
+}

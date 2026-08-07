@@ -46,3 +46,14 @@ struct MothersNameInputView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    MothersNameInputView(
+        viewModel: MothersNameInputViewModel(draft: draft),
+        draft: draft,
+        onBack: {},
+        onContinue: {}
+    )
+}

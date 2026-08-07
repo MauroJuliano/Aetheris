@@ -238,3 +238,15 @@ private struct CardSwipeInteractionModifier: ViewModifier {
             }
     }
 }
+
+#Preview {
+    @Previewable @State var cards = CardsMock.creditCardMocks
+    @Previewable @State var selectedIndex = 0
+
+    CardSwipe(
+        cards: $cards,
+        selectedCardIndex: $selectedIndex
+    )
+    .padding()
+    .appScreenBackground()
+}

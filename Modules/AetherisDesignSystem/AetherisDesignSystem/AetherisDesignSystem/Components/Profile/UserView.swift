@@ -60,3 +60,13 @@ public struct UserView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
+
+#Preview {
+    UserView(
+        name: "Melissa Mccarthy",
+        imageName: "melissa",
+        joinedDate: "Joined August 17, 2025"
+    )
+    .padding()
+    .appScreenBackground()
+}

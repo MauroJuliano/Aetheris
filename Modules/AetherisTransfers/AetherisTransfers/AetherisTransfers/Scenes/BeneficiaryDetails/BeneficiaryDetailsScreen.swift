@@ -182,3 +182,15 @@ private extension BeneficiaryDetailsScreen {
         )
     }
 }
+
+#Preview {
+    BeneficiaryDetailsScreen(
+        viewModel: BeneficiaryDetailsViewModel(
+            beneficiaryId: BeneficiaryFixtures.defaultSelection.id,
+            service: BeneficiaryDetailsService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBackAction: {}
+    )
+}

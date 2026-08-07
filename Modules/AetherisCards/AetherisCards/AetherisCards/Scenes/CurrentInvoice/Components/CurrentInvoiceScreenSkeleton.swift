@@ -122,3 +122,8 @@ struct CurrentInvoiceScreenSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    CurrentInvoiceScreenSkeleton()
+        .appScreenBackground()
+}

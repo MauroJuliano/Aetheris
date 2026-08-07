@@ -22,3 +22,8 @@ struct TransactionsHistory: View {
     }
 }
 
+#Preview {
+    TransactionsHistory()
+        .padding()
+        .appScreenBackground()
+}

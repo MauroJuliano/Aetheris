@@ -22,3 +22,10 @@ extension View {
         modifier(Underline(spacing: spacing, height: height, color: color))
     }
 }
+
+#Preview {
+    Text("Underlined text")
+        .font(.headline)
+        .underlined(color: .blue)
+        .padding()
+}

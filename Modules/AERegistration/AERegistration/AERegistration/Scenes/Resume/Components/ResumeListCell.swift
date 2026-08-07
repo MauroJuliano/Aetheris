@@ -56,3 +56,15 @@ struct ResumeListCell: View {
         .appListCellRow(hasDivider: hasDivider, dividerLeading: 0, horizontalPadding: 0, verticalPadding: 0)
     }
 }
+
+#Preview {
+    ResumeListCell(
+        model: ResumeListModel(
+            image: "person.fill",
+            description: "Full name",
+            value: "Melissa Mccarthy"
+        )
+    )
+    .padding()
+    .appScreenBackground()
+}

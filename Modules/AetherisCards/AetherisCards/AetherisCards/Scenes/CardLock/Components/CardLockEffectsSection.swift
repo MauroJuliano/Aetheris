@@ -61,3 +61,12 @@ struct CardLockEffectsSection: View {
         .padding(.vertical, AppSpacing.small)
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        CardLockEffectsSection(isBlocked: false)
+        CardLockEffectsSection(isBlocked: true)
+    }
+    .padding()
+    .appScreenBackground()
+}

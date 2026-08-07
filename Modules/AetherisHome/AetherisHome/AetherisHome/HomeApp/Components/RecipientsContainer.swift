@@ -79,3 +79,19 @@ struct RecipientsContainer: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    RecipientsContainer(
+        users: [
+            Beneficiary(name: "Melissa", pixKey: "melissa@email.com", image: "melissa", hasDivider: false),
+            Beneficiary(name: "Ed Sheeran", pixKey: "ed@email.com", image: "ed", hasDivider: false),
+            Beneficiary(name: "Adele", pixKey: "adele@email.com", image: "Adele", hasDivider: false),
+            Beneficiary(name: "Troy", pixKey: "troy@email.com", image: "Troy", hasDivider: false)
+        ],
+        onSelectRecipient: { _ in },
+        onSeeAllTap: {},
+        onNewRecipientTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

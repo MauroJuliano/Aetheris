@@ -33,6 +33,19 @@ final class RegistrationDraft: ObservableObject {
     }
 }
 
+extension RegistrationDraft {
+    static var previewFilled: RegistrationDraft {
+        let draft = RegistrationDraft()
+        draft.sin = "123456789"
+        draft.mothersName = "Mary Johnson"
+        draft.userName = "Melissa Mccarthy"
+        draft.birthdate = "08/17/1990"
+        draft.password = "1234"
+        draft.confirmPassword = "1234"
+        return draft
+    }
+}
+
 struct RegisterFlow: View {
     private let coreService: any HasCoreService
     private let onBackToLogin: () -> Void
@@ -121,4 +134,12 @@ struct RegisterFlow: View {
             }
         }
     }
+}
+
+#Preview {
+    RegisterFlow(
+        coreService: DemoCoreService(delay: 0),
+        onBackToLogin: {},
+        onRegisterFinished: {}
+    )
 }

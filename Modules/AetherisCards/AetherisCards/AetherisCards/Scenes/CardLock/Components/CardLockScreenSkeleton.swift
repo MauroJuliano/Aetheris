@@ -151,3 +151,7 @@ struct CardLockScreenSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    CardLockScreenSkeleton()
+}

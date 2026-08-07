@@ -332,3 +332,19 @@ private struct CardInformationContainerSkeleton: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
+
+#Preview("Card Home") {
+    CardHome(
+        viewModel: HomeCardViewModel(
+            service: HomeCardService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        )
+    )
+}
+
+#Preview("Card Information Skeleton") {
+    CardInformationContainerSkeleton()
+        .padding()
+        .appScreenBackground()
+}

@@ -259,3 +259,38 @@ struct AmountPresets: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    RequestMoneyFormCardPreviewWrapper()
+}
+
+private struct RequestMoneyFormCardPreviewWrapper: View {
+    @State private var amountText = CurrencyInputFormatter.format(125)
+    @State private var reason = "Dinner split"
+    @FocusState private var focusedField: RequestMoneyField?
+
+    var body: some View {
+        RequestMoneyFormCard(
+            contacts: [.previewMelissa, .previewCarlos],
+            selectedContact: .previewMelissa,
+            presets: .previewPresets,
+            amountText: $amountText,
+            reason: $reason,
+            focusedField: $focusedField,
+            onSearchTap: {},
+            onContactTap: { _ in },
+            onPresetTap: { amountText = CurrencyInputFormatter.format($0) }
+        )
+        .padding()
+        .appScreenBackground()
+    }
+}
+
+extension Array where Element == RequestMoneyAmountPresetModel {
+    static let previewPresets: [RequestMoneyAmountPresetModel] = [
+        .init(id: "50", value: 50),
+        .init(id: "100", value: 100),
+        .init(id: "150", value: 150),
+        .init(id: "200", value: 200)
+    ]
+}

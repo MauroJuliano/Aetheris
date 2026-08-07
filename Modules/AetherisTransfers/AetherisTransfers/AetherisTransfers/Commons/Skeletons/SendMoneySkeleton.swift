@@ -76,3 +76,8 @@ struct SendMoneySkeleton: View {
             .padding(.top, AppSpacing.small)
     }
 }
+
+#Preview {
+    SendMoneySkeleton()
+        .appScreenBackground()
+}

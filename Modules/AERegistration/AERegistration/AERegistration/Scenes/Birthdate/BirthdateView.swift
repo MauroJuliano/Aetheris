@@ -47,3 +47,14 @@ struct BirthdateView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    BirthdateView(
+        viewModel: BirthdateViewModel(draft: draft),
+        draft: draft,
+        onBack: {},
+        onContinue: {}
+    )
+}

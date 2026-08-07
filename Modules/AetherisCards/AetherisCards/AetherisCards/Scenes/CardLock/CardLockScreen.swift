@@ -70,6 +70,18 @@ struct CardLockScreen: View {
     }
 }
 
+#Preview {
+    CardLockScreen(
+        viewModel: CardLockViewModel(
+            cardId: CardsPreviewData.cardId,
+            service: CardLockService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBackAction: {}
+    )
+}
+
 private extension CardLockScreen {
     var navigationBar: some View {
         NavBar(

@@ -45,3 +45,11 @@ public struct AppEmptyStateView: View {
         .appScreenBackground()
     }
 }
+
+#Preview {
+    AppEmptyStateView(
+        title: "No items yet",
+        description: "Your saved items will appear here.",
+        symbolName: "tray"
+    )
+}

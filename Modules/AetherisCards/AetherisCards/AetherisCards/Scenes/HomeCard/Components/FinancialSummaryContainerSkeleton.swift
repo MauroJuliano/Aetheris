@@ -41,3 +41,9 @@ struct FinancialSummaryContainerSkeleton: View {
         )
     }
 }
+
+#Preview {
+    FinancialSummaryContainerSkeleton()
+        .padding()
+        .appScreenBackground()
+}

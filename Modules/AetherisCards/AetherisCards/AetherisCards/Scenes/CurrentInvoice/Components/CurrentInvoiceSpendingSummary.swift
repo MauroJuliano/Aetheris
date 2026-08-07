@@ -88,3 +88,12 @@ struct CurrentInvoiceSpendingSummary: View {
         }
     }
 }
+
+#Preview {
+    CurrentInvoiceSpendingSummary(
+        summary: CardsPreviewData.invoice.spendingSummary,
+        onChartsTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

@@ -38,3 +38,10 @@ struct ViewReportFlowCoordinator: View {
         .toolbar(.hidden, for: .navigationBar)
     }
 }
+
+#Preview {
+    ViewReportFlowCoordinator(
+        coreService: DemoCoreService(delay: 0),
+        onBack: {}
+    )
+}

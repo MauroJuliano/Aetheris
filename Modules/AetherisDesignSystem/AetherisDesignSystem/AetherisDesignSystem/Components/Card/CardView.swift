@@ -13,3 +13,9 @@ struct CardView: View {
         }
     }
 }
+
+#Preview {
+    CardView(card: CardsMock.creditCardMocks[0])
+        .padding()
+        .appScreenBackground()
+}

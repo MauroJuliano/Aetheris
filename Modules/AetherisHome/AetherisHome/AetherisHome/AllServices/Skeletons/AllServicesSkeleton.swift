@@ -45,3 +45,7 @@ struct AllServicesSkeleton: View {
     }
 }
 
+#Preview {
+    AllServicesSkeleton()
+        .appScreenBackground()
+}

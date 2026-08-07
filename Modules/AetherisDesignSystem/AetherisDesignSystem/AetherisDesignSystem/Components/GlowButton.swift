@@ -39,4 +39,9 @@ public struct GlowButton: View {
     }
 }
 
+#Preview {
+    GlowButton(title: "Continue")
+        .padding()
+        .appScreenBackground()
+}
 

@@ -42,3 +42,8 @@ struct ProfileLogoutView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    ProfileLogoutView()
+        .environmentObject(AppSessionStore())
+}

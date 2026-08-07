@@ -45,3 +45,14 @@ struct UserNameView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    UserNameView(
+        viewModel: UserNameViewModel(draft: draft),
+        draft: draft,
+        onBack: {},
+        onContinue: {}
+    )
+}

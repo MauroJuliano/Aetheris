@@ -35,3 +35,9 @@ struct VirtualCardSecurityInfo: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    VirtualCardSecurityInfo(onLearnMoreTap: {})
+        .padding()
+        .appScreenBackground()
+}

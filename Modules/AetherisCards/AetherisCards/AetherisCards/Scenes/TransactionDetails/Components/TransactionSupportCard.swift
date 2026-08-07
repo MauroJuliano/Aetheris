@@ -46,3 +46,9 @@ struct TransactionSupportCard: View {
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
 }
+
+#Preview {
+    TransactionSupportCard(onSupportTap: {})
+        .padding()
+        .appScreenBackground()
+}

@@ -98,6 +98,12 @@ public struct SpendingThisMonthView: View {
     }
 }
 
+#Preview {
+    SpendingThisMonthView()
+        .padding()
+        .appScreenBackground()
+}
+
 struct SpendingCategory: Identifiable, Equatable {
     let id = UUID()
     let title: String

@@ -223,3 +223,13 @@ struct CurrentInvoiceOverview: View {
         }
     }
 }
+
+#Preview {
+    CurrentInvoiceOverview(
+        invoice: CardsPreviewData.invoice,
+        onAvailableLimitTap: {},
+        onBestPurchaseDateTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

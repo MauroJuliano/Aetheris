@@ -56,3 +56,12 @@ struct ProfileLoadErrorView: View {
         .accessibilityIdentifier("profile.loadError")
     }
 }
+
+#Preview {
+    ProfileLoadErrorView(
+        isRetrying: false,
+        onRetry: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

@@ -80,3 +80,11 @@ struct FinancialSummary: View {
         return Strings.FinancialSummary.monthAgo(max(1, days / 30))
     }
 }
+
+#Preview {
+    FinancialSummary(
+        model: CardsPreviewData.summaries[0]
+    )
+    .padding()
+    .appScreenBackground()
+}

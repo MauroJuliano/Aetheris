@@ -93,3 +93,19 @@ struct ConfirmPasswordView: View {
         )
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    ConfirmPasswordView(
+        viewModel: ConfirmPasswordViewModel(
+            service: RegistrationService(
+                coreService: DemoCoreService(delay: 0)
+            ),
+            draft: draft
+        ),
+        draft: draft,
+        onBack: {},
+        onSuccess: {}
+    )
+}

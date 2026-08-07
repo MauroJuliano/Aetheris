@@ -104,3 +104,9 @@ struct CurrentInvoiceDetails: View {
         .padding(.vertical, AppSpacing.small)
     }
 }
+
+#Preview {
+    CurrentInvoiceDetails(details: CardsPreviewData.invoice.details)
+        .padding()
+        .appScreenBackground()
+}

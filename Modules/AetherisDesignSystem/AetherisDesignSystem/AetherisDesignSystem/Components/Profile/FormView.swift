@@ -25,3 +25,11 @@ public struct FormView: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    FormView(
+        cells: FormCellModel.generalCellsMock + FormCellModel.notifications
+    )
+    .padding()
+    .appScreenBackground()
+}

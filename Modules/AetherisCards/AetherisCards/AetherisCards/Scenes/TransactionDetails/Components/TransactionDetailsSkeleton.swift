@@ -111,3 +111,7 @@ struct TransactionDetailsSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    TransactionDetailsSkeleton()
+}

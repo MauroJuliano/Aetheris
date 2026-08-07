@@ -107,3 +107,8 @@ struct ProfileScreenSkeleton: View {
             .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
 }
+
+#Preview {
+    ProfileScreenSkeleton()
+        .padding(.horizontal, AppSpacing.screenHorizontal)
+}

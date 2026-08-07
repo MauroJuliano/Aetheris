@@ -46,3 +46,7 @@ struct ProfileLegalView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    ProfileLegalView(onDone: {})
+}

@@ -74,4 +74,16 @@ public struct NotificationCell: View {
     }
 }
 
+#Preview {
+    NotificationCell(
+        model: Notifications(
+            title: "Payment received from Melissa",
+            leadingContent: .image("melissa"),
+            date: Date(),
+            hasDivider: false
+        )
+    )
+    .padding()
+    .appScreenBackground()
+}
 

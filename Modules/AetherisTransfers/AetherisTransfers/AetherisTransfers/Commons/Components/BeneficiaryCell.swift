@@ -40,6 +40,22 @@ public struct BeneficiaryCell: View {
     }
 }
 
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        BeneficiaryCell(
+            model: BeneficiaryFixtures.defaults[0],
+            isRecent: true
+        )
+
+        BeneficiaryCell(
+            model: BeneficiaryFixtures.defaults[1],
+            isRecent: false
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}
+
 private extension BeneficiaryCell {
     var beneficiaryImage: some View {
         Image(model.image)

@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct BeneficiaryList: View {
@@ -126,4 +127,16 @@ private extension String {
 
         return normalizedValue.contains(normalizedQuery)
     }
+}
+
+#Preview {
+    BeneficiaryList(
+        viewModel: BeneficiaryListViewModel(
+            service: BeneficiaryListService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onSelect: { _ in },
+        onBack: {}
+    )
 }
