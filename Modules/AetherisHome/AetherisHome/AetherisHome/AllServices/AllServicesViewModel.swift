@@ -16,7 +16,12 @@ final class AllServicesViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
 
-        items = await service.loadServices()
+        do {
+            items = try await service.loadServices()
+        } catch {
+            items = []
+            errorMessage = Strings.HomeApp.genericErrorDescription
+        }
 
         isLoading = false
     }

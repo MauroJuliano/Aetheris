@@ -128,12 +128,14 @@ extension HomeAppDashboard {
             masked: false
         ),
         cards: CardsMock.creditCardMocks,
-        recentRecipients: [
-            .init(id: "ben_1", name: "Melissa", pixKey: "contact@melissamccarthy.com", avatar: "melissa"),
-            .init(id: "ben_2", name: "Ed Sheeran", pixKey: "afirelove", avatar: "ed"),
-            .init(id: "ben_3", name: "Adele", pixKey: "rollinginthedeep", avatar: "Adele"),
-            .init(id: "ben_4", name: "Troy Bolton", pixKey: "scream", avatar: "Troy")
-        ],
+        recentRecipients: BeneficiaryFixtures.defaults.map {
+            .init(
+                id: $0.id.uuidString,
+                name: $0.name,
+                pixKey: $0.pixKey,
+                avatar: $0.image
+            )
+        },
         quickActions: [
             .init(id: "transfer", title: Strings.QuickActions.sendTitle, subtitle: Strings.QuickActions.transferSubtitle, icon: "paperplane.fill", route: .sendMoney),
             .init(id: "request", title: Strings.QuickActions.requestTitle, subtitle: Strings.QuickActions.requestSubtitle, icon: "arrow.down", route: .requestMoney),

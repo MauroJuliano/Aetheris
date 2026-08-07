@@ -66,6 +66,17 @@
 "Common.cancel" = "Cancel";
 "Common.seeAll" = "See all";
 
+"BeneficiaryList.title" = "Beneficiaries";
+"BeneficiaryList.searchPlaceholder" = "Search beneficiaries";
+"BeneficiaryList.clearSearch" = "Clear search";
+"BeneficiaryList.savedBeneficiaries" = "Saved beneficiaries";
+"BeneficiaryList.recentBeneficiary" = "Recent beneficiary";
+"BeneficiaryList.savedContact" = "Saved contact";
+"BeneficiaryList.unavailableTitle" = "Beneficiaries unavailable";
+"BeneficiaryList.loadFailed" = "We couldn't load your beneficiaries right now.";
+"BeneficiaryList.emptyTitle" = "No beneficiaries yet";
+"BeneficiaryList.emptyDescription" = "Saved beneficiaries will appear here.";
+
 "BeneficiaryDetails.title" = "Beneficiary";
 "BeneficiaryDetails.transfer" = "Transfer";
 "BeneficiaryDetails.request" = "Request";

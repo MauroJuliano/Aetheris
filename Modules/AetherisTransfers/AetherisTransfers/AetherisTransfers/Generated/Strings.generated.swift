@@ -30,6 +30,28 @@ internal enum Strings {
     /// Find beneficiary
     internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
   }
+  internal enum BeneficiaryList {
+    /// Clear search
+    internal static let clearSearch = Strings.tr("Localizable", "BeneficiaryList.clearSearch", fallback: "Clear search")
+    /// Saved beneficiaries will appear here.
+    internal static let emptyDescription = Strings.tr("Localizable", "BeneficiaryList.emptyDescription", fallback: "Saved beneficiaries will appear here.")
+    /// No beneficiaries yet
+    internal static let emptyTitle = Strings.tr("Localizable", "BeneficiaryList.emptyTitle", fallback: "No beneficiaries yet")
+    /// We couldn't load your beneficiaries right now.
+    internal static let loadFailed = Strings.tr("Localizable", "BeneficiaryList.loadFailed", fallback: "We couldn't load your beneficiaries right now.")
+    /// Recent beneficiary
+    internal static let recentBeneficiary = Strings.tr("Localizable", "BeneficiaryList.recentBeneficiary", fallback: "Recent beneficiary")
+    /// Saved beneficiaries
+    internal static let savedBeneficiaries = Strings.tr("Localizable", "BeneficiaryList.savedBeneficiaries", fallback: "Saved beneficiaries")
+    /// Saved contact
+    internal static let savedContact = Strings.tr("Localizable", "BeneficiaryList.savedContact", fallback: "Saved contact")
+    /// Search beneficiaries
+    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryList.searchPlaceholder", fallback: "Search beneficiaries")
+    /// Beneficiaries
+    internal static let title = Strings.tr("Localizable", "BeneficiaryList.title", fallback: "Beneficiaries")
+    /// Beneficiaries unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryList.unavailableTitle", fallback: "Beneficiaries unavailable")
+  }
   internal enum BeneficiaryDetails {
     /// Account
     internal static let account = Strings.tr("Localizable", "BeneficiaryDetails.account", fallback: "Account")

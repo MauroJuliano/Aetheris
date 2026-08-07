@@ -6,14 +6,14 @@ import Testing
 @Suite("BeneficiaryListViewModel")
 struct BeneficiaryListViewModelTests {
     @Test
-    func initialState_usesLimitedDefaultBeneficiariesAndStartsLoading() {
+    func initialState_startsLoadingAndEmpty() {
         let sut = BeneficiaryListViewModel(
             service: BeneficiaryListServiceSpy(result: .failure(URLError(.timedOut)))
         )
 
         #expect(sut.isLoading)
-        #expect(sut.beneficiaries.count == min(4, BeneficiaryFixtures.defaults.count))
-        #expect(sut.beneficiaries.map(\.name) == Array(BeneficiaryFixtures.defaults.prefix(4)).map(\.name))
+        #expect(sut.beneficiaries.isEmpty)
+        #expect(sut.errorMessage == nil)
     }
 
     @Test
@@ -30,14 +30,15 @@ struct BeneficiaryListViewModelTests {
     }
 
     @Test
-    func load_usesDefaultFallback_whenServiceFails() async {
+    func load_setsErrorAndKeepsBeneficiariesEmpty_whenServiceFails() async {
         let service = BeneficiaryListServiceSpy(result: .failure(URLError(.notConnectedToInternet)))
         let sut = BeneficiaryListViewModel(service: service)
 
         await sut.load()
 
         #expect(!sut.isLoading)
-        #expect(sut.beneficiaries.map(\.name) == Array(BeneficiaryFixtures.defaults.prefix(4)).map(\.name))
+        #expect(sut.beneficiaries.isEmpty)
+        #expect(sut.errorMessage == Strings.BeneficiaryList.loadFailed)
         #expect(service.loadCalls == 1)
     }
 

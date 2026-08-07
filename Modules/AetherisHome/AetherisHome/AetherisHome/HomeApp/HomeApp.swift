@@ -84,6 +84,7 @@ struct HomeApp: View {
                     )
 
                     RecipientsContainer(
+                        users: viewModel.recentRecipients,
                         onSelectRecipient: onSelectRecipient,
                         onSeeAllTap: onSeeAllRecipientsTap,
                         onNewRecipientTap: onNewRecipientTap

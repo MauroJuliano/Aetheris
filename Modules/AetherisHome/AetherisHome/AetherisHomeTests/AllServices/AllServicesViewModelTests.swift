@@ -34,7 +34,7 @@ private final class AllServicesServiceSpy: AllServicesServicing {
 
     init(items: [AllServicesItem]) { self.items = items }
 
-    func loadServices() async -> [AllServicesItem] {
+    func loadServices() async throws -> [AllServicesItem] {
         loadCalls += 1
         return items
     }

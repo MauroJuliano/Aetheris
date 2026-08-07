@@ -2,7 +2,7 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct RecipientsContainer: View {
-    let users = BeneficiaryFixtures.defaults
+    let users: [Beneficiary]
     let onSelectRecipient: (Beneficiary) -> Void
     let onSeeAllTap: () -> Void
     let onNewRecipientTap: () -> Void
