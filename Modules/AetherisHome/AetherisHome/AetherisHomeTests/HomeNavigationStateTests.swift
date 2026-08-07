@@ -1,4 +1,6 @@
 import Testing
+import Foundation
+import AetherisDesignSystem
 @testable import AetherisHome
 
 @Suite("HomeNavigationState")
@@ -15,11 +17,12 @@ struct HomeNavigationStateTests {
     func push_appendsEveryRoute() {
         var sut = HomeNavigationState()
 
-        sut.push(.card)
+        sut.push(.card())
         sut.push(.notifications)
         sut.push(.allServices)
+        sut.push(.requestMoney)
 
-        #expect(sut.path.count == 3)
+        #expect(sut.path.count == 4)
         #expect(!sut.isAtRoot)
     }
 
@@ -29,7 +32,7 @@ struct HomeNavigationStateTests {
         sut.pop()
         #expect(sut.isAtRoot)
 
-        sut.push(.card)
+        sut.push(.card())
         sut.push(.notifications)
         sut.pop()
 
@@ -39,7 +42,7 @@ struct HomeNavigationStateTests {
     @Test
     func replaceCurrent_preservesPathDepth() {
         var sut = HomeNavigationState()
-        sut.push(.card)
+        sut.push(.card())
         sut.push(.beneficiaryList)
 
         sut.replaceCurrent(with: .viewReport)
@@ -68,13 +71,29 @@ struct HomeNavigationStateTests {
     }
 
     @Test
+    func beneficiaryDetails_preservesBeneficiaryIdentifier() {
+        let beneficiaryId = UUID()
+        let route = HomeRoute.beneficiaryDetails(beneficiaryId)
+
+        #expect(route == .beneficiaryDetails(beneficiaryId))
+    }
+
+    @Test
     func reset_returnsToRootFromDeepLink() {
         var sut = HomeNavigationState()
-        sut.push(.card)
+        sut.push(.card())
         sut.push(.viewReport)
 
         sut.reset()
 
         #expect(sut.isAtRoot)
+    }
+
+    @Test
+    func cardRoute_preservesInitialCardIdentifier() {
+        let route = HomeRoute.card(initialCardId: CardMockIDs.gold)
+
+        #expect(route == .card(initialCardId: CardMockIDs.gold))
+        #expect(route != .card())
     }
 }

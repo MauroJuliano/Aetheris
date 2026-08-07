@@ -32,17 +32,28 @@ final class SendMoneyViewModel: ObservableObject {
         }
     }
 
-    func canContinue(currentAmount: Decimal) -> Bool {
-        session != nil && currentAmount > 0 && currentAmount <= walletBalance
+    func canContinue(
+        selectedBeneficiary: Beneficiary?,
+        currentAmount: Decimal
+    ) -> Bool {
+        selectedBeneficiary != nil &&
+            session != nil &&
+            currentAmount > 0 &&
+            currentAmount <= walletBalance
     }
 
     func continueTapped(
-        selectedBeneficiary: Beneficiary,
+        selectedBeneficiary: Beneficiary?,
         currentAmount: Decimal,
         formattedAmount: String
     ) -> TransferDraft? {
-        guard canContinue(currentAmount: currentAmount) else { return nil }
+        guard canContinue(
+            selectedBeneficiary: selectedBeneficiary,
+            currentAmount: currentAmount
+        ) else { return nil }
         guard let session else { return nil }
+        guard let selectedBeneficiary else { return nil }
+
         return TransferDraft(
             amount: currentAmount,
             formattedAmount: formattedAmount,

@@ -5,7 +5,7 @@ enum SendMoneyFactory {
     @MainActor
     static func make(
         coreService: any HasCoreService,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         onBackAction: (() -> Void)? = nil,
         onChangeBeneficiary: @escaping () -> Void = {},
         onContinue: @escaping (TransferDraft) -> Void = { _ in }

@@ -1,27 +1,30 @@
 import AetherisDesignSystem
 import AetherisInsights
+import Foundation
 import SwiftUI
 
 struct HomeApp: View {
     @StateObject private var viewModel: HomeAppViewModel
     @State private var selectedCardIndex: Int = 0
-    let onCardTap: () -> Void
+    let onCardTap: (UUID) -> Void
     let onNotificationsTap: () -> Void
     let onSelectRecipient: (Beneficiary) -> Void
     let onSeeAllRecipientsTap: () -> Void
     let onNewRecipientTap: () -> Void
     let onTransferTap: () -> Void
+    let onRequestMoneyTap: () -> Void
     let onMoreTap: () -> Void
     let onViewReportTap: () -> Void
 
     init(
         viewModel: HomeAppViewModel,
-        onCardTap: @escaping () -> Void,
+        onCardTap: @escaping (UUID) -> Void,
         onNotificationsTap: @escaping () -> Void,
         onSelectRecipient: @escaping (Beneficiary) -> Void,
         onSeeAllRecipientsTap: @escaping () -> Void,
         onNewRecipientTap: @escaping () -> Void,
         onTransferTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void,
         onMoreTap: @escaping () -> Void,
         onViewReportTap: @escaping () -> Void
     ) {
@@ -32,6 +35,7 @@ struct HomeApp: View {
         self.onSeeAllRecipientsTap = onSeeAllRecipientsTap
         self.onNewRecipientTap = onNewRecipientTap
         self.onTransferTap = onTransferTap
+        self.onRequestMoneyTap = onRequestMoneyTap
         self.onMoreTap = onMoreTap
         self.onViewReportTap = onViewReportTap
     }
@@ -76,7 +80,7 @@ struct HomeApp: View {
                     CardSwipe(
                         cards: $viewModel.cards,
                         selectedCardIndex: $selectedCardIndex,
-                        onTap: onCardTap
+                        onTap: openSelectedCard
                     )
 
                     RecipientsContainer(
@@ -87,6 +91,7 @@ struct HomeApp: View {
 
                     QuickActions(
                         onTransferTap: onTransferTap,
+                        onRequestTap: onRequestMoneyTap,
                         onMoreTap: onMoreTap
                     )
 
@@ -104,5 +109,16 @@ struct HomeApp: View {
         }
         .task { await viewModel.loadIfNeeded() }
         .accessibilityIdentifier("home.screen")
+    }
+
+    private func openSelectedCard() {
+        guard let selectedCardId else { return }
+        onCardTap(selectedCardId)
+    }
+
+    private var selectedCardId: UUID? {
+        guard !viewModel.cards.isEmpty else { return nil }
+        let safeIndex = min(max(selectedCardIndex, 0), viewModel.cards.count - 1)
+        return viewModel.cards[safeIndex].id
     }
 }

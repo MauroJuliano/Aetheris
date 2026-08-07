@@ -52,6 +52,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.standard:
             return [
                 .init(
+                    id: TransactionMockIDs.melissaTransfer,
                     cardId: cardId,
                     image: "melissa",
                     title: Strings.FinancialSummary.transferSent,
@@ -61,6 +62,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.edPayment,
                     cardId: cardId,
                     image: "ed",
                     title: Strings.FinancialSummary.paymentReceived,
@@ -70,6 +72,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.netflixSubscription,
                     cardId: cardId,
                     image: "NetflixLogo",
                     title: Strings.FinancialSummary.netflix,
@@ -79,6 +82,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.appleSubscription,
                     cardId: cardId,
                     image: "applelogo",
                     title: Strings.FinancialSummary.appleBill,
@@ -88,6 +92,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.ifoodPurchase,
                     cardId: cardId,
                     image: "ifoodlogo",
                     title: Strings.FinancialSummary.ifoodBar,
@@ -101,6 +106,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.gold:
             return [
                 .init(
+                    id: TransactionMockIDs.melissaTransfer,
                     cardId: cardId,
                     image: "melissa",
                     title: Strings.FinancialSummary.transferSent,
@@ -110,6 +116,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.netflixSubscription,
                     cardId: cardId,
                     image: "NetflixLogo",
                     title: Strings.FinancialSummary.netflix,
@@ -123,6 +130,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.infinite:
             return [
                 .init(
+                    id: TransactionMockIDs.adeleTransfer,
                     cardId: cardId,
                     image: "Adele",
                     title: Strings.FinancialSummary.transferSent,
@@ -132,6 +140,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .month, value: -1, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.edPayment,
                     cardId: cardId,
                     image: "ed",
                     title: Strings.FinancialSummary.paymentReceived,
@@ -145,6 +154,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         case CardMockIDs.black:
             return [
                 .init(
+                    id: TransactionMockIDs.appleSubscription,
                     cardId: cardId,
                     image: "applelogo",
                     title: Strings.FinancialSummary.appleBill,
@@ -154,6 +164,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.ifoodPurchase,
                     cardId: cardId,
                     image: "ifoodlogo",
                     title: Strings.FinancialSummary.ifoodBar,
@@ -167,6 +178,7 @@ extension TransactionHistoryEndpoint: Endpoint {
         default:
             return [
                 .init(
+                    id: TransactionMockIDs.melissaTransfer,
                     cardId: cardId,
                     image: "melissa",
                     title: Strings.FinancialSummary.transferSent,
@@ -176,6 +188,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.edPayment,
                     cardId: cardId,
                     image: "ed",
                     title: Strings.FinancialSummary.paymentReceived,
@@ -185,6 +198,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.netflixSubscription,
                     cardId: cardId,
                     image: "NetflixLogo",
                     title: Strings.FinancialSummary.netflix,
@@ -194,6 +208,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.appleSubscription,
                     cardId: cardId,
                     image: "applelogo",
                     title: Strings.FinancialSummary.appleBill,
@@ -203,6 +218,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -5, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.ifoodPurchase,
                     cardId: cardId,
                     image: "ifoodlogo",
                     title: Strings.FinancialSummary.ifoodBar,
@@ -212,6 +228,7 @@ extension TransactionHistoryEndpoint: Endpoint {
                     date: Calendar.current.date(byAdding: .day, value: -20, to: Date()) ?? Date()
                 ),
                 .init(
+                    id: TransactionMockIDs.adeleTransfer,
                     cardId: cardId,
                     image: "Adele",
                     title: Strings.FinancialSummary.transferSent,

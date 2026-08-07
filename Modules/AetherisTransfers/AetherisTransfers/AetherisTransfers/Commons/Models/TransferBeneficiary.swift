@@ -4,12 +4,12 @@ import AetherisDesignSystem
 
 public struct TransferBeneficiary: View {
     let onChange: () -> Void
-    @Binding var model: Beneficiary
+    @Binding var model: Beneficiary?
     
     @State private var rotateGradient: Bool
     
     public init(onChange: @escaping () -> Void,
-                model: Binding<Beneficiary>,
+                model: Binding<Beneficiary?>,
                 rotateGradient: Bool = false) {
         self.onChange = onChange
         self._model = model
@@ -17,41 +17,45 @@ public struct TransferBeneficiary: View {
     }
     
     public var body: some View {
-        HStack(spacing: AppSpacing.medium) {
-            avatarView
-            
-            VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
-                Text(model.name)
-                    .font(AppTypography.headline)
-                    .foregroundStyle(Color.textPrimary)
+        Button(action: onChange) {
+            HStack(spacing: AppSpacing.medium) {
+                avatarView
 
-                HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                    Text(model.pixKey)
-                        .font(AppTypography.footnote)
-                        .foregroundStyle(Color.textTertiary)
-                        .lineLimit(2)
-                        .truncationMode(.tail)
-                        .layoutPriority(1)
+                VStack(alignment: .leading, spacing: AppSpacing.xxSmall) {
+                    Text(title)
+                        .font(AppTypography.headline)
+                        .foregroundStyle(Color.textPrimary)
 
-                    Button {
-                        UIPasteboard.general.string = model.pixKey
-                    } label: {
-                        Image(systemName: "doc.on.doc")
-                            .font(.system(size: 13, weight: .medium))
-                            .foregroundStyle(Color.brandPrimaryColor)
+                    if let model {
+                        HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
+                            Text(model.pixKey)
+                                .font(AppTypography.footnote)
+                                .foregroundStyle(Color.textTertiary)
+                                .lineLimit(2)
+                                .truncationMode(.tail)
+                                .layoutPriority(1)
+
+                            Image(systemName: "doc.on.doc")
+                                .font(.system(size: 13, weight: .medium))
+                                .foregroundStyle(Color.brandPrimaryColor)
+                                .onTapGesture {
+                                    UIPasteboard.general.string = model.pixKey
+                                }
+                        }
+                    } else {
+                        Text(Strings.TransferBeneficiary.selectDescription)
+                            .font(AppTypography.footnote)
+                            .foregroundStyle(Color.textTertiary)
+                            .lineLimit(2)
                     }
                 }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Button {
-                onChange()
-            } label: {
+                .frame(maxWidth: .infinity, alignment: .leading)
+
                 HStack(spacing: AppSpacing.xxSmall + AppSpacing.xxxSmall) {
-                    Text(Strings.TransferBeneficiary.change)
+                    Text(actionTitle)
                         .font(AppTypography.subheadline.weight(.semibold))
-                    
-                    Image(systemName: "pencil")
+
+                    Image(systemName: actionIcon)
                         .font(AppTypography.subheadline.weight(.semibold))
                 }
                 .foregroundStyle(Color.brandPrimaryColor)
@@ -62,44 +66,72 @@ public struct TransferBeneficiary: View {
                         .fill(Color.backgroundColorA)
                         .appShadow(AppShadow.chartGlow)
                 )
+                .fixedSize()
             }
-            .fixedSize()
+            .padding(.horizontal, AppSpacing.medium)
+            .padding(.vertical, AppSpacing.medium + AppSpacing.xxxSmall)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
         }
-        .padding(.horizontal, AppSpacing.medium)
-        .padding(.vertical, AppSpacing.medium + AppSpacing.xxxSmall)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .buttonStyle(.plain)
         .appCardSurface()
     }
-    
+
+    private var title: String {
+        model?.name ?? Strings.TransferBeneficiary.selectTitle
+    }
+
+    private var actionTitle: String {
+        model == nil
+            ? Strings.TransferBeneficiary.select
+            : Strings.TransferBeneficiary.change
+    }
+
+    private var actionIcon: String {
+        model == nil ? "chevron.right" : "pencil"
+    }
+
     private var avatarView: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color.blue.opacity(0.35),
-                    Color.purple.opacity(0.35)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(width: 72, height: 72)
-            .clipShape(Circle())
-            .blur(radius: 18)
-            .rotationEffect(.degrees(rotateGradient ? 360 : 0))
-            .animation(
-                .linear(duration: 6).repeatForever(autoreverses: false),
-                value: rotateGradient
-            )
-            
-            Image(model.image)
-                .resizable()
-                .scaledToFill()
+            if let model {
+                LinearGradient(
+                    colors: [
+                        Color.blue.opacity(0.35),
+                        Color.purple.opacity(0.35)
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
                 .frame(width: 72, height: 72)
                 .clipShape(Circle())
-                .overlay(
-                    Circle()
-                        .stroke(Color.border, lineWidth: 1)
+                .blur(radius: 18)
+                .rotationEffect(.degrees(rotateGradient ? 360 : 0))
+                .animation(
+                    .linear(duration: 6).repeatForever(autoreverses: false),
+                    value: rotateGradient
                 )
-                .appShadow(AppShadow.control)
+
+                Image(model.image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 72, height: 72)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle()
+                            .stroke(Color.border, lineWidth: 1)
+                    )
+                    .appShadow(AppShadow.control)
+            } else {
+                ZStack {
+                    Circle()
+                        .fill(Color.brandPrimaryColor.opacity(0.08))
+                        .frame(width: 72, height: 72)
+
+                    Image(systemName: "person")
+                        .font(.system(size: 28, weight: .medium))
+                        .foregroundStyle(Color.brandPrimaryColor)
+                }
+            }
         }
         .onAppear {
             rotateGradient = true

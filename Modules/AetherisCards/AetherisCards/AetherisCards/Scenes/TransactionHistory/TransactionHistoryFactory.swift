@@ -15,7 +15,8 @@ enum TransactionHistoryFactory {
                     cardId: cardId
                 )
             ),
-            onBack: nil
+            onBack: nil,
+            onTransactionTap: { _ in }
         )
     }
 
@@ -23,7 +24,8 @@ enum TransactionHistoryFactory {
     static func make(
         coreService: any HasCoreService,
         cardId: UUID,
-        onBack: @escaping () -> Void
+        onBack: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void = { _ in }
     ) -> TransactionHistoryView {
         TransactionHistoryView(
             viewModel: TransactionHistoryViewModel(
@@ -32,7 +34,8 @@ enum TransactionHistoryFactory {
                     cardId: cardId
                 )
             ),
-            onBack: onBack
+            onBack: onBack,
+            onTransactionTap: onTransactionTap
         )
     }
 }

@@ -2,8 +2,10 @@ import Foundation
 import SwiftUI
 
 enum HomeRoute: Hashable {
-    case card
+    case card(initialCardId: UUID? = nil)
     case sendMoney
+    case requestMoney
+    case beneficiaryDetails(UUID)
     case beneficiaryList
     case addBeneficiary
     case notifications

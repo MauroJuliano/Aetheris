@@ -16,17 +16,21 @@ extension HomeFlowCoordinator {
     var rootView: some View {
         HomeAppFactory.make(
             coreService: coreService,
-            onCardTap: { navigation.push(.card) },
+            onCardTap: { cardId in
+                tabBarRoutingStore.showCards(selectedCardId: cardId)
+            },
             onNotificationsTap: { navigation.push(.notifications) },
             onSelectRecipient: { beneficiary in
-                selectedBeneficiary = beneficiary
-                navigation.push(.sendMoney)
+                navigation.push(.beneficiaryDetails(beneficiary.id))
             },
             onSeeAllRecipientsTap: { navigation.push(.beneficiaryList) },
             onNewRecipientTap: { navigation.push(.addBeneficiary) },
             onTransferTap: {
-                selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+                selectedBeneficiary = nil
                 navigation.push(.sendMoney)
+            },
+            onRequestMoneyTap: {
+                navigation.push(.requestMoney)
             },
             onMoreTap: {
                 withAnimation(.easeInOut(duration: 0.25)) {
@@ -40,10 +44,11 @@ extension HomeFlowCoordinator {
     @ViewBuilder
     func destinationView(for route: HomeRoute) -> some View {
         switch route {
-        case .card:
+        case .card(let initialCardId):
             CardsFactory.makeEmbedded(
                 coreService: coreService,
                 path: $navigation.path,
+                initialSelectedCardId: initialCardId,
                 onFinished: { popRoute() }
             )
             .navigationBarHidden(true)
@@ -58,12 +63,34 @@ extension HomeFlowCoordinator {
             )
             .navigationBarHidden(true)
 
+        case .requestMoney:
+            TransfersFactory.makeRequestMoneyWithContactPicker(
+                coreService: coreService,
+                path: $navigation.path,
+                onBack: { popRoute() },
+                onFinished: { popRoute() }
+            )
+            .navigationBarHidden(true)
+
+        case .beneficiaryDetails(let beneficiaryId):
+            TransfersFactory.makeBeneficiaryDetails(
+                coreService: coreService,
+                beneficiaryId: beneficiaryId,
+                path: $navigation.path,
+                onBack: { popRoute() },
+                onTransferTap: { beneficiary in
+                    selectedBeneficiary = beneficiary
+                    navigation.push(.sendMoney)
+                },
+                onBeneficiaryRemoved: { popRoute() }
+            )
+            .navigationBarHidden(true)
+
         case .beneficiaryList:
             TransfersFactory.makeBeneficiaryList(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    selectedBeneficiary = beneficiary
-                    navigation.replaceCurrent(with: .sendMoney)
+                    navigation.replaceCurrent(with: .beneficiaryDetails(beneficiary.id))
                 },
                 onBack: { popRoute() }
             )
@@ -73,8 +100,7 @@ extension HomeFlowCoordinator {
             TransfersFactory.makeBeneficiarySearch(
                 coreService: coreService,
                 onSelect: { beneficiary in
-                    selectedBeneficiary = beneficiary
-                    navigation.replaceCurrent(with: .sendMoney)
+                    navigation.replaceCurrent(with: .beneficiaryDetails(beneficiary.id))
                 },
                 onBack: { popRoute() }
             )
@@ -105,12 +131,13 @@ extension HomeFlowCoordinator {
     private func navigateFromAllServices(_ route: AllServicesItem.Route) {
         switch route {
         case .transfer:
-            selectedBeneficiary = BeneficiaryFixtures.defaultSelection
+            selectedBeneficiary = nil
             navigation.replaceCurrent(with: .sendMoney)
         case .beneficiaries:
             navigation.replaceCurrent(with: .beneficiaryList)
         case .cards:
-            navigation.replaceCurrent(with: .card)
+            navigation.reset()
+            tabBarRoutingStore.showCards()
         case .notifications:
             navigation.replaceCurrent(with: .notifications)
         case .reports:

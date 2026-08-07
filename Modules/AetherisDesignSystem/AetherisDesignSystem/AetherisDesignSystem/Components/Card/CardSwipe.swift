@@ -33,13 +33,16 @@ public struct CardSwipe: View {
             }
         }
         .onAppear {
-            syncSelectedCardIndex()
+            syncTopCardIndex(with: selectedCardIndex)
         }
         .onChange(of: cards.count) { _, _ in
-            syncSelectedCardIndex()
+            syncTopCardIndex(with: selectedCardIndex)
         }
         .onChange(of: topCardIndex) { _, _ in
             syncSelectedCardIndex()
+        }
+        .onChange(of: selectedCardIndex) { _, newValue in
+            syncTopCardIndex(with: newValue)
         }
     }
 
@@ -80,6 +83,19 @@ public struct CardSwipe: View {
         }
 
         selectedCardIndex = min(max(topCardIndex, 0), cards.count - 1)
+    }
+
+    private func syncTopCardIndex(with selectedIndex: Int) {
+        guard !cards.isEmpty else {
+            topCardIndex = 0
+            return
+        }
+
+        let safeIndex = min(max(selectedIndex, 0), cards.count - 1)
+        guard topCardIndex != safeIndex else { return }
+
+        dragOffSet = .zero
+        topCardIndex = safeIndex
     }
 }
 

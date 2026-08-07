@@ -23,6 +23,46 @@ struct CardNavigationStateTests {
     }
 
     @Test
+    func showTransactionDetails_preservesTransactionIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showTransactionDetails(transactionID: TransactionMockIDs.netflixSubscription)
+
+        #expect(sut.path == [.transactionDetails(TransactionMockIDs.netflixSubscription)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
+    func showVirtualCard_preservesPhysicalCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showVirtualCard(physicalCardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.virtualCard(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
+    func showCurrentInvoice_preservesCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showCurrentInvoice(cardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.currentInvoice(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
+    func showCardLock_preservesCardIdentifier() {
+        var sut = CardNavigationState()
+
+        sut.showCardLock(cardID: CardMockIDs.gold)
+
+        #expect(sut.path == [.cardLock(CardMockIDs.gold)])
+        #expect(!sut.isAtRoot)
+    }
+
+    @Test
     func pop_returnsToRootAndIsSafeWhenAlreadyEmpty() {
         var sut = CardNavigationState()
         sut.showTransactionHistory(cardID: CardMockIDs.standard)

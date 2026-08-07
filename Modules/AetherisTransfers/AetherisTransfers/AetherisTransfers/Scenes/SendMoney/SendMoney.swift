@@ -4,14 +4,14 @@ import SwiftUI
 struct SendMoney: View {
     @StateObject private var viewModel: SendMoneyViewModel
     @StateObject private var amountViewModel: TransferAmountViewModel
-    @Binding private var selectedBeneficiary: Beneficiary
+    @Binding private var selectedBeneficiary: Beneficiary?
     let onBackAction: (() -> Void)?
     let onChangeBeneficiary: () -> Void
     let onContinue: (TransferDraft) -> Void
     
     init(
         viewModel: SendMoneyViewModel,
-        selectedBeneficiary: Binding<Beneficiary>,
+        selectedBeneficiary: Binding<Beneficiary?>,
         onBackAction: (() -> Void)? = nil,
         onChangeBeneficiary: @escaping () -> Void,
         onContinue: @escaping (TransferDraft) -> Void
@@ -104,8 +104,18 @@ struct SendMoney: View {
                 }
             }
             .padding(AppSpacing.medium)
-            .disabled(!viewModel.canContinue(currentAmount: amountViewModel.currentAmount))
-            .opacity(viewModel.canContinue(currentAmount: amountViewModel.currentAmount) ? 1 : 0.55)
+            .disabled(
+                !viewModel.canContinue(
+                    selectedBeneficiary: selectedBeneficiary,
+                    currentAmount: amountViewModel.currentAmount
+                )
+            )
+            .opacity(
+                viewModel.canContinue(
+                    selectedBeneficiary: selectedBeneficiary,
+                    currentAmount: amountViewModel.currentAmount
+                ) ? 1 : 0.55
+            )
             .accessibilityIdentifier("transfer.continue")
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)

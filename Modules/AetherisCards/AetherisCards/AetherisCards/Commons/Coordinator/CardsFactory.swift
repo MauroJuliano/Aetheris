@@ -18,13 +18,24 @@ public final class CardsFactory: CardsFactoryInterface {
     public static func makeEmbedded(
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
+        initialSelectedCardId: UUID? = nil,
         onFinished: @escaping () -> Void
     ) -> AnyView {
         AnyView(HomeCardFactory.make(
             coreService: coreService,
+            initialSelectedCardId: initialSelectedCardId,
             onBackAction: onFinished,
             onTransactionHistoryTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))
+            },
+            onVirtualCardTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.virtualCard(cardID))
+            },
+            onInvoiceTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.currentInvoice(cardID))
+            },
+            onCardLockTap: { cardID in
+                path.wrappedValue.append(CardFlowRoute.cardLock(cardID))
             }
         ))
     }
@@ -45,6 +56,54 @@ public final class CardsFactory: CardsFactoryInterface {
                         onBack: {
                             guard !path.wrappedValue.isEmpty else { return }
                             path.wrappedValue.removeLast()
+                        },
+                        onTransactionTap: { transactionID in
+                            path.wrappedValue.append(CardFlowRoute.transactionDetails(transactionID))
+                        }
+                    )
+                case .transactionDetails(let transactionID):
+                    TransactionDetailsFactory.make(
+                        coreService: coreService,
+                        transactionId: transactionID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        }
+                    )
+                case .virtualCard(let physicalCardID):
+                    VirtualCardFactory.make(
+                        coreService: coreService,
+                        physicalCardId: physicalCardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onTransactionHistoryTap: { cardID in
+                            path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))
+                        }
+                    )
+                case .currentInvoice(let cardID):
+                    CurrentInvoiceFactory.make(
+                        coreService: coreService,
+                        cardId: cardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onTransactionHistoryTap: { invoiceID in
+                            path.wrappedValue.append(CardFlowRoute.transactionHistory(invoiceID))
+                        }
+                    )
+                case .cardLock(let cardID):
+                    CardLockFactory.make(
+                        coreService: coreService,
+                        cardId: cardID,
+                        onBackAction: {
+                            guard !path.wrappedValue.isEmpty else { return }
+                            path.wrappedValue.removeLast()
+                        },
+                        onVirtualCardTap: { cardID in
+                            path.wrappedValue.append(CardFlowRoute.virtualCard(cardID))
                         }
                     )
                 }

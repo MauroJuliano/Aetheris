@@ -4,10 +4,17 @@ import UIKit
 import SwiftUI
 
 enum SendMoneyFlowRoute: Hashable {
-    case beneficiaryList
+    case beneficiaryList(BeneficiaryListSelectionContext)
+    case beneficiaryDetails(UUID)
+    case requestMoney(RequestContactModel)
     case pin(TransferDraft)
     case processing(TransferSubmission)
     case success(TransferReceiptModel)
+}
+
+enum BeneficiaryListSelectionContext: Hashable {
+    case transferSelection
+    case detailsNavigation
 }
 
 struct SendMoneyNavigationState {
@@ -38,7 +45,7 @@ struct SendMoneyNavigationState {
 struct SendMoneyFlowCoordinator: View {
     let coreService: any HasCoreService
     let identityValidation: any IdentityValidating
-    @Binding var selectedBeneficiary: Beneficiary
+    @Binding var selectedBeneficiary: Beneficiary?
     let onBackAction: () -> Void
 
     @State private var navigation = SendMoneyNavigationState()
@@ -50,7 +57,7 @@ struct SendMoneyFlowCoordinator: View {
                 selectedBeneficiary: $selectedBeneficiary,
                 onBackAction: onBackAction,
                 onChangeBeneficiary: {
-                    navigation.push(.beneficiaryList)
+                    navigation.push(.beneficiaryList(.transferSelection))
                 },
                 onContinue: { receipt in
                     navigation.push(.pin(receipt))
@@ -58,14 +65,49 @@ struct SendMoneyFlowCoordinator: View {
             )
             .navigationDestination(for: SendMoneyFlowRoute.self) { route in
                 switch route {
-                case .beneficiaryList:
+                case .beneficiaryList(let context):
                     BeneficiaryListFactory.make(
                         coreService: coreService,
                         onSelect: { beneficiary in
-                            selectedBeneficiary = beneficiary
-                            popRoute()
+                            switch context {
+                            case .transferSelection:
+                                selectedBeneficiary = beneficiary
+                                navigation.reset()
+
+                            case .detailsNavigation:
+                                navigation.push(.beneficiaryDetails(beneficiary.id))
+                            }
                         },
                         onBack: { popRoute() }
+                    )
+                    .navigationBarHidden(true)
+
+                case .beneficiaryDetails(let beneficiaryId):
+                    BeneficiaryDetailsFactory.make(
+                        coreService: coreService,
+                        beneficiaryId: beneficiaryId,
+                        onBackAction: { popRoute() },
+                        onTransferTap: { beneficiary in
+                            selectedBeneficiary = beneficiary
+                            navigation.reset()
+                        },
+                        onRequestMoneyTap: { contact in
+                            navigation.push(.requestMoney(contact))
+                        },
+                        onBeneficiaryRemoved: {
+                            navigation.reset()
+                        }
+                    )
+                    .navigationBarHidden(true)
+
+                case .requestMoney(let contact):
+                    RequestMoneyFactory.make(
+                        coreService: coreService,
+                        initialContact: contact,
+                        onBackAction: { popRoute() },
+                        onSuccess: { _ in
+                            navigation.reset()
+                        }
                     )
                     .navigationBarHidden(true)
 

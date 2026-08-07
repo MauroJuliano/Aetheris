@@ -6,7 +6,7 @@ import SwiftUI
 public final class TransfersFeatureFactory: TransfersFactoryInterface {
     private let coreService: any HasCoreService
     private let identityValidation: any IdentityValidating
-    private var beneficiary = BeneficiaryFixtures.defaultSelection
+    private var beneficiary: Beneficiary?
 
     public init(
         coreService: any HasCoreService,

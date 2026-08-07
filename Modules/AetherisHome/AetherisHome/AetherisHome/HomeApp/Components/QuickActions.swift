@@ -9,11 +9,14 @@ struct QuickActions: View {
     ]
 
     let onTransferTap: () -> Void
+    let onRequestTap: () -> Void
     let onMoreTap: () -> Void
 
     init(onTransferTap: @escaping () -> Void = {},
+         onRequestTap: @escaping () -> Void = {},
          onMoreTap: @escaping () -> Void = {}) {
         self.onTransferTap = onTransferTap
+        self.onRequestTap = onRequestTap
         self.onMoreTap = onMoreTap
     }
 
@@ -28,6 +31,8 @@ struct QuickActions: View {
                     QuickActionCard(action: action) {
                         if index == 0 {
                             onTransferTap()
+                        } else if index == 1 {
+                            onRequestTap()
                         } else if index == 2 {
                             onMoreTap()
                         }
