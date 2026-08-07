@@ -25,8 +25,6 @@ internal enum Strings {
     internal static let loanTitle = Strings.tr("Localizable", "CardDistribution.loanTitle", fallback: "Loan")
   }
   internal enum CardInfo {
-    /// Apply Now
-    internal static let applyNow = Strings.tr("Localizable", "CardInfo.applyNow", fallback: "Apply Now")
     /// See Insights
     internal static let monthlySpendingButton = Strings.tr("Localizable", "CardInfo.monthlySpendingButton", fallback: "See Insights")
     /// Top category: Restaurants 🍔
@@ -35,36 +33,14 @@ internal enum Strings {
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "CardInfo.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "CardInfo.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-    /// Apply now for a Platinum Secured Card
-    internal static let noCreditCardCaption = Strings.tr("Localizable", "CardInfo.noCreditCardCaption", fallback: "Apply now for a Platinum Secured Card")
-    /// No Credit Card Yet?
-    internal static let noCreditCardHeadline = Strings.tr("Localizable", "CardInfo.noCreditCardHeadline", fallback: "No Credit Card Yet?")
-    /// Build Your Credit
-    internal static let noCreditCardTitle = Strings.tr("Localizable", "CardInfo.noCreditCardTitle", fallback: "Build Your Credit")
-    /// Redeem
-    internal static let redeem = Strings.tr("Localizable", "CardInfo.redeem", fallback: "Redeem")
-    /// Worth $125 in travel
-    internal static let rewardsCaption = Strings.tr("Localizable", "CardInfo.rewardsCaption", fallback: "Worth $125 in travel")
-    /// Rewards Available
-    internal static let rewardsHeadline = Strings.tr("Localizable", "CardInfo.rewardsHeadline", fallback: "Rewards Available")
-    /// 12,500 points
-    internal static let rewardsTitle = Strings.tr("Localizable", "CardInfo.rewardsTitle", fallback: "12,500 points")
   }
   internal enum CardView {
-    /// Rewards Available
-    internal static let rewardsHeadline = Strings.tr("Localizable", "CardView.rewardsHeadline", fallback: "Rewards Available")
-    /// 12,500 points
-    internal static let rewardsTitle = Strings.tr("Localizable", "CardView.rewardsTitle", fallback: "12,500 points")
   }
   internal enum CardsMock {
     /// Monthly Spending
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "CardsMock.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "CardsMock.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-    /// No Credit Card Yet?
-    internal static let noCreditCardHeadline = Strings.tr("Localizable", "CardsMock.noCreditCardHeadline", fallback: "No Credit Card Yet?")
-    /// Build Your Credit
-    internal static let noCreditCardTitle = Strings.tr("Localizable", "CardsMock.noCreditCardTitle", fallback: "Build Your Credit")
   }
   internal enum CreditCard {
     /// MASTERCARD

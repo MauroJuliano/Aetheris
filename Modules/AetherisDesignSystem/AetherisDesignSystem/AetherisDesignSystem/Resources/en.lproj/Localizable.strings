@@ -33,26 +33,13 @@
 
 "CreditCard.validTill" = "Valid till";
 
-"CardInfo.rewardsHeadline" = "Rewards Available";
-"CardInfo.rewardsTitle" = "12,500 points";
-"CardInfo.redeem" = "Redeem";
-"CardInfo.rewardsCaption" = "Worth $125 in travel";
 "CardInfo.monthlySpendingHeadline" = "Monthly Spending";
 "CardInfo.monthlySpendingTitle" = "You spent $2,310 in August";
 "CardInfo.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "CardInfo.monthlySpendingButton" = "See Insights";
-"CardInfo.noCreditCardHeadline" = "No Credit Card Yet?";
-"CardInfo.noCreditCardTitle" = "Build Your Credit";
-"CardInfo.noCreditCardCaption" = "Apply now for a Platinum Secured Card";
-"CardInfo.applyNow" = "Apply Now";
-
-"CardView.rewardsHeadline" = "Rewards Available";
-"CardView.rewardsTitle" = "12,500 points";
 
 "CardsMock.monthlySpendingHeadline" = "Monthly Spending";
 "CardsMock.monthlySpendingTitle" = "You spent $2,310 in August";
-"CardsMock.noCreditCardHeadline" = "No Credit Card Yet?";
-"CardsMock.noCreditCardTitle" = "Build Your Credit";
 "CreditCard.ownerName" = "Jorge Henrique";
 "CreditCard.brandVisa" = "VISA";
 "CreditCard.ownerNameTwo" = "Amado batista";

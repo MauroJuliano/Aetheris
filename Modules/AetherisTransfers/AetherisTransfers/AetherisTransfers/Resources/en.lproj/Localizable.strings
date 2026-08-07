@@ -39,24 +39,13 @@
 "HomeApp.cardsLoadFailed" = "We could not load your cards right now.";
 "HomeApp.cardOwnerOne" = "Jorge Henrique";
 "HomeApp.visaBrand" = "VISA";
-"HomeApp.rewardsHeadline" = "Rewards Available";
-"HomeApp.rewardsTitle" = "12,500 points";
-"HomeApp.rewardsCaption" = "Worth $125 in travel";
-"HomeApp.redeem" = "Redeem";
 "HomeApp.monthlySpendingHeadline" = "Monthly Spending";
 "HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
 "HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
 "HomeApp.seeInsights" = "See Insights";
 "HomeApp.cardOwnerTwo" = "Amado Batista";
 "HomeApp.mastercardBrand" = "MASTERCARD";
-"HomeApp.specialOfferHeadline" = "Special Offer";
-"HomeApp.specialOfferTitle" = "Travel Insurance";
-"HomeApp.specialOfferCaption" = "Protect your trips starting at $12/mo";
 "HomeApp.learnMore" = "Learn More";
-"HomeApp.noCreditCardHeadline" = "No Credit Card Yet?";
-"HomeApp.buildYourCreditTitle" = "Build Your Credit";
-"HomeApp.buildYourCreditCaption" = "Apply now for a Platinum Secured Card";
-"HomeApp.applyNow" = "Apply Now";
 
 "Common.tryAgain" = "Try again";
 "Common.back" = "Back";
