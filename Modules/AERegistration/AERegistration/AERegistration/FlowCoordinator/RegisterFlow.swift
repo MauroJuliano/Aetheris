@@ -52,6 +52,7 @@ struct RegisterFlow: View {
     var onRegisterFinished: () -> Void
     @State private var path: [RegisterRoute] = []
     @StateObject private var draft = RegistrationDraft()
+    @State private var isOnboardingPresented = false
 
     init(coreService: any HasCoreService,
          onBackToLogin: @escaping () -> Void,
@@ -62,77 +63,89 @@ struct RegisterFlow: View {
     }
     
     var body: some View {
-        NavigationStack(path: $path) {
-            SINFactory.make(draft: draft, onBack: onBackToLogin) {
-                path.append(.personal)
-            }
-            .navigationDestination(for: RegisterRoute.self) { route in
-                switch route {
-                case .personal:
-                    MothersNameInputFactory.make(
-                        draft: draft,
-                        onBack: {
-                        if !path.isEmpty {
-                            path.removeLast()
-                        }
-                    },
-                        onContinue: {
-                        path.append(.userName)
+        Group {
+            if isOnboardingPresented {
+                OnboardingView(
+                    onFinish: finishRegistration
+                )
+            } else {
+                NavigationStack(path: $path) {
+                    SINFactory.make(draft: draft, onBack: onBackToLogin) {
+                        path.append(.personal)
                     }
-                    )
-                case .userName:
-                    UserNameFactory.make(
-                        draft: draft,
-                        onBack: {
-                        if !path.isEmpty {
-                            path.removeLast()
+                    .navigationDestination(for: RegisterRoute.self) { route in
+                        switch route {
+                        case .personal:
+                            MothersNameInputFactory.make(
+                                draft: draft,
+                                onBack: {
+                                    if !path.isEmpty {
+                                        path.removeLast()
+                                    }
+                                },
+                                onContinue: {
+                                    path.append(.userName)
+                                }
+                            )
+                        case .userName:
+                            UserNameFactory.make(
+                                draft: draft,
+                                onBack: {
+                                    if !path.isEmpty {
+                                        path.removeLast()
+                                    }
+                                },
+                                onContinue: {
+                                    path.append(.birthdate)
+                                }
+                            )
+                        case .birthdate:
+                            BirthdateFactory.make(
+                                draft: draft,
+                                onBack: {
+                                    if !path.isEmpty {
+                                        path.removeLast()
+                                    }
+                                },
+                                onContinue: {
+                                    path.append(.resume)
+                                }
+                            )
+                        case .resume:
+                            ResumeFactory.make(
+                                coreService: coreService,
+                                draft: draft,
+                                onBack: {
+                                    if !path.isEmpty {
+                                        path.removeLast()
+                                    }
+                                },
+                                onContinue: {
+                                    path.append(.password)
+                                }
+                            )
+                        case .password:
+                            PasswordFactory.make(draft: draft, onBack: onBackToLogin) {
+                                path.append(.confirmPassword)
+                            }
+                        case .confirmPassword:
+                            ConfirmPasswordFactory.make(coreService: coreService, draft: draft, onBack: {
+                                if !path.isEmpty {
+                                    path.removeLast()
+                                }
+                            }) {
+                                isOnboardingPresented = true
+                            }
                         }
-                    },
-                        onContinue: {
-                        path.append(.birthdate)
-                    }
-                    )
-                case .birthdate:
-                    BirthdateFactory.make(
-                        draft: draft,
-                        onBack: {
-                        if !path.isEmpty {
-                            path.removeLast()
-                        }
-                    },
-                        onContinue: {
-                        path.append(.resume)
-                    }
-                    )
-                case .resume:
-                    ResumeFactory.make(
-                        coreService: coreService,
-                        draft: draft,
-                        onBack: {
-                        if !path.isEmpty {
-                            path.removeLast()
-                        }
-                    },
-                        onContinue: {
-                        path.append(.password)
-                    }
-                    )
-                case .password:
-                    PasswordFactory.make(draft: draft, onBack: onBackToLogin) {
-                        path.append(.confirmPassword)
-                    }
-                case .confirmPassword:
-                    ConfirmPasswordFactory.make(coreService: coreService, draft: draft, onBack: {
-                        if !path.isEmpty {
-                            path.removeLast()
-                        }
-                    }) {
-                        draft.reset()
-                        onRegisterFinished()
                     }
                 }
             }
         }
+    }
+
+    private func finishRegistration() {
+        draft.reset()
+        onRegisterFinished()
     }
 }
 

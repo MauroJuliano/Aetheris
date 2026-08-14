@@ -1,6 +1,16 @@
 // Default
 "Default.buttonName" = "Continue";
 "Common.errorSubmit" = "Failed to submit";
+"Onboarding.skip" = "Skip";
+"Onboarding.stepOneTitle" = "Your account is ready";
+"Onboarding.stepOneDescription" = "Everything you need to manage your money is ready to go.";
+"Onboarding.stepOneButton" = "Continue";
+"Onboarding.stepTwoTitle" = "Everything in one place";
+"Onboarding.stepTwoDescription" = "Track your balance, manage cards and move money with less friction.";
+"Onboarding.stepTwoButton" = "Continue";
+"Onboarding.stepThreeTitle" = "Ready to start";
+"Onboarding.stepThreeDescription" = "You are all set to explore Aetheris and use your account.";
+"Onboarding.stepThreeButton" = "Get started";
 "SubmissionError.title" = "Unable to continue";
 "SubmissionError.description" = "We couldn't submit your information. Please try again.";
 "SubmissionError.tryAgain" = "Try again";
