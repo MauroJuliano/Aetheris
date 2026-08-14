@@ -20,7 +20,7 @@ class UserNameViewModel: ObservableObject {
 
     func updateUserName(_ value: String) {
         errorMessage = nil
-        draft.userName = RegistrationInputRules.sanitizeName(value)
+        draft.userName = value
     }
     
     // MARK: Life cycle

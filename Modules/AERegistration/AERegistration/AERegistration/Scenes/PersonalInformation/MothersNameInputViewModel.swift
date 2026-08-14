@@ -20,7 +20,7 @@ class MothersNameInputViewModel: ObservableObject {
 
     func updateMothersName(_ value: String) {
         errorMessage = nil
-        draft.mothersName = RegistrationInputRules.sanitizeName(value)
+        draft.mothersName = value
     }
     
     // MARK: Life Cycle
