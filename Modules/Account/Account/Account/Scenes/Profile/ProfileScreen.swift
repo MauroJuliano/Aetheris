@@ -1,5 +1,6 @@
 import AetherisDesignSystem
 import AetherisAuthenticationInterface
+import Core
 import SwiftUI
 
 struct ProfileScreen: View {
@@ -163,4 +164,16 @@ private enum ProfileRoute: Hashable {
     case feedback
     case terms
     case logout
+}
+
+#Preview {
+    ProfileScreen(
+        viewModel: ProfileScreenViewModel(
+            store: ProfileStore(),
+            service: ProfileService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        )
+    )
+    .environmentObject(TabBarVisibilityStore())
 }

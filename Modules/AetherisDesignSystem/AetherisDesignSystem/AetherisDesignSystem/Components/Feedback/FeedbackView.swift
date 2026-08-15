@@ -128,3 +128,15 @@ public struct FeedbackView: View {
 
 @available(*, deprecated, renamed: "FeedbackView")
 public typealias FullScreenErrorView = FeedbackView
+
+#Preview {
+    FeedbackView(
+        title: "Something went wrong",
+        description: "We couldn't load your information. Please try again.",
+        primaryButtonTitle: "Try again",
+        secondaryButtonTitle: "Back",
+        illustrationName: nil,
+        onPrimaryAction: {},
+        onSecondaryAction: {}
+    )
+}

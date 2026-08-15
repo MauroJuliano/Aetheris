@@ -100,3 +100,13 @@ public struct NumericKeyboard: View {
         .accessibilityIdentifier("amount.key.\(key)")
     }
 }
+
+#Preview {
+    NumericKeyboard(
+        displayedAmount: "$ 125.00",
+        displayedBalance: "$ 1,000.00",
+        onKeyPressed: { _ in }
+    )
+    .padding()
+    .appScreenBackground()
+}

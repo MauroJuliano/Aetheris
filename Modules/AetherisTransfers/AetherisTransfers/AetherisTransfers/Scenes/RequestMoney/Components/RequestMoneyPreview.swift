@@ -175,3 +175,27 @@ struct RequestMoneyPreview: View {
         }
     }
 }
+
+#Preview("Contact") {
+    RequestMoneyPreview(
+        contact: .previewSophie,
+        requesterName: "Blake Brown",
+        amount: 125,
+        reason: "Dinner split",
+        mode: .contact
+    )
+    .padding()
+    .appScreenBackground()
+}
+
+#Preview("Shared link") {
+    RequestMoneyPreview(
+        contact: nil,
+        requesterName: "Blake Brown",
+        amount: 80,
+        reason: "Event tickets",
+        mode: .shareLink
+    )
+    .padding()
+    .appScreenBackground()
+}

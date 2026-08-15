@@ -180,3 +180,18 @@ private struct BeneficiaryTransactionRow: View {
         }
     }
 }
+
+#Preview {
+    let beneficiary = BeneficiaryDetailsMockStore.beneficiary(
+        for: BeneficiaryFixtures.defaultSelection.id
+    )
+
+    BeneficiaryTransactionsSection(
+        summary: beneficiary.transactionSummary,
+        transactions: beneficiary.recentTransactions,
+        onSeeAllTap: {},
+        onTransactionTap: { _ in }
+    )
+    .padding()
+    .appScreenBackground()
+}

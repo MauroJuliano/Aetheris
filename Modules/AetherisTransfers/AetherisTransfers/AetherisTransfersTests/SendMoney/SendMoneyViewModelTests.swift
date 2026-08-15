@@ -97,8 +97,8 @@ struct SendMoneyViewModelTests {
 
         #expect(draft.amount == 125)
         #expect(draft.formattedAmount == "$ 125.00")
-        #expect(draft.beneficiaryName == "Melissa")
-        #expect(draft.beneficiaryIdentifier == "melissa@example.com")
+        #expect(draft.beneficiaryName == "Sophie Keller")
+        #expect(draft.beneficiaryIdentifier == "sophie.keller@aetheris.app")
         #expect(draft.accountName == "Savings")
         #expect(draft.accountLastDigits == "9876")
     }
@@ -113,9 +113,9 @@ struct SendMoneyViewModelTests {
 
 private extension Beneficiary {
     static let fixture = Beneficiary(
-        name: "Melissa",
-        pixKey: "melissa@example.com",
-        image: "melissa",
+        name: "Sophie Keller",
+        pixKey: "sophie.keller@aetheris.app",
+        image: "sophie",
         hasDivider: true
     )
 }

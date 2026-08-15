@@ -56,3 +56,17 @@ struct HomeQuickActions: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    HomeQuickActions(
+        actions: [
+            CardOptions(label: "Send", icon: "paperplane"),
+            CardOptions(label: "Request", icon: "arrow.down"),
+            .virtualCard(),
+            .cardLock(isBlocked: false)
+        ],
+        onAction: { _ in }
+    )
+    .padding()
+    .appScreenBackground()
+}

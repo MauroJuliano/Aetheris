@@ -123,3 +123,8 @@ struct BeneficiaryDetailsSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    BeneficiaryDetailsSkeleton()
+        .appScreenBackground()
+}

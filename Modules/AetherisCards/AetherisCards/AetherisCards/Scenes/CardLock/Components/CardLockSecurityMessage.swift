@@ -33,3 +33,9 @@ struct CardLockSecurityMessage: View {
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
 }
+
+#Preview {
+    CardLockSecurityMessage()
+        .padding()
+        .appScreenBackground()
+}

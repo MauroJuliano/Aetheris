@@ -22,3 +22,12 @@ public struct NotificationBell: View {
         }
     }
 }
+
+#Preview {
+    HStack(spacing: AppSpacing.large) {
+        NotificationBell(showBadge: true)
+        NotificationBell(showBadge: false)
+    }
+    .padding()
+    .appScreenBackground()
+}

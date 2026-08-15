@@ -109,7 +109,7 @@ private extension CardDetailsModel {
 
 private extension FinancialSummaryModel {
     static let fixture = FinancialSummaryModel(
-        image: "melissa",
+        image: "sophie",
         title: "Transfer",
         description: "Sent",
         value: "-$ 10.00",

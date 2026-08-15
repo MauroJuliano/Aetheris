@@ -67,3 +67,23 @@ struct VirtualCardQuickActions: View {
         .disabled(isLoading)
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        VirtualCardQuickActions(
+            isGeneratingNewNumber: false,
+            onCopyNumberTap: {},
+            onGenerateNewNumberTap: {},
+            onSettingsTap: {}
+        )
+
+        VirtualCardQuickActions(
+            isGeneratingNewNumber: true,
+            onCopyNumberTap: {},
+            onGenerateNewNumberTap: {},
+            onSettingsTap: {}
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}

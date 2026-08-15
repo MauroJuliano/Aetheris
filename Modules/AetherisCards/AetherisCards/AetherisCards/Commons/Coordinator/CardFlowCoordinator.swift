@@ -137,3 +137,12 @@ struct CardFlowCoordinator: View {
         tabBarVisibilityStore.isVisible = navigation.isAtRoot
     }
 }
+
+#Preview {
+    CardFlowCoordinator(
+        coreService: DemoCoreService(delay: 0),
+        onDismiss: nil
+    )
+    .environmentObject(TabBarVisibilityStore())
+    .environmentObject(TabBarRoutingStore())
+}

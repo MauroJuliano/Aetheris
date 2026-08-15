@@ -81,3 +81,25 @@ struct SharedMoneyRequestCard: View {
         }
     }
 }
+
+#Preview {
+    SharedMoneyRequestCardPreviewWrapper()
+}
+
+private struct SharedMoneyRequestCardPreviewWrapper: View {
+    @State private var amountText = CurrencyInputFormatter.format(80)
+    @State private var reason = "Event tickets"
+    @FocusState private var focusedField: RequestMoneyField?
+
+    var body: some View {
+        SharedMoneyRequestCard(
+            presets: .previewPresets,
+            amountText: $amountText,
+            reason: $reason,
+            focusedField: $focusedField,
+            onPresetTap: { amountText = CurrencyInputFormatter.format($0) }
+        )
+        .padding()
+        .appScreenBackground()
+    }
+}

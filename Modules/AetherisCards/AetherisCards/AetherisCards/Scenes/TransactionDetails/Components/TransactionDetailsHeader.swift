@@ -77,3 +77,11 @@ struct TransactionDetailsHeader: View {
         }
     }
 }
+
+#Preview {
+    TransactionDetailsHeader(
+        transaction: CardsPreviewData.transaction
+    )
+    .padding()
+    .appScreenBackground()
+}

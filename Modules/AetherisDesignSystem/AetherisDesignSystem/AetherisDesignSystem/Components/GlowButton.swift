@@ -3,15 +3,18 @@ import SwiftUI
 public struct GlowButton: View {
     private var title: String = Strings.GlowButton.continueTitle
     private var action: () -> Void = {}
+    private var isLoading = false
     
     @State private var isAnimating = false
     
     public init(
         title: String,
-        action: @escaping () -> Void = {}
+        action: @escaping () -> Void = {},
+        isLoading: Bool = false
     ) {
         self.title = title
         self.action = action
+        self.isLoading = isLoading
     }
     
     public var body: some View {
@@ -25,18 +28,31 @@ public struct GlowButton: View {
                         isAnimating = true
                     }
                 }
-            
+
             Button(action: action) {
-                Text(title)
-                    .font(AppTypography.button)
-                    .foregroundStyle(Color.brandPrimaryColor)
-                    .frame(width: AppComponentMetrics.glowButtonWidth, height: AppComponentMetrics.glowButtonHeight)
-                    .appShadow(AppShadow.control)
-                    .background(Color.backgroundColorA)
-                    .clipShape(RoundedRectangle(cornerRadius: AppRadius.pill))
+                ZStack {
+                    Text(title)
+                        .font(AppTypography.button)
+                        .foregroundStyle(Color.brandPrimaryColor)
+                        .opacity(isLoading ? 0 : 1)
+
+                    if isLoading {
+                        ProgressView()
+                            .tint(Color.brandPrimaryColor)
+                    }
+                }
+                .frame(width: AppComponentMetrics.glowButtonWidth, height: AppComponentMetrics.glowButtonHeight)
+                .appShadow(AppShadow.control)
+                .background(Color.backgroundColorA)
+                .clipShape(RoundedRectangle(cornerRadius: AppRadius.pill))
             }
+            .disabled(isLoading)
         }
     }
 }
 
-
+#Preview {
+    GlowButton(title: "Continue")
+        .padding()
+        .appScreenBackground()
+}

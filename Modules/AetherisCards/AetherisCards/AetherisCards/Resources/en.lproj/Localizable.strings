@@ -222,7 +222,7 @@
 "TransactionsHistory.payment" = "Payment";
 "TransactionsHistory.netflix" = "Netflix";
 "TransactionsHistory.subscription" = "Subscription";
-"TransactionsHistory.melissa" = "Melissa";
+"TransactionsHistory.melissa" = "Sophie Keller";
 "TransactionsHistory.transferReceived" = "Transfer received";
 "TransactionsHistory.apple" = "Apple";
 "TransactionsHistory.purchase" = "Purchase";
@@ -230,10 +230,10 @@
 "TransactionsHistory.deposit" = "Deposit";
 
 "FinancialSummary.transferSent" = "Transfer sent";
-"FinancialSummary.transferSentDescription" = "Funds successfully transferred to Melissa";
-"FinancialSummary.transferSentAdeleDescription" = "Funds successfully transferred to Adele";
+"FinancialSummary.transferSentDescription" = "Funds successfully transferred to Sophie Keller";
+"FinancialSummary.transferSentAmeliaDescription" = "Funds successfully transferred to Amelia Thompson";
 "FinancialSummary.paymentReceived" = "Payment received";
-"FinancialSummary.paymentReceivedDescription" = "Funds received from Ed Sheeran";
+"FinancialSummary.paymentReceivedDescription" = "Funds received from Amelia Thompson";
 "FinancialSummary.netflix" = "Netflix";
 "FinancialSummary.appleBill" = "Apple.Com/Bill";
 "FinancialSummary.ifoodBar" = "Ifd* Joe's Bar";

@@ -66,3 +66,8 @@ struct BeneficiaryListSkeleton: View {
 
 }
 
+#Preview {
+    BeneficiaryListSkeleton()
+        .padding()
+        .appScreenBackground()
+}

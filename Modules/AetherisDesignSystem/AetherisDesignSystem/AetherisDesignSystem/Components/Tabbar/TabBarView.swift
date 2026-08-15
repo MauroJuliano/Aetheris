@@ -40,3 +40,17 @@ public struct TabBarView: View {
             .accessibilityIdentifier("tab.bar")
     }
 }
+
+#Preview {
+    @Previewable @State var selectedIndex = 0
+
+    VStack {
+        Spacer()
+
+        TabBarView(
+            selectedIndex: $selectedIndex,
+            onCenterTap: {}
+        )
+    }
+    .appScreenBackground()
+}

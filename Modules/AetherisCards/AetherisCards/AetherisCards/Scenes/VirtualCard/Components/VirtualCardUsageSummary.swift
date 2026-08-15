@@ -77,3 +77,13 @@ struct VirtualCardUsageSummary: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
+
+#Preview {
+    VirtualCardUsageSummary(
+        availableLimit: CardsPreviewData.virtualCard.availableLimit,
+        totalLimit: CardsPreviewData.virtualCard.totalLimit,
+        monthlyExpenses: CardsPreviewData.virtualCard.monthlyExpenses
+    )
+    .padding()
+    .appScreenBackground()
+}

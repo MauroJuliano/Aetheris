@@ -1,4 +1,6 @@
+import AetherisAuthenticationInterface
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct TransferProcessingView: View {
@@ -77,4 +79,30 @@ struct TransferProcessingView: View {
                 .foregroundStyle(Color.brandPrimaryColor)
         }
     }
+}
+
+#Preview {
+    TransferProcessingView(
+        viewModel: TransferProcessingViewModel(
+            submission: TransferSubmission(
+                draft: TransferDraft(
+                    amount: 125,
+                    formattedAmount: "$125.00",
+                    currency: "USD",
+                    beneficiaryName: "Sophie Keller",
+                    beneficiaryIdentifier: "sophie.keller@aetheris.app",
+                    accountName: "Aetheris Checking",
+                    accountLastDigits: "1234"
+                ),
+                authorization: IdentityAuthorization(
+                    token: "preview-token",
+                    expiresAt: "2026-08-07T23:59:59Z"
+                ),
+                idempotencyKey: "preview-transfer"
+            ),
+            service: SendMoneyService(coreService: DemoCoreService(delay: 0))
+        ),
+        onCompleted: { _ in },
+        onTryLater: {}
+    )
 }

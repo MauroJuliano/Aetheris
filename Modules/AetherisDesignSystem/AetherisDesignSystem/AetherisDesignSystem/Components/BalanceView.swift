@@ -50,3 +50,11 @@ public struct BalanceView: View {
         return prefix + String(repeating: "•", count: amount.count)
     }
 }
+
+#Preview {
+    BalanceView(
+        title: "Balance",
+        balanceText: "$ 13,553.00"
+    )
+    .appScreenBackground()
+}

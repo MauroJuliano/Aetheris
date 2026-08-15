@@ -59,6 +59,18 @@ struct CurrentInvoiceScreen: View {
     }
 }
 
+#Preview {
+    CurrentInvoiceScreen(
+        viewModel: CurrentInvoiceViewModel(
+            cardId: CardsPreviewData.cardId,
+            service: CurrentInvoiceService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBackAction: {}
+    )
+}
+
 private extension CurrentInvoiceScreen {
     var navigationBar: some View {
         NavBar(

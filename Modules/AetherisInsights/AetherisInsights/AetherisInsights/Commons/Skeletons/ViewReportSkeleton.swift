@@ -119,3 +119,6 @@ struct ViewReportSkeleton: View {
     }
 }
 
+#Preview {
+    ViewReportSkeleton()
+}

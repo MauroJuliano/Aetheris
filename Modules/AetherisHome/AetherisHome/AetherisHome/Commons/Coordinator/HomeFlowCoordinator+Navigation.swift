@@ -115,6 +115,7 @@ extension HomeFlowCoordinator {
 
         case .allServices:
             AllServicesFactory.make(
+                coreService: coreService,
                 onBack: { popRoute() },
                 onSelect: navigateFromAllServices
             )

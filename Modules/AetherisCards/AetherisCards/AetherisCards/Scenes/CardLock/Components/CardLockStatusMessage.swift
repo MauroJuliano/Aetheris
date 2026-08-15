@@ -55,3 +55,12 @@ struct CardLockStatusMessage: View {
         accentColor.opacity(0.06)
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        CardLockStatusMessage(isBlocked: false)
+        CardLockStatusMessage(isBlocked: true)
+    }
+    .padding()
+    .appScreenBackground()
+}

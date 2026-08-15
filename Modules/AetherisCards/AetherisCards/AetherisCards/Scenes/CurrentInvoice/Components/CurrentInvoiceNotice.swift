@@ -53,3 +53,9 @@ struct CurrentInvoiceNotice: View {
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
 }
+
+#Preview {
+    CurrentInvoiceNotice(onDismiss: {})
+        .padding()
+        .appScreenBackground()
+}

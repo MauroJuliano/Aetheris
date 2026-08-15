@@ -80,6 +80,18 @@ struct VirtualCardScreen: View {
     }
 }
 
+#Preview {
+    VirtualCardScreen(
+        viewModel: VirtualCardViewModel(
+            physicalCardId: CardsPreviewData.cardId,
+            service: VirtualCardService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBackAction: {}
+    )
+}
+
 private extension VirtualCardScreen {
     var navigationBar: some View {
         NavBar(

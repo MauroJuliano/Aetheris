@@ -49,3 +49,13 @@ struct TransactionActions: View {
         .disabled(action == .download && isDownloading)
     }
 }
+
+#Preview {
+    TransactionActions(
+        availableActions: [.share, .download, .addNote, .reportIssue],
+        isDownloading: false,
+        onAction: { _ in }
+    )
+    .padding()
+    .appScreenBackground()
+}

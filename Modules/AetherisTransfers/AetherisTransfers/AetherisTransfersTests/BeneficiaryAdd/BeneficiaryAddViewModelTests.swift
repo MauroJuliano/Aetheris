@@ -22,17 +22,17 @@ struct BeneficiaryAddViewModelTests {
 
     @Test
     func searchBeneficiary_returnsResultAndClearsPreviousError() async {
-        let expected = Beneficiary(name: "Melissa", pixKey: "melissa@example.com", image: "melissa", hasDivider: true)
+        let expected = Beneficiary(name: "Sophie Keller", pixKey: "sophie.keller@aetheris.app", image: "sophie", hasDivider: true)
         let service = BeneficiaryAddServiceSpy(result: .success(expected))
         let sut = BeneficiaryAddViewModel(service: service)
-        sut.searchTerm = "melissa@example.com"
+        sut.searchTerm = "sophie.keller@aetheris.app"
 
         let beneficiary = await sut.searchBeneficiary()
 
         #expect(beneficiary == expected)
         #expect(!sut.isSearching)
         #expect(sut.errorMessage == nil)
-        #expect(service.searches == ["melissa@example.com"])
+        #expect(service.searches == ["sophie.keller@aetheris.app"])
     }
 
     @Test

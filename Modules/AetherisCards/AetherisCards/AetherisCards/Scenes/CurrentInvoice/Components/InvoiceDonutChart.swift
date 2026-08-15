@@ -33,3 +33,10 @@ struct InvoiceDonutChart: View {
         .accessibilityValue(Strings.CurrentInvoice.installmentAccessibilityValue(Int((safeProgress * 100).rounded())))
     }
 }
+
+#Preview {
+    InvoiceDonutChart(installmentProgress: 0.62)
+        .frame(width: 140, height: 140)
+        .padding()
+        .appScreenBackground()
+}

@@ -54,3 +54,11 @@ struct TransactionGeneralInformation: View {
         Divider().padding(.leading, 52)
     }
 }
+
+#Preview {
+    TransactionGeneralInformation(
+        transaction: CardsPreviewData.transaction
+    )
+    .padding()
+    .appScreenBackground()
+}

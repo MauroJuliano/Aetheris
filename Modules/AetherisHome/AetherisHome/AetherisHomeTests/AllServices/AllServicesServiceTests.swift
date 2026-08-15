@@ -1,14 +1,16 @@
 import Foundation
+import Core
 import Testing
 @testable import AetherisHome
 
 @Suite("AllServicesService")
 struct AllServicesServiceTests {
     @Test
-    func loadServices_returnsLocalItems() async {
-        let sut = AllServicesService()
+    func loadServices_returnsMockPayloadFromEndpoint() async throws {
+        let coreService = CoreServiceTestDouble()
+        let sut = AllServicesService(coreService: coreService)
 
-        let items = await sut.loadServices()
+        let items = try await sut.loadServices()
 
         #expect(items.count == 5)
         #expect(items.map(\.title) == [
@@ -28,5 +30,23 @@ struct AllServicesServiceTests {
         #expect(items.map(\.theme) == [.primary, .info, .warning, .primary, .info])
         #expect(items.map(\.route) == [.transfer, .beneficiaries, .cards, .notifications, .reports])
         #expect(Set(items.map(\.id)).count == items.count)
+        #expect(coreService.calls == [
+            .init(path: "/payments/services", method: .get)
+        ])
+    }
+
+    @Test
+    func loadServices_throwsInvalidData_whenResponseCannotDecode() async throws {
+        let coreService = CoreServiceTestDouble()
+        coreService.responseData = Data()
+        let sut = AllServicesService(coreService: coreService)
+
+        do {
+            _ = try await sut.loadServices()
+            #expect(Bool(false))
+        } catch {
+            #expect((error as? CoreServiceError) == .invalidData)
+            #expect(coreService.calls.count == 1)
+        }
     }
 }

@@ -1,5 +1,6 @@
 import AetherisDesignSystem
 import AetherisInsights
+import Core
 import Foundation
 import SwiftUI
 
@@ -84,6 +85,7 @@ struct HomeApp: View {
                     )
 
                     RecipientsContainer(
+                        users: viewModel.recentRecipients,
                         onSelectRecipient: onSelectRecipient,
                         onSeeAllTap: onSeeAllRecipientsTap,
                         onNewRecipientTap: onNewRecipientTap
@@ -121,4 +123,23 @@ struct HomeApp: View {
         let safeIndex = min(max(selectedCardIndex, 0), viewModel.cards.count - 1)
         return viewModel.cards[safeIndex].id
     }
+}
+
+#Preview {
+    HomeApp(
+        viewModel: HomeAppViewModel(
+            service: HomeAppService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onCardTap: { _ in },
+        onNotificationsTap: {},
+        onSelectRecipient: { _ in },
+        onSeeAllRecipientsTap: {},
+        onNewRecipientTap: {},
+        onTransferTap: {},
+        onRequestMoneyTap: {},
+        onMoreTap: {},
+        onViewReportTap: {}
+    )
 }

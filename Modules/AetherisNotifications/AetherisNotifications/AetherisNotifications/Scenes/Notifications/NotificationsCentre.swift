@@ -76,3 +76,14 @@ struct NotificationsCentre: View {
         .task { await viewModel.load() }
     }
 }
+
+#Preview {
+    NotificationsCentre(
+        viewModel: NotificationsCentreViewModel(
+            service: NotificationsCentreService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBack: {}
+    )
+}

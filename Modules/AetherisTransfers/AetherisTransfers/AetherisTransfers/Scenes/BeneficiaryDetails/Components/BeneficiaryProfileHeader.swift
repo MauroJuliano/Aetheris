@@ -128,3 +128,16 @@ private struct BeneficiaryActionButton: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    BeneficiaryProfileHeader(
+        beneficiary: BeneficiaryDetailsMockStore.beneficiary(
+            for: BeneficiaryFixtures.defaultSelection.id
+        ),
+        onTransferTap: {},
+        onRequestMoneyTap: {},
+        onMoreOptionsTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

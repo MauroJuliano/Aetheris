@@ -251,3 +251,23 @@ private struct TransferInfoRow: View {
         }
     }
 }
+
+#Preview {
+    TransferSuccessView(
+        viewModel: TransferSuccessViewModel(
+            model: TransferReceiptModel(
+                amount: "$125.00",
+                recipientName: "Sophie Keller",
+                recipientEmail: "sophie.keller@aetheris.app",
+                accountName: "Aetheris Checking",
+                accountLastDigits: "1234",
+                date: "Aug 7, 2026 at 4:30 PM",
+                referenceId: "TRF-2026-0001"
+            ),
+            onBack: {},
+            onDone: {},
+            onNewTransfer: {},
+            onCopyReference: { _ in }
+        )
+    )
+}

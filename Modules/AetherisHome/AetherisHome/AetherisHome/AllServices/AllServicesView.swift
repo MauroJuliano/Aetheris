@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct AllServicesView: View {
@@ -131,4 +132,16 @@ struct AllServicesView: View {
         case .warning: return .orange
         }
     }
+}
+
+#Preview {
+    AllServicesView(
+        viewModel: AllServicesViewModel(
+            service: AllServicesService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBack: {},
+        onSelect: { _ in }
+    )
 }

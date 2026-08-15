@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct SendMoney: View {
@@ -127,4 +128,20 @@ struct SendMoney: View {
             amountViewModel.updateBalance(viewModel.walletBalance)
         }
     }
+}
+
+#Preview {
+    @Previewable @State var beneficiary: Beneficiary? = BeneficiaryFixtures.defaultSelection
+
+    SendMoney(
+        viewModel: SendMoneyViewModel(
+            service: SendMoneyService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        selectedBeneficiary: $beneficiary,
+        onBackAction: {},
+        onChangeBeneficiary: {},
+        onContinue: { _ in }
+    )
 }

@@ -142,3 +142,21 @@ private struct CircleIcon: View {
         }
     }
 }
+
+#Preview {
+    CardInformationContainer(
+        model: CardDetailsModel(
+            cardId: CardsPreviewData.cardId,
+            availableLimit: 2_750,
+            totalLimit: 5_000,
+            currentInvoice: 350,
+            invoiceStatus: "Open",
+            dueDate: Calendar.current.date(byAdding: .day, value: 5, to: Date()) ?? Date(),
+            isBlocked: false
+        ),
+        onInvoiceTap: {},
+        onDueDateTap: {}
+    )
+    .padding()
+    .appScreenBackground()
+}

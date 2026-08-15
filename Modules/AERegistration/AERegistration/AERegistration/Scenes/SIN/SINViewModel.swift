@@ -5,15 +5,17 @@ class SINViewModel: ObservableObject {
     typealias localizable = Strings.Sin
     
     @Published var errorMessage: String?
+    @Published var sin: String
 
     private let draft: RegistrationDraft
 
     init(draft: RegistrationDraft) {
         self.draft = draft
+        self.sin = draft.sin
     }
 
     var isSINValid: Bool {
-        RegistrationInputRules.isValidSIN(draft.sin)
+        RegistrationInputRules.isValidSIN(sin)
     }
     
     var title: String { localizable.title }
@@ -29,7 +31,7 @@ class SINViewModel: ObservableObject {
     // MARK: - Life Cycle
     func updateSIN(_ newValue: String) {
         errorMessage = nil
-        draft.sin = format(newValue)
+        sin = format(newValue)
     }
 
     func submit(onContinue: () -> Void) {
@@ -39,6 +41,7 @@ class SINViewModel: ObservableObject {
         }
 
         errorMessage = nil
+        draft.sin = sin
         onContinue()
     }
 }

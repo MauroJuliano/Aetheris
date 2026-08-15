@@ -45,6 +45,12 @@ struct QuickActions: View {
     }
 }
 
+#Preview {
+    QuickActions()
+        .padding()
+        .appScreenBackground()
+}
+
 struct QuickActionCard: View {
     let action: QuickActionItem
     let onTap: () -> Void

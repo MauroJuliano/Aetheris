@@ -42,3 +42,12 @@ struct RemoveBeneficiaryButton: View {
         .accessibilityIdentifier("beneficiaryDetails.removeButton")
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        RemoveBeneficiaryButton(isLoading: false) {}
+        RemoveBeneficiaryButton(isLoading: true) {}
+    }
+    .padding()
+    .appScreenBackground()
+}

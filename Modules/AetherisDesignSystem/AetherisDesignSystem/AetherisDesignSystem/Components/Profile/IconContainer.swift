@@ -24,3 +24,12 @@ struct IconContainer: View {
     }
 }
 
+#Preview {
+    HStack(spacing: AppSpacing.medium) {
+        IconContainer(model: .init(icon: "person"))
+        IconContainer(model: .init(icon: "envelope"))
+        IconContainer(model: .init(icon: "creditcard"))
+    }
+    .padding()
+    .appScreenBackground()
+}

@@ -37,7 +37,7 @@ struct NotificationsCentreServiceTests {
             return nil
         }
 
-        #expect(images == ["melissa", "ed"])
+        #expect(images == ["sophie", "Amelia"])
         #expect(icons == ["bell", "wrench.and.screwdriver", "calendar", "gearshape"])
         #expect(response.notifications[0].section == Strings.Notifications.sectionToday)
         #expect(coreService.calls == [

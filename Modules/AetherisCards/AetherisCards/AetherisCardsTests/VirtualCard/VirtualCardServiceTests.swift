@@ -17,7 +17,7 @@ struct VirtualCardServiceTests {
         #expect(dashboard.virtualCard.style == .gold)
         #expect(dashboard.virtualCard.brand == .mastercard)
         #expect(dashboard.summaries.count == 3)
-        #expect(dashboard.summaries.map(\.image) == ["NetflixLogo", "applelogo", "melissa"])
+        #expect(dashboard.summaries.map(\.image) == ["NetflixLogo", "applelogo", "sophie"])
         #expect(coreService.calls == [
             .init(
                 path: "/payments/cards/\(CardMockIDs.gold.uuidString)/virtual-card",

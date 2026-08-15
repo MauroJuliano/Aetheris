@@ -2,7 +2,7 @@ import AetherisDesignSystem
 import SwiftUI
 
 struct RecipientsContainer: View {
-    let users = BeneficiaryFixtures.defaults
+    let users: [Beneficiary]
     let onSelectRecipient: (Beneficiary) -> Void
     let onSeeAllTap: () -> Void
     let onNewRecipientTap: () -> Void
@@ -78,4 +78,20 @@ struct RecipientsContainer: View {
         .padding(AppSpacing.medium)
         .appCardSurface()
     }
+}
+
+#Preview {
+    RecipientsContainer(
+        users: [
+            Beneficiary(name: "Sophie Keller", pixKey: "sophie.keller@aetheris.app", image: "sophie", hasDivider: false),
+            Beneficiary(name: "Amelia Thompson", pixKey: "amelia.thompson@aetheris.app", image: "Amelia", hasDivider: false),
+            Beneficiary(name: "Léa Tremblay", pixKey: "lea.tremblay@aetheris.app", image: "lea", hasDivider: false),
+            Beneficiary(name: "Maya Patel", pixKey: "maya.patel@aetheris.app", image: "maya", hasDivider: false)
+        ],
+        onSelectRecipient: { _ in },
+        onSeeAllTap: {},
+        onNewRecipientTap: {}
+    )
+    .padding()
+    .appScreenBackground()
 }

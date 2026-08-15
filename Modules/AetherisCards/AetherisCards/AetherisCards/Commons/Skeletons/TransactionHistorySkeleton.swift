@@ -64,3 +64,6 @@ struct TransactionHistorySkeleton: View {
 
 }
 
+#Preview {
+    TransactionHistorySkeleton()
+}

@@ -104,17 +104,17 @@ enum TransactionDetailsMockStore {
 
     static func transaction(for transactionId: UUID, note: String? = nil) -> TransactionDetailsModel {
         switch transactionId {
-        case TransactionMockIDs.melissaTransfer:
+        case TransactionMockIDs.sophieTransfer:
             return transfer(
                 id: transactionId,
-                title: "Melissa",
+                title: "Sophie Keller",
                 subtitle: "Bank transfer",
                 amount: 250,
-                imageName: "melissa",
-                recipientName: "Melissa Stone",
+                imageName: "sophie",
+                recipientName: "Sophie Keller",
                 note: note
             )
-        case TransactionMockIDs.edPayment:
+        case TransactionMockIDs.ameliaPayment:
             return incomingPayment(id: transactionId, note: note)
         case TransactionMockIDs.netflixSubscription:
             return netflixSubscription(id: transactionId, note: note)
@@ -122,14 +122,14 @@ enum TransactionDetailsMockStore {
             return appleSubscription(id: transactionId, note: note)
         case TransactionMockIDs.ifoodPurchase:
             return purchase(id: transactionId, note: note)
-        case TransactionMockIDs.adeleTransfer:
+        case TransactionMockIDs.ameliaTransfer:
             return transfer(
                 id: transactionId,
-                title: "Adele",
+                title: "Amelia Thompson",
                 subtitle: "Bank transfer",
                 amount: 70,
-                imageName: "Adele",
-                recipientName: "Adele Roberts",
+                imageName: "Amelia",
+                recipientName: "Amelia Thompson",
                 note: note
             )
         case TransactionMockIDs.refund:
@@ -151,7 +151,7 @@ private extension TransactionDetailsMockStore {
         let senderId = UUID(uuidString: "20000000-0000-0000-0000-000000000002")!
         return TransactionDetailsModel(
             id: id,
-            title: "Ed Sheeran",
+            title: "Amelia Thompson",
             subtitle: "Payment received",
             amount: 125,
             currencyCode: "USD",
@@ -160,12 +160,12 @@ private extension TransactionDetailsMockStore {
             date: Date(),
             transactionCode: "TXN-ED-125-2026",
             note: note,
-            imageName: "ed",
+            imageName: "Amelia",
             imageURL: nil,
             incomingPaymentDetails: IncomingPaymentDetailsModel(
                 senderId: senderId,
-                senderName: "Ed Sheeran",
-                senderContact: "ed@email.com",
+                senderName: "Amelia Thompson",
+                senderContact: "amelia.thompson@aetheris.app",
                 method: "Instant payment",
                 methodDetails: "Aetheris account",
                 reference: "Dinner split"

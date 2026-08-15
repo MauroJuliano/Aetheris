@@ -8,7 +8,6 @@ enum UserNameFactory {
                      onContinue: @escaping () -> Void) -> some View {
         let viewModel = UserNameViewModel(draft: draft)
         return UserNameView(viewModel: viewModel,
-                            draft: draft,
                             onBack: onBack,
                             onContinue: onContinue)
     }

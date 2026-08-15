@@ -122,3 +122,13 @@ struct ProfileEditFieldView: View {
         }
     }
 }
+
+#Preview {
+    ProfileEditFieldView(
+        title: Strings.Profile.editNameTitle,
+        description: Strings.Profile.editNameDescription,
+        initialValue: "Blake Lehmann",
+        placeholder: Strings.Profile.editNamePlaceholder,
+        onSave: { _ in .success }
+    )
+}

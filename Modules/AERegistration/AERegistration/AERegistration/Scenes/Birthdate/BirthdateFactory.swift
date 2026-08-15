@@ -8,7 +8,6 @@ enum BirthdateFactory {
                      onContinue: @escaping () -> Void) -> BirthdateView {
         let viewModel = BirthdateViewModel(draft: draft)
         return BirthdateView(viewModel: viewModel,
-                             draft: draft,
                              onBack: onBack,
                              onContinue: onContinue)
     }

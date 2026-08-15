@@ -30,6 +30,28 @@ internal enum Strings {
     /// Find beneficiary
     internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
   }
+  internal enum BeneficiaryList {
+    /// Clear search
+    internal static let clearSearch = Strings.tr("Localizable", "BeneficiaryList.clearSearch", fallback: "Clear search")
+    /// Saved beneficiaries will appear here.
+    internal static let emptyDescription = Strings.tr("Localizable", "BeneficiaryList.emptyDescription", fallback: "Saved beneficiaries will appear here.")
+    /// No beneficiaries yet
+    internal static let emptyTitle = Strings.tr("Localizable", "BeneficiaryList.emptyTitle", fallback: "No beneficiaries yet")
+    /// We couldn't load your beneficiaries right now.
+    internal static let loadFailed = Strings.tr("Localizable", "BeneficiaryList.loadFailed", fallback: "We couldn't load your beneficiaries right now.")
+    /// Recent beneficiary
+    internal static let recentBeneficiary = Strings.tr("Localizable", "BeneficiaryList.recentBeneficiary", fallback: "Recent beneficiary")
+    /// Saved beneficiaries
+    internal static let savedBeneficiaries = Strings.tr("Localizable", "BeneficiaryList.savedBeneficiaries", fallback: "Saved beneficiaries")
+    /// Saved contact
+    internal static let savedContact = Strings.tr("Localizable", "BeneficiaryList.savedContact", fallback: "Saved contact")
+    /// Search beneficiaries
+    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryList.searchPlaceholder", fallback: "Search beneficiaries")
+    /// Beneficiaries
+    internal static let title = Strings.tr("Localizable", "BeneficiaryList.title", fallback: "Beneficiaries")
+    /// Beneficiaries unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryList.unavailableTitle", fallback: "Beneficiaries unavailable")
+  }
   internal enum BeneficiaryDetails {
     /// Account
     internal static let account = Strings.tr("Localizable", "BeneficiaryDetails.account", fallback: "Account")
@@ -121,12 +143,6 @@ internal enum Strings {
   internal enum HomeApp {
     /// Account terms - Privacy Policy
     internal static let accountTerms = Strings.tr("Localizable", "HomeApp.accountTerms", fallback: "Account terms - Privacy Policy")
-    /// Apply Now
-    internal static let applyNow = Strings.tr("Localizable", "HomeApp.applyNow", fallback: "Apply Now")
-    /// Apply now for a Platinum Secured Card
-    internal static let buildYourCreditCaption = Strings.tr("Localizable", "HomeApp.buildYourCreditCaption", fallback: "Apply now for a Platinum Secured Card")
-    /// Build Your Credit
-    internal static let buildYourCreditTitle = Strings.tr("Localizable", "HomeApp.buildYourCreditTitle", fallback: "Build Your Credit")
     /// Jorge Henrique
     internal static let cardOwnerOne = Strings.tr("Localizable", "HomeApp.cardOwnerOne", fallback: "Jorge Henrique")
     /// Amado Batista
@@ -153,28 +169,12 @@ internal enum Strings {
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "HomeApp.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "HomeApp.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-    /// No Credit Card Yet?
-    internal static let noCreditCardHeadline = Strings.tr("Localizable", "HomeApp.noCreditCardHeadline", fallback: "No Credit Card Yet?")
     /// No dashboard data yet
     internal static let noDashboardDataTitle = Strings.tr("Localizable", "HomeApp.noDashboardDataTitle", fallback: "No dashboard data yet")
     /// @2025 Powered by Blake
     internal static let poweredBy = Strings.tr("Localizable", "HomeApp.poweredBy", fallback: "@2025 Powered by Blake")
-    /// Redeem
-    internal static let redeem = Strings.tr("Localizable", "HomeApp.redeem", fallback: "Redeem")
-    /// Worth $125 in travel
-    internal static let rewardsCaption = Strings.tr("Localizable", "HomeApp.rewardsCaption", fallback: "Worth $125 in travel")
-    /// Rewards Available
-    internal static let rewardsHeadline = Strings.tr("Localizable", "HomeApp.rewardsHeadline", fallback: "Rewards Available")
-    /// 12,500 points
-    internal static let rewardsTitle = Strings.tr("Localizable", "HomeApp.rewardsTitle", fallback: "12,500 points")
     /// See Insights
     internal static let seeInsights = Strings.tr("Localizable", "HomeApp.seeInsights", fallback: "See Insights")
-    /// Protect your trips starting at $12/mo
-    internal static let specialOfferCaption = Strings.tr("Localizable", "HomeApp.specialOfferCaption", fallback: "Protect your trips starting at $12/mo")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "HomeApp.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "HomeApp.specialOfferTitle", fallback: "Travel Insurance")
     /// Try later
     internal static let tryLater = Strings.tr("Localizable", "HomeApp.tryLater", fallback: "Try later")
     /// Version 0.00.1

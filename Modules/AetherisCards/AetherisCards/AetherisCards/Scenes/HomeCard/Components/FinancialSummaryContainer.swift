@@ -70,3 +70,13 @@ struct FinancialSummaryContainer: View {
         }
     }
 }
+
+#Preview {
+    FinancialSummaryContainer(
+        summaries: CardsPreviewData.summaries,
+        title: Strings.VirtualCard.recentTransactions,
+        actionTitle: Strings.Common.seeAll
+    )
+    .padding()
+    .appScreenBackground()
+}

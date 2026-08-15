@@ -68,3 +68,39 @@ struct RecentContactButton: View {
         }
     }
 }
+
+#Preview {
+    HStack(spacing: AppSpacing.medium) {
+        RecentContactButton(
+            contact: .previewSophie,
+            isSelected: true,
+            action: {}
+        )
+
+        RecentContactButton(
+            contact: .previewCarlos,
+            isSelected: false,
+            action: {}
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}
+
+extension RequestContactModel {
+    static let previewSophie = RequestContactModel(
+        id: UUID(),
+        name: "Sophie Keller",
+        contactInformation: "sophie.keller@aetheris.app",
+        imageName: "sophie"
+    )
+
+    static let previewMelissa = previewSophie
+
+    static let previewCarlos = RequestContactModel(
+        id: UUID(),
+        name: "Carlos Barbosa",
+        contactInformation: "carlos@email.com",
+        imageName: nil
+    )
+}

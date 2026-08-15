@@ -55,3 +55,14 @@ struct RequestMoneyModeSelector: View {
         .buttonStyle(.plain)
     }
 }
+
+#Preview {
+    @Previewable @State var selectedMode: RequestMoneyMode = .contact
+
+    RequestMoneyModeSelector(
+        selectedMode: selectedMode,
+        onModeSelected: { selectedMode = $0 }
+    )
+    .padding()
+    .appScreenBackground()
+}

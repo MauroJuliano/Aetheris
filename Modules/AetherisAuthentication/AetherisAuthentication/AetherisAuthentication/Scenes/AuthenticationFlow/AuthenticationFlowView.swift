@@ -1,4 +1,10 @@
 import AetherisAuthenticationInterface
+import AccountInterface
+import AERegistrationInterface
+import AetherisCardsInterface
+import AetherisHomeInterface
+import AetherisTransfersInterface
+import Core
 import SwiftUI
 
 struct AuthenticationFlowView: View {
@@ -73,5 +79,64 @@ struct AuthenticationFlowView: View {
                 authPath.removeAll()
             }
         }
+    }
+}
+
+#Preview {
+    AuthenticationFlowView(
+        dependencies: AuthenticationPreviewDependencies()
+    )
+    .environmentObject(AppSessionStore())
+}
+
+final class AuthenticationPreviewDependencies:
+    HasRegistration,
+    HasHome,
+    HasCards,
+    HasTransfers,
+    HasAccount {
+    let registrationFactory: RegistrationFactoryInterface = AuthenticationPreviewRegistrationFactory()
+    let homeFactory: HomeFactoryInterface = AuthenticationPreviewHomeFactory()
+    let cardsFactory: CardsFactoryInterface = AuthenticationPreviewCardsFactory()
+    let transfersFactory: TransfersFactoryInterface = AuthenticationPreviewTransfersFactory()
+    let accountFactory: AccountFactoryInterface = AuthenticationPreviewAccountFactory()
+}
+
+struct AuthenticationPreviewRegistrationFactory: RegistrationFactoryInterface {
+    init(coreService: any HasCoreService) {}
+    init() {}
+
+    func make(
+        onFinished: @escaping () -> Void,
+        onBackToLogin: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(Text("Registration preview"))
+    }
+}
+
+struct AuthenticationPreviewHomeFactory: HomeFactoryInterface {
+    func make() -> AnyView {
+        AnyView(Text("Home preview"))
+    }
+}
+
+struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
+    func make(onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Cards preview"))
+    }
+}
+
+struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
+    func make(onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Transfers preview"))
+    }
+}
+
+struct AuthenticationPreviewAccountFactory: AccountFactoryInterface {
+    func make(
+        entryPoint: AccountEntryPoint,
+        onFinished: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(Text("Account preview"))
     }
 }

@@ -68,3 +68,30 @@ struct TransactionDetailRow: View {
         .contentShape(Rectangle())
     }
 }
+
+#Preview {
+    VStack(spacing: 0) {
+        TransactionDetailRow(
+            title: "Merchant",
+            icon: "storefront",
+            value: "Netflix",
+            subtitle: "NETFLIX.COM",
+            showsChevron: true,
+            action: {}
+        )
+
+        Divider()
+            .padding(.leading, 52)
+
+        TransactionDetailRow(
+            title: "Status",
+            icon: "checkmark.circle.fill",
+            value: "Completed",
+            valueColor: .green
+        )
+    }
+    .padding(.horizontal, AppSpacing.medium)
+    .appCardSurface()
+    .padding()
+    .appScreenBackground()
+}

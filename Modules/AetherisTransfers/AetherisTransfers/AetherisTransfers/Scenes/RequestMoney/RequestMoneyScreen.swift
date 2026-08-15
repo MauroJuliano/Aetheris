@@ -81,6 +81,18 @@ private extension RequestMoneyScreen {
     }
 }
 
+#Preview {
+    RequestMoneyScreen(
+        viewModel: RequestMoneyViewModel(
+            service: RequestMoneyService(
+                coreService: DemoCoreService(delay: 0)
+            ),
+            initialContact: .previewSophie
+        ),
+        onBackAction: {}
+    )
+}
+
 private extension RequestMoneyScreen {
     var content: some View {
         ScrollView(showsIndicators: false) {

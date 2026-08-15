@@ -43,3 +43,14 @@ struct PasswordView: View {
         .navigationBarHidden(true)
     }
 }
+
+#Preview {
+    let draft = RegistrationDraft.previewFilled
+
+    PasswordView(
+        viewModel: PasswordViewModel(draft: draft),
+        draft: draft,
+        onBack: {},
+        onContinue: {}
+    )
+}

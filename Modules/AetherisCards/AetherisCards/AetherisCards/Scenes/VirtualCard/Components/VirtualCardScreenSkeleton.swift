@@ -97,3 +97,8 @@ struct VirtualCardScreenSkeleton: View {
         .appCardSurface()
     }
 }
+
+#Preview {
+    VirtualCardScreenSkeleton()
+        .appScreenBackground()
+}

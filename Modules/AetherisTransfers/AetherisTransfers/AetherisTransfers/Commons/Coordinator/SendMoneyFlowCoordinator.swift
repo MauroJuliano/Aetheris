@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import AetherisAuthenticationInterface
 import Core
 import UIKit
@@ -185,6 +186,52 @@ struct SendMoneyFlowCoordinator: View {
             navigationTitle: Strings.TransferPin.confirmTransfer,
             title: Strings.TransferPin.title,
             description: Strings.TransferPin.subtitle(draft.formattedAmount, draft.beneficiaryName)
+        )
+    }
+}
+
+#Preview {
+    @Previewable @State var beneficiary: Beneficiary? = BeneficiaryFixtures.defaultSelection
+
+    SendMoneyFlowCoordinator(
+        coreService: DemoCoreService(delay: 0),
+        identityValidation: PreviewIdentityValidator(),
+        selectedBeneficiary: $beneficiary,
+        onBackAction: {}
+    )
+}
+
+private struct PreviewIdentityValidator: IdentityValidating {
+    @MainActor
+    func authenticate(
+        content: IdentityValidationContent,
+        onCancel: @escaping () -> Void,
+        onResult: @escaping (IdentityValidationResult) -> Void
+    ) -> AnyView {
+        AnyView(
+            VStack(spacing: AppSpacing.medium) {
+                Text(content.title)
+                    .font(AppTypography.sectionTitle)
+                    .foregroundStyle(Color.textPrimary)
+
+                Text(content.description)
+                    .font(AppTypography.body)
+                    .foregroundStyle(Color.textSecondaryColor)
+                    .multilineTextAlignment(.center)
+
+                PrimaryButton(title: Strings.Common.continueButton) {
+                    onResult(
+                        .authorized(
+                            IdentityAuthorization(
+                                token: "preview-token",
+                                expiresAt: "2026-08-07T23:59:59Z"
+                            )
+                        )
+                    )
+                }
+            }
+            .padding()
+            .appScreenBackground()
         )
     }
 }

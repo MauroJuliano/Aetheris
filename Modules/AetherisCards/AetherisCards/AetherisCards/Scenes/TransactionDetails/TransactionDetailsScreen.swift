@@ -81,6 +81,18 @@ struct TransactionDetailsScreen: View {
     }
 }
 
+#Preview {
+    TransactionDetailsScreen(
+        viewModel: TransactionDetailsViewModel(
+            transactionId: TransactionMockIDs.netflixSubscription,
+            service: TransactionDetailsService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onBackAction: {}
+    )
+}
+
 private extension TransactionDetailsScreen {
     var navigationBar: some View {
         NavBar(

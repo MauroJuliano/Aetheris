@@ -96,3 +96,23 @@ public struct CardDistribution: View {
         .appShadow(AppShadow.elevated)
     }
 }
+
+#Preview {
+    HStack(spacing: AppSpacing.medium) {
+        CardDistribution(
+            primaryColor: .brandPrimaryColor,
+            backgroundColor: .black,
+            spectrumRatio: .horizontal,
+            model: .sampleCreditCard
+        )
+
+        CardDistribution(
+            primaryColor: .brandSecondaryColor,
+            backgroundColor: .textPrimary,
+            spectrumRatio: .vertical,
+            model: .sampleInvestments
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}

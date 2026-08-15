@@ -43,3 +43,35 @@ struct HomeFlowCoordinator: View {
         tabBarVisibilityStore.isVisible = navigation.isAtRoot
     }
 }
+
+#Preview {
+    HomeFlowCoordinator(
+        coreService: DemoCoreService(delay: 0),
+        identityValidation: HomePreviewIdentityValidator()
+    )
+    .environmentObject(TabBarVisibilityStore())
+    .environmentObject(TabBarRoutingStore())
+}
+
+private struct HomePreviewIdentityValidator: IdentityValidating {
+    @MainActor
+    func authenticate(
+        content: IdentityValidationContent,
+        onCancel: @escaping () -> Void,
+        onResult: @escaping (IdentityValidationResult) -> Void
+    ) -> AnyView {
+        AnyView(
+            Color.clear
+                .onAppear {
+                    onResult(
+                        .authorized(
+                            IdentityAuthorization(
+                                token: "preview-token",
+                                expiresAt: "2026-08-07T00:00:00Z"
+                            )
+                        )
+                    )
+                }
+        )
+    }
+}

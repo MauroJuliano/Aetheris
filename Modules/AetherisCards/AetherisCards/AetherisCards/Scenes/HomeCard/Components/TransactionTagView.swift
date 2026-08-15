@@ -16,3 +16,12 @@ struct TransactionTag: View {
     }
 }
 
+#Preview {
+    HStack {
+        TransactionTag(type: .income)
+        TransactionTag(type: .expense)
+        TransactionTag(type: .transfer)
+    }
+    .padding()
+    .appScreenBackground()
+}

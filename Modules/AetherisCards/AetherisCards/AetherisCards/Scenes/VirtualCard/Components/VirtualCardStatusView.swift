@@ -55,3 +55,21 @@ struct VirtualCardStatusView: View {
         }
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        VirtualCardStatusView(
+            isActive: true,
+            isLoading: false,
+            onStatusChange: { _ in }
+        )
+
+        VirtualCardStatusView(
+            isActive: false,
+            isLoading: true,
+            onStatusChange: { _ in }
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}

@@ -242,18 +242,18 @@ internal enum Strings {
     internal static let netflix = Strings.tr("Localizable", "FinancialSummary.netflix", fallback: "Netflix")
     /// Payment received
     internal static let paymentReceived = Strings.tr("Localizable", "FinancialSummary.paymentReceived", fallback: "Payment received")
-    /// Funds received from Ed Sheeran
-    internal static let paymentReceivedDescription = Strings.tr("Localizable", "FinancialSummary.paymentReceivedDescription", fallback: "Funds received from Ed Sheeran")
+    /// Funds received from Amelia Thompson
+    internal static let paymentReceivedDescription = Strings.tr("Localizable", "FinancialSummary.paymentReceivedDescription", fallback: "Funds received from Amelia Thompson")
     /// Restaurant
     internal static let restaurant = Strings.tr("Localizable", "FinancialSummary.restaurant", fallback: "Restaurant")
     /// Subscription
     internal static let subscription = Strings.tr("Localizable", "FinancialSummary.subscription", fallback: "Subscription")
     /// Transfer sent
     internal static let transferSent = Strings.tr("Localizable", "FinancialSummary.transferSent", fallback: "Transfer sent")
-    /// Funds successfully transferred to Adele
-    internal static let transferSentAdeleDescription = Strings.tr("Localizable", "FinancialSummary.transferSentAdeleDescription", fallback: "Funds successfully transferred to Adele")
-    /// Funds successfully transferred to Melissa
-    internal static let transferSentDescription = Strings.tr("Localizable", "FinancialSummary.transferSentDescription", fallback: "Funds successfully transferred to Melissa")
+    /// Funds successfully transferred to Amelia Thompson
+    internal static let transferSentAmeliaDescription = Strings.tr("Localizable", "FinancialSummary.transferSentAmeliaDescription", fallback: "Funds successfully transferred to Amelia Thompson")
+    /// Funds successfully transferred to Sophie Keller
+    internal static let transferSentDescription = Strings.tr("Localizable", "FinancialSummary.transferSentDescription", fallback: "Funds successfully transferred to Sophie Keller")
   }
   internal enum HomeCard {
     /// Cards unavailable
@@ -470,8 +470,8 @@ internal enum Strings {
     internal static let apple = Strings.tr("Localizable", "TransactionsHistory.apple", fallback: "Apple")
     /// Deposit
     internal static let deposit = Strings.tr("Localizable", "TransactionsHistory.deposit", fallback: "Deposit")
-    /// Melissa
-    internal static let melissa = Strings.tr("Localizable", "TransactionsHistory.melissa", fallback: "Melissa")
+    /// Sophie Keller
+    internal static let melissa = Strings.tr("Localizable", "TransactionsHistory.melissa", fallback: "Sophie Keller")
     /// Netflix
     internal static let netflix = Strings.tr("Localizable", "TransactionsHistory.netflix", fallback: "Netflix")
     /// Payment

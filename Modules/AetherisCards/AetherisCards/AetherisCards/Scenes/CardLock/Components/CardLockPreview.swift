@@ -148,3 +148,15 @@ struct CardLockPreview: View {
         }
     }
 }
+
+#Preview("Unlocked") {
+    CardLockPreview(model: CardsPreviewData.cardLock)
+        .padding()
+        .appScreenBackground()
+}
+
+#Preview("Blocked") {
+    CardLockPreview(model: CardsPreviewData.blockedCardLock)
+        .padding()
+        .appScreenBackground()
+}

@@ -149,3 +149,7 @@ struct HomeAppSkeleton: View {
             .clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
 }
+
+#Preview {
+    HomeAppSkeleton()
+}

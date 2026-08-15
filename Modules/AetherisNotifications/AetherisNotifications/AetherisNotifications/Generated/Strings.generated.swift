@@ -35,8 +35,8 @@ internal enum Strings {
     internal static let sectionYesterday = Strings.tr("Localizable", "Notifications.sectionYesterday", fallback: "Yesterday")
     /// System maintenance completed
     internal static let titleMaintenanceCompleted = Strings.tr("Localizable", "Notifications.titleMaintenanceCompleted", fallback: "System maintenance completed")
-    /// Payment received from Ed Sheeran
-    internal static let titlePaymentReceived = Strings.tr("Localizable", "Notifications.titlePaymentReceived", fallback: "Payment received from Ed Sheeran")
+    /// Payment received from Amelia Thompson
+    internal static let titlePaymentReceived = Strings.tr("Localizable", "Notifications.titlePaymentReceived", fallback: "Payment received from Amelia Thompson")
     /// Refund processed successfully
     internal static let titleRefundProcessed = Strings.tr("Localizable", "Notifications.titleRefundProcessed", fallback: "Refund processed successfully")
     /// Your subscription has expired

@@ -1,5 +1,6 @@
 import AetherisAuthenticationInterface
 import AetherisDesignSystem
+import Core
 import SwiftUI
 
 struct IdentityValidationView: View {
@@ -146,4 +147,21 @@ struct IdentityValidationView: View {
         viewModel.clearError()
         onResult(.failed)
     }
+}
+
+#Preview {
+    IdentityValidationView(
+        viewModel: IdentityValidationViewModel(
+            content: IdentityValidationContent(
+                navigationTitle: "Security check",
+                title: "Enter your PIN",
+                description: "Confirm your identity to continue."
+            ),
+            service: IdentityValidationService(
+                coreService: DemoCoreService(delay: 0)
+            )
+        ),
+        onCancel: {},
+        onResult: { _ in }
+    )
 }
