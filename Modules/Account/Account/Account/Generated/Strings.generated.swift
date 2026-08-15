@@ -39,8 +39,8 @@ internal enum Strings {
     internal static let editPhonePlaceholder = Strings.tr("Localizable", "Profile.editPhonePlaceholder", fallback: "Enter phone number")
     /// Edit phone
     internal static let editPhoneTitle = Strings.tr("Localizable", "Profile.editPhoneTitle", fallback: "Edit phone")
-    /// contact@melissamccarthy.com
-    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "contact@melissamccarthy.com")
+    /// blake.lehmann@aetheris.app
+    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "blake.lehmann@aetheris.app")
     /// Tell us what can be improved in the app experience.
     internal static let feedbackDescription = Strings.tr("Localizable", "Profile.feedbackDescription", fallback: "Tell us what can be improved in the app experience.")
     /// Write your feedback here...
@@ -83,8 +83,8 @@ internal enum Strings {
     internal static let updateErrorDescription = Strings.tr("Localizable", "Profile.updateErrorDescription", fallback: "We couldn't update your profile. Please try again.")
     /// Unable to save changes
     internal static let updateErrorTitle = Strings.tr("Localizable", "Profile.updateErrorTitle", fallback: "Unable to save changes")
-    /// Melissa Mccarthy
-    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Melissa Mccarthy")
+    /// Blake Lehmann
+    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Blake Lehmann")
     /// Version 0.00.1
     internal static let version = Strings.tr("Localizable", "Profile.version", fallback: "Version 0.00.1")
   }

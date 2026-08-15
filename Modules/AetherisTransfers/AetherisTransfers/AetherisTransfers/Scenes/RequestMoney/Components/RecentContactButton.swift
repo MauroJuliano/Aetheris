@@ -72,7 +72,7 @@ struct RecentContactButton: View {
 #Preview {
     HStack(spacing: AppSpacing.medium) {
         RecentContactButton(
-            contact: .previewMelissa,
+            contact: .previewSophie,
             isSelected: true,
             action: {}
         )
@@ -88,12 +88,14 @@ struct RecentContactButton: View {
 }
 
 extension RequestContactModel {
-    static let previewMelissa = RequestContactModel(
+    static let previewSophie = RequestContactModel(
         id: UUID(),
-        name: "Melissa",
-        contactInformation: "contact@melissamccarthy.com",
-        imageName: "melissa"
+        name: "Sophie Keller",
+        contactInformation: "sophie.keller@aetheris.app",
+        imageName: "sophie"
     )
+
+    static let previewMelissa = previewSophie
 
     static let previewCarlos = RequestContactModel(
         id: UUID(),

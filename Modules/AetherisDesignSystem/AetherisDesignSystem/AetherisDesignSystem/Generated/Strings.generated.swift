@@ -83,8 +83,8 @@ internal enum Strings {
     internal static let transactionsHistory = Strings.tr("Localizable", "MinimalDropdown.transactionsHistory", fallback: "Transactions History")
   }
   internal enum Profile {
-    /// contact@melissamccarthy.com
-    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "contact@melissamccarthy.com")
+    /// blake.lehmann@aetheris.app
+    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "blake.lehmann@aetheris.app")
     /// Feedback
     internal static let feedback = Strings.tr("Localizable", "Profile.feedback", fallback: "Feedback")
     /// General
@@ -99,8 +99,8 @@ internal enum Strings {
     internal static let pushNotifications = Strings.tr("Localizable", "Profile.pushNotifications", fallback: "Push notifications")
     /// SMS notifications
     internal static let smsNotifications = Strings.tr("Localizable", "Profile.smsNotifications", fallback: "SMS notifications")
-    /// Melissa Mccarthy
-    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Melissa Mccarthy")
+    /// Blake Lehmann
+    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Blake Lehmann")
   }
   internal enum TabBar {
     /// Cards
@@ -113,8 +113,8 @@ internal enum Strings {
   internal enum UserView {
     /// Joined August 17, 2025
     internal static let joinedDate = Strings.tr("Localizable", "UserView.joinedDate", fallback: "Joined August 17, 2025")
-    /// Melissa Mccarthy
-    internal static let userName = Strings.tr("Localizable", "UserView.userName", fallback: "Melissa Mccarthy")
+    /// Blake Lehmann
+    internal static let userName = Strings.tr("Localizable", "UserView.userName", fallback: "Blake Lehmann")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

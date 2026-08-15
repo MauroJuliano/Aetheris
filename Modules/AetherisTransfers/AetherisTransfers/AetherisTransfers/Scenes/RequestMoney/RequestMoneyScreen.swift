@@ -87,7 +87,7 @@ private extension RequestMoneyScreen {
             service: RequestMoneyService(
                 coreService: DemoCoreService(delay: 0)
             ),
-            initialContact: .previewMelissa
+            initialContact: .previewSophie
         ),
         onBackAction: {}
     )

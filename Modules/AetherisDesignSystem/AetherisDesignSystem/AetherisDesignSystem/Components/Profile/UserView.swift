@@ -7,7 +7,7 @@ public struct UserView: View {
     @State private var rotateGradient: Bool
     
     public init(name: String,
-                imageName: String = "melissa",
+                imageName: String = "blake",
                 joinedDate: String = "Joined August 17, 2025",
                 rotateGradient: Bool = false) {
         self.name = name
@@ -63,8 +63,8 @@ public struct UserView: View {
 
 #Preview {
     UserView(
-        name: "Melissa Mccarthy",
-        imageName: "melissa",
+        name: "Blake Lehmann",
+        imageName: "blake",
         joinedDate: "Joined August 17, 2025"
     )
     .padding()

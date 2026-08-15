@@ -271,8 +271,8 @@ private struct RequestMoneyFormCardPreviewWrapper: View {
 
     var body: some View {
         RequestMoneyFormCard(
-            contacts: [.previewMelissa, .previewCarlos],
-            selectedContact: .previewMelissa,
+            contacts: [.previewSophie, .previewCarlos],
+            selectedContact: .previewSophie,
             presets: .previewPresets,
             amountText: $amountText,
             reason: $reason,

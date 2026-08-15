@@ -178,7 +178,7 @@ struct RequestMoneyPreview: View {
 
 #Preview("Contact") {
     RequestMoneyPreview(
-        contact: .previewMelissa,
+        contact: .previewSophie,
         requesterName: "Blake Brown",
         amount: 125,
         reason: "Dinner split",

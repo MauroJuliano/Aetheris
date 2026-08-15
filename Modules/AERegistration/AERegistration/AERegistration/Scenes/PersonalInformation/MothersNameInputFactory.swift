@@ -8,7 +8,6 @@ enum MothersNameInputFactory {
                      onContinue: @escaping () -> Void) -> MothersNameInputView {
         let viewModel = MothersNameInputViewModel(draft: draft)
         return MothersNameInputView(viewModel: viewModel,
-                                    draft: draft,
                                     onBack: onBack,
                                     onContinue: onContinue)
     }

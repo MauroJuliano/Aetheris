@@ -79,13 +79,13 @@ public extension NotificationsCentreResponse {
         notifications: [
             .init(
                 title: Strings.Notifications.titleTransferSent,
-                leadingContent: .image("melissa"),
+                leadingContent: .image("sophie"),
                 date: Date(),
                 hasDivider: true
             ),
             .init(
                 title: Strings.Notifications.titlePaymentReceived,
-                leadingContent: .image("ed"),
+                leadingContent: .image("Amelia"),
                 date: Date(),
                 hasDivider: true
             ),

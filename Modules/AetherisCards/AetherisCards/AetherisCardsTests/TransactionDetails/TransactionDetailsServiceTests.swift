@@ -32,8 +32,8 @@ struct TransactionDetailsServiceTests {
         let coreService = CoreServiceTestDouble()
         let sut = TransactionDetailsService(coreService: coreService)
 
-        let incoming = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.edPayment)
-        let transfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.melissaTransfer)
+        let incoming = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.ameliaPayment)
+        let transfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.sophieTransfer)
         let purchase = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.ifoodPurchase)
         let invoicePayment = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.invoicePayment)
 

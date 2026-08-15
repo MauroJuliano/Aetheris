@@ -2,68 +2,125 @@ import SwiftUI
 import AetherisDesignSystem
 
 struct ResumeListCell: View {
-    @State var model: ResumeListModel
+    let model: ResumeListModel
     let hasDivider: Bool
     var onChange: ((ResumeListModel) -> Void)? = nil
-    
-    init(model: ResumeListModel,
-         hasDivider: Bool = false,
-         onChange: ((ResumeListModel) -> Void)? = nil) {
+
+    init(
+        model: ResumeListModel,
+        hasDivider: Bool = false,
+        onChange: ((ResumeListModel) -> Void)? = nil
+    ) {
         self.model = model
         self.hasDivider = hasDivider
         self.onChange = onChange
     }
-    
+
     var body: some View {
-        HStack {
-            Circle()
-                .fill(Color.brandPrimaryColor.opacity(0.12))
-                .frame(width: 46, height: 46)
-                .overlay {
-                    Image(systemName: model.image)
-                        .font(.system(size: 20, weight: .medium))
-                        .foregroundStyle(Color.brandPrimaryColor)
-                }
-            
-            VStack(alignment: .leading) {
-                Text(model.description)
+        Button {
+            onChange?(model)
+        } label: {
+            HStack(spacing: AppSpacing.medium) {
+                iconView
+
+                contentView
+
+                Spacer(minLength: AppSpacing.medium)
+
+                Image(systemName: "chevron.forward")
+                    .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Color.textTertiary)
-                    .font(AppTypography.cellSubtitle)
-                
-                Text(model.value)
-                    .foregroundStyle(Color.textPrimary)
-                    .font(AppTypography.onboardingBody)
             }
-            
-            Spacer()
-            
-            Button {
-                onChange?(model)
-            } label: {
-                HStack {
-                    Text(Strings.Resume.edit)
-                        .font(AppTypography.callout)
-                        .foregroundStyle(Color.brandPrimaryColor)
-                    
-                    Image(systemName: "chevron.forward")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(Color.brandPrimaryColor)
-                        .frame(width: 12, height: 12)
-                }
-            }
+            .contentShape(Rectangle())
         }
-        .appListCellRow(hasDivider: hasDivider, dividerLeading: 0, horizontalPadding: 0, verticalPadding: 0)
+        .buttonStyle(.plain)
+        .appListCellRow(
+            hasDivider: hasDivider,
+            dividerLeading: 62,
+            horizontalPadding: AppSpacing.medium,
+            verticalPadding: AppSpacing.medium
+        )
+    }
+}
+
+private extension ResumeListCell {
+
+    var iconView: some View {
+        RoundedRectangle(
+            cornerRadius: 14,
+            style: .continuous
+        )
+        .fill(Color.brandPrimaryColor.opacity(0.10))
+        .frame(width: 48, height: 48)
+        .overlay {
+            Image(systemName: model.image)
+                .font(.system(size: 19, weight: .medium))
+                .foregroundStyle(Color.brandPrimaryColor)
+        }
+    }
+
+    var contentView: some View {
+        VStack(
+            alignment: .leading,
+            spacing: 4
+        ) {
+            Text(model.description)
+                .font(AppTypography.cellSubtitle)
+                .foregroundStyle(Color.textSecondaryColor)
+
+            Text(model.value)
+                .font(AppTypography.onboardingBody)
+                .foregroundStyle(Color.textPrimary)
+                .lineLimit(1)
+        }
+        .frame(
+            maxWidth: .infinity,
+            alignment: .leading
+        )
     }
 }
 
 #Preview {
-    ResumeListCell(
-        model: ResumeListModel(
-            image: "person.fill",
-            description: "Full name",
-            value: "Melissa Mccarthy"
+    VStack(spacing: 0) {
+        ResumeListCell(
+            model: ResumeListModel(
+                image: "person.fill",
+                description: "Full name",
+                value: "Melissa Mccarthy"
+            ),
+            hasDivider: true
         )
+
+        ResumeListCell(
+            model: ResumeListModel(
+                image: "calendar",
+                description: "Date of birth",
+                value: "October 18, 1996"
+            ),
+            hasDivider: true
+        )
+
+        ResumeListCell(
+            model: ResumeListModel(
+                image: "heart.fill",
+                description: "Mother's name",
+                value: "Jane Smith"
+            ),
+            hasDivider: true
+        )
+
+        ResumeListCell(
+            model: ResumeListModel(
+                image: "lock.fill",
+                description: "Social Insurance Number",
+                value: "••• ••• 222"
+            )
+        )
+    }
+    .appCardSurface(
+        radius: AppRadius.large,
+        stroke: Color.border,
+        shadow: AppShadow.card
     )
     .padding()
     .appScreenBackground()

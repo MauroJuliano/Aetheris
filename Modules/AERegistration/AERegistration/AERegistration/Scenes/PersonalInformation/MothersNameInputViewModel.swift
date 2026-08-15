@@ -5,6 +5,7 @@ class MothersNameInputViewModel: ObservableObject {
     typealias localizable = Strings.MothersName
     
     @Published var errorMessage: String?
+    @Published var mothersName: String
 
     private let draft: RegistrationDraft
     
@@ -16,21 +17,23 @@ class MothersNameInputViewModel: ObservableObject {
     
     init(draft: RegistrationDraft) {
         self.draft = draft
+        self.mothersName = draft.mothersName
     }
 
     func updateMothersName(_ value: String) {
         errorMessage = nil
-        draft.mothersName = value
+        mothersName = RegistrationInputRules.sanitizeName(value)
     }
     
     // MARK: Life Cycle
     func submit(onContinue: () -> Void) {
-        guard RegistrationInputRules.isValidName(draft.mothersName) else {
+        guard RegistrationInputRules.isValidName(mothersName) else {
             errorMessage = Strings.MothersName.error
             return
         }
 
         errorMessage = nil
+        draft.mothersName = mothersName
         onContinue()
     }
 }

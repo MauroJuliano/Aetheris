@@ -12,7 +12,7 @@ struct ProfileData {
         name: Strings.Profile.userName,
         email: Strings.Profile.email,
         phone: Strings.Profile.phone,
-        avatarName: "melissa",
+        avatarName: "blake",
         joinedDate: "Joined August 17, 2025"
     )
 }

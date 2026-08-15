@@ -89,8 +89,8 @@ struct TransferProcessingView: View {
                     amount: 125,
                     formattedAmount: "$125.00",
                     currency: "USD",
-                    beneficiaryName: "Melissa",
-                    beneficiaryIdentifier: "contact@melissamccarthy.com",
+                    beneficiaryName: "Sophie Keller",
+                    beneficiaryIdentifier: "sophie.keller@aetheris.app",
                     accountName: "Aetheris Checking",
                     accountLastDigits: "1234"
                 ),

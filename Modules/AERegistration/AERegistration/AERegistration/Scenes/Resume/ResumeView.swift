@@ -4,79 +4,41 @@ import SwiftUI
 
 struct ResumeView: View {
     @StateObject private var viewModel: ResumeViewModel
+
     private let onBack: () -> Void
-    private var onContinue: () -> Void
-    
-    init(viewModel: ResumeViewModel,
-         onBack: @escaping () -> Void,
-         onContinue: @escaping () -> Void) {
+    private let onContinue: () -> Void
+    private let onEditTap: (ResumeListModel.Kind) -> Void
+
+    init(
+        viewModel: ResumeViewModel,
+        onBack: @escaping () -> Void,
+        onContinue: @escaping () -> Void,
+        onEditTap: @escaping (ResumeListModel.Kind) -> Void = { _ in }
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.onBack = onBack
         self.onContinue = onContinue
+        self.onEditTap = onEditTap
     }
-    
+
     var body: some View {
-        ZStack {
-            VStack {
-                VStack(alignment: .leading) {
-                    Text(Strings.Resume.title)
-                        .font(AppTypography.screenTitle)
-                        .foregroundStyle(Color.textPrimary)
-                        .bold()
-                    
-                    Text(Strings.Resume.subtitle)
-                        .foregroundStyle(Color.textSecondaryColor)
-                }
-                .padding(AppSpacing.medium)
-                
-                Spacer()
-                
-                VStack {
-                    ForEach(viewModel.resumeList.indices, id: \.self) { index in
-                        let model = viewModel.resumeList[index]
-                        ResumeListCell(model: model,
-                                       hasDivider: index != viewModel.resumeList.count - 1
-                        ) { selectedModel in
-                            _ = selectedModel
-                        }
-                    }
-                }
-                .padding(AppSpacing.medium)
-                .appCardSurface(
-                    radius: AppRadius.large,
-                    stroke: Color.border,
-                    shadow: AppShadow.card
-                )
-                .padding(.horizontal, AppSpacing.screenHorizontal)
-                
-                HStack {
-                    Circle()
-                        .fill(Color.brandPrimaryColor.opacity(0.12))
-                        .frame(width: 46, height: 46)
-                        .overlay {
-                            Image(systemName: "checkmark.shield")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundStyle(Color.brandPrimaryColor)
-                        }
-                    
-                    Text(Strings.Resume.securityNote)
-                        .font(AppTypography.subheadline)
-                        .foregroundStyle(Color.textSecondaryColor)
-                }
-                .padding(AppSpacing.medium)
-                
-                GlowButton(title: Strings.Resume.continueButton) {
-                    Task {
-                        if await viewModel.submit() {
-                            onContinue()
-                        }
-                    }
-                }
-                .disabled(viewModel.isLoading)
-                .padding(.vertical, AppSpacing.medium)
-                .accessibilityIdentifier("registration.resumeContinue")
+        VStack(spacing: 0) {
+            VStack(spacing: 0) {
+                headerSection
+
+                resumeCard
+                    .padding(.top, AppSpacing.xLarge)
+
+                securitySection
+                    .padding(.top, AppSpacing.large)
             }
+            .padding(.horizontal, AppSpacing.formHorizontal)
+
+            Spacer(minLength: AppSpacing.large)
+
+            continueButton
         }
+        .padding(.bottom, AppSpacing.large)
         .safeAreaInset(edge: .top, spacing: 0) {
             NavBar(
                 hasNotifications: false,
@@ -95,29 +57,148 @@ struct ResumeView: View {
         .navigationBarHidden(true)
         .accessibilityIdentifier("registration.resumeScreen")
         .sheet(isPresented: submissionErrorBinding) {
-            ActionErrorSheet(
-                title: Strings.SubmissionError.title,
-                description: viewModel.submissionErrorDescription,
-                primaryButtonTitle: Strings.SubmissionError.tryAgain,
-                secondaryButtonTitle: Strings.SubmissionError.cancel,
-                onPrimaryAction: {
-                    viewModel.submissionError = nil
-                    Task {
-                        if await viewModel.submit() {
-                            onContinue()
-                        }
-                    }
-                },
-                onSecondaryAction: {
-                    viewModel.submissionError = nil
-                }
-            )
+            submissionErrorSheet
         }
     }
+}
 
-    private var submissionErrorBinding: Binding<Bool> {
+private extension ResumeView {
+    var headerSection: some View {
+        VStack(
+            alignment: .leading,
+            spacing: AppSpacing.small
+        ) {
+            Text(Strings.Resume.title)
+                .font(AppTypography.screenTitle)
+                .foregroundStyle(Color.textPrimary)
+                .bold()
+
+            Text(Strings.Resume.subtitle)
+                .font(AppTypography.body)
+                .foregroundStyle(Color.textSecondaryColor)
+                .fixedSize(
+                    horizontal: false,
+                    vertical: true
+                )
+        }
+        .frame(
+            maxWidth: .infinity,
+            alignment: .leading
+        )
+        .padding(.top, AppSpacing.medium)
+    }
+
+    var resumeCard: some View {
+        VStack(spacing: 0) {
+            ForEach(
+                Array(viewModel.resumeList.enumerated()),
+                id: \.offset
+            ) { index, model in
+                ResumeListCell(
+                    model: model,
+                    hasDivider: index != viewModel.resumeList.count - 1
+                ) { selectedModel in
+                    onEditTap(selectedModel.kind)
+                }
+            }
+        }
+        .padding(.vertical, AppSpacing.small)
+        .appCardSurface(
+            radius: AppRadius.large,
+            stroke: Color.border,
+            shadow: AppShadow.card
+        )
+    }
+
+    var securitySection: some View {
+        HStack(spacing: AppSpacing.medium) {
+            Circle()
+                .fill(
+                    Color.brandPrimaryColor.opacity(0.10)
+                )
+                .frame(width: 48, height: 48)
+                .overlay {
+                    Image(systemName: "checkmark.shield")
+                        .font(
+                            .system(
+                                size: 20,
+                                weight: .medium
+                            )
+                        )
+                        .foregroundStyle(
+                            Color.brandPrimaryColor
+                        )
+                }
+
+            Text(Strings.Resume.securityNote)
+                .font(AppTypography.subheadline)
+                .foregroundStyle(Color.textSecondaryColor)
+                .fixedSize(
+                    horizontal: false,
+                    vertical: true
+                )
+
+            Spacer(minLength: 0)
+        }
+        .padding(AppSpacing.medium)
+        .frame(maxWidth: .infinity)
+        .background(
+            Color.brandPrimaryColor.opacity(0.045)
+        )
+        .clipShape(
+            RoundedRectangle(
+                cornerRadius: AppRadius.large,
+                style: .continuous
+            )
+        )
+    }
+
+    var continueButton: some View {
+        GlowButton(
+            title: Strings.Resume.continueButton
+        ) {
+            submit()
+        }
+        .disabled(viewModel.isLoading)
+        .accessibilityIdentifier(
+            "registration.resumeContinue"
+        )
+    }
+
+    var submissionErrorSheet: some View {
+        ActionErrorSheet(
+            title: Strings.SubmissionError.title,
+            description: viewModel.submissionErrorDescription,
+            primaryButtonTitle:
+                Strings.SubmissionError.tryAgain,
+            secondaryButtonTitle:
+                Strings.SubmissionError.cancel,
+            onPrimaryAction: {
+                viewModel.submissionError = nil
+                submit()
+            },
+            onSecondaryAction: {
+                viewModel.submissionError = nil
+            }
+        )
+    }
+
+    func submit() {
+        Task {
+            if await viewModel.submit() {
+                onContinue()
+            }
+        }
+    }
+}
+
+private extension ResumeView {
+
+    var submissionErrorBinding: Binding<Bool> {
         Binding(
-            get: { viewModel.submissionError != nil },
+            get: {
+                viewModel.submissionError != nil
+            },
             set: { isPresented in
                 if !isPresented {
                     viewModel.submissionError = nil

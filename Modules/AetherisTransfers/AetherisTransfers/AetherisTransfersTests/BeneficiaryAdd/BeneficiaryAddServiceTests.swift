@@ -11,12 +11,12 @@ struct BeneficiaryAddServiceTests {
         let sut = BeneficiaryAddService(coreService: coreService)
 
         let beneficiary = try await sut.findBeneficiary(
-            identifier: "contact@melissamccarthy.com"
+            identifier: "sophie.keller@aetheris.app"
         )
 
-        #expect(beneficiary.name == "Melissa")
-        #expect(beneficiary.pixKey == "contact@melissamccarthy.com")
-        #expect(beneficiary.image == "melissa")
+        #expect(beneficiary.name == "Sophie Keller")
+        #expect(beneficiary.pixKey == "sophie.keller@aetheris.app")
+        #expect(beneficiary.image == "sophie")
         #expect(beneficiary.hasDivider)
         #expect(coreService.calls == [
             .init(path: "/payments/beneficiaries", method: .post)
@@ -24,15 +24,15 @@ struct BeneficiaryAddServiceTests {
     }
 
     @Test(arguments: [
-        "  CONTACT@MELISSAMCCARTHY.COM  ",
-        "melissamccarthy",
-        "MELISSA"
+        "  SOPHIE.KELLER@AETHERIS.APP  ",
+        "sophiekeller",
+        "SOPHIE"
     ])
     func findBeneficiary_normalizesAndMatchesSupportedIdentifiers(identifier: String) {
         let beneficiary = Beneficiary(
-            name: "Melissa",
-            pixKey: "contact@melissamccarthy.com",
-            image: "melissa",
+            name: "Sophie Keller",
+            pixKey: "sophie.keller@aetheris.app",
+            image: "sophie",
             hasDivider: true
         )
 
@@ -49,7 +49,7 @@ struct BeneficiaryAddServiceTests {
         let sut = BeneficiaryAddService(coreService: coreService)
 
         do {
-            _ = try await sut.findBeneficiary(identifier: "contact@melissamccarthy.com")
+            _ = try await sut.findBeneficiary(identifier: "sophie.keller@aetheris.app")
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
@@ -64,7 +64,7 @@ struct BeneficiaryAddServiceTests {
         let sut = BeneficiaryAddService(coreService: coreService)
 
         do {
-            _ = try await sut.findBeneficiary(identifier: "contact@melissamccarthy.com")
+            _ = try await sut.findBeneficiary(identifier: "sophie.keller@aetheris.app")
             #expect(Bool(false))
         } catch {
             #expect((error as? CoreServiceError) == .invalidData)
@@ -93,7 +93,7 @@ struct BeneficiaryAddServiceTests {
         let sut = BeneficiaryAddService(coreService: coreService)
 
         do {
-            _ = try await sut.findBeneficiary(identifier: "contact@melissamccarthy.com")
+            _ = try await sut.findBeneficiary(identifier: "sophie.keller@aetheris.app")
             #expect(Bool(false))
         } catch {
             let urlError = error as? URLError

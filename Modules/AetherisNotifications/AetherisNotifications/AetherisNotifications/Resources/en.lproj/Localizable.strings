@@ -10,8 +10,8 @@
 "Common.back" = "Back";
 "Common.close" = "Close";
 
-"Notifications.titleTransferSent" = "Funds successfully transferred to Melissa";
-"Notifications.titlePaymentReceived" = "Payment received from Ed Sheeran";
+"Notifications.titleTransferSent" = "Funds successfully transferred to Sophie Keller";
+"Notifications.titlePaymentReceived" = "Payment received from Amelia Thompson";
 "Notifications.titleSubscriptionRenewed" = "Subscription renewed for Man's best Friend";
 "Notifications.titleRefundProcessed" = "Refund processed successfully";
 "Notifications.titleSubscriptionExpired" = "Your subscription has expired";
@@ -21,4 +21,3 @@
 "Notifications.sectionLastWeek" = "Last Week";
 "Notifications.sectionLastMonth" = "Last Month";
 "Notifications.sectionOthers" = "Others";
-

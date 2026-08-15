@@ -22,7 +22,7 @@ struct RequestMoneyViewModelTests {
 
     @Test
     func load_keepsInitialContactSelectedAndAddsItToRecentContacts() async {
-        let initialContact = RequestContactModel.ed
+        let initialContact = RequestContactModel.sophie
         let dashboard = RequestMoneyDashboard.fixture()
         let service = RequestMoneyServiceSpy(dashboardResult: .success(dashboard))
         let sut = RequestMoneyViewModel(
@@ -136,11 +136,11 @@ private extension RequestContactModel {
         imageName: "lucas"
     )
 
-    static let ed = RequestContactModel(
+    static let sophie = RequestContactModel(
         id: UUID(uuidString: "A0000000-0000-0000-0000-000000000001")!,
-        name: "Ed Sheeran",
-        contactInformation: "afirelove",
-        imageName: "ed"
+        name: "Sophie Keller",
+        contactInformation: "sophie.keller@aetheris.app",
+        imageName: "sophie"
     )
 }
 

@@ -70,57 +70,99 @@ enum BeneficiaryDetailsMockStore {
         let beneficiary = BeneficiaryFixtures.defaults.first { $0.id == beneficiaryId }
 
         switch beneficiary?.name {
-        case "Melissa":
+        case "Sophie Keller":
             return model(
                 id: beneficiaryId,
-                name: "Melissa",
-                imageName: "melissa",
-                initials: "M",
+                name: "Sophie Keller",
+                imageName: "sophie",
+                initials: "SK",
                 kind: .contact,
-                email: "contact@melissamccarthy.com",
-                phone: "+1 (310) 555-0172",
-                location: "Los Angeles, United States",
+                email: "sophie.keller@aetheris.app",
+                phone: "+49 211 555 0101",
+                location: "Düsseldorf, Germany",
                 account: beneficiary?.pixKey
             )
-        case "Adele":
+        case "Amelia Thompson":
             return model(
                 id: beneficiaryId,
-                name: "Adele",
-                imageName: "Adele",
-                initials: "A",
+                name: "Amelia Thompson",
+                imageName: "Amelia",
+                initials: "AT",
                 kind: .contact,
-                email: "adele@email.com",
-                phone: "+44 20 5555 0101",
-                location: "London, United Kingdom",
+                email: "amelia.thompson@aetheris.app",
+                phone: "+1 (416) 555-0102",
+                location: "Toronto, Canada",
                 account: beneficiary?.pixKey,
                 sentAmount: 420,
                 receivedAmount: 180
             )
-        case "Troy Bolton":
+        case "Léa Tremblay":
             return model(
                 id: beneficiaryId,
-                name: "Troy Bolton",
-                imageName: "Troy",
-                initials: "TB",
+                name: "Léa Tremblay",
+                imageName: "lea",
+                initials: "LT",
                 kind: .contact,
-                email: "troy@email.com",
-                phone: "+1 (505) 555-0144",
-                location: "Albuquerque, United States",
+                email: "lea.tremblay@aetheris.app",
+                phone: "+1 (514) 555-0103",
+                location: "Montréal, Canada",
                 account: beneficiary?.pixKey,
                 sentAmount: 310,
                 receivedAmount: 0
             )
+        case "Maya Patel":
+            return model(
+                id: beneficiaryId,
+                name: "Maya Patel",
+                imageName: "maya",
+                initials: "MP",
+                kind: .contact,
+                email: "maya.patel@aetheris.app",
+                phone: "+1 (604) 555-0104",
+                location: "Vancouver, Canada",
+                account: beneficiary?.pixKey,
+                sentAmount: 510,
+                receivedAmount: 95
+            )
+        case "Hannah Schneider":
+            return model(
+                id: beneficiaryId,
+                name: "Hannah Schneider",
+                imageName: "hanna",
+                initials: "HS",
+                kind: .contact,
+                email: "hannah.schneider@aetheris.app",
+                phone: "+49 30 555 0105",
+                location: "Berlin, Germany",
+                account: beneficiary?.pixKey,
+                sentAmount: 220,
+                receivedAmount: 60
+            )
+        case "Blake Lehmann":
+            return model(
+                id: beneficiaryId,
+                name: "Blake Lehmann",
+                imageName: "blake",
+                initials: "BL",
+                kind: .contact,
+                email: "blake.lehmann@aetheris.app",
+                phone: "+49 221 555 0106",
+                location: "Cologne, Germany",
+                account: beneficiary?.pixKey,
+                sentAmount: 980,
+                receivedAmount: 240
+            )
         default:
             return model(
                 id: beneficiaryId,
-                name: beneficiary?.name ?? "Ed Sheeran",
-                imageName: beneficiary?.image ?? "ed",
-                initials: "ES",
+                name: beneficiary?.name ?? "Blake Lehmann",
+                imageName: beneficiary?.image ?? "blake",
+                initials: "BL",
                 kind: .contact,
-                email: "ed.sheeran@email.com",
-                phone: "+44 20 5555 0198",
-                location: "London, United Kingdom",
-                account: beneficiary?.pixKey ?? "afirelove"
+                email: "blake.lehmann@aetheris.app",
+                phone: "+49 221 555 0106",
+                location: "Cologne, Germany",
+                account: beneficiary?.pixKey ?? "blake.lehmann@aetheris.app"
             )
         }
     }

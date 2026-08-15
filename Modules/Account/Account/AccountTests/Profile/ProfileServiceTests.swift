@@ -12,9 +12,9 @@ struct ProfileServiceTests {
 
         let response = try await sut.loadProfile()
 
-        #expect(response.user.firstName == "Melissa")
-        #expect(response.user.lastName == "Mccarthy")
-        #expect(response.user.avatar == "melissa")
+        #expect(response.user.firstName == "Blake")
+        #expect(response.user.lastName == "Lehmann")
+        #expect(response.user.avatar == "blake")
         #expect(response.user.joinedDate == "Joined August 17, 2025")
         #expect(response.general.title == "General")
         #expect(response.general.name == Strings.Profile.userName)

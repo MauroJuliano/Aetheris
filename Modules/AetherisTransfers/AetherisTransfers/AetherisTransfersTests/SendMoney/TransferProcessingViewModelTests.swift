@@ -76,8 +76,8 @@ private final class SubmissionServiceSpy: SendMoneyServicing {
 extension TransferReceiptModel {
     static let fixture = TransferReceiptModel(
         amount: "$ 10.00",
-        recipientName: "Melissa",
-        recipientEmail: "melissa@example.com",
+        recipientName: "Sophie Keller",
+        recipientEmail: "sophie.keller@aetheris.app",
         accountName: "Main Account",
         accountLastDigits: "1234",
         date: "Today",
@@ -90,8 +90,8 @@ extension TransferDraft {
         amount: 10,
         formattedAmount: "$ 10.00",
         currency: "USD",
-        beneficiaryName: "Melissa",
-        beneficiaryIdentifier: "melissa@example.com",
+        beneficiaryName: "Sophie Keller",
+        beneficiaryIdentifier: "sophie.keller@aetheris.app",
         accountName: "Main Account",
         accountLastDigits: "1234"
     )
@@ -116,8 +116,8 @@ extension TransferReceiptResponse {
         status: "completed",
         amount: 10,
         currency: "USD",
-        recipientName: "Melissa",
-        recipientIdentifier: "melissa@example.com",
+        recipientName: "Sophie Keller",
+        recipientIdentifier: "sophie.keller@aetheris.app",
         accountName: "Main Account",
         accountLastDigits: "1234",
         completedAt: "Today"

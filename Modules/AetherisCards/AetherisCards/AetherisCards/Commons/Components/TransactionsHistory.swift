@@ -2,13 +2,17 @@ import SwiftUI
 import AetherisDesignSystem
 
 struct TransactionsHistory: View {
-    private let rows: [ListCell.Model] = [
-        .init(title: Strings.TransactionsHistory.swarovski, subtitle: Strings.TransactionsHistory.payment, value: "-46.99", icon: "bag"),
-        .init(title: Strings.TransactionsHistory.netflix, subtitle: Strings.TransactionsHistory.subscription, value: "-19.99", icon: "play.rectangle"),
-        .init(title: Strings.TransactionsHistory.melissa, subtitle: Strings.TransactionsHistory.transferReceived, value: "+250.00", icon: "person.fill"),
-        .init(title: Strings.TransactionsHistory.apple, subtitle: Strings.TransactionsHistory.purchase, value: "-14.90", icon: "applelogo"),
-        .init(title: Strings.TransactionsHistory.salary, subtitle: Strings.TransactionsHistory.deposit, value: "+2,850.00", icon: "building.columns")
-    ]
+    private var rows: [ListCell.Model] {
+        CardActivityPreviewData.transactions(for: CardsPreviewData.cardId)
+            .map {
+                .init(
+                    title: $0.title,
+                    subtitle: $0.description,
+                    value: $0.value,
+                    icon: Self.icon(for: $0.tag)
+                )
+            }
+    }
     
     var body: some View {
         VStack {
@@ -18,6 +22,17 @@ struct TransactionsHistory: View {
             ForEach(rows.indices, id: \.self) { index in
                 ListCell(model: rows[index])
             }
+        }
+    }
+
+    private static func icon(for type: TransactionType) -> String {
+        switch type {
+        case .transfer:
+            return "arrow.up.right"
+        case .income:
+            return "arrow.down"
+        case .expense:
+            return "bag"
         }
     }
 }

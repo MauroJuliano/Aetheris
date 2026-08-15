@@ -77,8 +77,8 @@ public struct NotificationCell: View {
 #Preview {
     NotificationCell(
         model: Notifications(
-            title: "Payment received from Melissa",
-            leadingContent: .image("melissa"),
+            title: "Payment received from Sophie",
+            leadingContent: .image("sophie"),
             date: Date(),
             hasDivider: false
         )
@@ -86,4 +86,3 @@ public struct NotificationCell: View {
     .padding()
     .appScreenBackground()
 }
-

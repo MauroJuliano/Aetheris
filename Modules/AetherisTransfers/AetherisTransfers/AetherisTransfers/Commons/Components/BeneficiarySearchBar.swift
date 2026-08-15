@@ -64,7 +64,7 @@ struct BeneficiarySearchBar: View {
 }
 
 #Preview {
-    @Previewable @State var text = "Adele"
+    @Previewable @State var text = "Sophie"
 
     BeneficiarySearchBar(text: $text)
         .padding()

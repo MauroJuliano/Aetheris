@@ -127,7 +127,7 @@ struct ProfileEditFieldView: View {
     ProfileEditFieldView(
         title: Strings.Profile.editNameTitle,
         description: Strings.Profile.editNameDescription,
-        initialValue: "Melissa Mccarthy",
+        initialValue: "Blake Lehmann",
         placeholder: Strings.Profile.editNamePlaceholder,
         onSave: { _ in .success }
     )

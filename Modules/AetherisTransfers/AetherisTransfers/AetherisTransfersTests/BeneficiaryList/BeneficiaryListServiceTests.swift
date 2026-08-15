@@ -13,7 +13,7 @@ struct BeneficiaryListServiceTests {
         let response = try await sut.loadBeneficiaryList()
 
         #expect(response.beneficiaries.count == BeneficiaryFixtures.defaults.count)
-        #expect(response.beneficiaries.first?.name == "Melissa")
+        #expect(response.beneficiaries.first?.name == "Sophie Keller")
         #expect(coreService.calls == [
             .init(path: "/payments/beneficiaries/recent", method: .get)
         ])

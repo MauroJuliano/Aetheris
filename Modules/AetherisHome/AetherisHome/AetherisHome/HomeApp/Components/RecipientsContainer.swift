@@ -83,10 +83,10 @@ struct RecipientsContainer: View {
 #Preview {
     RecipientsContainer(
         users: [
-            Beneficiary(name: "Melissa", pixKey: "melissa@email.com", image: "melissa", hasDivider: false),
-            Beneficiary(name: "Ed Sheeran", pixKey: "ed@email.com", image: "ed", hasDivider: false),
-            Beneficiary(name: "Adele", pixKey: "adele@email.com", image: "Adele", hasDivider: false),
-            Beneficiary(name: "Troy", pixKey: "troy@email.com", image: "Troy", hasDivider: false)
+            Beneficiary(name: "Sophie Keller", pixKey: "sophie.keller@aetheris.app", image: "sophie", hasDivider: false),
+            Beneficiary(name: "Amelia Thompson", pixKey: "amelia.thompson@aetheris.app", image: "Amelia", hasDivider: false),
+            Beneficiary(name: "Léa Tremblay", pixKey: "lea.tremblay@aetheris.app", image: "lea", hasDivider: false),
+            Beneficiary(name: "Maya Patel", pixKey: "maya.patel@aetheris.app", image: "maya", hasDivider: false)
         ],
         onSelectRecipient: { _ in },
         onSeeAllTap: {},

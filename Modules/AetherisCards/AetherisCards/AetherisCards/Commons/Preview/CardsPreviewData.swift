@@ -4,35 +4,7 @@ import Foundation
 enum CardsPreviewData {
     static let cardId = CardMockIDs.standard
 
-    static let summaries: [FinancialSummaryModel] = [
-        FinancialSummaryModel(
-            cardId: cardId,
-            image: "applelogo",
-            title: "Apple",
-            description: "Subscription",
-            value: "-$ 49.90",
-            tag: .expense,
-            date: Date()
-        ),
-        FinancialSummaryModel(
-            cardId: cardId,
-            image: "NetflixLogo",
-            title: "Netflix",
-            description: "Streaming",
-            value: "-$ 20.00",
-            tag: .expense,
-            date: Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
-        ),
-        FinancialSummaryModel(
-            cardId: cardId,
-            image: "ifoodlogo",
-            title: "Salary",
-            description: "Incoming payment",
-            value: "+$ 2,800.00",
-            tag: .income,
-            date: Calendar.current.date(byAdding: .day, value: -2, to: Date()) ?? Date()
-        )
-    ]
+    static let summaries: [FinancialSummaryModel] = CardActivityPreviewData.transactions(for: cardId)
 
     static let virtualCard = VirtualCardModel(
         id: UUID(uuidString: "90000000-0000-0000-0000-000000000001")!,

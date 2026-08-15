@@ -16,6 +16,7 @@ struct RegisterView: View {
     var fieldErrorMessage: String? = nil
     var secureTextHiddenLabel: String = ""
     var secureTextVisibleLabel: String = ""
+    var textFieldFormatter: (String) -> String = { $0 }
     
     var onAction: () -> Void = {}
     
@@ -114,6 +115,15 @@ struct RegisterView: View {
             )
             .accessibilityIdentifier("registration.input")
             .focused($isTextFieldFocused)
+            .onChange(of: textFieldValue) { _, newValue in
+                let formattedValue = textFieldFormatter(newValue)
+
+                guard formattedValue != newValue else {
+                    return
+                }
+
+                textFieldValue = formattedValue
+            }
         }
     }
 

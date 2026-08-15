@@ -141,7 +141,7 @@ private struct CurrentInvoiceMockProfile {
                 installmentPurchases: 3_250,
                 oneTimePurchases: 2_600,
                 transactions: [
-                    .init(image: "Adele", title: Strings.FinancialSummary.transferSent, description: Strings.FinancialSummary.transferSentAdeleDescription, value: "-$ 70.00", dayOffset: -2),
+                    .init(image: "Amelia", title: Strings.FinancialSummary.transferSent, description: Strings.FinancialSummary.transferSentAmeliaDescription, value: "-$ 70.00", dayOffset: -2),
                     .init(image: "ifoodlogo", title: Strings.FinancialSummary.ifoodBar, description: Strings.FinancialSummary.restaurant, value: "-$ 92.30", dayOffset: -5)
                 ]
             )

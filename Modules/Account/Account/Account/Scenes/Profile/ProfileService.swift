@@ -107,9 +107,9 @@ extension ProfileEndpoint: Endpoint {
 extension ProfileDashboardResponse {
     static let mock = ProfileDashboardResponse(
         user: .init(
-            firstName: "Melissa",
-            lastName: "Mccarthy",
-            avatar: "melissa",
+            firstName: "Blake",
+            lastName: "Lehmann",
+            avatar: "blake",
             joinedDate: "Joined August 17, 2025"
         ),
         general: .init(

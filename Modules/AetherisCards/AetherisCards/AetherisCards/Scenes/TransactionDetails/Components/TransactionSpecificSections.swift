@@ -449,8 +449,8 @@ private func iconCircle(systemName: String, color: Color, size: CGFloat) -> some
             IncomingPaymentDetailsSection(
                 details: IncomingPaymentDetailsModel(
                     senderId: UUID(),
-                    senderName: "Melissa Clark",
-                    senderContact: "melissa@email.com",
+                    senderName: "Amelia Thompson",
+                    senderContact: "amelia.thompson@aetheris.app",
                     method: "ACH",
                     methodDetails: "Checking account",
                     reference: "INV-2048"
@@ -462,7 +462,7 @@ private func iconCircle(systemName: String, color: Color, size: CGFloat) -> some
             TransferDetailsSection(
                 details: TransferDetailsModel(
                     recipientId: UUID(),
-                    recipientName: "Ed Sheeran",
+                    recipientName: "Sophie Keller",
                     recipientContact: "+1 (617) 555-0198",
                     destinationInstitution: "Aetheris Bank",
                     method: "Instant transfer",

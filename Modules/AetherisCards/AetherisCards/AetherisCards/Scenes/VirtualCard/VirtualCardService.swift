@@ -260,7 +260,7 @@ private extension FinancialSummaryModel {
                     dayOffset: -4
                 ),
                 .init(
-                    image: "melissa",
+                    image: "sophie",
                     title: Strings.FinancialSummary.transferSent,
                     description: Strings.FinancialSummary.transferSentDescription,
                     value: "-$ 180.00",
@@ -268,23 +268,23 @@ private extension FinancialSummaryModel {
                 )
             ]
         case CardMockIDs.infinite:
-            transactions = [
-                .init(
-                    image: "Adele",
-                    title: Strings.FinancialSummary.transferSent,
-                    description: Strings.FinancialSummary.transferSentAdeleDescription,
-                    value: "-$ 70.00",
-                    dayOffset: -2
-                ),
-                .init(
-                    image: "ifoodlogo",
-                    title: Strings.FinancialSummary.ifoodBar,
+                transactions = [
+                    .init(
+                        image: "Amelia",
+                        title: Strings.FinancialSummary.transferSent,
+                        description: Strings.FinancialSummary.transferSentAmeliaDescription,
+                        value: "-$ 70.00",
+                        dayOffset: -2
+                    ),
+                    .init(
+                        image: "ifoodlogo",
+                        title: Strings.FinancialSummary.ifoodBar,
                     description: Strings.FinancialSummary.restaurant,
                     value: "-$ 92.30",
                     dayOffset: -5
                 ),
                 .init(
-                    image: "ed",
+                    image: "Amelia",
                     title: Strings.FinancialSummary.paymentReceived,
                     description: Strings.FinancialSummary.paymentReceivedDescription,
                     value: "$ 125.00",

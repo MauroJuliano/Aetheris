@@ -4,16 +4,13 @@ import SwiftUI
 
 struct UserNameView: View {
     @StateObject private var viewModel: UserNameViewModel
-    @ObservedObject private var draft: RegistrationDraft
     private let onBack: () -> Void
     private let onContinue: () -> Void
     
     init(viewModel: UserNameViewModel,
-         draft: RegistrationDraft,
          onBack: @escaping () -> Void,
          onContinue: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _draft = ObservedObject(wrappedValue: draft)
         self.onBack = onBack
         self.onContinue = onContinue
     }
@@ -22,12 +19,13 @@ struct UserNameView: View {
             RegisterView(title: viewModel.title,
                              subTitle: viewModel.subTitle,
                              textFieldValue: Binding(
-                                get: { draft.userName },
+                                get: { viewModel.userName },
                                 set: { viewModel.updateUserName($0) }
                              ),
                              buttonTitle: viewModel.buttonName,
                              textFieldPlaceholder: viewModel.placeholder,
                              fieldErrorMessage: viewModel.errorMessage,
+                             textFieldFormatter: RegistrationInputRules.sanitizeName,
                 onAction: {
                     viewModel.submit(onContinue: onContinue)
                 })
@@ -51,7 +49,6 @@ struct UserNameView: View {
 
     UserNameView(
         viewModel: UserNameViewModel(draft: draft),
-        draft: draft,
         onBack: {},
         onContinue: {}
     )

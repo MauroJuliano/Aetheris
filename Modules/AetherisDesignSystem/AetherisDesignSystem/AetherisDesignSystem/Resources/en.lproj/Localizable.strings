@@ -23,8 +23,8 @@
 
 "Profile.generalSection" = "General";
 "Profile.notificationsSection" = "Notifications";
-"Profile.userName" = "Melissa Mccarthy";
-"Profile.email" = "contact@melissamccarthy.com";
+"Profile.userName" = "Blake Lehmann";
+"Profile.email" = "blake.lehmann@aetheris.app";
 "Profile.phone" = "(33) 9908-3213";
 "Profile.feedback" = "Feedback";
 "Profile.pushNotifications" = "Push notifications";
@@ -45,7 +45,7 @@
 "CreditCard.ownerNameTwo" = "Amado batista";
 "CreditCard.brandMastercard" = "MASTERCARD";
 
-"UserView.userName" = "Melissa Mccarthy";
+"UserView.userName" = "Blake Lehmann";
 "UserView.joinedDate" = "Joined August 17, 2025";
 
 "GlowButton.continueTitle" = "Continue";
