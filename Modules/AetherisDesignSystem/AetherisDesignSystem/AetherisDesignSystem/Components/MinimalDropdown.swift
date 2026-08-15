@@ -73,4 +73,17 @@ public struct MinimalDropdown: View {
     }
 }
 
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        MinimalDropdown(isExpanded: false)
+        MinimalDropdown(
+            title: "Period",
+            selectedOption: "This month",
+            isExpanded: true,
+            options: ["Today", "This week", "This month"]
+        )
+    }
+    .padding()
+    .appScreenBackground()
+}
 

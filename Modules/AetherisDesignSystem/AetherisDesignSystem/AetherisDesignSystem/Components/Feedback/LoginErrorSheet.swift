@@ -65,3 +65,14 @@ public struct ActionErrorSheet: View {
 
 @available(*, deprecated, renamed: "ActionErrorSheet")
 public typealias LoginErrorSheet = ActionErrorSheet
+
+#Preview {
+    ActionErrorSheet(
+        title: "Action unavailable",
+        description: "We couldn't complete this action right now.",
+        primaryButtonTitle: "Try again",
+        secondaryButtonTitle: "Cancel",
+        onPrimaryAction: {},
+        onSecondaryAction: {}
+    )
+}

@@ -16,10 +16,10 @@ final class ResumeViewModel: ObservableObject {
 
     var resumeList: [ResumeListModel] {
         [
-            .init(image: "lock.fill", description: Strings.Sin.title, value: draft.sin),
-            .init(image: "heart.fill", description: Strings.MothersName.title, value: draft.mothersName),
-            .init(image: "person.fill", description: Strings.UserName.title, value: draft.userName),
-            .init(image: "calendar", description: Strings.Birthdate.title, value: draft.birthdate)
+            .init(image: "lock.fill", description: Strings.Sin.title, value: draft.sin, kind: .sin),
+            .init(image: "heart.fill", description: Strings.MothersName.title, value: draft.mothersName, kind: .mothersName),
+            .init(image: "person.fill", description: Strings.UserName.title, value: draft.userName, kind: .userName),
+            .init(image: "calendar", description: Strings.Birthdate.title, value: draft.birthdate, kind: .birthdate)
         ]
     }
 

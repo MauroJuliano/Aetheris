@@ -93,3 +93,27 @@ public struct NavBar: View {
      
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.xLarge) {
+        NavBar(
+            shouldPresentNotifications: true,
+            model: .init(
+                firstText: "Welcome",
+                secondText: "Blake",
+                hasInitialSpace: false
+            )
+        )
+
+        NavBar(
+            hasNotifications: false,
+            hasBackButton: true,
+            model: .init(
+                firstText: "Details",
+                hasInitialSpace: false
+            )
+        )
+    }
+    .padding(.vertical)
+    .appScreenBackground()
+}

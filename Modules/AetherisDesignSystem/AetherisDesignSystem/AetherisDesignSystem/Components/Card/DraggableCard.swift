@@ -67,6 +67,12 @@ struct DraggableCard: View {
     }
 }
 
-//#Preview {
-//    DraggableCard()
-//}
+#Preview {
+    DraggableCard(
+        index: 0,
+        visualIndex: 0,
+        cards: CardsMock.creditCardMocks
+    )
+    .padding()
+    .appScreenBackground()
+}

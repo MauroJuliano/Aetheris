@@ -1,6 +1,5 @@
 import SwiftUI
 import AERegistrationInterface
-import PaymentsInterface
 import AetherisAuthenticationInterface
 
 public final class AuthenticationFactory: AuthenticationFactoryInterface {

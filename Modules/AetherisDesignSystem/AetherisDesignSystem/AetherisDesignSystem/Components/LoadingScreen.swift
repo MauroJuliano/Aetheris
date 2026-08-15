@@ -66,3 +66,7 @@ struct LoadingScreen: View {
     }
 }
 
+#Preview {
+    LoadingScreen()
+        .appScreenBackground()
+}

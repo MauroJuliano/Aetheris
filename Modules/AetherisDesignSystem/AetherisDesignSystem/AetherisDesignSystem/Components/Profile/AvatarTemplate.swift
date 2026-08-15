@@ -50,3 +50,8 @@ public struct AvatarTemplate: View {
     }
 }
 
+#Preview {
+    AvatarTemplate(model: .init(image: "blake"))
+        .padding()
+        .appScreenBackground()
+}

@@ -7,7 +7,6 @@ enum SINFactory {
                                 onContinue: @escaping () -> Void) -> some View {
         let viewModel = SINViewModel(draft: draft)
         return SINView(viewModel: viewModel,
-                       draft: draft,
                        onBack: onBack,
                        onContinue: onContinue)
     }

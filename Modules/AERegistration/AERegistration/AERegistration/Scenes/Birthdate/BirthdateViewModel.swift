@@ -5,6 +5,7 @@ class BirthdateViewModel: ObservableObject {
     typealias localizable = Strings.Birthdate
     
     @Published var errorMessage: String?
+    @Published var birthdate: String
 
     private let draft: RegistrationDraft
     
@@ -16,21 +17,23 @@ class BirthdateViewModel: ObservableObject {
     
     init(draft: RegistrationDraft) {
         self.draft = draft
+        self.birthdate = draft.birthdate
     }
 
     func updateBirthdate(_ value: String) {
         errorMessage = nil
-        draft.birthdate = RegistrationInputRules.sanitizeBirthdate(value)
+        birthdate = RegistrationInputRules.sanitizeBirthdate(value)
     }
     
     // MARK: Life Cycle
     func submit(onContinue: () -> Void) {
-        guard RegistrationInputRules.isValidBirthdate(draft.birthdate) else {
+        guard RegistrationInputRules.isValidBirthdate(birthdate) else {
             errorMessage = Strings.Birthdate.error
             return
         }
 
         errorMessage = nil
+        draft.birthdate = birthdate
         onContinue()
     }
 }

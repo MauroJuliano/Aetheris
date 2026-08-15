@@ -98,3 +98,9 @@ struct TabBarPreviewWrapper: View {
         TabBar(selectedIndex: $selectedIndex)
     }
 }
+
+#Preview {
+    TabBarPreviewWrapper()
+        .padding()
+        .appScreenBackground()
+}

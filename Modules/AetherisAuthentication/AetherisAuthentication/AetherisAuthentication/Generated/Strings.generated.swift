@@ -30,6 +30,14 @@ internal enum Strings {
     /// Forgot password?
     internal static let title = Strings.tr("Localizable", "ForgotPassword.title", fallback: "Forgot password?")
   }
+  internal enum IdentityValidation {
+    /// Close
+    internal static let close = Strings.tr("Localizable", "IdentityValidation.close", fallback: "Close")
+    /// The PIN could not be validated. Please review it and start again.
+    internal static let errorDescription = Strings.tr("Localizable", "IdentityValidation.errorDescription", fallback: "The PIN could not be validated. Please review it and start again.")
+    /// We couldn't confirm your identity
+    internal static let errorTitle = Strings.tr("Localizable", "IdentityValidation.errorTitle", fallback: "We couldn't confirm your identity")
+  }
   internal enum Login {
     /// Don't have an account?
     internal static let dontHaveAccount = Strings.tr("Localizable", "Login.dontHaveAccount", fallback: "Don't have an account?")

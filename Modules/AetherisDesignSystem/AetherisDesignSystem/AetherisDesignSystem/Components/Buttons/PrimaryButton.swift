@@ -30,3 +30,9 @@ public struct PrimaryButton: View {
         }
     }
 }
+
+#Preview {
+    PrimaryButton(title: "Continue") {}
+        .padding()
+        .appScreenBackground()
+}

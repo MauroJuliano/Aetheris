@@ -24,6 +24,28 @@ internal enum Strings {
     /// Failed to submit
     internal static let errorSubmit = Strings.tr("Localizable", "Common.errorSubmit", fallback: "Failed to submit")
   }
+  internal enum Onboarding {
+    /// Continue
+    internal static let stepOneButton = Strings.tr("Localizable", "Onboarding.stepOneButton", fallback: "Continue")
+    /// Your account is ready. Manage money, cards and transfers in one place.
+    internal static let stepOneDescription = Strings.tr("Localizable", "Onboarding.stepOneDescription", fallback: "Your account is ready. Manage money, cards and transfers in one place.")
+    /// Welcome to Aetheris
+    internal static let stepOneTitle = Strings.tr("Localizable", "Onboarding.stepOneTitle", fallback: "Welcome to Aetheris")
+    /// Continue
+    internal static let stepThreeButton = Strings.tr("Localizable", "Onboarding.stepThreeButton", fallback: "Get started")
+    /// You are all set to explore Aetheris and use your account.
+    internal static let stepThreeDescription = Strings.tr("Localizable", "Onboarding.stepThreeDescription", fallback: "You are all set to explore Aetheris and use your account.")
+    /// Ready to start
+    internal static let stepThreeTitle = Strings.tr("Localizable", "Onboarding.stepThreeTitle", fallback: "Ready to start")
+    /// Continue
+    internal static let stepTwoButton = Strings.tr("Localizable", "Onboarding.stepTwoButton", fallback: "Continue")
+    /// Track your balance, manage cards and move money with less friction.
+    internal static let stepTwoDescription = Strings.tr("Localizable", "Onboarding.stepTwoDescription", fallback: "Track your balance, manage cards and move money with less friction.")
+    /// Everything in one place
+    internal static let stepTwoTitle = Strings.tr("Localizable", "Onboarding.stepTwoTitle", fallback: "Everything in one place")
+    /// Skip
+    internal static let skip = Strings.tr("Localizable", "Onboarding.skip", fallback: "Skip")
+  }
   internal enum ConfirmPassword {
     /// 1234
     internal static let placeholder = Strings.tr("Localizable", "ConfirmPassword.placeholder", fallback: "1234")

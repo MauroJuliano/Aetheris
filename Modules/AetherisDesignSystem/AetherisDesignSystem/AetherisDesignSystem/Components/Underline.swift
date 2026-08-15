@@ -28,3 +28,16 @@ public extension View {
         modifier(Underline(spacing: spacing, height: height, color: color))
     }
 }
+
+#Preview {
+    Text("Underlined text")
+        .font(AppTypography.headline)
+        .foregroundStyle(Color.textPrimary)
+        .underlined(
+            spacing: AppSpacing.xSmall,
+            height: 2,
+            color: .brandPrimaryColor
+        )
+        .padding()
+        .appScreenBackground()
+}

@@ -1,0 +1,41 @@
+"Common.continueButton" = "Continue";
+"Common.errorSubmit" = "Failed to submit";
+
+"HomeApp.homeUnavailableTitle" = "Home unavailable";
+"HomeApp.noDashboardDataTitle" = "No dashboard data yet";
+"HomeApp.emptyDescription" = "The simulated payments service returned an empty response.";
+"HomeApp.genericErrorTitle" = "Something went wrong";
+"HomeApp.genericErrorDescription" = "We couldn't load your information. Please check your connection and try again.";
+"HomeApp.tryLater" = "Try later";
+"HomeApp.welcomePrefix" = "Welcome, ";
+"HomeApp.welcomeName" = "Blake!";
+"HomeApp.logout" = "Logout";
+"HomeApp.version" = "Version 0.00.1";
+"HomeApp.poweredBy" = "@2025 Powered by Blake";
+"HomeApp.accountTerms" = "Account terms - Privacy Policy";
+"HomeApp.cardsLoadFailed" = "We could not load your cards right now.";
+"HomeApp.cardOwnerOne" = "Jorge Henrique";
+"HomeApp.visaBrand" = "VISA";
+"HomeApp.monthlySpendingHeadline" = "Monthly Spending";
+"HomeApp.monthlySpendingTitle" = "You spent $2,310 in August";
+"HomeApp.monthlySpendingCaption" = "Top category: Restaurants 🍔";
+"HomeApp.seeInsights" = "See Insights";
+"HomeApp.cardOwnerTwo" = "Amado Batista";
+"HomeApp.mastercardBrand" = "MASTERCARD";
+"HomeApp.learnMore" = "Learn More";
+
+"SpendingChart.title" = "Spending this month";
+"SpendingChart.total" = "$ 2,428.00";
+"SpendingChart.change" = "8.3%";
+"SpendingChart.comparison" = "vs last month";
+"SpendingChart.viewReport" = "View report";
+"SpendingChart.shopping" = "Shopping";
+"SpendingChart.bills" = "Bills";
+"SpendingChart.transport" = "Transport";
+"SpendingChart.foodAndDrinks" = "Food & Drinks";
+
+"Common.tryAgain" = "Try again";
+"Common.back" = "Back";
+"Common.close" = "Close";
+
+"ViewReport.loadingTitle" = "View Report";

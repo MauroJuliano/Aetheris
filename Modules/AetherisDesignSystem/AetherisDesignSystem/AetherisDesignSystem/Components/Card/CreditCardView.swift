@@ -92,3 +92,14 @@ struct CreditCardView: View {
         
     }
 }
+
+#Preview {
+    if case let .creditCard(model) = CardsMock.creditCardMocks[0].content {
+        CreditCardView(
+            model: model,
+            theme: model.style.theme
+        )
+        .padding()
+        .appScreenBackground()
+    }
+}

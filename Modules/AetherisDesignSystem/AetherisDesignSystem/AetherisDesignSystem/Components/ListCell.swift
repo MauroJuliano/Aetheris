@@ -60,3 +60,26 @@ public struct ListCell: View {
     }
 }
 
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        ListCell(
+            model: .init(
+                title: "Swarovski",
+                subtitle: "Payment",
+                value: "-$46.99",
+                icon: "bag"
+            )
+        )
+
+        ListCell(
+            model: .init(
+                title: "Salary",
+                subtitle: "Income",
+                value: "+$2,800.00",
+                icon: "arrow.down"
+            )
+        )
+    }
+    .padding(.vertical)
+    .appScreenBackground()
+}

@@ -173,3 +173,11 @@ public struct SpendingLineChart: View {
         "$ \(String(format: "%.2f", value))"
     }
 }
+
+#Preview {
+    SpendingLineChart()
+        .padding()
+        .appCardSurface()
+        .padding()
+        .appScreenBackground()
+}

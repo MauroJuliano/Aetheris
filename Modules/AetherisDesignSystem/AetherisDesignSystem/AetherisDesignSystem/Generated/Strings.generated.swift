@@ -25,10 +25,6 @@ internal enum Strings {
     internal static let loanTitle = Strings.tr("Localizable", "CardDistribution.loanTitle", fallback: "Loan")
   }
   internal enum CardInfo {
-    /// Apply Now
-    internal static let applyNow = Strings.tr("Localizable", "CardInfo.applyNow", fallback: "Apply Now")
-    /// Learn More
-    internal static let learnMore = Strings.tr("Localizable", "CardInfo.learnMore", fallback: "Learn More")
     /// See Insights
     internal static let monthlySpendingButton = Strings.tr("Localizable", "CardInfo.monthlySpendingButton", fallback: "See Insights")
     /// Top category: Restaurants 🍔
@@ -37,46 +33,14 @@ internal enum Strings {
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "CardInfo.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "CardInfo.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-    /// Apply now for a Platinum Secured Card
-    internal static let noCreditCardCaption = Strings.tr("Localizable", "CardInfo.noCreditCardCaption", fallback: "Apply now for a Platinum Secured Card")
-    /// No Credit Card Yet?
-    internal static let noCreditCardHeadline = Strings.tr("Localizable", "CardInfo.noCreditCardHeadline", fallback: "No Credit Card Yet?")
-    /// Build Your Credit
-    internal static let noCreditCardTitle = Strings.tr("Localizable", "CardInfo.noCreditCardTitle", fallback: "Build Your Credit")
-    /// Redeem
-    internal static let redeem = Strings.tr("Localizable", "CardInfo.redeem", fallback: "Redeem")
-    /// Worth $125 in travel
-    internal static let rewardsCaption = Strings.tr("Localizable", "CardInfo.rewardsCaption", fallback: "Worth $125 in travel")
-    /// Rewards Available
-    internal static let rewardsHeadline = Strings.tr("Localizable", "CardInfo.rewardsHeadline", fallback: "Rewards Available")
-    /// 12,500 points
-    internal static let rewardsTitle = Strings.tr("Localizable", "CardInfo.rewardsTitle", fallback: "12,500 points")
-    /// Protect your trips starting at $12/mo
-    internal static let specialOfferCaption = Strings.tr("Localizable", "CardInfo.specialOfferCaption", fallback: "Protect your trips starting at $12/mo")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "CardInfo.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "CardInfo.specialOfferTitle", fallback: "Travel Insurance")
   }
   internal enum CardView {
-    /// Rewards Available
-    internal static let rewardsHeadline = Strings.tr("Localizable", "CardView.rewardsHeadline", fallback: "Rewards Available")
-    /// 12,500 points
-    internal static let rewardsTitle = Strings.tr("Localizable", "CardView.rewardsTitle", fallback: "12,500 points")
   }
   internal enum CardsMock {
     /// Monthly Spending
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "CardsMock.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "CardsMock.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-    /// No Credit Card Yet?
-    internal static let noCreditCardHeadline = Strings.tr("Localizable", "CardsMock.noCreditCardHeadline", fallback: "No Credit Card Yet?")
-    /// Build Your Credit
-    internal static let noCreditCardTitle = Strings.tr("Localizable", "CardsMock.noCreditCardTitle", fallback: "Build Your Credit")
-    /// Special Offer
-    internal static let specialOfferHeadline = Strings.tr("Localizable", "CardsMock.specialOfferHeadline", fallback: "Special Offer")
-    /// Travel Insurance
-    internal static let specialOfferTitle = Strings.tr("Localizable", "CardsMock.specialOfferTitle", fallback: "Travel Insurance")
   }
   internal enum CreditCard {
     /// MASTERCARD
@@ -119,8 +83,8 @@ internal enum Strings {
     internal static let transactionsHistory = Strings.tr("Localizable", "MinimalDropdown.transactionsHistory", fallback: "Transactions History")
   }
   internal enum Profile {
-    /// contact@melissamccarthy.com
-    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "contact@melissamccarthy.com")
+    /// blake.lehmann@aetheris.app
+    internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "blake.lehmann@aetheris.app")
     /// Feedback
     internal static let feedback = Strings.tr("Localizable", "Profile.feedback", fallback: "Feedback")
     /// General
@@ -135,8 +99,8 @@ internal enum Strings {
     internal static let pushNotifications = Strings.tr("Localizable", "Profile.pushNotifications", fallback: "Push notifications")
     /// SMS notifications
     internal static let smsNotifications = Strings.tr("Localizable", "Profile.smsNotifications", fallback: "SMS notifications")
-    /// Melissa Mccarthy
-    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Melissa Mccarthy")
+    /// Blake Lehmann
+    internal static let userName = Strings.tr("Localizable", "Profile.userName", fallback: "Blake Lehmann")
   }
   internal enum TabBar {
     /// Cards
@@ -149,8 +113,8 @@ internal enum Strings {
   internal enum UserView {
     /// Joined August 17, 2025
     internal static let joinedDate = Strings.tr("Localizable", "UserView.joinedDate", fallback: "Joined August 17, 2025")
-    /// Melissa Mccarthy
-    internal static let userName = Strings.tr("Localizable", "UserView.userName", fallback: "Melissa Mccarthy")
+    /// Blake Lehmann
+    internal static let userName = Strings.tr("Localizable", "UserView.userName", fallback: "Blake Lehmann")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

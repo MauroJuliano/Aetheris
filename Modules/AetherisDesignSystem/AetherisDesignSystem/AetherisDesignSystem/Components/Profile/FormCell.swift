@@ -216,3 +216,12 @@ public struct FormCell: View {
         }
     }
 }
+
+#Preview {
+    VStack(spacing: AppSpacing.medium) {
+        FormCell(model: FormCellModel.generalCellsMock[0], hasDivider: true)
+        FormCell(model: FormCellModel.notifications[0], hasDivider: false)
+    }
+    .padding()
+    .appScreenBackground()
+}

@@ -1,0 +1,3 @@
+import AetherisTransfersInterface
+
+public typealias Beneficiary = AetherisTransfersInterface.Beneficiary
