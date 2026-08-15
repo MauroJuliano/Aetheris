@@ -12,7 +12,7 @@ There is no live backend. The app uses mocked responses so the main flows can be
 
 The app starts with a simple authentication flow, including validation, loading states, error handling, and password recovery.
 
-**IMAGE PLACEHOLDER**
+<img width="1448" height="1086" alt="AuthenticationFlow" src="https://github.com/user-attachments/assets/bfb9e3c0-4e59-4166-a330-83ba91d99cb3" />
 
 ---
 
