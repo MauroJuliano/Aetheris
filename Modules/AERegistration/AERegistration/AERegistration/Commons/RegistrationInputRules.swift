@@ -13,11 +13,15 @@ enum RegistrationInputRules {
         value
             .filter { $0.isLetter || $0.isWhitespace }
             .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    }
+
+    static func normalizedName(_ value: String) -> String {
+        sanitizeName(value)
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     static func isValidName(_ value: String) -> Bool {
-        sanitizeName(value).count >= 2
+        normalizedName(value).count >= 2
     }
 
     static func sanitizeBirthdate(_ value: String) -> String {

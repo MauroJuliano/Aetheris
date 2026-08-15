@@ -4,7 +4,8 @@ import SwiftUI
 struct RegisterView: View {
     let title: String
     let subTitle: String
-    @FocusState private var isTextFieldFocused: Bool
+    @FocusState private var isSecureFieldFocused: Bool
+    @State private var isTextFieldFocused = false
     @Binding var textFieldValue: String
     @State private var isSecureTextVisible = false
     
@@ -44,6 +45,7 @@ struct RegisterView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     isTextFieldFocused = false
+                    isSecureFieldFocused = false
                 }
         }
     }
@@ -106,24 +108,21 @@ struct RegisterView: View {
                 prompt: inputPrompt
             )
             .accessibilityIdentifier("registration.input")
-            .focused($isTextFieldFocused)
+            .focused($isSecureFieldFocused)
         } else {
-            TextField(
-                "",
+            RegistrationTextField(
                 text: $textFieldValue,
-                prompt: inputPrompt
+                placeholder: textFieldPlaceholder,
+                formatter: textFieldFormatter,
+                keyboardType: keyboardType,
+                isFocused: Binding(
+                    get: { isTextFieldFocused },
+                    set: { isTextFieldFocused = $0 }
+                ),
+                accessibilityIdentifier: "registration.input"
             )
-            .accessibilityIdentifier("registration.input")
-            .focused($isTextFieldFocused)
-            .onChange(of: textFieldValue) { _, newValue in
-                let formattedValue = textFieldFormatter(newValue)
-
-                guard formattedValue != newValue else {
-                    return
-                }
-
-                textFieldValue = formattedValue
-            }
+            .frame(height: 52)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -142,6 +141,120 @@ struct RegisterView: View {
                 .foregroundStyle(Color.textTertiary)
         }
         .accessibilityLabel(isSecureTextVisible ? secureTextVisibleLabel : secureTextHiddenLabel)
+    }
+}
+
+private struct RegistrationTextField: UIViewRepresentable {
+    @Binding var text: String
+    let placeholder: String
+    let formatter: (String) -> String
+    let keyboardType: UIKeyboardType
+    @Binding var isFocused: Bool
+    let accessibilityIdentifier: String
+
+    func makeUIView(context: Context) -> UITextField {
+        let textField = UITextField(frame: .zero)
+        textField.delegate = context.coordinator
+        textField.borderStyle = .none
+        textField.backgroundColor = .clear
+        textField.textAlignment = .left
+        textField.contentVerticalAlignment = .center
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        textField.textColor = UIColor(Color.textPrimary)
+        textField.font = .preferredFont(forTextStyle: .body)
+        textField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [
+                .foregroundColor: UIColor(Color.textTertiary),
+                .font: UIFont.preferredFont(forTextStyle: .body)
+            ]
+        )
+        textField.keyboardType = keyboardType
+        textField.accessibilityIdentifier = accessibilityIdentifier
+        textField.addTarget(
+            context.coordinator,
+            action: #selector(Coordinator.editingChanged(_:)),
+            for: .editingChanged
+        )
+        return textField
+    }
+
+    func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.keyboardType = keyboardType
+
+        if uiView.text != text {
+            uiView.text = text
+        }
+
+        if isFocused, !uiView.isFirstResponder {
+            uiView.becomeFirstResponder()
+        } else if !isFocused, uiView.isFirstResponder {
+            uiView.resignFirstResponder()
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(
+            text: $text,
+            formatter: formatter,
+            isFocused: $isFocused
+        )
+    }
+
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        private let text: Binding<String>
+        private let formatter: (String) -> String
+        private let isFocused: Binding<Bool>
+
+        init(
+            text: Binding<String>,
+            formatter: @escaping (String) -> String,
+            isFocused: Binding<Bool>
+        ) {
+            self.text = text
+            self.formatter = formatter
+            self.isFocused = isFocused
+        }
+
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            isFocused.wrappedValue = true
+        }
+
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            isFocused.wrappedValue = false
+        }
+
+        func textField(
+            _ textField: UITextField,
+            shouldChangeCharactersIn range: NSRange,
+            replacementString string: String
+        ) -> Bool {
+            let currentText = textField.text ?? ""
+
+            guard let textRange = Range(range, in: currentText) else {
+                return false
+            }
+
+            let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+            let formattedText = formatter(updatedText)
+
+            textField.text = formattedText
+            text.wrappedValue = formattedText
+
+            return false
+        }
+
+        @objc
+        func editingChanged(_ textField: UITextField) {
+            let formattedText = formatter(textField.text ?? "")
+            if textField.text != formattedText {
+                textField.text = formattedText
+            }
+            if text.wrappedValue != formattedText {
+                text.wrappedValue = formattedText
+            }
+        }
     }
 }
 

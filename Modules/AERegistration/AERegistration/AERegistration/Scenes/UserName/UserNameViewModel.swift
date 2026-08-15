@@ -33,7 +33,7 @@ class UserNameViewModel: ObservableObject {
         }
 
         errorMessage = nil
-        draft.userName = userName
+        draft.userName = RegistrationInputRules.normalizedName(userName)
         onContinue()
     }
 }

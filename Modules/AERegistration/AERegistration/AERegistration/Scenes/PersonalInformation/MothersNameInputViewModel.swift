@@ -33,7 +33,7 @@ class MothersNameInputViewModel: ObservableObject {
         }
 
         errorMessage = nil
-        draft.mothersName = mothersName
+        draft.mothersName = RegistrationInputRules.normalizedName(mothersName)
         onContinue()
     }
 }

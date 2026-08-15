@@ -155,7 +155,8 @@ private extension ResumeView {
 
     var continueButton: some View {
         GlowButton(
-            title: Strings.Resume.continueButton
+            title: Strings.Resume.continueButton,
+            isLoading: viewModel.isLoading
         ) {
             submit()
         }
@@ -184,6 +185,10 @@ private extension ResumeView {
     }
 
     func submit() {
+        guard !viewModel.isLoading else {
+            return
+        }
+
         Task {
             if await viewModel.submit() {
                 onContinue()
