@@ -1,0 +1,36 @@
+name: Auto Merge
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  configure-auto-merge:
+    name: Configure Auto Merge
+    if: >
+      github.event.label.name == 'automerge' &&
+      github.event.pull_request.base.ref == 'main' &&
+      github.event.pull_request.head.ref == 'dev' &&
+      github.actor == 'MauroJuliano'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enable auto-merge
+        if: github.event.action == 'labeled'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --squash "$PR_URL"
+
+      - name: Disable auto-merge
+        if: github.event.action == 'unlabeled'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --disable-auto "$PR_URL"

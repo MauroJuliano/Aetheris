@@ -1,0 +1,117 @@
+{
+  "configurations" : [
+    {
+      "id" : "7F7B565B-3B18-4D3E-B8B4-6B0192CB47F8",
+      "name" : "Unit Tests",
+      "options" : {
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Aetheris.xcodeproj",
+      "identifier" : "A976FAA72E37AEEF00FF923B",
+      "name" : "AetherisApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A976FABE2E37AEF200FF923B",
+        "name" : "AetherisAppUITests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B530692F4D2C34005C2C96",
+        "name" : "AERegistrationTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B5344F2F4E384E005C2C96",
+        "name" : "CoreTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B535BB2F4E3B87005C2C96",
+        "name" : "AetherisDesignSystemTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B536D82F4E6C01005C2C96",
+        "name" : "AetherisAuthenticationTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9B537072F4E6E16005C2C96",
+        "name" : "AetherisAuthenticationInterfaceTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "A9C1891C2F4E7AFE00013305",
+        "name" : "AccountTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "3CE661CDAE87DBE54A2F7C99",
+        "name" : "AetherisCardsTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "ADA68CF51F7C17DD7EF55ACA",
+        "name" : "AetherisTransfersTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "05A80796B074060C0491CF77",
+        "name" : "AetherisNotificationsTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "7105FD3BE6AF5450A584C4B1",
+        "name" : "AetherisInsightsTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Aetheris.xcodeproj",
+        "identifier" : "F8027F19B066C0413AC0169C",
+        "name" : "AetherisHomeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

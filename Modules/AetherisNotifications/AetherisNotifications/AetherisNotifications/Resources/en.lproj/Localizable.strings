@@ -1,0 +1,23 @@
+"Common.continueButton" = "Continue";
+"Common.errorSubmit" = "Failed to submit";
+
+"NotificationsCentre.unavailableTitle" = "Notifications unavailable";
+"NotificationsCentre.emptyTitle" = "No notifications yet";
+"NotificationsCentre.emptyDescription" = "The simulated service has no notifications to show.";
+"NotificationsCentre.title" = "Notifications";
+
+"Common.tryAgain" = "Try again";
+"Common.back" = "Back";
+"Common.close" = "Close";
+
+"Notifications.titleTransferSent" = "Funds successfully transferred to Sophie Keller";
+"Notifications.titlePaymentReceived" = "Payment received from Amelia Thompson";
+"Notifications.titleSubscriptionRenewed" = "Subscription renewed for Man's best Friend";
+"Notifications.titleRefundProcessed" = "Refund processed successfully";
+"Notifications.titleSubscriptionExpired" = "Your subscription has expired";
+"Notifications.titleMaintenanceCompleted" = "System maintenance completed";
+"Notifications.sectionToday" = "Today";
+"Notifications.sectionYesterday" = "Yesterday";
+"Notifications.sectionLastWeek" = "Last Week";
+"Notifications.sectionLastMonth" = "Last Month";
+"Notifications.sectionOthers" = "Others";

@@ -1,0 +1,41 @@
+// Default
+"Default.buttonName" = "Continue";
+
+// SIN
+"SIN.title" = "Social Insurance Number";
+"SIN.subTitle" = "We'll use your SIN to verify your identity and keep your account secure.";
+"SIN.placeholder" = "000.000.000";
+"SIN.buttonName" = "Continue";
+
+// MothersName
+"MothersName.title" = "Mother's name";
+"MothersName.placeholder" = "Jane doe";
+
+// UserName
+"UserName.title" = "Full name";
+"UserName.placeholder" = "John doe";
+
+// BirthDate
+"Birthdate.title" = "Date of birth";
+"Birthdate.placeholder" = "26/08/1970";
+
+"Birthdate.subTitle" = "We'll use your date of birth to verify your identity securely";
+"UserName.subTitle" = "Choose a unique username that others can use to find and pay you.";
+"Register.fullNameTitle" = "Full name";
+"Register.fullNameSubtitle" = "Enter your legal name exactly as it appears on your documents.";
+"Register.continueButton" = "Continue";
+"Register.placeholderName" = "Insert your name";
+"Resume.title" = "Review You Information";
+"Resume.subtitle" = "Please confirm that all the information below is correct before we continue.";
+"Resume.securityNote" = "Your information is securely encrypted and will never be shared.";
+"Resume.continueButton" = "Continue";
+"Resume.listTitle" = "Resume List";
+"Resume.edit" = "Edit";
+"Resume.fullName" = "Full Name";
+"Resume.mockName" = "Melissa Mccarthy";
+"Resume.mockMysticalTime" = "Mystical time";
+"Resume.mockAnnSomething" = "Ann something";
+"Resume.mockBirthDate" = "12/10/1980";
+"Resume.mockSin" = "000.000.00-23";
+"Resume.mockWeCouldNeverBeTogether" = "We could never be together";
+"Resume.mockAddress" = "Avenue t's nice to pretend";

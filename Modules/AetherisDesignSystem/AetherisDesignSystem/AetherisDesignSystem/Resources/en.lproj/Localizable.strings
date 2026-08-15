@@ -1,0 +1,51 @@
+"TabBar.home" = "Home";
+"TabBar.cards" = "Cards";
+"TabBar.profile" = "Profile";
+
+"MinimalDropdown.transactionsHistory" = "Transactions History";
+"MinimalDropdown.today" = "Today";
+"MinimalDropdown.thisWeek" = "This Week";
+"MinimalDropdown.thisMonth" = "This Month";
+"MinimalDropdown.allTime" = "All Time";
+
+"GlowButton.continue" = "Continue";
+"FullScreenError.title" = "Something went wrong";
+"FullScreenError.description" = "We couldn't load your information. Please check your connection and try again.";
+"FullScreenError.primaryButton" = "Try again";
+"FullScreenError.secondaryButton" = "Try later";
+
+"CardDistribution.creditCardTitle" = "Credit Card";
+"CardDistribution.creditCardSubtitle" = "Enjoy exclusive benefits with zero annual fee.";
+"CardDistribution.loanTitle" = "Loan";
+"CardDistribution.loanSubtitle" = "Personalized loan options.";
+"CardDistribution.investmentsTitle" = "Investments";
+"CardDistribution.investmentsSubtitle" = "Grow your money with flexible plans.";
+
+"Profile.generalSection" = "General";
+"Profile.notificationsSection" = "Notifications";
+"Profile.userName" = "Blake Lehmann";
+"Profile.email" = "blake.lehmann@aetheris.app";
+"Profile.phone" = "(33) 9908-3213";
+"Profile.feedback" = "Feedback";
+"Profile.pushNotifications" = "Push notifications";
+"Profile.smsNotifications" = "SMS notifications";
+"Profile.joinedDate" = "Joined August 17, 2025";
+
+"CreditCard.validTill" = "Valid till";
+
+"CardInfo.monthlySpendingHeadline" = "Monthly Spending";
+"CardInfo.monthlySpendingTitle" = "You spent $2,310 in August";
+"CardInfo.monthlySpendingCaption" = "Top category: Restaurants 🍔";
+"CardInfo.monthlySpendingButton" = "See Insights";
+
+"CardsMock.monthlySpendingHeadline" = "Monthly Spending";
+"CardsMock.monthlySpendingTitle" = "You spent $2,310 in August";
+"CreditCard.ownerName" = "Jorge Henrique";
+"CreditCard.brandVisa" = "VISA";
+"CreditCard.ownerNameTwo" = "Amado batista";
+"CreditCard.brandMastercard" = "MASTERCARD";
+
+"UserView.userName" = "Blake Lehmann";
+"UserView.joinedDate" = "Joined August 17, 2025";
+
+"GlowButton.continueTitle" = "Continue";
