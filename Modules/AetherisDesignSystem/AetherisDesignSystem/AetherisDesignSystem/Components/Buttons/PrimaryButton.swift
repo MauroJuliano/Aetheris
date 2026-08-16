@@ -3,10 +3,16 @@ import SwiftUI
 public struct PrimaryButton: View {
     private let title: String
     private let action: () -> Void
+    private let isLoading: Bool
 
-    public init(title: String, action: @escaping () -> Void) {
+    public init(
+        title: String,
+        isLoading: Bool = false,
+        action: @escaping () -> Void
+    ) {
         self.title = title
         self.action = action
+        self.isLoading = isLoading
     }
 
     public var body: some View {
@@ -22,12 +28,18 @@ public struct PrimaryButton: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
 
-                Text(title)
-                    .foregroundStyle(Color.brandPrimaryColor)
-                    .font(AppTypography.headline)
-                    .appShadow(AppShadow.control)
+                if isLoading {
+                    ProgressView()
+                        .tint(Color.brandPrimaryColor)
+                } else {
+                    Text(title)
+                        .foregroundStyle(Color.brandPrimaryColor)
+                        .font(AppTypography.headline)
+                        .appShadow(AppShadow.control)
+                }
             }
         }
+        .disabled(isLoading)
     }
 }
 
