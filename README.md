@@ -20,6 +20,8 @@ The app starts with a simple authentication flow, including validation, loading 
 
 The registration is split into multiple steps, including personal information, address, credentials, and account setup.
 
+<img width="1448" height="1086" alt="Registerflow" src="https://github.com/user-attachments/assets/d84b92cf-5510-4f73-9fbf-e5972142ba73" />
+
 **VIDEO PLACEHOLDER**
 
 A short recording of the complete registration flow works well here.
