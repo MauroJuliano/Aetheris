@@ -28,4 +28,28 @@ struct RegistrationInputRulesTests {
         #expect(RegistrationInputRules.sanitizeName("Jane   doe") == "Jane doe")
         #expect(RegistrationInputRules.normalizedName("  Jane doe  ") == "Jane doe")
     }
+
+    @Test
+    func isValidSIN_requiresExpectedMask() {
+        #expect(!RegistrationInputRules.isValidSIN(""))
+        #expect(!RegistrationInputRules.isValidSIN("123456789"))
+        #expect(RegistrationInputRules.isValidSIN("123.456.789"))
+        #expect(!RegistrationInputRules.isValidSIN("123.456.7890"))
+    }
+
+    @Test
+    func isValidBirthdate_requiresExpectedMaskAndRealDate() {
+        #expect(!RegistrationInputRules.isValidBirthdate(""))
+        #expect(!RegistrationInputRules.isValidBirthdate("10/10/10"))
+        #expect(RegistrationInputRules.isValidBirthdate("10/10/2010"))
+        #expect(!RegistrationInputRules.isValidBirthdate("31/02/2010"))
+    }
+
+    @Test
+    func isValidName_requiresMinimumVisibleCharacters() {
+        #expect(!RegistrationInputRules.isValidName(" "))
+        #expect(!RegistrationInputRules.isValidName("J"))
+        #expect(RegistrationInputRules.isValidName("Jane"))
+        #expect(RegistrationInputRules.isValidName("Jane Doe"))
+    }
 }

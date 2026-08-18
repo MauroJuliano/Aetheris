@@ -38,7 +38,7 @@ struct HomeAppViewModelTests {
         #expect(sut.balanceText == "$ 13.553,00")
         #expect(sut.isBalanceVisible)
         #expect(sut.cards.count == 3)
-        #expect(sut.recentRecipients.count == 4)
+        #expect(sut.recentRecipients.count == 6)
         #expect(sut.quickActions.count == 4)
         #expect(sut.spendingThisMonth?.categories.count == 4)
         #expect(sut.unreadCount == 3)

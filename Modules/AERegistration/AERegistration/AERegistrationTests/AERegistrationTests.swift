@@ -11,7 +11,8 @@ struct RegistrationNameInputTests {
 
         sut.updateMothersName("Jane Doe")
 
-        #expect(draft.mothersName == "Jane Doe")
+        #expect(sut.mothersName == "Jane Doe")
+        #expect(draft.mothersName.isEmpty)
     }
 
     @Test
@@ -21,6 +22,7 @@ struct RegistrationNameInputTests {
 
         sut.updateUserName("Jane Doe")
 
-        #expect(draft.userName == "Jane Doe")
+        #expect(sut.userName == "Jane Doe")
+        #expect(draft.userName.isEmpty)
     }
 }

@@ -36,8 +36,8 @@ struct BeneficiaryList: View {
         .task { await viewModel.load() }
     }
 
-    var loadedContent: some View {
-        VStack {
+    private var loadedContent: some View {
+        VStack(spacing: 0) {
             NavBar(
                 hasBackButton: true,
                 model: .init(
@@ -48,27 +48,18 @@ struct BeneficiaryList: View {
             )
 
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: AppSpacing.medium) {
-                    BeneficiarySearchBar(
-                        text: $searchText
-                    )
-                    .padding(.top, AppSpacing.medium)
+                VStack(alignment: .leading, spacing: AppSpacing.large) {
+                    BeneficiarySearchBar(text: $searchText)
+                        .padding(.top, AppSpacing.medium)
 
-                    Text(Strings.BeneficiaryList.savedBeneficiaries)
-                        .font(AppTypography.body)
-                        .bold()
-                        .foregroundStyle(Color.textPrimary)
+                    if searchQuery.isEmpty {
+                        recentSection
+                    }
 
-                    LazyVStack(spacing: AppSpacing.medium) {
-                        ForEach(Array(filteredBeneficiaries.enumerated()), id: \.element.id) { index, cell in
-                            BeneficiaryCell(
-                                model: cell,
-                                isRecent: index == 0,
-                                onChange: { selected in
-                                    onSelect(selected)
-                                }
-                            )
-                        }
+                    if filteredAllBeneficiaries.isEmpty {
+                        searchEmptyState
+                    } else {
+                        allBeneficiariesSection
                     }
                 }
                 .padding(.bottom, AppSpacing.bottomBarClearance)
@@ -77,22 +68,95 @@ struct BeneficiaryList: View {
         }
     }
 
-    private var filteredBeneficiaries: [Beneficiary] {
-        let query = searchText.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
+    private var searchQuery: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
-        guard !query.isEmpty else {
-            return viewModel.beneficiaries
+    private var recentBeneficiaries: [Beneficiary] {
+        Array(viewModel.beneficiaries.prefix(4))
+    }
+
+    private var allBeneficiaries: [Beneficiary] {
+        BeneficiaryFixtures.defaults
+    }
+
+    private var filteredAllBeneficiaries: [Beneficiary] {
+        guard !searchQuery.isEmpty else {
+            return allBeneficiaries
         }
 
-        return viewModel.beneficiaries.filter {
-            $0.name.matchesSearch(query) ||
-                $0.pixKey.matchesSearch(query)
+        return allBeneficiaries.filter {
+            $0.name.matchesSearch(searchQuery) ||
+                $0.pixKey.matchesSearch(searchQuery)
         }
     }
 
-    func errorView(message: String) -> some View {
+    private var beneficiarySections: [(letter: String, beneficiaries: [Beneficiary])] {
+        let sorted = filteredAllBeneficiaries.sorted {
+            $0.name.localizedStandardCompare($1.name) == .orderedAscending
+        }
+
+        let grouped = Dictionary(grouping: sorted) { beneficiary in
+            beneficiary.sectionKey
+        }
+
+        return grouped.keys.sorted().map { letter in
+            (
+                letter: letter,
+                beneficiaries: grouped[letter] ?? []
+            )
+        }
+    }
+
+    private var recentSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            Text("Recent")
+                .font(AppTypography.body)
+                .bold()
+                .foregroundStyle(Color.textPrimary)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: AppSpacing.medium) {
+                    ForEach(recentBeneficiaries) { beneficiary in
+                        RecentBeneficiaryCell(
+                            model: beneficiary,
+                            onSelect: {
+                                onSelect(beneficiary)
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private var allBeneficiariesSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            Text(searchQuery.isEmpty ? "All beneficiaries" : "Results")
+                .font(AppTypography.body)
+                .bold()
+                .foregroundStyle(Color.textPrimary)
+
+            LazyVStack(spacing: AppSpacing.large) {
+                ForEach(beneficiarySections, id: \.letter) { section in
+                    BeneficiaryAlphabetSection(
+                        letter: section.letter,
+                        beneficiaries: section.beneficiaries,
+                        onSelect: onSelect
+                    )
+                }
+            }
+        }
+    }
+
+    private var searchEmptyState: some View {
+        AppEmptyStateView(
+            title: "No results",
+            description: "Try another name or PIX key."
+        )
+    }
+
+    private func errorView(message: String) -> some View {
         FeedbackView(
             title: Strings.BeneficiaryList.unavailableTitle,
             description: message,
@@ -105,7 +169,7 @@ struct BeneficiaryList: View {
         )
     }
 
-    var emptyState: some View {
+    private var emptyState: some View {
         AppEmptyStateView(
             title: Strings.BeneficiaryList.emptyTitle,
             description: Strings.BeneficiaryList.emptyDescription
@@ -126,6 +190,17 @@ private extension String {
         )
 
         return normalizedValue.contains(normalizedQuery)
+    }
+}
+
+private extension Beneficiary {
+    var sectionKey: String {
+        let normalized = name.folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: .current
+        )
+
+        return String(normalized.prefix(1)).uppercased()
     }
 }
 

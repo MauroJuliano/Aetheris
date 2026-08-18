@@ -38,6 +38,36 @@ struct TransactionHistoryViewModelTests {
     }
 
     @Test
+    func load_groupsTransactionsAcrossAllSections_andKeepsOrdering() async {
+        let calendar = Calendar.current
+        let transactions = [
+            Self.makeTransaction(title: "Today", date: Date()),
+            Self.makeTransaction(title: "Yesterday", date: calendar.date(byAdding: .day, value: -1, to: Date())!),
+            Self.makeTransaction(title: "Week", date: calendar.date(byAdding: .day, value: -3, to: Date())!),
+            Self.makeTransaction(title: "Month", date: calendar.date(byAdding: .day, value: -20, to: Date())!),
+            Self.makeTransaction(title: "Older", date: calendar.date(byAdding: .month, value: -2, to: Date())!)
+        ]
+        let sut = TransactionHistoryViewModel(service: TransactionHistoryServiceSpy(result: .success(transactions)))
+
+        await sut.load()
+
+        #expect(sut.sections.map(\.title) == [
+            Strings.Notifications.sectionToday,
+            Strings.Notifications.sectionYesterday,
+            Strings.Notifications.sectionLastWeek,
+            Strings.Notifications.sectionLastMonth,
+            Strings.Notifications.sectionOthers
+        ])
+        #expect(sut.sections.flatMap(\.items).map(\.title) == [
+            "Today",
+            "Yesterday",
+            "Week",
+            "Month",
+            "Older"
+        ])
+    }
+
+    @Test
     func load_marksHistoryEmpty_whenServiceReturnsNoTransactions() async {
         let sut = TransactionHistoryViewModel(service: TransactionHistoryServiceSpy(result: .success([])))
 
@@ -46,6 +76,17 @@ struct TransactionHistoryViewModelTests {
         #expect(sut.isEmpty)
         #expect(sut.sections.isEmpty)
         #expect(sut.errorMessage == nil)
+    }
+
+    @Test
+    func load_setsErrorMessage_whenServiceFails() async {
+        let sut = TransactionHistoryViewModel(service: TransactionHistoryServiceSpy(result: .failure(URLError(.timedOut))))
+
+        await sut.load()
+
+        #expect(sut.sections.isEmpty)
+        #expect(sut.errorMessage == "We could not load your transaction history.")
+        #expect(!sut.isLoading)
     }
 
     @Test
