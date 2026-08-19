@@ -24,6 +24,15 @@ public struct FormView: View {
         .padding(AppSpacing.medium)
         .appCardSurface()
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FormViewSkeleton(rows: cells.count)
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

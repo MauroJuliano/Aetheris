@@ -10,8 +10,19 @@ public final class CardsFactory: CardsFactoryInterface {
     }
 
     @MainActor
-    public func make(onFinished: @escaping () -> Void) -> AnyView {
-        AnyView(CardFlowCoordinator(coreService: coreService, onDismiss: nil))
+    public func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            CardFlowCoordinator(
+                coreService: coreService,
+                onDismiss: onFinished,
+                onSendMoneyTap: onSendMoneyTap,
+                onRequestMoneyTap: onRequestMoneyTap
+            )
+        )
     }
 
     @MainActor
@@ -19,7 +30,9 @@ public final class CardsFactory: CardsFactoryInterface {
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
         initialSelectedCardId: UUID? = nil,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void = {},
+        onRequestMoneyTap: @escaping () -> Void = {}
     ) -> AnyView {
         AnyView(HomeCardFactory.make(
             coreService: coreService,
@@ -36,6 +49,12 @@ public final class CardsFactory: CardsFactoryInterface {
             },
             onCardLockTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.cardLock(cardID))
+            },
+            onSendMoneyTap: {
+                onSendMoneyTap()
+            },
+            onRequestMoneyTap: {
+                onRequestMoneyTap()
             }
         ))
     }

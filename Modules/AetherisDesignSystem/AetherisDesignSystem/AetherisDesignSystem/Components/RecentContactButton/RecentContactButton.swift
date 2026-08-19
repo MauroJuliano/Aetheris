@@ -1,13 +1,55 @@
-import AetherisDesignSystem
 import SwiftUI
 
-struct RecentContactButton: View {
-    let contact: RequestContactModel
-    let isSelected: Bool
-    let action: () -> Void
+public struct RecentContactButtonModel: Identifiable, Hashable {
+    public let id: UUID
+    public let name: String
+    public let contactInformation: String
+    public let imageName: String?
 
-    var body: some View {
-        Button(action: action) {
+    public init(
+        id: UUID,
+        name: String,
+        contactInformation: String,
+        imageName: String?
+    ) {
+        self.id = id
+        self.name = name
+        self.contactInformation = contactInformation
+        self.imageName = imageName
+    }
+
+    public var firstName: String {
+        name.split(separator: " ").first.map(String.init) ?? name
+    }
+
+    public var initials: String {
+        name
+            .split(separator: " ")
+            .prefix(2)
+            .compactMap(\.first)
+            .map(String.init)
+            .joined()
+            .uppercased()
+    }
+}
+
+public struct RecentContactButton: View {
+    public let contact: RecentContactButtonModel
+    public let isSelected: Bool
+    public let onTap: () -> Void
+
+    public init(
+        contact: RecentContactButtonModel,
+        isSelected: Bool,
+        onTap: @escaping () -> Void
+    ) {
+        self.contact = contact
+        self.isSelected = isSelected
+        self.onTap = onTap
+    }
+
+    public var body: some View {
+        Button(action: onTap) {
             VStack(spacing: AppSpacing.xSmall) {
                 ZStack(alignment: .bottomTrailing) {
                     avatar
@@ -34,11 +76,7 @@ struct RecentContactButton: View {
             }
             .frame(width: 82)
             .padding(.vertical, AppSpacing.xSmall)
-            .background(
-                isSelected
-                    ? Color.brandPrimaryColor.opacity(0.08)
-                    : Color.clear
-            )
+            .background(isSelected ? Color.brandPrimaryColor.opacity(0.08) : Color.clear)
             .clipShape(RoundedRectangle(cornerRadius: AppRadius.medium))
         }
         .buttonStyle(.plain)
@@ -67,40 +105,41 @@ struct RecentContactButton: View {
             }
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            RecentContactButtonSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {
     HStack(spacing: AppSpacing.medium) {
         RecentContactButton(
-            contact: .previewSophie,
+            contact: .init(
+                id: UUID(),
+                name: "Sophie Keller",
+                contactInformation: "sophie.keller@aetheris.app",
+                imageName: "sophie"
+            ),
             isSelected: true,
-            action: {}
+            onTap: {}
         )
 
         RecentContactButton(
-            contact: .previewCarlos,
+            contact: .init(
+                id: UUID(),
+                name: "Carlos Barbosa",
+                contactInformation: "carlos@email.com",
+                imageName: nil
+            ),
             isSelected: false,
-            action: {}
+            onTap: {}
         )
     }
     .padding()
     .appScreenBackground()
-}
-
-extension RequestContactModel {
-    static let previewSophie = RequestContactModel(
-        id: UUID(),
-        name: "Sophie Keller",
-        contactInformation: "sophie.keller@aetheris.app",
-        imageName: "sophie"
-    )
-
-    static let previewMelissa = previewSophie
-
-    static let previewCarlos = RequestContactModel(
-        id: UUID(),
-        name: "Carlos Barbosa",
-        contactInformation: "carlos@email.com",
-        imageName: nil
-    )
 }

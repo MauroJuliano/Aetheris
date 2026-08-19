@@ -20,6 +20,8 @@ struct CardHome: View {
     let onInvoiceTap: (UUID) -> Void
     let onDueDateTap: (UUID) -> Void
     let onCardLockTap: (UUID) -> Void
+    let onSendMoneyTap: () -> Void
+    let onRequestMoneyTap: () -> Void
     let onQuickActionTap: (CardOptions) -> Void
 
     init(
@@ -33,6 +35,8 @@ struct CardHome: View {
         onInvoiceTap: @escaping (UUID) -> Void = { _ in },
         onDueDateTap: @escaping (UUID) -> Void = { _ in },
         onCardLockTap: @escaping (UUID) -> Void = { _ in },
+        onSendMoneyTap: @escaping () -> Void = {},
+        onRequestMoneyTap: @escaping () -> Void = {},
         onQuickActionTap: @escaping (CardOptions) -> Void = { _ in }
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -45,6 +49,8 @@ struct CardHome: View {
         self.onInvoiceTap = onInvoiceTap
         self.onDueDateTap = onDueDateTap
         self.onCardLockTap = onCardLockTap
+        self.onSendMoneyTap = onSendMoneyTap
+        self.onRequestMoneyTap = onRequestMoneyTap
         self.onQuickActionTap = onQuickActionTap
     }
 
@@ -193,10 +199,14 @@ struct CardHome: View {
         guard let cardId = currentCardId else { return }
 
         switch option.id {
+        case CardOptions.sendId:
+            onSendMoneyTap()
         case CardOptions.virtualCardId:
             onVirtualCardTap(cardId)
         case CardOptions.cardLockId:
             onCardLockTap(cardId)
+        case CardOptions.requestId:
+            onRequestMoneyTap()
         default:
             onQuickActionTap(option)
         }

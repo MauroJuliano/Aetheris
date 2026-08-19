@@ -86,6 +86,15 @@ public struct TabBar: View {
         .accessibilityIdentifier("tab.\(index)")
         .accessibilityLabel(item.label)
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TabBarSkeleton(itemsCount: items.count)
+        } else {
+            self
+        }
+    }
     
 }
 

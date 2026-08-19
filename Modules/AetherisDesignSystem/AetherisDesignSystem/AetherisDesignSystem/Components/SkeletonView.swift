@@ -63,3 +63,9 @@ public struct SkeletonView<S: Shape>: View {
     }
 }
 
+#Preview {
+    SkeletonView(Circle())
+        .frame(width: 80, height: 80)
+        .padding()
+        .appScreenBackground()
+}

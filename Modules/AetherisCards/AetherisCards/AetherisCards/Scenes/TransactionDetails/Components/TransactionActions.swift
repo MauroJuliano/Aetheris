@@ -4,15 +4,30 @@ import SwiftUI
 struct TransactionActions: View {
     let availableActions: [TransactionAction]
     let isDownloading: Bool
+    let isLoading: Bool
     let onAction: (TransactionAction) -> Void
 
     var body: some View {
         HStack(spacing: 0) {
-            ForEach(Array(availableActions.enumerated()), id: \.element.id) { index, action in
-                actionButton(action)
+            if isLoading {
+                ForEach(0..<4, id: \.self) { index in
+                    VStack(spacing: AppSpacing.xSmall) {
+                        SkeletonBlock(width: 24, height: 24, radius: 8)
+                        SkeletonBlock(width: 60, height: 13, radius: 6)
+                    }
+                    .frame(maxWidth: .infinity)
 
-                if index < availableActions.count - 1 {
-                    Divider().frame(height: 54)
+                    if index < 3 {
+                        Divider().frame(height: 54)
+                    }
+                }
+            } else {
+                ForEach(Array(availableActions.enumerated()), id: \.element.id) { index, action in
+                    actionButton(action)
+
+                    if index < availableActions.count - 1 {
+                        Divider().frame(height: 54)
+                    }
                 }
             }
         }
@@ -54,6 +69,7 @@ struct TransactionActions: View {
     TransactionActions(
         availableActions: [.share, .download, .addNote, .reportIssue],
         isDownloading: false,
+        isLoading: false,
         onAction: { _ in }
     )
     .padding()

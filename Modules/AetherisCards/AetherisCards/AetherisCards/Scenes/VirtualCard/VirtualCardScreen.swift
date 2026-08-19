@@ -124,6 +124,9 @@ private extension VirtualCardScreen {
 
                 VirtualCardQuickActions(
                     isGeneratingNewNumber: viewModel.isGeneratingNewNumber,
+                    copyNumberTitle: Strings.VirtualCard.copyNumber,
+                    generateNewNumberTitle: Strings.VirtualCard.generateNewNumber,
+                    settingsTitle: Strings.VirtualCard.settings,
                     onCopyNumberTap: copyCardNumber,
                     onGenerateNewNumberTap: {
                         isGenerateConfirmationPresented = true

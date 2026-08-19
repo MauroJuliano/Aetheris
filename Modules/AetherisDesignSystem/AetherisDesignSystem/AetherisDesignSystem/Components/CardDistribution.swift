@@ -95,6 +95,15 @@ public struct CardDistribution: View {
         .frame(width: spectrumRatio.size.width, height: spectrumRatio.size.height)
         .appShadow(AppShadow.elevated)
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CardDistributionSkeleton(spectrumRatio: spectrumRatio)
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

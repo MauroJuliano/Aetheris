@@ -1,3 +1,4 @@
+import AetherisDesignSystem
 import SwiftUI
 
 public enum NotificationLeadingContent: Codable, Hashable {
@@ -35,6 +36,17 @@ public enum NotificationLeadingContent: Codable, Hashable {
         case let .icon(value):
             try container.encode(Kind.icon, forKey: .kind)
             try container.encode(value, forKey: .value)
+        }
+    }
+}
+
+public extension NotificationLeadingContent {
+    var asCellContent: NotificationCellLeadingContent {
+        switch self {
+        case .image(let value):
+            return .image(value)
+        case .icon(let value):
+            return .icon(value)
         }
     }
 }

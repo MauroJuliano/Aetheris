@@ -12,6 +12,15 @@ struct CardView: View {
             CreditCardView(model: model, theme: model.style.theme)
         }
     }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CardViewSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

@@ -121,7 +121,11 @@ struct AuthenticationPreviewHomeFactory: HomeFactoryInterface {
 }
 
 struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
-    func make(onFinished: @escaping () -> Void) -> AnyView {
+    func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
         AnyView(Text("Cards preview"))
     }
 }
@@ -129,6 +133,10 @@ struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
 struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
     func make(onFinished: @escaping () -> Void) -> AnyView {
         AnyView(Text("Transfers preview"))
+    }
+
+    func makeRequestMoney(onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Request money preview"))
     }
 }
 

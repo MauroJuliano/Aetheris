@@ -47,12 +47,18 @@ struct TransactionDetailsScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    TransactionDetailsSkeleton()
-                } else if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = viewModel.errorMessage {
                     errorView(message: errorMessage)
                 } else if let transaction = viewModel.transaction {
-                    content(transaction)
+                    content(
+                        transaction,
+                        isLoading: viewModel.isLoading
+                    )
+                } else if viewModel.isLoading {
+                    content(
+                        .loadingPlaceholder,
+                        isLoading: true
+                    )
                 } else {
                     emptyState
                 }
@@ -108,24 +114,46 @@ private extension TransactionDetailsScreen {
         .padding(.bottom, AppSpacing.small)
     }
 
-    func content(_ transaction: TransactionDetailsModel) -> some View {
+    func content(
+        _ transaction: TransactionDetailsModel,
+        isLoading: Bool
+    ) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
-                TransactionDetailsHeader(transaction: transaction)
-                TransactionGeneralInformation(transaction: transaction)
+                TransactionDetailsHeader(
+                    transaction: transaction,
+                    isLoading: isLoading
+                )
+
+                TransactionGeneralInformation(
+                    transaction: transaction,
+                    isLoading: isLoading
+                )
+
                 TransactionDetailsSectionFactory.make(
                     transaction: transaction,
                     onMerchantTap: onMerchantTap,
                     onPaymentMethodTap: onPaymentMethodTap,
                     onTransactionHistoryTap: onTransactionHistoryTap,
-                    onBlockMerchantTap: onBlockMerchantTap
+                    onBlockMerchantTap: onBlockMerchantTap,
+                    isLoading: isLoading
                 )
-                TransactionSupportCard {
-                    onSupportTap(transaction.id)
-                }
+
+                CalloutCard(
+                    title: Strings.TransactionDetails.needHelp,
+                    description: Strings.TransactionDetails.supportDescription,
+                    buttonTitle: Strings.TransactionDetails.getSupport,
+                    iconName: "shield.checkered",
+                    onButtonTap: {
+                        onSupportTap(transaction.id)
+                    }
+                )
+                .toSkeleton(enable: isLoading)
+
                 TransactionActions(
                     availableActions: transaction.availableActions,
-                    isDownloading: viewModel.isDownloadingReceipt
+                    isDownloading: viewModel.isDownloadingReceipt,
+                    isLoading: isLoading
                 ) { action in
                     viewModel.performAction(
                         action,
@@ -167,6 +195,32 @@ private extension TransactionDetailsScreen {
         AppEmptyStateView(
             title: Strings.TransactionDetails.emptyTitle,
             description: Strings.TransactionDetails.emptyDescription
+        )
+    }
+}
+
+private extension TransactionDetailsModel {
+    static var loadingPlaceholder: TransactionDetailsModel {
+        TransactionDetailsModel(
+            id: UUID(),
+            title: Strings.TransactionDetails.title,
+            subtitle: nil,
+            amount: 0,
+            currencyCode: "USD",
+            kind: .purchase,
+            status: .pending,
+            date: .now,
+            transactionCode: "",
+            note: nil,
+            imageName: nil,
+            imageURL: nil,
+            incomingPaymentDetails: nil,
+            transferDetails: nil,
+            merchantDetails: nil,
+            subscriptionDetails: nil,
+            refundDetails: nil,
+            invoicePaymentDetails: nil,
+            availableActions: []
         )
     }
 }

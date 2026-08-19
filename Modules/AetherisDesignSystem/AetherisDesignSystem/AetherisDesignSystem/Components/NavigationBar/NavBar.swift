@@ -90,7 +90,18 @@ public struct NavBar: View {
             }
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
-     
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            NavBarSkeleton(
+                hasNotifications: hasNotifications,
+                hasBackButton: hasBackButton
+            )
+        } else {
+            self
+        }
     }
 }
 

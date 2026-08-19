@@ -49,6 +49,15 @@ public struct NumericKeyboard: View {
         )
     }
 
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            NumericKeyboardSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var amountHeader: some View {
         VStack(spacing: 8) {
             Text(displayedAmount)

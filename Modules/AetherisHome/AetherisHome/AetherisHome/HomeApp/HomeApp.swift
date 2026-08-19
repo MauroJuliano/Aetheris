@@ -92,9 +92,20 @@ struct HomeApp: View {
                     )
 
                     QuickActions(
-                        onTransferTap: onTransferTap,
-                        onRequestTap: onRequestMoneyTap,
-                        onMoreTap: onMoreTap
+                        title: Strings.QuickActions.sectionTitle,
+                        items: quickActionItems,
+                        onItemTap: { item in
+                            switch item.id {
+                            case Self.sendQuickActionId:
+                                onTransferTap()
+
+                            case Self.requestQuickActionId:
+                                onRequestMoneyTap()
+
+                            default:
+                                onMoreTap()
+                            }
+                        }
                     )
 
                     SpendingThisMonthView(
@@ -116,6 +127,36 @@ struct HomeApp: View {
     private func openSelectedCard() {
         guard let selectedCardId else { return }
         onCardTap(selectedCardId)
+    }
+
+    private static let sendQuickActionId = "send"
+    private static let requestQuickActionId = "request"
+    private static let moreQuickActionId = "more_services"
+
+    private var quickActionItems: [QuickActionItem] {
+        let sendAction = viewModel.quickActions.first { $0.route == .sendMoney }
+        let requestAction = viewModel.quickActions.first { $0.route == .requestMoney }
+
+        return [
+            .init(
+                id: Self.sendQuickActionId,
+                title: sendAction?.title ?? Strings.QuickActions.sendTitle,
+                subtitle: sendAction?.subtitle ?? Strings.QuickActions.transferSubtitle,
+                icon: sendAction?.icon ?? "paperplane.fill"
+            ),
+            .init(
+                id: Self.requestQuickActionId,
+                title: requestAction?.title ?? Strings.QuickActions.requestTitle,
+                subtitle: requestAction?.subtitle ?? Strings.QuickActions.requestSubtitle,
+                icon: requestAction?.icon ?? "arrow.down"
+            ),
+            .init(
+                id: Self.moreQuickActionId,
+                title: Strings.QuickActions.moreTitle,
+                subtitle: Strings.QuickActions.moreSubtitle,
+                icon: "ellipsis"
+            )
+        ]
     }
 
     private var selectedCardId: UUID? {

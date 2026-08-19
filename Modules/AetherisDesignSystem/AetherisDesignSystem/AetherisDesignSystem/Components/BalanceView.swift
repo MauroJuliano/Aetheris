@@ -39,6 +39,15 @@ public struct BalanceView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            BalanceViewSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var maskedBalanceText: String {
         guard let separatorIndex = balanceText.firstIndex(of: " ") else {
             return String(repeating: "•", count: balanceText.count)

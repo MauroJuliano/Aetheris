@@ -178,7 +178,12 @@ struct RequestMoneyPreview: View {
 
 #Preview("Contact") {
     RequestMoneyPreview(
-        contact: .previewSophie,
+        contact: .init(
+            id: UUID(),
+            name: "Sophie Keller",
+            contactInformation: "sophie.keller@aetheris.app",
+            imageName: "sophie"
+        ),
         requesterName: "Blake Brown",
         amount: 125,
         reason: "Dinner split",

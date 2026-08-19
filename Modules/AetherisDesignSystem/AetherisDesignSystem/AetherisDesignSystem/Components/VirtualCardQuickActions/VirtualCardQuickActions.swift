@@ -1,28 +1,57 @@
-import AetherisDesignSystem
 import SwiftUI
 
-struct VirtualCardQuickActions: View {
-    let isGeneratingNewNumber: Bool
-    let onCopyNumberTap: () -> Void
-    let onGenerateNewNumberTap: () -> Void
-    let onSettingsTap: () -> Void
+public struct VirtualCardQuickActions: View {
+    public let isGeneratingNewNumber: Bool
+    public let copyNumberTitle: String
+    public let generateNewNumberTitle: String
+    public let settingsTitle: String
+    public let onCopyNumberTap: () -> Void
+    public let onGenerateNewNumberTap: () -> Void
+    public let onSettingsTap: () -> Void
 
-    var body: some View {
+    public init(
+        isGeneratingNewNumber: Bool,
+        copyNumberTitle: String,
+        generateNewNumberTitle: String,
+        settingsTitle: String,
+        onCopyNumberTap: @escaping () -> Void,
+        onGenerateNewNumberTap: @escaping () -> Void,
+        onSettingsTap: @escaping () -> Void
+    ) {
+        self.isGeneratingNewNumber = isGeneratingNewNumber
+        self.copyNumberTitle = copyNumberTitle
+        self.generateNewNumberTitle = generateNewNumberTitle
+        self.settingsTitle = settingsTitle
+        self.onCopyNumberTap = onCopyNumberTap
+        self.onGenerateNewNumberTap = onGenerateNewNumberTap
+        self.onSettingsTap = onSettingsTap
+    }
+
+    public var body: some View {
         HStack(spacing: AppSpacing.small) {
-            actionButton(title: Strings.VirtualCard.copyNumber, icon: "doc.on.doc", action: onCopyNumberTap)
+            actionButton(title: copyNumberTitle, icon: "doc.on.doc", action: onCopyNumberTap)
 
             actionButton(
-                title: Strings.VirtualCard.generateNewNumber,
+                title: generateNewNumberTitle,
                 icon: "arrow.clockwise",
                 isLoading: isGeneratingNewNumber,
                 action: onGenerateNewNumberTap
             )
 
-            actionButton(title: Strings.VirtualCard.settings, icon: "gearshape", action: onSettingsTap)
+            actionButton(title: settingsTitle, icon: "gearshape", action: onSettingsTap)
         }
         .padding(.horizontal, AppSpacing.small)
         .padding(.vertical, AppSpacing.medium)
         .appCardSurface()
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            VirtualCardQuickActionsSkeleton(actionsCount: 3)
+        } else {
+            self
+        }
     }
 
     private func actionButton(
@@ -72,13 +101,18 @@ struct VirtualCardQuickActions: View {
     VStack(spacing: AppSpacing.medium) {
         VirtualCardQuickActions(
             isGeneratingNewNumber: false,
+            copyNumberTitle: "Copy number",
+            generateNewNumberTitle: "Generate new number",
+            settingsTitle: "Settings",
             onCopyNumberTap: {},
             onGenerateNewNumberTap: {},
             onSettingsTap: {}
         )
-
         VirtualCardQuickActions(
             isGeneratingNewNumber: true,
+            copyNumberTitle: "Copy number",
+            generateNewNumberTitle: "Generate new number",
+            settingsTitle: "Settings",
             onCopyNumberTap: {},
             onGenerateNewNumberTap: {},
             onSettingsTap: {}

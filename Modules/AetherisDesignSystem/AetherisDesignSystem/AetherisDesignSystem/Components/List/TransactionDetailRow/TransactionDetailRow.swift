@@ -1,16 +1,34 @@
-import AetherisDesignSystem
 import SwiftUI
 
-struct TransactionDetailRow: View {
-    let title: String
-    let icon: String
-    let value: String
-    var subtitle: String?
-    var valueColor: Color = .textPrimary
-    var showsChevron = false
-    var action: (() -> Void)?
+public struct TransactionDetailRow: View {
+    public let title: String
+    public let icon: String
+    public let value: String
 
-    var body: some View {
+    public var subtitle: String?
+    public var valueColor: Color = .textPrimary
+    public var showsChevron = false
+    public var action: (() -> Void)?
+
+    public init(
+        title: String,
+        icon: String,
+        value: String,
+        subtitle: String? = nil,
+        valueColor: Color = .textPrimary,
+        showsChevron: Bool = false,
+        action: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.icon = icon
+        self.value = value
+        self.subtitle = subtitle
+        self.valueColor = valueColor
+        self.showsChevron = showsChevron
+        self.action = action
+    }
+
+    public var body: some View {
         Group {
             if let action {
                 Button(action: action) {
@@ -67,6 +85,18 @@ struct TransactionDetailRow: View {
         .padding(.vertical, AppSpacing.small)
         .contentShape(Rectangle())
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TransactionDetailRowSkeleton(
+                showsChevron: showsChevron,
+                hasSubtitle: subtitle != nil
+            )
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {
@@ -89,6 +119,19 @@ struct TransactionDetailRow: View {
             value: "Completed",
             valueColor: .green
         )
+
+        Divider()
+            .padding(.leading, 52)
+
+        TransactionDetailRow(
+            title: "Merchant",
+            icon: "storefront",
+            value: "Netflix",
+            subtitle: "NETFLIX.COM",
+            showsChevron: true,
+            action: {}
+        )
+        .toSkeleton(enable: true)
     }
     .padding(.horizontal, AppSpacing.medium)
     .appCardSurface()

@@ -82,12 +82,19 @@ private extension RequestMoneyScreen {
 }
 
 #Preview {
+    let sophie = RequestContactModel(
+        id: UUID(),
+        name: "Sophie Keller",
+        contactInformation: "sophie.keller@aetheris.app",
+        imageName: "sophie"
+    )
+
     RequestMoneyScreen(
         viewModel: RequestMoneyViewModel(
             service: RequestMoneyService(
                 coreService: DemoCoreService(delay: 0)
             ),
-            initialContact: .previewSophie
+            initialContact: sophie
         ),
         onBackAction: {}
     )

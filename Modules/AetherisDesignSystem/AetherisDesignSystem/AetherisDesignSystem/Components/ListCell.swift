@@ -58,6 +58,15 @@ public struct ListCell: View {
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            ListCellSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

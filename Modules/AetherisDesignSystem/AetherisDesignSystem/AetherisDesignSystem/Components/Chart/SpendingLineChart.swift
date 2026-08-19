@@ -111,6 +111,15 @@ public struct SpendingLineChart: View {
         .frame(height: 72)
     }
 
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            SpendingLineChartSkeleton()
+        } else {
+            self
+        }
+    }
+
     private func makePath(in size: CGSize) -> Path {
         var path = Path()
 

@@ -24,4 +24,14 @@ public final class TransfersFeatureFactory: TransfersFactoryInterface {
             onFinished: onFinished
         )
     }
+
+    @MainActor public func makeRequestMoney(
+        onFinished: @escaping () -> Void
+    ) -> AnyView {
+        TransfersFactory.makeRequestMoney(
+            coreService: coreService,
+            onBack: onFinished,
+            onFinished: onFinished
+        )
+    }
 }

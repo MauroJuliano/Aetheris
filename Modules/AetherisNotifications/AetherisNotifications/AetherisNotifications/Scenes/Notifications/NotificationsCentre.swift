@@ -56,7 +56,14 @@ struct NotificationsCentre: View {
 
                                 VStack {
                                     ForEach(section.items) { cell in
-                                        NotificationCell(model: cell)
+                                        NotificationCell(
+                                            model: .init(
+                                                title: cell.title,
+                                                leadingContent: cell.leadingContent.asCellContent,
+                                                timeLabel: NotificationTimeLabelFormatter.label(for: cell.date),
+                                                hasDivider: cell.hasDivider
+                                            )
+                                        )
                                     }
                                 }
                                 .appCardSurface(

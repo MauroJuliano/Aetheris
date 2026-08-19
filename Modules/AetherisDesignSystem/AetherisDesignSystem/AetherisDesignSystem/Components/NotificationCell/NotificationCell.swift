@@ -1,9 +1,39 @@
-import AetherisDesignSystem
 import SwiftUI
 
+public enum NotificationCellLeadingContent: Hashable {
+    case image(String)
+    case icon(String)
+}
+
+public struct NotificationCellModel: Identifiable, Hashable {
+    public let id: UUID
+    public let title: String
+    public let leadingContent: NotificationCellLeadingContent
+    public let timeLabel: String
+    public let hasDivider: Bool
+
+    public init(
+        id: UUID = UUID(),
+        title: String,
+        leadingContent: NotificationCellLeadingContent,
+        timeLabel: String,
+        hasDivider: Bool
+    ) {
+        self.id = id
+        self.title = title
+        self.leadingContent = leadingContent
+        self.timeLabel = timeLabel
+        self.hasDivider = hasDivider
+    }
+}
+
 public struct NotificationCell: View {
-    var model: Notifications
-    
+    public let model: NotificationCellModel
+
+    public init(model: NotificationCellModel) {
+        self.model = model
+    }
+
     public var body: some View {
         HStack(spacing: AppSpacing.medium - AppSpacing.xxxSmall) {
             leadingView
@@ -20,18 +50,23 @@ public struct NotificationCell: View {
                     .fill(Color.brandPrimaryColor)
                     .frame(width: AppSpacing.xSmall, height: AppSpacing.xSmall)
 
-                Text(timeLabel)
+                Text(model.timeLabel)
                     .font(AppTypography.footnote)
                     .foregroundStyle(Color.textTertiary)
             }
         }
         .appListCellRow(hasDivider: model.hasDivider)
     }
-    
-    private var timeLabel: String {
-        NotificationTimeLabelFormatter.label(for: model.date)
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            NotificationCellSkeleton()
+        } else {
+            self
+        }
     }
-    
+
     @ViewBuilder
     private var leadingView: some View {
         switch model.leadingContent {
@@ -57,10 +92,10 @@ public struct NotificationCell: View {
 
 #Preview {
     NotificationCell(
-        model: Notifications(
+        model: .init(
             title: "Payment received from Sophie",
             leadingContent: .image("sophie"),
-            date: Date(),
+            timeLabel: "2h ago",
             hasDivider: false
         )
     )
