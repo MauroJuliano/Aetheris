@@ -113,7 +113,13 @@ private extension TransactionDetailsScreen {
             VStack(spacing: AppSpacing.medium) {
                 TransactionDetailsHeader(transaction: transaction)
                 TransactionGeneralInformation(transaction: transaction)
-                transactionSpecificSection(transaction)
+                TransactionDetailsSectionFactory.make(
+                    transaction: transaction,
+                    onMerchantTap: onMerchantTap,
+                    onPaymentMethodTap: onPaymentMethodTap,
+                    onTransactionHistoryTap: onTransactionHistoryTap,
+                    onBlockMerchantTap: onBlockMerchantTap
+                )
                 TransactionSupportCard {
                     onSupportTap(transaction.id)
                 }
@@ -121,83 +127,17 @@ private extension TransactionDetailsScreen {
                     availableActions: transaction.availableActions,
                     isDownloading: viewModel.isDownloadingReceipt
                 ) { action in
-                    handleAction(action, transaction: transaction)
+                    viewModel.performAction(
+                        action,
+                        onShareTap: onShareTap,
+                        onDownloadTap: onDownloadTap,
+                        onAddNoteTap: onAddNoteTap,
+                        onReportIssueTap: onReportIssueTap
+                    )
                 }
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .padding(.bottom, AppSpacing.bottomBarClearance)
-        }
-    }
-
-    @ViewBuilder
-    func transactionSpecificSection(_ transaction: TransactionDetailsModel) -> some View {
-        switch transaction.kind {
-        case .incomingPayment:
-            if let details = transaction.incomingPaymentDetails {
-                IncomingPaymentDetailsSection(
-                    details: details,
-                    onSenderTap: { onMerchantTap(details.senderId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
-                )
-            }
-        case .outgoingTransfer:
-            if let details = transaction.transferDetails {
-                TransferDetailsSection(
-                    details: details,
-                    onRecipientTap: { onMerchantTap(details.recipientId) }
-                )
-            }
-        case .purchase:
-            if let details = transaction.merchantDetails {
-                MerchantDetailsSection(
-                    details: details,
-                    onMerchantTap: { onMerchantTap(details.merchantId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
-                )
-            }
-        case .subscription:
-            if let details = transaction.subscriptionDetails {
-                SubscriptionDetailsSection(
-                    details: details,
-                    onMerchantTap: { onMerchantTap(details.merchantId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) },
-                    onHistoryTap: { onTransactionHistoryTap(details.merchantId) },
-                    onBlockMerchantTap: { onBlockMerchantTap(details.merchantId) }
-                )
-            }
-        case .refund:
-            if let details = transaction.refundDetails {
-                RefundDetailsSection(
-                    details: details,
-                    onOriginalTransactionTap: {
-                        onTransactionHistoryTap(details.originalTransactionId)
-                    }
-                )
-            }
-        case .invoicePayment:
-            if let details = transaction.invoicePaymentDetails {
-                InvoicePaymentDetailsSection(
-                    details: details,
-                    onInvoiceTap: { onTransactionHistoryTap(details.invoiceId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
-                )
-            }
-        }
-    }
-
-    func handleAction(_ action: TransactionAction, transaction: TransactionDetailsModel) {
-        switch action {
-        case .share:
-            onShareTap(transaction.id)
-        case .download:
-            Task {
-                guard await viewModel.downloadReceipt() != nil else { return }
-                onDownloadTap(transaction.id)
-            }
-        case .addNote:
-            onAddNoteTap(transaction.id)
-        case .reportIssue:
-            onReportIssueTap(transaction.id)
         }
     }
 

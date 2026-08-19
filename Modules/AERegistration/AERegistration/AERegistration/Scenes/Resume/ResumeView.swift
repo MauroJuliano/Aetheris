@@ -158,7 +158,11 @@ private extension ResumeView {
             title: Strings.Resume.continueButton,
             isLoading: viewModel.isLoading
         ) {
-            submit()
+            Task {
+                if await viewModel.submit() {
+                    onContinue()
+                }
+            }
         }
         .disabled(viewModel.isLoading)
         .accessibilityIdentifier(
@@ -176,7 +180,11 @@ private extension ResumeView {
                 Strings.SubmissionError.cancel,
             onPrimaryAction: {
                 viewModel.submissionError = nil
-                submit()
+                Task {
+                    if await viewModel.submit() {
+                        onContinue()
+                    }
+                }
             },
             onSecondaryAction: {
                 viewModel.submissionError = nil
@@ -184,17 +192,6 @@ private extension ResumeView {
         )
     }
 
-    func submit() {
-        guard !viewModel.isLoading else {
-            return
-        }
-
-        Task {
-            if await viewModel.submit() {
-                onContinue()
-            }
-        }
-    }
 }
 
 private extension ResumeView {

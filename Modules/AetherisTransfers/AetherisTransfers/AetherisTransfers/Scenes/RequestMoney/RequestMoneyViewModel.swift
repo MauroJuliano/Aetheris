@@ -54,6 +54,15 @@ final class RequestMoneyViewModel: ObservableObject {
         }
     }
 
+    var primaryButtonTitle: String {
+        switch selectedMode {
+        case .contact:
+            return Strings.RequestMoney.sendRequest
+        case .shareLink:
+            return Strings.RequestMoney.shareRequest
+        }
+    }
+
     func loadIfNeeded() async {
         guard !hasLoaded else {
             return
@@ -110,7 +119,7 @@ final class RequestMoneyViewModel: ObservableObject {
         amountText = CurrencyInputFormatter.format(value)
     }
 
-    func submit() async -> MoneyRequestModel? {
+    func submit() async -> RequestMoneySubmissionResult? {
         guard canSubmit else {
             return nil
         }
@@ -124,6 +133,7 @@ final class RequestMoneyViewModel: ObservableObject {
 
         do {
             let request: MoneyRequestModel
+            let shouldShareLink: Bool
 
             switch selectedMode {
             case .contact:
@@ -136,17 +146,22 @@ final class RequestMoneyViewModel: ObservableObject {
                     amount: amount,
                     reason: normalizedReason
                 )
+                shouldShareLink = false
             case .shareLink:
                 request = try await service.createSharedRequest(
                     amount: amount,
                     reason: normalizedReason
                 )
+                shouldShareLink = true
             }
 
             UINotificationFeedbackGenerator()
                 .notificationOccurred(.success)
 
-            return request
+            return RequestMoneySubmissionResult(
+                request: request,
+                shouldShareLink: shouldShareLink
+            )
         } catch {
             submitErrorMessage = Self.message(for: error)
 
@@ -181,4 +196,9 @@ final class RequestMoneyViewModel: ObservableObject {
 
         return [selectedContact] + contacts
     }
+}
+
+struct RequestMoneySubmissionResult {
+    let request: MoneyRequestModel
+    let shouldShareLink: Bool
 }
