@@ -1,0 +1,27 @@
+"Common.continueButton" = "Weiter";
+"Common.errorSubmit" = "Senden fehlgeschlagen";
+
+"NotificationsCentre.unavailableTitle" = "Benachrichtigungen nicht verfügbar";
+"NotificationsCentre.emptyTitle" = "Noch keine Benachrichtigungen";
+"NotificationsCentre.emptyDescription" = "Der simulierte Dienst hat keine Benachrichtigungen zum Anzeigen.";
+"NotificationsCentre.title" = "Benachrichtigungen";
+
+"Common.tryAgain" = "Erneut versuchen";
+"Common.back" = "Zurück";
+"Common.close" = "Schließen";
+
+"Notifications.titleTransferSent" = "Geld wurde erfolgreich an Sophie Keller überwiesen";
+"Notifications.titlePaymentReceived" = "Zahlung von Amelia Thompson erhalten";
+"Notifications.titleSubscriptionRenewed" = "Abonnement für Man's Best Friend verlängert";
+"Notifications.titleRefundProcessed" = "Erstattung erfolgreich bearbeitet";
+"Notifications.titleSubscriptionExpired" = "Dein Abonnement ist abgelaufen";
+"Notifications.titleMaintenanceCompleted" = "Systemwartung abgeschlossen";
+"Notifications.sectionToday" = "Heute";
+"Notifications.sectionYesterday" = "Gestern";
+"Notifications.sectionLastWeek" = "Letzte Woche";
+"Notifications.sectionLastMonth" = "Letzter Monat";
+"Notifications.sectionOthers" = "Sonstige";
+"Notifications.oneDayAgo" = "Vor 1 Tag";
+"Notifications.daysAgo" = "Vor %d Tagen";
+"Notifications.oneMonthAgo" = "Vor 1 Monat";
+"Notifications.monthsAgo" = "Vor %d Monaten";
