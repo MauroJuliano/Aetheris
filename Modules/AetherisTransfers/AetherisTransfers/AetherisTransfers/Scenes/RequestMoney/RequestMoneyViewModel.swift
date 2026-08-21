@@ -12,8 +12,17 @@ final class RequestMoneyViewModel: ObservableObject {
     @Published private(set) var selectedContact: RequestContactModel?
 
     @Published var selectedMode: RequestMoneyMode = .contact
-    @Published var amountText = ""
-    @Published var reason = ""
+    @Published var amountText = "" {
+        didSet {
+            let formatted = CurrencyInputFormatter.format(amountText)
+            if amountText != formatted { amountText = formatted }
+        }
+    }
+    @Published var reason = "" {
+        didSet {
+            if reason.count > Self.reasonLimit { reason = String(reason.prefix(Self.reasonLimit)) }
+        }
+    }
 
     @Published private(set) var isLoading = false
     @Published private(set) var isSubmitting = false

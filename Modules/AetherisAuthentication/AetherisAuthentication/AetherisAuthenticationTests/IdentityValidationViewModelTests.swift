@@ -10,15 +10,20 @@ struct IdentityValidationViewModelTests {
     func fourDigits_requestValidationAndReturnAuthorization() async {
         let service = IdentityValidationServiceSpy(result: .success(.fixture))
         let sut = IdentityValidationViewModel(content: .fixture, service: service)
-        var receivedAuthorization: IdentityAuthorization?
+        let receivedAuthorization = ValueBox<IdentityAuthorization>()
 
         ["1", "2", "3", "4"].forEach { digit in
-            sut.handleDigit(digit) { receivedAuthorization = $0 }
+            sut.handleDigit(digit) { receivedAuthorization.value = $0 }
         }
-        await waitForAsyncWork()
+
+        await waitForValidation(
+            service: service,
+            sut: sut,
+            timeout: .seconds(1)
+        )
 
         #expect(service.validatedPins == ["1234"])
-        #expect(receivedAuthorization == .fixture)
+        #expect(receivedAuthorization.value == .fixture)
         #expect(sut.pin.isEmpty)
         #expect(sut.validationErrorMessage == nil)
     }
@@ -31,7 +36,11 @@ struct IdentityValidationViewModelTests {
         ["0", "0", "0", "0"].forEach { digit in
             sut.handleDigit(digit) { _ in }
         }
-        await waitForAsyncWork()
+        await waitForValidation(
+            service: service,
+            sut: sut,
+            timeout: .seconds(1)
+        )
 
         #expect(service.validatedPins == ["0000"])
         #expect(sut.validationErrorMessage != nil)
@@ -41,9 +50,26 @@ struct IdentityValidationViewModelTests {
         #expect(sut.validationErrorMessage == nil)
     }
 
-    private func waitForAsyncWork() async {
-        try? await Task.sleep(for: .milliseconds(20))
+    private func waitForValidation(
+        service: IdentityValidationServiceSpy,
+        sut: IdentityValidationViewModel,
+        timeout: Duration
+    ) async {
+        await Task.yield()
+
+        let deadline = ContinuousClock.now.advanced(by: timeout)
+
+        while (service.validatedPins.isEmpty || sut.isAuthenticating),
+              ContinuousClock.now < deadline {
+            await Task.yield()
+            try? await Task.sleep(for: .milliseconds(5))
+        }
     }
+
+}
+
+private final class ValueBox<Value> {
+    var value: Value?
 }
 
 private final class IdentityValidationServiceSpy: IdentityValidationServicing {

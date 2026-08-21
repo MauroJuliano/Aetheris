@@ -35,6 +35,12 @@
 "UserName.placeholder" = "Enter your full legal name";
 "UserName.error" = "Enter at least 2 letters.";
 
+// Email
+"Email.title" = "Email address";
+"Email.subTitle" = "We'll use this email to identify your account and send important updates.";
+"Email.placeholder" = "name@example.com";
+"Email.error" = "Enter a valid email address.";
+
 // BirthDate
 "Birthdate.title" = "Date of birth";
 "Birthdate.subTitle" = "We'll use your date of birth to verify your identity securely";
@@ -67,6 +73,7 @@
 "Resume.edit" = "Edit";
 "Resume.fullName" = "Full Name";
 "Resume.mockName" = "Melissa Mccarthy";
+"Resume.mockEmail" = "melissa@example.com";
 "Resume.mockMysticalTime" = "Mystical time";
 "Resume.mockAnnSomething" = "Ann something";
 "Resume.mockBirthDate" = "12/10/1980";

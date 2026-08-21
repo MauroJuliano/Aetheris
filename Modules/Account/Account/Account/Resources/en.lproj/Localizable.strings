@@ -1,5 +1,17 @@
 "Common.tryAgain" = "Try again";
 "Common.back" = "Back";
+"Common.ok" = "OK";
+
+"Language.title" = "Language";
+"Language.description" = "Choose the language you prefer for Aetheris.";
+"Language.systemDefault" = "System Default";
+"Language.systemDescription" = "Use your device language";
+"Language.english" = "English";
+"Language.german" = "German";
+"Language.portuguese" = "Portuguese";
+"Language.selected" = "Selected";
+"Language.restartTitle" = "Language saved";
+"Language.restartDescription" = "The new language will be applied the next time you open Aetheris.";
 
 "Profile.logout" = "Logout";
 "Profile.version" = "Version 0.00.1";

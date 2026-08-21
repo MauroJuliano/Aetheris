@@ -1,6 +1,17 @@
 "TabBar.home" = "Home";
 "TabBar.cards" = "Cards";
 "TabBar.profile" = "Profile";
+"TabBar.transfer" = "Transfer";
+
+"Accessibility.back" = "Back";
+"Accessibility.notifications" = "Notifications";
+"Accessibility.loading" = "Loading";
+"Accessibility.showBalance" = "Show balance";
+"Accessibility.hideBalance" = "Hide balance";
+"Accessibility.hiddenBalance" = "Balance hidden";
+
+"Balance.title" = "Balance";
+"NumericKeyboard.walletBalance" = "Wallet balance:";
 
 "MinimalDropdown.transactionsHistory" = "Transactions History";
 "MinimalDropdown.today" = "Today";

@@ -52,6 +52,25 @@ struct BeneficiaryListViewModelTests {
         #expect(!sut.isLoading)
         #expect(sut.beneficiaries.isEmpty)
     }
+
+    @Test
+    func presentationCollections_filterAndGroupBeneficiaries() async {
+        let remote = [
+            Beneficiary.fixture(name: "Bruno"),
+            Beneficiary.fixture(name: "Alice"),
+            Beneficiary.fixture(name: "Amanda")
+        ]
+        let sut = BeneficiaryListViewModel(
+            service: BeneficiaryListServiceSpy(result: .success(.init(beneficiaries: remote)))
+        )
+
+        await sut.load()
+
+        #expect(sut.recentBeneficiaries.map(\.name) == ["Bruno", "Alice", "Amanda"])
+        #expect(sut.filteredBeneficiaries(query: "man").map(\.name) == ["Amanda"])
+        #expect(sut.sections(query: "a").map(\.letter) == ["A"])
+        #expect(sut.sections(query: "a")[0].beneficiaries.map(\.name) == ["Alice", "Amanda"])
+    }
 }
 
 private extension Beneficiary {

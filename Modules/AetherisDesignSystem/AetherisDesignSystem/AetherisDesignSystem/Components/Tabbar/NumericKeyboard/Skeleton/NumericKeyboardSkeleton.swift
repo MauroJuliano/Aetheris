@@ -4,9 +4,12 @@ struct NumericKeyboardSkeleton: View {
     var body: some View {
         VStack(spacing: AppSpacing.xLarge - AppSpacing.xSmall) {
             VStack(spacing: 8) {
-                SkeletonBlock(width: 150, height: 30, radius: 12)
-                SkeletonBlock(width: 180, height: 14, radius: 7)
-                SkeletonBlock(width: 120, height: 14, radius: 7)
+                SkeletonBlock(width: 150, height: 38, radius: 12)
+
+                HStack(spacing: AppSpacing.small) {
+                    SkeletonBlock(width: 110, height: 17, radius: 7)
+                    SkeletonBlock(width: 76, height: 17, radius: 7)
+                }
             }
             .padding(.bottom, 12)
 
@@ -15,10 +18,10 @@ struct NumericKeyboardSkeleton: View {
                     HStack(spacing: AppComponentMetrics.keyboardKeySpacing) {
                         ForEach(0..<3, id: \.self) { _ in
                             SkeletonBlock(
-                                width: 72,
                                 height: AppComponentMetrics.keyboardKeyHeight,
                                 radius: AppComponentMetrics.keyboardKeyCornerRadius
                             )
+                            .frame(maxWidth: .infinity)
                         }
                     }
                 }
@@ -27,6 +30,7 @@ struct NumericKeyboardSkeleton: View {
         .padding(.horizontal, AppComponentMetrics.keyboardContainerHorizontalPadding)
         .padding(.top, AppComponentMetrics.keyboardContainerTopPadding)
         .padding(.bottom, AppComponentMetrics.keyboardContainerBottomPadding)
+        .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: AppRadius.large + AppRadius.medium, style: .continuous)
                 .fill(Color.backgroundColorA)

@@ -4,7 +4,7 @@ extension Decimal {
     var currencyFormatted: String {
         formatted(
             .currency(code: "BRL")
-                .locale(Locale(identifier: "pt_BR"))
+                .locale(.cardDetails)
         )
     }
 }
@@ -16,8 +16,14 @@ extension Date {
                 .day(.twoDigits)
                 .month(.abbreviated)
                 .year()
-                .locale(Locale(identifier: "pt_BR"))
+                .locale(.cardDetails)
         )
         .uppercased()
+    }
+}
+
+private extension Locale {
+    static var cardDetails: Locale {
+        Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
     }
 }

@@ -12,6 +12,10 @@ final class TransactionDetailsViewModel: ObservableObject {
     private let service: any TransactionDetailsServicing
     private var hasLoaded = false
 
+    var displayedTransaction: TransactionDetailsModel? {
+        transaction ?? (isLoading ? .loadingPlaceholder : nil)
+    }
+
     init(transactionId: UUID, service: any TransactionDetailsServicing) {
         self.transactionId = transactionId
         self.service = service
@@ -95,5 +99,31 @@ final class TransactionDetailsViewModel: ObservableObject {
 
     func dismissActionError() {
         actionErrorMessage = nil
+    }
+}
+
+private extension TransactionDetailsModel {
+    static var loadingPlaceholder: TransactionDetailsModel {
+        TransactionDetailsModel(
+            id: UUID(),
+            title: Strings.TransactionDetails.title,
+            subtitle: nil,
+            amount: 0,
+            currencyCode: "USD",
+            kind: .purchase,
+            status: .pending,
+            date: .now,
+            transactionCode: "",
+            note: nil,
+            imageName: nil,
+            imageURL: nil,
+            incomingPaymentDetails: nil,
+            transferDetails: nil,
+            merchantDetails: nil,
+            subscriptionDetails: nil,
+            refundDetails: nil,
+            invoicePaymentDetails: nil,
+            availableActions: []
+        )
     }
 }

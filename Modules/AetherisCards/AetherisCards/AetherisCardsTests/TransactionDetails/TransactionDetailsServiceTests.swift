@@ -33,18 +33,35 @@ struct TransactionDetailsServiceTests {
         let sut = TransactionDetailsService(coreService: coreService)
 
         let incoming = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.ameliaPayment)
+        let ameliaTransfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.ameliaTransfer)
         let transfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.sophieTransfer)
         let purchase = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.ifoodPurchase)
         let invoicePayment = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.invoicePayment)
 
         #expect(incoming.kind == .incomingPayment)
         #expect(incoming.incomingPaymentDetails != nil)
+        #expect(ameliaTransfer.kind == .outgoingTransfer)
+        #expect(ameliaTransfer.transferDetails?.recipientName == "Amelia Thompson")
         #expect(transfer.kind == .outgoingTransfer)
         #expect(transfer.transferDetails != nil)
         #expect(purchase.kind == .purchase)
         #expect(purchase.merchantDetails != nil)
         #expect(invoicePayment.kind == .invoicePayment)
         #expect(invoicePayment.invoicePaymentDetails != nil)
+    }
+
+    @Test
+    func fetchTransactionDetails_usesNeutralFallback_forUnknownIdentifiers() async throws {
+        let coreService = CoreServiceTestDouble()
+        let sut = TransactionDetailsService(coreService: coreService)
+        let unknownId = UUID(uuidString: "FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")!
+
+        let transaction = try await sut.fetchTransactionDetails(transactionId: unknownId)
+
+        #expect(transaction.id == unknownId)
+        #expect(transaction.title == "Transaction")
+        #expect(transaction.kind == .purchase)
+        #expect(transaction.imageName == nil)
     }
 
     @Test

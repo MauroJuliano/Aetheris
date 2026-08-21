@@ -13,6 +13,7 @@ struct RegistrationServiceTests {
             sin: "000000000",
             mothersName: "Jane Doe",
             userName: "Melissa",
+            email: "melissa@example.com",
             birthdate: "10/10/1999"
         )
 
@@ -71,6 +72,7 @@ extension RegistrationProfileRequest {
         sin: "000000000",
         mothersName: "Jane Doe",
         userName: "Melissa",
+        email: "melissa@example.com",
         birthdate: "10/10/1999"
     )
 }

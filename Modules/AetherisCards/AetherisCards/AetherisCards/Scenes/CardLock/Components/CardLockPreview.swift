@@ -149,6 +149,12 @@ struct CardLockPreview: View {
     }
 }
 
+extension CardLockPreview {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { CardLockPreviewSkeleton() } else { self }
+    }
+}
+
 #Preview("Unlocked") {
     CardLockPreview(model: CardsPreviewData.cardLock)
         .padding()

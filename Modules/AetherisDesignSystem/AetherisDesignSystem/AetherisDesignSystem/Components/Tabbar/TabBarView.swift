@@ -32,7 +32,7 @@ public struct TabBarView: View {
                     }
                     .appShadow(AppShadow.tabBar)
                     .accessibilityIdentifier("tab.transfer")
-                    .accessibilityLabel("Transfer")
+                    .accessibilityLabel(Strings.TabBar.transfer)
                 }
                 .padding(.horizontal, AppTabBarMetrics.horizontalPadding)
                 .padding(.bottom, AppTabBarMetrics.bottomPadding)

@@ -21,11 +21,7 @@ struct ConfirmPasswordView: View {
     }
 
     var body: some View {
-        ZStack {
-            if viewModel.isLoading {
-                RegisterInputSkeleton()
-            } else {
-                RegisterView(
+        RegisterView(
                     title: viewModel.title,
                     subTitle: viewModel.subTitle,
                     textFieldValue: Binding(
@@ -38,26 +34,24 @@ struct ConfirmPasswordView: View {
                     isSecureEntry: true,
                     fieldErrorMessage: viewModel.errorMessage,
                     secureTextHiddenLabel: Strings.Password.show,
-                    secureTextVisibleLabel: Strings.Password.hide
-                ) {
+                    secureTextVisibleLabel: Strings.Password.hide,
+                    isLoading: viewModel.isLoading
+        ) {
                     Task {
                         if await viewModel.submit() {
                             onSuccess()
                         }
                     }
-                }
-            }
         }
         .safeAreaInset(edge: .top, spacing: 0) {
-            if !viewModel.isLoading {
-                NavBar(
+            NavBar(
                     hasNotifications: false,
                     hasBackButton: true,
                     model: .init(hasInitialSpace: false),
                     onBack: onBack
                 )
+                .toSkeleton(enable: viewModel.isLoading)
                 .padding(.top, AppSpacing.medium)
-            }
         }
         .appScreenBackground()
         .navigationBarHidden(true)
@@ -68,7 +62,7 @@ struct ConfirmPasswordView: View {
                 primaryButtonTitle: Strings.SubmissionError.tryAgain,
                 secondaryButtonTitle: Strings.SubmissionError.cancel,
                 onPrimaryAction: {
-                    viewModel.submissionError = nil
+                    viewModel.dismissSubmissionError()
                     Task {
                         if await viewModel.submit() {
                             onSuccess()
@@ -76,7 +70,7 @@ struct ConfirmPasswordView: View {
                     }
                 },
                 onSecondaryAction: {
-                    viewModel.submissionError = nil
+                    viewModel.dismissSubmissionError()
                 }
             )
         }
@@ -87,7 +81,7 @@ struct ConfirmPasswordView: View {
             get: { viewModel.submissionError != nil },
             set: { isPresented in
                 if !isPresented {
-                    viewModel.submissionError = nil
+                    viewModel.dismissSubmissionError()
                 }
             }
         )

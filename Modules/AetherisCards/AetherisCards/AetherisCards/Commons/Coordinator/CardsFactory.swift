@@ -26,6 +26,27 @@ public final class CardsFactory: CardsFactoryInterface {
     }
 
     @MainActor
+    public func makeEmbedded(
+        path: Binding<NavigationPath>,
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        Self.makeEmbedded(
+            coreService: coreService,
+            path: path,
+            onFinished: onFinished,
+            onSendMoneyTap: onSendMoneyTap,
+            onRequestMoneyTap: onRequestMoneyTap
+        )
+    }
+
+    @MainActor
+    public func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView {
+        Self.makeNavigationHost(content: content, coreService: coreService, path: path)
+    }
+
+    @MainActor
     public static func makeEmbedded(
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,

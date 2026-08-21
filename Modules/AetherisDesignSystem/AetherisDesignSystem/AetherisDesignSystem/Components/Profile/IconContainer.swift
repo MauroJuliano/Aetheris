@@ -1,9 +1,5 @@
 import SwiftUI
 
-struct IconContainerModel {
-    let icon: String
-}
-
 struct IconContainer: View {
     var model: IconContainerModel
     

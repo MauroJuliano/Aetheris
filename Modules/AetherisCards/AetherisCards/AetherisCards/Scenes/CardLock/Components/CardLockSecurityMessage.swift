@@ -34,6 +34,12 @@ struct CardLockSecurityMessage: View {
     }
 }
 
+extension CardLockSecurityMessage {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { CardLockRowSkeleton() } else { self }
+    }
+}
+
 #Preview {
     CardLockSecurityMessage()
         .padding()

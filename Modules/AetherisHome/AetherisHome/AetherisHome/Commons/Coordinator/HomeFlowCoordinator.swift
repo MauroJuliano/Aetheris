@@ -2,12 +2,16 @@ import Core
 import AetherisAuthenticationInterface
 import AetherisCards
 import AetherisCardsInterface
+import AetherisInsightsInterface
+import AetherisNotificationsInterface
 import AetherisTransfers
 import SwiftUI
 
 struct HomeFlowCoordinator: View {
     let coreService: any HasCoreService
     let identityValidation: any IdentityValidating
+    let insightsFactory: InsightsFactoryInterface
+    let notificationsFactory: NotificationsFactoryInterface
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
     @EnvironmentObject var tabBarRoutingStore: TabBarRoutingStore
     @State var selectedBeneficiary: Beneficiary?
@@ -19,7 +23,10 @@ struct HomeFlowCoordinator: View {
                 content: CardsFactory.makeNavigationHost(
                     content: AnyView(
                         rootView
-                            .navigationDestination(for: HomeRoute.self, destination: destinationView(for:))
+                            .navigationDestination(
+                                for: HomeRoute.self,
+                                destination: destinationView(for:)
+                            )
                     ),
                     coreService: coreService,
                     path: $navigation.path
@@ -40,14 +47,18 @@ struct HomeFlowCoordinator: View {
     }
 
     private func syncTabBarVisibility() {
-        tabBarVisibilityStore.isVisible = navigation.isAtRoot
+        tabBarVisibilityStore.isVisible = HomeFlowCoordinatorRouter.tabBarIsVisible(
+            isAtRoot: navigation.isAtRoot
+        )
     }
 }
 
 #Preview {
     HomeFlowCoordinator(
         coreService: DemoCoreService(delay: 0),
-        identityValidation: HomePreviewIdentityValidator()
+        identityValidation: HomePreviewIdentityValidator(),
+        insightsFactory: HomePreviewInsightsFactory(),
+        notificationsFactory: HomePreviewNotificationsFactory()
     )
     .environmentObject(TabBarVisibilityStore())
     .environmentObject(TabBarRoutingStore())
@@ -72,6 +83,28 @@ private struct HomePreviewIdentityValidator: IdentityValidating {
                         )
                     )
                 }
+        )
+    }
+}
+
+private struct HomePreviewNotificationsFactory: NotificationsFactoryInterface {
+    func make(
+        onBack: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            Color.clear
+                .onAppear(perform: onBack)
+        )
+    }
+}
+
+private struct HomePreviewInsightsFactory: InsightsFactoryInterface {
+    func makeReport(
+        onBack: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            Color.clear
+                .onAppear(perform: onBack)
         )
     }
 }

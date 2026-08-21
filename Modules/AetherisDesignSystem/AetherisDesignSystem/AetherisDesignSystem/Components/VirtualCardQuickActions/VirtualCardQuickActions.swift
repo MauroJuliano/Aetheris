@@ -94,6 +94,8 @@ public struct VirtualCardQuickActions: View {
         }
         .buttonStyle(.plain)
         .disabled(isLoading)
+        .accessibilityLabel(title.replacingOccurrences(of: "\n", with: " "))
+        .accessibilityValue(isLoading ? Strings.Accessibility.loading : "")
     }
 }
 

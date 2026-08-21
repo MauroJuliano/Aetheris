@@ -1,19 +1,5 @@
 import SwiftUI
 
-public struct NavBarModel {
-    var firstText: String?
-    var secondText: String?
-    var hasInitialSpace: Bool
-    
-    public init(firstText: String? = nil,
-                secondText: String? = nil,
-                hasInitialSpace: Bool) {
-        self.firstText = firstText
-        self.secondText = secondText
-        self.hasInitialSpace = hasInitialSpace
-    }
-}
-
 public struct NavBar: View {
     @State private var hasNotifications: Bool
     @State private var hasBackButton: Bool
@@ -62,6 +48,7 @@ public struct NavBar: View {
                         }
                         
                     }
+                    .accessibilityLabel(Strings.Accessibility.back)
                 }
                 
                 if let firstText = model.firstText {
@@ -86,6 +73,7 @@ public struct NavBar: View {
                     } label: {
                         NotificationBell(showBadge: shouldPresentNotifications)
                     }
+                    .accessibilityLabel(Strings.Accessibility.notifications)
                 }
             }
         }

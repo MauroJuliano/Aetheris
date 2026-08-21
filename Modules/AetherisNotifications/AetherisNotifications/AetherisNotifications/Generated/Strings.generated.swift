@@ -23,6 +23,18 @@ internal enum Strings {
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
   }
   internal enum Notifications {
+    /// %d days ago
+    internal static func daysAgo(_ p1: Int) -> String {
+      return Strings.tr("Localizable", "Notifications.daysAgo", p1, fallback: "%d days ago")
+    }
+    /// %d months ago
+    internal static func monthsAgo(_ p1: Int) -> String {
+      return Strings.tr("Localizable", "Notifications.monthsAgo", p1, fallback: "%d months ago")
+    }
+    /// 1 day ago
+    internal static let oneDayAgo = Strings.tr("Localizable", "Notifications.oneDayAgo", fallback: "1 day ago")
+    /// 1 month ago
+    internal static let oneMonthAgo = Strings.tr("Localizable", "Notifications.oneMonthAgo", fallback: "1 month ago")
     /// Last Month
     internal static let sectionLastMonth = Strings.tr("Localizable", "Notifications.sectionLastMonth", fallback: "Last Month")
     /// Last Week
@@ -43,8 +55,8 @@ internal enum Strings {
     internal static let titleSubscriptionExpired = Strings.tr("Localizable", "Notifications.titleSubscriptionExpired", fallback: "Your subscription has expired")
     /// Subscription renewed for Man's best Friend
     internal static let titleSubscriptionRenewed = Strings.tr("Localizable", "Notifications.titleSubscriptionRenewed", fallback: "Subscription renewed for Man's best Friend")
-    /// Funds successfully transferred to Melissa
-    internal static let titleTransferSent = Strings.tr("Localizable", "Notifications.titleTransferSent", fallback: "Funds successfully transferred to Melissa")
+    /// Funds successfully transferred to Sophie Keller
+    internal static let titleTransferSent = Strings.tr("Localizable", "Notifications.titleTransferSent", fallback: "Funds successfully transferred to Sophie Keller")
   }
   internal enum NotificationsCentre {
     /// The simulated service has no notifications to show.

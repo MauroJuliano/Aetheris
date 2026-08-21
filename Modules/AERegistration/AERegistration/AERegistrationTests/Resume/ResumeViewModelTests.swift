@@ -15,12 +15,14 @@ struct ResumeViewModelTests {
             .sin,
             .mothersName,
             .userName,
+            .email,
             .birthdate
         ])
         #expect(sut.resumeList.map(\.value) == [
             "123.456.789",
             "Jane Doe",
             "Melissa",
+            "melissa@example.com",
             "10/10/1999"
         ])
     }
@@ -41,6 +43,7 @@ struct ResumeViewModelTests {
                 sin: "123456789",
                 mothersName: "Jane Doe",
                 userName: "Melissa",
+                email: "melissa@example.com",
                 birthdate: "10/10/1999"
             )
         ])
@@ -67,6 +70,7 @@ struct ResumeViewModelTests {
         draft.sin = "123.456.789"
         draft.mothersName = "Jane Doe"
         draft.userName = "Melissa"
+        draft.email = "melissa@example.com"
         draft.birthdate = "10/10/1999"
         return draft
     }

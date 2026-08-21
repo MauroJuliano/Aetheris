@@ -106,7 +106,7 @@ extension SendMoneyEndpoint: Endpoint {
                     recipientIdentifier: draft.beneficiaryIdentifier,
                     accountName: draft.accountName,
                     accountLastDigits: draft.accountLastDigits,
-                    completedAt: "August 4, 2026 at 12:00 PM"
+                    completedAt: "2026-08-04T15:00:00Z"
                 )
             )
         }

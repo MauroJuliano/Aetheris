@@ -13,8 +13,32 @@ internal enum Strings {
   internal enum Common {
     /// Back
     internal static let back = Strings.tr("Localizable", "Common.back", fallback: "Back")
+    /// OK
+    internal static let ok = Strings.tr("Localizable", "Common.ok", fallback: "OK")
     /// Try again
     internal static let tryAgain = Strings.tr("Localizable", "Common.tryAgain", fallback: "Try again")
+  }
+  internal enum Language {
+    /// Choose the language you prefer for Aetheris.
+    internal static let description = Strings.tr("Localizable", "Language.description", fallback: "Choose the language you prefer for Aetheris.")
+    /// English
+    internal static let english = Strings.tr("Localizable", "Language.english", fallback: "English")
+    /// German
+    internal static let german = Strings.tr("Localizable", "Language.german", fallback: "German")
+    /// Portuguese
+    internal static let portuguese = Strings.tr("Localizable", "Language.portuguese", fallback: "Portuguese")
+    /// The new language will be applied the next time you open Aetheris.
+    internal static let restartDescription = Strings.tr("Localizable", "Language.restartDescription", fallback: "The new language will be applied the next time you open Aetheris.")
+    /// Language saved
+    internal static let restartTitle = Strings.tr("Localizable", "Language.restartTitle", fallback: "Language saved")
+    /// Selected
+    internal static let selected = Strings.tr("Localizable", "Language.selected", fallback: "Selected")
+    /// System Default
+    internal static let systemDefault = Strings.tr("Localizable", "Language.systemDefault", fallback: "System Default")
+    /// Use your device language
+    internal static let systemDescription = Strings.tr("Localizable", "Language.systemDescription", fallback: "Use your device language")
+    /// Language
+    internal static let title = Strings.tr("Localizable", "Language.title", fallback: "Language")
   }
   internal enum Profile {
     /// Confirm logout

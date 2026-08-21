@@ -28,6 +28,15 @@ struct VirtualCardView: View {
         .accessibilityIdentifier("virtualCard.card")
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            VirtualCardViewSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var cardBackground: some View {
         RoundedRectangle(cornerRadius: AppRadius.card, style: .continuous)
             .fill(
@@ -64,7 +73,7 @@ struct VirtualCardView: View {
 
     private var header: some View {
         HStack {
-            Text("VIRTUAL")
+            Text(Strings.VirtualCard.cardType.uppercased())
                 .font(AppTypography.cellCaption)
                 .bold()
                 .foregroundStyle(model.style.cardsForegroundColor)
@@ -85,7 +94,9 @@ struct VirtualCardView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(isContentVisible ? "Hide card details" : "Show card details")
+            .accessibilityLabel(
+                isContentVisible ? Strings.VirtualCard.hideDetails : Strings.VirtualCard.showDetails
+            )
         }
     }
 
@@ -95,15 +106,20 @@ struct VirtualCardView: View {
             .foregroundStyle(model.style.cardsForegroundColor)
             .lineLimit(1)
             .minimumScaleFactor(0.75)
-            .accessibilityLabel("Card number")
-            .accessibilityValue(isContentVisible ? model.formattedNumber : "Hidden number")
+            .accessibilityLabel(Strings.VirtualCard.cardNumberAccessibilityLabel)
+            .accessibilityValue(
+                isContentVisible ? model.formattedNumber : Strings.VirtualCard.hiddenNumberAccessibilityValue
+            )
     }
 
     private var footer: some View {
         HStack(alignment: .bottom) {
             VStack(alignment: .leading, spacing: AppSpacing.medium) {
                 HStack(spacing: AppSpacing.xLarge) {
-                    cardField(title: "Valid until", value: isContentVisible ? model.expirationDate : "••/••")
+                    cardField(
+                        title: Strings.VirtualCard.validUntil,
+                        value: isContentVisible ? model.expirationDate : "••/••"
+                    )
                     cardField(title: "CVC", value: isContentVisible ? model.securityCode : "•••")
                 }
 

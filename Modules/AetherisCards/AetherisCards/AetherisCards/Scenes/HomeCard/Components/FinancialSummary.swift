@@ -63,6 +63,15 @@ struct FinancialSummary: View {
         )
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FinancialSummarySkeleton(hasDivider: hasDivider)
+        } else {
+            self
+        }
+    }
+
     private var dateLabel: String {
         FinancialSummaryPresentation.dateLabel(for: model.date)
     }

@@ -27,9 +27,7 @@ struct SendMoney: View {
     
     var body: some View {
         Group {
-            if viewModel.isLoading {
-                SendMoneySkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 FeedbackView(
                     title: Strings.HomeApp.genericErrorTitle,
                     description: errorMessage,
@@ -64,6 +62,7 @@ struct SendMoney: View {
                 onChange: onChangeBeneficiary,
                 model: $selectedBeneficiary
             )
+            .toSkeleton(enable: viewModel.isLoading)
             .padding()
             .frame(maxWidth: .infinity)
 
@@ -72,12 +71,15 @@ struct SendMoney: View {
                 displayedBalance: amountViewModel.formattedBalance,
                 onKeyPressed: amountViewModel.handleKeyPress
             )
+            .toSkeleton(enable: viewModel.isLoading)
             .padding()
             .frame(maxWidth: .infinity)
 
             Spacer()
 
-            Button {
+            PrimaryButton(
+                title: Strings.SendMoney.continueButton
+            ) {
                 guard let receipt = viewModel.continueTapped(
                     selectedBeneficiary: selectedBeneficiary,
                     currentAmount: amountViewModel.currentAmount,
@@ -87,23 +89,8 @@ struct SendMoney: View {
                 }
 
                 onContinue(receipt)
-            } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: AppRadius.large)
-                        .fill(Color.backgroundColorA)
-                        .appShadow(AppShadow.card)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: AppRadius.pill)
-                                .stroke(Color.border, style: .init(lineWidth: 1))
-                        )
-                        .frame(width: 300, height: 50)
-
-                    Text(Strings.SendMoney.continueButton)
-                        .foregroundStyle(Color.brandPrimaryColor)
-                        .font(AppTypography.headline)
-                        .appShadow(AppShadow.control)
-                }
             }
+            .toSkeleton(enable: viewModel.isLoading)
             .padding(AppSpacing.medium)
             .disabled(
                 !viewModel.canContinue(

@@ -177,50 +177,6 @@ enum TransactionAction: String, Codable, Identifiable, Equatable {
     }
 }
 
-struct IncomingPaymentDetailsModel: Codable, Equatable {
-    let senderId: UUID
-    let senderName: String
-    let senderContact: String?
-    let method: String
-    let methodDetails: String?
-    let reference: String?
-}
-
-struct TransferDetailsModel: Codable, Equatable {
-    let recipientId: UUID
-    let recipientName: String
-    let recipientContact: String?
-    let destinationInstitution: String?
-    let method: String
-    let reference: String?
-}
-
-struct MerchantDetailsModel: Codable, Equatable {
-    let merchantId: UUID
-    let merchantName: String
-    let descriptor: String?
-    let category: String
-    let location: String?
-    let paymentMethod: PaymentMethodSummaryModel
-}
-
-struct SubscriptionDetailsModel: Codable, Equatable {
-    let merchantId: UUID
-    let merchantName: String
-    let merchantDescriptor: String?
-    let merchantImageName: String?
-    let category: String
-    let billingFrequency: BillingFrequency
-    let lastPaymentDate: Date
-    let nextExpectedPaymentDate: Date?
-    let expectedAmount: Decimal
-    let currencyCode: String
-    let paymentMethod: PaymentMethodSummaryModel
-    let paymentHistory: [SubscriptionPaymentHistoryModel]
-    let isRecurringPaymentDetected: Bool
-    let merchantIsBlocked: Bool
-}
-
 enum BillingFrequency: String, Codable, Equatable {
     case weekly
     case monthly
@@ -242,44 +198,4 @@ enum BillingFrequency: String, Codable, Equatable {
             return Strings.TransactionDetails.notIdentified
         }
     }
-}
-
-struct SubscriptionPaymentHistoryModel: Identifiable, Codable, Equatable {
-    let id: UUID
-    let date: Date
-    let amount: Decimal
-    let currencyCode: String
-    let status: TransactionStatus
-}
-
-struct PaymentMethodSummaryModel: Identifiable, Codable, Equatable {
-    let id: UUID
-    let title: String
-    let subtitle: String?
-    let lastFourDigits: String?
-    let icon: String
-
-    var displayTitle: String {
-        guard let lastFourDigits else { return title }
-        return "\(title) **** \(lastFourDigits)"
-    }
-}
-
-struct RefundDetailsModel: Codable, Equatable {
-    let originalTransactionId: UUID
-    let originalMerchantName: String
-    let originalPurchaseDate: Date
-    let refundReason: String?
-    let expectedAvailabilityDate: Date?
-}
-
-struct InvoicePaymentDetailsModel: Codable, Equatable {
-    let invoiceId: UUID
-    let cardId: UUID
-    let cardName: String
-    let billingPeriod: String
-    let paidAmount: Decimal
-    let currencyCode: String
-    let paymentMethod: PaymentMethodSummaryModel
-    let confirmationCode: String
 }

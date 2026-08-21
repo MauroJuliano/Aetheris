@@ -48,9 +48,7 @@ struct HomeApp: View {
                 .scaledToFill()
                 .ignoresSafeArea()
 
-            if viewModel.isLoading {
-                HomeAppSkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 FeedbackView(
                     title: Strings.HomeApp.homeUnavailableTitle,
                     description: errorMessage,
@@ -75,42 +73,51 @@ struct HomeApp: View {
                         ),
                         onRightButtonAction: onNotificationsTap
                     )
+                    .toSkeleton(enable: viewModel.isLoading)
 
                     BalanceView()
+                        .toSkeleton(enable: viewModel.isLoading)
 
                     CardSwipe(
                         cards: $viewModel.cards,
                         selectedCardIndex: $selectedCardIndex,
                         onTap: openSelectedCard
                     )
+                    .toSkeleton(enable: viewModel.isLoading)
 
                     RecipientsContainer(
-                        users: viewModel.recentRecipients,
-                        onSelectRecipient: onSelectRecipient,
+                        title: Strings.Recipients.title,
+                        seeAllTitle: Strings.Recipients.seeAll,
+                        newRecipientTitle: Strings.Recipients.newRecipient,
+                        recipients: viewModel.recipientItems,
+                        onSelectRecipient: { recipient in
+                            guard let selectedRecipient = viewModel.recipient(for: recipient.id) else { return }
+                            onSelectRecipient(selectedRecipient)
+                        },
                         onSeeAllTap: onSeeAllRecipientsTap,
                         onNewRecipientTap: onNewRecipientTap
                     )
+                    .toSkeleton(enable: viewModel.isLoading)
 
                     QuickActions(
                         title: Strings.QuickActions.sectionTitle,
-                        items: quickActionItems,
+                        items: viewModel.quickActionItems,
                         onItemTap: { item in
-                            switch item.id {
-                            case Self.sendQuickActionId:
+                            switch viewModel.quickActionDestination(for: item.id) {
+                            case .transfer:
                                 onTransferTap()
 
-                            case Self.requestQuickActionId:
+                            case .request:
                                 onRequestMoneyTap()
 
-                            default:
+                            case .more:
                                 onMoreTap()
                             }
                         }
                     )
+                    .toSkeleton(enable: viewModel.isLoading)
 
-                    SpendingThisMonthView(
-                        onViewReportTap: onViewReportTap
-                    )
+                    spendingAnalyticsCard
                 }
                 .padding(.top, AppSpacing.formTop)
                 .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -129,34 +136,22 @@ struct HomeApp: View {
         onCardTap(selectedCardId)
     }
 
-    private static let sendQuickActionId = "send"
-    private static let requestQuickActionId = "request"
-    private static let moreQuickActionId = "more_services"
+    private var spendingAnalyticsCard: some View {
+        let spending = viewModel.spendingAnalyticsCardModel
 
-    private var quickActionItems: [QuickActionItem] {
-        let sendAction = viewModel.quickActions.first { $0.route == .sendMoney }
-        let requestAction = viewModel.quickActions.first { $0.route == .requestMoney }
-
-        return [
-            .init(
-                id: Self.sendQuickActionId,
-                title: sendAction?.title ?? Strings.QuickActions.sendTitle,
-                subtitle: sendAction?.subtitle ?? Strings.QuickActions.transferSubtitle,
-                icon: sendAction?.icon ?? "paperplane.fill"
-            ),
-            .init(
-                id: Self.requestQuickActionId,
-                title: requestAction?.title ?? Strings.QuickActions.requestTitle,
-                subtitle: requestAction?.subtitle ?? Strings.QuickActions.requestSubtitle,
-                icon: requestAction?.icon ?? "arrow.down"
-            ),
-            .init(
-                id: Self.moreQuickActionId,
-                title: Strings.QuickActions.moreTitle,
-                subtitle: Strings.QuickActions.moreSubtitle,
-                icon: "ellipsis"
-            )
-        ]
+        return AnalyticsCard(
+            title: spending.title,
+            totalTitle: spending.totalTitle,
+            changeTitle: spending.changeTitle,
+            comparisonTitle: spending.comparisonTitle,
+            viewReportTitle: Strings.SpendingChart.viewReport,
+            onViewReportTap: onViewReportTap
+        ) {
+            SpendingLineChart()
+        } footerContent: {
+            AnalyticsCategorySummary(items: spending.categories)
+        }
+        .toSkeleton(enable: viewModel.isLoading)
     }
 
     private var selectedCardId: UUID? {

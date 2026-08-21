@@ -1,6 +1,6 @@
 import AetherisCards
-import AetherisInsights
-import AetherisNotifications
+import AetherisInsightsInterface
+import AetherisNotificationsInterface
 import AetherisTransfers
 import Core
 import AetherisAuthenticationInterface
@@ -19,7 +19,11 @@ extension HomeFlowCoordinator {
             onCardTap: { cardId in
                 tabBarRoutingStore.showCards(selectedCardId: cardId)
             },
-            onNotificationsTap: { navigation.push(.notifications) },
+            onNotificationsTap: {
+                apply(
+                    HomeFlowCoordinatorRouter.notificationsTapped()
+                )
+            },
             onSelectRecipient: { beneficiary in
                 navigation.push(.beneficiaryDetails(beneficiary.id))
             },
@@ -85,6 +89,7 @@ extension HomeFlowCoordinator {
                 beneficiaryId: beneficiaryId,
                 path: $navigation.path,
                 onBack: { popRoute() },
+                onNotificationsTap: { navigation.push(.notifications) },
                 onTransferTap: { beneficiary in
                     selectedBeneficiary = beneficiary
                     navigation.push(.sendMoney)
@@ -114,8 +119,7 @@ extension HomeFlowCoordinator {
             .navigationBarHidden(true)
 
         case .notifications:
-            NotificationsFactory.make(
-                coreService: coreService,
+            notificationsFactory.make(
                 onBack: { popRoute() }
             )
             .navigationBarHidden(true)
@@ -128,8 +132,7 @@ extension HomeFlowCoordinator {
             )
 
         case .viewReport:
-            InsightsFactory.makeReport(
-                coreService: coreService,
+            insightsFactory.makeReport(
                 onBack: { popRoute() }
             )
             .navigationBarHidden(true)
@@ -137,19 +140,29 @@ extension HomeFlowCoordinator {
     }
 
     private func navigateFromAllServices(_ route: AllServicesItem.Route) {
-        switch route {
-        case .transfer:
-            selectedBeneficiary = nil
-            navigation.replaceCurrent(with: .sendMoney)
-        case .beneficiaries:
-            navigation.replaceCurrent(with: .beneficiaryList)
-        case .cards:
-            navigation.reset()
-            tabBarRoutingStore.showCards()
-        case .notifications:
-            navigation.replaceCurrent(with: .notifications)
-        case .reports:
-            navigation.replaceCurrent(with: .viewReport)
+        apply(
+            HomeFlowCoordinatorRouter.allServicesSelected(route)
+        )
+    }
+
+    private func apply(
+        _ commands: [HomeFlowCoordinatorCommand]
+    ) {
+        for command in commands {
+            switch command {
+            case .clearSelectedBeneficiary:
+                selectedBeneficiary = nil
+
+            case .push(let homeRoute):
+                navigation.push(homeRoute)
+
+            case .replace(let homeRoute):
+                navigation.replaceCurrent(with: homeRoute)
+
+            case .showCards(let selectedCardId):
+                navigation.reset()
+                tabBarRoutingStore.showCards(selectedCardId: selectedCardId)
+            }
         }
     }
 }

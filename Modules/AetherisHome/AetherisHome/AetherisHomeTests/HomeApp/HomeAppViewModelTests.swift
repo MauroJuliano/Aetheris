@@ -25,6 +25,30 @@ struct HomeAppViewModelTests {
     }
 
     @Test
+    func spendingAnalyticsCardModel_usesMockBeforeLoading() {
+        let sut = makeSUT(result: .success(.mock))
+
+        #expect(sut.spendingAnalyticsCardModel.title == Strings.SpendingChart.title)
+        #expect(sut.spendingAnalyticsCardModel.totalTitle == "$ 2,428.00")
+        #expect(sut.spendingAnalyticsCardModel.changeTitle == "+8%")
+        #expect(sut.spendingAnalyticsCardModel.comparisonTitle == Strings.SpendingChart.comparison)
+        #expect(sut.spendingAnalyticsCardModel.categories.count == 4)
+    }
+
+    @Test
+    func quickActionItems_usesMockFallbackBeforeLoading() {
+        let sut = makeSUT(result: .success(.mock))
+
+        #expect(sut.quickActionItems.count == 3)
+        #expect(sut.recipientItems.count == 6)
+        #expect(sut.recipientItems.map(\.id) == sut.recentRecipients.map(\.id))
+        #expect(sut.recipient(for: sut.recipientItems[0].id)?.id == sut.recentRecipients[0].id)
+        #expect(sut.quickActionItems[0].title == Strings.QuickActions.sendTitle)
+        #expect(sut.quickActionItems[1].title == Strings.QuickActions.requestTitle)
+        #expect(sut.quickActionItems[2].title == Strings.QuickActions.moreTitle)
+    }
+
+    @Test
     func load_mapsDashboardIntoViewState() async {
         let service = HomeAppServiceSpy(result: .success(.mock))
         let sut = makeSUT(service: service)
@@ -44,6 +68,20 @@ struct HomeAppViewModelTests {
         #expect(sut.unreadCount == 3)
         #expect(sut.hasUnreadNotifications)
         #expect(service.loadCalls == 1)
+        #expect(sut.spendingAnalyticsCardModel.title == Strings.SpendingChart.title)
+        #expect(sut.spendingAnalyticsCardModel.categories.count == 4)
+        #expect(sut.quickActionItems.count == 3)
+    }
+
+    @Test
+    func selectedCardId_atIndexClampsToAvailableCards() async {
+        let sut = makeSUT(result: .success(makeDashboard(cards: HomeAppDashboard.mock.cards)))
+
+        await sut.load()
+
+        #expect(sut.selectedCardId(at: -1) == HomeAppDashboard.mock.cards[0].id)
+        #expect(sut.selectedCardId(at: 1) == HomeAppDashboard.mock.cards[1].id)
+        #expect(sut.selectedCardId(at: 99) == HomeAppDashboard.mock.cards[2].id)
     }
 
     @Test

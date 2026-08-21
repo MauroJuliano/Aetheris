@@ -82,10 +82,11 @@ public final class TransferAmountViewModel: ObservableObject {
     private func formatCurrency(_ value: Decimal) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencySymbol = "$"
+        formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+        formatter.currencyCode = "USD"
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
 
-        return formatter.string(from: NSDecimalNumber(decimal: value)) ?? "$0.00"
+        return formatter.string(from: NSDecimalNumber(decimal: value)) ?? "USD 0.00"
     }
 }

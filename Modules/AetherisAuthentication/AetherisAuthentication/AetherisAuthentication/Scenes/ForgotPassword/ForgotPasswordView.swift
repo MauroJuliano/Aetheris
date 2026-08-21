@@ -168,9 +168,7 @@ private extension ForgotPasswordView {
             )
         }
     }
-}
 
-private extension ForgotPasswordView {
     var background: some View {
         ZStack {
             Color.backgroundColorA
@@ -186,9 +184,7 @@ private extension ForgotPasswordView {
             isEmailFocused = false
         }
     }
-}
 
-private extension ForgotPasswordView {
     func sendResetLink() {
         let normalizedEmail = email
             .trimmingCharacters(in: .whitespacesAndNewlines)

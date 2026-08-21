@@ -2,7 +2,8 @@ import SwiftUI
 
 struct PrimaryButtonSkeleton: View {
     var body: some View {
-        SkeletonBlock(width: 180, height: 50, radius: AppRadius.large)
+        SkeletonBlock(height: 50, radius: AppRadius.large)
+            .frame(maxWidth: .infinity)
     }
 }
 

@@ -65,6 +65,35 @@ struct NotificationsCentreViewModelTests {
             "Month",
             "Older"
         ])
+        #expect(sut.sections.flatMap(\.items).last?.hasDivider == false)
+    }
+
+    @Test
+    func load_exposesLoadingSectionsBeforeResponseArrives() async {
+        let sut = NotificationsCentreViewModel(
+            service: DelayedNotificationsServiceSpy(
+                response: .init(
+                    unreadCount: 1,
+                    notifications: [
+                        Self.makeNotification(title: "Loaded", date: Date())
+                    ]
+                ),
+                delayNanoseconds: 150_000_000
+            )
+        )
+
+        let task = Task {
+            await sut.load()
+        }
+
+        try? await Task.sleep(nanoseconds: 20_000_000)
+
+        #expect(sut.isLoading)
+        #expect(sut.sections.count == 3)
+        #expect(sut.sections.first?.isLoading == true)
+        #expect(sut.sections.first?.titleSkeletonWidth == 56)
+
+        _ = await task.value
     }
 
     @Test
@@ -126,5 +155,20 @@ private final class NotificationsServiceSpy: NotificationsCentreServicing {
         case let .success(response): return response
         case let .failure(error): throw error
         }
+    }
+}
+
+private final class DelayedNotificationsServiceSpy: NotificationsCentreServicing {
+    let response: NotificationsCentreResponse
+    let delayNanoseconds: UInt64
+
+    init(response: NotificationsCentreResponse, delayNanoseconds: UInt64) {
+        self.response = response
+        self.delayNanoseconds = delayNanoseconds
+    }
+
+    func loadNotifications() async throws -> NotificationsCentreResponse {
+        try await Task.sleep(nanoseconds: delayNanoseconds)
+        return response
     }
 }

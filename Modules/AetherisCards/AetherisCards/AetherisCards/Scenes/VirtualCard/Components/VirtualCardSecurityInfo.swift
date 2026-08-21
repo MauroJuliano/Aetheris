@@ -34,6 +34,15 @@ struct VirtualCardSecurityInfo: View {
         .padding(AppSpacing.medium)
         .appCardSurface()
     }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            VirtualCardSecurityInfoSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

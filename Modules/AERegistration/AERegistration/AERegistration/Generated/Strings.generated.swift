@@ -24,28 +24,6 @@ internal enum Strings {
     /// Failed to submit
     internal static let errorSubmit = Strings.tr("Localizable", "Common.errorSubmit", fallback: "Failed to submit")
   }
-  internal enum Onboarding {
-    /// Continue
-    internal static let stepOneButton = Strings.tr("Localizable", "Onboarding.stepOneButton", fallback: "Continue")
-    /// Your account is ready. Manage money, cards and transfers in one place.
-    internal static let stepOneDescription = Strings.tr("Localizable", "Onboarding.stepOneDescription", fallback: "Your account is ready. Manage money, cards and transfers in one place.")
-    /// Welcome to Aetheris
-    internal static let stepOneTitle = Strings.tr("Localizable", "Onboarding.stepOneTitle", fallback: "Welcome to Aetheris")
-    /// Continue
-    internal static let stepThreeButton = Strings.tr("Localizable", "Onboarding.stepThreeButton", fallback: "Get started")
-    /// You are all set to explore Aetheris and use your account.
-    internal static let stepThreeDescription = Strings.tr("Localizable", "Onboarding.stepThreeDescription", fallback: "You are all set to explore Aetheris and use your account.")
-    /// Ready to start
-    internal static let stepThreeTitle = Strings.tr("Localizable", "Onboarding.stepThreeTitle", fallback: "Ready to start")
-    /// Continue
-    internal static let stepTwoButton = Strings.tr("Localizable", "Onboarding.stepTwoButton", fallback: "Continue")
-    /// Track your balance, manage cards and move money with less friction.
-    internal static let stepTwoDescription = Strings.tr("Localizable", "Onboarding.stepTwoDescription", fallback: "Track your balance, manage cards and move money with less friction.")
-    /// Everything in one place
-    internal static let stepTwoTitle = Strings.tr("Localizable", "Onboarding.stepTwoTitle", fallback: "Everything in one place")
-    /// Skip
-    internal static let skip = Strings.tr("Localizable", "Onboarding.skip", fallback: "Skip")
-  }
   internal enum ConfirmPassword {
     /// 1234
     internal static let placeholder = Strings.tr("Localizable", "ConfirmPassword.placeholder", fallback: "1234")
@@ -64,15 +42,47 @@ internal enum Strings {
     /// Continue
     internal static let buttonName = Strings.tr("Localizable", "Default.buttonName", fallback: "Continue")
   }
+  internal enum Email {
+    /// Enter a valid email address.
+    internal static let error = Strings.tr("Localizable", "Email.error", fallback: "Enter a valid email address.")
+    /// name@example.com
+    internal static let placeholder = Strings.tr("Localizable", "Email.placeholder", fallback: "name@example.com")
+    /// We'll use this email to identify your account and send important updates.
+    internal static let subTitle = Strings.tr("Localizable", "Email.subTitle", fallback: "We'll use this email to identify your account and send important updates.")
+    /// Email address
+    internal static let title = Strings.tr("Localizable", "Email.title", fallback: "Email address")
+  }
   internal enum MothersName {
     /// Enter at least 2 letters.
     internal static let error = Strings.tr("Localizable", "MothersName.error", fallback: "Enter at least 2 letters.")
-    /// Jane doe
-    internal static let placeholder = Strings.tr("Localizable", "MothersName.placeholder", fallback: "Jane doe")
+    /// Enter your mother's full name
+    internal static let placeholder = Strings.tr("Localizable", "MothersName.placeholder", fallback: "Enter your mother's full name")
     /// Used as an additional security measure to help protect your account
     internal static let subTitle = Strings.tr("Localizable", "MothersName.subTitle", fallback: "Used as an additional security measure to help protect your account")
     /// Mother's name
     internal static let title = Strings.tr("Localizable", "MothersName.title", fallback: "Mother's name")
+  }
+  internal enum Onboarding {
+    /// Skip
+    internal static let skip = Strings.tr("Localizable", "Onboarding.skip", fallback: "Skip")
+    /// Continue
+    internal static let stepOneButton = Strings.tr("Localizable", "Onboarding.stepOneButton", fallback: "Continue")
+    /// Everything you need to manage your money is ready to go.
+    internal static let stepOneDescription = Strings.tr("Localizable", "Onboarding.stepOneDescription", fallback: "Everything you need to manage your money is ready to go.")
+    /// Your account is ready
+    internal static let stepOneTitle = Strings.tr("Localizable", "Onboarding.stepOneTitle", fallback: "Your account is ready")
+    /// Get started
+    internal static let stepThreeButton = Strings.tr("Localizable", "Onboarding.stepThreeButton", fallback: "Get started")
+    /// You are all set to explore Aetheris and use your account.
+    internal static let stepThreeDescription = Strings.tr("Localizable", "Onboarding.stepThreeDescription", fallback: "You are all set to explore Aetheris and use your account.")
+    /// Ready to start
+    internal static let stepThreeTitle = Strings.tr("Localizable", "Onboarding.stepThreeTitle", fallback: "Ready to start")
+    /// Continue
+    internal static let stepTwoButton = Strings.tr("Localizable", "Onboarding.stepTwoButton", fallback: "Continue")
+    /// Track your balance, manage cards and move money with less friction.
+    internal static let stepTwoDescription = Strings.tr("Localizable", "Onboarding.stepTwoDescription", fallback: "Track your balance, manage cards and move money with less friction.")
+    /// Everything in one place
+    internal static let stepTwoTitle = Strings.tr("Localizable", "Onboarding.stepTwoTitle", fallback: "Everything in one place")
   }
   internal enum Password {
     /// Enter a 4-digit password.
@@ -113,6 +123,8 @@ internal enum Strings {
     internal static let mockAnnSomething = Strings.tr("Localizable", "Resume.mockAnnSomething", fallback: "Ann something")
     /// 12/10/1980
     internal static let mockBirthDate = Strings.tr("Localizable", "Resume.mockBirthDate", fallback: "12/10/1980")
+    /// melissa@example.com
+    internal static let mockEmail = Strings.tr("Localizable", "Resume.mockEmail", fallback: "melissa@example.com")
     /// Mystical time
     internal static let mockMysticalTime = Strings.tr("Localizable", "Resume.mockMysticalTime", fallback: "Mystical time")
     /// Melissa Mccarthy
@@ -153,10 +165,10 @@ internal enum Strings {
   internal enum UserName {
     /// Enter at least 2 letters.
     internal static let error = Strings.tr("Localizable", "UserName.error", fallback: "Enter at least 2 letters.")
-    /// John doe
-    internal static let placeholder = Strings.tr("Localizable", "UserName.placeholder", fallback: "John doe")
-    /// Choose a unique username that others can use to find and pay you.
-    internal static let subTitle = Strings.tr("Localizable", "UserName.subTitle", fallback: "Choose a unique username that others can use to find and pay you.")
+    /// Enter your full legal name
+    internal static let placeholder = Strings.tr("Localizable", "UserName.placeholder", fallback: "Enter your full legal name")
+    /// Enter your full name as it appears on your official documents.
+    internal static let subTitle = Strings.tr("Localizable", "UserName.subTitle", fallback: "Enter your full name as it appears on your official documents.")
     /// Full name
     internal static let title = Strings.tr("Localizable", "UserName.title", fallback: "Full name")
   }

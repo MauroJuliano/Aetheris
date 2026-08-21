@@ -5,6 +5,7 @@ struct ResumeListModel: Identifiable {
         case sin
         case mothersName
         case userName
+        case email
         case birthdate
     }
 

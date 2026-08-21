@@ -6,10 +6,10 @@ public struct BalanceView: View {
     private let balanceText: String
 
     public init(
-        title: String = "Balance",
+        title: String? = nil,
         balanceText: String = "$ 13,553.00"
     ) {
-        self.title = title
+        self.title = title ?? Strings.Balance.title
         self.balanceText = balanceText
     }
 
@@ -18,12 +18,17 @@ public struct BalanceView: View {
             Text(title)
                 .font(AppTypography.navTitle)
                 .foregroundStyle(Color.textTertiary)
+                .accessibilityHidden(true)
 
             HStack(spacing: AppSpacing.small) {
                 Text(isBalanceVisible ? balanceText : maskedBalanceText)
                     .font(AppTypography.balanceAmount)
                     .bold()
                     .foregroundStyle(Color.textPrimary)
+                    .accessibilityLabel(title)
+                    .accessibilityValue(
+                        isBalanceVisible ? balanceText : Strings.Accessibility.hiddenBalance
+                    )
 
                 Button {
                     isBalanceVisible.toggle()
@@ -32,6 +37,9 @@ public struct BalanceView: View {
                         .font(.system(size: AppComponentMetrics.balanceEyeSize, weight: .medium))
                         .foregroundStyle(Color.textTertiary)
                 }
+                .accessibilityLabel(
+                    isBalanceVisible ? Strings.Accessibility.hideBalance : Strings.Accessibility.showBalance
+                )
             }
         }
         .padding(.top, AppSpacing.medium)

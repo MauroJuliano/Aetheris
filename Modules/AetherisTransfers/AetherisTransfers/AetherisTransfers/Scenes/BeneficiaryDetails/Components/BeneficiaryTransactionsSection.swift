@@ -119,6 +119,12 @@ struct BeneficiaryTransactionsSection: View {
     }
 }
 
+extension BeneficiaryTransactionsSection {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { BeneficiaryTransactionsSectionSkeleton() } else { self }
+    }
+}
+
 private struct BeneficiaryTransactionRow: View {
     let transaction: BeneficiaryTransactionModel
     let action: () -> Void

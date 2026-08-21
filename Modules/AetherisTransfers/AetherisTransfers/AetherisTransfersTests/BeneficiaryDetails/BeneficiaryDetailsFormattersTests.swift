@@ -5,11 +5,21 @@ import Testing
 @Suite("BeneficiaryDetailsFormatters")
 struct BeneficiaryDetailsFormattersTests {
     @Test
-    func beneficiaryTransactionDateFormatted_usesShortEnglishDate() {
+    func beneficiaryTransactionDateFormatted_respectsEnglishLocale() {
         let date = makeDate(year: 2026, month: 8, day: 18)
+        let formatted = date.beneficiaryTransactionDateFormatted(locale: Locale(identifier: "en_US"))
 
-        #expect(date.beneficiaryTransactionDateFormatted.contains("Aug"))
-        #expect(date.beneficiaryTransactionDateFormatted.contains("2026"))
+        #expect(formatted.contains("Aug"))
+        #expect(formatted.contains("2026"))
+    }
+
+    @Test
+    func beneficiaryTransactionDateFormatted_respectsBrazilianPortugueseLocale() {
+        let date = makeDate(year: 2026, month: 8, day: 18)
+        let formatted = date.beneficiaryTransactionDateFormatted(locale: Locale(identifier: "pt_BR"))
+
+        #expect(formatted.lowercased().contains("ago"))
+        #expect(formatted.contains("2026"))
     }
 
     private func makeDate(year: Int, month: Int, day: Int) -> Date {

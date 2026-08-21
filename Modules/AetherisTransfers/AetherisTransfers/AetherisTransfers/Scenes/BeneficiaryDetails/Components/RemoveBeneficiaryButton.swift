@@ -43,6 +43,12 @@ struct RemoveBeneficiaryButton: View {
     }
 }
 
+extension RemoveBeneficiaryButton {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { RemoveBeneficiaryButtonSkeleton() } else { self }
+    }
+}
+
 #Preview {
     VStack(spacing: AppSpacing.medium) {
         RemoveBeneficiaryButton(isLoading: false) {}

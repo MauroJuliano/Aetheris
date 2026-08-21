@@ -12,6 +12,8 @@ struct TransactionHistoryViewModelTests {
         #expect(sut.isLoading)
         #expect(!sut.isEmpty)
         #expect(sut.sections.isEmpty)
+        #expect(sut.displayedSections.count == 3)
+        #expect(sut.displayedSections.flatMap(\.items).count == 5)
         #expect(sut.errorMessage == nil)
     }
 
@@ -33,6 +35,7 @@ struct TransactionHistoryViewModelTests {
             Strings.Notifications.sectionOthers
         ])
         #expect(sut.sections.flatMap(\.items).count == 3)
+        #expect(sut.displayedSections.map(\.id) == sut.sections.map(\.id))
         #expect(!sut.isLoading)
         #expect(!sut.isEmpty)
     }
