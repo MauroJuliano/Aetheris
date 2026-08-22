@@ -68,7 +68,7 @@ struct BeneficiaryListViewModelTests {
 
         #expect(sut.recentBeneficiaries.map(\.name) == ["Bruno", "Alice", "Amanda"])
         #expect(sut.filteredBeneficiaries(query: "man").map(\.name) == ["Amanda"])
-        #expect(sut.sections(query: "a").map(\.letter) == ["A"])
+        #expect(sut.sections(query: "a").map(\.letter) == ["A", "B"])
         #expect(sut.sections(query: "a")[0].beneficiaries.map(\.name) == ["Alice", "Amanda"])
     }
 }

@@ -22,9 +22,8 @@ final class BeneficiaryListViewModel: ObservableObject {
 
     func filteredBeneficiaries(query: String) -> [Beneficiary] {
         let query = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        let all = BeneficiaryFixtures.defaults
-        guard !query.isEmpty else { return all }
-        return all.filter {
+        guard !query.isEmpty else { return beneficiaries }
+        return beneficiaries.filter {
             $0.name.localizedCaseInsensitiveContains(query) || $0.pixKey.localizedCaseInsensitiveContains(query)
         }
     }

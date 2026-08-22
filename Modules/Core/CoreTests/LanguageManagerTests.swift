@@ -30,6 +30,6 @@ struct LanguageManagerTests {
         sut.setLanguage(.system)
 
         #expect(sut.currentLanguage == .system)
-        #expect(defaults.object(forKey: "AppleLanguages") == nil)
+        #expect(defaults.persistentDomain(forName: suiteName)?["AppleLanguages"] == nil)
     }
 }
