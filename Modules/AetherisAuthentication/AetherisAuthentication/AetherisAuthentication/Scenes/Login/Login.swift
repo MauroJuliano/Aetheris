@@ -36,6 +36,7 @@ struct Login: View {
                 Text(Strings.Login.welcomeBack)
                     .foregroundStyle(Color.brandPrimaryColor)
                     .font(AppTypography.balanceAmount)
+                    .accessibilityIdentifier("login.screen")
 
                 Text(Strings.Login.getStarted)
                     .foregroundStyle(Color.textPrimary)
@@ -141,7 +142,6 @@ struct Login: View {
                 }
             )
             .presentationDragIndicator(.visible)
-            .accessibilityIdentifier("login.errorSheet")
         }
         .onChange(of: password) { _, newValue in
             let filtered = newValue.filter(\.isNumber)

@@ -19,6 +19,7 @@ struct BirthdateView: View {
         ZStack {
             RegisterView(title: viewModel.title,
                              subTitle: viewModel.subTitle,
+                             screenAccessibilityIdentifier: "registration.step.birthdate",
                              textFieldValue: Binding(
                                 get: { viewModel.birthdate },
                                 set: { viewModel.updateBirthdate($0) }

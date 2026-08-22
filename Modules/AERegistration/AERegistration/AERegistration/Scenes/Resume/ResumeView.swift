@@ -55,6 +55,7 @@ struct ResumeView: View {
                 .ignoresSafeArea()
         }
         .navigationBarHidden(true)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("registration.resumeScreen")
         .sheet(isPresented: submissionErrorBinding) {
             submissionErrorSheet

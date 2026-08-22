@@ -39,6 +39,7 @@ public struct ActionErrorSheet: View {
                 Text(title)
                     .font(AppTypography.headline.weight(.semibold))
                     .foregroundStyle(Color.textPrimary)
+                    .accessibilityIdentifier("actionError.title")
 
                 Text(description)
                     .font(AppTypography.body)
@@ -47,6 +48,7 @@ public struct ActionErrorSheet: View {
             }
 
             PrimaryButton(title: primaryButtonTitle, action: onPrimaryAction)
+                .accessibilityIdentifier("actionError.primary")
 
             if let secondaryButtonTitle, let onSecondaryAction {
                 Button(action: onSecondaryAction) {
@@ -54,6 +56,7 @@ public struct ActionErrorSheet: View {
                         .font(AppTypography.body)
                         .foregroundStyle(Color.brandPrimaryColor)
                 }
+                .accessibilityIdentifier("actionError.secondary")
             }
         }
         .padding(AppSpacing.xLarge)

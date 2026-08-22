@@ -24,6 +24,7 @@ struct PasswordView: View {
             RegisterView(
                 title: viewModel.title,
                 subTitle: viewModel.subTitle,
+                screenAccessibilityIdentifier: "registration.step.password",
                 textFieldValue: Binding(
                     get: { draft.password },
                     set: { viewModel.updatePassword($0) }
