@@ -180,9 +180,19 @@ private extension RequestMoneyScreen {
 
 private extension RequestMoneyScreen {
     var bottomAction: some View {
-        PrimaryButton(title: primaryButtonTitle) {
+        PrimaryButton(title: viewModel.primaryButtonTitle) {
             focusedField = nil
-            submitRequest()
+            Task {
+                guard let result = await viewModel.submit() else {
+                    return
+                }
+
+                if result.shouldShareLink {
+                    onShareRequestTap()
+                }
+
+                onSuccess(result.request)
+            }
         }
         .disabled(!viewModel.canSubmit)
         .opacity(viewModel.canSubmit ? 1 : 0.45)
@@ -191,29 +201,6 @@ private extension RequestMoneyScreen {
         .padding(.bottom, AppSpacing.small)
         .background(Color.backgroundColorA)
         .accessibilityIdentifier("requestMoney.submitButton")
-    }
-
-    var primaryButtonTitle: String {
-        switch viewModel.selectedMode {
-        case .contact:
-            return Strings.RequestMoney.sendRequest
-        case .shareLink:
-            return Strings.RequestMoney.shareRequest
-        }
-    }
-
-    func submitRequest() {
-        Task {
-            guard let request = await viewModel.submit() else {
-                return
-            }
-
-            if viewModel.selectedMode == .shareLink {
-                onShareRequestTap()
-            }
-
-            onSuccess(request)
-        }
     }
 }
 

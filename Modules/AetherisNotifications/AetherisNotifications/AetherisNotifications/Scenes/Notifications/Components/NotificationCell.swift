@@ -29,26 +29,7 @@ public struct NotificationCell: View {
     }
     
     private var timeLabel: String {
-        let formatter = DateFormatter()
-        
-        if Calendar.current.isDateInToday(model.date) {
-            formatter.dateFormat = "h:mm a"
-            return formatter.string(from: model.date)
-        }
-        
-        if Calendar.current.isDateInYesterday(model.date) {
-            return "Yesterday"
-        }
-        
-        let days = Calendar.current.dateComponents([.day],
-                                                   from: model.date,
-                                                   to: Date()).day ?? 0
-        
-        if days < 30 {
-            return "\(days) days ago"
-        }
-        
-        return "\(max(1, days / 30)) month ago"
+        NotificationTimeLabelFormatter.label(for: model.date)
     }
     
     @ViewBuilder

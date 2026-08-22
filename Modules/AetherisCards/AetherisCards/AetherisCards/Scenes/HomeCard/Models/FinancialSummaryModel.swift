@@ -52,21 +52,6 @@ struct FinancialSummaryModel: Identifiable, Codable {
 
 extension FinancialSummaryModel {
     var section: String {
-        let calendar = Calendar.current
-        let now = Date()
-
-        if calendar.isDateInToday(date) {
-            return Strings.Notifications.sectionToday
-        } else if calendar.isDateInYesterday(date) {
-            return Strings.Notifications.sectionYesterday
-        } else if let weekAgo = calendar.date(byAdding: .day, value: -7, to: now),
-                  date >= weekAgo {
-            return Strings.Notifications.sectionLastWeek
-        } else if let monthAgo = calendar.date(byAdding: .month, value: -1, to: now),
-                  date >= monthAgo {
-            return Strings.Notifications.sectionLastMonth
-        } else {
-            return Strings.Notifications.sectionOthers
-        }
+        FinancialSummaryPresentation.section(for: date)
     }
 }

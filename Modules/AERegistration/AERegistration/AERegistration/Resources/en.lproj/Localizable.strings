@@ -25,14 +25,14 @@
 
 // MothersName
 "MothersName.title" = "Mother's name";
-"MothersName.placeholder" = "Jane doe";
+"MothersName.placeholder" = "Enter your mother's full name";
 "MothersName.subTitle" = "Used as an additional security measure to help protect your account";
 "MothersName.error" = "Enter at least 2 letters.";
 
 // UserName
 "UserName.title" = "Full name";
-"UserName.subTitle" = "Choose a unique username that others can use to find and pay you.";
-"UserName.placeholder" = "John doe";
+"UserName.subTitle" = "Enter your full name as it appears on your official documents.";
+"UserName.placeholder" = "Enter your full legal name";
 "UserName.error" = "Enter at least 2 letters.";
 
 // BirthDate

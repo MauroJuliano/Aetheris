@@ -72,6 +72,17 @@ struct RequestMoneyViewModelTests {
     }
 
     @Test
+    func primaryButtonTitle_matchesSelectedMode() {
+        let sut = RequestMoneyViewModel(service: RequestMoneyServiceSpy())
+
+        #expect(sut.primaryButtonTitle == Strings.RequestMoney.sendRequest)
+
+        sut.selectMode(.shareLink)
+
+        #expect(sut.primaryButtonTitle == Strings.RequestMoney.shareRequest)
+    }
+
+    @Test
     func submit_createsContactRequest_whenContactModeIsSelected() async throws {
         let service = RequestMoneyServiceSpy()
         let sut = RequestMoneyViewModel(service: service)
@@ -80,13 +91,14 @@ struct RequestMoneyViewModelTests {
         sut.selectPreset(150)
         sut.reason = "Lunch"
 
-        let request = try #require(await sut.submit())
+        let result = try #require(await sut.submit())
 
         #expect(service.createRequestCalls == 1)
         #expect(service.createSharedRequestCalls == 0)
-        #expect(request.contact == .marina)
-        #expect(request.amount == 150)
-        #expect(request.reason == "Lunch")
+        #expect(!result.shouldShareLink)
+        #expect(result.request.contact == .marina)
+        #expect(result.request.amount == 150)
+        #expect(result.request.reason == "Lunch")
     }
 
     @Test
@@ -97,13 +109,14 @@ struct RequestMoneyViewModelTests {
         sut.selectMode(.shareLink)
         sut.selectPreset(200)
 
-        let request = try #require(await sut.submit())
+        let result = try #require(await sut.submit())
 
         #expect(service.createRequestCalls == 0)
         #expect(service.createSharedRequestCalls == 1)
-        #expect(request.contact == nil)
-        #expect(request.paymentLink != nil)
-        #expect(request.amount == 200)
+        #expect(result.shouldShareLink)
+        #expect(result.request.contact == nil)
+        #expect(result.request.paymentLink != nil)
+        #expect(result.request.amount == 200)
     }
 }
 

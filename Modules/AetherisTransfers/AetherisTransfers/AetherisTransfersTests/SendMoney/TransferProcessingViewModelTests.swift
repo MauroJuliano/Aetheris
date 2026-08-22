@@ -1,3 +1,4 @@
+import Core
 import AetherisAuthenticationInterface
 import Foundation
 import Testing
@@ -43,33 +44,115 @@ struct TransferProcessingViewModelTests {
 
     @Test
     func submit_ignoresDuplicateRequestWhileOneIsInFlight() async {
-        let service = SubmissionServiceSpy(results: [.success(.fixture)], delay: .milliseconds(30))
+        let service = DeferredSubmissionService(result: .success(.fixture))
         let sut = TransferProcessingViewModel(submission: .fixture, service: service)
 
         async let first: Void = sut.submit { _ in }
-        await Task.yield()
+        await service.waitUntilCalled()
+
         async let duplicate: Void = sut.submit { _ in }
+        await Task.yield()
+        await service.finish()
         _ = await (first, duplicate)
 
-        #expect(service.submissions.count == 1)
+        #expect(await service.submissions.count == 1)
+    }
+
+    @Test
+    func submit_exposesBackendMessage_whenServiceFailsWithCoreError() async {
+        let service = SubmissionServiceSpy(
+            results: [
+                .failure(
+                    CoreServiceError.badRequest(
+                        .init(
+                            statusCode: 400,
+                            message: "Recipient not available"
+                        )
+                    )
+                )
+            ]
+        )
+        let sut = TransferProcessingViewModel(submission: .fixture, service: service)
+
+        await sut.submit { _ in }
+
+        guard case let .failed(message) = sut.state else {
+            Issue.record("Expected failed state")
+            return
+        }
+
+        #expect(message == "Recipient not available")
+    }
+
+    @Test
+    func submit_usesFallbackMessage_whenServiceFailsWithoutBackendMessage() async {
+        let service = SubmissionServiceSpy(results: [.failure(URLError(.timedOut))])
+        let sut = TransferProcessingViewModel(submission: .fixture, service: service)
+
+        await sut.submit { _ in }
+
+        guard case let .failed(message) = sut.state else {
+            Issue.record("Expected failed state")
+            return
+        }
+
+        #expect(message == Strings.TransferProcessing.errorDescription)
     }
 }
 
 private final class SubmissionServiceSpy: SendMoneyServicing {
     private var results: [Result<TransferReceiptResponse, Error>]
-    private let delay: Duration?
     private(set) var submissions: [TransferSubmission] = []
 
-    init(results: [Result<TransferReceiptResponse, Error>], delay: Duration? = nil) {
+    init(results: [Result<TransferReceiptResponse, Error>]) {
         self.results = results
-        self.delay = delay
     }
 
     func loadSession() async throws -> SendMoneySession { .mock }
     func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
         submissions.append(submission)
-        if let delay { try await Task.sleep(for: delay) }
+        guard !results.isEmpty else {
+            throw SubmissionServiceSpyError.exhaustedResults
+        }
+
         return try results.removeFirst().get()
+    }
+}
+
+private enum SubmissionServiceSpyError: Error {
+    case exhaustedResults
+}
+
+private actor DeferredSubmissionService: SendMoneyServicing {
+    private let result: Result<TransferReceiptResponse, Error>
+    private var continuation: CheckedContinuation<Void, Never>?
+    private(set) var submissions: [TransferSubmission] = []
+
+    init(result: Result<TransferReceiptResponse, Error>) {
+        self.result = result
+    }
+
+    func loadSession() async throws -> SendMoneySession { .mock }
+
+    func submit(_ submission: TransferSubmission) async throws -> TransferReceiptResponse {
+        submissions.append(submission)
+
+        await withCheckedContinuation { continuation in
+            self.continuation = continuation
+        }
+
+        return try result.get()
+    }
+
+    func waitUntilCalled() async {
+        while submissions.isEmpty {
+            await Task.yield()
+        }
+    }
+
+    func finish() {
+        continuation?.resume()
+        continuation = nil
     }
 }
 

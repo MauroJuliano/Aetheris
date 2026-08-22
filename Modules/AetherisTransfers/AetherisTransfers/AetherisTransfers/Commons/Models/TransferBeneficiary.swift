@@ -75,6 +75,7 @@ public struct TransferBeneficiary: View {
         }
         .buttonStyle(.plain)
         .appCardSurface()
+        .accessibilityIdentifier("transfer.beneficiarySelector")
     }
 
     private var title: String {

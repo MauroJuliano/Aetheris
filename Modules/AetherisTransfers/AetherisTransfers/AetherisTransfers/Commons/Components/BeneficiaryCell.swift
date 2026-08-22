@@ -3,18 +3,15 @@ import AetherisTransfersInterface
 import AetherisDesignSystem
 
 public struct BeneficiaryCell: View {
-    @State var model: Beneficiary
-    let isRecent: Bool
+    let model: Beneficiary
 
     var onChange: ((Beneficiary) -> Void)? = nil
 
     public init(
         model: Beneficiary,
-        isRecent: Bool = false,
         onChange: ((Beneficiary) -> Void)? = nil
     ) {
         self.model = model
-        self.isRecent = isRecent
         self.onChange = onChange
     }
 
@@ -32,24 +29,19 @@ public struct BeneficiaryCell: View {
                 navigationButton
             }
             .padding(.horizontal, AppSpacing.medium)
-            .padding(.vertical, AppSpacing.small)
+            .padding(.vertical, AppSpacing.medium)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .appCardSurface()
+        .accessibilityIdentifier("beneficiary.cell")
     }
 }
 
 #Preview {
     VStack(spacing: AppSpacing.medium) {
         BeneficiaryCell(
-            model: BeneficiaryFixtures.defaults[0],
-            isRecent: true
-        )
-
-        BeneficiaryCell(
-            model: BeneficiaryFixtures.defaults[1],
-            isRecent: false
+            model: BeneficiaryFixtures.defaults[0]
         )
     }
     .padding()
@@ -61,13 +53,13 @@ private extension BeneficiaryCell {
         Image(model.image)
             .resizable()
             .scaledToFill()
-            .frame(width: 58, height: 58)
+            .frame(width: 60, height: 60)
             .clipShape(Circle())
             .overlay {
                 Circle()
                     .stroke(
                         Color.brandPrimaryColor.opacity(0.15),
-                        lineWidth: 3
+                        lineWidth: 2
                     )
             }
     }
@@ -75,7 +67,7 @@ private extension BeneficiaryCell {
     var beneficiaryInformation: some View {
         VStack(
             alignment: .leading,
-            spacing: AppSpacing.xSmall
+            spacing: AppSpacing.xxxSmall
         ) {
             Text(model.name)
                 .font(AppTypography.callout)
@@ -83,28 +75,16 @@ private extension BeneficiaryCell {
                 .bold()
                 .lineLimit(1)
 
-            beneficiaryStatus
+            Text(model.pixKey)
+                .font(AppTypography.cellCaption)
+                .foregroundStyle(Color.textSecondaryColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
         }
         .frame(
             maxWidth: .infinity,
             alignment: .leading
         )
-    }
-
-    var beneficiaryStatus: some View {
-        HStack(spacing: AppSpacing.xxxSmall) {
-            Circle()
-                .fill(statusColor)
-                .frame(width: 6, height: 6)
-
-            Text(statusTitle)
-                .font(AppTypography.cellCaption)
-                .foregroundStyle(Color.textSecondaryColor)
-        }
-        .padding(.horizontal, AppSpacing.small)
-        .padding(.vertical, AppSpacing.xxxSmall)
-        .background(Color.backgroundColorA)
-        .clipShape(Capsule())
     }
 
     var navigationButton: some View {
@@ -116,17 +96,5 @@ private extension BeneficiaryCell {
                 RoundedRectangle(cornerRadius: AppRadius.large)
                     .fill(Color.backgroundColorA)
             }
-    }
-
-    var statusTitle: String {
-        isRecent
-            ? Strings.BeneficiaryList.recentBeneficiary
-            : Strings.BeneficiaryList.savedContact
-    }
-
-    var statusColor: Color {
-        isRecent
-            ? .brandPrimaryColor
-            : .textTertiary
     }
 }

@@ -56,6 +56,9 @@ final class AetherisAppUITests: XCTestCase {
         completeRegistrationStep(title: "Password", placeholder: "1234", value: "1234", secure: true)
         completeRegistrationStep(title: "Confirm password", placeholder: "1234", value: "1234", secure: true)
 
+        XCTAssertTrue(app.staticTexts["Your account is ready"].waitForExistence(timeout: 3))
+        app.buttons["Get started"].tap()
+
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
     }
 
@@ -108,6 +111,7 @@ final class AetherisAppUITests: XCTestCase {
         app.buttons["Transfer"].tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
         app.buttons["1"].tap()
+        selectTransferBeneficiary()
         app.buttons["Continue"].tap()
         XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
 
@@ -124,6 +128,7 @@ final class AetherisAppUITests: XCTestCase {
         app.buttons["Transfer"].tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
         app.buttons["1"].tap()
+        selectTransferBeneficiary()
         app.buttons["Continue"].tap()
 
         XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
@@ -155,8 +160,27 @@ final class AetherisAppUITests: XCTestCase {
             ? app.secureTextFields["registration.input"]
             : app.textFields["registration.input"]
         input.tap()
-        input.typeText(value)
+        app.typeText(value)
         app.buttons["Continue"].tap()
+    }
+
+    private func selectTransferBeneficiary() {
+        let selector = app.buttons["transfer.beneficiarySelector"]
+        XCTAssertTrue(selector.waitForExistence(timeout: 3))
+        selector.tap()
+
+        let beneficiary = app.buttons["beneficiary.cell"].firstMatch
+        XCTAssertTrue(beneficiary.waitForExistence(timeout: 3))
+        beneficiary.tap()
+
+        let continueButton = app.buttons["Continue"]
+        XCTAssertTrue(continueButton.waitForExistence(timeout: 3))
+        let enabledPredicate = NSPredicate(format: "isEnabled == true")
+        let continueEnabled = XCTNSPredicateExpectation(
+            predicate: enabledPredicate,
+            object: continueButton
+        )
+        wait(for: [continueEnabled], timeout: 3)
     }
 
     private func field(_ identifier: String) -> XCUIElement {

@@ -71,6 +71,28 @@ final class TransactionDetailsViewModel: ObservableObject {
         }
     }
 
+    func performAction(
+        _ action: TransactionAction,
+        onShareTap: @escaping (UUID) -> Void,
+        onDownloadTap: @escaping (UUID) -> Void,
+        onAddNoteTap: @escaping (UUID) -> Void,
+        onReportIssueTap: @escaping (UUID) -> Void
+    ) {
+        switch action {
+        case .share:
+            onShareTap(transactionId)
+        case .download:
+            Task {
+                guard await downloadReceipt() != nil else { return }
+                onDownloadTap(transactionId)
+            }
+        case .addNote:
+            onAddNoteTap(transactionId)
+        case .reportIssue:
+            onReportIssueTap(transactionId)
+        }
+    }
+
     func dismissActionError() {
         actionErrorMessage = nil
     }
