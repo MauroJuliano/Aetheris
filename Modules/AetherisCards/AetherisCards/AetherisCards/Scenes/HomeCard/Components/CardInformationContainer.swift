@@ -92,7 +92,7 @@ struct CardInformationContainer: View {
                     .bold()
                     .foregroundStyle(Color.textPrimary)
 
-                Text(model.invoiceStatus)
+                Text(model.invoiceStatus.title)
                     .font(AppTypography.cellCaption)
                     .foregroundStyle(Color.brandPrimaryColor)
             }

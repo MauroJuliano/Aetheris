@@ -23,6 +23,8 @@ public protocol CardsFactoryInterface {
     ) -> AnyView
     @MainActor
     func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView
+    @MainActor
+    func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>)
 }
 
 @MainActor

@@ -3,9 +3,12 @@
 "Common.cancel" = "Abbrechen";
 "Common.ok" = "OK";
 "Mock.bankTransfer" = "Banküberweisung";
+"Mock.concertTicket" = "Konzertticket";
+"Mock.dinnerWithSophie" = "Abendessen mit Sophie Keller";
 "Mock.transaction" = "Transaktion";
 "Mock.unknownMerchant" = "Unbekannter Händler";
 "Mock.paymentReceived" = "Zahlung erhalten";
+"Mock.thanksForCollaboration" = "Danke für die Zusammenarbeit";
 "Mock.physicalCard" = "Physische Karte";
 "Mock.refund" = "Erstattung";
 "Mock.originalPurchaseRefunded" = "Ursprünglicher Kauf erstattet";
@@ -262,9 +265,11 @@
 "TransactionsHistory.deposit" = "Einzahlung";
 
 "FinancialSummary.transferSent" = "Überweisung gesendet";
+"FinancialSummary.transferSentTo" = "Geld erfolgreich an %@ überwiesen";
 "FinancialSummary.transferSentDescription" = "Geld erfolgreich an Sophie Keller überwiesen";
 "FinancialSummary.transferSentAmeliaDescription" = "Geld erfolgreich an Amelia Thompson überwiesen";
 "FinancialSummary.paymentReceived" = "Zahlung erhalten";
+"FinancialSummary.paymentReceivedFrom" = "Geld von %@ erhalten";
 "FinancialSummary.paymentReceivedDescription" = "Geld von Amelia Thompson erhalten";
 "FinancialSummary.netflix" = "Netflix";
 "FinancialSummary.appleBill" = "Apple.Com/Bill";

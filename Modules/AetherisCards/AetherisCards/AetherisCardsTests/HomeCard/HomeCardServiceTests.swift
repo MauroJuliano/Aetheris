@@ -6,7 +6,7 @@ import Testing
 @Suite("HomeCardService")
 struct HomeCardServiceTests {
     @Test
-    func loadDashboard_andQuickActions_returnMockData() async throws {
+    func loadDashboard_returnsStructuredMockData() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = HomeCardService(coreService: coreService)
 
@@ -14,11 +14,12 @@ struct HomeCardServiceTests {
 
         #expect(dashboard.cards.count == 3)
         #expect(dashboard.summaries.count == 11)
-        #expect(dashboard.quickActions.count == 4)
-        #expect(dashboard.summaries.map(\.tag) == [
-            .transfer, .income, .expense, .expense, .expense,
-            .transfer, .expense, .transfer, .income, .expense, .expense
+        #expect(dashboard.summaries.map(\.type) == [
+            .transfer, .income, .subscription, .subscription, .purchase,
+            .transfer, .subscription, .transfer, .income, .subscription, .purchase
         ])
+        #expect(dashboard.summaries.first?.counterparty == "Sophie Keller")
+        #expect(dashboard.summaries.first?.amount == -250)
         #expect(coreService.calls == [
             .init(path: "/payments/home-card/dashboard", method: .get),
         ])

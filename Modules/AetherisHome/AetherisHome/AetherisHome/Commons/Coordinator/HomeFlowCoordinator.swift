@@ -35,7 +35,8 @@ struct HomeFlowCoordinator: View {
                 identityValidation: identityValidation,
                 selectedBeneficiary: $selectedBeneficiary,
                 path: $navigation.path,
-                onFinished: { navigation.reset() }
+                onFinished: { navigation.reset() },
+                onTransactionTap: showTransactionDetails
             )
         }
         .onAppear {
@@ -50,6 +51,10 @@ struct HomeFlowCoordinator: View {
         tabBarVisibilityStore.isVisible = HomeFlowCoordinatorRouter.tabBarIsVisible(
             isAtRoot: navigation.isAtRoot
         )
+    }
+
+    func showTransactionDetails(_ transactionID: UUID) {
+        CardsFactory.showTransactionDetails(transactionID: transactionID, path: $navigation.path)
     }
 }
 

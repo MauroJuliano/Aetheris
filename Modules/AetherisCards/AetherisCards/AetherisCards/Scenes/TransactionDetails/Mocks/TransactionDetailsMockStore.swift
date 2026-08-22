@@ -19,6 +19,28 @@ enum TransactionDetailsMockStore {
             )
         case TransactionMockIDs.ameliaPayment:
             return incomingPayment(id: transactionId, note: note)
+        case TransactionMockIDs.beneficiaryPayment:
+            return beneficiaryPayment(id: transactionId, note: note)
+        case TransactionMockIDs.beneficiaryDinnerTransfer:
+            return transfer(
+                id: transactionId,
+                title: "Sophie Keller",
+                subtitle: Strings.Mock.bankTransfer,
+                amount: 50,
+                imageName: "sophie",
+                recipientName: "Sophie Keller",
+                note: note ?? Strings.Mock.dinnerWithSophie
+            )
+        case TransactionMockIDs.beneficiaryConcertTransfer:
+            return transfer(
+                id: transactionId,
+                title: "Sophie Keller",
+                subtitle: Strings.Mock.bankTransfer,
+                amount: 200,
+                imageName: "sophie",
+                recipientName: "Sophie Keller",
+                note: note ?? Strings.Mock.concertTicket
+            )
         case TransactionMockIDs.netflixSubscription:
             return netflixSubscription(id: transactionId, note: note)
         case TransactionMockIDs.appleSubscription:
@@ -54,6 +76,30 @@ enum TransactionDetailsMockStore {
 private extension TransactionDetailsMockStore {
     static var baseActions: [TransactionAction] {
         [.share, .download, .addNote, .reportIssue]
+    }
+
+    static func beneficiaryPayment(id: UUID, note: String?) -> TransactionDetailsModel {
+        TransactionDetailsModel(
+            id: id,
+            title: Strings.Mock.paymentReceived,
+            subtitle: nil,
+            amount: 75,
+            currencyCode: "USD",
+            kind: .incomingPayment,
+            status: .completed,
+            date: Date(),
+            transactionCode: "TXN-BEN-75-2026",
+            note: note ?? Strings.Mock.thanksForCollaboration,
+            imageName: nil,
+            imageURL: nil,
+            incomingPaymentDetails: nil,
+            transferDetails: nil,
+            merchantDetails: nil,
+            subscriptionDetails: nil,
+            refundDetails: nil,
+            invoicePaymentDetails: nil,
+            availableActions: baseActions
+        )
     }
 
     static func incomingPayment(id: UUID, note: String?) -> TransactionDetailsModel {

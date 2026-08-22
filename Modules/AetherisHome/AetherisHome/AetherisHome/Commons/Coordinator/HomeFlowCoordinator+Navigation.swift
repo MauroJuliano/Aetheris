@@ -94,6 +94,7 @@ extension HomeFlowCoordinator {
                     selectedBeneficiary = beneficiary
                     navigation.push(.sendMoney)
                 },
+                onTransactionTap: showTransactionDetails,
                 onBeneficiaryRemoved: { popRoute() }
             )
             .navigationBarHidden(true)

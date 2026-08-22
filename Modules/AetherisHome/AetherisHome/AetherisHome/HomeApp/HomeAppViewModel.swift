@@ -27,7 +27,6 @@ final class HomeAppViewModel: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published var cards: [Card] = []
     @Published var recentRecipients: [Beneficiary] = []
-    @Published var quickActions: [HomeAppDashboard.QuickAction] = []
     @Published var spendingThisMonth: HomeAppDashboard.SpendingThisMonth?
 
     @Published private(set) var userFirstName: String = Strings.HomeApp.welcomeName
@@ -50,22 +49,18 @@ final class HomeAppViewModel: ObservableObject {
     }
 
     var quickActionItems: [QuickActionItem] {
-        let actions = quickActions.isEmpty ? HomeAppDashboard.mock.quickActions : quickActions
-        let sendAction = actions.first { $0.route == .sendMoney }
-        let requestAction = actions.first { $0.route == .requestMoney }
-
-        return [
+        [
             .init(
                 id: Self.sendQuickActionId,
-                title: sendAction?.title ?? Strings.QuickActions.sendTitle,
-                subtitle: sendAction?.subtitle ?? Strings.QuickActions.transferSubtitle,
-                icon: sendAction?.icon ?? "paperplane.fill"
+                title: Strings.QuickActions.sendTitle,
+                subtitle: Strings.QuickActions.transferSubtitle,
+                icon: "paperplane.fill"
             ),
             .init(
                 id: Self.requestQuickActionId,
-                title: requestAction?.title ?? Strings.QuickActions.requestTitle,
-                subtitle: requestAction?.subtitle ?? Strings.QuickActions.requestSubtitle,
-                icon: requestAction?.icon ?? "arrow.down"
+                title: Strings.QuickActions.requestTitle,
+                subtitle: Strings.QuickActions.requestSubtitle,
+                icon: "arrow.down"
             ),
             .init(
                 id: Self.moreQuickActionId,
@@ -91,18 +86,18 @@ final class HomeAppViewModel: ObservableObject {
         let spending = spendingThisMonth ?? HomeAppDashboard.mock.spendingThisMonth
 
         return SpendingAnalyticsCardModel(
-            title: spending.title,
+            title: Strings.SpendingChart.title,
             totalTitle: Self.currencyText(spending.total),
             changeTitle: Self.changeText(spending.changePercent),
-            comparisonTitle: spending.comparisonLabel,
+            comparisonTitle: Strings.SpendingChart.comparison,
             categories: spending.categories.map {
                 AnalyticsCategorySummaryItemModel(
                     id: $0.id,
-                    title: $0.title,
+                    title: Self.categoryTitle(for: $0.id),
                     amount: Self.amountText($0.amount),
-                    percentage: $0.percentage,
-                    icon: $0.icon,
-                    iconColor: Self.color(from: $0.colorToken)
+                    percentage: Self.percentageText(amount: $0.amount, total: spending.total),
+                    icon: Self.categoryIcon(for: $0.id),
+                    iconColor: Self.categoryColor(for: $0.id)
                 )
             }
         )
@@ -144,7 +139,6 @@ final class HomeAppViewModel: ObservableObject {
             isBalanceVisible = !dashboard.balance.masked
             cards = dashboard.cards
             recentRecipients = dashboard.recentRecipients.map(Self.mapRecipient(_:))
-            quickActions = dashboard.quickActions
             spendingThisMonth = dashboard.spendingThisMonth
             unreadCount = dashboard.notifications.unreadCount
             isEmpty = cards.isEmpty
@@ -194,19 +188,39 @@ final class HomeAppViewModel: ObservableObject {
         String(format: "%+.0f%%", value)
     }
 
-    private static func color(from token: String) -> Color {
-        switch token {
-        case "brandPrimaryColor":
-            return .brandPrimaryColor
-        case "cyan":
-            return .cyan
-        case "success":
-            return .success
-        case "orange":
-            return .orange
-        default:
-            return .brandPrimaryColor
+    private static func categoryTitle(for id: String) -> String {
+        switch id {
+        case "shopping": Strings.SpendingChart.shopping
+        case "bills": Strings.SpendingChart.bills
+        case "transport": Strings.SpendingChart.transport
+        case "food_and_drinks": Strings.SpendingChart.foodAndDrinks
+        default: id
         }
+    }
+
+    private static func categoryIcon(for id: String) -> String {
+        switch id {
+        case "shopping": "bag.fill"
+        case "bills": "doc.text.fill"
+        case "transport": "car.fill"
+        case "food_and_drinks": "fork.knife"
+        default: "circle.fill"
+        }
+    }
+
+    private static func categoryColor(for id: String) -> Color {
+        switch id {
+        case "shopping": .brandPrimaryColor
+        case "bills": .cyan
+        case "transport": .success
+        case "food_and_drinks": .orange
+        default: .brandPrimaryColor
+        }
+    }
+
+    private static func percentageText(amount: Double, total: Double) -> String {
+        guard total > 0 else { return "0%" }
+        return "\(Int((amount / total * 100).rounded()))%"
     }
 
     private static func amountText(_ amount: Double) -> String {

@@ -141,6 +141,8 @@ struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
     func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView {
         content
     }
+
+    func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>) {}
 }
 
 struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
@@ -163,7 +165,8 @@ struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
     func makeNavigationHost(
         content: AnyView,
         path: Binding<NavigationPath>,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
     ) -> AnyView {
         content
     }

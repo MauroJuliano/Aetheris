@@ -16,4 +16,9 @@ public enum AppLanguage: String, CaseIterable, Codable, Identifiable, Sendable {
         case .portugueseBrazil: "pt-BR"
         }
     }
+
+    public var locale: Locale {
+        guard let languageCode else { return .current }
+        return Locale(identifier: languageCode)
+    }
 }

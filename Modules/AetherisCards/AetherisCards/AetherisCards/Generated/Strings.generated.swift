@@ -244,6 +244,10 @@ internal enum Strings {
     internal static var paymentReceived: String { Strings.tr("Localizable", "FinancialSummary.paymentReceived", fallback: "Payment received") }
     /// Funds received from Amelia Thompson
     internal static var paymentReceivedDescription: String { Strings.tr("Localizable", "FinancialSummary.paymentReceivedDescription", fallback: "Funds received from Amelia Thompson") }
+    /// Funds received from %@
+    internal static func paymentReceivedFrom(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "FinancialSummary.paymentReceivedFrom", String(describing: p1), fallback: "Funds received from %@")
+    }
     /// Restaurant
     internal static var restaurant: String { Strings.tr("Localizable", "FinancialSummary.restaurant", fallback: "Restaurant") }
     /// Subscription
@@ -254,6 +258,10 @@ internal enum Strings {
     internal static var transferSentAmeliaDescription: String { Strings.tr("Localizable", "FinancialSummary.transferSentAmeliaDescription", fallback: "Funds successfully transferred to Amelia Thompson") }
     /// Funds successfully transferred to Sophie Keller
     internal static var transferSentDescription: String { Strings.tr("Localizable", "FinancialSummary.transferSentDescription", fallback: "Funds successfully transferred to Sophie Keller") }
+    /// Funds successfully transferred to %@
+    internal static func transferSentTo(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "FinancialSummary.transferSentTo", String(describing: p1), fallback: "Funds successfully transferred to %@")
+    }
   }
   internal enum HomeCard {
     /// Cards unavailable
@@ -276,8 +284,12 @@ internal enum Strings {
     internal static var august2026: String { Strings.tr("Localizable", "Mock.august2026", fallback: "August 2026") }
     /// Bank transfer
     internal static var bankTransfer: String { Strings.tr("Localizable", "Mock.bankTransfer", fallback: "Bank transfer") }
+    /// Concert ticket
+    internal static var concertTicket: String { Strings.tr("Localizable", "Mock.concertTicket", fallback: "Concert ticket") }
     /// Dinner split
     internal static var dinnerSplit: String { Strings.tr("Localizable", "Mock.dinnerSplit", fallback: "Dinner split") }
+    /// Dinner with Sophie Keller
+    internal static var dinnerWithSophie: String { Strings.tr("Localizable", "Mock.dinnerWithSophie", fallback: "Dinner with Sophie Keller") }
     /// Entertainment
     internal static var entertainment: String { Strings.tr("Localizable", "Mock.entertainment", fallback: "Entertainment") }
     /// Instant payment
@@ -304,6 +316,8 @@ internal enum Strings {
     internal static var restaurant: String { Strings.tr("Localizable", "Mock.restaurant", fallback: "Restaurant") }
     /// Sao Paulo, Brazil
     internal static var saoPauloBrazil: String { Strings.tr("Localizable", "Mock.saoPauloBrazil", fallback: "Sao Paulo, Brazil") }
+    /// Thanks for the collaboration
+    internal static var thanksForCollaboration: String { Strings.tr("Localizable", "Mock.thanksForCollaboration", fallback: "Thanks for the collaboration") }
     /// Transaction
     internal static var transaction: String { Strings.tr("Localizable", "Mock.transaction", fallback: "Transaction") }
     /// Unknown merchant

@@ -63,7 +63,8 @@ public final class TransfersFeatureFactory: TransfersFactoryInterface {
     @MainActor public func makeNavigationHost(
         content: AnyView,
         path: Binding<NavigationPath>,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
     ) -> AnyView {
         TransfersFactory.makeNavigationHost(
             content: content,
@@ -71,7 +72,8 @@ public final class TransfersFeatureFactory: TransfersFactoryInterface {
             identityValidation: identityValidation,
             selectedBeneficiary: beneficiaryBinding,
             path: path,
-            onFinished: onFinished
+            onFinished: onFinished,
+            onTransactionTap: onTransactionTap
         )
     }
 
