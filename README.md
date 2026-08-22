@@ -1,3 +1,5 @@
+# Aetheris
+
 Aetheris is a SwiftUI banking app I built for my portfolio.
 
 The goal was to create something closer to a real app instead of a collection of isolated screens. It includes authentication, registration, onboarding, transfers, cards, beneficiaries, transactions, notifications, and account settings.
@@ -161,7 +163,7 @@ Services can be replaced with mocks to provide controlled responses during tests
 ## Running the Project
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/MauroJuliano/Aetheris.git
 ```
 
 Open `Aetheris.xcodeproj`, select an iPhone simulator, and run with `⌘ + R`.
