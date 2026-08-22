@@ -65,6 +65,15 @@ struct DraggableCard: View {
                     }
             )
     }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            DraggableCardSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

@@ -39,6 +39,15 @@ public struct TabBarView: View {
             }
             .accessibilityIdentifier("tab.bar")
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TabBarViewSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

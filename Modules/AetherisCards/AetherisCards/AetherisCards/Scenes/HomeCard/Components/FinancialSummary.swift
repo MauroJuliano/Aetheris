@@ -32,7 +32,13 @@ struct FinancialSummary: View {
                     .font(AppTypography.subheadline)
                     .monospacedDigit()
                 
-                TransactionTag(type: model.tag)
+                TransactionTag(
+                    model: .init(
+                        title: model.tag.title,
+                        icon: model.tag.icon,
+                        color: model.tag.color
+                    )
+                )
             }
             
             Spacer()

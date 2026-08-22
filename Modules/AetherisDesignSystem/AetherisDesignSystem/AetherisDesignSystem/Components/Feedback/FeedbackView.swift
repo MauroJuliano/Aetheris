@@ -102,6 +102,15 @@ public struct FeedbackView: View {
         .accessibilityIdentifier("error.screen")
     }
 
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FeedbackViewSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var errorIllustration: some View {
         ZStack {
             Circle()

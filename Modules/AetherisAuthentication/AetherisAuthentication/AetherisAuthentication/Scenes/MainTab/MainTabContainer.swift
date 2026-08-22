@@ -8,6 +8,7 @@ import SwiftUI
 
 struct MainTabContainer: View {
     @State private var showSendMoney = false
+    @State private var showRequestMoney = false
     @StateObject private var tabBarVisibilityStore = TabBarVisibilityStore()
     @StateObject private var tabBarRoutingStore = TabBarRoutingStore()
     
@@ -42,6 +43,13 @@ struct MainTabContainer: View {
             .environmentObject(tabBarVisibilityStore)
             .environmentObject(tabBarRoutingStore)
         }
+        .fullScreenCover(isPresented: $showRequestMoney) {
+            transfersFactory.makeRequestMoney(onFinished: {
+                showRequestMoney = false
+            })
+            .environmentObject(tabBarVisibilityStore)
+            .environmentObject(tabBarRoutingStore)
+        }
         .background(Color.backgroundColorA.ignoresSafeArea())
     }
     
@@ -55,7 +63,15 @@ struct MainTabContainer: View {
                 .allowsHitTesting(tabBarRoutingStore.selectedIndex == 0)
                 .accessibilityHidden(tabBarRoutingStore.selectedIndex != 0)
 
-            cardsFactory.make(onFinished: {})
+            cardsFactory.make(
+                onFinished: {},
+                onSendMoneyTap: {
+                    showSendMoney = true
+                },
+                onRequestMoneyTap: {
+                    showRequestMoney = true
+                }
+            )
                 .environmentObject(tabBarVisibilityStore)
                 .environmentObject(tabBarRoutingStore)
                 .opacity(tabBarRoutingStore.selectedIndex == 1 ? 1 : 0)

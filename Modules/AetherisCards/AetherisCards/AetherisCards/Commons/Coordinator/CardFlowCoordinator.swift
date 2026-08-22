@@ -45,6 +45,8 @@ struct CardNavigationState {
 struct CardFlowCoordinator: View {
     let coreService: any HasCoreService
     let onDismiss: (() -> Void)?
+    let onSendMoneyTap: () -> Void
+    let onRequestMoneyTap: () -> Void
     @State private var navigation = CardNavigationState()
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
     @EnvironmentObject private var tabBarRoutingStore: TabBarRoutingStore
@@ -69,6 +71,12 @@ struct CardFlowCoordinator: View {
                 },
                 onCardLockTap: { cardId in
                     navigation.showCardLock(cardID: cardId)
+                },
+                onSendMoneyTap: {
+                    onSendMoneyTap()
+                },
+                onRequestMoneyTap: {
+                    onRequestMoneyTap()
                 }
             )
             .navigationDestination(for: CardFlowRoute.self) { route in
@@ -141,7 +149,9 @@ struct CardFlowCoordinator: View {
 #Preview {
     CardFlowCoordinator(
         coreService: DemoCoreService(delay: 0),
-        onDismiss: nil
+        onDismiss: nil,
+        onSendMoneyTap: {},
+        onRequestMoneyTap: {}
     )
     .environmentObject(TabBarVisibilityStore())
     .environmentObject(TabBarRoutingStore())

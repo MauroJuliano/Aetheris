@@ -5,9 +5,25 @@ struct IncomingPaymentDetailsSection: View {
     let details: IncomingPaymentDetailsModel
     let onSenderTap: () -> Void
     let onPaymentMethodTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: IncomingPaymentDetailsModel,
+        onSenderTap: @escaping () -> Void,
+        onPaymentMethodTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onSenderTap = onSenderTap
+        self.onPaymentMethodTap = onPaymentMethodTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.paymentDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.paymentDetails,
+            isLoading: isLoading
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.from,
                 icon: "building.columns",
@@ -16,7 +32,10 @@ struct IncomingPaymentDetailsSection: View {
                 showsChevron: true,
                 action: onSenderTap
             )
+            .toSkeleton(enable: isLoading)
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.method,
                 icon: "arrow.left.arrow.right",
@@ -25,13 +44,17 @@ struct IncomingPaymentDetailsSection: View {
                 showsChevron: true,
                 action: onPaymentMethodTap
             )
+            .toSkeleton(enable: isLoading)
+
             if let reference = details.reference {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.reference,
                     icon: "doc.text",
                     value: reference
                 )
+                .toSkeleton(enable: isLoading)
             }
         }
     }
@@ -40,9 +63,23 @@ struct IncomingPaymentDetailsSection: View {
 struct TransferDetailsSection: View {
     let details: TransferDetailsModel
     let onRecipientTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: TransferDetailsModel,
+        onRecipientTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onRecipientTap = onRecipientTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.transferDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.transferDetails,
+            isLoading: isLoading
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.to,
                 icon: "person",
@@ -51,27 +88,37 @@ struct TransferDetailsSection: View {
                 showsChevron: true,
                 action: onRecipientTap
             )
+            .toSkeleton(enable: isLoading)
+
             if let institution = details.destinationInstitution {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.institution,
                     icon: "building.columns",
                     value: institution
                 )
+                .toSkeleton(enable: isLoading)
             }
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.method,
                 icon: "arrow.left.arrow.right",
                 value: details.method
             )
+            .toSkeleton(enable: isLoading)
+
             if let reference = details.reference {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.reference,
                     icon: "doc.text",
                     value: reference
                 )
+                .toSkeleton(enable: isLoading)
             }
         }
     }
@@ -81,9 +128,25 @@ struct MerchantDetailsSection: View {
     let details: MerchantDetailsModel
     let onMerchantTap: () -> Void
     let onPaymentMethodTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: MerchantDetailsModel,
+        onMerchantTap: @escaping () -> Void,
+        onPaymentMethodTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onMerchantTap = onMerchantTap
+        self.onPaymentMethodTap = onPaymentMethodTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.purchaseDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.purchaseDetails,
+            isLoading: isLoading
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.merchant,
                 icon: "storefront",
@@ -92,21 +155,30 @@ struct MerchantDetailsSection: View {
                 showsChevron: true,
                 action: onMerchantTap
             )
+            .toSkeleton(enable: isLoading)
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.category,
                 icon: "square.grid.2x2",
                 value: details.category
             )
+            .toSkeleton(enable: isLoading)
+
             if let location = details.location {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.location,
                     icon: "mappin",
                     value: location
                 )
+                .toSkeleton(enable: isLoading)
             }
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.paymentMethod,
                 icon: details.paymentMethod.icon,
@@ -115,6 +187,7 @@ struct MerchantDetailsSection: View {
                 showsChevron: true,
                 action: onPaymentMethodTap
             )
+            .toSkeleton(enable: isLoading)
         }
     }
 }
@@ -122,9 +195,23 @@ struct MerchantDetailsSection: View {
 struct RefundDetailsSection: View {
     let details: RefundDetailsModel
     let onOriginalTransactionTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: RefundDetailsModel,
+        onOriginalTransactionTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onOriginalTransactionTap = onOriginalTransactionTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.refundDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.refundDetails,
+            isLoading: isLoading
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.originalTransaction,
                 icon: "receipt",
@@ -133,21 +220,28 @@ struct RefundDetailsSection: View {
                 showsChevron: true,
                 action: onOriginalTransactionTap
             )
+            .toSkeleton(enable: isLoading)
+
             if let reason = details.refundReason {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.reason,
                     icon: "text.bubble",
                     value: reason
                 )
+                .toSkeleton(enable: isLoading)
             }
+
             if let availabilityDate = details.expectedAvailabilityDate {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.expectedAvailability,
                     icon: "calendar",
                     value: availabilityDate.shortTransactionDateFormatted
                 )
+                .toSkeleton(enable: isLoading)
             }
         }
     }
@@ -157,9 +251,25 @@ struct InvoicePaymentDetailsSection: View {
     let details: InvoicePaymentDetailsModel
     let onInvoiceTap: () -> Void
     let onPaymentMethodTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: InvoicePaymentDetailsModel,
+        onInvoiceTap: @escaping () -> Void,
+        onPaymentMethodTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onInvoiceTap = onInvoiceTap
+        self.onPaymentMethodTap = onPaymentMethodTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.invoicePaymentDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.invoicePaymentDetails,
+            isLoading: isLoading
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.invoice,
                 icon: "doc.text",
@@ -168,13 +278,19 @@ struct InvoicePaymentDetailsSection: View {
                 showsChevron: true,
                 action: onInvoiceTap
             )
+            .toSkeleton(enable: isLoading)
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.paidAmount,
                 icon: "dollarsign.circle",
                 value: details.paidAmount.absoluteCurrencyFormatted(code: details.currencyCode)
             )
+            .toSkeleton(enable: isLoading)
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.paymentMethod,
                 icon: details.paymentMethod.icon,
@@ -183,12 +299,16 @@ struct InvoicePaymentDetailsSection: View {
                 showsChevron: true,
                 action: onPaymentMethodTap
             )
+            .toSkeleton(enable: isLoading)
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.confirmationCode,
                 icon: "checkmark.seal",
                 value: details.confirmationCode
             )
+            .toSkeleton(enable: isLoading)
         }
     }
 }
@@ -199,26 +319,54 @@ struct SubscriptionDetailsSection: View {
     let onPaymentMethodTap: () -> Void
     let onHistoryTap: () -> Void
     let onBlockMerchantTap: () -> Void
+    let isLoading: Bool
+
+    init(
+        details: SubscriptionDetailsModel,
+        onMerchantTap: @escaping () -> Void,
+        onPaymentMethodTap: @escaping () -> Void,
+        onHistoryTap: @escaping () -> Void,
+        onBlockMerchantTap: @escaping () -> Void,
+        isLoading: Bool = false
+    ) {
+        self.details = details
+        self.onMerchantTap = onMerchantTap
+        self.onPaymentMethodTap = onPaymentMethodTap
+        self.onHistoryTap = onHistoryTap
+        self.onBlockMerchantTap = onBlockMerchantTap
+        self.isLoading = isLoading
+    }
 
     var body: some View {
         VStack(spacing: AppSpacing.medium) {
-            if details.isRecurringPaymentDetected {
-                recurringPaymentCard
+            if isLoading {
+                recurringPaymentCardSkeleton
+                subscriptionDetailsCardSkeleton
+                paymentHistoryCardSkeleton
+                merchantControlCardSkeleton
+            } else {
+                if details.isRecurringPaymentDetected {
+                    recurringPaymentCard
+                }
+
+                subscriptionDetailsCard
+
+                if !details.paymentHistory.isEmpty {
+                    paymentHistoryCard
+                }
+
+                merchantControlCard
             }
-
-            subscriptionDetailsCard
-
-            if !details.paymentHistory.isEmpty {
-                paymentHistoryCard
-            }
-
-            merchantControlCard
         }
     }
 
     private var recurringPaymentCard: some View {
         HStack(spacing: AppSpacing.medium) {
-            iconCircle(systemName: "arrow.triangle.2.circlepath", color: .brandPrimaryColor, size: 50)
+            iconCircle(
+                systemName: "arrow.triangle.2.circlepath",
+                color: .brandPrimaryColor,
+                size: 50
+            )
 
             VStack(alignment: .leading, spacing: AppSpacing.xxxSmall) {
                 Text(Strings.TransactionDetails.recurringPayment)
@@ -246,8 +394,29 @@ struct SubscriptionDetailsSection: View {
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
 
+    private var recurringPaymentCardSkeleton: some View {
+        HStack(spacing: AppSpacing.medium) {
+            SkeletonView(.circle)
+                .frame(width: 50, height: 50)
+
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                SkeletonBlock(width: 150, height: 16, radius: 8)
+                SkeletonBlock(width: 220, height: 14, radius: 7)
+                SkeletonBlock(width: 180, height: 13, radius: 6)
+            }
+
+            Spacer(minLength: 0)
+        }
+        .padding(AppSpacing.medium)
+        .background(Color.brandPrimaryColor.opacity(0.05))
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
+    }
+
     private var subscriptionDetailsCard: some View {
-        TransactionDetailsCard(title: Strings.TransactionDetails.subscriptionDetails) {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.subscriptionDetails,
+            isLoading: false
+        ) {
             TransactionDetailRow(
                 title: Strings.TransactionDetails.merchant,
                 icon: "storefront",
@@ -257,32 +426,39 @@ struct SubscriptionDetailsSection: View {
                 action: onMerchantTap
             )
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.category,
                 icon: "square.grid.2x2",
                 value: details.category
             )
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.billingFrequency,
                 icon: "calendar.badge.clock",
                 value: details.billingFrequency.title
             )
+
             if let nextDate = details.nextExpectedPaymentDate {
                 TransactionDetailsDivider()
+
                 TransactionDetailRow(
                     title: Strings.TransactionDetails.nextPayment,
                     icon: "calendar",
                     value: nextDate.shortTransactionDateFormatted
                 )
             }
+
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.expectedAmount,
                 icon: "dollarsign.circle",
                 value: details.expectedAmount.absoluteCurrencyFormatted(code: details.currencyCode)
             )
             TransactionDetailsDivider()
+
             TransactionDetailRow(
                 title: Strings.TransactionDetails.paymentMethod,
                 icon: details.paymentMethod.icon,
@@ -291,6 +467,73 @@ struct SubscriptionDetailsSection: View {
                 showsChevron: true,
                 action: onPaymentMethodTap
             )
+        }
+    }
+
+    private var subscriptionDetailsCardSkeleton: some View {
+        TransactionDetailsCard(
+            title: Strings.TransactionDetails.subscriptionDetails,
+            isLoading: true
+        ) {
+            TransactionDetailRow(
+                title: Strings.TransactionDetails.merchant,
+                icon: "storefront",
+                value: details.merchantName,
+                subtitle: details.merchantDescriptor,
+                showsChevron: true,
+                action: onMerchantTap
+            )
+            .toSkeleton(enable: true)
+
+            TransactionDetailsDivider()
+
+            TransactionDetailRow(
+                title: Strings.TransactionDetails.category,
+                icon: "square.grid.2x2",
+                value: details.category
+            )
+            .toSkeleton(enable: true)
+
+            TransactionDetailsDivider()
+
+            TransactionDetailRow(
+                title: Strings.TransactionDetails.billingFrequency,
+                icon: "calendar.badge.clock",
+                value: details.billingFrequency.title
+            )
+            .toSkeleton(enable: true)
+
+            if let nextDate = details.nextExpectedPaymentDate {
+                TransactionDetailsDivider()
+
+                TransactionDetailRow(
+                    title: Strings.TransactionDetails.nextPayment,
+                    icon: "calendar",
+                    value: nextDate.shortTransactionDateFormatted
+                )
+                .toSkeleton(enable: true)
+            }
+
+            TransactionDetailsDivider()
+
+            TransactionDetailRow(
+                title: Strings.TransactionDetails.expectedAmount,
+                icon: "dollarsign.circle",
+                value: details.expectedAmount.absoluteCurrencyFormatted(code: details.currencyCode)
+            )
+            .toSkeleton(enable: true)
+
+            TransactionDetailsDivider()
+
+            TransactionDetailRow(
+                title: Strings.TransactionDetails.paymentMethod,
+                icon: details.paymentMethod.icon,
+                value: details.paymentMethod.displayTitle,
+                subtitle: details.paymentMethod.subtitle,
+                showsChevron: true,
+                action: onPaymentMethodTap
+            )
+            .toSkeleton(enable: true)
         }
     }
 
@@ -318,6 +561,41 @@ struct SubscriptionDetailsSection: View {
                 SubscriptionPaymentHistoryRow(payment: payment)
 
                 if index < min(details.paymentHistory.count, 3) - 1 {
+                    Divider().padding(.leading, AppSpacing.medium)
+                }
+            }
+        }
+        .appCardSurface()
+    }
+
+    private var paymentHistoryCardSkeleton: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                SkeletonBlock(width: 160, height: 20, radius: 9)
+
+                Spacer()
+
+                SkeletonBlock(width: 70, height: 16, radius: 8)
+            }
+            .padding(.horizontal, AppSpacing.medium)
+            .padding(.top, AppSpacing.medium)
+            .padding(.bottom, AppSpacing.small)
+
+            ForEach(0..<3, id: \.self) { index in
+                HStack(spacing: AppSpacing.medium) {
+                    VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                        SkeletonBlock(width: 100, height: 13, radius: 6)
+                        SkeletonBlock(width: 130, height: 16, radius: 8)
+                    }
+
+                    Spacer()
+
+                    SkeletonBlock(width: 80, height: 16, radius: 8)
+                }
+                .padding(.horizontal, AppSpacing.medium)
+                .padding(.vertical, AppSpacing.small)
+
+                if index < 2 {
                     Divider().padding(.leading, AppSpacing.medium)
                 }
             }
@@ -356,6 +634,24 @@ struct SubscriptionDetailsSection: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .appCardSurface()
+    }
+
+    private var merchantControlCardSkeleton: some View {
+        HStack(spacing: AppSpacing.medium) {
+            SkeletonView(.circle)
+                .frame(width: 46, height: 46)
+
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                SkeletonBlock(width: 170, height: 16, radius: 8)
+                SkeletonBlock(width: 240, height: 14, radius: 7)
+            }
+
+            Spacer()
+
+            SkeletonBlock(width: 10, height: 16, radius: 5)
+        }
+        .padding(AppSpacing.medium)
         .appCardSurface()
     }
 
@@ -407,20 +703,38 @@ struct SubscriptionPaymentHistoryRow: View {
 
 private struct TransactionDetailsCard<Content: View>: View {
     let title: String
+    let isLoading: Bool
     @ViewBuilder let content: Content
+
+    init(
+        title: String,
+        isLoading: Bool = false,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = title
+        self.isLoading = isLoading
+        self.content = content()
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(title)
-                .font(AppTypography.sectionTitle)
-                .bold()
-                .foregroundStyle(Color.textPrimary)
-                .padding(.top, AppSpacing.medium)
-                .padding(.bottom, AppSpacing.small)
+            if isLoading {
+                SkeletonBlock(width: 180, height: 20, radius: 9)
+                    .padding(.top, AppSpacing.medium)
+                    .padding(.bottom, AppSpacing.small)
+            } else {
+                Text(title)
+                    .font(AppTypography.sectionTitle)
+                    .bold()
+                    .foregroundStyle(Color.textPrimary)
+                    .padding(.top, AppSpacing.medium)
+                    .padding(.bottom, AppSpacing.small)
+            }
 
             content
         }
         .padding(.horizontal, AppSpacing.medium)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .appCardSurface()
     }
 }
@@ -518,13 +832,13 @@ private func iconCircle(systemName: String, color: Color, size: CGFloat) -> some
                     paidAmount: 350,
                     currencyCode: "USD",
                     paymentMethod: CardsPreviewData.paymentMethod,
-                    confirmationCode: "PAY-2026-08"
+                    confirmationCode: "INV-98441"
                 ),
                 onInvoiceTap: {},
                 onPaymentMethodTap: {}
             )
         }
         .padding()
+        .appScreenBackground()
     }
-    .appScreenBackground()
 }

@@ -35,7 +35,8 @@ enum TransactionDetailsSectionFactory {
         onMerchantTap: @escaping (UUID) -> Void,
         onPaymentMethodTap: @escaping (UUID) -> Void,
         onTransactionHistoryTap: @escaping (UUID) -> Void,
-        onBlockMerchantTap: @escaping (UUID) -> Void
+        onBlockMerchantTap: @escaping (UUID) -> Void,
+        isLoading: Bool = false
     ) -> some View {
         switch transaction.sectionKind {
         case .incomingPayment:
@@ -43,14 +44,16 @@ enum TransactionDetailsSectionFactory {
                 IncomingPaymentDetailsSection(
                     details: details,
                     onSenderTap: { onMerchantTap(details.senderId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
+                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) },
+                    isLoading: isLoading
                 )
             }
         case .outgoingTransfer:
             if let details = transaction.transferDetails {
                 TransferDetailsSection(
                     details: details,
-                    onRecipientTap: { onMerchantTap(details.recipientId) }
+                    onRecipientTap: { onMerchantTap(details.recipientId) },
+                    isLoading: isLoading
                 )
             }
         case .purchase:
@@ -58,7 +61,8 @@ enum TransactionDetailsSectionFactory {
                 MerchantDetailsSection(
                     details: details,
                     onMerchantTap: { onMerchantTap(details.merchantId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
+                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) },
+                    isLoading: isLoading
                 )
             }
         case .subscription:
@@ -68,7 +72,8 @@ enum TransactionDetailsSectionFactory {
                     onMerchantTap: { onMerchantTap(details.merchantId) },
                     onPaymentMethodTap: { onPaymentMethodTap(transaction.id) },
                     onHistoryTap: { onTransactionHistoryTap(details.merchantId) },
-                    onBlockMerchantTap: { onBlockMerchantTap(details.merchantId) }
+                    onBlockMerchantTap: { onBlockMerchantTap(details.merchantId) },
+                    isLoading: isLoading
                 )
             }
         case .refund:
@@ -77,7 +82,8 @@ enum TransactionDetailsSectionFactory {
                     details: details,
                     onOriginalTransactionTap: {
                         onTransactionHistoryTap(details.originalTransactionId)
-                    }
+                    },
+                    isLoading: isLoading
                 )
             }
         case .invoicePayment:
@@ -85,7 +91,8 @@ enum TransactionDetailsSectionFactory {
                 InvoicePaymentDetailsSection(
                     details: details,
                     onInvoiceTap: { onTransactionHistoryTap(details.invoiceId) },
-                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) }
+                    onPaymentMethodTap: { onPaymentMethodTap(transaction.id) },
+                    isLoading: isLoading
                 )
             }
         }

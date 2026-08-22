@@ -3,6 +3,7 @@ import SwiftUI
 
 struct TransactionGeneralInformation: View {
     let transaction: TransactionDetailsModel
+    let isLoading: Bool
 
     var body: some View {
         VStack(spacing: 0) {
@@ -11,6 +12,7 @@ struct TransactionGeneralInformation: View {
                 icon: "calendar",
                 value: transaction.date.transactionDateFormatted
             )
+            .toSkeleton(enable: isLoading)
             divider
             TransactionDetailRow(
                 title: Strings.TransactionDetails.status,
@@ -18,24 +20,28 @@ struct TransactionGeneralInformation: View {
                 value: transaction.status.title,
                 valueColor: transaction.status.color
             )
+            .toSkeleton(enable: isLoading)
             divider
             TransactionDetailRow(
                 title: Strings.TransactionDetails.transactionId,
                 icon: "number",
                 value: transaction.transactionCode
             )
+            .toSkeleton(enable: isLoading)
             divider
             TransactionDetailRow(
                 title: Strings.TransactionDetails.type,
                 icon: transaction.categoryIcon,
                 value: transaction.categoryTitle
             )
+            .toSkeleton(enable: isLoading)
             divider
             TransactionDetailRow(
                 title: Strings.TransactionDetails.amount,
                 icon: "dollarsign.circle",
                 value: transaction.amount.absoluteCurrencyFormatted(code: transaction.currencyCode)
             )
+            .toSkeleton(enable: isLoading)
 
             if let note = transaction.note, !note.isEmpty {
                 divider
@@ -44,6 +50,7 @@ struct TransactionGeneralInformation: View {
                     icon: "message",
                     value: note
                 )
+                .toSkeleton(enable: isLoading)
             }
         }
         .padding(.horizontal, AppSpacing.medium)
@@ -57,7 +64,8 @@ struct TransactionGeneralInformation: View {
 
 #Preview {
     TransactionGeneralInformation(
-        transaction: CardsPreviewData.transaction
+        transaction: CardsPreviewData.transaction,
+        isLoading: false
     )
     .padding()
     .appScreenBackground()

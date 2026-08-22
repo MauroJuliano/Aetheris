@@ -49,7 +49,14 @@ extension HomeFlowCoordinator {
                 coreService: coreService,
                 path: $navigation.path,
                 initialSelectedCardId: initialCardId,
-                onFinished: { popRoute() }
+                onFinished: { popRoute() },
+                onSendMoneyTap: {
+                    selectedBeneficiary = nil
+                    navigation.push(.sendMoney)
+                },
+                onRequestMoneyTap: {
+                    navigation.push(.requestMoney)
+                }
             )
             .navigationBarHidden(true)
 

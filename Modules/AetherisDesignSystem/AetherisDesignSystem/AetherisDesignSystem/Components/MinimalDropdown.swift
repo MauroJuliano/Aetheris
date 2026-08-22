@@ -71,6 +71,15 @@ public struct MinimalDropdown: View {
             .padding()
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            MinimalDropdownSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {
@@ -86,4 +95,3 @@ public struct MinimalDropdown: View {
     .padding()
     .appScreenBackground()
 }
-

@@ -111,14 +111,19 @@ struct RequestMoneyFormCard: View {
                 .foregroundStyle(Color.textSecondaryColor)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: AppSpacing.medium) {
-                    ForEach(contacts) { contact in
-                        RecentContactButton(
-                            contact: contact,
-                            isSelected: contact.id == selectedContact?.id
-                        ) {
-                            onContactTap(contact)
-                        }
+                    HStack(spacing: AppSpacing.medium) {
+                        ForEach(contacts) { contact in
+                            RecentContactButton(
+                                contact: .init(
+                                    id: contact.id,
+                                    name: contact.name,
+                                    contactInformation: contact.contactInformation,
+                                    imageName: contact.imageName
+                                ),
+                                isSelected: contact.id == selectedContact?.id
+                            ) {
+                                onContactTap(contact)
+                            }
                     }
                 }
             }
@@ -270,9 +275,24 @@ private struct RequestMoneyFormCardPreviewWrapper: View {
     @FocusState private var focusedField: RequestMoneyField?
 
     var body: some View {
+        let sophie = RequestContactModel(
+            id: UUID(),
+            name: "Sophie Keller",
+            contactInformation: "sophie.keller@aetheris.app",
+            imageName: "sophie"
+        )
+
         RequestMoneyFormCard(
-            contacts: [.previewSophie, .previewCarlos],
-            selectedContact: .previewSophie,
+            contacts: [
+                sophie,
+                .init(
+                    id: UUID(),
+                    name: "Carlos Barbosa",
+                    contactInformation: "carlos@email.com",
+                    imageName: nil
+                )
+            ],
+            selectedContact: sophie,
             presets: .previewPresets,
             amountText: $amountText,
             reason: $reason,

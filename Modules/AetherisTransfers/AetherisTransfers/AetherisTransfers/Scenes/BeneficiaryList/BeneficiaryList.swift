@@ -49,7 +49,11 @@ struct BeneficiaryList: View {
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: AppSpacing.large) {
-                    BeneficiarySearchBar(text: $searchText)
+                    BeneficiarySearchBar(
+                        text: $searchText,
+                        placeholder: Strings.BeneficiaryList.searchPlaceholder,
+                        clearLabel: Strings.BeneficiaryList.clearSearch
+                    )
                         .padding(.top, AppSpacing.medium)
 
                     if searchQuery.isEmpty {

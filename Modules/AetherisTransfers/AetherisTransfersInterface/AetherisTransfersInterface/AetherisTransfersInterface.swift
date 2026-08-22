@@ -4,6 +4,7 @@ import SwiftUI
 @MainActor public protocol HasTransfers { var transfersFactory: TransfersFactoryInterface { get } }
 @MainActor public protocol TransfersFactoryInterface {
     func make(onFinished: @escaping () -> Void) -> AnyView
+    func makeRequestMoney(onFinished: @escaping () -> Void) -> AnyView
 }
 
 public struct Beneficiary: Identifiable, Codable, Hashable {

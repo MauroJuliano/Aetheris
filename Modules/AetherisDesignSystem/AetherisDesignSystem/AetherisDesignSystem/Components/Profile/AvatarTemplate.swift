@@ -48,6 +48,15 @@ public struct AvatarTemplate: View {
             rotateGradient = true
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            AvatarTemplateSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

@@ -9,7 +9,11 @@ public protocol HasCards {
 
 public protocol CardsFactoryInterface {
     @MainActor
-    func make(onFinished: @escaping () -> Void) -> AnyView
+    func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView
 }
 
 @MainActor

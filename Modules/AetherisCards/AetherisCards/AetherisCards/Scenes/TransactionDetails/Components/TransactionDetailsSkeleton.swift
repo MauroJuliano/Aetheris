@@ -66,17 +66,14 @@ struct TransactionDetailsSkeleton: View {
     }
 
     private var rowSkeleton: some View {
-        HStack(spacing: AppSpacing.medium) {
-            SkeletonView(.circle)
-                .frame(width: 40, height: 40)
-
-            SkeletonBlock(width: 100, height: 16, radius: 8)
-
-            Spacer()
-
-            SkeletonBlock(width: 130, height: 16, radius: 8)
-        }
-        .padding(.vertical, AppSpacing.small)
+        TransactionDetailRow(
+            title: "Transaction",
+            icon: "circle",
+            value: "Placeholder",
+            subtitle: "Placeholder",
+            showsChevron: false
+        )
+        .toSkeleton(enable: true)
     }
 
     private var supportSkeleton: some View {

@@ -41,6 +41,15 @@ public struct PrimaryButton: View {
         }
         .disabled(isLoading)
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            PrimaryButtonSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

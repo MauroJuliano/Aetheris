@@ -215,6 +215,19 @@ public struct FormCell: View {
             Divider()
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FormCellSkeleton(
+                hasSectionTitle: model.sectionTitle != nil,
+                hasDivider: hasDivider,
+                showsToggle: model.content.toggle != nil
+            )
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {
