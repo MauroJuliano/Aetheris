@@ -28,7 +28,7 @@ extension CardOptions {
     static func virtualCard() -> CardOptions {
         CardOptions(
             id: virtualCardId,
-            label: "Virtual\ncard",
+            label: Strings.CardInformation.virtualCardQuickAction,
             icon: "creditcard"
         )
     }

@@ -42,6 +42,15 @@ struct CurrentInvoiceSpendingSummary: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CurrentInvoiceSpendingSummarySkeleton()
+        } else {
+            self
+        }
+    }
+
     private var header: some View {
         HStack {
             Text(Strings.CurrentInvoice.spendingSummaryTitle)
@@ -87,13 +96,4 @@ struct CurrentInvoiceSpendingSummary: View {
                 .foregroundStyle(Color.textSecondaryColor)
         }
     }
-}
-
-#Preview {
-    CurrentInvoiceSpendingSummary(
-        summary: CardsPreviewData.invoice.spendingSummary,
-        onChartsTap: {}
-    )
-    .padding()
-    .appScreenBackground()
 }

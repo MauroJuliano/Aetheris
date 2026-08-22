@@ -57,6 +57,9 @@ public struct ListCell: View {
                 .padding(AppSpacing.medium)
         }
         .padding(.horizontal, AppSpacing.screenHorizontal)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(model.title), \(model.subtitle)")
+        .accessibilityValue(model.value)
     }
 
     @ViewBuilder

@@ -62,6 +62,12 @@ struct BeneficiaryInformationSection: View {
     }
 }
 
+extension BeneficiaryInformationSection {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { BeneficiaryInformationSectionSkeleton() } else { self }
+    }
+}
+
 private struct BeneficiaryInformationRowModel: Identifiable {
     let id = UUID()
     let title: String

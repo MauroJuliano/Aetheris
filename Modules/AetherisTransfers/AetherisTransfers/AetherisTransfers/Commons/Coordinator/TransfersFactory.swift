@@ -127,6 +127,7 @@ public enum TransfersFactory {
         beneficiaryId: UUID,
         path: Binding<NavigationPath>,
         onBack: @escaping () -> Void,
+        onNotificationsTap: @escaping () -> Void = {},
         onTransferTap: @escaping (Beneficiary) -> Void,
         onBeneficiaryRemoved: @escaping () -> Void
     ) -> AnyView {
@@ -135,6 +136,7 @@ public enum TransfersFactory {
                 coreService: coreService,
                 beneficiaryId: beneficiaryId,
                 onBackAction: onBack,
+                onNotificationsTap: onNotificationsTap,
                 onTransferTap: onTransferTap,
                 onRequestMoneyTap: { contact in
                     path.wrappedValue.append(SendMoneyFlowRoute.requestMoney(contact))

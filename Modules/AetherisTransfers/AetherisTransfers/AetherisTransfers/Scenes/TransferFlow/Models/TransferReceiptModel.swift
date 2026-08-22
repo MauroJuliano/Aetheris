@@ -1,41 +1,4 @@
-import AetherisAuthenticationInterface
 import Foundation
-
-struct TransferDraft: Hashable {
-    let amount: Decimal
-    let formattedAmount: String
-    let currency: String
-    let beneficiaryName: String
-    let beneficiaryIdentifier: String
-    let accountName: String
-    let accountLastDigits: String
-}
-
-struct TransferSubmission: Hashable {
-    let draft: TransferDraft
-    let authorization: IdentityAuthorization
-    let idempotencyKey: String
-}
-
-struct TransferRequest: Encodable {
-    let amount: Decimal
-    let currency: String
-    let beneficiaryIdentifier: String
-    let authorizationToken: String
-}
-
-struct TransferReceiptResponse: Codable, Hashable {
-    let transactionId: String
-    let referenceId: String
-    let status: String
-    let amount: Double
-    let currency: String
-    let recipientName: String
-    let recipientIdentifier: String
-    let accountName: String
-    let accountLastDigits: String
-    let completedAt: String
-}
 
 struct TransferReceiptModel: Hashable {
     let amount: String
@@ -52,18 +15,38 @@ extension TransferReceiptModel {
         amount = Self.format(amount: response.amount, currency: response.currency)
         recipientName = response.recipientName
         recipientEmail = response.recipientIdentifier
-        accountName = response.accountName
+        accountName = Self.localizedAccountName(response.accountName)
         accountLastDigits = response.accountLastDigits
-        date = response.completedAt
+        date = Self.format(date: response.completedAt)
         referenceId = response.referenceId
     }
 
     private static func format(amount: Double, currency: String) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
+        formatter.locale = currentLocale
         formatter.currencyCode = currency
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
         return formatter.string(from: NSNumber(value: amount)) ?? "\(currency) \(amount)"
+    }
+
+    private static func format(date value: String) -> String {
+        let inputFormatter = ISO8601DateFormatter()
+        guard let date = inputFormatter.date(from: value) else { return value }
+
+        let formatter = DateFormatter()
+        formatter.locale = currentLocale
+        formatter.dateStyle = .long
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
+
+    private static func localizedAccountName(_ value: String) -> String {
+        value == "Main Account" ? Strings.TransferSuccess.mainAccount : value
+    }
+
+    private static var currentLocale: Locale {
+        Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
     }
 }

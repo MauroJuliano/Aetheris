@@ -15,6 +15,7 @@ struct RegistrationSubmissionViewModelTests {
         #expect(draft.sin.isEmpty)
         #expect(draft.mothersName.isEmpty)
         #expect(draft.userName.isEmpty)
+        #expect(draft.email.isEmpty)
         #expect(draft.birthdate.isEmpty)
         #expect(draft.password.isEmpty)
         #expect(draft.confirmPassword.isEmpty)
@@ -36,6 +37,7 @@ struct RegistrationSubmissionViewModelTests {
                 sin: "000000000",
                 mothersName: "Jane Doe",
                 userName: "Melissa",
+                email: "melissa@example.com",
                 birthdate: "10/10/1999"
             )
         ])
@@ -135,6 +137,7 @@ struct RegistrationSubmissionViewModelTests {
         draft.sin = "000.000.000"
         draft.mothersName = "Jane Doe"
         draft.userName = "Melissa"
+        draft.email = "melissa@example.com"
         draft.birthdate = "10/10/1999"
         draft.password = "1234"
         draft.confirmPassword = "1234"

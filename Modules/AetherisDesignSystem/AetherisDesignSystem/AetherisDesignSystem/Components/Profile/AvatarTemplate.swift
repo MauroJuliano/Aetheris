@@ -1,13 +1,5 @@
 import SwiftUI
 
-public struct AvatarModel {
-    let image: String
-    
-    public init(image: String) {
-        self.image = image
-    }
-}
-
 public struct AvatarTemplate: View {
     private var model: AvatarModel
     @State private var rotateGradient: Bool

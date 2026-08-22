@@ -24,6 +24,26 @@ enum RegistrationInputRules {
         normalizedName(value).count >= 2
     }
 
+    static func sanitizeEmail(_ value: String) -> String {
+        value
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: " ", with: "")
+            .lowercased()
+    }
+
+    static func isValidEmail(_ value: String) -> Bool {
+        let normalized = sanitizeEmail(value)
+
+        guard !normalized.isEmpty else {
+            return false
+        }
+
+        return normalized.range(
+            of: #"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"#,
+            options: [.regularExpression, .caseInsensitive]
+        ) != nil
+    }
+
     static func sanitizeBirthdate(_ value: String) -> String {
         formatBirthdate(digitsOnly: String(value.filter(\.isNumber).prefix(8)))
     }

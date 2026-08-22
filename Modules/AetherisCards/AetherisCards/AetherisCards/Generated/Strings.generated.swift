@@ -262,6 +262,54 @@ internal enum Strings {
     internal static let emptyDescription = Strings.tr("Localizable", "HomeCard.emptyDescription", fallback: "This area will reflect the dashboard when the simulated service returns data.")
     /// No cards or activity yet
     internal static let emptyTitle = Strings.tr("Localizable", "HomeCard.emptyTitle", fallback: "No cards or activity yet")
+    /// We could not load your cards and activity right now.
+    internal static let loadFailed = Strings.tr("Localizable", "HomeCard.loadFailed", fallback: "We could not load your cards and activity right now.")
+  }
+  internal enum Mock {
+    /// Account balance
+    internal static let accountBalance = Strings.tr("Localizable", "Mock.accountBalance", fallback: "Account balance")
+    /// Aetheris account
+    internal static let aetherisAccount = Strings.tr("Localizable", "Mock.aetherisAccount", fallback: "Aetheris account")
+    /// Aetheris checking
+    internal static let aetherisChecking = Strings.tr("Localizable", "Mock.aetherisChecking", fallback: "Aetheris checking")
+    /// August 2026
+    internal static let august2026 = Strings.tr("Localizable", "Mock.august2026", fallback: "August 2026")
+    /// Bank transfer
+    internal static let bankTransfer = Strings.tr("Localizable", "Mock.bankTransfer", fallback: "Bank transfer")
+    /// Dinner split
+    internal static let dinnerSplit = Strings.tr("Localizable", "Mock.dinnerSplit", fallback: "Dinner split")
+    /// Entertainment
+    internal static let entertainment = Strings.tr("Localizable", "Mock.entertainment", fallback: "Entertainment")
+    /// Instant payment
+    internal static let instantPayment = Strings.tr("Localizable", "Mock.instantPayment", fallback: "Instant payment")
+    /// Instant transfer
+    internal static let instantTransfer = Strings.tr("Localizable", "Mock.instantTransfer", fallback: "Instant transfer")
+    /// Invoice payment
+    internal static let invoicePayment = Strings.tr("Localizable", "Mock.invoicePayment", fallback: "Invoice payment")
+    /// Loading
+    internal static let loading = Strings.tr("Localizable", "Mock.loading", fallback: "Loading")
+    /// Merchant refund
+    internal static let merchantRefund = Strings.tr("Localizable", "Mock.merchantRefund", fallback: "Merchant refund")
+    /// Original purchase refunded
+    internal static let originalPurchaseRefunded = Strings.tr("Localizable", "Mock.originalPurchaseRefunded", fallback: "Original purchase refunded")
+    /// Payment received
+    internal static let paymentReceived = Strings.tr("Localizable", "Mock.paymentReceived", fallback: "Payment received")
+    /// Personal transfer
+    internal static let personalTransfer = Strings.tr("Localizable", "Mock.personalTransfer", fallback: "Personal transfer")
+    /// Physical card
+    internal static let physicalCard = Strings.tr("Localizable", "Mock.physicalCard", fallback: "Physical card")
+    /// Refund
+    internal static let refund = Strings.tr("Localizable", "Mock.refund", fallback: "Refund")
+    /// Restaurant
+    internal static let restaurant = Strings.tr("Localizable", "Mock.restaurant", fallback: "Restaurant")
+    /// Sao Paulo, Brazil
+    internal static let saoPauloBrazil = Strings.tr("Localizable", "Mock.saoPauloBrazil", fallback: "Sao Paulo, Brazil")
+    /// Transaction
+    internal static let transaction = Strings.tr("Localizable", "Mock.transaction", fallback: "Transaction")
+    /// Unknown merchant
+    internal static let unknownMerchant = Strings.tr("Localizable", "Mock.unknownMerchant", fallback: "Unknown merchant")
+    /// Virtual card
+    internal static let virtualCard = Strings.tr("Localizable", "Mock.virtualCard", fallback: "Virtual card")
   }
   internal enum Notifications {
     /// Last Month
@@ -460,6 +508,8 @@ internal enum Strings {
     internal static let emptyDescription = Strings.tr("Localizable", "TransactionHistory.emptyDescription", fallback: "This account does not have transaction history in the simulated dataset.")
     /// No transactions yet
     internal static let emptyTitle = Strings.tr("Localizable", "TransactionHistory.emptyTitle", fallback: "No transactions yet")
+    /// We could not load your transaction history.
+    internal static let loadFailed = Strings.tr("Localizable", "TransactionHistory.loadFailed", fallback: "We could not load your transaction history.")
     /// Transaction History
     internal static let title = Strings.tr("Localizable", "TransactionHistory.title", fallback: "Transaction History")
     /// History unavailable
@@ -498,6 +548,10 @@ internal enum Strings {
     internal static let availableLimit = Strings.tr("Localizable", "VirtualCard.availableLimit", fallback: "Available limit")
     /// Cancel
     internal static let cancel = Strings.tr("Localizable", "VirtualCard.cancel", fallback: "Cancel")
+    /// Card number
+    internal static let cardNumberAccessibilityLabel = Strings.tr("Localizable", "VirtualCard.cardNumberAccessibilityLabel", fallback: "Card number")
+    /// Virtual
+    internal static let cardType = Strings.tr("Localizable", "VirtualCard.cardType", fallback: "Virtual")
     /// Number copied
     internal static let copied = Strings.tr("Localizable", "VirtualCard.copied", fallback: "Number copied")
     /// Copy number
@@ -516,6 +570,10 @@ internal enum Strings {
     internal static let generateConfirmationTitle = Strings.tr("Localizable", "VirtualCard.generateConfirmationTitle", fallback: "Generate a new number?")
     /// Generate new number
     internal static let generateNewNumber = Strings.tr("Localizable", "VirtualCard.generateNewNumber", fallback: "Generate new number")
+    /// Hidden number
+    internal static let hiddenNumberAccessibilityValue = Strings.tr("Localizable", "VirtualCard.hiddenNumberAccessibilityValue", fallback: "Hidden number")
+    /// Hide card details
+    internal static let hideDetails = Strings.tr("Localizable", "VirtualCard.hideDetails", fallback: "Hide card details")
     /// Activate the card to use it again
     internal static let inactiveDescription = Strings.tr("Localizable", "VirtualCard.inactiveDescription", fallback: "Activate the card to use it again")
     /// Virtual card locked
@@ -524,6 +582,10 @@ internal enum Strings {
     internal static let learnMore = Strings.tr("Localizable", "VirtualCard.learnMore", fallback: "Learn more")
     /// Monthly spending
     internal static let monthlyExpenses = Strings.tr("Localizable", "VirtualCard.monthlyExpenses", fallback: "Monthly spending")
+    /// %d%% of the limit used
+    internal static func monthlyUsageFormat(_ p1: Int) -> String {
+      return Strings.tr("Localizable", "VirtualCard.monthlyUsageFormat", p1, fallback: "%d%% of the limit used")
+    }
     /// Recent transactions
     internal static let recentTransactions = Strings.tr("Localizable", "VirtualCard.recentTransactions", fallback: "Recent transactions")
     /// The virtual card has a different number, expiration date, and CVC than your physical card.
@@ -532,10 +594,18 @@ internal enum Strings {
     internal static let seeAll = Strings.tr("Localizable", "VirtualCard.seeAll", fallback: "See all")
     /// Settings
     internal static let settings = Strings.tr("Localizable", "VirtualCard.settings", fallback: "Settings")
+    /// Show card details
+    internal static let showDetails = Strings.tr("Localizable", "VirtualCard.showDetails", fallback: "Show card details")
     /// Virtual card
     internal static let title = Strings.tr("Localizable", "VirtualCard.title", fallback: "Virtual card")
+    /// of %@
+    internal static func totalLimitFormat(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "VirtualCard.totalLimitFormat", String(describing: p1), fallback: "of %@")
+    }
     /// Virtual card unavailable
     internal static let unavailableTitle = Strings.tr("Localizable", "VirtualCard.unavailableTitle", fallback: "Virtual card unavailable")
+    /// Valid until
+    internal static let validUntil = Strings.tr("Localizable", "VirtualCard.validUntil", fallback: "Valid until")
   }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

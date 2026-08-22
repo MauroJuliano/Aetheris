@@ -65,6 +65,10 @@ final class ConfirmPasswordViewModel: ObservableObject {
         submissionError?.serverMessage ?? Strings.SubmissionError.description
     }
 
+    func dismissSubmissionError() {
+        submissionError = nil
+    }
+
     private func sanitize(_ value: String) -> String {
         String(value.filter(\.isNumber).prefix(4))
     }

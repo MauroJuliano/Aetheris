@@ -30,28 +30,6 @@ internal enum Strings {
     /// Find beneficiary
     internal static let title = Strings.tr("Localizable", "BeneficiaryAdd.title", fallback: "Find beneficiary")
   }
-  internal enum BeneficiaryList {
-    /// Clear search
-    internal static let clearSearch = Strings.tr("Localizable", "BeneficiaryList.clearSearch", fallback: "Clear search")
-    /// Saved beneficiaries will appear here.
-    internal static let emptyDescription = Strings.tr("Localizable", "BeneficiaryList.emptyDescription", fallback: "Saved beneficiaries will appear here.")
-    /// No beneficiaries yet
-    internal static let emptyTitle = Strings.tr("Localizable", "BeneficiaryList.emptyTitle", fallback: "No beneficiaries yet")
-    /// We couldn't load your beneficiaries right now.
-    internal static let loadFailed = Strings.tr("Localizable", "BeneficiaryList.loadFailed", fallback: "We couldn't load your beneficiaries right now.")
-    /// Recent beneficiary
-    internal static let recentBeneficiary = Strings.tr("Localizable", "BeneficiaryList.recentBeneficiary", fallback: "Recent beneficiary")
-    /// Saved beneficiaries
-    internal static let savedBeneficiaries = Strings.tr("Localizable", "BeneficiaryList.savedBeneficiaries", fallback: "Saved beneficiaries")
-    /// Saved contact
-    internal static let savedContact = Strings.tr("Localizable", "BeneficiaryList.savedContact", fallback: "Saved contact")
-    /// Search beneficiaries
-    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryList.searchPlaceholder", fallback: "Search beneficiaries")
-    /// Beneficiaries
-    internal static let title = Strings.tr("Localizable", "BeneficiaryList.title", fallback: "Beneficiaries")
-    /// Beneficiaries unavailable
-    internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryList.unavailableTitle", fallback: "Beneficiaries unavailable")
-  }
   internal enum BeneficiaryDetails {
     /// Account
     internal static let account = Strings.tr("Localizable", "BeneficiaryDetails.account", fallback: "Account")
@@ -63,8 +41,14 @@ internal enum Strings {
     internal static let business = Strings.tr("Localizable", "BeneficiaryDetails.business", fallback: "Business")
     /// Completed
     internal static let completed = Strings.tr("Localizable", "BeneficiaryDetails.completed", fallback: "Completed")
+    /// Concert ticket
+    internal static let concertTicket = Strings.tr("Localizable", "BeneficiaryDetails.concertTicket", fallback: "Concert ticket")
     /// Contact
     internal static let contact = Strings.tr("Localizable", "BeneficiaryDetails.contact", fallback: "Contact")
+    /// Dinner with %@
+    internal static func dinnerWith(_ p1: Any) -> String {
+      return Strings.tr("Localizable", "BeneficiaryDetails.dinnerWith", String(describing: p1), fallback: "Dinner with %@")
+    }
     /// Email
     internal static let email = Strings.tr("Localizable", "BeneficiaryDetails.email", fallback: "Email")
     /// We couldn't find the details for this beneficiary.
@@ -103,6 +87,8 @@ internal enum Strings {
     internal static let request = Strings.tr("Localizable", "BeneficiaryDetails.request", fallback: "Request")
     /// Sent
     internal static let sent = Strings.tr("Localizable", "BeneficiaryDetails.sent", fallback: "Sent")
+    /// Thanks for the collaboration
+    internal static let thanksForCollaboration = Strings.tr("Localizable", "BeneficiaryDetails.thanksForCollaboration", fallback: "Thanks for the collaboration")
     /// Beneficiary
     internal static let title = Strings.tr("Localizable", "BeneficiaryDetails.title", fallback: "Beneficiary")
     /// Transactions
@@ -119,6 +105,34 @@ internal enum Strings {
     internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryDetails.unavailableTitle", fallback: "Beneficiary unavailable")
     /// Verified beneficiary
     internal static let verified = Strings.tr("Localizable", "BeneficiaryDetails.verified", fallback: "Verified beneficiary")
+  }
+  internal enum BeneficiaryList {
+    /// Clear search
+    internal static let clearSearch = Strings.tr("Localizable", "BeneficiaryList.clearSearch", fallback: "Clear search")
+    /// Saved beneficiaries will appear here.
+    internal static let emptyDescription = Strings.tr("Localizable", "BeneficiaryList.emptyDescription", fallback: "Saved beneficiaries will appear here.")
+    /// No beneficiaries yet
+    internal static let emptyTitle = Strings.tr("Localizable", "BeneficiaryList.emptyTitle", fallback: "No beneficiaries yet")
+    /// We couldn't load your beneficiaries right now.
+    internal static let loadFailed = Strings.tr("Localizable", "BeneficiaryList.loadFailed", fallback: "We couldn't load your beneficiaries right now.")
+    /// No results
+    internal static let noSearchResults = Strings.tr("Localizable", "BeneficiaryList.noSearchResults", fallback: "No results")
+    /// Recent
+    internal static let recent = Strings.tr("Localizable", "BeneficiaryList.recent", fallback: "Recent")
+    /// Recent beneficiary
+    internal static let recentBeneficiary = Strings.tr("Localizable", "BeneficiaryList.recentBeneficiary", fallback: "Recent beneficiary")
+    /// Saved beneficiaries
+    internal static let savedBeneficiaries = Strings.tr("Localizable", "BeneficiaryList.savedBeneficiaries", fallback: "Saved beneficiaries")
+    /// Saved contact
+    internal static let savedContact = Strings.tr("Localizable", "BeneficiaryList.savedContact", fallback: "Saved contact")
+    /// Search beneficiaries
+    internal static let searchPlaceholder = Strings.tr("Localizable", "BeneficiaryList.searchPlaceholder", fallback: "Search beneficiaries")
+    /// Beneficiaries
+    internal static let title = Strings.tr("Localizable", "BeneficiaryList.title", fallback: "Beneficiaries")
+    /// Try another name or PIX key.
+    internal static let tryAnotherSearch = Strings.tr("Localizable", "BeneficiaryList.tryAnotherSearch", fallback: "Try another name or PIX key.")
+    /// Beneficiaries unavailable
+    internal static let unavailableTitle = Strings.tr("Localizable", "BeneficiaryList.unavailableTitle", fallback: "Beneficiaries unavailable")
   }
   internal enum Common {
     /// Back
@@ -289,6 +303,8 @@ internal enum Strings {
     internal static let done = Strings.tr("Localizable", "TransferSuccess.done", fallback: "Done")
     /// From
     internal static let from = Strings.tr("Localizable", "TransferSuccess.from", fallback: "From")
+    /// Main Account
+    internal static let mainAccount = Strings.tr("Localizable", "TransferSuccess.mainAccount", fallback: "Main Account")
     /// Reference ID
     internal static let referenceId = Strings.tr("Localizable", "TransferSuccess.referenceId", fallback: "Reference ID")
     /// Your transaction is protected and encrypted.

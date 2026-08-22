@@ -14,9 +14,7 @@ struct NotificationsCentre: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                NotificationsCentreSkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 FeedbackView(
                     title: Strings.NotificationsCentre.unavailableTitle,
                     description: errorMessage,
@@ -33,54 +31,71 @@ struct NotificationsCentre: View {
                     description: Strings.NotificationsCentre.emptyDescription
                 )
             } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
-
-                        NavBar(
-                            hasNotifications: false,
-                            hasBackButton: true,
-                            model: .init(
-                                firstText: Strings.NotificationsCentre.title,
-                                hasInitialSpace: false
-                            ),
-                            onBack: onBack
-                        )
-
-                        ForEach(viewModel.sections) { section in
-                            VStack(alignment: .leading, spacing: AppSpacing.small) {
-
-                                Text(section.title)
-                                    .foregroundStyle(Color.textPrimary)
-                                    .font(AppTypography.sectionTitle)
-                                    .padding(.horizontal, AppSpacing.screenHorizontal)
-
-                                VStack {
-                                    ForEach(section.items) { cell in
-                                        NotificationCell(
-                                            model: .init(
-                                                title: cell.title,
-                                                leadingContent: cell.leadingContent.asCellContent,
-                                                timeLabel: NotificationTimeLabelFormatter.label(for: cell.date),
-                                                hasDivider: cell.hasDivider
-                                            )
-                                        )
-                                    }
-                                }
-                                .appCardSurface(
-                                    radius: AppRadius.large,
-                                    stroke: Color.border,
-                                    shadow: AppShadow.card
-                                )
-                            }
-                            .padding(.horizontal, AppSpacing.screenHorizontal)
-                        }
-                    }
-                }
+                notificationsContent
             }
         }
         .navigationBarHidden(true)
         .appScreenBackground()
         .task { await viewModel.load() }
+    }
+}
+
+private extension NotificationsCentre {
+    var notificationsContent: some View {
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: AppSpacing.xLarge) {
+                navBar
+
+                ForEach(viewModel.sections) { section in
+                    sectionView(model: section)
+                }
+            }
+        }
+    }
+
+    var navBar: some View {
+        NavBar(
+            hasNotifications: false,
+            hasBackButton: true,
+            model: .init(
+                firstText: Strings.NotificationsCentre.title,
+                hasInitialSpace: false
+            ),
+            onBack: onBack
+        )
+    }
+
+    func sectionView(
+        model: NotificationsSectionPresentationModel
+    ) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            NotificationSectionHeader(
+                title: model.title,
+                skeletonWidth: model.titleSkeletonWidth
+            )
+            .toSkeleton(enable: model.isLoading)
+            .padding(.horizontal, AppSpacing.screenHorizontal)
+
+            VStack(spacing: 0) {
+                ForEach(Array(model.items.enumerated()), id: \.element.id) { index, item in
+                    NotificationCell(
+                        model: item
+                    )
+                    .toSkeleton(enable: model.isLoading)
+
+                    if model.isLoading == false, index < model.items.count - 1 {
+                        Divider()
+                            .padding(.leading, 62)
+                    }
+                }
+            }
+            .appCardSurface(
+                radius: AppRadius.large,
+                stroke: Color.border,
+                shadow: AppShadow.card
+            )
+        }
+        .padding(.horizontal, AppSpacing.screenHorizontal)
     }
 }
 

@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct AllServicesItem: Identifiable, Codable {
     enum Route: String, Codable {
@@ -22,6 +23,22 @@ struct AllServicesItem: Identifiable, Codable {
     let icon: String
     let theme: Theme
     let route: Route
+
+    var accentColor: Color {
+        switch theme {
+        case .primary:
+            return .brandPrimaryColor
+
+        case .success:
+            return .success
+
+        case .info:
+            return .blue
+
+        case .warning:
+            return .orange
+        }
+    }
 }
 
 enum AllServicesFixtures {

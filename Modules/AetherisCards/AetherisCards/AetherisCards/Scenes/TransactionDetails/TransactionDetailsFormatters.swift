@@ -1,7 +1,9 @@
 import Foundation
 
 extension Locale {
-    static let transactionDetails = Locale(identifier: "en_US")
+    static var transactionDetails: Locale {
+        Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+    }
 }
 
 extension Date {

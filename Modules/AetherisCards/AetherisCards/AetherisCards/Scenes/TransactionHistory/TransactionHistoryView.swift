@@ -20,9 +20,7 @@ struct TransactionHistoryView: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                TransactionHistorySkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                 FeedbackView(
                     title: Strings.TransactionHistory.unavailableTitle,
                     description: errorMessage,
@@ -35,7 +33,7 @@ struct TransactionHistoryView: View {
                         dismiss()
                     }
                 )
-            } else if viewModel.isEmpty {
+            } else if viewModel.isEmpty && !viewModel.isLoading {
                 AppEmptyStateView(
                     title: Strings.TransactionHistory.emptyTitle,
                     description: Strings.TransactionHistory.emptyDescription
@@ -58,13 +56,19 @@ struct TransactionHistoryView: View {
                                 }
                             }
                         )
+                        .toSkeleton(enable: viewModel.isLoading)
 
-                        ForEach(viewModel.sections) { section in
+                        ForEach(viewModel.displayedSections) { section in
                             VStack(alignment: .leading, spacing: AppSpacing.small) {
-                                Text(section.title)
-                                    .foregroundStyle(Color.textPrimary)
-                                    .font(AppTypography.sectionTitle)
-                                    .padding(.horizontal, AppSpacing.screenHorizontal)
+                                if viewModel.isLoading {
+                                    SkeletonBlock(width: section.titleWidth, height: 18, radius: 9)
+                                        .padding(.horizontal, AppSpacing.screenHorizontal)
+                                } else {
+                                    Text(section.title)
+                                        .foregroundStyle(Color.textPrimary)
+                                        .font(AppTypography.sectionTitle)
+                                        .padding(.horizontal, AppSpacing.screenHorizontal)
+                                }
 
                                 VStack {
                                     ForEach(section.items) { transaction in
@@ -75,6 +79,7 @@ struct TransactionHistoryView: View {
                                                 model: transaction,
                                                 hasDivider: transaction.id != section.items.last?.id
                                             )
+                                            .toSkeleton(enable: viewModel.isLoading)
                                             .frame(maxWidth: .infinity)
                                             .contentShape(Rectangle())
                                         }
@@ -100,6 +105,7 @@ struct TransactionHistoryView: View {
         .appScreenBackground()
         .task { await viewModel.load() }
     }
+
 }
 
 #Preview {

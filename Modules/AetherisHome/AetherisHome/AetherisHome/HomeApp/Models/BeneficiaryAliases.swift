@@ -1,5 +1,5 @@
 import AetherisTransfers
+import AetherisDesignSystem
 
 typealias Beneficiary = AetherisTransfers.Beneficiary
-typealias BeneficiaryCell = AetherisTransfers.BeneficiaryCell
 typealias BeneficiaryFixtures = AetherisTransfers.BeneficiaryFixtures

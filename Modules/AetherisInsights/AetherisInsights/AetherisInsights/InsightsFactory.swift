@@ -1,4 +1,5 @@
 import Core
+import AetherisInsightsInterface
 import SwiftUI
 
 public enum InsightsFactory {
@@ -7,6 +8,12 @@ public enum InsightsFactory {
         coreService: any HasCoreService,
         onBack: @escaping () -> Void
     ) -> AnyView {
-        AnyView(ViewReportFlowCoordinator(coreService: coreService, onBack: onBack))
+        AnyView(
+            InsightsFeatureFactory(
+                coreService: coreService
+            ).makeReport(
+                onBack: onBack
+            )
+        )
     }
 }

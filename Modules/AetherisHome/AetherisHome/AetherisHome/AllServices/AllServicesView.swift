@@ -19,9 +19,7 @@ struct AllServicesView: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                AllServicesSkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                 FeedbackView(
                     title: Strings.HomeApp.genericErrorTitle,
                     description: errorMessage,
@@ -44,24 +42,32 @@ struct AllServicesView: View {
                             ),
                             onBack: onBack
                         )
+                        .toSkeleton(enable: viewModel.isLoading)
 
-                        Text(Strings.AllServices.subtitle)
-                            .font(AppTypography.subheadline)
-                            .foregroundStyle(Color.textSecondaryColor)
-                            .padding(.top, -AppSpacing.small)
+                        if viewModel.isLoading {
+                            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                                SkeletonBlock(width: 140, height: 18, radius: 9)
+                                SkeletonBlock(width: 240, height: 14, radius: 7)
+                            }
+                        } else {
+                            Text(Strings.AllServices.subtitle)
+                                .font(AppTypography.subheadline)
+                                .foregroundStyle(Color.textSecondaryColor)
+                                .padding(.top, -AppSpacing.small)
+                        }
 
                         LazyVGrid(
                             columns: [
                                 GridItem(.flexible(), spacing: AppSpacing.medium),
-                                GridItem(.flexible(), spacing: AppSpacing.medium)
-                            ],
-                            spacing: AppSpacing.medium
-                        ) {
-                            ForEach(Array(viewModel.items.enumerated()), id: \.element.id) { index, item in
-                                serviceCard(item: item, index: index)
-                            }
-                        }
+                        GridItem(.flexible(), spacing: AppSpacing.medium)
+                    ],
+                    spacing: AppSpacing.medium
+                ) {
+                    ForEach(viewModel.displayedItems) { item in
+                        serviceCard(item: item, isLoading: viewModel.isLoading)
                     }
+                }
+            }
                     .padding(.horizontal, AppSpacing.screenHorizontal)
                     .padding(.bottom, AppSpacing.xxLarge)
                 }
@@ -75,63 +81,6 @@ struct AllServicesView: View {
         .task { await viewModel.load() }
     }
 
-    private func serviceCard(item: AllServicesItem, index: Int) -> some View {
-        let background = backgroundColor(for: item.theme)
-        let foreground = foregroundColor(for: item.theme)
-
-        return Button {
-            onSelect(item.route)
-        } label: {
-            VStack(alignment: .leading, spacing: AppSpacing.medium) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: AppRadius.large, style: .continuous)
-                        .fill(background.opacity(0.12))
-                        .frame(width: 44, height: 44)
-
-                    Image(systemName: item.icon)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(foreground)
-                }
-
-                Text(item.title)
-                    .font(AppTypography.headline)
-                    .foregroundStyle(Color.textPrimary)
-                    .lineLimit(2)
-
-                Text(item.subtitle)
-                    .font(AppTypography.footnote)
-                    .foregroundStyle(Color.textSecondaryColor)
-                    .lineLimit(2)
-            }
-            .frame(maxWidth: .infinity, minHeight: 132, alignment: .leading)
-            .padding(AppSpacing.medium)
-            .appCardSurface(
-                radius: AppRadius.large,
-                stroke: Color.border,
-                shadow: AppShadow.card
-            )
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("allServices.\(item.route.rawValue)")
-    }
-
-    private func backgroundColor(for theme: AllServicesItem.Theme) -> Color {
-        switch theme {
-        case .primary: return .brandPrimaryColor
-        case .success: return .success
-        case .info: return .blue
-        case .warning: return .orange
-        }
-    }
-
-    private func foregroundColor(for theme: AllServicesItem.Theme) -> Color {
-        switch theme {
-        case .primary: return .brandPrimaryColor
-        case .success: return .success
-        case .info: return .blue
-        case .warning: return .orange
-        }
-    }
 }
 
 #Preview {
@@ -144,4 +93,20 @@ struct AllServicesView: View {
         onBack: {},
         onSelect: { _ in }
     )
+}
+
+private extension AllServicesView {
+    func serviceCard(item: AllServicesItem, isLoading: Bool) -> some View {
+        ServiceCard(
+            title: item.title,
+            subtitle: item.subtitle,
+            icon: item.icon,
+            accentColor: item.accentColor,
+            action: {
+                onSelect(item.route)
+            }
+        )
+        .toSkeleton(enable: isLoading)
+        .accessibilityIdentifier("allServices.\(item.route.rawValue)")
+    }
 }

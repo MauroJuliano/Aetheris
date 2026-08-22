@@ -7,9 +7,10 @@ enum NotificationTimeLabelFormatter {
         calendar: Calendar = .current
     ) -> String {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
 
         if calendar.isDateInToday(date) {
-            formatter.dateFormat = "h:mm a"
+            formatter.timeStyle = .short
             return formatter.string(from: date)
         }
 
@@ -20,10 +21,10 @@ enum NotificationTimeLabelFormatter {
         let days = calendar.dateComponents([.day], from: date, to: now).day ?? 0
 
         if days < 30 {
-            return days == 1 ? "1 day ago" : "\(days) days ago"
+            return days == 1 ? Strings.Notifications.oneDayAgo : Strings.Notifications.daysAgo(days)
         }
 
         let months = max(1, days / 30)
-        return months == 1 ? "1 month ago" : "\(months) months ago"
+        return months == 1 ? Strings.Notifications.oneMonthAgo : Strings.Notifications.monthsAgo(months)
     }
 }

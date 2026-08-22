@@ -12,6 +12,25 @@ final class CardLockViewModel: ObservableObject {
     private let service: CardLockServicing
     private var hasLoaded = false
 
+    var displayedCard: CardLockModel? {
+        card ?? (isLoading ? .loadingPlaceholder : nil)
+    }
+
+    var confirmationTitle: String {
+        guard let card else { return "" }
+        return card.isBlocked ? Strings.CardLock.unlockConfirmationTitle : Strings.CardLock.lockConfirmationTitle
+    }
+
+    var confirmationButtonTitle: String {
+        guard let card else { return "" }
+        return card.isBlocked ? Strings.CardLock.unlockCard : Strings.CardLock.lockCard
+    }
+
+    var confirmationDescription: String {
+        guard let card else { return "" }
+        return card.isBlocked ? Strings.CardLock.unlockConfirmationDescription : Strings.CardLock.lockConfirmationDescription
+    }
+
     init(cardId: UUID, service: CardLockServicing) {
         self.cardId = cardId
         self.service = service
@@ -67,4 +86,11 @@ final class CardLockViewModel: ObservableObject {
             UINotificationFeedbackGenerator().notificationOccurred(.error)
         }
     }
+}
+
+private extension CardLockModel {
+    static let loadingPlaceholder = CardLockModel(
+        id: UUID(), holderName: "Loading", lastFourDigits: "0000",
+        expirationDate: "00/00", brand: .visa, style: .aurora, isBlocked: false
+    )
 }

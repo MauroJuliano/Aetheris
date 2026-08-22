@@ -78,6 +78,15 @@ public struct TransferBeneficiary: View {
         .accessibilityIdentifier("transfer.beneficiarySelector")
     }
 
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TransferBeneficiarySkeleton()
+        } else {
+            self
+        }
+    }
+
     private var title: String {
         model?.name ?? Strings.TransferBeneficiary.selectTitle
     }

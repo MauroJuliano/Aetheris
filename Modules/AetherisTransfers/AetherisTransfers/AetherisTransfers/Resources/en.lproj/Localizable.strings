@@ -23,6 +23,7 @@
 "TransferSuccess.secureSubtitle" = "Your transaction is protected and encrypted.";
 "TransferSuccess.done" = "Done";
 "TransferSuccess.anotherTransfer" = "Make another transfer";
+"TransferSuccess.mainAccount" = "Main Account";
 
 "HomeApp.homeUnavailableTitle" = "Home unavailable";
 "HomeApp.noDashboardDataTitle" = "No dashboard data yet";
@@ -60,11 +61,14 @@
 "BeneficiaryList.clearSearch" = "Clear search";
 "BeneficiaryList.savedBeneficiaries" = "Saved beneficiaries";
 "BeneficiaryList.recentBeneficiary" = "Recent beneficiary";
+"BeneficiaryList.recent" = "Recent";
 "BeneficiaryList.savedContact" = "Saved contact";
 "BeneficiaryList.unavailableTitle" = "Beneficiaries unavailable";
 "BeneficiaryList.loadFailed" = "We couldn't load your beneficiaries right now.";
 "BeneficiaryList.emptyTitle" = "No beneficiaries yet";
 "BeneficiaryList.emptyDescription" = "Saved beneficiaries will appear here.";
+"BeneficiaryList.noSearchResults" = "No results";
+"BeneficiaryList.tryAnotherSearch" = "Try another name or PIX key.";
 
 "BeneficiaryDetails.title" = "Beneficiary";
 "BeneficiaryDetails.transfer" = "Transfer";
@@ -98,6 +102,9 @@
 "BeneficiaryDetails.emptyTitle" = "Beneficiary not found";
 "BeneficiaryDetails.emptyDescription" = "We couldn't find the details for this beneficiary.";
 "BeneficiaryDetails.actionErrorTitle" = "Something went wrong";
+"BeneficiaryDetails.thanksForCollaboration" = "Thanks for the collaboration";
+"BeneficiaryDetails.dinnerWith" = "Dinner with %@";
+"BeneficiaryDetails.concertTicket" = "Concert ticket";
 
 "BeneficiaryAdd.subtitle" = "Search an existing recipient to use in this transfer.";
 "BeneficiaryAdd.description" = "Enter the email or PIX key for the person you want to find.";

@@ -42,6 +42,15 @@ struct FinancialSummaryContainer: View {
     }
 
     @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FinancialSummaryContainerSkeleton()
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
     private var header: some View {
         if let title {
             HStack {
@@ -69,14 +78,4 @@ struct FinancialSummaryContainer: View {
             .padding(.top, AppSpacing.medium)
         }
     }
-}
-
-#Preview {
-    FinancialSummaryContainer(
-        summaries: CardsPreviewData.summaries,
-        title: Strings.VirtualCard.recentTransactions,
-        actionTitle: Strings.Common.seeAll
-    )
-    .padding()
-    .appScreenBackground()
 }

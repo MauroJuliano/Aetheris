@@ -179,7 +179,7 @@ private extension ResumeView {
             secondaryButtonTitle:
                 Strings.SubmissionError.cancel,
             onPrimaryAction: {
-                viewModel.submissionError = nil
+                viewModel.dismissSubmissionError()
                 Task {
                     if await viewModel.submit() {
                         onContinue()
@@ -187,7 +187,7 @@ private extension ResumeView {
                 }
             },
             onSecondaryAction: {
-                viewModel.submissionError = nil
+                viewModel.dismissSubmissionError()
             }
         )
     }
@@ -203,7 +203,7 @@ private extension ResumeView {
             },
             set: { isPresented in
                 if !isPresented {
-                    viewModel.submissionError = nil
+                    viewModel.dismissSubmissionError()
                 }
             }
         )

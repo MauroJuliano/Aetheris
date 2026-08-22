@@ -54,4 +54,15 @@ extension FinancialSummaryModel {
     var section: String {
         FinancialSummaryPresentation.section(for: date)
     }
+
+    static var placeholder: FinancialSummaryModel {
+        FinancialSummaryModel(
+            image: "placeholder",
+            title: Strings.Mock.loading,
+            description: Strings.Mock.loading,
+            value: "$0.00",
+            tag: .income,
+            date: Date()
+        )
+    }
 }

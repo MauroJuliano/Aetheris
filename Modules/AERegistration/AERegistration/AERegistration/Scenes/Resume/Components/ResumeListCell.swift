@@ -71,7 +71,8 @@ private extension ResumeListCell {
             Text(model.value)
                 .font(AppTypography.onboardingBody)
                 .foregroundStyle(Color.textPrimary)
-                .lineLimit(1)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(
             maxWidth: .infinity,

@@ -49,15 +49,10 @@ struct TransactionDetailsScreen: View {
             ZStack {
                 if let errorMessage = viewModel.errorMessage {
                     errorView(message: errorMessage)
-                } else if let transaction = viewModel.transaction {
+                } else if let transaction = viewModel.displayedTransaction {
                     content(
                         transaction,
                         isLoading: viewModel.isLoading
-                    )
-                } else if viewModel.isLoading {
-                    content(
-                        .loadingPlaceholder,
-                        isLoading: true
                     )
                 } else {
                     emptyState
@@ -195,32 +190,6 @@ private extension TransactionDetailsScreen {
         AppEmptyStateView(
             title: Strings.TransactionDetails.emptyTitle,
             description: Strings.TransactionDetails.emptyDescription
-        )
-    }
-}
-
-private extension TransactionDetailsModel {
-    static var loadingPlaceholder: TransactionDetailsModel {
-        TransactionDetailsModel(
-            id: UUID(),
-            title: Strings.TransactionDetails.title,
-            subtitle: nil,
-            amount: 0,
-            currencyCode: "USD",
-            kind: .purchase,
-            status: .pending,
-            date: .now,
-            transactionCode: "",
-            note: nil,
-            imageName: nil,
-            imageURL: nil,
-            incomingPaymentDetails: nil,
-            transferDetails: nil,
-            merchantDetails: nil,
-            subscriptionDetails: nil,
-            refundDetails: nil,
-            invoicePaymentDetails: nil,
-            availableActions: []
         )
     }
 }

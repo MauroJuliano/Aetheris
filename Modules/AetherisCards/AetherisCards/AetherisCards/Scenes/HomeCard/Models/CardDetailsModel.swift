@@ -45,4 +45,21 @@ struct CardDetailsModel: Identifiable, Codable, Equatable {
             1
         )
     }
+
+    private static let placeholderCardId = UUID(uuidString: "00000000-0000-0000-0000-000000000001")!
+
+    static func placeholder(cardId: UUID? = nil) -> CardDetailsModel {
+        let resolvedCardId = cardId ?? placeholderCardId
+
+        return CardDetailsModel(
+            id: resolvedCardId,
+            cardId: resolvedCardId,
+            availableLimit: 0,
+            totalLimit: 0,
+            currentInvoice: 0,
+            invoiceStatus: "",
+            dueDate: .distantPast,
+            isBlocked: false
+        )
+    }
 }

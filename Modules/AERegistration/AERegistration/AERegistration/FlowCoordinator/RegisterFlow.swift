@@ -4,11 +4,13 @@ import SwiftUI
 enum RegisterRoute: Hashable {
     case personal
     case userName
+    case email
     case birthdate
     case resume
     case editSin
     case editMothersName
     case editUserName
+    case editEmail
     case editBirthdate
     case password
     case confirmPassword
@@ -19,6 +21,7 @@ final class RegistrationDraft: ObservableObject {
     @Published var sin = ""
     @Published var mothersName = ""
     @Published var userName = ""
+    @Published var email = ""
     @Published var birthdate = ""
     @Published var password = ""
     @Published var confirmPassword = ""
@@ -32,6 +35,7 @@ final class RegistrationDraft: ObservableObject {
         sin = ""
         mothersName = ""
         userName = ""
+        email = ""
         birthdate = ""
         clearPasswords()
     }
@@ -43,6 +47,7 @@ extension RegistrationDraft {
         draft.sin = "123456789"
         draft.mothersName = "Mary Johnson"
         draft.userName = "Melissa Mccarthy"
+        draft.email = "melissa@example.com"
         draft.birthdate = "08/17/1990"
         draft.password = "1234"
         draft.confirmPassword = "1234"
@@ -99,6 +104,18 @@ struct RegisterFlow: View {
                                 }
                             },
                             onContinue: {
+                                path.append(.email)
+                            }
+                        )
+                    case .email:
+                        EmailFactory.make(
+                            draft: draft,
+                            onBack: {
+                                if !path.isEmpty {
+                                    path.removeLast()
+                                }
+                            },
+                            onContinue: {
                                 path.append(.birthdate)
                             }
                         )
@@ -137,6 +154,9 @@ struct RegisterFlow: View {
                                 case .userName:
                                     path.append(.editUserName)
 
+                                case .email:
+                                    path.append(.editEmail)
+
                                 case .birthdate:
                                     path.append(.editBirthdate)
                                 }
@@ -156,6 +176,12 @@ struct RegisterFlow: View {
                         )
                     case .editUserName:
                         UserNameFactory.make(
+                            draft: draft,
+                            onBack: popToResume,
+                            onContinue: popToResume
+                        )
+                    case .editEmail:
+                        EmailFactory.make(
                             draft: draft,
                             onBack: popToResume,
                             onContinue: popToResume

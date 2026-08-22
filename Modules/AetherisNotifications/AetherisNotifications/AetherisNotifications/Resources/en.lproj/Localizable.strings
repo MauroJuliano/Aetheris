@@ -21,3 +21,7 @@
 "Notifications.sectionLastWeek" = "Last Week";
 "Notifications.sectionLastMonth" = "Last Month";
 "Notifications.sectionOthers" = "Others";
+"Notifications.oneDayAgo" = "1 day ago";
+"Notifications.daysAgo" = "%d days ago";
+"Notifications.oneMonthAgo" = "1 month ago";
+"Notifications.monthsAgo" = "%d months ago";

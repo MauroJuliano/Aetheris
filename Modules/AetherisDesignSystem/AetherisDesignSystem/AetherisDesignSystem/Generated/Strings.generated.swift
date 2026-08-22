@@ -10,6 +10,24 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum Strings {
+  internal enum Accessibility {
+    /// Back
+    internal static let back = Strings.tr("Localizable", "Accessibility.back", fallback: "Back")
+    /// Balance hidden
+    internal static let hiddenBalance = Strings.tr("Localizable", "Accessibility.hiddenBalance", fallback: "Balance hidden")
+    /// Hide balance
+    internal static let hideBalance = Strings.tr("Localizable", "Accessibility.hideBalance", fallback: "Hide balance")
+    /// Loading
+    internal static let loading = Strings.tr("Localizable", "Accessibility.loading", fallback: "Loading")
+    /// Notifications
+    internal static let notifications = Strings.tr("Localizable", "Accessibility.notifications", fallback: "Notifications")
+    /// Show balance
+    internal static let showBalance = Strings.tr("Localizable", "Accessibility.showBalance", fallback: "Show balance")
+  }
+  internal enum Balance {
+    /// Balance
+    internal static let title = Strings.tr("Localizable", "Balance.title", fallback: "Balance")
+  }
   internal enum CardDistribution {
     /// Enjoy exclusive benefits with zero annual fee.
     internal static let creditCardSubtitle = Strings.tr("Localizable", "CardDistribution.creditCardSubtitle", fallback: "Enjoy exclusive benefits with zero annual fee.")
@@ -33,8 +51,6 @@ internal enum Strings {
     internal static let monthlySpendingHeadline = Strings.tr("Localizable", "CardInfo.monthlySpendingHeadline", fallback: "Monthly Spending")
     /// You spent $2,310 in August
     internal static let monthlySpendingTitle = Strings.tr("Localizable", "CardInfo.monthlySpendingTitle", fallback: "You spent $2,310 in August")
-  }
-  internal enum CardView {
   }
   internal enum CardsMock {
     /// Monthly Spending
@@ -82,6 +98,10 @@ internal enum Strings {
     /// Transactions History
     internal static let transactionsHistory = Strings.tr("Localizable", "MinimalDropdown.transactionsHistory", fallback: "Transactions History")
   }
+  internal enum NumericKeyboard {
+    /// Wallet balance:
+    internal static let walletBalance = Strings.tr("Localizable", "NumericKeyboard.walletBalance", fallback: "Wallet balance:")
+  }
   internal enum Profile {
     /// blake.lehmann@aetheris.app
     internal static let email = Strings.tr("Localizable", "Profile.email", fallback: "blake.lehmann@aetheris.app")
@@ -109,6 +129,8 @@ internal enum Strings {
     internal static let home = Strings.tr("Localizable", "TabBar.home", fallback: "Home")
     /// Profile
     internal static let profile = Strings.tr("Localizable", "TabBar.profile", fallback: "Profile")
+    /// Transfer
+    internal static let transfer = Strings.tr("Localizable", "TabBar.transfer", fallback: "Transfer")
   }
   internal enum UserView {
     /// Joined August 17, 2025

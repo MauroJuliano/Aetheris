@@ -49,6 +49,11 @@ final class AetherisAppUITests: XCTestCase {
         completeRegistrationStep(title: "Social Insurance Number", placeholder: "000.000.000", value: "123456789")
         completeRegistrationStep(title: "Mother's name", placeholder: "Jane doe", value: "Ana Maria")
         completeRegistrationStep(title: "Full name", placeholder: "John doe", value: "Melissa Test")
+        completeRegistrationStep(
+            title: "Email address",
+            placeholder: "name@example.com",
+            value: "melissa.test@example.com"
+        )
         completeRegistrationStep(title: "Date of birth", placeholder: "26/08/1970", value: "17081990")
 
         XCTAssertTrue(element("registration.resumeScreen").waitForExistence(timeout: 3))

@@ -8,7 +8,7 @@ import SwiftUI
 
 struct MainTabContainer: View {
     @State private var showSendMoney = false
-    @State private var showRequestMoney = false
+    @State private var cardsNavigationPath = NavigationPath()
     @StateObject private var tabBarVisibilityStore = TabBarVisibilityStore()
     @StateObject private var tabBarRoutingStore = TabBarRoutingStore()
     
@@ -34,19 +34,15 @@ struct MainTabContainer: View {
         }
         .animation(.easeInOut(duration: 0.22), value: tabBarVisibilityStore.isVisible)
         .onChange(of: tabBarRoutingStore.selectedIndex) { _, _ in
-            tabBarVisibilityStore.isVisible = true
+            syncTabBarVisibility()
+        }
+        .onChange(of: cardsNavigationPath.count) { _, _ in
+            syncTabBarVisibility()
         }
         .fullScreenCover(isPresented: $showSendMoney) {
             transfersFactory.make(onFinished: {
                     showSendMoney = false
                 })
-            .environmentObject(tabBarVisibilityStore)
-            .environmentObject(tabBarRoutingStore)
-        }
-        .fullScreenCover(isPresented: $showRequestMoney) {
-            transfersFactory.makeRequestMoney(onFinished: {
-                showRequestMoney = false
-            })
             .environmentObject(tabBarVisibilityStore)
             .environmentObject(tabBarRoutingStore)
         }
@@ -63,15 +59,7 @@ struct MainTabContainer: View {
                 .allowsHitTesting(tabBarRoutingStore.selectedIndex == 0)
                 .accessibilityHidden(tabBarRoutingStore.selectedIndex != 0)
 
-            cardsFactory.make(
-                onFinished: {},
-                onSendMoneyTap: {
-                    showSendMoney = true
-                },
-                onRequestMoneyTap: {
-                    showRequestMoney = true
-                }
-            )
+            cardsNavigation
                 .environmentObject(tabBarVisibilityStore)
                 .environmentObject(tabBarRoutingStore)
                 .opacity(tabBarRoutingStore.selectedIndex == 1 ? 1 : 0)
@@ -86,8 +74,55 @@ struct MainTabContainer: View {
                 .accessibilityHidden(tabBarRoutingStore.selectedIndex != 2)
         }
     }
+
+    private var cardsNavigation: some View {
+        NavigationStack(path: $cardsNavigationPath) {
+            transfersFactory.makeNavigationHost(
+                content: cardsFactory.makeNavigationHost(
+                    content: cardsFactory.makeEmbedded(
+                        path: $cardsNavigationPath,
+                        onFinished: resetCardsNavigation,
+                        onSendMoneyTap: { cardsNavigationPath.append(MainTabRoute.sendMoney) },
+                        onRequestMoneyTap: { cardsNavigationPath.append(MainTabRoute.requestMoney) }
+                    ),
+                    path: $cardsNavigationPath
+                ),
+                path: $cardsNavigationPath,
+                onFinished: resetCardsNavigation
+            )
+            .navigationDestination(for: MainTabRoute.self) { route in
+                switch route {
+                case .sendMoney:
+                    transfersFactory.makeEmbedded(
+                        path: $cardsNavigationPath,
+                        onFinished: popCardsNavigation
+                    )
+                case .requestMoney:
+                    transfersFactory.makeRequestMoneyEmbedded(
+                        path: $cardsNavigationPath,
+                        onFinished: popCardsNavigation
+                    )
+                }
+            }
+        }
+    }
+
+    private func popCardsNavigation() {
+        guard !cardsNavigationPath.isEmpty else { return }
+        cardsNavigationPath.removeLast()
+    }
+
+    private func resetCardsNavigation() {
+        cardsNavigationPath = NavigationPath()
+    }
+
+    private func syncTabBarVisibility() {
+        tabBarVisibilityStore.isVisible = tabBarRoutingStore.selectedIndex != 1 || cardsNavigationPath.isEmpty
+    }
+
     
 }
+
 
 #Preview {
     MainTabContainer(

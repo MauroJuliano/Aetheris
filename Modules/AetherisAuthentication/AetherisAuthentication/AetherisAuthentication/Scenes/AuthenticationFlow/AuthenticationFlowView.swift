@@ -128,6 +128,19 @@ struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
     ) -> AnyView {
         AnyView(Text("Cards preview"))
     }
+
+    func makeEmbedded(
+        path: Binding<NavigationPath>,
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(Text("Cards preview"))
+    }
+
+    func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView {
+        content
+    }
 }
 
 struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
@@ -137,6 +150,22 @@ struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
 
     func makeRequestMoney(onFinished: @escaping () -> Void) -> AnyView {
         AnyView(Text("Request money preview"))
+    }
+
+    func makeEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Transfers preview"))
+    }
+
+    func makeRequestMoneyEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Request money preview"))
+    }
+
+    func makeNavigationHost(
+        content: AnyView,
+        path: Binding<NavigationPath>,
+        onFinished: @escaping () -> Void
+    ) -> AnyView {
+        content
     }
 }
 

@@ -20,4 +20,15 @@ struct AetherisAuthenticationInterfaceTests {
 
         #expect(sut.isAuthenticated == true)
     }
+
+    @Test
+    func tabBarVisibilityStore_startsVisibleAndAllowsTogglingVisibility() {
+        let sut = TabBarVisibilityStore()
+
+        #expect(sut.isVisible == true)
+
+        sut.isVisible = false
+
+        #expect(sut.isVisible == false)
+    }
 }

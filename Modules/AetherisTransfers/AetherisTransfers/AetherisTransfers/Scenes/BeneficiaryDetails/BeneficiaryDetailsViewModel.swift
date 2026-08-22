@@ -14,6 +14,10 @@ final class BeneficiaryDetailsViewModel: ObservableObject {
     private let service: any BeneficiaryDetailsServicing
     private var hasLoaded = false
 
+    var displayedBeneficiary: BeneficiaryDetailsModel? {
+        beneficiary ?? (isLoading ? BeneficiaryDetailsMockStore.beneficiary(for: beneficiaryId) : nil)
+    }
+
     init(beneficiaryId: UUID, service: any BeneficiaryDetailsServicing) {
         self.beneficiaryId = beneficiaryId
         self.service = service

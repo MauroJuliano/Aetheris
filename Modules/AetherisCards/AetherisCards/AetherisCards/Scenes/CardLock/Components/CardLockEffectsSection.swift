@@ -62,6 +62,12 @@ struct CardLockEffectsSection: View {
     }
 }
 
+extension CardLockEffectsSection {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { CardLockEffectsSectionSkeleton() } else { self }
+    }
+}
+
 #Preview {
     VStack(spacing: AppSpacing.medium) {
         CardLockEffectsSection(isBlocked: false)

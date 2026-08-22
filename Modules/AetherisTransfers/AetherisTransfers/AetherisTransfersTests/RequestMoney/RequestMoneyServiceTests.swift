@@ -12,7 +12,7 @@ struct RequestMoneyServiceTests {
 
         let dashboard = try await sut.loadDashboard()
 
-        #expect(dashboard.requesterName == "Blake Brown")
+        #expect(dashboard.requesterName == "Blake Lehmann")
         #expect(dashboard.recentContacts.count == BeneficiaryFixtures.defaults.count)
         #expect(dashboard.recentContacts.map(\.id) == BeneficiaryFixtures.defaults.map(\.id))
         #expect(dashboard.recentContacts.map(\.name) == BeneficiaryFixtures.defaults.map(\.name))

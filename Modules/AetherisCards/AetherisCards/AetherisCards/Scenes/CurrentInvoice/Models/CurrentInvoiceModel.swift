@@ -35,6 +35,31 @@ struct CurrentInvoiceModel: Identifiable, Codable, Equatable {
     var canBePaid: Bool {
         amount > 0 && status != .paid
     }
+
+    static func placeholder(cardId: UUID = UUID()) -> CurrentInvoiceModel {
+        CurrentInvoiceModel(
+            id: UUID(),
+            cardId: cardId,
+            amount: 0,
+            status: .open,
+            dueDate: Date(),
+            bestPurchaseDate: Date(),
+            totalLimit: 0,
+            availableLimit: 0,
+            usedLimit: 0,
+            details: CurrentInvoiceDetailsModel(
+                purchasesSubtotal: 0,
+                otherCharges: 0,
+                discountsAndCredits: 0,
+                total: 0
+            ),
+            spendingSummary: InvoiceSpendingSummaryModel(
+                totalSpent: 0,
+                installmentPurchases: 0,
+                oneTimePurchases: 0
+            )
+        )
+    }
 }
 
 enum InvoiceStatus: String, Codable, Equatable {
@@ -67,28 +92,5 @@ enum InvoiceStatus: String, Codable, Equatable {
         case .paid:
             return .green
         }
-    }
-}
-
-struct CurrentInvoiceDetailsModel: Codable, Equatable {
-    let purchasesSubtotal: Decimal
-    let otherCharges: Decimal
-    let discountsAndCredits: Decimal
-    let total: Decimal
-}
-
-struct InvoiceSpendingSummaryModel: Codable, Equatable {
-    let totalSpent: Decimal
-    let installmentPurchases: Decimal
-    let oneTimePurchases: Decimal
-
-    var installmentProgress: Double {
-        guard totalSpent > 0 else { return 0 }
-        return NSDecimalNumber(decimal: installmentPurchases / totalSpent).doubleValue
-    }
-
-    var oneTimeProgress: Double {
-        guard totalSpent > 0 else { return 0 }
-        return NSDecimalNumber(decimal: oneTimePurchases / totalSpent).doubleValue
     }
 }

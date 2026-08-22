@@ -13,7 +13,7 @@ struct RequestMoneyViewModelTests {
 
         await sut.load()
 
-        #expect(sut.requesterName == "Blake Brown")
+        #expect(sut.requesterName == "Blake Lehmann")
         #expect(sut.recentContacts == dashboard.recentContacts)
         #expect(sut.amountPresets == dashboard.amountPresets)
         #expect(sut.reason == "Dinner")
@@ -83,6 +83,17 @@ struct RequestMoneyViewModelTests {
     }
 
     @Test
+    func inputProperties_sanitizeCurrencyAndLimitReason() {
+        let sut = RequestMoneyViewModel(service: RequestMoneyServiceSpy())
+
+        sut.amountText = "abc1234"
+        sut.reason = String(repeating: "a", count: 1_100)
+
+        #expect(sut.amountText == CurrencyInputFormatter.format("abc1234"))
+        #expect(sut.reason.count == 60)
+    }
+
+    @Test
     func submit_createsContactRequest_whenContactModeIsSelected() async throws {
         let service = RequestMoneyServiceSpy()
         let sut = RequestMoneyViewModel(service: service)
@@ -123,11 +134,11 @@ struct RequestMoneyViewModelTests {
 private extension RequestMoneyDashboard {
     static func fixture(defaultReason: String? = nil) -> RequestMoneyDashboard {
         RequestMoneyDashboard(
-            requesterName: "Blake Brown",
+            requesterName: "Blake Lehmann",
             recentContacts: [.marina, .lucas],
             amountPresets: [
-                RequestMoneyAmountPresetModel(id: "preset_100", value: 100, title: "R$ 100"),
-                RequestMoneyAmountPresetModel(id: "preset_200", value: 200, title: "R$ 200")
+                RequestMoneyAmountPresetModel(id: "preset_100", value: 100),
+                RequestMoneyAmountPresetModel(id: "preset_200", value: 200)
             ],
             defaultReason: defaultReason
         )

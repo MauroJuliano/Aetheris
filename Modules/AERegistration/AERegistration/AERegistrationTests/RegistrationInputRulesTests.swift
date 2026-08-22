@@ -30,6 +30,11 @@ struct RegistrationInputRulesTests {
     }
 
     @Test
+    func sanitizeEmail_trimsSpaces_andLowercases() {
+        #expect(RegistrationInputRules.sanitizeEmail("  Jane.Doe@Example.com ") == "jane.doe@example.com")
+    }
+
+    @Test
     func isValidSIN_requiresExpectedMask() {
         #expect(!RegistrationInputRules.isValidSIN(""))
         #expect(!RegistrationInputRules.isValidSIN("123456789"))
@@ -51,5 +56,13 @@ struct RegistrationInputRulesTests {
         #expect(!RegistrationInputRules.isValidName("J"))
         #expect(RegistrationInputRules.isValidName("Jane"))
         #expect(RegistrationInputRules.isValidName("Jane Doe"))
+    }
+
+    @Test
+    func isValidEmail_requiresStandardFormat() {
+        #expect(!RegistrationInputRules.isValidEmail(""))
+        #expect(!RegistrationInputRules.isValidEmail("jane"))
+        #expect(RegistrationInputRules.isValidEmail("jane.doe@example.com"))
+        #expect(RegistrationInputRules.isValidEmail("JANE.DOE@EXAMPLE.COM"))
     }
 }

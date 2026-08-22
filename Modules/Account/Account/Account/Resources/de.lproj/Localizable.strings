@@ -1,0 +1,11 @@
+"Common.ok" = "OK";
+"Language.title" = "Sprache";
+"Language.description" = "Wähle deine bevorzugte Sprache für Aetheris.";
+"Language.systemDefault" = "Systemstandard";
+"Language.systemDescription" = "Gerätesprache verwenden";
+"Language.english" = "Englisch";
+"Language.german" = "Deutsch";
+"Language.portuguese" = "Portugiesisch";
+"Language.selected" = "Ausgewählt";
+"Language.restartTitle" = "Sprache gespeichert";
+"Language.restartDescription" = "Die neue Sprache wird beim nächsten Start von Aetheris angewendet.";

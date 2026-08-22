@@ -1,4 +1,5 @@
 import AetherisDesignSystem
+import AetherisCardsInterface
 import Core
 import Foundation
 import Testing
@@ -43,6 +44,26 @@ struct CardLogicTests {
                 fallback: "Fallback"
             ) == "Fallback"
         )
+    }
+
+    @Test
+    @MainActor
+    func tabBarRoutingStore_tracksPendingSelectionAndCardsTabTransition() {
+        let selectedCardId = UUID(uuidString: "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA")!
+        let sut = TabBarRoutingStore()
+
+        #expect(sut.selectedIndex == 0)
+        #expect(sut.pendingCardsSelectedCardId == nil)
+
+        sut.showCards(selectedCardId: selectedCardId)
+
+        #expect(sut.selectedIndex == 1)
+        #expect(sut.pendingCardsSelectedCardId == selectedCardId)
+
+        sut.clearPendingCardsSelection()
+
+        #expect(sut.pendingCardsSelectedCardId == nil)
+        #expect(sut.selectedIndex == 1)
     }
 
     @Test

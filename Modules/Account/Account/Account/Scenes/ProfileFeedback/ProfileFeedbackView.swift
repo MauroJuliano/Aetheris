@@ -5,8 +5,7 @@ struct ProfileFeedbackView: View {
     let onDone: () -> Void
 
     @Environment(\.dismiss) private var dismiss
-    @State private var feedback = ""
-    private let feedbackLimit = 1_000
+    @StateObject private var viewModel = ProfileFeedbackViewModel()
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.large) {
@@ -65,20 +64,18 @@ struct ProfileFeedbackView: View {
                         .stroke(Color.border, lineWidth: 1)
                 }
 
-            TextEditor(text: $feedback)
+            TextEditor(text: Binding(
+                get: { viewModel.feedback },
+                set: { viewModel.updateFeedback($0) }
+            ))
                 .font(AppTypography.body)
                 .foregroundStyle(Color.textPrimary)
                 .scrollContentBackground(.hidden)
                 .padding(.horizontal, AppSpacing.medium)
                 .padding(.top, AppSpacing.small)
                 .padding(.bottom, 40)
-                .onChange(of: feedback) { _, newValue in
-                    if newValue.count > feedbackLimit {
-                        feedback = String(newValue.prefix(feedbackLimit))
-                    }
-                }
 
-            if feedback.isEmpty {
+            if viewModel.feedback.isEmpty {
                 Text(Strings.Profile.feedbackPlaceholder)
                     .font(AppTypography.body)
                     .foregroundStyle(Color.textSecondaryColor.opacity(0.7))
@@ -93,7 +90,7 @@ struct ProfileFeedbackView: View {
                 HStack {
                     Spacer()
 
-                    Text("\(feedback.count)/\(feedbackLimit)")
+                    Text(viewModel.characterCountDescription)
                         .font(AppTypography.caption)
                         .foregroundStyle(Color.textSecondaryColor)
                 }
@@ -102,6 +99,20 @@ struct ProfileFeedbackView: View {
             .allowsHitTesting(false)
         }
         .frame(minHeight: 360)
+    }
+}
+
+@MainActor
+private final class ProfileFeedbackViewModel: ObservableObject {
+    @Published private(set) var feedback = ""
+    private let feedbackLimit = 1_000
+
+    var characterCountDescription: String {
+        "\(feedback.count)/\(feedbackLimit)"
+    }
+
+    func updateFeedback(_ value: String) {
+        feedback = String(value.prefix(feedbackLimit))
     }
 }
 

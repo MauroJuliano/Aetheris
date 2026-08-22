@@ -10,6 +10,7 @@ struct AllServicesViewModelTests {
 
         #expect(sut.isLoading)
         #expect(sut.items.isEmpty)
+        #expect(sut.displayedItems.count == 6)
         #expect(sut.errorMessage == nil)
     }
 
@@ -23,6 +24,7 @@ struct AllServicesViewModelTests {
 
         #expect(!sut.isLoading)
         #expect(sut.items.map(\.title) == items.map(\.title))
+        #expect(sut.displayedItems.map(\.title) == items.map(\.title))
         #expect(sut.errorMessage == nil)
         #expect(service.loadCalls == 1)
     }
