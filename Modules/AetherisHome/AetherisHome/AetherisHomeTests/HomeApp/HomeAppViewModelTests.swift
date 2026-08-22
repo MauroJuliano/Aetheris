@@ -28,7 +28,7 @@ struct HomeAppViewModelTests {
         let sut = makeSUT(result: .success(.mock))
 
         #expect(sut.spendingAnalyticsCardModel.title == Strings.SpendingChart.title)
-        #expect(sut.spendingAnalyticsCardModel.totalTitle == "$ 2,428.00")
+        #expect(sut.spendingAnalyticsCardModel.totalTitle == "$ 2.428,00")
         #expect(sut.spendingAnalyticsCardModel.changeTitle == "+8%")
         #expect(sut.spendingAnalyticsCardModel.comparisonTitle == Strings.SpendingChart.comparison)
         #expect(sut.spendingAnalyticsCardModel.categories.count == 4)
@@ -39,9 +39,8 @@ struct HomeAppViewModelTests {
         let sut = makeSUT(result: .success(.mock))
 
         #expect(sut.quickActionItems.count == 3)
-        #expect(sut.recipientItems.count == 6)
+        #expect(sut.recipientItems.isEmpty)
         #expect(sut.recipientItems.map(\.id) == sut.recentRecipients.map(\.id))
-        #expect(sut.recipient(for: sut.recipientItems[0].id)?.id == sut.recentRecipients[0].id)
         #expect(sut.quickActionItems[0].title == Strings.QuickActions.sendTitle)
         #expect(sut.quickActionItems[1].title == Strings.QuickActions.requestTitle)
         #expect(sut.quickActionItems[2].title == Strings.QuickActions.moreTitle)

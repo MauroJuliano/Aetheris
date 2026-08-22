@@ -36,7 +36,8 @@ A multi-step registration flow covering personal information, address, credentia
 
 Account balance, recent transactions, beneficiaries, quick actions, and spending information.
 
-**IMAGE PLACEHOLDER**
+<img width="1391" height="1131" alt="HomeFlow" src="https://github.com/user-attachments/assets/42ecc25e-5814-4bd5-b5a5-ffec333a542e" />
+
 
 ### Transfers
 
@@ -44,17 +45,22 @@ The transfer flow covers beneficiary selection, amount entry, confirmation, proc
 
 `Beneficiary → Amount → Confirmation → Processing → Success`
 
+<img width="1445" height="1089" alt="TransferFlow" src="https://github.com/user-attachments/assets/02490ccc-2190-4d30-a829-0b137d7932c8" />
+
+
 ### Cards
 
 Card overview, available limit, invoice, virtual card, lock/unlock, and transaction history.
 
-**IMAGE PLACEHOLDER**
+<img width="1526" height="1030" alt="CardFlow" src="https://github.com/user-attachments/assets/1e306dc4-35e1-43bc-a10a-2dafc18b4b8f" />
+
+
 
 ### More Screens
 
 Beneficiaries, transaction details, subscriptions, notifications, profile, settings, and request money.
 
-**IMAGE PLACEHOLDER**
+<img width="1535" height="1024" alt="morescreens" src="https://github.com/user-attachments/assets/9c1e119c-e865-47bc-a0db-3495dad95d01" />
 
 ---
 
@@ -144,8 +150,6 @@ This keeps UI, navigation, and data loading separated while still allowing the a
 
 Reusable components live inside `AetherisDesignSystem`, including buttons, text fields, cards, cells, navigation elements, skeletons, colors, typography, and spacing.
 
-**IMAGE PLACEHOLDER**
-
 ---
 
 ## Tests
@@ -154,14 +158,12 @@ The project includes unit tests for ViewModels, services, state transitions, suc
 
 Services can be replaced with mocks to provide controlled responses during tests.
 
-**IMAGE PLACEHOLDER**
-
 ---
 
 ## Running the Project
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/MauroJuliano/Aetheris.git
 ```
 
 Open `Aetheris.xcodeproj`, select an iPhone simulator, and run with `⌘ + R`.
