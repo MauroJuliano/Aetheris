@@ -88,7 +88,13 @@ struct MainTabContainer: View {
                     path: $cardsNavigationPath
                 ),
                 path: $cardsNavigationPath,
-                onFinished: resetCardsNavigation
+                onFinished: resetCardsNavigation,
+                onTransactionTap: { transactionID in
+                    cardsFactory.showTransactionDetails(
+                        transactionID: transactionID,
+                        path: $cardsNavigationPath
+                    )
+                }
             )
             .navigationDestination(for: MainTabRoute.self) { route in
                 switch route {

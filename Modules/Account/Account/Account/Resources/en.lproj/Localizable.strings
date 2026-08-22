@@ -10,8 +10,7 @@
 "Language.german" = "German";
 "Language.portuguese" = "Portuguese";
 "Language.selected" = "Selected";
-"Language.restartTitle" = "Language saved";
-"Language.restartDescription" = "The new language will be applied the next time you open Aetheris.";
+"Language.applying" = "Applying language...";
 
 "Profile.logout" = "Logout";
 "Profile.version" = "Version 0.00.1";

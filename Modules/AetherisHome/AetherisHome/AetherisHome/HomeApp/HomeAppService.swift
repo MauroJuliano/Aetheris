@@ -25,29 +25,10 @@ struct HomeAppDashboard: Codable, Hashable {
         let avatar: String
     }
 
-    struct QuickAction: Codable, Hashable, Identifiable {
-        enum Route: String, Codable, Hashable {
-            case sendMoney
-            case requestMoney
-            case payBills
-            case topUp
-        }
-
-        let id: String
-        let title: String
-        let subtitle: String
-        let icon: String
-        let route: Route
-    }
-
     struct SpendingThisMonth: Codable, Hashable {
         struct Category: Codable, Hashable, Identifiable {
             let id: String
-            let title: String
             let amount: Double
-            let percentage: String
-            let icon: String
-            let colorToken: String
         }
 
         struct SeriesPoint: Codable, Hashable, Identifiable {
@@ -57,10 +38,8 @@ struct HomeAppDashboard: Codable, Hashable {
             var id: Int { day }
         }
 
-        let title: String
         let total: Double
         let changePercent: Double
-        let comparisonLabel: String
         let categories: [Category]
         let series: [SeriesPoint]
     }
@@ -73,7 +52,6 @@ struct HomeAppDashboard: Codable, Hashable {
     let balance: Balance
     let cards: [Card]
     let recentRecipients: [RecentRecipient]
-    let quickActions: [QuickAction]
     let spendingThisMonth: SpendingThisMonth
     let notifications: Notifications
 }

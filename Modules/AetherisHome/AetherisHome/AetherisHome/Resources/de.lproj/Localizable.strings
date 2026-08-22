@@ -1,0 +1,73 @@
+"Common.continueButton" = "Weiter";
+"Common.errorSubmit" = "Senden fehlgeschlagen";
+"SendMoney.title" = "Überweisen";
+"SendMoney.continueButton" = "Weiter";
+
+"HomeApp.homeUnavailableTitle" = "Startseite nicht verfügbar";
+"HomeApp.noDashboardDataTitle" = "Noch keine Übersichtsdaten";
+"HomeApp.emptyDescription" = "Der simulierte Zahlungsdienst hat eine leere Antwort zurückgegeben.";
+"HomeApp.genericErrorTitle" = "Etwas ist schiefgelaufen";
+"HomeApp.genericErrorDescription" = "Deine Angaben konnten nicht geladen werden. Überprüfe deine Verbindung und versuche es erneut.";
+"HomeApp.tryLater" = "Später versuchen";
+"HomeApp.welcomePrefix" = "Willkommen, ";
+"HomeApp.welcomeName" = "Blake!";
+"HomeApp.logout" = "Abmelden";
+"HomeApp.version" = "Version 0.00.1";
+"HomeApp.poweredBy" = "@2025 Unterstützt von Blake";
+"HomeApp.accountTerms" = "Kontobedingungen – Datenschutzrichtlinie";
+"HomeApp.cardsLoadFailed" = "Deine Karten konnten momentan nicht geladen werden.";
+"HomeApp.cardOwnerOne" = "Jorge Henrique";
+"HomeApp.visaBrand" = "VISA";
+"HomeApp.monthlySpendingHeadline" = "Monatliche Ausgaben";
+"HomeApp.monthlySpendingTitle" = "Du hast im August 2.310 $ ausgegeben";
+"HomeApp.monthlySpendingCaption" = "Top-Kategorie: Restaurants 🍔";
+"HomeApp.seeInsights" = "Analysen anzeigen";
+"HomeApp.cardOwnerTwo" = "Amado Batista";
+"HomeApp.mastercardBrand" = "MASTERCARD";
+"HomeApp.learnMore" = "Mehr erfahren";
+
+"QuickActions.sectionTitle" = "Was möchtest du tun?";
+"QuickActions.sendTitle" = "Senden";
+"QuickActions.transferTitle" = "Überweisen";
+"QuickActions.transferSubtitle" = "Geld senden";
+"QuickActions.requestTitle" = "Anfordern";
+"QuickActions.requestSubtitle" = "Geld empfangen";
+"QuickActions.moreTitle" = "Mehr";
+"QuickActions.moreSubtitle" = "Alle Dienste";
+"QuickActions.payTitle" = "Bezahlen";
+"QuickActions.paySubtitle" = "Rechnungen bezahlen";
+"QuickActions.topUpTitle" = "Aufladen";
+"QuickActions.topUpSubtitle" = "Geld hinzufügen";
+
+"AllServices.title" = "Alle Dienste";
+"AllServices.subtitle" = "Schneller Zugriff auf die wichtigsten Dienste der App.";
+"AllServices.transferMoney" = "Geld überweisen";
+"AllServices.manageBeneficiaries" = "Empfänger";
+"AllServices.cardCenter" = "Karten";
+"AllServices.notifications" = "Benachrichtigungen";
+"AllServices.reports" = "Berichte";
+
+"SpendingChart.title" = "Ausgaben in diesem Monat";
+"SpendingChart.total" = "2.428,00 $";
+"SpendingChart.change" = "8,3 %";
+"SpendingChart.comparison" = "gegenüber dem letzten Monat";
+"SpendingChart.viewReport" = "Bericht anzeigen";
+"SpendingChart.shopping" = "Einkäufe";
+"SpendingChart.bills" = "Rechnungen";
+"SpendingChart.transport" = "Transport";
+"SpendingChart.foodAndDrinks" = "Essen & Trinken";
+
+"NotificationsCentre.unavailableTitle" = "Benachrichtigungen nicht verfügbar";
+"NotificationsCentre.emptyTitle" = "Noch keine Benachrichtigungen";
+"NotificationsCentre.emptyDescription" = "Der simulierte Dienst hat keine Benachrichtigungen zum Anzeigen.";
+"NotificationsCentre.title" = "Benachrichtigungen";
+
+"Common.tryAgain" = "Erneut versuchen";
+"Common.back" = "Zurück";
+"Common.close" = "Schließen";
+
+"CardHome.title" = "Karten";
+
+"Recipients.title" = "Empfänger";
+"Recipients.seeAll" = "Alle anzeigen";
+"Recipients.newRecipient" = "Neuer\nEmpfänger";

@@ -51,6 +51,39 @@ struct TransactionDetailsServiceTests {
     }
 
     @Test
+    func fetchTransactionDetails_preservesBeneficiaryPaymentMessage() async throws {
+        let sut = TransactionDetailsService(coreService: CoreServiceTestDouble())
+
+        let transaction = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.beneficiaryPayment
+        )
+
+        #expect(transaction.kind == .incomingPayment)
+        #expect(transaction.amount == 75)
+        #expect(transaction.note == Strings.Mock.thanksForCollaboration)
+    }
+
+    @Test
+    func fetchTransactionDetails_mapsBeneficiaryTransfersInsteadOfUsingFallback() async throws {
+        let sut = TransactionDetailsService(coreService: CoreServiceTestDouble())
+
+        let dinner = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.beneficiaryDinnerTransfer
+        )
+        let concert = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.beneficiaryConcertTransfer
+        )
+
+        #expect(dinner.kind == .outgoingTransfer)
+        #expect(dinner.amount == 50)
+        #expect(dinner.transferDetails?.recipientName == "Sophie Keller")
+        #expect(dinner.note == Strings.Mock.dinnerWithSophie)
+        #expect(concert.kind == .outgoingTransfer)
+        #expect(concert.amount == 200)
+        #expect(concert.note == Strings.Mock.concertTicket)
+    }
+
+    @Test
     func fetchTransactionDetails_usesNeutralFallback_forUnknownIdentifiers() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = TransactionDetailsService(coreService: coreService)

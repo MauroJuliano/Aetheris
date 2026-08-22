@@ -1,62 +1,177 @@
 # Aetheris
 
-Aetheris is a SwiftUI demo app built for portfolio review.
+Aetheris is a SwiftUI banking app I built for my portfolio.
 
-It simulates a banking experience with separate feature modules, shared design tokens, and a network layer built around endpoints and a core service. The app does not talk to a live backend. Responses are modeled in code so each flow can be exercised end to end.
+The goal was to create something closer to a real app instead of a collection of isolated screens. It includes authentication, registration, onboarding, transfers, cards, beneficiaries, transactions, notifications, and account settings.
 
-## What is inside
+The app does not use a live backend. Responses are mocked locally so the main flows can be explored without any external setup.
 
-- Authentication and registration
-- Onboarding after sign up
-- Home dashboard
-- Card home, virtual card, card lock, invoice, transaction history, and transaction details
-- Beneficiary list and beneficiary details
-- Send money and request money flows
-- Profile and notifications
-- Reusable design system components
+Aetheris is available in English, Brazilian Portuguese, and German, with real-time language switching through the app settings.
+
+---
+
+## App Walkthrough
+
+The complete experience—including authentication, registration, transfers, cards, beneficiaries, and account settings—will be available as a single video walkthrough.
+
+**YOUTUBE VIDEO PLACEHOLDER**
+
+---
+
+## Preview
+
+### Authentication
+
+Login, validation, loading, error handling, and password recovery.
+
+<img width="1448" height="1086" alt="AuthenticationFlow" src="https://github.com/user-attachments/assets/bfb9e3c0-4e59-4166-a330-83ba91d99cb3" />
+
+### Registration
+
+A multi-step registration flow covering personal information, address, credentials, and account review.
+
+<img width="1448" height="1086" alt="RegisterFlow" src="https://github.com/user-attachments/assets/d84b92cf-5510-4f73-9fbf-e5972142ba73" />
+
+### Home
+
+Account balance, recent transactions, beneficiaries, quick actions, and spending information.
+
+**IMAGE PLACEHOLDER**
+
+### Transfers
+
+The transfer flow covers beneficiary selection, amount entry, confirmation, processing, and success/error states.
+
+`Beneficiary → Amount → Confirmation → Processing → Success`
+
+### Cards
+
+Card overview, available limit, invoice, virtual card, lock/unlock, and transaction history.
+
+**IMAGE PLACEHOLDER**
+
+### More Screens
+
+Beneficiaries, transaction details, subscriptions, notifications, profile, settings, and request money.
+
+**IMAGE PLACEHOLDER**
+
+---
+
+## Localization
+
+Aetheris supports three languages:
+
+- English
+- Brazilian Portuguese
+- German
+
+Users can change the app language through Settings. The interface updates immediately without requiring an app restart.
+
+Localization covers authentication, registration, navigation, cards, transfers, beneficiaries, transaction details, notifications, and account settings.
+
+---
+
+## Tech
+
+- Swift
+- SwiftUI
+- async/await
+- XCTest
+- MVVM
+- Coordinators
+- Dependency Injection
+- Modular feature structure
+- Shared Design System
+- Custom networking layer
+- Localization (EN, PT-BR, DE)
+
+---
 
 ## Architecture
 
-The app is split into modules:
+The app is split into feature modules with shared infrastructure.
 
-- `Core` handles the HTTP client, endpoint abstraction, and demo service.
-- `AetherisDesignSystem` contains shared colors, spacing, typography, buttons, cards, skeletons, and other UI pieces.
-- `AetherisAuthentication`, `AERegistration`, `AetherisHome`, `AetherisCards`, `AetherisTransfers`, `Account`, `AetherisNotifications`, and `AetherisInsights` hold the feature flows.
+```text
+Aetheris
+│
+├── Core
+├── AetherisDesignSystem
+├── AetherisAuthentication
+├── AERegistration
+├── AetherisHome
+├── AetherisCards
+├── AetherisTransfers
+├── Account
+├── AetherisNotifications
+└── AetherisInsights
+```
 
-Each feature usually follows the same structure:
+Most features follow a similar structure:
 
-- `Screen` or `View`
-- `ViewModel`
-- `Service`
-- `Factory` or coordinator
-- local models and small UI components
+```text
+Feature
+│
+├── View
+├── ViewModel
+├── Service
+├── Models
+├── Components
+└── Factory / Coordinator
+```
 
-This keeps navigation, data loading, and screen composition separated.
+A typical data request follows:
 
-## Data flow
+```text
+View
+ ↓
+ViewModel
+ ↓
+Service
+ ↓
+CoreService
+ ↓
+Endpoint
+ ↓
+Mock Response
+```
 
-Most screens load data through a service that uses `HasCoreService`.
+This keeps UI, navigation, and data loading separated while still allowing the app to behave around asynchronous loading, success, and error states.
 
-The service calls an endpoint, and the endpoint also provides mock response data. That makes the app behave like it is connected to a backend while keeping the whole project self-contained.
+---
 
-## App flow
+## Design System
 
-The app starts with a splash screen, then goes through authentication. From there it can reach registration, onboarding, and the main tab experience.
+Reusable components live inside `AetherisDesignSystem`, including buttons, text fields, cards, cells, navigation elements, skeletons, colors, typography, and spacing.
 
-Inside the main app, the home screen routes into cards, transfers, account, and supporting detail screens.
+**IMAGE PLACEHOLDER**
 
-## Running the project
-
-1. Open `Aetheris.xcodeproj` in Xcode.
-2. Select the `Aetheris` app target.
-3. Run on an iPhone simulator.
+---
 
 ## Tests
 
-The repository includes unit tests for the main feature modules and the core networking layer.
+The project includes unit tests for ViewModels, services, state transitions, success cases, and error cases.
 
-Run them from Xcode or with `xcodebuild` using the existing test scheme.
+Services can be replaced with mocks to provide controlled responses during tests.
 
-## Notes
+**IMAGE PLACEHOLDER**
 
-This project is meant to demonstrate structure, navigation, UI composition, and testable feature boundaries. It is not intended for production use.
+---
+
+## Running the Project
+
+```bash
+git clone <repository-url>
+```
+
+Open `Aetheris.xcodeproj`, select an iPhone simulator, and run with `⌘ + R`.
+
+No backend or API configuration is required.
+
+---
+
+## Disclaimer
+
+Aetheris is a portfolio project.
+
+It does not connect to a real financial institution or process real transactions. All data shown in the app is fictional.

@@ -18,7 +18,6 @@ final class HomeCardViewModel: ObservableObject {
     @Published var cards: [Card] = []
     @Published private(set) var cardDetails: [CardDetailsModel] = []
     @Published private(set) var summaries: [FinancialSummaryModel] = []
-    @Published private(set) var quickActions: [CardOptions] = []
 
     private let service: any HomeCardServicing
     private var hasLoaded = false
@@ -42,8 +41,7 @@ final class HomeCardViewModel: ObservableObject {
             let loadedDashboard = try await service.loadDashboard()
             cards = loadedDashboard.cards
             cardDetails = loadedDashboard.cardDetails
-            summaries = loadedDashboard.summaries
-            quickActions = loadedDashboard.quickActions
+            summaries = loadedDashboard.summaries.map(\.presentationModel)
             isEmpty = cards.isEmpty && summaries.isEmpty
         } catch {
             errorMessage = CardServiceErrorMessage.message(
@@ -72,11 +70,9 @@ final class HomeCardViewModel: ObservableObject {
     }
 
     func quickActions(at index: Int) -> [CardOptions] {
-        let baseActions = quickActions
-            .filter { !CardOptions.replacedQuickActionIds.contains($0.id) }
-            .prefix(2)
-
-        return Array(baseActions) + [
+        [
+            .send(),
+            .request(),
             .virtualCard(),
             .cardLock(isBlocked: cardDetails(at: index)?.isBlocked == true)
         ]

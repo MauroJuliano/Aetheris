@@ -44,5 +44,11 @@ public final class LanguageManager: LanguageManaging {
         } else {
             defaults.removeObject(forKey: Keys.appleLanguages)
         }
+
+        NotificationCenter.default.post(name: .aetherisLanguageDidChange, object: language)
     }
+}
+
+public extension Notification.Name {
+    static let aetherisLanguageDidChange = Notification.Name("aetheris.languageDidChange")
 }

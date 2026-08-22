@@ -1,0 +1,82 @@
+// Standard
+"Default.buttonName" = "Weiter";
+"Common.errorSubmit" = "Senden fehlgeschlagen";
+"Onboarding.skip" = "Überspringen";
+"Onboarding.stepOneTitle" = "Dein Konto ist bereit";
+"Onboarding.stepOneDescription" = "Alles, was du zur Verwaltung deines Geldes brauchst, ist startklar.";
+"Onboarding.stepOneButton" = "Weiter";
+"Onboarding.stepTwoTitle" = "Alles an einem Ort";
+"Onboarding.stepTwoDescription" = "Behalte dein Guthaben im Blick, verwalte Karten und überweise Geld ganz einfach.";
+"Onboarding.stepTwoButton" = "Weiter";
+"Onboarding.stepThreeTitle" = "Bereit zum Start";
+"Onboarding.stepThreeDescription" = "Du kannst Aetheris jetzt entdecken und dein Konto verwenden.";
+"Onboarding.stepThreeButton" = "Loslegen";
+"SubmissionError.title" = "Fortfahren nicht möglich";
+"SubmissionError.description" = "Deine Angaben konnten nicht gesendet werden. Bitte versuche es erneut.";
+"SubmissionError.tryAgain" = "Erneut versuchen";
+"SubmissionError.cancel" = "Abbrechen";
+
+// Sozialversicherungsnummer
+"SIN.title" = "Sozialversicherungsnummer";
+"SIN.subTitle" = "Wir verwenden deine Nummer, um deine Identität zu bestätigen und dein Konto zu schützen.";
+"SIN.placeholder" = "000.000.000";
+"SIN.buttonName" = "Weiter";
+"SIN.error" = "Gib eine gültige Nummer im Format 000.000.000 ein.";
+
+// Name der Mutter
+"MothersName.title" = "Name der Mutter";
+"MothersName.placeholder" = "Vollständigen Namen deiner Mutter eingeben";
+"MothersName.subTitle" = "Dient als zusätzliche Sicherheitsmaßnahme zum Schutz deines Kontos";
+"MothersName.error" = "Gib mindestens 2 Buchstaben ein.";
+
+// Vollständiger Name
+"UserName.title" = "Vollständiger Name";
+"UserName.subTitle" = "Gib deinen vollständigen Namen so ein, wie er in deinen amtlichen Dokumenten steht.";
+"UserName.placeholder" = "Vollständigen gesetzlichen Namen eingeben";
+"UserName.error" = "Gib mindestens 2 Buchstaben ein.";
+
+// E-Mail
+"Email.title" = "E-Mail-Adresse";
+"Email.subTitle" = "Wir verwenden diese E-Mail-Adresse, um dein Konto zu identifizieren und wichtige Neuigkeiten zu senden.";
+"Email.placeholder" = "name@beispiel.de";
+"Email.error" = "Gib eine gültige E-Mail-Adresse ein.";
+
+// Geburtsdatum
+"Birthdate.title" = "Geburtsdatum";
+"Birthdate.subTitle" = "Wir verwenden dein Geburtsdatum, um deine Identität sicher zu bestätigen";
+"Birthdate.placeholder" = "26.08.1970";
+"Birthdate.error" = "Gib ein gültiges Datum im Format TT.MM.JJJJ ein.";
+
+"Password.title" = "Passwort";
+"Password.subTitle" = "Erstelle ein vierstelliges numerisches Passwort für dein Konto.";
+"Password.placeholder" = "1234";
+"Password.error" = "Gib ein vierstelliges Passwort ein.";
+"Password.show" = "Passwort anzeigen";
+"Password.hide" = "Passwort ausblenden";
+
+"ConfirmPassword.title" = "Passwort bestätigen";
+"ConfirmPassword.subTitle" = "Gib dasselbe vierstellige Passwort erneut ein, um fortzufahren.";
+"ConfirmPassword.placeholder" = "1234";
+"ConfirmPassword.error.mismatch" = "Die Passwörter stimmen nicht überein.";
+"ConfirmPassword.error.submit" = "Senden fehlgeschlagen";
+
+"Register.fullNameTitle" = "Vollständiger Name";
+"Register.fullNameSubtitle" = "Gib deinen gesetzlichen Namen genau so ein, wie er in deinen Dokumenten steht.";
+"Register.continueButton" = "Weiter";
+"Register.placeholderName" = "Namen eingeben";
+
+"Resume.title" = "Angaben überprüfen";
+"Resume.subtitle" = "Bitte bestätige vor dem Fortfahren, dass alle Angaben korrekt sind.";
+"Resume.securityNote" = "Deine Angaben werden erst beim Fortfahren sicher übertragen.";
+"Resume.continueButton" = "Weiter";
+"Resume.listTitle" = "Zusammenfassung";
+"Resume.edit" = "Bearbeiten";
+"Resume.fullName" = "Vollständiger Name";
+"Resume.mockName" = "Melissa Mccarthy";
+"Resume.mockEmail" = "melissa@beispiel.de";
+"Resume.mockMysticalTime" = "Mystische Zeit";
+"Resume.mockAnnSomething" = "Etwas über Ann";
+"Resume.mockBirthDate" = "12.10.1980";
+"Resume.mockSin" = "000.000.00-23";
+"Resume.mockWeCouldNeverBeTogether" = "Wir könnten nie zusammen sein";
+"Resume.mockAddress" = "Allee des schönen Scheins";

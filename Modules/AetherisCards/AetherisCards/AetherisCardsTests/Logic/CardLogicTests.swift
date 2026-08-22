@@ -92,26 +92,24 @@ struct CardLogicTests {
 
     @Test
     func cardOptions_exposeExpectedQuickActionPayloads() {
+        let send = CardOptions.send()
+        let request = CardOptions.request()
         let virtualCard = CardOptions.virtualCard()
         let blockedAction = CardOptions.cardLock(isBlocked: true)
         let unblockedAction = CardOptions.cardLock(isBlocked: false)
 
+        #expect(send.id == CardOptions.sendId)
+        #expect(send.label == Strings.QuickActions.sendTitle)
+        #expect(request.id == CardOptions.requestId)
+        #expect(request.label == Strings.QuickActions.requestTitle)
         #expect(virtualCard.id == CardOptions.virtualCardId)
-        #expect(virtualCard.label == "Virtual\ncard")
+        #expect(virtualCard.label == Strings.CardInformation.virtualCardQuickAction)
         #expect(virtualCard.icon == "creditcard")
         #expect(blockedAction.id == CardOptions.cardLockId)
         #expect(blockedAction.label == Strings.CardInformation.unlock)
         #expect(blockedAction.icon == "lock.open")
         #expect(unblockedAction.label == Strings.CardInformation.lock)
         #expect(unblockedAction.icon == "lock")
-        #expect(
-            CardOptions.replacedQuickActionIds == [
-                CardOptions.payId,
-                CardOptions.topUpId,
-                CardOptions.virtualCardId,
-                CardOptions.cardLockId
-            ]
-        )
     }
 
     @Test

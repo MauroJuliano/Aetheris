@@ -34,12 +34,10 @@ struct LanguageSelectionView: View {
         .appScreenBackground()
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
-        .alert(Strings.Language.restartTitle, isPresented: restartNoticeBinding) {
-            Button(Strings.Common.ok, role: .cancel) {
-                viewModel.dismissRestartNotice()
+        .overlay {
+            if viewModel.isApplyingLanguage {
+                applyingLanguageOverlay
             }
-        } message: {
-            Text(Strings.Language.restartDescription)
         }
         .accessibilityIdentifier("languageSelection.screen")
     }
@@ -50,7 +48,10 @@ struct LanguageSelectionView: View {
                 LanguageSelectionCell(
                     language: language,
                     isSelected: viewModel.selectedLanguage == language,
-                    onTap: { viewModel.select(language) }
+                    isEnabled: !viewModel.isApplyingLanguage,
+                    onTap: {
+                        Task { await viewModel.select(language) }
+                    }
                 )
 
                 if index < viewModel.languages.count - 1 {
@@ -61,10 +62,26 @@ struct LanguageSelectionView: View {
         .appCardSurface()
     }
 
-    private var restartNoticeBinding: Binding<Bool> {
-        Binding(
-            get: { viewModel.isRestartNoticePresented },
-            set: { if !$0 { viewModel.dismissRestartNotice() } }
-        )
+    private var applyingLanguageOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.28)
+                .ignoresSafeArea()
+
+            VStack(spacing: AppSpacing.medium) {
+                ProgressView()
+                    .controlSize(.large)
+                    .tint(Color.brandPrimaryColor)
+
+                Text(Strings.Language.applying)
+                    .font(AppTypography.body)
+                    .bold()
+                    .foregroundStyle(Color.textPrimary)
+            }
+            .padding(AppSpacing.large)
+            .appCardSurface()
+        }
+        .transition(.opacity)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Strings.Language.applying)
     }
 }

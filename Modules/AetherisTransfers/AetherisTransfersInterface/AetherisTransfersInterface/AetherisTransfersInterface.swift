@@ -10,7 +10,8 @@ import SwiftUI
     func makeNavigationHost(
         content: AnyView,
         path: Binding<NavigationPath>,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
     ) -> AnyView
 }
 

@@ -1,0 +1,62 @@
+"TabBar.home" = "Start";
+"TabBar.cards" = "Karten";
+"TabBar.profile" = "Profil";
+"TabBar.transfer" = "Überweisen";
+
+"Accessibility.back" = "Zurück";
+"Accessibility.notifications" = "Benachrichtigungen";
+"Accessibility.loading" = "Wird geladen";
+"Accessibility.showBalance" = "Guthaben anzeigen";
+"Accessibility.hideBalance" = "Guthaben ausblenden";
+"Accessibility.hiddenBalance" = "Guthaben ausgeblendet";
+
+"Balance.title" = "Guthaben";
+"NumericKeyboard.walletBalance" = "Kontoguthaben:";
+
+"MinimalDropdown.transactionsHistory" = "Transaktionsverlauf";
+"MinimalDropdown.today" = "Heute";
+"MinimalDropdown.thisWeek" = "Diese Woche";
+"MinimalDropdown.thisMonth" = "Dieser Monat";
+"MinimalDropdown.allTime" = "Gesamter Zeitraum";
+
+"GlowButton.continue" = "Weiter";
+"FullScreenError.title" = "Etwas ist schiefgelaufen";
+"FullScreenError.description" = "Deine Angaben konnten nicht geladen werden. Überprüfe deine Verbindung und versuche es erneut.";
+"FullScreenError.primaryButton" = "Erneut versuchen";
+"FullScreenError.secondaryButton" = "Später versuchen";
+
+"CardDistribution.creditCardTitle" = "Kreditkarte";
+"CardDistribution.creditCardSubtitle" = "Profitiere von exklusiven Vorteilen ohne Jahresgebühr.";
+"CardDistribution.loanTitle" = "Kredit";
+"CardDistribution.loanSubtitle" = "Individuelle Kreditangebote.";
+"CardDistribution.investmentsTitle" = "Anlagen";
+"CardDistribution.investmentsSubtitle" = "Lass dein Geld mit flexiblen Plänen wachsen.";
+
+"Profile.generalSection" = "Allgemein";
+"Profile.notificationsSection" = "Benachrichtigungen";
+"Profile.userName" = "Blake Lehmann";
+"Profile.email" = "blake.lehmann@aetheris.app";
+"Profile.phone" = "(33) 9908-3213";
+"Profile.feedback" = "Feedback";
+"Profile.pushNotifications" = "Push-Benachrichtigungen";
+"Profile.smsNotifications" = "SMS-Benachrichtigungen";
+"Profile.joinedDate" = "Mitglied seit 17. August 2025";
+
+"CreditCard.validTill" = "Gültig bis";
+
+"CardInfo.monthlySpendingHeadline" = "Monatliche Ausgaben";
+"CardInfo.monthlySpendingTitle" = "Du hast im August 2.310 $ ausgegeben";
+"CardInfo.monthlySpendingCaption" = "Top-Kategorie: Restaurants 🍔";
+"CardInfo.monthlySpendingButton" = "Analysen anzeigen";
+
+"CardsMock.monthlySpendingHeadline" = "Monatliche Ausgaben";
+"CardsMock.monthlySpendingTitle" = "Du hast im August 2.310 $ ausgegeben";
+"CreditCard.ownerName" = "Jorge Henrique";
+"CreditCard.brandVisa" = "VISA";
+"CreditCard.ownerNameTwo" = "Amado Batista";
+"CreditCard.brandMastercard" = "MASTERCARD";
+
+"UserView.userName" = "Blake Lehmann";
+"UserView.joinedDate" = "Mitglied seit 17. August 2025";
+
+"GlowButton.continueTitle" = "Weiter";

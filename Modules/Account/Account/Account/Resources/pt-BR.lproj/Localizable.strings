@@ -7,8 +7,7 @@
 "Language.german" = "Alemão";
 "Language.portuguese" = "Português";
 "Language.selected" = "Selecionado";
-"Language.restartTitle" = "Idioma salvo";
-"Language.restartDescription" = "O novo idioma será aplicado na próxima vez que você abrir o Aetheris.";
+"Language.applying" = "Alterando idioma...";
 
 "Common.tryAgain" = "Tentar novamente";
 "Common.back" = "Voltar";

@@ -47,6 +47,11 @@ public final class CardsFactory: CardsFactoryInterface {
     }
 
     @MainActor
+    public func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>) {
+        Self.showTransactionDetails(transactionID: transactionID, path: path)
+    }
+
+    @MainActor
     public static func makeEmbedded(
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
@@ -149,5 +154,13 @@ public final class CardsFactory: CardsFactoryInterface {
                 }
             }
         )
+    }
+
+    @MainActor
+    public static func showTransactionDetails(
+        transactionID: UUID,
+        path: Binding<NavigationPath>
+    ) {
+        path.wrappedValue.append(CardFlowRoute.transactionDetails(transactionID))
     }
 }

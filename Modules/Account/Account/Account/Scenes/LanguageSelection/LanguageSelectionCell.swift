@@ -5,6 +5,7 @@ import SwiftUI
 struct LanguageSelectionCell: View {
     let language: AppLanguage
     let isSelected: Bool
+    let isEnabled: Bool
     let onTap: () -> Void
 
     var body: some View {
@@ -35,6 +36,7 @@ struct LanguageSelectionCell: View {
             .background(isSelected ? Color.brandPrimaryColor.opacity(0.05) : Color.clear)
         }
         .buttonStyle(.plain)
+        .disabled(!isEnabled)
         .accessibilityLabel(language.title)
         .accessibilityValue(isSelected ? Strings.Language.selected : language.subtitle)
         .accessibilityAddTraits(isSelected ? .isSelected : [])

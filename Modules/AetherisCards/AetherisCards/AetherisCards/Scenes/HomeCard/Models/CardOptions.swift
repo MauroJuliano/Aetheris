@@ -13,17 +13,24 @@ struct CardOptions: Identifiable, Codable, Hashable {
 extension CardOptions {
     static let sendId = "send"
     static let requestId = "request"
-    static let payId = "pay"
-    static let topUpId = "top_up"
     static let virtualCardId = "virtual_card"
     static let cardLockId = "card_lock"
 
-    static let replacedQuickActionIds: Set<String> = [
-        payId,
-        topUpId,
-        virtualCardId,
-        cardLockId
-    ]
+    static func send() -> CardOptions {
+        CardOptions(
+            id: sendId,
+            label: Strings.QuickActions.sendTitle,
+            icon: "paperplane.fill"
+        )
+    }
+
+    static func request() -> CardOptions {
+        CardOptions(
+            id: requestId,
+            label: Strings.QuickActions.requestTitle,
+            icon: "arrow.down"
+        )
+    }
 
     static func virtualCard() -> CardOptions {
         CardOptions(

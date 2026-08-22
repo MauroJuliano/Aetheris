@@ -19,4 +19,6 @@ find "$PROJECT_ROOT" -path "*/Resources/en.lproj/Localizable.strings" -print | s
     --param enumName=Strings \
     "$strings_file" \
     --output "$output"
+
+  ruby "$PROJECT_ROOT/scripts/swiftgen-runtime-localization.rb" "$output"
 done

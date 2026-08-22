@@ -15,7 +15,6 @@ struct HomeCardViewModelTests {
         #expect(sut.cards.isEmpty)
         #expect(sut.cardDetails.isEmpty)
         #expect(sut.summaries.isEmpty)
-        #expect(sut.quickActions.isEmpty)
         #expect(sut.errorMessage == nil)
     }
 
@@ -24,8 +23,7 @@ struct HomeCardViewModelTests {
         let dashboard = HomeCardDashboard(
             cards: CardsMock.creditCardMocks,
             cardDetails: [.fixture],
-            summaries: [.fixture],
-            quickActions: [.init(label: "Send", icon: "paperplane")]
+            summaries: [.fixture]
         )
         let service = HomeCardServiceSpy(result: .success(dashboard))
         let sut = HomeCardViewModel(service: service)
@@ -36,8 +34,7 @@ struct HomeCardViewModelTests {
         #expect(!sut.isEmpty)
         #expect(sut.cards.count == 3)
         #expect(sut.cardDetails.map(\.cardId) == [CardMockIDs.standard])
-        #expect(sut.summaries.map(\.title) == ["Transfer"])
-        #expect(sut.quickActions.map(\.label) == ["Send"])
+        #expect(sut.summaries.map(\.title) == [Strings.FinancialSummary.transferSent])
         #expect(sut.errorMessage == nil)
     }
 
@@ -46,11 +43,7 @@ struct HomeCardViewModelTests {
         let dashboard = HomeCardDashboard(
             cards: CardsMock.creditCardMocks,
             cardDetails: [.fixture],
-            summaries: [.fixture],
-            quickActions: [
-                .init(id: CardOptions.sendId, label: "Send", icon: "paperplane"),
-                .init(id: CardOptions.requestId, label: "Request", icon: "arrow.down")
-            ]
+            summaries: [.fixture]
         )
         let sut = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(dashboard)))
 
@@ -59,7 +52,7 @@ struct HomeCardViewModelTests {
         #expect(sut.cardId(at: -1) == CardsMock.creditCardMocks[0].id)
         #expect(sut.cardId(at: 99) == CardsMock.creditCardMocks[2].id)
         #expect(sut.cardDetails(at: 0)?.cardId == CardMockIDs.standard)
-        #expect(sut.summaries(at: 0).map(\.title) == ["Transfer"])
+        #expect(sut.summaries(at: 0).map(\.title) == [Strings.FinancialSummary.transferSent])
         #expect(sut.quickActions(at: 0).map(\.id) == [
             CardOptions.sendId,
             CardOptions.requestId,
@@ -85,8 +78,7 @@ struct HomeCardViewModelTests {
         let populatedSUT = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(.init(
             cards: CardsMock.creditCardMocks,
             cardDetails: [],
-            summaries: [],
-            quickActions: [customAction]
+            summaries: []
         ))))
         let emptySUT = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(.empty)))
 
@@ -102,8 +94,7 @@ struct HomeCardViewModelTests {
         let dashboard = HomeCardDashboard(
             cards: CardsMock.creditCardMocks,
             cardDetails: [.fixture],
-            summaries: [.fixture],
-            quickActions: []
+            summaries: [.fixture]
         )
         let service = HomeCardServiceSpy(result: .success(dashboard))
         let sut = HomeCardViewModel(service: service)
@@ -131,7 +122,7 @@ struct HomeCardViewModelTests {
     func load_setsErrorAndRecoversOnRetry() async {
         let service = HomeCardServiceSpy(results: [
             .failure(URLError(.timedOut)),
-            .success(.init(cards: CardsMock.creditCardMocks, cardDetails: [], summaries: [], quickActions: []))
+            .success(.init(cards: CardsMock.creditCardMocks, cardDetails: [], summaries: []))
         ])
         let sut = HomeCardViewModel(service: service)
 
@@ -148,7 +139,7 @@ struct HomeCardViewModelTests {
 }
 
 private extension HomeCardDashboard {
-    static let empty = HomeCardDashboard(cards: [], cardDetails: [], summaries: [], quickActions: [])
+    static let empty = HomeCardDashboard(cards: [], cardDetails: [], summaries: [])
 }
 
 private extension CardDetailsModel {
@@ -157,19 +148,21 @@ private extension CardDetailsModel {
         availableLimit: 750,
         totalLimit: 1_000,
         currentInvoice: 250,
-        invoiceStatus: "Open",
+        invoiceStatus: .open,
         dueDate: Date(),
         isBlocked: false
     )
 }
 
-private extension FinancialSummaryModel {
-    static let fixture = FinancialSummaryModel(
+private extension CardActivityModel {
+    static let fixture = CardActivityModel(
+        id: UUID(),
+        cardId: CardMockIDs.standard,
         image: "sophie",
-        title: "Transfer",
-        description: "Sent",
-        value: "-$ 10.00",
-        tag: .transfer,
+        type: .transfer,
+        counterparty: "Sophie Keller",
+        amount: -10,
+        currencyCode: "USD",
         date: Date()
     )
 }

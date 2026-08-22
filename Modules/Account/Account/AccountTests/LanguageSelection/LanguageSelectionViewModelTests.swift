@@ -6,26 +6,29 @@ import Testing
 @Suite("LanguageSelectionViewModel")
 struct LanguageSelectionViewModelTests {
     @Test
-    func selectPersistsLanguageAndPresentsRestartNotice() {
+    func selectPersistsAndAppliesLanguage() async {
         let manager = LanguageManagerSpy(currentLanguage: .system)
-        let sut = LanguageSelectionViewModel(languageManager: manager)
+        let sut = LanguageSelectionViewModel(
+            languageManager: manager,
+            applyDelayNanoseconds: 0
+        )
 
-        sut.select(.portugueseBrazil)
+        await sut.select(.portugueseBrazil)
 
         #expect(sut.selectedLanguage == .portugueseBrazil)
         #expect(manager.selectedLanguages == [.portugueseBrazil])
-        #expect(sut.isRestartNoticePresented)
+        #expect(!sut.isApplyingLanguage)
     }
 
     @Test
-    func selectingCurrentLanguageDoesNothing() {
+    func selectingCurrentLanguageDoesNothing() async {
         let manager = LanguageManagerSpy(currentLanguage: .english)
         let sut = LanguageSelectionViewModel(languageManager: manager)
 
-        sut.select(.english)
+        await sut.select(.english)
 
         #expect(manager.selectedLanguages.isEmpty)
-        #expect(!sut.isRestartNoticePresented)
+        #expect(!sut.isApplyingLanguage)
     }
 }
 

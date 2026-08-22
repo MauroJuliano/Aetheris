@@ -18,7 +18,6 @@ struct HomeAppViewModelTests {
         #expect(sut.errorMessage == nil)
         #expect(sut.cards.isEmpty)
         #expect(sut.recentRecipients.isEmpty)
-        #expect(sut.quickActions.isEmpty)
         #expect(sut.spendingThisMonth == nil)
         #expect(sut.unreadCount == 0)
         #expect(!sut.hasUnreadNotifications)
@@ -36,7 +35,7 @@ struct HomeAppViewModelTests {
     }
 
     @Test
-    func quickActionItems_usesMockFallbackBeforeLoading() {
+    func quickActionItems_areDefinedLocallyBeforeLoading() {
         let sut = makeSUT(result: .success(.mock))
 
         #expect(sut.quickActionItems.count == 3)
@@ -63,7 +62,6 @@ struct HomeAppViewModelTests {
         #expect(sut.isBalanceVisible)
         #expect(sut.cards.count == 3)
         #expect(sut.recentRecipients.count == 6)
-        #expect(sut.quickActions.count == 4)
         #expect(sut.spendingThisMonth?.categories.count == 4)
         #expect(sut.unreadCount == 3)
         #expect(sut.hasUnreadNotifications)
@@ -260,12 +258,9 @@ struct HomeAppViewModelTests {
             balance: .init(currency: currency, amount: amount, masked: masked),
             cards: cards,
             recentRecipients: recipients,
-            quickActions: [],
             spendingThisMonth: .init(
-                title: Strings.SpendingChart.title,
                 total: 0,
                 changePercent: 0,
-                comparisonLabel: Strings.SpendingChart.comparison,
                 categories: [],
                 series: []
             ),

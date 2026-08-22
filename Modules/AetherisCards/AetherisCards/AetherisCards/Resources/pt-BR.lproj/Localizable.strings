@@ -15,9 +15,12 @@
 "Notifications.sectionLastMonth" = "Último mês";
 "Notifications.sectionOthers" = "Outras";
 "Mock.bankTransfer" = "Transferência bancária";
+"Mock.concertTicket" = "Ingresso do show";
+"Mock.dinnerWithSophie" = "Jantar com Sophie Keller";
 "Mock.transaction" = "Transação";
 "Mock.unknownMerchant" = "Estabelecimento desconhecido";
 "Mock.paymentReceived" = "Pagamento recebido";
+"Mock.thanksForCollaboration" = "Obrigado pela colaboração";
 "Mock.physicalCard" = "Cartão físico";
 "Mock.refund" = "Reembolso";
 "Mock.originalPurchaseRefunded" = "Compra original reembolsada";
@@ -37,9 +40,11 @@
 "Mock.august2026" = "Agosto de 2026";
 "Mock.entertainment" = "Entretenimento";
 "FinancialSummary.transferSent" = "Transferência enviada";
+"FinancialSummary.transferSentTo" = "Dinheiro transferido com sucesso para %@";
 "FinancialSummary.transferSentDescription" = "Dinheiro transferido com sucesso para Sophie Keller";
 "FinancialSummary.transferSentAmeliaDescription" = "Dinheiro transferido com sucesso para Amelia Thompson";
 "FinancialSummary.paymentReceived" = "Pagamento recebido";
+"FinancialSummary.paymentReceivedFrom" = "Dinheiro recebido de %@";
 "FinancialSummary.paymentReceivedDescription" = "Dinheiro recebido de Amelia Thompson";
 "FinancialSummary.netflix" = "Netflix";
 "FinancialSummary.appleBill" = "Apple.Com/Bill";
