@@ -22,6 +22,7 @@ struct EmailView: View {
             RegisterView(
                 title: viewModel.title,
                 subTitle: viewModel.subTitle,
+                screenAccessibilityIdentifier: "registration.step.email",
                 textFieldValue: Binding(
                     get: { viewModel.email },
                     set: { viewModel.updateEmail($0) }

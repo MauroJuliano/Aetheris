@@ -39,8 +39,8 @@ struct IdentityValidationView: View {
                     }
                 }
             )
-            .accessibilityIdentifier("identity.validation.errorSheet")
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("identity.validation.screen")
     }
 

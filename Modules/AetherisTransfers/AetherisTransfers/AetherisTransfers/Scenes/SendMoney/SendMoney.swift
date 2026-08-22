@@ -45,6 +45,7 @@ struct SendMoney: View {
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
         .task { await loadSession() }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("transfer.amountScreen")
     }
 

@@ -99,6 +99,7 @@ public struct FeedbackView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .appScreenBackground()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("error.screen")
     }
 
