@@ -18,6 +18,7 @@ struct UserNameView: View {
         ZStack {
             RegisterView(title: viewModel.title,
                              subTitle: viewModel.subTitle,
+                             screenAccessibilityIdentifier: "registration.step.fullName",
                              textFieldValue: Binding(
                                 get: { viewModel.userName },
                                 set: { viewModel.updateUserName($0) }

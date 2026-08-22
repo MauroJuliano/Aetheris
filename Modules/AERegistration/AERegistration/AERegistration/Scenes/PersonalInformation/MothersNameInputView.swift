@@ -19,6 +19,7 @@ struct MothersNameInputView: View {
         ZStack {
             RegisterView(title: viewModel.title,
                              subTitle: viewModel.subTitle,
+                             screenAccessibilityIdentifier: "registration.step.motherName",
                              textFieldValue: Binding(
                                 get: { viewModel.mothersName },
                                 set: { viewModel.updateMothersName($0) }

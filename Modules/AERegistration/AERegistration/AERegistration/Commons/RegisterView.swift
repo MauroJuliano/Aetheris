@@ -4,6 +4,7 @@ import SwiftUI
 struct RegisterView: View {
     let title: String
     let subTitle: String
+    var screenAccessibilityIdentifier: String = "registration.step"
     @State private var isTextFieldFocused = false
     @Binding var textFieldValue: String
     @State private var isSecureTextVisible = false
@@ -65,6 +66,7 @@ struct RegisterView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, AppSpacing.formTop)
             .padding(.horizontal, AppSpacing.formHorizontal)
+            .accessibilityIdentifier(screenAccessibilityIdentifier)
         }
     }
 

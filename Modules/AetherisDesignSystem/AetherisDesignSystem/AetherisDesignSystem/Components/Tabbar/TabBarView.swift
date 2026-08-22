@@ -37,6 +37,7 @@ public struct TabBarView: View {
                 .padding(.horizontal, AppTabBarMetrics.horizontalPadding)
                 .padding(.bottom, AppTabBarMetrics.bottomPadding)
             }
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("tab.bar")
     }
 

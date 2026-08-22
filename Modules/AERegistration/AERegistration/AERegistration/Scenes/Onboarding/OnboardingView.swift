@@ -25,6 +25,8 @@ struct OnboardingView: View {
             }
         }
         .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("registration.onboardingScreen")
     }
 }
 
@@ -64,6 +66,7 @@ private extension OnboardingView {
 
             GlowButton(title: Strings.Onboarding.stepThreeButton,
                        action: onFinish)
+            .accessibilityIdentifier("registration.onboardingFinish")
             .padding(.bottom, 60)
         }
         .padding(.horizontal, AppSpacing.large)
