@@ -201,6 +201,8 @@ internal enum Strings {
     internal static var welcomePrefix: String { Strings.tr("Localizable", "HomeApp.welcomePrefix", fallback: "Welcome, ") }
   }
   internal enum RequestMoney {
+    /// Enter an amount
+    internal static var amountPlaceholder: String { Strings.tr("Localizable", "RequestMoney.amountPlaceholder", fallback: "Enter an amount") }
     /// How much do you want to request?
     internal static var amountTitle: String { Strings.tr("Localizable", "RequestMoney.amountTitle", fallback: "How much do you want to request?") }
     /// Contact or key

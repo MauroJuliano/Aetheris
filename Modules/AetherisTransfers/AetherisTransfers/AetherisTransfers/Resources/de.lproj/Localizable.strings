@@ -131,6 +131,7 @@
 "RequestMoney.selectBeneficiaryDescription" = "Wähle, wer diese Anfrage erhalten soll";
 "RequestMoney.recentContacts" = "Letzte Kontakte";
 "RequestMoney.amountTitle" = "Wie viel möchtest du anfordern?";
+"RequestMoney.amountPlaceholder" = "Betrag eingeben";
 "RequestMoney.shareAmountTitle" = "Wie viel möchtest du berechnen?";
 "RequestMoney.edit" = "Bearbeiten";
 "RequestMoney.reasonTitle" = "Grund (optional)";

@@ -146,7 +146,12 @@ struct RequestMoneyFormCard: View {
                 .foregroundStyle(Color.textSecondaryColor)
 
             HStack(alignment: .center) {
-                TextField("$0.00", text: $amountText)
+                TextField(
+                    "",
+                    text: $amountText,
+                    prompt: Text(Strings.RequestMoney.amountPlaceholder)
+                        .foregroundStyle(Color.textTertiary)
+                )
                     .font(.system(size: 38, weight: .semibold))
                     .foregroundStyle(Color.textPrimary)
                     .keyboardType(.numberPad)

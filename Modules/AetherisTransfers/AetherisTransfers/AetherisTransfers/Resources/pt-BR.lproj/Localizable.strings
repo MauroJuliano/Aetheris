@@ -117,6 +117,7 @@
 "RequestMoney.shareAmountTitle" = "Quanto você deseja cobrar?";
 "RequestMoney.reasonTitle" = "Motivo (opcional)";
 "RequestMoney.amountTitle" = "Quanto você deseja solicitar?";
+"RequestMoney.amountPlaceholder" = "Digite um valor";
 "RequestMoney.edit" = "Editar";
 "RequestMoney.recipientTitle" = "De quem você deseja solicitar?";
 "RequestMoney.shareMode" = "Compartilhar solicitação";
