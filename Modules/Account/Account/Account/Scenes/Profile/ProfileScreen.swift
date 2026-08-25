@@ -75,7 +75,6 @@ struct ProfileScreen: View {
                     }
                     .padding(.bottom, AppSpacing.bottomBarClearance)
             }
-            .safeAreaPadding(.top, AppSpacing.formTop)
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .appScreenBackground()
             .navigationDestination(for: ProfileRoute.self) { route in
