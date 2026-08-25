@@ -51,6 +51,39 @@ struct TransactionDetailsServiceTests {
     }
 
     @Test
+    func fetchTransactionDetails_mapsEveryCardVariantInsteadOfUsingFallback() async throws {
+        let sut = TransactionDetailsService(coreService: CoreServiceTestDouble())
+
+        let infinitePayment = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.infinitePayment
+        )
+        let goldTransfer = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.goldTransfer
+        )
+        let goldSubscription = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.goldSubscription
+        )
+        let blackApple = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.blackAppleSubscription
+        )
+        let blackIfood = try await sut.fetchTransactionDetails(
+            transactionId: TransactionMockIDs.blackIfoodPurchase
+        )
+
+        #expect(infinitePayment.kind == .incomingPayment)
+        #expect(infinitePayment.amount == 125)
+        #expect(infinitePayment.title == "Amelia Thompson")
+        #expect(goldTransfer.kind == .outgoingTransfer)
+        #expect(goldTransfer.amount == 480)
+        #expect(goldSubscription.kind == .subscription)
+        #expect(goldSubscription.amount == 20)
+        #expect(blackApple.kind == .subscription)
+        #expect(blackApple.amount == 9)
+        #expect(blackIfood.kind == .purchase)
+        #expect(blackIfood.amount == 30)
+    }
+
+    @Test
     func fetchTransactionDetails_preservesBeneficiaryPaymentMessage() async throws {
         let sut = TransactionDetailsService(coreService: CoreServiceTestDouble())
 
