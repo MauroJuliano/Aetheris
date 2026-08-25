@@ -83,7 +83,6 @@ struct CardHome: View {
                 }
             }
         }
-        .safeAreaPadding(.top, AppSpacing.formTop)
         .appScreenBackground()
         .task {
             await viewModel.loadIfNeeded()
