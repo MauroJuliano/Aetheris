@@ -172,6 +172,15 @@ Open `Aetheris.xcodeproj`, select an iPhone simulator, and run with `⌘ + R`.
 
 No backend or API configuration is required.
 
+### Test Accounts
+
+Use either account to explore the authenticated experience:
+
+| User | Email | Password |
+| --- | --- | --- |
+| Blake Lehmann | `blake.lehmann@aetheris.app` | `4321` |
+| Admin | `admin@aetheris.app` | `4321` |
+
 ---
 
 ## Disclaimer
