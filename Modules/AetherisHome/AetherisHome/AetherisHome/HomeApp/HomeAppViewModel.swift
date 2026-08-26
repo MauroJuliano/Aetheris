@@ -87,14 +87,14 @@ final class HomeAppViewModel: ObservableObject {
 
         return SpendingAnalyticsCardModel(
             title: Strings.SpendingChart.title,
-            totalTitle: Self.currencyText(spending.total),
+            totalTitle: currencyText(spending.total),
             changeTitle: Self.changeText(spending.changePercent),
             comparisonTitle: Strings.SpendingChart.comparison,
             categories: spending.categories.map {
                 AnalyticsCategorySummaryItemModel(
                     id: $0.id,
                     title: Self.categoryTitle(for: $0.id),
-                    amount: Self.amountText($0.amount),
+                    amount: amountText($0.amount),
                     percentage: Self.percentageText(amount: $0.amount, total: spending.total),
                     icon: Self.categoryIcon(for: $0.id),
                     iconColor: Self.categoryColor(for: $0.id)
@@ -173,10 +173,10 @@ final class HomeAppViewModel: ObservableObject {
         return "\(currencySymbol) \(formattedAmount)"
     }
 
-    private static func currencyText(_ amount: Double) -> String {
+    private func currencyText(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+        formatter.locale = locale
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
 
@@ -223,10 +223,10 @@ final class HomeAppViewModel: ObservableObject {
         return "\(Int((amount / total * 100).rounded()))%"
     }
 
-    private static func amountText(_ amount: Double) -> String {
+    private func amountText(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.locale = Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+        formatter.locale = locale
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
 
