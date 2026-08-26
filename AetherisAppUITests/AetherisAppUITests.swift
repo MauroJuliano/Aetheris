@@ -16,8 +16,8 @@ final class AetherisAppUITests: XCTestCase {
     func testAuthentication_validCredentialsOpenHome() {
         launch()
         XCTAssertTrue(element("login.screen").waitForExistence(timeout: 3))
-        enterText("melissa@aetheris.app", in: app.textFields["login.email"])
-        enterText("1234", in: app.secureTextFields["login.password"])
+        enterText("blake.lehmann@aetheris.com", in: app.textFields["login.email"])
+        enterText("4321", in: app.secureTextFields["login.password"])
         element("login.submit").tap()
 
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))

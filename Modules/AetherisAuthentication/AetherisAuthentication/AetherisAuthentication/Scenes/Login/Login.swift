@@ -17,6 +17,7 @@ struct Login: View {
     @FocusState private var focusedField: Field?
 
     private let validCredentials: [(email: String, password: String)] = [
+        ("blake.lehmann@aetheris.com", "4321"),
         ("melissa@aetheris.app", "1234"),
         ("admin@aetheris.app", "4321")
     ]
