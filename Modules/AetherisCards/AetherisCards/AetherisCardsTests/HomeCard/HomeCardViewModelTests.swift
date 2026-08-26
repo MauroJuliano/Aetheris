@@ -73,6 +73,29 @@ struct HomeCardViewModelTests {
     }
 
     @Test
+    func summaries_returnsMostRecentTransactionsFirst() async {
+        let older = CardActivityModel.fixture(
+            id: TransactionMockIDs.ameliaTransfer,
+            cardId: CardMockIDs.infinite,
+            date: Date(timeIntervalSince1970: 100)
+        )
+        let newer = CardActivityModel.fixture(
+            id: TransactionMockIDs.infinitePayment,
+            cardId: CardMockIDs.infinite,
+            date: Date(timeIntervalSince1970: 200)
+        )
+        let sut = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(.init(
+            cards: CardsMock.creditCardMocks,
+            cardDetails: [],
+            summaries: [older, newer]
+        ))))
+
+        await sut.load()
+
+        #expect(sut.summaries(at: 2).map(\.id) == [newer.id, older.id])
+    }
+
+    @Test
     func quickActionDestination_returnsCustomAction_andRequiresACard() async {
         let customAction = CardOptions(id: "custom", label: "Custom", icon: "sparkles")
         let populatedSUT = HomeCardViewModel(service: HomeCardServiceSpy(result: .success(.init(
@@ -165,6 +188,19 @@ private extension CardActivityModel {
         currencyCode: "USD",
         date: Date()
     )
+
+    static func fixture(id: UUID, cardId: UUID, date: Date) -> CardActivityModel {
+        CardActivityModel(
+            id: id,
+            cardId: cardId,
+            image: "Amelia",
+            type: .transfer,
+            counterparty: "Amelia Thompson",
+            amount: -70,
+            currencyCode: "USD",
+            date: date
+        )
+    }
 }
 
 private final class HomeCardServiceSpy: HomeCardServicing {

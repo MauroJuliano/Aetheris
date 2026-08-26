@@ -81,6 +81,10 @@ struct MainTabContainer: View {
                 content: cardsFactory.makeNavigationHost(
                     content: cardsFactory.makeEmbedded(
                         path: $cardsNavigationPath,
+                        selectedCardRequestId: tabBarRoutingStore.pendingCardsSelectedCardId,
+                        onSelectedCardRequestApplied: {
+                            tabBarRoutingStore.clearPendingCardsSelection()
+                        },
                         onFinished: resetCardsNavigation,
                         onSendMoneyTap: { cardsNavigationPath.append(MainTabRoute.sendMoney) },
                         onRequestMoneyTap: { cardsNavigationPath.append(MainTabRoute.requestMoney) }

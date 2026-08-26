@@ -28,6 +28,8 @@ public final class CardsFactory: CardsFactoryInterface {
     @MainActor
     public func makeEmbedded(
         path: Binding<NavigationPath>,
+        selectedCardRequestId: UUID?,
+        onSelectedCardRequestApplied: @escaping () -> Void,
         onFinished: @escaping () -> Void,
         onSendMoneyTap: @escaping () -> Void,
         onRequestMoneyTap: @escaping () -> Void
@@ -35,6 +37,8 @@ public final class CardsFactory: CardsFactoryInterface {
         Self.makeEmbedded(
             coreService: coreService,
             path: path,
+            selectedCardRequestId: selectedCardRequestId,
+            onSelectedCardRequestApplied: onSelectedCardRequestApplied,
             onFinished: onFinished,
             onSendMoneyTap: onSendMoneyTap,
             onRequestMoneyTap: onRequestMoneyTap
@@ -56,6 +60,8 @@ public final class CardsFactory: CardsFactoryInterface {
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
         initialSelectedCardId: UUID? = nil,
+        selectedCardRequestId: UUID? = nil,
+        onSelectedCardRequestApplied: @escaping () -> Void = {},
         onFinished: @escaping () -> Void,
         onSendMoneyTap: @escaping () -> Void = {},
         onRequestMoneyTap: @escaping () -> Void = {}
@@ -63,6 +69,8 @@ public final class CardsFactory: CardsFactoryInterface {
         AnyView(HomeCardFactory.make(
             coreService: coreService,
             initialSelectedCardId: initialSelectedCardId,
+            selectedCardRequestId: selectedCardRequestId,
+            onSelectedCardRequestApplied: onSelectedCardRequestApplied,
             onBackAction: onFinished,
             onTransactionHistoryTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))

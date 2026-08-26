@@ -89,13 +89,18 @@ struct RegisterView: View {
         }
     }
 
+    @ViewBuilder
     private var inputSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-            fieldError
-            inputField
+        if isLoading {
+            SkeletonBlock(height: 52, radius: AppRadius.large)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, AppSpacing.formHorizontal)
+        } else {
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                fieldError
+                inputField
+            }
         }
-        .redacted(reason: isLoading ? .placeholder : [])
-        .allowsHitTesting(!isLoading)
     }
 
     @ViewBuilder

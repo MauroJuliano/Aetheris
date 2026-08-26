@@ -66,7 +66,8 @@ final class HomeCardViewModel: ObservableObject {
     func summaries(at index: Int) -> [FinancialSummaryModel] {
         guard let cardId = cardId(at: index) else { return summaries }
         let matchingSummaries = summaries.filter { $0.cardId == cardId }
-        return matchingSummaries.isEmpty ? summaries : matchingSummaries
+        return (matchingSummaries.isEmpty ? summaries : matchingSummaries)
+            .sorted { $0.date > $1.date }
     }
 
     func quickActions(at index: Int) -> [CardOptions] {

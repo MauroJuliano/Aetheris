@@ -131,6 +131,8 @@ struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
 
     func makeEmbedded(
         path: Binding<NavigationPath>,
+        selectedCardRequestId: UUID?,
+        onSelectedCardRequestApplied: @escaping () -> Void,
         onFinished: @escaping () -> Void,
         onSendMoneyTap: @escaping () -> Void,
         onRequestMoneyTap: @escaping () -> Void

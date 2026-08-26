@@ -17,7 +17,7 @@ enum TransactionDetailsMockStore {
                 recipientName: "Sophie Keller",
                 note: note
             )
-        case TransactionMockIDs.ameliaPayment:
+        case TransactionMockIDs.ameliaPayment, TransactionMockIDs.infinitePayment:
             return incomingPayment(id: transactionId, note: note)
         case TransactionMockIDs.beneficiaryPayment:
             return beneficiaryPayment(id: transactionId, note: note)
@@ -41,13 +41,33 @@ enum TransactionDetailsMockStore {
                 recipientName: "Sophie Keller",
                 note: note ?? Strings.Mock.concertTicket
             )
-        case TransactionMockIDs.netflixSubscription:
+        case TransactionMockIDs.netflixSubscription, TransactionMockIDs.goldSubscription:
             return netflixSubscription(id: transactionId, note: note)
-        case TransactionMockIDs.appleSubscription:
+        case TransactionMockIDs.appleSubscription, TransactionMockIDs.blackAppleSubscription:
             return appleSubscription(id: transactionId, note: note)
-        case TransactionMockIDs.ifoodPurchase:
+        case TransactionMockIDs.ifoodPurchase, TransactionMockIDs.blackIfoodPurchase:
             return purchase(id: transactionId, note: note)
         case TransactionMockIDs.ameliaTransfer:
+            return transfer(
+                id: transactionId,
+                title: "Amelia Thompson",
+                subtitle: Strings.Mock.bankTransfer,
+                amount: 70,
+                imageName: "Amelia",
+                recipientName: "Amelia Thompson",
+                note: note
+            )
+        case TransactionMockIDs.goldTransfer:
+            return transfer(
+                id: transactionId,
+                title: "Sophie Keller",
+                subtitle: Strings.Mock.bankTransfer,
+                amount: 480,
+                imageName: "sophie",
+                recipientName: "Sophie Keller",
+                note: note
+            )
+        case TransactionMockIDs.infiniteTransfer:
             return transfer(
                 id: transactionId,
                 title: "Amelia Thompson",

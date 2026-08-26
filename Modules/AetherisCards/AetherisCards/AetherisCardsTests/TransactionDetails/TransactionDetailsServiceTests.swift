@@ -84,6 +84,28 @@ struct TransactionDetailsServiceTests {
     }
 
     @Test
+    func fetchTransactionDetails_mapsEveryCardActivityAlias() async throws {
+        let sut = TransactionDetailsService(coreService: CoreServiceTestDouble())
+
+        let infinitePayment = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.infinitePayment)
+        let infiniteTransfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.infiniteTransfer)
+        let goldTransfer = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.goldTransfer)
+        let goldSubscription = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.goldSubscription)
+        let blackApple = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.blackAppleSubscription)
+        let blackIfood = try await sut.fetchTransactionDetails(transactionId: TransactionMockIDs.blackIfoodPurchase)
+
+        #expect(infinitePayment.kind == .incomingPayment)
+        #expect(infinitePayment.amount == 125)
+        #expect(infiniteTransfer.kind == .outgoingTransfer)
+        #expect(infiniteTransfer.amount == 70)
+        #expect(goldTransfer.kind == .outgoingTransfer)
+        #expect(goldTransfer.amount == 480)
+        #expect(goldSubscription.kind == .subscription)
+        #expect(blackApple.kind == .subscription)
+        #expect(blackIfood.kind == .purchase)
+    }
+
+    @Test
     func fetchTransactionDetails_usesNeutralFallback_forUnknownIdentifiers() async throws {
         let coreService = CoreServiceTestDouble()
         let sut = TransactionDetailsService(coreService: coreService)
