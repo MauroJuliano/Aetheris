@@ -12,9 +12,11 @@ Aetheris is available in English, Brazilian Portuguese, and German, with real-ti
 
 ## App Walkthrough
 
-The complete experience—including authentication, registration, transfers, cards, beneficiaries, and account settings—will be available as a single video walkthrough.
+Watch the complete Aetheris experience, including authentication, registration, transfers, cards, beneficiaries, notifications, profile, and account settings.
 
-**YOUTUBE VIDEO PLACEHOLDER**
+[![Watch the complete Aetheris app experience on YouTube](Docs/Assets/Aetheris-Experience.png)](https://youtu.be/F6gMTg2vyxk)
+
+**[Watch on YouTube →](https://youtu.be/F6gMTg2vyxk)**
 
 ---
 
