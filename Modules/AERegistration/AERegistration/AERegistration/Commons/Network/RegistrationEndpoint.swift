@@ -56,6 +56,7 @@ struct RegistrationProfileRequest: Codable, Equatable {
     let sin: String
     let mothersName: String
     let userName: String
+    let email: String
     let birthdate: String
 }
 

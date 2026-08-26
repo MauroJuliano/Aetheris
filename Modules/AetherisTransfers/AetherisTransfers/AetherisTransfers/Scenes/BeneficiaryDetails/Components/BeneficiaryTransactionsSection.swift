@@ -119,6 +119,12 @@ struct BeneficiaryTransactionsSection: View {
     }
 }
 
+extension BeneficiaryTransactionsSection {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { BeneficiaryTransactionsSectionSkeleton() } else { self }
+    }
+}
+
 private struct BeneficiaryTransactionRow: View {
     let transaction: BeneficiaryTransactionModel
     let action: () -> Void
@@ -139,9 +145,11 @@ private struct BeneficiaryTransactionRow: View {
                         Text(description)
                             .font(AppTypography.cellCaption)
                             .foregroundStyle(Color.textSecondaryColor)
-                            .lineLimit(1)
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 Spacer(minLength: AppSpacing.small)
 

@@ -19,6 +19,7 @@ final class ResumeViewModel: ObservableObject {
             .init(image: "lock.fill", description: Strings.Sin.title, value: draft.sin, kind: .sin),
             .init(image: "heart.fill", description: Strings.MothersName.title, value: draft.mothersName, kind: .mothersName),
             .init(image: "person.fill", description: Strings.UserName.title, value: draft.userName, kind: .userName),
+            .init(image: "envelope.fill", description: Strings.Email.title, value: draft.email, kind: .email),
             .init(image: "calendar", description: Strings.Birthdate.title, value: draft.birthdate, kind: .birthdate)
         ]
     }
@@ -36,6 +37,7 @@ final class ResumeViewModel: ObservableObject {
                 sin: draft.sin.filter(\.isNumber),
                 mothersName: draft.mothersName,
                 userName: draft.userName,
+                email: draft.email,
                 birthdate: draft.birthdate
             )
             let succeeded = try await service.submitProfile(request)
@@ -51,5 +53,9 @@ final class ResumeViewModel: ObservableObject {
 
     var submissionErrorDescription: String {
         submissionError?.serverMessage ?? Strings.SubmissionError.description
+    }
+
+    func dismissSubmissionError() {
+        submissionError = nil
     }
 }

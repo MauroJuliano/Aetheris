@@ -3,30 +3,41 @@ import SwiftUI
 
 struct TransactionDetailsHeader: View {
     let transaction: TransactionDetailsModel
+    let isLoading: Bool
 
     var body: some View {
         VStack(spacing: AppSpacing.small) {
-            avatar
+            if isLoading {
+                SkeletonView(.circle)
+                    .frame(width: 92, height: 92)
 
-            Text(transaction.title)
-                .font(AppTypography.sectionTitle)
-                .bold()
-                .foregroundStyle(Color.textPrimary)
-                .multilineTextAlignment(.center)
+                SkeletonBlock(width: 160, height: 24, radius: 10)
+                SkeletonBlock(width: 130, height: 42, radius: 14)
+                SkeletonBlock(width: 104, height: 28, radius: 14)
+                SkeletonBlock(width: 180, height: 16, radius: 8)
+            } else {
+                avatar
 
-            Text(transaction.formattedAmount)
-                .font(.system(size: 40, weight: .semibold))
-                .foregroundStyle(transaction.accentColor)
-                .minimumScaleFactor(0.75)
-                .lineLimit(1)
-
-            categoryBadge
-
-            if let subtitle = transaction.subtitle {
-                Text(subtitle)
-                    .font(AppTypography.body)
-                    .foregroundStyle(Color.textSecondaryColor)
+                Text(transaction.title)
+                    .font(AppTypography.sectionTitle)
+                    .bold()
+                    .foregroundStyle(Color.textPrimary)
                     .multilineTextAlignment(.center)
+
+                Text(transaction.formattedAmount)
+                    .font(.system(size: 40, weight: .semibold))
+                    .foregroundStyle(transaction.accentColor)
+                    .minimumScaleFactor(0.75)
+                    .lineLimit(1)
+
+                categoryBadge
+
+                if let subtitle = transaction.subtitle {
+                    Text(subtitle)
+                        .font(AppTypography.body)
+                        .foregroundStyle(Color.textSecondaryColor)
+                        .multilineTextAlignment(.center)
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -80,7 +91,8 @@ struct TransactionDetailsHeader: View {
 
 #Preview {
     TransactionDetailsHeader(
-        transaction: CardsPreviewData.transaction
+        transaction: CardsPreviewData.transaction,
+        isLoading: false
     )
     .padding()
     .appScreenBackground()

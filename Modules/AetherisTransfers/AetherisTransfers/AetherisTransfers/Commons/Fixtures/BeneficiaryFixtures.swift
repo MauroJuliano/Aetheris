@@ -34,18 +34,18 @@ public enum BeneficiaryFixtures {
             hasDivider: true
         ),
         .init(
-            name: "Carlos Barbosa",
-            pixKey: "carlos.barbosa@aetheris.app",
-            image: "aria",
+            name: "Armin Barbosa",
+            pixKey: "armin.barbosa@aetheris.app",
+            image: "armin",
             hasDivider: false
         )
     ]
 
     public static var defaultSelection: Beneficiary {
         defaults.last ?? .init(
-            name: "Carlos Barbosa",
-            pixKey: "carlos.barbosa@aetheris.app",
-            image: "aria",
+            name: "armin Barbosa",
+            pixKey: "armin.barbosa@aetheris.app",
+            image: "armin",
             hasDivider: true
         )
     }

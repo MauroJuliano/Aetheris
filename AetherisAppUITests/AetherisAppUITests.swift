@@ -15,12 +15,10 @@ final class AetherisAppUITests: XCTestCase {
     @MainActor
     func testAuthentication_validCredentialsOpenHome() {
         launch()
-        XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 3))
-        app.textFields["login.email"].tap()
-        app.textFields["login.email"].typeText("melissa@aetheris.app")
-        app.secureTextFields["login.password"].tap()
-        app.secureTextFields["login.password"].typeText("1234")
-        app.buttons["Login"].tap()
+        XCTAssertTrue(element("login.screen").waitForExistence(timeout: 3))
+        enterText("blake.lehmann@aetheris.app", in: app.textFields["login.email"])
+        enterText("4321", in: app.secureTextFields["login.password"])
+        element("login.submit").tap()
 
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
         XCTAssertTrue(element("tab.bar").exists)
@@ -29,32 +27,37 @@ final class AetherisAppUITests: XCTestCase {
     @MainActor
     func testAuthentication_invalidCredentialsShowErrorAndAllowRetry() {
         launch()
-        XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 3))
-        app.textFields["login.email"].tap()
-        app.textFields["login.email"].typeText("wrong@aetheris.app")
-        app.secureTextFields["login.password"].tap()
-        app.secureTextFields["login.password"].typeText("9999")
-        app.buttons["Login"].tap()
+        XCTAssertTrue(element("login.screen").waitForExistence(timeout: 3))
+        enterText("wrong@aetheris.app", in: app.textFields["login.email"])
+        enterText("9999", in: app.secureTextFields["login.password"])
+        element("login.submit").tap()
 
-        XCTAssertTrue(app.staticTexts["Unable to sign in"].waitForExistence(timeout: 3))
-        app.buttons["Try again"].tap()
-        XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 2))
+        XCTAssertTrue(element("actionError.title").waitForExistence(timeout: 3))
+        element("actionError.primary").tap()
+        XCTAssertTrue(element("login.screen").waitForExistence(timeout: 2))
     }
 
     @MainActor
     func testRegistration_completeFlowOpensHome() {
         launch()
-        XCTAssertTrue(app.staticTexts["Welcome back!"].waitForExistence(timeout: 3))
-        app.buttons["Sign up here"].tap()
-        completeRegistrationStep(title: "Social Insurance Number", placeholder: "000.000.000", value: "123456789")
-        completeRegistrationStep(title: "Mother's name", placeholder: "Jane doe", value: "Ana Maria")
-        completeRegistrationStep(title: "Full name", placeholder: "John doe", value: "Melissa Test")
-        completeRegistrationStep(title: "Date of birth", placeholder: "26/08/1970", value: "17081990")
+        XCTAssertTrue(element("login.screen").waitForExistence(timeout: 3))
+        element("login.register").tap()
+        if !element("registration.step.sin").waitForExistence(timeout: 3) {
+            element("login.register").tap()
+        }
+        completeRegistrationStep(identifier: "sin", value: "123456789")
+        completeRegistrationStep(identifier: "motherName", value: "Ana Maria")
+        completeRegistrationStep(identifier: "fullName", value: "Melissa Test")
+        completeRegistrationStep(identifier: "email", value: "melissa.test@example.com")
+        completeRegistrationStep(identifier: "birthdate", value: "17081990")
 
-        XCTAssertTrue(element("registration.resumeScreen").waitForExistence(timeout: 3))
-        app.buttons["Continue"].tap()
-        completeRegistrationStep(title: "Password", placeholder: "1234", value: "1234", secure: true)
-        completeRegistrationStep(title: "Confirm password", placeholder: "1234", value: "1234", secure: true)
+        XCTAssertTrue(element("registration.resumeContinue").waitForExistence(timeout: 8))
+        element("registration.resumeContinue").tap()
+        completeRegistrationStep(identifier: "password", value: "1234", secure: true)
+        completeRegistrationStep(identifier: "confirmPassword", value: "1234", secure: true)
+
+        XCTAssertTrue(element("registration.onboardingFinish").waitForExistence(timeout: 8))
+        element("registration.onboardingFinish").tap()
 
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
     }
@@ -62,8 +65,8 @@ final class AetherisAppUITests: XCTestCase {
     @MainActor
     func testHomeFailure_retryRecoversDashboard() {
         launch(authenticated: true, additionalArguments: ["-uiTestingHomeFailureOnce"])
-        XCTAssertTrue(app.staticTexts["Home unavailable"].waitForExistence(timeout: 3))
-        app.buttons["Try again"].tap()
+        XCTAssertTrue(element("error.retry").waitForExistence(timeout: 3))
+        element("error.retry").tap()
 
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
         XCTAssertFalse(element("error.screen").exists)
@@ -74,11 +77,11 @@ final class AetherisAppUITests: XCTestCase {
         launch(authenticated: true)
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
 
-        app.buttons["Cards"].tap()
+        element("tab.1").tap()
         XCTAssertTrue(element("cards.screen").waitForExistence(timeout: 5))
-        app.buttons["Profile"].tap()
+        element("tab.2").tap()
         XCTAssertTrue(element("profile.screen").waitForExistence(timeout: 5))
-        app.buttons["Home"].tap()
+        element("tab.0").tap()
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
     }
 
@@ -96,7 +99,7 @@ final class AetherisAppUITests: XCTestCase {
         enterValidTransfer()
 
         XCTAssertTrue(element("transfer.processingError").waitForExistence(timeout: 5))
-        app.buttons["Try again"].tap()
+        element("error.retry").tap()
 
         XCTAssertTrue(element("transfer.successScreen").waitForExistence(timeout: 5))
     }
@@ -105,29 +108,31 @@ final class AetherisAppUITests: XCTestCase {
     func testTransfer_invalidPinReturnsToSendMoney() {
         launch(authenticated: true)
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
-        app.buttons["Transfer"].tap()
+        element("tab.transfer").tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
-        app.buttons["1"].tap()
-        app.buttons["Continue"].tap()
+        element("amount.key.1").tap()
+        selectTransferBeneficiary()
+        element("transfer.continue").tap()
         XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
 
-        ["0", "0", "0", "0"].forEach { _ in app.buttons["0"].tap() }
+        (0..<4).forEach { _ in element("pin.key.0").tap() }
 
-        XCTAssertTrue(element("identity.validation.errorSheet").waitForExistence(timeout: 3))
-        app.buttons["Close"].tap()
+        XCTAssertTrue(element("actionError.title").waitForExistence(timeout: 3))
+        element("actionError.primary").tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
     }
 
     @MainActor
     private func enterValidTransfer() {
         XCTAssertTrue(element("home.screen").waitForExistence(timeout: 5))
-        app.buttons["Transfer"].tap()
+        element("tab.transfer").tap()
         XCTAssertTrue(element("transfer.amountScreen").waitForExistence(timeout: 3))
-        app.buttons["1"].tap()
-        app.buttons["Continue"].tap()
+        element("amount.key.1").tap()
+        selectTransferBeneficiary()
+        element("transfer.continue").tap()
 
         XCTAssertTrue(element("identity.validation.screen").waitForExistence(timeout: 3))
-        ["1", "2, ABC", "3, DEF", "4, GHI"].forEach { app.buttons[$0].tap() }
+        ["1", "2", "3", "4"].forEach { element("pin.key.\($0)").tap() }
     }
 
     private func launch(authenticated: Bool = false, additionalArguments: [String] = []) {
@@ -138,25 +143,52 @@ final class AetherisAppUITests: XCTestCase {
     }
 
     private func completeRegistrationStep(
-        title: String,
-        placeholder: String,
+        identifier: String,
         value: String,
         secure: Bool = false
     ) {
-        let titleElement = app.staticTexts[title]
-        if !titleElement.waitForExistence(timeout: 3) {
-            let continueButton = app.buttons["Continue"]
-            if continueButton.exists && continueButton.isHittable {
-                continueButton.tap()
-            }
-        }
-        XCTAssertTrue(titleElement.waitForExistence(timeout: 3))
+        XCTAssertTrue(element("registration.step.\(identifier)").waitForExistence(timeout: 8))
         let input = secure
             ? app.secureTextFields["registration.input"]
             : app.textFields["registration.input"]
-        input.tap()
-        input.typeText(value)
-        app.buttons["Continue"].tap()
+        enterText(value, in: input)
+        dismissKeyboard()
+        element("registration.continue").tap()
+    }
+
+    private func enterText(_ value: String, in field: XCUIElement) {
+        XCTAssertTrue(field.waitForExistence(timeout: 8))
+        field.tap()
+        if !app.keyboards.firstMatch.waitForExistence(timeout: 2) {
+            field.tap()
+        }
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 2))
+        field.typeText(value)
+    }
+
+    private func dismissKeyboard() {
+        guard app.keyboards.firstMatch.exists else { return }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.2)).tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForNonExistence(timeout: 2))
+    }
+
+    private func selectTransferBeneficiary() {
+        let selector = app.buttons["transfer.beneficiarySelector"]
+        XCTAssertTrue(selector.waitForExistence(timeout: 3))
+        selector.tap()
+
+        let beneficiary = app.buttons["contactCardRow.cell"].firstMatch
+        XCTAssertTrue(beneficiary.waitForExistence(timeout: 3))
+        beneficiary.tap()
+
+        let continueButton = element("transfer.continue")
+        XCTAssertTrue(continueButton.waitForExistence(timeout: 3))
+        let enabledPredicate = NSPredicate(format: "isEnabled == true")
+        let continueEnabled = XCTNSPredicateExpectation(
+            predicate: enabledPredicate,
+            object: continueButton
+        )
+        wait(for: [continueEnabled], timeout: 8)
     }
 
     private func field(_ identifier: String) -> XCUIElement {

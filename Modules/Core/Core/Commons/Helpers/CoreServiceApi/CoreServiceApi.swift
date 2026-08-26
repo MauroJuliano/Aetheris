@@ -1,35 +1,11 @@
 import Foundation
 
-public struct HTTPErrorContext: Equatable, Sendable {
-    public let statusCode: Int
-    public let code: String?
-    public let message: String?
-
-    public init(statusCode: Int, code: String? = nil, message: String? = nil) {
-        self.statusCode = statusCode
-        self.code = code
-        self.message = message
-    }
-}
-
 public enum NetworkError: Equatable, Sendable {
     case timedOut
     case noConnection
     case cancelled
     case connectionLost
     case other(code: Int)
-}
-
-public struct DecodingErrorContext: Equatable, Sendable {
-    public let type: String
-    public let codingPath: String
-    public let description: String
-
-    public init(type: String, codingPath: String, description: String) {
-        self.type = type
-        self.codingPath = codingPath
-        self.description = description
-    }
 }
 
 public enum CoreServiceError: Error, Equatable {
@@ -65,10 +41,6 @@ public extension CoreServiceError {
     var serverMessage: String? {
         context?.message
     }
-}
-
-public struct EmptyResponse: Codable, Equatable, Sendable {
-    public init() {}
 }
 
 public protocol HasCoreService {

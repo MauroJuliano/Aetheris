@@ -13,6 +13,15 @@ struct CardInformationContainer: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CardInformationContainerSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var financialInformation: some View {
         VStack(spacing: 0) {
             HStack(alignment: .top, spacing: AppSpacing.medium) {
@@ -83,7 +92,7 @@ struct CardInformationContainer: View {
                     .bold()
                     .foregroundStyle(Color.textPrimary)
 
-                Text(model.invoiceStatus)
+                Text(model.invoiceStatus.title)
                     .font(AppTypography.cellCaption)
                     .foregroundStyle(Color.brandPrimaryColor)
             }
@@ -120,7 +129,6 @@ struct CardInformationContainer: View {
         }
         .buttonStyle(.plain)
     }
-
 }
 
 private struct CircleIcon: View {
@@ -141,22 +149,4 @@ private struct CircleIcon: View {
                 .foregroundStyle(color)
         }
     }
-}
-
-#Preview {
-    CardInformationContainer(
-        model: CardDetailsModel(
-            cardId: CardsPreviewData.cardId,
-            availableLimit: 2_750,
-            totalLimit: 5_000,
-            currentInvoice: 350,
-            invoiceStatus: "Open",
-            dueDate: Calendar.current.date(byAdding: .day, value: 5, to: Date()) ?? Date(),
-            isBlocked: false
-        ),
-        onInvoiceTap: {},
-        onDueDateTap: {}
-    )
-    .padding()
-    .appScreenBackground()
 }

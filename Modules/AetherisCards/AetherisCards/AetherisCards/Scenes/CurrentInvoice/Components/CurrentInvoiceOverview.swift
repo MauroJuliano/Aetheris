@@ -14,6 +14,15 @@ struct CurrentInvoiceOverview: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CurrentInvoiceOverviewSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var desktopOverview: some View {
         HStack(alignment: .top, spacing: AppSpacing.medium) {
             amountColumn
@@ -222,14 +231,4 @@ struct CurrentInvoiceOverview: View {
                 .foregroundStyle(Color.brandPrimaryColor)
         }
     }
-}
-
-#Preview {
-    CurrentInvoiceOverview(
-        invoice: CardsPreviewData.invoice,
-        onAvailableLimitTap: {},
-        onBestPurchaseDateTap: {}
-    )
-    .padding()
-    .appScreenBackground()
 }

@@ -10,8 +10,49 @@ public final class CardsFactory: CardsFactoryInterface {
     }
 
     @MainActor
-    public func make(onFinished: @escaping () -> Void) -> AnyView {
-        AnyView(CardFlowCoordinator(coreService: coreService, onDismiss: nil))
+    public func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(
+            CardFlowCoordinator(
+                coreService: coreService,
+                onDismiss: onFinished,
+                onSendMoneyTap: onSendMoneyTap,
+                onRequestMoneyTap: onRequestMoneyTap
+            )
+        )
+    }
+
+    @MainActor
+    public func makeEmbedded(
+        path: Binding<NavigationPath>,
+        selectedCardRequestId: UUID?,
+        onSelectedCardRequestApplied: @escaping () -> Void,
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        Self.makeEmbedded(
+            coreService: coreService,
+            path: path,
+            selectedCardRequestId: selectedCardRequestId,
+            onSelectedCardRequestApplied: onSelectedCardRequestApplied,
+            onFinished: onFinished,
+            onSendMoneyTap: onSendMoneyTap,
+            onRequestMoneyTap: onRequestMoneyTap
+        )
+    }
+
+    @MainActor
+    public func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView {
+        Self.makeNavigationHost(content: content, coreService: coreService, path: path)
+    }
+
+    @MainActor
+    public func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>) {
+        Self.showTransactionDetails(transactionID: transactionID, path: path)
     }
 
     @MainActor
@@ -19,11 +60,17 @@ public final class CardsFactory: CardsFactoryInterface {
         coreService: any HasCoreService,
         path: Binding<NavigationPath>,
         initialSelectedCardId: UUID? = nil,
-        onFinished: @escaping () -> Void
+        selectedCardRequestId: UUID? = nil,
+        onSelectedCardRequestApplied: @escaping () -> Void = {},
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void = {},
+        onRequestMoneyTap: @escaping () -> Void = {}
     ) -> AnyView {
         AnyView(HomeCardFactory.make(
             coreService: coreService,
             initialSelectedCardId: initialSelectedCardId,
+            selectedCardRequestId: selectedCardRequestId,
+            onSelectedCardRequestApplied: onSelectedCardRequestApplied,
             onBackAction: onFinished,
             onTransactionHistoryTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.transactionHistory(cardID))
@@ -36,6 +83,12 @@ public final class CardsFactory: CardsFactoryInterface {
             },
             onCardLockTap: { cardID in
                 path.wrappedValue.append(CardFlowRoute.cardLock(cardID))
+            },
+            onSendMoneyTap: {
+                onSendMoneyTap()
+            },
+            onRequestMoneyTap: {
+                onRequestMoneyTap()
             }
         ))
     }
@@ -109,5 +162,13 @@ public final class CardsFactory: CardsFactoryInterface {
                 }
             }
         )
+    }
+
+    @MainActor
+    public static func showTransactionDetails(
+        transactionID: UUID,
+        path: Binding<NavigationPath>
+    ) {
+        path.wrappedValue.append(CardFlowRoute.transactionDetails(transactionID))
     }
 }

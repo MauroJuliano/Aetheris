@@ -8,6 +8,7 @@ import Core
 struct AetherisApp: App {
     private let dependencies = DependencyContainer()
     @StateObject private var sessionStore: AppSessionStore
+    @State private var languageRevision = UUID()
 
     init() {
         let session = AppSessionStore()
@@ -20,6 +21,14 @@ struct AetherisApp: App {
             SplashRootView(delay: UITestConfiguration.isEnabled ? 0 : 1.5) {
                 dependencies.authenticationFactory.make()
                     .environmentObject(sessionStore)
+            }
+            .id(languageRevision)
+            .environment(
+                \.locale,
+                Locale(identifier: dependencies.languageManager.effectiveLanguage.languageCode ?? Locale.current.identifier)
+            )
+            .onReceive(NotificationCenter.default.publisher(for: .aetherisLanguageDidChange)) { _ in
+                languageRevision = UUID()
             }
         }
     }

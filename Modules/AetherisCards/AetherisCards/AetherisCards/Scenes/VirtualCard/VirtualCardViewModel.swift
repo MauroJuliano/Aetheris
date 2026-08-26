@@ -13,6 +13,10 @@ final class VirtualCardViewModel: ObservableObject {
     private let physicalCardId: UUID
     private let service: VirtualCardServiceProtocol
 
+    var displayedCard: VirtualCardModel? {
+        virtualCard ?? (isLoading ? .loadingPlaceholder : nil)
+    }
+
     init(physicalCardId: UUID, service: VirtualCardServiceProtocol) {
         self.physicalCardId = physicalCardId
         self.service = service
@@ -89,4 +93,21 @@ final class VirtualCardViewModel: ObservableObject {
     func didCopyCardNumber() {}
 
     func showSecurityInformation() {}
+}
+
+private extension VirtualCardModel {
+    static let loadingPlaceholder = VirtualCardModel(
+        id: UUID(),
+        physicalCardId: UUID(),
+        holderName: "Loading",
+        cardNumber: "0000000000000000",
+        expirationDate: "00/00",
+        securityCode: "000",
+        brand: .visa,
+        style: .aurora,
+        availableLimit: 0,
+        totalLimit: 0,
+        monthlyExpenses: 0,
+        isActive: false
+    )
 }

@@ -8,6 +8,7 @@ struct IdentityValidationView: View {
     let onCancel: () -> Void
     let onResult: (IdentityValidationResult) -> Void
     @State private var showValidationError = false
+    @State private var didReportFailure = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -22,16 +23,24 @@ struct IdentityValidationView: View {
         .appScreenBackground()
         .onChange(of: viewModel.validationErrorMessage) { _, message in
             showValidationError = message != nil
+            if message != nil {
+                didReportFailure = false
+            }
         }
-        .sheet(isPresented: $showValidationError, onDismiss: finishFailure) {
+        .sheet(isPresented: $showValidationError, onDismiss: finishFailureIfNeeded) {
             ActionErrorSheet(
                 title: Strings.IdentityValidation.errorTitle,
                 description: viewModel.validationErrorMessage ?? Strings.IdentityValidation.errorDescription,
                 primaryButtonTitle: Strings.IdentityValidation.close,
-                onPrimaryAction: { showValidationError = false }
+                onPrimaryAction: {
+                    showValidationError = false
+                    DispatchQueue.main.async {
+                        finishFailureIfNeeded()
+                    }
+                }
             )
-            .accessibilityIdentifier("identity.validation.errorSheet")
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("identity.validation.screen")
     }
 
@@ -142,8 +151,10 @@ struct IdentityValidationView: View {
         }
     }
 
-    private func finishFailure() {
+    private func finishFailureIfNeeded() {
+        guard !didReportFailure else { return }
         guard viewModel.validationErrorMessage != nil else { return }
+        didReportFailure = true
         viewModel.clearError()
         onResult(.failed)
     }

@@ -43,12 +43,10 @@ struct BeneficiaryDetailsScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    BeneficiaryDetailsSkeleton()
-                } else if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                     errorView(message: errorMessage)
-                } else if let beneficiary = viewModel.beneficiary {
-                    content(beneficiary)
+                } else if let beneficiary = viewModel.displayedBeneficiary {
+                    content(beneficiary, isLoading: viewModel.isLoading)
                 } else {
                     emptyState
                 }
@@ -106,7 +104,7 @@ private extension BeneficiaryDetailsScreen {
         .padding(.bottom, AppSpacing.small)
     }
 
-    func content(_ beneficiary: BeneficiaryDetailsModel) -> some View {
+    func content(_ beneficiary: BeneficiaryDetailsModel, isLoading: Bool) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
                 BeneficiaryProfileHeader(
@@ -121,8 +119,10 @@ private extension BeneficiaryDetailsScreen {
                         onMoreOptionsTap(beneficiary.id)
                     }
                 )
+                .toSkeleton(enable: isLoading)
 
                 BeneficiaryInformationSection(information: beneficiary.information)
+                    .toSkeleton(enable: isLoading)
 
                 BeneficiaryTransactionsSection(
                     summary: beneficiary.transactionSummary,
@@ -132,6 +132,7 @@ private extension BeneficiaryDetailsScreen {
                     },
                     onTransactionTap: onTransactionTap
                 )
+                .toSkeleton(enable: isLoading)
 
                 RemoveBeneficiaryButton(
                     isLoading: viewModel.isRemoving,
@@ -139,6 +140,7 @@ private extension BeneficiaryDetailsScreen {
                         isRemoveConfirmationPresented = true
                     }
                 )
+                .toSkeleton(enable: isLoading)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .padding(.bottom, AppSpacing.bottomBarClearance)

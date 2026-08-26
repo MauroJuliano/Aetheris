@@ -28,6 +28,15 @@ struct RequestMoneyFormCard: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            RequestMoneyFormCardSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var recipientSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.medium) {
             Text(Strings.RequestMoney.recipientTitle)
@@ -111,14 +120,19 @@ struct RequestMoneyFormCard: View {
                 .foregroundStyle(Color.textSecondaryColor)
 
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: AppSpacing.medium) {
-                    ForEach(contacts) { contact in
-                        RecentContactButton(
-                            contact: contact,
-                            isSelected: contact.id == selectedContact?.id
-                        ) {
-                            onContactTap(contact)
-                        }
+                    HStack(spacing: AppSpacing.medium) {
+                        ForEach(contacts) { contact in
+                            RecentContactButton(
+                                contact: .init(
+                                    id: contact.id,
+                                    name: contact.name,
+                                    contactInformation: contact.contactInformation,
+                                    imageName: contact.imageName
+                                ),
+                                isSelected: contact.id == selectedContact?.id
+                            ) {
+                                onContactTap(contact)
+                            }
                     }
                 }
             }
@@ -132,14 +146,11 @@ struct RequestMoneyFormCard: View {
                 .foregroundStyle(Color.textSecondaryColor)
 
             HStack(alignment: .center) {
-                TextField("R$ 0,00", text: $amountText)
+                TextField("$0.00", text: $amountText)
                     .font(.system(size: 38, weight: .semibold))
                     .foregroundStyle(Color.textPrimary)
                     .keyboardType(.numberPad)
                     .focused(focusedField, equals: .amount)
-                    .onChange(of: amountText) { _, newValue in
-                        amountText = CurrencyInputFormatter.format(newValue)
-                    }
                     .accessibilityIdentifier("requestMoney.amount")
 
                 Spacer()
@@ -184,11 +195,6 @@ struct RequestMoneyFormCard: View {
                 .foregroundStyle(Color.textPrimary)
                 .lineLimit(1...3)
                 .focused(focusedField, equals: .reason)
-                .onChange(of: reason) { _, newValue in
-                    if newValue.count > RequestMoneyViewModel.reasonLimit {
-                        reason = String(newValue.prefix(RequestMoneyViewModel.reasonLimit))
-                    }
-                }
             }
             .padding(AppSpacing.medium)
             .background(Color.surface.opacity(0.7))
@@ -205,59 +211,10 @@ struct RequestMoneyFormCard: View {
     }
 }
 
-struct AmountPresets: View {
-    let amountText: String
-    let presets: [RequestMoneyAmountPresetModel]
-    let onPresetTap: (Decimal) -> Void
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: AppSpacing.small) {
-                ForEach(presets) { preset in
-                    presetButton(preset)
-                }
-            }
-        }
-    }
-
-    private func presetButton(_ preset: RequestMoneyAmountPresetModel) -> some View {
-        let isSelected = CurrencyInputFormatter.decimal(from: amountText) == preset.value
-
-        return Button {
-            onPresetTap(preset.value)
-        } label: {
-            Text(preset.title)
-                .font(AppTypography.cellCaption)
-                .bold()
-                .foregroundStyle(isSelected ? Color.white : Color.brandPrimaryColor)
-                .padding(.horizontal, AppSpacing.medium)
-                .frame(height: 42)
-                .background {
-                    if isSelected {
-                        LinearGradient(
-                            colors: [
-                                Color.brandPrimaryColor,
-                                Color.brandSecondaryColor
-                            ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    } else {
-                        Color.clear
-                    }
-                }
-                .overlay {
-                    Capsule()
-                        .stroke(
-                            isSelected
-                                ? Color.clear
-                                : Color.brandPrimaryColor.opacity(0.25)
-                        )
-                }
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
-    }
+#Preview {
+    RequestMoneyFormCardSkeleton()
+        .padding()
+        .appScreenBackground()
 }
 
 #Preview {
@@ -270,9 +227,24 @@ private struct RequestMoneyFormCardPreviewWrapper: View {
     @FocusState private var focusedField: RequestMoneyField?
 
     var body: some View {
+        let sophie = RequestContactModel(
+            id: UUID(),
+            name: "Sophie Keller",
+            contactInformation: "sophie.keller@aetheris.app",
+            imageName: "sophie"
+        )
+
         RequestMoneyFormCard(
-            contacts: [.previewSophie, .previewCarlos],
-            selectedContact: .previewSophie,
+            contacts: [
+                sophie,
+                .init(
+                    id: UUID(),
+                    name: "Carlos Barbosa",
+                    contactInformation: "carlos@email.com",
+                    imageName: nil
+                )
+            ],
+            selectedContact: sophie,
             presets: .previewPresets,
             amountText: $amountText,
             reason: $reason,

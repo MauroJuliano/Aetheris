@@ -17,7 +17,17 @@ final class TransactionHistoryViewModel: ObservableObject {
     struct Section: Identifiable {
         let id: String
         let title: String
+        let titleWidth: CGFloat
         let items: [FinancialSummaryModel]
+    }
+
+    var displayedSections: [Section] {
+        guard isLoading else { return sections }
+        return [
+            .init(id: "loading-1", title: "", titleWidth: 56, items: [.placeholder, .placeholder]),
+            .init(id: "loading-2", title: "", titleWidth: 88, items: [.placeholder]),
+            .init(id: "loading-3", title: "", titleWidth: 78, items: [.placeholder, .placeholder])
+        ]
     }
     
     func load() async {
@@ -32,7 +42,7 @@ final class TransactionHistoryViewModel: ObservableObject {
         } catch {
             errorMessage = CardServiceErrorMessage.message(
                 for: error,
-                fallback: "We could not load your transaction history."
+                fallback: Strings.TransactionHistory.loadFailed
             )
         }
 
@@ -55,6 +65,7 @@ final class TransactionHistoryViewModel: ObservableObject {
         sections = sorted.map {
             Section(id: $0,
                     title: $0,
+                    titleWidth: 0,
                     items: grouped[$0] ?? [])
         }
     }

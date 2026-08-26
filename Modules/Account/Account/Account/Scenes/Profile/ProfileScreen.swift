@@ -7,21 +7,26 @@ struct ProfileScreen: View {
     @StateObject private var viewModel: ProfileScreenViewModel
     @State private var path: [ProfileRoute] = []
     @EnvironmentObject private var tabBarVisibilityStore: TabBarVisibilityStore
+    private let languageManager: any LanguageManaging
 
-    init(viewModel: ProfileScreenViewModel) {
+    init(
+        viewModel: ProfileScreenViewModel,
+        languageManager: any LanguageManaging = LanguageManager()
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.languageManager = languageManager
     }
 
     var body: some View {
         NavigationStack(path: $path) {
-            ZStack {
-                ScrollView(showsIndicators: false) {
+            ScrollView(showsIndicators: false) {
                     VStack(spacing: AppSpacing.medium) {
                         UserView(
                             name: viewModel.profile.name,
                             imageName: viewModel.profile.avatarName,
                             joinedDate: viewModel.profile.joinedDate
                         )
+                        .toSkeleton(enable: viewModel.isInitialLoading)
 
                         if viewModel.hasLoadingError {
                             ProfileLoadErrorView(
@@ -32,7 +37,7 @@ struct ProfileScreen: View {
                             )
                             .transition(.move(edge: .top).combined(with: .opacity))
                         }
-                        
+
                         FormView(cells: viewModel.generalCells) { cell in
                             switch cell.content.kind {
                             case .name:
@@ -47,57 +52,28 @@ struct ProfileScreen: View {
                                 break
                             }
                         }
-                            
-                        FormView(cells: viewModel.notificationCells)
-                        
-                        Spacer()
-                        
-                        Button {
-                            path.append(.logout)
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: AppRadius.large)
-                                    .fill(Color.backgroundColorA)
-                                    .appShadow(AppShadow.card)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: AppRadius.pill)
-                                            .stroke(Color.border, style: .init(lineWidth: 1))
-                                    )
-                                    .frame(width: 300, height: 50)
-                                
-                                Text(Strings.Profile.logout)
-                                    .foregroundStyle(Color.brandPrimaryColor)
-                                    .font(AppTypography.button)
-                                    .appShadow(AppShadow.control)
-                            }
-                        }
-                        .padding(.vertical, AppSpacing.medium)
-                        
-                        Spacer()
-                        
-                        Text(viewModel.footer.version)
-                            .foregroundStyle(Color.textTertiary.opacity(0.5))
-                            .font(AppTypography.footnote)
-                            .padding(.top, AppSpacing.medium)
-                        
-                        Text(viewModel.footer.poweredBy)
-                            .foregroundStyle(Color.textTertiary.opacity(0.5))
-                            .font(AppTypography.footnote)
-                        
-                        Button {
-                            path.append(.terms)
-                        } label: {
-                            Text(viewModel.footer.terms)
-                                .foregroundStyle(Color.brandPrimaryColor)
-                                .font(AppTypography.button)
-                        }
-                        .padding(.bottom, AppSpacing.bottomBarClearance)
-                    }
-                }
-                .opacity(viewModel.isInitialLoading ? 0 : 1)
+                        .toSkeleton(enable: viewModel.isInitialLoading)
 
-                ProfileScreenSkeleton()
-                    .opacity(viewModel.isInitialLoading ? 1 : 0)
+                        FormView(cells: viewModel.notificationCells)
+                            .toSkeleton(enable: viewModel.isInitialLoading)
+
+                        LanguagePreferenceRow(
+                            title: Strings.Language.title,
+                            value: languageManager.currentLanguage.title,
+                            onTap: { path.append(.language) }
+                        )
+                        .toSkeleton(enable: viewModel.isInitialLoading)
+                        .accessibilityIdentifier("profile.languageButton")
+
+                        PrimaryButton(title: Strings.Profile.logout) { path.append(.logout) }
+                        .toSkeleton(enable: viewModel.isInitialLoading)
+                        .frame(width: 300)
+                        .padding(.vertical, AppSpacing.medium)
+
+                        ProfileFooterView(footer: viewModel.footer) { path.append(.terms) }
+                            .toSkeleton(enable: viewModel.isInitialLoading)
+                    }
+                    .padding(.bottom, AppSpacing.bottomBarClearance)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .appScreenBackground()
@@ -137,6 +113,8 @@ struct ProfileScreen: View {
                     }
                 case .logout:
                     ProfileLogoutView()
+                case .language:
+                    LanguageSelectionView(languageManager: languageManager)
                 }
             }
             .animation(.easeInOut(duration: 0.25), value: viewModel.hasLoadingError)
@@ -157,6 +135,31 @@ struct ProfileScreen: View {
 
 }
 
+private struct ProfileFooterView: View {
+    let footer: ProfileDashboardResponse.Footer
+    let onTermsTap: () -> Void
+
+    var body: some View {
+        VStack(spacing: AppSpacing.small) {
+            Text(footer.version).foregroundStyle(Color.textTertiary.opacity(0.5)).font(AppTypography.footnote)
+            Text(footer.poweredBy).foregroundStyle(Color.textTertiary.opacity(0.5)).font(AppTypography.footnote)
+            Button(footer.terms, action: onTermsTap).foregroundStyle(Color.brandPrimaryColor).font(AppTypography.button)
+        }
+        .padding(.top, AppSpacing.medium)
+    }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            VStack(spacing: AppSpacing.small) {
+                SkeletonBlock(width: 88, height: 12, radius: 6)
+                SkeletonBlock(width: 140, height: 12, radius: 6)
+                SkeletonBlock(width: 210, height: 18, radius: 9)
+            }
+        } else { self }
+    }
+}
+
 private enum ProfileRoute: Hashable {
     case editName
     case editEmail
@@ -164,6 +167,7 @@ private enum ProfileRoute: Hashable {
     case feedback
     case terms
     case logout
+    case language
 }
 
 #Preview {

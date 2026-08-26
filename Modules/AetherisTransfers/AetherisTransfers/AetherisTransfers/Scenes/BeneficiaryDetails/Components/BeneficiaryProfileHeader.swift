@@ -92,6 +92,12 @@ struct BeneficiaryProfileHeader: View {
     }
 }
 
+extension BeneficiaryProfileHeader {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { BeneficiaryProfileHeaderSkeleton() } else { self }
+    }
+}
+
 private struct BeneficiaryActionButton: View {
     let title: String
     let icon: String

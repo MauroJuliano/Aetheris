@@ -59,6 +59,15 @@ public struct UserView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            UserViewSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

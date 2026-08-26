@@ -32,7 +32,13 @@ struct FinancialSummary: View {
                     .font(AppTypography.subheadline)
                     .monospacedDigit()
                 
-                TransactionTag(type: model.tag)
+                TransactionTag(
+                    model: .init(
+                        title: model.tag.title,
+                        icon: model.tag.icon,
+                        color: model.tag.color
+                    )
+                )
             }
             
             Spacer()
@@ -57,27 +63,17 @@ struct FinancialSummary: View {
         )
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FinancialSummarySkeleton(hasDivider: hasDivider)
+        } else {
+            self
+        }
+    }
+
     private var dateLabel: String {
-        let formatter = DateFormatter()
-
-        if Calendar.current.isDateInToday(model.date) {
-            formatter.dateFormat = "h:mm a"
-            return formatter.string(from: model.date)
-        }
-
-        if Calendar.current.isDateInYesterday(model.date) {
-            return Strings.Notifications.sectionYesterday
-        }
-
-        let days = Calendar.current.dateComponents([.day],
-                                                   from: model.date,
-                                                   to: Date()).day ?? 0
-
-        if days < 30 {
-            return Strings.FinancialSummary.daysAgo(days)
-        }
-
-        return Strings.FinancialSummary.monthAgo(max(1, days / 30))
+        FinancialSummaryPresentation.dateLabel(for: model.date)
     }
 }
 

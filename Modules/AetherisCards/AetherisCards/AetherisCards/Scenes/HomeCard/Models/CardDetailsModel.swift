@@ -1,12 +1,28 @@
 import Foundation
 
+enum CardInvoiceStatus: String, Codable, Equatable {
+    case open
+    case closed
+    case dueSoon = "due_soon"
+    case unavailable
+
+    var title: String {
+        switch self {
+        case .open: Strings.CardInformation.openInvoice
+        case .closed: Strings.CardInformation.closedInvoice
+        case .dueSoon: Strings.CardInformation.dueSoon
+        case .unavailable: ""
+        }
+    }
+}
+
 struct CardDetailsModel: Identifiable, Codable, Equatable {
     let id: UUID
     let cardId: UUID
     let availableLimit: Decimal
     let totalLimit: Decimal
     let currentInvoice: Decimal
-    let invoiceStatus: String
+    let invoiceStatus: CardInvoiceStatus
     let dueDate: Date
     let isBlocked: Bool
 
@@ -16,7 +32,7 @@ struct CardDetailsModel: Identifiable, Codable, Equatable {
         availableLimit: Decimal,
         totalLimit: Decimal,
         currentInvoice: Decimal,
-        invoiceStatus: String,
+        invoiceStatus: CardInvoiceStatus,
         dueDate: Date,
         isBlocked: Bool
     ) {
@@ -43,6 +59,23 @@ struct CardDetailsModel: Identifiable, Codable, Equatable {
                 0
             ),
             1
+        )
+    }
+
+    private static let placeholderCardId = UUID(uuidString: "00000000-0000-0000-0000-000000000001")!
+
+    static func placeholder(cardId: UUID? = nil) -> CardDetailsModel {
+        let resolvedCardId = cardId ?? placeholderCardId
+
+        return CardDetailsModel(
+            id: resolvedCardId,
+            cardId: resolvedCardId,
+            availableLimit: 0,
+            totalLimit: 0,
+            currentInvoice: 0,
+            invoiceStatus: .unavailable,
+            dueDate: .distantPast,
+            isBlocked: false
         )
     }
 }

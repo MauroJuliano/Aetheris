@@ -60,53 +60,6 @@ enum BeneficiaryKind: String, Codable, Equatable {
     }
 }
 
-struct BeneficiaryInformationModel: Codable, Equatable {
-    let email: String?
-    let phone: String?
-    let location: String?
-    let accountInformation: String?
-}
-
-struct BeneficiaryTransactionSummaryModel: Codable, Equatable {
-    let sentAmount: Decimal
-    let receivedAmount: Decimal
-    let currencyCode: String
-    let sentTransactionsCount: Int
-    let receivedTransactionsCount: Int
-
-    var netAmount: Decimal {
-        receivedAmount - sentAmount
-    }
-
-    var totalTransactionsCount: Int {
-        sentTransactionsCount + receivedTransactionsCount
-    }
-}
-
-struct BeneficiaryTransactionModel: Identifiable, Codable, Equatable {
-    let id: UUID
-    let kind: BeneficiaryTransactionKind
-    let title: String
-    let description: String?
-    let amount: Decimal
-    let currencyCode: String
-    let date: Date
-    let status: BeneficiaryTransactionStatus
-
-    var isIncoming: Bool {
-        kind == .received
-    }
-
-    var formattedAmount: String {
-        let formattedValue = abs(amount).formatted(
-            .currency(code: currencyCode)
-                .locale(.beneficiaryDetails)
-        )
-
-        return isIncoming ? "+\(formattedValue)" : "-\(formattedValue)"
-    }
-}
-
 enum BeneficiaryTransactionKind: String, Codable, Equatable {
     case sent
     case received

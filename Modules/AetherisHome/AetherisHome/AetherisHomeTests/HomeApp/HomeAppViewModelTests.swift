@@ -18,10 +18,32 @@ struct HomeAppViewModelTests {
         #expect(sut.errorMessage == nil)
         #expect(sut.cards.isEmpty)
         #expect(sut.recentRecipients.isEmpty)
-        #expect(sut.quickActions.isEmpty)
         #expect(sut.spendingThisMonth == nil)
         #expect(sut.unreadCount == 0)
         #expect(!sut.hasUnreadNotifications)
+    }
+
+    @Test
+    func spendingAnalyticsCardModel_usesMockBeforeLoading() {
+        let sut = makeSUT(result: .success(.mock))
+
+        #expect(sut.spendingAnalyticsCardModel.title == Strings.SpendingChart.title)
+        #expect(sut.spendingAnalyticsCardModel.totalTitle == "$ 2.428,00")
+        #expect(sut.spendingAnalyticsCardModel.changeTitle == "+8%")
+        #expect(sut.spendingAnalyticsCardModel.comparisonTitle == Strings.SpendingChart.comparison)
+        #expect(sut.spendingAnalyticsCardModel.categories.count == 4)
+    }
+
+    @Test
+    func quickActionItems_areDefinedLocallyBeforeLoading() {
+        let sut = makeSUT(result: .success(.mock))
+
+        #expect(sut.quickActionItems.count == 3)
+        #expect(sut.recipientItems.isEmpty)
+        #expect(sut.recipientItems.map(\.id) == sut.recentRecipients.map(\.id))
+        #expect(sut.quickActionItems[0].title == Strings.QuickActions.sendTitle)
+        #expect(sut.quickActionItems[1].title == Strings.QuickActions.requestTitle)
+        #expect(sut.quickActionItems[2].title == Strings.QuickActions.moreTitle)
     }
 
     @Test
@@ -38,12 +60,25 @@ struct HomeAppViewModelTests {
         #expect(sut.balanceText == "$ 13.553,00")
         #expect(sut.isBalanceVisible)
         #expect(sut.cards.count == 3)
-        #expect(sut.recentRecipients.count == 4)
-        #expect(sut.quickActions.count == 4)
+        #expect(sut.recentRecipients.count == 6)
         #expect(sut.spendingThisMonth?.categories.count == 4)
         #expect(sut.unreadCount == 3)
         #expect(sut.hasUnreadNotifications)
         #expect(service.loadCalls == 1)
+        #expect(sut.spendingAnalyticsCardModel.title == Strings.SpendingChart.title)
+        #expect(sut.spendingAnalyticsCardModel.categories.count == 4)
+        #expect(sut.quickActionItems.count == 3)
+    }
+
+    @Test
+    func selectedCardId_atIndexClampsToAvailableCards() async {
+        let sut = makeSUT(result: .success(makeDashboard(cards: HomeAppDashboard.mock.cards)))
+
+        await sut.load()
+
+        #expect(sut.selectedCardId(at: -1) == HomeAppDashboard.mock.cards[0].id)
+        #expect(sut.selectedCardId(at: 1) == HomeAppDashboard.mock.cards[1].id)
+        #expect(sut.selectedCardId(at: 99) == HomeAppDashboard.mock.cards[2].id)
     }
 
     @Test
@@ -222,12 +257,9 @@ struct HomeAppViewModelTests {
             balance: .init(currency: currency, amount: amount, masked: masked),
             cards: cards,
             recentRecipients: recipients,
-            quickActions: [],
             spendingThisMonth: .init(
-                title: Strings.SpendingChart.title,
                 total: 0,
                 changePercent: 0,
-                comparisonLabel: Strings.SpendingChart.comparison,
                 categories: [],
                 series: []
             ),

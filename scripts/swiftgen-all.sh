@@ -3,7 +3,7 @@ set -eu
 
 PROJECT_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 
-find "$PROJECT_ROOT" -path "*/Resources/*.lproj/Localizable.strings" -print | sort | while IFS= read -r strings_file; do
+find "$PROJECT_ROOT" -path "*/Resources/en.lproj/Localizable.strings" -print | sort | while IFS= read -r strings_file; do
   module_root=${strings_file%%/Resources/*}
 
   if [ "$module_root" = "$PROJECT_ROOT" ]; then
@@ -19,4 +19,6 @@ find "$PROJECT_ROOT" -path "*/Resources/*.lproj/Localizable.strings" -print | so
     --param enumName=Strings \
     "$strings_file" \
     --output "$output"
+
+  ruby "$PROJECT_ROOT/scripts/swiftgen-runtime-localization.rb" "$output"
 done

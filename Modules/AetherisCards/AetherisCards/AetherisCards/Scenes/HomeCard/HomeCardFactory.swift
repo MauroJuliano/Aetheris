@@ -13,7 +13,9 @@ enum HomeCardFactory {
         onTransactionHistoryTap: @escaping (UUID) -> Void = { _ in },
         onVirtualCardTap: @escaping (UUID) -> Void = { _ in },
         onInvoiceTap: @escaping (UUID) -> Void = { _ in },
-        onCardLockTap: @escaping (UUID) -> Void = { _ in }
+        onCardLockTap: @escaping (UUID) -> Void = { _ in },
+        onSendMoneyTap: @escaping () -> Void = {},
+        onRequestMoneyTap: @escaping () -> Void = {}
     ) -> CardHome {
         CardHome(
             viewModel: HomeCardViewModel(service: HomeCardService(coreService: coreService)),
@@ -24,7 +26,9 @@ enum HomeCardFactory {
             onTransactionHistoryTap: onTransactionHistoryTap,
             onVirtualCardTap: onVirtualCardTap,
             onInvoiceTap: onInvoiceTap,
-            onCardLockTap: onCardLockTap
+            onCardLockTap: onCardLockTap,
+            onSendMoneyTap: onSendMoneyTap,
+            onRequestMoneyTap: onRequestMoneyTap
         )
     }
 }

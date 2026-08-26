@@ -1,11 +1,5 @@
 import SwiftUI
 
-struct SpendingPoint: Identifiable, Equatable {
-    let id = UUID()
-    let day: String
-    let amount: Double
-}
-
 public struct SpendingLineChart: View {
     public init() {}
 
@@ -109,6 +103,15 @@ public struct SpendingLineChart: View {
             }
         }
         .frame(height: 72)
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            SpendingLineChartSkeleton()
+        } else {
+            self
+        }
     }
 
     private func makePath(in size: CGSize) -> Path {

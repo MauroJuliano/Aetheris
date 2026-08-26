@@ -8,6 +8,13 @@ final class AllServicesViewModel: ObservableObject {
 
     private let service: any AllServicesServicing
 
+    var displayedItems: [AllServicesItem] {
+        guard isLoading else { return items }
+        return (0..<6).map { _ in
+            AllServicesItem(title: "Loading", subtitle: "Loading", icon: "square.grid.2x2", theme: .primary, route: .transfer)
+        }
+    }
+
     init(service: any AllServicesServicing) {
         self.service = service
     }

@@ -74,6 +74,73 @@ struct TransactionDetailsViewModelTests {
         #expect(sut.transaction?.note == "Shared account")
         #expect(service.updateNoteCallCount == 1)
     }
+
+    @Test
+    func performAction_routesCallbacksAndUsesReceiptDownloadForDownloadAction() async {
+        let service = TransactionDetailsServiceSpy(
+            transaction: TransactionDetailsMockStore.transaction(
+                for: TransactionMockIDs.netflixSubscription
+            )
+        )
+        let sut = TransactionDetailsViewModel(
+            transactionId: TransactionMockIDs.netflixSubscription,
+            service: service
+        )
+
+        var shareCalls = 0
+        var downloadCalls = 0
+        var addNoteCalls = 0
+        var reportCalls = 0
+
+        sut.performAction(
+            .share,
+            onShareTap: { _ in shareCalls += 1 },
+            onDownloadTap: { _ in downloadCalls += 1 },
+            onAddNoteTap: { _ in addNoteCalls += 1 },
+            onReportIssueTap: { _ in reportCalls += 1 }
+        )
+
+        sut.performAction(
+            .addNote,
+            onShareTap: { _ in shareCalls += 1 },
+            onDownloadTap: { _ in downloadCalls += 1 },
+            onAddNoteTap: { _ in addNoteCalls += 1 },
+            onReportIssueTap: { _ in reportCalls += 1 }
+        )
+
+        sut.performAction(
+            .reportIssue,
+            onShareTap: { _ in shareCalls += 1 },
+            onDownloadTap: { _ in downloadCalls += 1 },
+            onAddNoteTap: { _ in addNoteCalls += 1 },
+            onReportIssueTap: { _ in reportCalls += 1 }
+        )
+
+        sut.performAction(
+            .download,
+            onShareTap: { _ in shareCalls += 1 },
+            onDownloadTap: { _ in downloadCalls += 1 },
+            onAddNoteTap: { _ in addNoteCalls += 1 },
+            onReportIssueTap: { _ in reportCalls += 1 }
+        )
+
+        try? await Task.sleep(nanoseconds: 50_000_000)
+
+        #expect(shareCalls == 1)
+        #expect(addNoteCalls == 1)
+        #expect(reportCalls == 1)
+        #expect(downloadCalls == 1)
+        #expect(service.downloadReceiptCallCount == 1)
+    }
+
+    @Test
+    func sectionKind_matchesTransactionKind() {
+        let transaction = TransactionDetailsMockStore.transaction(
+            for: TransactionMockIDs.appleSubscription
+        )
+
+        #expect(transaction.sectionKind == .subscription)
+    }
 }
 
 private final class TransactionDetailsServiceSpy: TransactionDetailsServicing {

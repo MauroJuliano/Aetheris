@@ -22,31 +22,6 @@ public enum CardMockIDs {
     public static let infinite = UUID(uuidString: "44444444-4444-4444-4444-444444444444")!
 }
 
-public struct CreditCardTheme: Hashable {
-    let gradient: [Color]
-    let glow: [Color]
-    let accentOverlay: Color
-    let shadow: Color
-    let foreground: Color
-    let secondaryForeground: Color
-
-    public init(
-        gradient: [Color],
-        glow: [Color],
-        accentOverlay: Color,
-        shadow: Color,
-        foreground: Color = .white,
-        secondaryForeground: Color = .white.opacity(0.7)
-    ) {
-        self.gradient = gradient
-        self.glow = glow
-        self.accentOverlay = accentOverlay
-        self.shadow = shadow
-        self.foreground = foreground
-        self.secondaryForeground = secondaryForeground
-    }
-}
-
 public enum CreditCardStyle: String, Codable, Hashable {
     case standard = "STANDARD"
     case black = "BLACK"
@@ -70,28 +45,6 @@ public enum CreditCardStyle: String, Codable, Hashable {
         case .infinite:
             .infinite
         }
-    }
-}
-
-public struct CreditCardModel: Hashable, Codable {
-    let number: String
-    let validDate: String
-    let name: String
-    let brand: String
-    let style: CreditCardStyle
-    
-    public init(
-        number: String,
-        validDate: String,
-        name: String,
-        brand: String,
-        style: CreditCardStyle = .standard
-    ) {
-        self.number = number
-        self.validDate = validDate
-        self.name = name
-        self.brand = brand
-        self.style = style
     }
 }
 

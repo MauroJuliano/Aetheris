@@ -75,6 +75,16 @@ public struct TransferBeneficiary: View {
         }
         .buttonStyle(.plain)
         .appCardSurface()
+        .accessibilityIdentifier("transfer.beneficiarySelector")
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TransferBeneficiarySkeleton()
+        } else {
+            self
+        }
     }
 
     private var title: String {

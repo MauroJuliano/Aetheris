@@ -54,6 +54,15 @@ struct RequestMoneyModeSelector: View {
         }
         .buttonStyle(.plain)
     }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            RequestMoneyModeSelectorSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

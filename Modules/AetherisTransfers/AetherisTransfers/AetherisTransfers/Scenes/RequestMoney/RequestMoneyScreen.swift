@@ -34,9 +34,7 @@ struct RequestMoneyScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    RequestMoneyScreenSkeleton()
-                } else if let errorMessage = viewModel.loadingErrorMessage {
+                if let errorMessage = viewModel.loadingErrorMessage {
                     loadingErrorView(message: errorMessage)
                 } else {
                     content
@@ -67,6 +65,8 @@ struct RequestMoneyScreen: View {
 }
 
 private extension RequestMoneyScreen {
+    // MARK: - Navigation
+
     var navigationBar: some View {
         NavBar(
             hasBackButton: true,
@@ -79,21 +79,9 @@ private extension RequestMoneyScreen {
         .padding(.horizontal, AppSpacing.screenHorizontal)
         .padding(.bottom, AppSpacing.small)
     }
-}
 
-#Preview {
-    RequestMoneyScreen(
-        viewModel: RequestMoneyViewModel(
-            service: RequestMoneyService(
-                coreService: DemoCoreService(delay: 0)
-            ),
-            initialContact: .previewSophie
-        ),
-        onBackAction: {}
-    )
-}
+    // MARK: - Content
 
-private extension RequestMoneyScreen {
     var content: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
@@ -103,6 +91,7 @@ private extension RequestMoneyScreen {
                     selectedMode: viewModel.selectedMode,
                     onModeSelected: viewModel.selectMode
                 )
+                .toSkeleton(enable: viewModel.isLoading)
 
                 switch viewModel.selectedMode {
                 case .contact:
@@ -142,6 +131,7 @@ private extension RequestMoneyScreen {
                 onContactTap: viewModel.selectContact,
                 onPresetTap: viewModel.selectPreset
             )
+            .toSkeleton(enable: viewModel.isLoading)
 
             if viewModel.selectedContact != nil,
                viewModel.amount > 0 {
@@ -159,6 +149,7 @@ private extension RequestMoneyScreen {
                 focusedField: $focusedField,
                 onPresetTap: viewModel.selectPreset
             )
+            .toSkeleton(enable: viewModel.isLoading)
 
             if viewModel.amount > 0 {
                 preview
@@ -176,14 +167,15 @@ private extension RequestMoneyScreen {
         )
         .transition(.move(edge: .bottom).combined(with: .opacity))
     }
-}
 
-private extension RequestMoneyScreen {
+    // MARK: - Bottom action
+
     var bottomAction: some View {
-        PrimaryButton(title: primaryButtonTitle) {
-            focusedField = nil
-            submitRequest()
-        }
+        PrimaryButton(
+            title: viewModel.primaryButtonTitle,
+            action: submitRequest
+        )
+        .toSkeleton(enable: viewModel.isLoading)
         .disabled(!viewModel.canSubmit)
         .opacity(viewModel.canSubmit ? 1 : 0.45)
         .padding(.horizontal, AppSpacing.screenHorizontal)
@@ -193,31 +185,8 @@ private extension RequestMoneyScreen {
         .accessibilityIdentifier("requestMoney.submitButton")
     }
 
-    var primaryButtonTitle: String {
-        switch viewModel.selectedMode {
-        case .contact:
-            return Strings.RequestMoney.sendRequest
-        case .shareLink:
-            return Strings.RequestMoney.shareRequest
-        }
-    }
+    // MARK: - Feedback
 
-    func submitRequest() {
-        Task {
-            guard let request = await viewModel.submit() else {
-                return
-            }
-
-            if viewModel.selectedMode == .shareLink {
-                onShareRequestTap()
-            }
-
-            onSuccess(request)
-        }
-    }
-}
-
-private extension RequestMoneyScreen {
     var submitErrorBinding: Binding<Bool> {
         Binding(
             get: {
@@ -236,11 +205,48 @@ private extension RequestMoneyScreen {
             title: Strings.RequestMoney.unavailableTitle,
             description: message,
             primaryButtonTitle: Strings.Common.tryAgain,
-            onPrimaryAction: {
-                Task {
-                    await viewModel.load()
-                }
-            }
+            onPrimaryAction: retryLoading
         )
     }
+
+    // MARK: - Actions
+
+    func submitRequest() {
+        focusedField = nil
+
+        Task {
+            guard let result = await viewModel.submit() else { return }
+
+            if result.shouldShareLink {
+                onShareRequestTap()
+            }
+
+            onSuccess(result.request)
+        }
+    }
+
+    func retryLoading() {
+        Task {
+            await viewModel.load()
+        }
+    }
+}
+
+#Preview {
+    let sophie = RequestContactModel(
+        id: UUID(),
+        name: "Sophie Keller",
+        contactInformation: "sophie.keller@aetheris.app",
+        imageName: "sophie"
+    )
+
+    RequestMoneyScreen(
+        viewModel: RequestMoneyViewModel(
+            service: RequestMoneyService(
+                coreService: DemoCoreService(delay: 0)
+            ),
+            initialContact: sophie
+        ),
+        onBackAction: {}
+    )
 }

@@ -21,6 +21,15 @@ public struct NotificationBell: View {
             }
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            NotificationBellSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

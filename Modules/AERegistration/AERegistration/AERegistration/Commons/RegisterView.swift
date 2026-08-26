@@ -4,7 +4,7 @@ import SwiftUI
 struct RegisterView: View {
     let title: String
     let subTitle: String
-    @FocusState private var isSecureFieldFocused: Bool
+    var screenAccessibilityIdentifier: String = "registration.step"
     @State private var isTextFieldFocused = false
     @Binding var textFieldValue: String
     @State private var isSecureTextVisible = false
@@ -18,6 +18,7 @@ struct RegisterView: View {
     var secureTextHiddenLabel: String = ""
     var secureTextVisibleLabel: String = ""
     var textFieldFormatter: (String) -> String = { $0 }
+    var isLoading = false
     
     var onAction: () -> Void = {}
     
@@ -34,6 +35,7 @@ struct RegisterView: View {
             GlowButton(title: buttonTitle) {
                 onAction()
             }
+            .toSkeleton(enable: isLoading)
             .accessibilityIdentifier("registration.continue")
             .padding(.bottom, AppSpacing.xxLarge)
         }
@@ -45,13 +47,18 @@ struct RegisterView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     isTextFieldFocused = false
-                    isSecureFieldFocused = false
                 }
         }
     }
 
+    @ViewBuilder
     private var header: some View {
-        Text(title)
+        if isLoading {
+            SkeletonBlock(width: 260, height: 40, radius: AppRadius.large)
+                .padding(.top, AppSpacing.formTop)
+                .padding(.horizontal, AppSpacing.formHorizontal)
+        } else {
+            Text(title)
             .foregroundStyle(Color.textPrimary)
             .font(AppTypography.screenTitle)
             .fontWeight(.bold)
@@ -59,21 +66,40 @@ struct RegisterView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.top, AppSpacing.formTop)
             .padding(.horizontal, AppSpacing.formHorizontal)
+            .accessibilityIdentifier(screenAccessibilityIdentifier)
+        }
     }
 
+    @ViewBuilder
     private var subtitle: some View {
-        Text(subTitle)
+        if isLoading {
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                SkeletonBlock(width: 320, height: 18, radius: 9)
+                SkeletonBlock(width: 230, height: 18, radius: 9)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, AppSpacing.formHorizontal)
+        } else {
+            Text(subTitle)
             .foregroundStyle(Color.textTertiary)
             .font(AppTypography.headline)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, AppSpacing.formHorizontal)
+        }
     }
 
+    @ViewBuilder
     private var inputSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
-            fieldError
-            inputField
+        if isLoading {
+            SkeletonBlock(height: 52, radius: AppRadius.large)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, AppSpacing.formHorizontal)
+        } else {
+            VStack(alignment: .leading, spacing: AppSpacing.xSmall) {
+                fieldError
+                inputField
+            }
         }
     }
 
@@ -99,47 +125,36 @@ struct RegisterView: View {
         .appInputField(underlineColor: fieldErrorMessage == nil ? Color.border : Color.error)
     }
 
-    @ViewBuilder
     private var inputControl: some View {
-        if isSecureEntry && !isSecureTextVisible {
-            SecureField(
-                "",
-                text: $textFieldValue,
-                prompt: inputPrompt
-            )
-            .accessibilityIdentifier("registration.input")
-            .focused($isSecureFieldFocused)
-        } else {
-            RegistrationTextField(
-                text: $textFieldValue,
-                placeholder: textFieldPlaceholder,
-                formatter: textFieldFormatter,
-                keyboardType: keyboardType,
-                isFocused: Binding(
-                    get: { isTextFieldFocused },
-                    set: { isTextFieldFocused = $0 }
-                ),
-                accessibilityIdentifier: "registration.input"
-            )
-            .frame(height: 52)
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-
-    private var inputPrompt: Text {
-        Text(textFieldPlaceholder)
-            .foregroundColor(Color.textTertiary)
-            .font(AppTypography.input)
+        RegistrationTextField(
+            text: $textFieldValue,
+            placeholder: textFieldPlaceholder,
+            formatter: textFieldFormatter,
+            keyboardType: keyboardType,
+            textContentType: textContentType,
+            isSecureTextEntry: isSecureEntry && !isSecureTextVisible,
+            isFocused: Binding(
+                get: { isTextFieldFocused },
+                set: { isTextFieldFocused = $0 }
+            ),
+            accessibilityIdentifier: "registration.input"
+        )
+        .frame(height: 52)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private var visibilityToggle: some View {
         Button {
             isSecureTextVisible.toggle()
+            isTextFieldFocused = true
         } label: {
             Image(systemName: isSecureTextVisible ? "eye.slash" : "eye")
                 .font(.system(size: 18, weight: .medium))
                 .foregroundStyle(Color.textTertiary)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
         .accessibilityLabel(isSecureTextVisible ? secureTextVisibleLabel : secureTextHiddenLabel)
     }
 }
@@ -149,6 +164,8 @@ private struct RegistrationTextField: UIViewRepresentable {
     let placeholder: String
     let formatter: (String) -> String
     let keyboardType: UIKeyboardType
+    let textContentType: UITextContentType?
+    let isSecureTextEntry: Bool
     @Binding var isFocused: Bool
     let accessibilityIdentifier: String
 
@@ -171,6 +188,8 @@ private struct RegistrationTextField: UIViewRepresentable {
             ]
         )
         textField.keyboardType = keyboardType
+        textField.textContentType = textContentType
+        textField.isSecureTextEntry = isSecureTextEntry
         textField.accessibilityIdentifier = accessibilityIdentifier
         textField.addTarget(
             context.coordinator,
@@ -182,6 +201,8 @@ private struct RegistrationTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.keyboardType = keyboardType
+        uiView.textContentType = textContentType
+        uiView.isSecureTextEntry = isSecureTextEntry
 
         if uiView.text != text {
             uiView.text = text

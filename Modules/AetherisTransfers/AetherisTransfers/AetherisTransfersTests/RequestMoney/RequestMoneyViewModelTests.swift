@@ -13,7 +13,7 @@ struct RequestMoneyViewModelTests {
 
         await sut.load()
 
-        #expect(sut.requesterName == "Blake Brown")
+        #expect(sut.requesterName == "Blake Lehmann")
         #expect(sut.recentContacts == dashboard.recentContacts)
         #expect(sut.amountPresets == dashboard.amountPresets)
         #expect(sut.reason == "Dinner")
@@ -72,6 +72,28 @@ struct RequestMoneyViewModelTests {
     }
 
     @Test
+    func primaryButtonTitle_matchesSelectedMode() {
+        let sut = RequestMoneyViewModel(service: RequestMoneyServiceSpy())
+
+        #expect(sut.primaryButtonTitle == Strings.RequestMoney.sendRequest)
+
+        sut.selectMode(.shareLink)
+
+        #expect(sut.primaryButtonTitle == Strings.RequestMoney.shareRequest)
+    }
+
+    @Test
+    func inputProperties_sanitizeCurrencyAndLimitReason() {
+        let sut = RequestMoneyViewModel(service: RequestMoneyServiceSpy())
+
+        sut.amountText = "abc1234"
+        sut.reason = String(repeating: "a", count: 1_100)
+
+        #expect(sut.amountText == CurrencyInputFormatter.format("abc1234"))
+        #expect(sut.reason.count == 60)
+    }
+
+    @Test
     func submit_createsContactRequest_whenContactModeIsSelected() async throws {
         let service = RequestMoneyServiceSpy()
         let sut = RequestMoneyViewModel(service: service)
@@ -80,13 +102,14 @@ struct RequestMoneyViewModelTests {
         sut.selectPreset(150)
         sut.reason = "Lunch"
 
-        let request = try #require(await sut.submit())
+        let result = try #require(await sut.submit())
 
         #expect(service.createRequestCalls == 1)
         #expect(service.createSharedRequestCalls == 0)
-        #expect(request.contact == .marina)
-        #expect(request.amount == 150)
-        #expect(request.reason == "Lunch")
+        #expect(!result.shouldShareLink)
+        #expect(result.request.contact == .marina)
+        #expect(result.request.amount == 150)
+        #expect(result.request.reason == "Lunch")
     }
 
     @Test
@@ -97,24 +120,25 @@ struct RequestMoneyViewModelTests {
         sut.selectMode(.shareLink)
         sut.selectPreset(200)
 
-        let request = try #require(await sut.submit())
+        let result = try #require(await sut.submit())
 
         #expect(service.createRequestCalls == 0)
         #expect(service.createSharedRequestCalls == 1)
-        #expect(request.contact == nil)
-        #expect(request.paymentLink != nil)
-        #expect(request.amount == 200)
+        #expect(result.shouldShareLink)
+        #expect(result.request.contact == nil)
+        #expect(result.request.paymentLink != nil)
+        #expect(result.request.amount == 200)
     }
 }
 
 private extension RequestMoneyDashboard {
     static func fixture(defaultReason: String? = nil) -> RequestMoneyDashboard {
         RequestMoneyDashboard(
-            requesterName: "Blake Brown",
+            requesterName: "Blake Lehmann",
             recentContacts: [.marina, .lucas],
             amountPresets: [
-                RequestMoneyAmountPresetModel(id: "preset_100", value: 100, title: "R$ 100"),
-                RequestMoneyAmountPresetModel(id: "preset_200", value: 200, title: "R$ 200")
+                RequestMoneyAmountPresetModel(id: "preset_100", value: 100),
+                RequestMoneyAmountPresetModel(id: "preset_200", value: 200)
             ],
             defaultReason: defaultReason
         )

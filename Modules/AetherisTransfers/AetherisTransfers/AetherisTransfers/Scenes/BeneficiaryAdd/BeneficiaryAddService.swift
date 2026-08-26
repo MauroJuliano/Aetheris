@@ -33,14 +33,24 @@ final class BeneficiaryAddService: BeneficiaryAddServicing {
     }
 
     static func matches(identifier: String, beneficiary: Beneficiary) -> Bool {
-        let normalized = identifier.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let name = beneficiary.name.lowercased()
-        let pixKey = beneficiary.pixKey.lowercased()
+        let normalized = normalizedValue(identifier)
+        let name = normalizedValue(beneficiary.name)
+        let pixKey = normalizedValue(beneficiary.pixKey)
 
         return normalized == name
             || normalized == pixKey
             || name.contains(normalized)
             || pixKey.contains(normalized)
+    }
+
+    private static func normalizedValue(_ value: String) -> String {
+        value
+            .folding(
+                options: [.diacriticInsensitive, .caseInsensitive],
+                locale: .current
+            )
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .joined()
     }
 }
 

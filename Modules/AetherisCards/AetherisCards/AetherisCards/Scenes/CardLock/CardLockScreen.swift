@@ -1,7 +1,6 @@
 import AetherisDesignSystem
 import Core
 import SwiftUI
-
 struct CardLockScreen: View {
     @StateObject private var viewModel: CardLockViewModel
     @State private var isConfirmationPresented = false
@@ -33,12 +32,10 @@ struct CardLockScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    CardLockScreenSkeleton()
-                } else if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                     errorView(message: errorMessage)
-                } else if let card = viewModel.card {
-                    content(card)
+                } else if let card = viewModel.displayedCard {
+                    content(card, isLoading: viewModel.isLoading)
                 } else {
                     emptyState
                 }
@@ -49,12 +46,12 @@ struct CardLockScreen: View {
             await viewModel.loadIfNeeded()
         }
         .confirmationDialog(
-            confirmationTitle,
+            viewModel.confirmationTitle,
             isPresented: $isConfirmationPresented,
             titleVisibility: .visible
         ) {
             Button(
-                confirmationButtonTitle,
+                viewModel.confirmationButtonTitle,
                 role: viewModel.card?.isBlocked == true ? nil : .destructive
             ) {
                 updateCardStatus()
@@ -62,7 +59,7 @@ struct CardLockScreen: View {
 
             Button(Strings.Common.cancel, role: .cancel) {}
         } message: {
-            Text(confirmationDescription)
+            Text(viewModel.confirmationDescription)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar(.hidden, for: .navigationBar)
@@ -104,22 +101,37 @@ private extension CardLockScreen {
         return card.isBlocked ? Strings.CardLock.unlockTitle : Strings.CardLock.lockTitle
     }
 
-    func content(_ card: CardLockModel) -> some View {
+    func content(_ card: CardLockModel, isLoading: Bool) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
-                descriptionText(card)
+                if isLoading {
+                    SkeletonBlock(width: 280, height: 18, radius: 9)
+                } else { descriptionText(card) }
 
                 CardLockPreview(model: card)
+                    .toSkeleton(enable: isLoading)
 
                 CardLockStatusMessage(isBlocked: card.isBlocked)
+                    .toSkeleton(enable: isLoading)
 
                 CardLockEffectsSection(isBlocked: card.isBlocked)
+                    .toSkeleton(enable: isLoading)
 
-                primaryActionButton(card)
+                PrimaryButton(title: card.isBlocked ? Strings.CardLock.unlockCard : Strings.CardLock.lockCard) {
+                    isConfirmationPresented = true
+                }
+                .toSkeleton(enable: isLoading)
 
-                otherOptionsSection(card)
+                CardLockOtherOptionsSection(
+                    card: card,
+                    onCardSettingsTap: onCardSettingsTap,
+                    onVirtualCardTap: onVirtualCardTap,
+                    onRequestNewCardTap: onRequestNewCardTap
+                )
+                .toSkeleton(enable: isLoading)
 
                 CardLockSecurityMessage()
+                    .toSkeleton(enable: isLoading)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .padding(.bottom, AppSpacing.large)
@@ -214,21 +226,6 @@ private extension CardLockScreen {
         }
     }
 
-    var confirmationTitle: String {
-        guard let card = viewModel.card else { return "" }
-        return card.isBlocked ? Strings.CardLock.unlockConfirmationTitle : Strings.CardLock.lockConfirmationTitle
-    }
-
-    var confirmationButtonTitle: String {
-        guard let card = viewModel.card else { return "" }
-        return card.isBlocked ? Strings.CardLock.unlockCard : Strings.CardLock.lockCard
-    }
-
-    var confirmationDescription: String {
-        guard let card = viewModel.card else { return "" }
-        return card.isBlocked ? Strings.CardLock.unlockConfirmationDescription : Strings.CardLock.lockConfirmationDescription
-    }
-
     func updateCardStatus() {
         Task {
             await viewModel.toggleCardStatus()
@@ -254,50 +251,5 @@ private extension CardLockScreen {
             description: Strings.CardLock.emptyDescription,
             symbolName: "creditcard.trianglebadge.exclamationmark"
         )
-    }
-}
-
-private struct CardLockOptionRow: View {
-    let title: String
-    let description: String
-    let icon: String
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: AppSpacing.medium) {
-                ZStack {
-                    Circle()
-                        .fill(Color.brandPrimaryColor.opacity(0.08))
-                        .frame(width: 42, height: 42)
-
-                    Image(systemName: icon)
-                        .font(.system(size: 17, weight: .medium))
-                        .foregroundStyle(Color.brandPrimaryColor)
-                }
-
-                VStack(alignment: .leading, spacing: AppSpacing.xxxSmall) {
-                    Text(title)
-                        .font(AppTypography.body)
-                        .fontWeight(.medium)
-                        .foregroundStyle(Color.textPrimary)
-
-                    Text(description)
-                        .font(AppTypography.cellCaption)
-                        .foregroundStyle(Color.textSecondaryColor)
-                        .multilineTextAlignment(.leading)
-                }
-
-                Spacer(minLength: AppSpacing.small)
-
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(Color.textTertiary)
-            }
-            .padding(.horizontal, AppSpacing.medium)
-            .padding(.vertical, AppSpacing.small)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
     }
 }

@@ -44,6 +44,15 @@ public struct AppEmptyStateView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .appScreenBackground()
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            AppEmptyStateViewSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

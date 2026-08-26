@@ -64,6 +64,15 @@ struct RequestMoneyPreview: View {
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            RequestMoneyPreviewSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var requesterColumn: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xxxSmall) {
             Text(Strings.RequestMoney.youRequest)
@@ -178,8 +187,13 @@ struct RequestMoneyPreview: View {
 
 #Preview("Contact") {
     RequestMoneyPreview(
-        contact: .previewSophie,
-        requesterName: "Blake Brown",
+        contact: .init(
+            id: UUID(),
+            name: "Sophie Keller",
+            contactInformation: "sophie.keller@aetheris.app",
+            imageName: "sophie"
+        ),
+        requesterName: "Blake Lehmann",
         amount: 125,
         reason: "Dinner split",
         mode: .contact
@@ -188,10 +202,16 @@ struct RequestMoneyPreview: View {
     .appScreenBackground()
 }
 
+#Preview("Skeleton") {
+    RequestMoneyPreviewSkeleton()
+        .padding()
+        .appScreenBackground()
+}
+
 #Preview("Shared link") {
     RequestMoneyPreview(
         contact: nil,
-        requesterName: "Blake Brown",
+        requesterName: "Blake Lehmann",
         amount: 80,
         reason: "Event tickets",
         mode: .shareLink

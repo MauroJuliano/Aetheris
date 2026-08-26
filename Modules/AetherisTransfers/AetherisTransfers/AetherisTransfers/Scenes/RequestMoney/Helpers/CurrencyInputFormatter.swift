@@ -1,17 +1,19 @@
 import Foundation
 
 enum CurrencyInputFormatter {
-    private static let locale = Locale(identifier: "pt_BR")
+    private static var locale: Locale {
+        Locale(identifier: Locale.preferredLanguages.first ?? "en_US")
+    }
 
-    private static let currencyFormatter: NumberFormatter = {
+    private static var currencyFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "BRL"
+        formatter.currencyCode = "USD"
         formatter.locale = locale
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
         return formatter
-    }()
+    }
 
     static func format(_ input: String) -> String {
         let digits = input.filter(\.isNumber)

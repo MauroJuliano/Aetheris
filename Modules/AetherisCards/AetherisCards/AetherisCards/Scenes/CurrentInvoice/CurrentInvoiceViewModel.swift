@@ -13,6 +13,10 @@ final class CurrentInvoiceViewModel: ObservableObject {
     private let service: CurrentInvoiceServicing
     private var hasLoaded = false
 
+    var displayedInvoice: CurrentInvoiceModel? {
+        invoice ?? (isLoading ? .placeholder(cardId: cardId) : nil)
+    }
+
     init(cardId: UUID, service: CurrentInvoiceServicing) {
         self.cardId = cardId
         self.service = service

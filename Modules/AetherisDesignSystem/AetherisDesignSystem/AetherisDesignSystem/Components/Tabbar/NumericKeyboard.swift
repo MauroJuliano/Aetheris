@@ -16,12 +16,12 @@ public struct NumericKeyboard: View {
     public init(
         displayedAmount: String,
         displayedBalance: String,
-        balanceLabel: String = "Wallet balance:",
+        balanceLabel: String? = nil,
         onKeyPressed: @escaping (String) -> Void
     ) {
         self.displayedAmount = displayedAmount
         self.displayedBalance = displayedBalance
-        self.balanceLabel = balanceLabel
+        self.balanceLabel = balanceLabel ?? Strings.NumericKeyboard.walletBalance
         self.onKeyPressed = onKeyPressed
     }
 
@@ -47,6 +47,15 @@ public struct NumericKeyboard: View {
                 .fill(Color.backgroundColorA)
                 .appShadow(AppShadow.soft)
         )
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            NumericKeyboardSkeleton()
+        } else {
+            self
+        }
     }
 
     private var amountHeader: some View {

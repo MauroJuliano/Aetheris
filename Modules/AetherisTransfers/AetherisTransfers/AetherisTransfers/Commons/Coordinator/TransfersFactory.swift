@@ -49,7 +49,8 @@ public enum TransfersFactory {
         identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary?>,
         path: Binding<NavigationPath>,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void = { _ in }
     ) -> AnyView {
         AnyView(
             content.navigationDestination(for: SendMoneyFlowRoute.self) { route in
@@ -59,7 +60,8 @@ public enum TransfersFactory {
                     identityValidation: identityValidation,
                     selectedBeneficiary: selectedBeneficiary,
                     path: path,
-                    onFinished: onFinished
+                    onFinished: onFinished,
+                    onTransactionTap: onTransactionTap
                 )
             }
         )
@@ -127,7 +129,9 @@ public enum TransfersFactory {
         beneficiaryId: UUID,
         path: Binding<NavigationPath>,
         onBack: @escaping () -> Void,
+        onNotificationsTap: @escaping () -> Void = {},
         onTransferTap: @escaping (Beneficiary) -> Void,
+        onTransactionTap: @escaping (UUID) -> Void = { _ in },
         onBeneficiaryRemoved: @escaping () -> Void
     ) -> AnyView {
         AnyView(
@@ -135,10 +139,12 @@ public enum TransfersFactory {
                 coreService: coreService,
                 beneficiaryId: beneficiaryId,
                 onBackAction: onBack,
+                onNotificationsTap: onNotificationsTap,
                 onTransferTap: onTransferTap,
                 onRequestMoneyTap: { contact in
                     path.wrappedValue.append(SendMoneyFlowRoute.requestMoney(contact))
                 },
+                onTransactionTap: onTransactionTap,
                 onBeneficiaryRemoved: onBeneficiaryRemoved
             )
         )
@@ -152,7 +158,8 @@ public enum TransfersFactory {
         identityValidation: any IdentityValidating,
         selectedBeneficiary: Binding<Beneficiary?>,
         path: Binding<NavigationPath>,
-        onFinished: @escaping () -> Void
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
     ) -> some View {
         switch route {
         case .beneficiaryList(let context):
@@ -184,6 +191,7 @@ public enum TransfersFactory {
                 onRequestMoneyTap: { contact in
                     path.wrappedValue.append(SendMoneyFlowRoute.requestMoney(contact))
                 },
+                onTransactionTap: onTransactionTap,
                 onBeneficiaryRemoved: {
                     returnToSendMoney(path)
                 }

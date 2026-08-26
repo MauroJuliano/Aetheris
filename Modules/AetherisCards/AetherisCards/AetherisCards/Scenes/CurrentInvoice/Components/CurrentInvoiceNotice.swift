@@ -52,10 +52,13 @@ struct CurrentInvoiceNotice: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: AppRadius.large))
     }
-}
 
-#Preview {
-    CurrentInvoiceNotice(onDismiss: {})
-        .padding()
-        .appScreenBackground()
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CurrentInvoiceNoticeSkeleton()
+        } else {
+            self
+        }
+    }
 }

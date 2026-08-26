@@ -1,6 +1,7 @@
 import SwiftUI
 
 public struct SkeletonView<S: Shape>: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let shape: S
     let color: Color
     
@@ -38,8 +39,9 @@ public struct SkeletonView<S: Shape>: View {
             }
             .clipShape(shape)
             .compositingGroup()
+            .accessibilityHidden(true)
             .onAppear {
-                guard !isAnimating else { return }
+                guard !reduceMotion, !isAnimating else { return }
                 withAnimation(animation) {
                     isAnimating = true
                 }
@@ -63,3 +65,9 @@ public struct SkeletonView<S: Shape>: View {
     }
 }
 
+#Preview {
+    SkeletonView(Circle())
+        .frame(width: 80, height: 80)
+        .padding()
+        .appScreenBackground()
+}

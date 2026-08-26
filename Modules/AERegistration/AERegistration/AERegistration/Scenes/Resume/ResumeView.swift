@@ -55,6 +55,7 @@ struct ResumeView: View {
                 .ignoresSafeArea()
         }
         .navigationBarHidden(true)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("registration.resumeScreen")
         .sheet(isPresented: submissionErrorBinding) {
             submissionErrorSheet
@@ -158,7 +159,11 @@ private extension ResumeView {
             title: Strings.Resume.continueButton,
             isLoading: viewModel.isLoading
         ) {
-            submit()
+            Task {
+                if await viewModel.submit() {
+                    onContinue()
+                }
+            }
         }
         .disabled(viewModel.isLoading)
         .accessibilityIdentifier(
@@ -175,26 +180,19 @@ private extension ResumeView {
             secondaryButtonTitle:
                 Strings.SubmissionError.cancel,
             onPrimaryAction: {
-                viewModel.submissionError = nil
-                submit()
+                viewModel.dismissSubmissionError()
+                Task {
+                    if await viewModel.submit() {
+                        onContinue()
+                    }
+                }
             },
             onSecondaryAction: {
-                viewModel.submissionError = nil
+                viewModel.dismissSubmissionError()
             }
         )
     }
 
-    func submit() {
-        guard !viewModel.isLoading else {
-            return
-        }
-
-        Task {
-            if await viewModel.submit() {
-                onContinue()
-            }
-        }
-    }
 }
 
 private extension ResumeView {
@@ -206,7 +204,7 @@ private extension ResumeView {
             },
             set: { isPresented in
                 if !isPresented {
-                    viewModel.submissionError = nil
+                    viewModel.dismissSubmissionError()
                 }
             }
         )

@@ -21,11 +21,9 @@ struct BeneficiaryList: View {
 
     var body: some View {
         ZStack {
-            if viewModel.isLoading {
-                BeneficiaryListSkeleton()
-            } else if let errorMessage = viewModel.errorMessage {
+            if let errorMessage = viewModel.errorMessage {
                 errorView(message: errorMessage)
-            } else if viewModel.beneficiaries.isEmpty {
+            } else if !viewModel.isLoading, viewModel.beneficiaries.isEmpty {
                 emptyState
             } else {
                 loadedContent
@@ -36,8 +34,8 @@ struct BeneficiaryList: View {
         .task { await viewModel.load() }
     }
 
-    var loadedContent: some View {
-        VStack {
+    private var loadedContent: some View {
+        VStack(spacing: 0) {
             NavBar(
                 hasBackButton: true,
                 model: .init(
@@ -48,27 +46,29 @@ struct BeneficiaryList: View {
             )
 
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: AppSpacing.medium) {
+                VStack(alignment: .leading, spacing: AppSpacing.large) {
                     BeneficiarySearchBar(
-                        text: $searchText
+                        text: $searchText,
+                        placeholder: Strings.BeneficiaryList.searchPlaceholder,
+                        clearLabel: Strings.BeneficiaryList.clearSearch
                     )
-                    .padding(.top, AppSpacing.medium)
+                    .toSkeleton(enable: viewModel.isLoading)
+                        .padding(.top, AppSpacing.medium)
 
-                    Text(Strings.BeneficiaryList.savedBeneficiaries)
-                        .font(AppTypography.body)
-                        .bold()
-                        .foregroundStyle(Color.textPrimary)
-
-                    LazyVStack(spacing: AppSpacing.medium) {
-                        ForEach(Array(filteredBeneficiaries.enumerated()), id: \.element.id) { index, cell in
-                            BeneficiaryCell(
-                                model: cell,
-                                isRecent: index == 0,
-                                onChange: { selected in
-                                    onSelect(selected)
-                                }
-                            )
+                    if searchQuery.isEmpty {
+                        if viewModel.isLoading {
+                            recentSectionSkeleton
+                        } else {
+                            recentSection
                         }
+                    }
+
+                    if viewModel.isLoading {
+                        allBeneficiariesSkeleton
+                    } else if filteredAllBeneficiaries.isEmpty {
+                        searchEmptyState
+                    } else {
+                        allBeneficiariesSection
                     }
                 }
                 .padding(.bottom, AppSpacing.bottomBarClearance)
@@ -77,22 +77,119 @@ struct BeneficiaryList: View {
         }
     }
 
-    private var filteredBeneficiaries: [Beneficiary] {
-        let query = searchText.trimmingCharacters(
-            in: .whitespacesAndNewlines
-        )
+    private var searchQuery: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
-        guard !query.isEmpty else {
-            return viewModel.beneficiaries
-        }
+    private var recentBeneficiaries: [Beneficiary] {
+        viewModel.recentBeneficiaries
+    }
 
-        return viewModel.beneficiaries.filter {
-            $0.name.matchesSearch(query) ||
-                $0.pixKey.matchesSearch(query)
+    private var filteredAllBeneficiaries: [Beneficiary] {
+        viewModel.filteredBeneficiaries(query: searchQuery)
+    }
+
+    private var beneficiarySections: [BeneficiaryListViewModel.Section] {
+        viewModel.sections(query: searchQuery)
+    }
+
+    private var recentSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            Text(Strings.BeneficiaryList.recent)
+                .font(AppTypography.body)
+                .bold()
+                .foregroundStyle(Color.textPrimary)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: AppSpacing.medium) {
+                    ForEach(recentBeneficiaries) { beneficiary in
+                        RecentContactItem(
+                            model: beneficiary.recentItemModel,
+                            onTap: {
+                                onSelect(beneficiary)
+                            }
+                        )
+                        .toSkeleton(enable: viewModel.isLoading)
+                    }
+                }
+            }
         }
     }
 
-    func errorView(message: String) -> some View {
+    private var recentSectionSkeleton: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            SkeletonBlock(width: 74, height: 18, radius: 8)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: AppSpacing.medium) {
+                    ForEach(0..<4, id: \.self) { _ in
+                        RecentContactItem(
+                            model: .init(
+                                id: UUID(),
+                                name: "Placeholder",
+                                imageName: nil
+                            ),
+                            onTap: {}
+                        )
+                        .toSkeleton(enable: true)
+                    }
+                }
+            }
+        }
+    }
+
+    private var allBeneficiariesSection: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            Text(searchQuery.isEmpty ? Strings.BeneficiaryList.savedBeneficiaries : "Results")
+                .font(AppTypography.body)
+                .bold()
+                .foregroundStyle(Color.textPrimary)
+
+            LazyVStack(spacing: AppSpacing.large) {
+                ForEach(beneficiarySections, id: \.letter) { section in
+                    BeneficiaryAlphabetSection(
+                        letter: section.letter,
+                        beneficiaries: section.beneficiaries,
+                        isLoading: viewModel.isLoading,
+                        onSelect: onSelect
+                    )
+                }
+            }
+        }
+    }
+
+    private var allBeneficiariesSkeleton: some View {
+        VStack(alignment: .leading, spacing: AppSpacing.small) {
+            SkeletonBlock(width: 150, height: 18, radius: 8)
+
+            VStack(spacing: AppSpacing.large) {
+                ForEach(beneficiarySections, id: \.letter) { section in
+                    VStack(alignment: .leading, spacing: AppSpacing.small) {
+                        SkeletonBlock(width: 14, height: 14, radius: 7)
+
+                        VStack(spacing: AppSpacing.medium) {
+                            ForEach(section.beneficiaries) { beneficiary in
+                                ContactCardRow(
+                                    model: beneficiary.cardRowModel,
+                                    onTap: {}
+                                )
+                                .toSkeleton(enable: true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private var searchEmptyState: some View {
+        AppEmptyStateView(
+            title: Strings.BeneficiaryList.noSearchResults,
+            description: Strings.BeneficiaryList.tryAnotherSearch
+        )
+    }
+
+    private func errorView(message: String) -> some View {
         FeedbackView(
             title: Strings.BeneficiaryList.unavailableTitle,
             description: message,
@@ -105,7 +202,7 @@ struct BeneficiaryList: View {
         )
     }
 
-    var emptyState: some View {
+    private var emptyState: some View {
         AppEmptyStateView(
             title: Strings.BeneficiaryList.emptyTitle,
             description: Strings.BeneficiaryList.emptyDescription
@@ -126,6 +223,34 @@ private extension String {
         )
 
         return normalizedValue.contains(normalizedQuery)
+    }
+}
+
+extension Beneficiary {
+    var cardRowModel: ContactCardRowModel {
+        .init(
+            id: id,
+            name: name,
+            contactInformation: pixKey,
+            imageName: image
+        )
+    }
+
+    var recentItemModel: RecentContactItemModel {
+        .init(
+            id: id,
+            name: name,
+            imageName: image
+        )
+    }
+
+    var sectionKey: String {
+        let normalized = name.folding(
+            options: [.diacriticInsensitive, .caseInsensitive],
+            locale: .current
+        )
+
+        return String(normalized.prefix(1)).uppercased()
     }
 }
 

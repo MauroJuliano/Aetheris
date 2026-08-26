@@ -9,7 +9,24 @@ public protocol HasCards {
 
 public protocol CardsFactoryInterface {
     @MainActor
-    func make(onFinished: @escaping () -> Void) -> AnyView
+    func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView
+    @MainActor
+    func makeEmbedded(
+        path: Binding<NavigationPath>,
+        selectedCardRequestId: UUID?,
+        onSelectedCardRequestApplied: @escaping () -> Void,
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView
+    @MainActor
+    func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView
+    @MainActor
+    func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>)
 }
 
 @MainActor

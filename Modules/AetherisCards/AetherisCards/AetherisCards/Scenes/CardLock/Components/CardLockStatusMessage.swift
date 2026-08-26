@@ -56,6 +56,12 @@ struct CardLockStatusMessage: View {
     }
 }
 
+extension CardLockStatusMessage {
+    @ViewBuilder func toSkeleton(enable: Bool) -> some View {
+        if enable { CardLockRowSkeleton() } else { self }
+    }
+}
+
 #Preview {
     VStack(spacing: AppSpacing.medium) {
         CardLockStatusMessage(isBlocked: false)

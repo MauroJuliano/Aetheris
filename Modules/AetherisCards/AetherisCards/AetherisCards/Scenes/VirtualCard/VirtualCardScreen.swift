@@ -35,12 +35,10 @@ struct VirtualCardScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    VirtualCardScreenSkeleton()
-                } else if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                     errorView(message: errorMessage)
-                } else if let card = viewModel.virtualCard {
-                    content(card: card)
+                } else if let card = viewModel.displayedCard {
+                    content(card: card, isLoading: viewModel.isLoading)
                 } else {
                     emptyState
                 }
@@ -107,10 +105,16 @@ private extension VirtualCardScreen {
         .padding(.bottom, AppSpacing.small)
     }
 
-    func content(card: VirtualCardModel) -> some View {
+    func content(card: VirtualCardModel, isLoading: Bool) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
-                descriptionText
+                if isLoading {
+                    SkeletonBlock(width: 280, height: 18, radius: 9)
+                        .padding(.horizontal, AppSpacing.large)
+                        .padding(.bottom, AppSpacing.xSmall)
+                } else {
+                    descriptionText
+                }
 
                 VirtualCardView(
                     model: card,
@@ -121,39 +125,52 @@ private extension VirtualCardScreen {
                         }
                     }
                 )
+                .toSkeleton(enable: isLoading)
 
                 VirtualCardQuickActions(
                     isGeneratingNewNumber: viewModel.isGeneratingNewNumber,
+                    copyNumberTitle: Strings.VirtualCard.copyNumber,
+                    generateNewNumberTitle: Strings.VirtualCard.generateNewNumber,
+                    settingsTitle: Strings.VirtualCard.settings,
                     onCopyNumberTap: copyCardNumber,
                     onGenerateNewNumberTap: {
                         isGenerateConfirmationPresented = true
                     },
                     onSettingsTap: onSettingsTap
                 )
+                .toSkeleton(enable: isLoading)
 
-                VirtualCardStatusView(
-                    isActive: card.isActive,
-                    isLoading: viewModel.isUpdatingStatus,
-                    onStatusChange: { isActive in
+                StatusToggleCard(
+                    title: card.isActive ? Strings.VirtualCard.activeTitle : Strings.VirtualCard.inactiveTitle,
+                    description: card.isActive ? Strings.VirtualCard.activeDescription : Strings.VirtualCard.inactiveDescription,
+                    icon: card.isActive ? "checkmark.shield" : "lock.shield",
+                    isOn: card.isActive,
+                    isUpdating: viewModel.isUpdatingStatus,
+                    onChange: { isActive in
                         Task {
                             await viewModel.updateCardStatus(isActive: isActive)
                         }
                     }
                 )
+                .toSkeleton(enable: isLoading)
 
                 VirtualCardUsageSummary(
                     availableLimit: card.availableLimit,
                     totalLimit: card.totalLimit,
-                    monthlyExpenses: card.monthlyExpenses
+                    monthlyExpenses: card.monthlyExpenses,
+                    usageProgress: card.usedLimitProgress,
+                    monthlyUsagePercentage: card.monthlyUsagePercentage
                 )
+                .toSkeleton(enable: isLoading)
 
-                summariesSection
+                summariesSection(isLoading: isLoading)
 
                 VirtualCardSecurityInfo(
                     onLearnMoreTap: {
                         viewModel.showSecurityInformation()
                     }
                 )
+                .toSkeleton(enable: isLoading)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .padding(.bottom, AppSpacing.large)
@@ -173,7 +190,7 @@ private extension VirtualCardScreen {
             .padding(.bottom, AppSpacing.xSmall)
     }
 
-    var summariesSection: some View {
+    func summariesSection(isLoading: Bool) -> some View {
         FinancialSummaryContainer(
             summaries: viewModel.summaries,
             title: Strings.VirtualCard.recentTransactions,
@@ -181,6 +198,7 @@ private extension VirtualCardScreen {
             onTap: openTransactionHistory,
             onActionTap: openTransactionHistory
         )
+        .toSkeleton(enable: isLoading)
     }
 
     func openTransactionHistory() {

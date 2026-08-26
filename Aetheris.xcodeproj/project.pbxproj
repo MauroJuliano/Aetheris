@@ -10,11 +10,13 @@
 		072CC50BB3971F9A1C3071EA /* AetherisCards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD0CE310DCCFB8F736C61FE /* AetherisCards.framework */; };
 		0973B326F412FA1B6E8252BF /* AetherisHomeInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B8967964741F6ACD34C71E /* AetherisHomeInterface.framework */; };
 		0B5BFBA638127BAEC28C1C07 /* AetherisCardsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCEF8FA3F3777C4604D4A12 /* AetherisCardsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10B1A8E12ACF47DA8E0D1A10 /* AetherisNotificationsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */; };
 		161C2951D9E22229B6DD5127 /* AetherisDesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; };
 		206A13AD7225416835B530A5 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
 		271C3E1595CBB6C50D727A87 /* AetherisTransfers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 64CEC714730AB2733E8B69BA /* AetherisTransfers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		28DBF538CBF7A081F52FAF8F /* AetherisNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C467F7752CD2F88D7AF88191 /* AetherisNotifications.framework */; };
 		2EF73D54E5921F787FE8EC29 /* AetherisDesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B535B22F4E3B87005C2C96 /* AetherisDesignSystem.framework */; };
+		335765C73691481299F9F0D8 /* AetherisNotificationsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */; };
 		351927B31F15F157D93B99E2 /* AetherisCardsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FCEF8FA3F3777C4604D4A12 /* AetherisCardsInterface.framework */; };
 		39B0517A0EF265168EEA2483 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
 		3CB736F1684545F1CD549FD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5895AA430AC85BD2EC4F0E1 /* Foundation.framework */; };
@@ -30,6 +32,8 @@
 		4B10928E8FD9A176168E21DC /* AetherisTransfersInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0051BF690602CCE5C15FDF5 /* AetherisTransfersInterface.framework */; };
 		4B61082547E726ACA649EF9F /* AetherisTransfers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CEC714730AB2733E8B69BA /* AetherisTransfers.framework */; };
 		4C5D8850C1A461A20C265F13 /* AetherisNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C467F7752CD2F88D7AF88191 /* AetherisNotifications.framework */; };
+		4D1E9BFD19D6415F93161455 /* AetherisNotificationsInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E3C7E6A5F914D2C91A0E7B2 /* AetherisNotificationsInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B62A2ED1A7A4E5C9B7F4D60 /* AetherisNotificationsInterface.swift */; };
 		51A3C3F26D20CFECFDA26910 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		5406A2FE1C88601224DDFFE2 /* AetherisHomeInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B8967964741F6ACD34C71E /* AetherisHomeInterface.framework */; };
 		5B9C9C0A45F7064AA6C4D584 /* AetherisCards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFD0CE310DCCFB8F736C61FE /* AetherisCards.framework */; };
@@ -48,11 +52,13 @@
 		964B91F7BBFCDD7F24F4327D /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
 		96B1A12F908FF806CBE083D7 /* AetherisTransfers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CEC714730AB2733E8B69BA /* AetherisTransfers.framework */; };
 		9F08383FB196673FBAD4B6E5 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
+		A0628454731E4B328217914F /* AetherisNotificationsInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */; };
 		A4D4B1A458B1CBBAA53910E2 /* AetherisHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26337A315BE728F61A2DDE44 /* AetherisHome.framework */; };
 		A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B536FE2F4E6E16005C2C96 /* AetherisAuthenticationInterface.framework */; };
 		A982A8122F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81C2F5111E000C22A84 /* AccountInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; };
 		A982A81D2F5111E000C22A84 /* AccountInterface.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A982A8072F5111DF00C22A84 /* AccountInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A99D6B3A30379F1500BFCBF4 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B534462F4E384E005C2C96 /* Core.framework */; };
 		A9AFA2882FE9DEEA005B85AF /* AetherisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AFA2842FE9DEEA005B85AF /* AetherisApp.swift */; };
 		A9AFA28D2FE9DEEA005B85AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA2852FE9DEEA005B85AF /* Assets.xcassets */; };
 		A9AFA28E2FE9DEEA005B85AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9AFA28F2FE9DEEA005B85AF /* LaunchScreen.storyboard */; };
@@ -193,6 +199,20 @@
 			remoteGlobalIDString = A9B534452F4E384E005C2C96;
 			remoteInfo = Core;
 		};
+		5FAE17DBB54148699DC5E29F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3FDE91199FD441F9BEE3DE8;
+			remoteInfo = AetherisNotificationsInterface;
+		};
+		6B2EFA70A5FB446B8682F31B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7612609572640D7AAC6E818;
+			remoteInfo = AetherisInsightsInterface;
+		};
 		6B888918846D73C26FD618AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
@@ -206,6 +226,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 5AAE7403F885C8CA8DA00A31;
 			remoteInfo = AetherisCards;
+		};
+		779BEE3E7D0F4E9A81BD95FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7612609572640D7AAC6E818;
+			remoteInfo = AetherisInsightsInterface;
 		};
 		7989791CE59B1D44D10E6618 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -297,6 +324,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C0415598F2C690D29D64D83C;
 			remoteInfo = AetherisHome;
+		};
+		9A9ED89A71594FA5920879CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3FDE91199FD441F9BEE3DE8;
+			remoteInfo = AetherisNotificationsInterface;
 		};
 		9AE1BE2A1624C8E3F0B44381 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -550,6 +584,13 @@
 			remoteGlobalIDString = A9B535B12F4E3B87005C2C96;
 			remoteInfo = AetherisDesignSystem;
 		};
+		ABCD1234EF567890ABCD1234 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D7612609572640D7AAC6E818;
+			remoteInfo = AetherisInsightsInterface;
+		};
 		ACA41B1E081E7DD294908E7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
@@ -584,6 +625,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 49C3426AD7DD75F970E10017;
 			remoteInfo = AetherisTransfersInterface;
+		};
+		B3453373695D4FC1B8374CF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A976FAA02E37AEEF00FF923B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3FDE91199FD441F9BEE3DE8;
+			remoteInfo = AetherisNotificationsInterface;
 		};
 		B4DDAA8DBD4ADBC12B0C0C17 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -705,6 +753,7 @@
 				271C3E1595CBB6C50D727A87 /* AetherisTransfers.framework in Embed Frameworks */,
 				BBAB6798BAA10F9DF5788468 /* AetherisTransfersInterface.framework in Embed Frameworks */,
 				F80DF3916815E5CD8FAD2F67 /* AetherisNotifications.framework in Embed Frameworks */,
+				4D1E9BFD19D6415F93161455 /* AetherisNotificationsInterface.framework in Embed Frameworks */,
 				C7B0C5FBC9C4178BDF8F8CDF /* AetherisInsights.framework in Embed Frameworks */,
 				DB41C980B857C18474B5A5A1 /* AetherisHome.framework in Embed Frameworks */,
 				48D096C872805109BDD5D4F7 /* AetherisHomeInterface.framework in Embed Frameworks */,
@@ -719,6 +768,8 @@
 		26337A315BE728F61A2DDE44 /* AetherisHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FCEF8FA3F3777C4604D4A12 /* AetherisCardsInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisCardsInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64CEC714730AB2733E8B69BA /* AetherisTransfers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisTransfers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B62A2ED1A7A4E5C9B7F4D60 /* AetherisNotificationsInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisNotificationsInterface.swift; sourceTree = "<group>"; };
+		72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisNotificationsInterface.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		789233969B9C55B8695239D5 /* AetherisNotificationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisNotificationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5895AA430AC85BD2EC4F0E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A75F73800FF09DA4E8764226 /* AetherisCardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisCardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -750,6 +801,8 @@
 		A9F00001302C000000000001 /* UITestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestConfiguration.swift; sourceTree = "<group>"; };
 		A9F00004302C000000000001 /* AetherisAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisAppUITests.swift; sourceTree = "<group>"; };
 		A9F00005302C000000000001 /* AetherisAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AetherisAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B100000130F1000000000001 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B100000230F1000000000002 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BE54D6369875C53E3CDD538E /* AetherisInsights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisInsights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0E3EA4115FDF41A2C93F78A /* AetherisInsightsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AetherisInsightsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C467F7752CD2F88D7AF88191 /* AetherisNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AetherisNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -789,6 +842,11 @@
 		0F31866A0CF0CC91B54A6256 /* AetherisCardsTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AetherisCardsTests;
+			sourceTree = "<group>";
+		};
+		0FE9E3F675AE46149067FDE7 /* AetherisNotificationsInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisNotificationsInterface;
 			sourceTree = "<group>";
 		};
 		230D000BBA1F559CEB98EF5E /* AetherisHome */ = {
@@ -834,6 +892,11 @@
 		8043C26B4D6950A4943597EA /* AetherisNotifications */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AetherisNotifications;
+			sourceTree = "<group>";
+		};
+		A0B3E4B7F06D4BB6B4D1715D /* AetherisInsightsInterface */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AetherisInsightsInterface;
 			sourceTree = "<group>";
 		};
 		A982A8082F5111DF00C22A84 /* AccountInterface */ = {
@@ -978,6 +1041,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		51128DF1DACC4FA9808F4E65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5720D55C8F0DDEEAD4A0DF63 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1004,6 +1075,7 @@
 			files = (
 				AFEDDD6EFB1D862D842D86C0 /* Foundation.framework in Frameworks */,
 				5406A2FE1C88601224DDFFE2 /* AetherisHomeInterface.framework in Frameworks */,
+				A0628454731E4B328217914F /* AetherisNotificationsInterface.framework in Frameworks */,
 				67F10633AF1BDBF102624FA6 /* Core.framework in Frameworks */,
 				E263FD0F43A60AA8F80CD07C /* AetherisDesignSystem.framework in Frameworks */,
 				5ED9A296EB7C0113B9C890AC /* AetherisAuthenticationInterface.framework in Frameworks */,
@@ -1042,7 +1114,7 @@
 				A9B530752F4D2C34005C2C96 /* AERegistration.framework in Frameworks */,
 				A9C189282F4E7AFE00013305 /* Account.framework in Frameworks */,
 				A93ABA28301AC75E00504890 /* AetherisAuthenticationInterface.framework in Frameworks */,
-				A9B5345B2F4E384E005C2C96 /* Core.framework in Frameworks */,
+				A99D6B3A30379F1500BFCBF4 /* Core.framework in Frameworks */,
 				A9B535C72F4E3B87005C2C96 /* AetherisDesignSystem.framework in Frameworks */,
 				A9B536E42F4E6C01005C2C96 /* AetherisAuthentication.framework in Frameworks */,
 				A9B530982F4D2C42005C2C96 /* AERegistrationInterface.framework in Frameworks */,
@@ -1051,6 +1123,7 @@
 				96B1A12F908FF806CBE083D7 /* AetherisTransfers.framework in Frameworks */,
 				4427B5373775F7C0ADB8AF25 /* AetherisTransfersInterface.framework in Frameworks */,
 				28DBF538CBF7A081F52FAF8F /* AetherisNotifications.framework in Frameworks */,
+				335765C73691481299F9F0D8 /* AetherisNotificationsInterface.framework in Frameworks */,
 				9459CC228BB40CC8CD0C6BCC /* AetherisInsights.framework in Frameworks */,
 				D575BA1294044D0E54C70155 /* AetherisHome.framework in Frameworks */,
 				D0A7D7D4A7B1D1000BF61385 /* AetherisHomeInterface.framework in Frameworks */,
@@ -1238,6 +1311,7 @@
 				F81E679143666A32DC6EBA36 /* Foundation.framework in Frameworks */,
 				69A22CEBEC4DD5265537CF5B /* Core.framework in Frameworks */,
 				8A957742E2F962A675920C0D /* AetherisDesignSystem.framework in Frameworks */,
+				10B1A8E12ACF47DA8E0D1A10 /* AetherisNotificationsInterface.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1248,6 +1322,13 @@
 				4A6FD60D6E142B8806C7ABFE /* Foundation.framework in Frameworks */,
 				072CC50BB3971F9A1C3071EA /* AetherisCards.framework in Frameworks */,
 				D75136755DB67214FB2EFD0E /* Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FFC864A3DF084AE38B117CEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1355,7 @@
 			isa = PBXGroup;
 			children = (
 				F1E3216D4B5503EB4F9D5F0F /* AetherisInsights */,
+				E56E4A4F504E48B5B664DC8B /* AetherisInsightsInterface */,
 			);
 			path = AetherisInsights;
 			sourceTree = "<group>";
@@ -1304,6 +1386,15 @@
 			path = AetherisCards;
 			sourceTree = "<group>";
 		};
+		244EE0BC61944E0081EA042B /* AetherisNotificationsInterface */ = {
+			isa = PBXGroup;
+			children = (
+				6B62A2ED1A7A4E5C9B7F4D60 /* AetherisNotificationsInterface.swift */,
+				0FE9E3F675AE46149067FDE7 /* AetherisNotificationsInterface */,
+			);
+			path = AetherisNotificationsInterface;
+			sourceTree = "<group>";
+		};
 		24DDEF85A45D85455FDA3D3D /* AetherisTransfers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,6 +1408,7 @@
 			isa = PBXGroup;
 			children = (
 				8043C26B4D6950A4943597EA /* AetherisNotifications */,
+				244EE0BC61944E0081EA042B /* AetherisNotificationsInterface */,
 				FA62AA014E453EBBFBADC91A /* AetherisNotificationsTests */,
 			);
 			path = AetherisNotifications;
@@ -1367,6 +1459,7 @@
 				A976FAA92E37AEEF00FF923B /* Products */,
 				A9BC38512FEEC4B400BFE3AF /* Generated */,
 				74919527735BA535FAF8DAF1 /* Frameworks */,
+				A99DEEC4303783E400BFCBF4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1425,6 +1518,14 @@
 				A982A8172F5111E000C22A84 /* AccountInterfaceTests */,
 			);
 			path = AccountInterface;
+			sourceTree = "<group>";
+		};
+		A99DEEC4303783E400BFCBF4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		A9AFA2AA2FE9E746005B85AF /* Resources */ = {
@@ -1570,6 +1671,14 @@
 			path = AetherisCards;
 			sourceTree = "<group>";
 		};
+		E56E4A4F504E48B5B664DC8B /* AetherisInsightsInterface */ = {
+			isa = PBXGroup;
+			children = (
+				A0B3E4B7F06D4BB6B4D1715D /* AetherisInsightsInterface */,
+			);
+			path = AetherisInsightsInterface;
+			sourceTree = "<group>";
+		};
 		E93FE1D97712DA4EC23E9F38 /* AetherisHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -1703,6 +1812,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF56B80B464647198DF4E18C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FA23F802158144099DBB0890 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1763,6 +1886,7 @@
 			dependencies = (
 				5AC24B0788C0980CCB952995 /* PBXTargetDependency */,
 				DFE167E002591D2C6B33867D /* PBXTargetDependency */,
+				954A5A378ECB491C98C0751E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				2A5822119431D0345AEFCA1B /* AetherisInsights */,
@@ -1807,6 +1931,7 @@
 			dependencies = (
 				70DBC66EB06095E840ACC1F9 /* PBXTargetDependency */,
 				53812EE959E48E73E2B9C24A /* PBXTargetDependency */,
+				68C8AE1088C34B039033840E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8043C26B4D6950A4943597EA /* AetherisNotifications */,
@@ -1931,6 +2056,27 @@
 			productReference = 64CEC714730AB2733E8B69BA /* AetherisTransfers.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A3FDE91199FD441F9BEE3DE8 /* AetherisNotificationsInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A8B5291A7DF47118B99871D /* Build configuration list for PBXNativeTarget "AetherisNotificationsInterface" */;
+			buildPhases = (
+				FA23F802158144099DBB0890 /* Headers */,
+				B891BA1A882945DE9AB8695C /* Sources */,
+				FFC864A3DF084AE38B117CEF /* Frameworks */,
+				7F96BE012C904280B5A85514 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				0FE9E3F675AE46149067FDE7 /* AetherisNotificationsInterface */,
+			);
+			name = AetherisNotificationsInterface;
+			productName = AetherisNotificationsInterface;
+			productReference = 72434D140AE74FCD909A5CA3 /* AetherisNotificationsInterface.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		A976FAA72E37AEEF00FF923B /* AetherisApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A976FAC92E37AEF200FF923B /* Build configuration list for PBXNativeTarget "AetherisApp" */;
@@ -1939,6 +2085,7 @@
 				A976FAA52E37AEEF00FF923B /* Frameworks */,
 				A976FAA62E37AEEF00FF923B /* Resources */,
 				A9B530772F4D2C34005C2C96 /* Embed Frameworks */,
+				7E2F1C2D3A4B5C6D7E8F9012 /* Embed AetherisInsightsInterface */,
 			);
 			buildRules = (
 			);
@@ -1959,6 +2106,8 @@
 				D9D248C81A792BBD496F8631 /* PBXTargetDependency */,
 				8D88AB65D03883C9E96B1C90 /* PBXTargetDependency */,
 				40E9B4C1A56C13C329417393 /* PBXTargetDependency */,
+				D5091CA48A2D432ABC682E50 /* PBXTargetDependency */,
+				4D67BD61505A429A89073477 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A9AFA2A52FE9E6CA005B85AF /* Generated */,
@@ -2409,6 +2558,8 @@
 				481E3A128C6219445B13F821 /* PBXTargetDependency */,
 				B1C7743BAF0711718A409721 /* PBXTargetDependency */,
 				498188804CD8B3CBD7657D6F /* PBXTargetDependency */,
+				A3345EA70A3D47C0B4A8362F /* PBXTargetDependency */,
+				6722DC76FC3F4465BEB3A3E0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				230D000BBA1F559CEB98EF5E /* AetherisHome */,
@@ -2416,6 +2567,26 @@
 			name = AetherisHome;
 			productName = AetherisHome;
 			productReference = 26337A315BE728F61A2DDE44 /* AetherisHome.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D7612609572640D7AAC6E818 /* AetherisInsightsInterface */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2DAF822CFA44409B94675E8C /* Build configuration list for PBXNativeTarget "AetherisInsightsInterface" */;
+			buildPhases = (
+				EF56B80B464647198DF4E18C /* Headers */,
+				C0F4349BC79A42F9A4E6B33D /* Sources */,
+				51128DF1DACC4FA9808F4E65 /* Frameworks */,
+				3F1BC99F1BEE4531980BCA43 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A0B3E4B7F06D4BB6B4D1715D /* AetherisInsightsInterface */,
+			);
+			name = AetherisInsightsInterface;
+			productName = AetherisInsightsInterface;
 			productType = "com.apple.product-type.framework";
 		};
 		F8027F19B066C0413AC0169C /* AetherisHomeTests */ = {
@@ -2450,6 +2621,9 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					A3FDE91199FD441F9BEE3DE8 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					A976FAA72E37AEEF00FF923B = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -2517,6 +2691,9 @@
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = A976FAA72E37AEEF00FF923B;
 					};
+					D7612609572640D7AAC6E818 = {
+						CreatedOnToolsVersion = 16.4;
+					};
 				};
 			};
 			buildConfigurationList = A976FAA32E37AEEF00FF923B /* Build configuration list for PBXProject "Aetheris" */;
@@ -2525,6 +2702,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
+				de,
 			);
 			mainGroup = A976FA9F2E37AEEF00FF923B;
 			minimizedProjectReferenceProxies = 1;
@@ -2559,9 +2738,11 @@
 				ADA68CF51F7C17DD7EF55ACA /* AetherisTransfersTests */,
 				49C3426AD7DD75F970E10017 /* AetherisTransfersInterface */,
 				39CBE5A20695475E66CAF97C /* AetherisNotifications */,
+				A3FDE91199FD441F9BEE3DE8 /* AetherisNotificationsInterface */,
 				05A80796B074060C0491CF77 /* AetherisNotificationsTests */,
 				198F443324D281D99DBA7EA1 /* AetherisInsights */,
 				7105FD3BE6AF5450A584C4B1 /* AetherisInsightsTests */,
+				D7612609572640D7AAC6E818 /* AetherisInsightsInterface */,
 				C0415598F2C690D29D64D83C /* AetherisHome */,
 				F8027F19B066C0413AC0169C /* AetherisHomeTests */,
 				2B33E89975C6EC193E7D5525 /* AetherisHomeInterface */,
@@ -2571,6 +2752,13 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		07F598089703D11853A240CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F1BC99F1BEE4531980BCA43 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2606,6 +2794,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7DB7C420360F1BEBB6839B11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F96BE012C904280B5A85514 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2798,6 +2993,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E2F1C2D3A4B5C6D7E8F9012 /* Embed AetherisInsightsInterface */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/AetherisInsightsInterface.framework",
+			);
+			name = "Embed AetherisInsightsInterface";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AetherisInsightsInterface.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nFRAMEWORK_NAME=\"AetherisInsightsInterface.framework\"\nSOURCE=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORK_NAME}\"\nDEST=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/${FRAMEWORK_NAME}\"\n\nif [ ! -d \"${SOURCE}\" ]; then\n  echo \"Missing ${FRAMEWORK_NAME} at ${SOURCE}\"\n  exit 1\nfi\n\nmkdir -p \"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\nrm -rf \"${DEST}\"\nditto \"${SOURCE}\" \"${DEST}\"\n\nif [ -n \"${EXPANDED_CODE_SIGN_IDENTITY:-}\" ]; then\n  /usr/bin/codesign --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements,flags \"${DEST}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		16DE39E1F7628879684478F0 /* Sources */ = {
@@ -3009,6 +3227,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B891BA1A882945DE9AB8695C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3C7E6A5F914D2C91A0E7B2 /* AetherisNotificationsInterface.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0F4349BC79A42F9A4E6B33D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C60F892C3E1E56F6CEA855D6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3105,6 +3338,12 @@
 			target = A9B534452F4E384E005C2C96 /* Core */;
 			targetProxy = 380E1AEA8297C3964BDA3CE1 /* PBXContainerItemProxy */;
 		};
+		4D67BD61505A429A89073477 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisInsightsInterface;
+			target = D7612609572640D7AAC6E818 /* AetherisInsightsInterface */;
+			targetProxy = 779BEE3E7D0F4E9A81BD95FD /* PBXContainerItemProxy */;
+		};
 		53812EE959E48E73E2B9C24A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AetherisDesignSystem;
@@ -3165,6 +3404,18 @@
 			target = 0A04300831C50667592FB9B8 /* AetherisCardsInterface */;
 			targetProxy = 95D8CFD02379F8E23BE7E12A /* PBXContainerItemProxy */;
 		};
+		6722DC76FC3F4465BEB3A3E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisInsightsInterface;
+			target = D7612609572640D7AAC6E818 /* AetherisInsightsInterface */;
+			targetProxy = ABCD1234EF567890ABCD1234 /* PBXContainerItemProxy */;
+		};
+		68C8AE1088C34B039033840E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisNotificationsInterface;
+			target = A3FDE91199FD441F9BEE3DE8 /* AetherisNotificationsInterface */;
+			targetProxy = B3453373695D4FC1B8374CF5 /* PBXContainerItemProxy */;
+		};
 		70DBC66EB06095E840ACC1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Core;
@@ -3201,6 +3452,12 @@
 			target = C0415598F2C690D29D64D83C /* AetherisHome */;
 			targetProxy = 9A78FD80EE7C3A7CA0D86026 /* PBXContainerItemProxy */;
 		};
+		954A5A378ECB491C98C0751E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisInsightsInterface;
+			target = D7612609572640D7AAC6E818 /* AetherisInsightsInterface */;
+			targetProxy = 6B2EFA70A5FB446B8682F31B /* PBXContainerItemProxy */;
+		};
 		96673E5335EF0C858AFF35A5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AetherisTransfersInterface;
@@ -3224,6 +3481,12 @@
 			name = AetherisTransfersInterface;
 			target = 49C3426AD7DD75F970E10017 /* AetherisTransfersInterface */;
 			targetProxy = 05D004FBDED7974ED3F91E44 /* PBXContainerItemProxy */;
+		};
+		A3345EA70A3D47C0B4A8362F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisNotificationsInterface;
+			target = A3FDE91199FD441F9BEE3DE8 /* AetherisNotificationsInterface */;
+			targetProxy = 9A9ED89A71594FA5920879CE /* PBXContainerItemProxy */;
 		};
 		A3D3066B47081B143DAE8EEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3449,6 +3712,12 @@
 			target = A9B534452F4E384E005C2C96 /* Core */;
 			targetProxy = 591FFDBF57B8F5ED95FF87C3 /* PBXContainerItemProxy */;
 		};
+		D5091CA48A2D432ABC682E50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AetherisNotificationsInterface;
+			target = A3FDE91199FD441F9BEE3DE8 /* AetherisNotificationsInterface */;
+			targetProxy = 5FAE17DBB54148699DC5E29F /* PBXContainerItemProxy */;
+		};
 		D9D248C81A792BBD496F8631 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AetherisInsights;
@@ -3498,6 +3767,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				A9AFA2A82FE9E746005B85AF /* en */,
+				B100000130F1000000000001 /* de */,
+				B100000230F1000000000002 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3509,12 +3780,42 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisInsightsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		09D334996A44456894D4E98B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisNotificationsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -3552,6 +3853,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisNotificationsTests;
@@ -3560,6 +3862,36 @@
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
+		};
+		111810D1598F40DB9C6B7F21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisInsightsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		1AE4DE5277943C6D60A90ED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3682,6 +4014,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisTransfersTests;
@@ -3726,6 +4059,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisTransfersTests;
@@ -3739,6 +4073,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisHomeTests;
@@ -3753,6 +4088,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisInsightsTests;
@@ -3797,6 +4133,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisCardsTests;
@@ -3805,6 +4142,36 @@
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
+		};
+		88177AE976C449529C158F4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisNotificationsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		8CF2790858D2E3DC280BE085 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4023,6 +4390,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LMTRNCP347;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authenticate transfers with Face ID.";
@@ -4054,6 +4422,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LMTRNCP347;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authenticate transfers with Face ID.";
@@ -5042,6 +5411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisHomeTests;
@@ -5055,6 +5425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisCardsTests;
@@ -5095,6 +5466,36 @@
 			};
 			name = Release;
 		};
+		EF88F95B359441DC953EBC1B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisInsightsInterface;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		F44179FADB5067D740425454 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5128,6 +5529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = LMTRNCP347;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.maurogfigueiredo.AetherisNotificationsTests;
@@ -5209,11 +5611,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		1A8B5291A7DF47118B99871D /* Build configuration list for PBXNativeTarget "AetherisNotificationsInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88177AE976C449529C158F4F /* Release */,
+				09D334996A44456894D4E98B /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2C18E4D6B2F1CBDDBDA29A7E /* Build configuration list for PBXNativeTarget "AetherisNotificationsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5BE16DE7071CF8D1BD9404C /* Release */,
 				0E7113C1C3C3A52DE441C60A /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2DAF822CFA44409B94675E8C /* Build configuration list for PBXNativeTarget "AetherisInsightsInterface" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				111810D1598F40DB9C6B7F21 /* Release */,
+				EF88F95B359441DC953EBC1B /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

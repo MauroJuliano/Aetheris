@@ -2,12 +2,38 @@
 "Common.back" = "Back";
 "Common.cancel" = "Cancel";
 "Common.ok" = "OK";
+"Mock.bankTransfer" = "Bank transfer";
+"Mock.concertTicket" = "Concert ticket";
+"Mock.dinnerWithSophie" = "Dinner with Sophie Keller";
+"Mock.transaction" = "Transaction";
+"Mock.unknownMerchant" = "Unknown merchant";
+"Mock.paymentReceived" = "Payment received";
+"Mock.thanksForCollaboration" = "Thanks for the collaboration";
+"Mock.physicalCard" = "Physical card";
+"Mock.refund" = "Refund";
+"Mock.originalPurchaseRefunded" = "Original purchase refunded";
+"Mock.aetherisChecking" = "Aetheris checking";
+"Mock.accountBalance" = "Account balance";
+"Mock.invoicePayment" = "Invoice payment";
+"Mock.virtualCard" = "Virtual card";
+"Mock.loading" = "Loading";
+"Mock.instantPayment" = "Instant payment";
+"Mock.aetherisAccount" = "Aetheris account";
+"Mock.dinnerSplit" = "Dinner split";
+"Mock.instantTransfer" = "Instant transfer";
+"Mock.personalTransfer" = "Personal transfer";
+"Mock.restaurant" = "Restaurant";
+"Mock.saoPauloBrazil" = "Sao Paulo, Brazil";
+"Mock.merchantRefund" = "Merchant refund";
+"Mock.august2026" = "August 2026";
+"Mock.entertainment" = "Entertainment";
 "Common.seeAll" = "See all";
 
 "CardHome.title" = "Cards";
 "HomeCard.cardsUnavailableTitle" = "Cards unavailable";
 "HomeCard.emptyTitle" = "No cards or activity yet";
 "HomeCard.emptyDescription" = "This area will reflect the dashboard when the simulated service returns data.";
+"HomeCard.loadFailed" = "We could not load your cards and activity right now.";
 
 "CardInformation.availableLimit" = "Available limit";
 "CardInformation.currentInvoice" = "Current invoice";
@@ -44,6 +70,14 @@
 "VirtualCard.generateConfirmationMessage" = "The current number will stop working. Recurring purchases and subscriptions may need to be updated.";
 "VirtualCard.cancel" = "Cancel";
 "VirtualCard.copied" = "Number copied";
+"VirtualCard.cardType" = "Virtual";
+"VirtualCard.cardNumberAccessibilityLabel" = "Card number";
+"VirtualCard.hiddenNumberAccessibilityValue" = "Hidden number";
+"VirtualCard.validUntil" = "Valid until";
+"VirtualCard.showDetails" = "Show card details";
+"VirtualCard.hideDetails" = "Hide card details";
+"VirtualCard.totalLimitFormat" = "of %@";
+"VirtualCard.monthlyUsageFormat" = "%d%% of the limit used";
 
 "CurrentInvoice.title" = "Current invoice";
 "CurrentInvoice.description" = "Track your invoice amount, due date, and spending details for this period.";
@@ -144,6 +178,7 @@
 "TransactionHistory.unavailableTitle" = "History unavailable";
 "TransactionHistory.emptyTitle" = "No transactions yet";
 "TransactionHistory.emptyDescription" = "This account does not have transaction history in the simulated dataset.";
+"TransactionHistory.loadFailed" = "We could not load your transaction history.";
 
 "TransactionDetails.title" = "Transaction Details";
 "TransactionDetails.date" = "Date";
@@ -230,9 +265,11 @@
 "TransactionsHistory.deposit" = "Deposit";
 
 "FinancialSummary.transferSent" = "Transfer sent";
+"FinancialSummary.transferSentTo" = "Funds successfully transferred to %@";
 "FinancialSummary.transferSentDescription" = "Funds successfully transferred to Sophie Keller";
 "FinancialSummary.transferSentAmeliaDescription" = "Funds successfully transferred to Amelia Thompson";
 "FinancialSummary.paymentReceived" = "Payment received";
+"FinancialSummary.paymentReceivedFrom" = "Funds received from %@";
 "FinancialSummary.paymentReceivedDescription" = "Funds received from Amelia Thompson";
 "FinancialSummary.netflix" = "Netflix";
 "FinancialSummary.appleBill" = "Apple.Com/Bill";

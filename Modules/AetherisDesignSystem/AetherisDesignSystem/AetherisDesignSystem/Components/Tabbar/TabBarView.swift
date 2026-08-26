@@ -32,12 +32,22 @@ public struct TabBarView: View {
                     }
                     .appShadow(AppShadow.tabBar)
                     .accessibilityIdentifier("tab.transfer")
-                    .accessibilityLabel("Transfer")
+                    .accessibilityLabel(Strings.TabBar.transfer)
                 }
                 .padding(.horizontal, AppTabBarMetrics.horizontalPadding)
                 .padding(.bottom, AppTabBarMetrics.bottomPadding)
             }
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("tab.bar")
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            TabBarViewSkeleton()
+        } else {
+            self
+        }
     }
 }
 

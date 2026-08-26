@@ -88,8 +88,15 @@ struct CreditCardView: View {
             .clipShape(RoundedRectangle(cornerRadius: AppCardMetrics.creditCardBorderRadius))
             .appShadow(AppShadowStyle(color: theme.shadow, radius: 10))
         }
-        
-        
+    }
+
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CreditCardViewSkeleton()
+        } else {
+            self
+        }
     }
 }
 

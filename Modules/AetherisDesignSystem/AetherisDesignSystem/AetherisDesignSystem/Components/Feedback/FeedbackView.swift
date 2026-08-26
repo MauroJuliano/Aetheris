@@ -99,7 +99,17 @@ public struct FeedbackView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .appScreenBackground()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("error.screen")
+    }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            FeedbackViewSkeleton()
+        } else {
+            self
+        }
     }
 
     private var errorIllustration: some View {

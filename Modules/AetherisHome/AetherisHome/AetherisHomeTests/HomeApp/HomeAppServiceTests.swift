@@ -17,8 +17,7 @@ struct HomeAppServiceTests {
         #expect(dashboard.balance.amount == 13_553.00)
         #expect(dashboard.balance.masked == false)
         #expect(dashboard.cards.count == 3)
-        #expect(dashboard.recentRecipients.count == 4)
-        #expect(dashboard.quickActions.count == 4)
+        #expect(dashboard.recentRecipients.count == 6)
         #expect(dashboard.spendingThisMonth.categories.count == 4)
         #expect(dashboard.notifications.unreadCount == 3)
         #expect(coreService.calls == [

@@ -38,12 +38,10 @@ struct CurrentInvoiceScreen: View {
             navigationBar
 
             ZStack {
-                if viewModel.isLoading {
-                    CurrentInvoiceScreenSkeleton()
-                } else if let errorMessage = viewModel.errorMessage {
+                if let errorMessage = viewModel.errorMessage, !viewModel.isLoading {
                     errorView(message: errorMessage)
-                } else if let invoice = viewModel.invoice {
-                    invoiceContent(invoice)
+                } else if let invoice = viewModel.displayedInvoice {
+                    invoiceContent(invoice, isLoading: viewModel.isLoading)
                 } else {
                     emptyState
                 }
@@ -85,7 +83,10 @@ private extension CurrentInvoiceScreen {
         .padding(.bottom, AppSpacing.small)
     }
 
-    func invoiceContent(_ invoice: CurrentInvoiceModel) -> some View {
+    func invoiceContent(
+        _ invoice: CurrentInvoiceModel,
+        isLoading: Bool
+    ) -> some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppSpacing.medium) {
                 descriptionText
@@ -95,6 +96,7 @@ private extension CurrentInvoiceScreen {
                     onAvailableLimitTap: onAvailableLimitTap,
                     onBestPurchaseDateTap: onBestPurchaseDateTap
                 )
+                .toSkeleton(enable: isLoading)
 
                 if viewModel.isInvoiceNoticeVisible {
                     CurrentInvoiceNotice {
@@ -102,22 +104,25 @@ private extension CurrentInvoiceScreen {
                             viewModel.dismissInvoiceNotice()
                         }
                     }
+                    .toSkeleton(enable: isLoading)
                 }
 
                 CurrentInvoiceDetails(details: invoice.details)
+                    .toSkeleton(enable: isLoading)
 
                 CurrentInvoiceSpendingSummary(
                     summary: invoice.spendingSummary,
                     onChartsTap: onSpendingChartsTap
                 )
+                .toSkeleton(enable: isLoading)
 
-                summariesSection
+                summariesSection(isLoading: isLoading)
             }
             .padding(.horizontal, AppSpacing.screenHorizontal)
             .padding(.bottom, AppSpacing.large)
         }
         .safeAreaInset(edge: .bottom) {
-            payInvoiceButton(invoice)
+            payInvoiceButton(invoice, isLoading: isLoading)
                 .padding(.horizontal, AppSpacing.screenHorizontal)
                 .padding(.top, AppSpacing.small)
                 .padding(.bottom, AppSpacing.small)
@@ -135,7 +140,7 @@ private extension CurrentInvoiceScreen {
     }
 
     @ViewBuilder
-    var summariesSection: some View {
+    func summariesSection(isLoading: Bool) -> some View {
         if !viewModel.summaries.isEmpty {
             FinancialSummaryContainer(
                 summaries: viewModel.summaries,
@@ -144,14 +149,19 @@ private extension CurrentInvoiceScreen {
                 onTap: openTransactionHistory,
                 onActionTap: openTransactionHistory
             )
+            .toSkeleton(enable: isLoading)
         }
     }
 
-    func payInvoiceButton(_ invoice: CurrentInvoiceModel) -> some View {
+    func payInvoiceButton(
+        _ invoice: CurrentInvoiceModel,
+        isLoading: Bool
+    ) -> some View {
         PrimaryButton(title: Strings.CurrentInvoice.payInvoice) {
             guard invoice.canBePaid, !viewModel.isStartingPayment else { return }
             onPayInvoiceTap(invoice.id)
         }
+        .toSkeleton(enable: isLoading)
         .disabled(viewModel.isStartingPayment || !invoice.canBePaid)
         .opacity(invoice.canBePaid ? 1 : 0.5)
         .accessibilityIdentifier("currentInvoice.payButton")

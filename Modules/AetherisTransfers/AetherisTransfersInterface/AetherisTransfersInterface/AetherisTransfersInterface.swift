@@ -4,6 +4,15 @@ import SwiftUI
 @MainActor public protocol HasTransfers { var transfersFactory: TransfersFactoryInterface { get } }
 @MainActor public protocol TransfersFactoryInterface {
     func make(onFinished: @escaping () -> Void) -> AnyView
+    func makeRequestMoney(onFinished: @escaping () -> Void) -> AnyView
+    func makeEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView
+    func makeRequestMoneyEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView
+    func makeNavigationHost(
+        content: AnyView,
+        path: Binding<NavigationPath>,
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
+    ) -> AnyView
 }
 
 public struct Beneficiary: Identifiable, Codable, Hashable {

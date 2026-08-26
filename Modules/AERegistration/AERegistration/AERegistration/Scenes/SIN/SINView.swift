@@ -20,6 +20,7 @@ struct SINView: View {
             RegisterView(
                     title: viewModel.title,
                     subTitle: viewModel.subtitle,
+                    screenAccessibilityIdentifier: "registration.step.sin",
                     textFieldValue: Binding(
                         get: { viewModel.sin },
                         set: { viewModel.updateSIN($0) }

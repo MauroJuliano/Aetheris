@@ -59,6 +59,15 @@ struct CurrentInvoiceDetails: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            CurrentInvoiceDetailsSkeleton()
+        } else {
+            self
+        }
+    }
+
     private func detailRow(
         title: String,
         subtitle: String?,
@@ -103,10 +112,4 @@ struct CurrentInvoiceDetails: View {
         .padding(.horizontal, AppSpacing.medium)
         .padding(.vertical, AppSpacing.small)
     }
-}
-
-#Preview {
-    CurrentInvoiceDetails(details: CardsPreviewData.invoice.details)
-        .padding()
-        .appScreenBackground()
 }

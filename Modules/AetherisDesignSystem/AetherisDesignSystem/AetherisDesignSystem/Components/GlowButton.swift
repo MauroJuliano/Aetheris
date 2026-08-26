@@ -49,6 +49,15 @@ public struct GlowButton: View {
             .disabled(isLoading)
         }
     }
+
+    @ViewBuilder
+    public func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            GlowButtonSkeleton()
+        } else {
+            self
+        }
+    }
 }
 
 #Preview {

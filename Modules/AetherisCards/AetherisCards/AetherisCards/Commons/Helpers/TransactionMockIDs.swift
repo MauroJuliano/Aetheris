@@ -15,4 +15,7 @@ enum TransactionMockIDs {
     static let infinitePayment = UUID(uuidString: "10000000-0000-0000-0000-000000000012")!
     static let blackAppleSubscription = UUID(uuidString: "10000000-0000-0000-0000-000000000013")!
     static let blackIfoodPurchase = UUID(uuidString: "10000000-0000-0000-0000-000000000014")!
+    static let beneficiaryPayment = UUID(uuidString: "70000000-0000-0000-0000-000000000001")!
+    static let beneficiaryDinnerTransfer = UUID(uuidString: "70000000-0000-0000-0000-000000000002")!
+    static let beneficiaryConcertTransfer = UUID(uuidString: "70000000-0000-0000-0000-000000000003")!
 }

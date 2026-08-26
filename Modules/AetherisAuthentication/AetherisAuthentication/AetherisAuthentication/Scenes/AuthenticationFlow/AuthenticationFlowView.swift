@@ -121,14 +121,56 @@ struct AuthenticationPreviewHomeFactory: HomeFactoryInterface {
 }
 
 struct AuthenticationPreviewCardsFactory: CardsFactoryInterface {
-    func make(onFinished: @escaping () -> Void) -> AnyView {
+    func make(
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
         AnyView(Text("Cards preview"))
     }
+
+    func makeEmbedded(
+        path: Binding<NavigationPath>,
+        selectedCardRequestId: UUID?,
+        onSelectedCardRequestApplied: @escaping () -> Void,
+        onFinished: @escaping () -> Void,
+        onSendMoneyTap: @escaping () -> Void,
+        onRequestMoneyTap: @escaping () -> Void
+    ) -> AnyView {
+        AnyView(Text("Cards preview"))
+    }
+
+    func makeNavigationHost(content: AnyView, path: Binding<NavigationPath>) -> AnyView {
+        content
+    }
+
+    func showTransactionDetails(transactionID: UUID, path: Binding<NavigationPath>) {}
 }
 
 struct AuthenticationPreviewTransfersFactory: TransfersFactoryInterface {
     func make(onFinished: @escaping () -> Void) -> AnyView {
         AnyView(Text("Transfers preview"))
+    }
+
+    func makeRequestMoney(onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Request money preview"))
+    }
+
+    func makeEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Transfers preview"))
+    }
+
+    func makeRequestMoneyEmbedded(path: Binding<NavigationPath>, onFinished: @escaping () -> Void) -> AnyView {
+        AnyView(Text("Request money preview"))
+    }
+
+    func makeNavigationHost(
+        content: AnyView,
+        path: Binding<NavigationPath>,
+        onFinished: @escaping () -> Void,
+        onTransactionTap: @escaping (UUID) -> Void
+    ) -> AnyView {
+        content
     }
 }
 

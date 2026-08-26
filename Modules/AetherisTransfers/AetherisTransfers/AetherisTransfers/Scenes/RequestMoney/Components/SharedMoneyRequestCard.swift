@@ -30,20 +30,26 @@ struct SharedMoneyRequestCard: View {
         .appCardSurface()
     }
 
+    @ViewBuilder
+    func toSkeleton(enable: Bool) -> some View {
+        if enable {
+            SharedMoneyRequestCardSkeleton()
+        } else {
+            self
+        }
+    }
+
     private var amountSection: some View {
         VStack(alignment: .leading, spacing: AppSpacing.small) {
             Text(Strings.RequestMoney.shareAmountTitle)
                 .font(AppTypography.body)
                 .foregroundStyle(Color.textSecondaryColor)
 
-            TextField("R$ 0,00", text: $amountText)
+            TextField("$0.00", text: $amountText)
                 .font(.system(size: 38, weight: .semibold))
                 .foregroundStyle(Color.textPrimary)
                 .keyboardType(.numberPad)
                 .focused(focusedField, equals: .amount)
-                .onChange(of: amountText) { _, newValue in
-                    amountText = CurrencyInputFormatter.format(newValue)
-                }
         }
     }
 
@@ -62,11 +68,6 @@ struct SharedMoneyRequestCard: View {
             .foregroundStyle(Color.textPrimary)
             .lineLimit(1...3)
             .focused(focusedField, equals: .reason)
-            .onChange(of: reason) { _, newValue in
-                if newValue.count > RequestMoneyViewModel.reasonLimit {
-                    reason = String(newValue.prefix(RequestMoneyViewModel.reasonLimit))
-                }
-            }
             .padding(AppSpacing.medium)
             .background(Color.surface.opacity(0.7))
             .overlay {

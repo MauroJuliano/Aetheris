@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @State private var email: String
+    @State private var isSendingResetLink = false
     let onBack: () -> Void
     let onSendResetLink: (String) -> Void
     let onBackToLogin: () -> Void
@@ -56,7 +57,10 @@ struct ForgotPasswordView: View {
 
 private extension ForgotPasswordView {
     var header: some View {
-        Button(action: onBack) {
+        Button {
+            onBack()
+            onBackToLogin()
+        } label: {
             Image(systemName: "arrow.left")
                 .font(.system(size: 24, weight: .regular))
                 .foregroundStyle(Color.brandPrimaryColor)
@@ -85,19 +89,22 @@ private extension ForgotPasswordView {
     }
 
     var formSection: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.large) {
-            VStack(alignment: .leading, spacing: AppSpacing.small) {
-                Text(Strings.ForgotPassword.emailLabel)
-                    .font(AppTypography.subheadline)
-                    .foregroundStyle(Color.textSecondaryColor)
+            VStack(alignment: .leading, spacing: AppSpacing.large) {
+                VStack(alignment: .leading, spacing: AppSpacing.small) {
+                    Text(Strings.ForgotPassword.emailLabel)
+                        .font(AppTypography.subheadline)
+                        .foregroundStyle(Color.textSecondaryColor)
 
                 emailField
             }
 
-            PrimaryButton(title: Strings.ForgotPassword.sendResetLink) {
+            PrimaryButton(
+                title: Strings.ForgotPassword.sendResetLink,
+                isLoading: isSendingResetLink
+            ) {
                 sendResetLink()
             }
-            .disabled(!isButtonEnabled)
+            .disabled(!isButtonEnabled || isSendingResetLink)
             .opacity(isButtonEnabled ? 1 : 0.45)
 
             HStack(spacing: AppSpacing.xxSmall) {
@@ -161,9 +168,7 @@ private extension ForgotPasswordView {
             )
         }
     }
-}
 
-private extension ForgotPasswordView {
     var background: some View {
         ZStack {
             Color.backgroundColorA
@@ -179,9 +184,7 @@ private extension ForgotPasswordView {
             isEmailFocused = false
         }
     }
-}
 
-private extension ForgotPasswordView {
     func sendResetLink() {
         let normalizedEmail = email
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -192,9 +195,22 @@ private extension ForgotPasswordView {
             return
         }
 
+        guard !isSendingResetLink else {
+            return
+        }
+
         isEmailFocused = false
-        onSendResetLink(normalizedEmail)
-        onBackToLogin()
+        isSendingResetLink = true
+
+        Task {
+            try? await Task.sleep(nanoseconds: 900_000_000)
+
+            await MainActor.run {
+                onSendResetLink(normalizedEmail)
+                isSendingResetLink = false
+                onBackToLogin()
+            }
+        }
     }
 }
 
