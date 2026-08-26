@@ -16,6 +16,7 @@ concurrency:
 env:
   PROJECT: Aetheris.xcodeproj
   SCHEME: AetherisTests
+  BUILD_DESTINATION: generic/platform=iOS Simulator
   DESTINATION: platform=iOS Simulator,name=iPhone 16 Pro,OS=latest
   DERIVED_DATA_PATH: DerivedData
 
@@ -71,7 +72,7 @@ jobs:
           xcodebuild build-for-testing \
             -project "$PROJECT" \
             -scheme "$SCHEME" \
-            -destination "$DESTINATION" \
+            -destination "$BUILD_DESTINATION" \
             -enableCodeCoverage YES \
             -derivedDataPath "$DERIVED_DATA_PATH" \
             CODE_SIGNING_ALLOWED=NO
